@@ -38,12 +38,12 @@ The following changes are recommendations and don't have to be done as we will s
 ##### Format changes
 * The `JSON2` API format has now been deprecated and is now applied  by default. The JSON2 renderer will be removed in Matomo 5 and we recommend switching to it. 
 * The `JSON` renderer now behaves like the previous `JSON2` renderer did. This means arrays like `['a' => 0, 'b' => 1]` will be rendered in JSON as `{"a":0,"b":1}` instead of `[{"a":0,"b":1}]`. This impacts these API methods:
-  * API.getSettings
-  * Annotations.get
-  * Goals.getGoal
-  * UsersManager.getUser
-  * UsersManager.getUserByEmail
-  * SitesManager.getSiteFromId
+  * `API.getSettings`
+  * `Annotations.get`
+  * `Goals.getGoal`
+  * `UsersManager.getUser`
+  * `UsersManager.getUserByEmail`
+  * `SitesManager.getSiteFromId`
 * The API response format `php` has been removed.
 * The response of an individual request within the bulk request of `API.getBulkRequest` may change if the API returns a scalar value (eg `5`). In this case the response will be no longer `5` but for example `{value: 5}`
 
@@ -116,7 +116,7 @@ The following changes are recommendations and don't have to be done as we will s
 * The class `Piwik\Plugins\CustomPiwikJs\TrackerUpdater` has been renamed to `Piwik\Plugins\CustomJsTracker\TrackerUpdater`
 * `Zend_Validate` and all subclasses have been completely removed. 
 * Matomo's mail component (`Piwik\Mail`) has been rewritten:
-  * Zend_Mail has been removed. `Piwik\Mail` is now an independet class.
+  * Zend_Mail has been removed. `Piwik\Mail` is now an independent class.
   * PHPMailer is now used for sending mails in `\Piwik\Mail\Transport` and can be replaced using DI.
   * Various methods in `Piwik\Mail` have been removed or changed their signature.
   
@@ -133,12 +133,12 @@ The following changes are recommendations and don't have to be done as we will s
 * The controller action `Proxy.redirect` has been removed. Instead link to the URL directly in HTML and set an attribute `rel="noreferrer noopener"`  
 * GeoIP Legacy support has been fully removed. Users of GeoIP Legacy need to set up a new location provider like GeoIP2, otherwise the default location provider will be used.
 * Site search category and count are no longer stored as custom variables. That also means they will now have an extra field in action details and no longer appear in custom variables.
-* The dimension and `log_link_visit_action` column interaction_position has been renamed to pageview_position. If your database queries rely on the column you can simply replace the name.
-* The metric (avg.) page generation time has been deprecated. It is no longer possible to track it. Already tracked values will still be shown in old reports. More detailed performance metrics are now available in PagePerformance plugin.
+* The dimension and column `log_link_visit_action.interaction_position` has been renamed to `pageview_position`. If your database queries rely on the column you can simply replace the name.
+* The metric "(avg.) page generation time" has been deprecated. It is no longer possible to track it. Already tracked values will still be shown in old reports. More detailed performance metrics are now available in PagePerformance plugin.
 * Added support for campaign name parameter `matomo_campaign` / `mtm_campaign` and campaign keyword parameter `matomo_kwd` / `mtm_kwd`
-* The following dimensions have been removed and replaced with versions that measure seconds: visitor_days_since_first, visitor_days_since_last, visitor_days_since_order
-* The _idvc, _idts, _viewts and _ects tracker parameters are no longer used, the values are calculated server side.
-  Note: tracking these values server side means replaying log data in the past will result in inaccurate values for these dimensions.
+* The following dimensions have been removed and replaced with versions that measure seconds: `visitor_days_since_first`, `visitor_days_since_last`, `visitor_days_since_order`
+* The `_idvc`, `_idts`, `_viewts` and `_ects` [HTTPS API](https://developer.matomo.org/api-reference/tracking-api) tracker parameters are no longer used, the values are now calculated server side. 
+  Note: tracking these values server side means that when [replaying log data in the past](https://matomo.org/faq/log-analytics-tool/faq_19221/) it will now result in some inaccurate values for these dimensions.
 
 ## Matomo 3.13.6
 
