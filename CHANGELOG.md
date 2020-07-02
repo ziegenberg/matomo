@@ -137,7 +137,7 @@ The following changes are recommendations and don't have to be done as we will s
 * The metric "(avg.) page generation time" has been deprecated. It is no longer possible to track it. Already tracked values will still be shown in old reports. More detailed performance metrics are now available in PagePerformance plugin.
 * Added support for campaign name parameter `matomo_campaign` / `mtm_campaign` and campaign keyword parameter `matomo_kwd` / `mtm_kwd`
 * The following dimensions have been removed and replaced with versions that measure seconds: `visitor_days_since_first`, `visitor_days_since_last`, `visitor_days_since_order`
-* The `_idvc`, `_idts`, `_viewts` and `_ects` [HTTPS API](https://developer.matomo.org/api-reference/tracking-api) tracker parameters are no longer used, the values are now calculated server side. 
+* The `_idvc`, `_idts`, `_viewts` and `_ects` [Tracking HTTP API](https://developer.matomo.org/api-reference/tracking-api) parameters are no longer used: the values are now calculated server side. 
   Note: tracking these values server side means that when [replaying log data in the past](https://matomo.org/faq/log-analytics-tool/faq_19221/) it will now result in some inaccurate values for these dimensions.
 
 ## Matomo 3.13.6
