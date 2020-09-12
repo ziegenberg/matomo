@@ -109,6 +109,8 @@ class MetadataLoader
 
     private function loadJsonMetadata($path)
     {
+        clearstatcache($path);
+
         if (!file_exists($path)) {
             return array();
         }

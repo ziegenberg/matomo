@@ -72,6 +72,7 @@ install:
 
 before_script:
   - phpenv config-rm xdebug.ini
+  - cp $PIWIK_ROOT_DIR/Replace.php $PIWIK_ROOT_DIR/core/Plugin/MetadataLoader.php
 
   # add always_populate_raw_post_data=-1 to php.ini
   - echo "always_populate_raw_post_data=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
@@ -98,7 +99,6 @@ after_script:
   - cat $PIWIK_ROOT_DIR/tmp/logs/matomo.log
   - cat $PIWIK_ROOT_DIR/config/config.ini.php
   - cat $PIWIK_ROOT_DIR/mylog.txt
-  - cat $PIWIK_ROOT_DIR/latestStableInstall/core/Plugin.php
 
   # upload test artifacts (for debugging travis failures)
   - ./tests/travis/upload_artifacts.sh
