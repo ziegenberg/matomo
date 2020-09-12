@@ -952,6 +952,7 @@ class Manager
 
         $incompatible = array();
         foreach ($plugins as $plugin) {
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "checking $plugin\n", FILE_APPEND);
             if ($plugin->hasMissingDependencies($piwikVersion)) {
                 $incompatible[] = $plugin;
             }
