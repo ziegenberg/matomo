@@ -1152,6 +1152,9 @@ class Manager
                 return $pluginsToPostPendingEventsTo;
             }
         }
+        if ($pluginName == 'CustomVariables') {
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 11\n", FILE_APPEND);
+        }
 
         $pluginsToPostPendingEventsTo[] = $newPlugin;
 
@@ -1355,14 +1358,20 @@ class Manager
         $missingPlugins = array();
 
         $plugins = $this->pluginList->getActivatedPlugins();
+        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing plugins start\n", FILE_APPEND);
 
         foreach ($plugins as $pluginName) {
             // if a plugin is listed in the config, but is not loaded, it does not exist in the folder
-            if (!$this->isPluginLoaded($pluginName) && !$this->isPluginBogus($pluginName) &&
-                !($this->doesPluginRequireInternetConnection($pluginName) && !SettingsPiwik::isInternetEnabled())) {
+            if (!$this->isPluginLoaded($pluginName)
+                && !$this->isPluginBogus($pluginName)
+                && !($this->doesPluginRequireInternetConnection($pluginName) && !SettingsPiwik::isInternetEnabled())
+            ) {
+                $inter = $this->doesPluginRequireInternetConnection($pluginName) && !SettingsPiwik::isInternetEnabled();
+                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing plugin: $pluginName - {$this->isPluginLoaded($pluginName)} - {$this->isPluginBogus($pluginName)} - $inter\n", FILE_APPEND);
                 $missingPlugins[] = $pluginName;
             }
         }
+        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing plugins after: ".implode(', ', $missingPlugins)."\n", FILE_APPEND);
 
         return $missingPlugins;
     }

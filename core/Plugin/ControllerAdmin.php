@@ -99,8 +99,10 @@ abstract class ControllerAdmin extends Controller
         $missingPlugins = \Piwik\Plugin\Manager::getInstance()->getMissingPlugins();
 
         if (empty($missingPlugins)) {
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "no missing plugins?\n", FILE_APPEND);
             return;
         }
+        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "no missing plugins\n", FILE_APPEND);
 
         $pluginsLink = Url::getCurrentQueryStringWithParametersModified(array(
             'module' => 'CorePluginsAdmin', 'action' => 'plugins'
