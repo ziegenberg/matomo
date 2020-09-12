@@ -158,7 +158,7 @@ class Controller extends \Piwik\Plugin\Controller
 
         try {
             $messages = $this->updater->updatePiwik($useHttps);
-            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', print_r($messages, true)."\n", FILE_APPEND);
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "MESSAGES: ".print_r($messages, true)."\n", FILE_APPEND);
         } catch (ArchiveDownloadException $e) {
             $view->httpsFail = $useHttps;
             $view->error = $e->getMessage();
