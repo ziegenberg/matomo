@@ -1047,53 +1047,28 @@ class Manager
 
     private function reloadActivatedPlugin($pluginName, $pluginsToPostPendingEventsTo)
     {
-        if ($pluginName == 'CustomVariables') {
-            $module = $_GET['module'] ?? $_POST['module'] ?? 'unknown';
-            $action = $_GET['action'] ?? $_POST['action'] ?? 'unknown';
-            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "Module: $module.$action\n", FILE_APPEND);
-            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 1\n", FILE_APPEND);
-        }
         if ($this->isPluginLoaded($pluginName) || $this->isPluginThirdPartyAndBogus($pluginName)) {
-            if ($pluginName == 'CustomVariables') {
-                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 2 ({$this->isPluginLoaded($pluginName)}) - ({$this->isPluginThirdPartyAndBogus($pluginName)})\n", FILE_APPEND);
-            }
             return $pluginsToPostPendingEventsTo;
-        }
-        if ($pluginName == 'CustomVariables') {
-            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 3\n", FILE_APPEND);
         }
 
         $newPlugin = $this->loadPlugin($pluginName);
-        if ($pluginName == 'CustomVariables') {
-            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 4\n", FILE_APPEND);
-        }
 
         if ($newPlugin === null) {
             return $pluginsToPostPendingEventsTo;
         }
 
         $requirements = $newPlugin->getMissingDependencies();
-        if ($pluginName == 'CustomVariables') {
-            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 5\n", FILE_APPEND);
-        }
 
         if (!empty($requirements)) {
             foreach ($requirements as $requirement) {
                 $possiblePluginName = $requirement['requirement'];
                 if (in_array($possiblePluginName, $this->pluginsToLoad, $strict = true)) {
-                    if ($pluginName == 'CustomVariables') {
-                        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 6\n", FILE_APPEND);
-                    }
                     $pluginsToPostPendingEventsTo = $this->reloadActivatedPlugin($possiblePluginName, $pluginsToPostPendingEventsTo);
                 }
             }
         }
 
         if ($newPlugin->hasMissingDependencies()) {
-            if ($pluginName == 'CustomVariables') {
-                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 7 (has missing deps)\n", FILE_APPEND);
-            }
-
             $this->unloadPluginFromMemory($pluginName);
 
             // at this state we do not know yet whether current user has super user access. We do not even know
@@ -1113,9 +1088,6 @@ class Manager
             && !Development::isEnabled()
             && $this->isPluginActivated('Marketplace')
             && $this->isPluginActivated($pluginName)) {
-            if ($pluginName == 'CustomVariables') {
-                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 8\n", FILE_APPEND);
-            }
 
             $cacheKey = 'MarketplacePluginMissingLicense' . $pluginName;
             $cache = self::getLicenseCache();
@@ -1123,9 +1095,6 @@ class Manager
             if ($cache->contains($cacheKey)) {
                 $pluginLicenseInfo = $cache->fetch($cacheKey);
             } elseif (!SettingsServer::isTrackerApiRequest()) {
-                if ($pluginName == 'CustomVariables') {
-                    file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 9\n", FILE_APPEND);
-                }
 
                 // prevent requesting license info during a tracker request see https://github.com/matomo-org/matomo/issues/14401
                 // as possibly many instances would try to do this at the same time
@@ -1145,16 +1114,9 @@ class Manager
             }
 
             if (!empty($pluginLicenseInfo['missing']) && (!defined('PIWIK_TEST_MODE') || !PIWIK_TEST_MODE)) {
-                if ($pluginName == 'CustomVariables') {
-                    file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 10 (missing license info)\n", FILE_APPEND);
-                }
-
                 $this->unloadPluginFromMemory($pluginName);
                 return $pluginsToPostPendingEventsTo;
             }
-        }
-        if ($pluginName == 'CustomVariables') {
-            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 11\n", FILE_APPEND);
         }
 
         $pluginsToPostPendingEventsTo[] = $newPlugin;
@@ -1359,7 +1321,6 @@ class Manager
         $missingPlugins = array();
 
         $plugins = $this->pluginList->getActivatedPlugins();
-        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing plugins start\n", FILE_APPEND);
 
         foreach ($plugins as $pluginName) {
             // if a plugin is listed in the config, but is not loaded, it does not exist in the folder
@@ -1368,11 +1329,9 @@ class Manager
                 && !($this->doesPluginRequireInternetConnection($pluginName) && !SettingsPiwik::isInternetEnabled())
             ) {
                 $inter = $this->doesPluginRequireInternetConnection($pluginName) && !SettingsPiwik::isInternetEnabled();
-                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing plugin: $pluginName - {$this->isPluginLoaded($pluginName)} - {$this->isPluginBogus($pluginName)} - $inter\n", FILE_APPEND);
                 $missingPlugins[] = $pluginName;
             }
         }
-        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing plugins after: ".implode(', ', $missingPlugins)."\n", FILE_APPEND);
 
         return $missingPlugins;
     }

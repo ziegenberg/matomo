@@ -155,6 +155,7 @@ class Controller extends \Piwik\Plugin\Controller
         $view = new OneClickDone(Piwik::getCurrentUserTokenAuth());
 
         $useHttps = Common::getRequestVar('https', 1, 'int');
+        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "updating?\n", FILE_APPEND);
 
         try {
             $messages = $this->updater->updatePiwik($useHttps);
