@@ -1047,6 +1047,9 @@ class Manager
     private function reloadActivatedPlugin($pluginName, $pluginsToPostPendingEventsTo)
     {
         if ($pluginName == 'CustomVariables') {
+            $module = $_GET['module'] ?? $_POST['module'] ?? 'unknown';
+            $action = $_GET['action'] ?? $_POST['action'] ?? 'unknown';
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "Module: $module.$action\n", FILE_APPEND);
             file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "start reload 1\n", FILE_APPEND);
         }
         if ($this->isPluginLoaded($pluginName) || $this->isPluginThirdPartyAndBogus($pluginName)) {

@@ -45,7 +45,7 @@ class TestsRunUI extends ConsoleCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $specs = $input->getArgument('specs');
+        $specs = ['OneClickUpdate']; //$input->getArgument('specs');
         $persistFixtureData = $input->getOption('persist-fixture-data');
         $keepSymlinks = $input->getOption('keep-symlinks');
         $printLogs = $input->getOption('print-logs');
