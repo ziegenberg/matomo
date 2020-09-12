@@ -98,6 +98,7 @@ after_script:
   - cat $PIWIK_ROOT_DIR/tmp/logs/matomo.log
   - cat $PIWIK_ROOT_DIR/config/config.ini.php
   - cat $PIWIK_ROOT_DIR/mylog.txt
+  - cat $PIWIK_ROOT_DIR/latestStableInstall/core/Plugin.php
 
   # upload test artifacts (for debugging travis failures)
   - ./tests/travis/upload_artifacts.sh
