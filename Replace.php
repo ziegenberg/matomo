@@ -110,7 +110,9 @@ class MetadataLoader
     private function loadJsonMetadata($path)
     {
         clearstatcache($path);
-        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "loading: $path\n", FILE_APPEND);
+        if (strpos($path, 'CustomVariables') !== false) {
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "loading: $path\n", FILE_APPEND);
+        }
 
         if (!file_exists($path)) {
             return array();
@@ -120,7 +122,9 @@ class MetadataLoader
         if (!$json) {
             return array();
         }
-        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "contents: $json\n", FILE_APPEND);
+        if (strpos($path, 'CustomVariables') !== false) {
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "contents: $json\n", FILE_APPEND);
+        }
 
         $info = json_decode($json, $assoc = true);
         if (!is_array($info)
