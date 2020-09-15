@@ -150,6 +150,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function oneClickUpdate()
     {
+        $GLOBALS['test'] = 1;
         Piwik::checkUserHasSuperUserAccess();
 
         $view = new OneClickDone(Piwik::getCurrentUserTokenAuth());

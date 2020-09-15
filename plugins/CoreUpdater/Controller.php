@@ -175,7 +175,6 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function oneClickUpdatePartTwo()
     {
-        $GLOBALS['test'] = 1;
         if (!SettingsPiwik::isAutoUpdateEnabled()) {
             throw new Exception('Auto updater is disabled');
         }
