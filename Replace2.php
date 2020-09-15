@@ -437,7 +437,7 @@ if (!class_exists('Piwik\Plugin')) {
 
             $dependency = $this->makeDependency($piwikVersion);
             $m = $dependency->getMissingDependencies($this->pluginInformation['require']);
-            if (@$GLOBALS['test'] && $this->pluginName == 'CustomVariables') {
+            if (@$GLOBALS['test'] && $this->pluginName == 'CustomVariables' && @$_GET['module'] != 'Proxy' && @$_POST['module'] != 'Proxy') {
                 print "IN MISSING DEPS:\n";
                 print_r($this->pluginInformation);
                 print_r($m);
