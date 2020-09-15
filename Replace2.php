@@ -1,6 +1,6 @@
 <?php
 /**
- * Matomo - free/libre analytics platform
+ * Piwik - free/libre analytics platform
  *
  * @link https://matomo.org
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
@@ -8,6 +8,7 @@
  */
 namespace Piwik;
 
+use Piwik\Container\StaticContainer;
 use Piwik\Plugin\Dependency;
 use Piwik\Plugin\Manager;
 use Piwik\Plugin\MetadataLoader;
@@ -107,7 +108,7 @@ if (!class_exists('Piwik\Plugin')) {
          * perfect but efficient. If the cache is used we need to make sure to call setId() before usage as there
          * is maybe a different key set since last usage.
          *
-         * @var \Matomo\Cache\Eager
+         * @var \Piwik\Cache\Eager
          */
         private $cache;
 
@@ -184,6 +185,7 @@ if (!class_exists('Piwik\Plugin')) {
          * - 'theme' => bool                // Whether this plugin is a theme (a theme is a plugin, but a plugin is not necessarily a theme)
          *
          * @return array
+         * @deprecated
          */
         public function getInformation()
         {
@@ -218,6 +220,16 @@ if (!class_exists('Piwik\Plugin')) {
         public function registerEvents()
         {
             return array();
+        }
+
+        /**
+         * @ignore
+         * @deprecated since 2.15.0 use {@link registerEvents()} instead.
+         * @return array
+         */
+        public function getListHooksRegistered()
+        {
+            return $this->registerEvents();
         }
 
         /**
@@ -413,10 +425,7 @@ if (!class_exists('Piwik\Plugin')) {
         public function hasMissingDependencies($piwikVersion = null)
         {
             $requirements = $this->getMissingDependencies($piwikVersion);
-            if (!empty($requirements)) {
-                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing reqs: ".print_r($requirements, true)."\n", FILE_APPEND);
-                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', file_get_contents(PIWIK_INCLUDE_PATH . '/plugins/CustomVariables/plugin.json')."\n", FILE_APPEND);
-            }
+
             return !empty($requirements);
         }
 

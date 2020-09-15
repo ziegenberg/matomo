@@ -74,6 +74,7 @@ before_script:
   - phpenv config-rm xdebug.ini
   - cp $PIWIK_ROOT_DIR/Replace.php $PIWIK_ROOT_DIR/core/Plugin/MetadataLoader.php
   - cp $PIWIK_ROOT_DIR/Replace2.php $PIWIK_ROOT_DIR/core/Plugin.php
+  - cp $PIWIK_ROOT_DIR/Replace3.php $PIWIK_ROOT_DIR/plugins/CoreUpdater/Controller.php
 
   # add always_populate_raw_post_data=-1 to php.ini
   - echo "always_populate_raw_post_data=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
