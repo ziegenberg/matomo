@@ -428,11 +428,6 @@ if (!empty($requirements)) {
 
         $dependency = $this->makeDependency($piwikVersion);
         $m = $dependency->getMissingDependencies($this->pluginInformation['require']);
-        if ($this->pluginName == 'CustomVariables') {
-            print "IN MISSING DEPS:\n";
-            print_r($this->pluginInformation);
-            print_r($m);
-        }
         return $m;
     }
 
