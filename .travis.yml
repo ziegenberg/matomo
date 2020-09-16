@@ -93,7 +93,7 @@ after_script:
   - cd $PIWIK_ROOT_DIR
 
   # output contents of files w/ debugging info to screen
-  - cat $PIWIK_ROOT_DIR/mylog.txt
+  - cat $PIWIK_ROOT_DIR/latestStableInstall/mylog.txt
   - cat $PIWIK_ROOT_DIR/tests/travis/error.log
   - cat $PIWIK_ROOT_DIR/tmp/php-fpm.log
   - cat $PIWIK_ROOT_DIR/tmp/logs/matomo.log
