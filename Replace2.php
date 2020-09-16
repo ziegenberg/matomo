@@ -438,7 +438,7 @@ if (!class_exists('Piwik\Plugin')) {
             $dependency = $this->makeDependency($piwikVersion);
             $m = $dependency->getMissingDependencies($this->pluginInformation['require']);
             if (@$GLOBALS['test']) {
-                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "IN MISSING DEPS:\n", FILE_APPEND);
+                file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "IN MISSING DEPS (3.x):\n", FILE_APPEND);
                 file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', print_r($this->pluginInformation, true), FILE_APPEND);
                 file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', print_r($m, true), FILE_APPEND);
             }

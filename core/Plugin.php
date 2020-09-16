@@ -413,10 +413,6 @@ class Plugin
     public function hasMissingDependencies($piwikVersion = null)
     {
         $requirements = $this->getMissingDependencies($piwikVersion);
-if (!empty($requirements)) {
-    file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "missing reqs: ".print_r($requirements, true)."\n", FILE_APPEND);
-    file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', file_get_contents(PIWIK_INCLUDE_PATH . '/plugins/CustomVariables/plugin.json')."\n", FILE_APPEND);
-}
         return !empty($requirements);
     }
 
@@ -428,6 +424,11 @@ if (!empty($requirements)) {
 
         $dependency = $this->makeDependency($piwikVersion);
         $m = $dependency->getMissingDependencies($this->pluginInformation['require']);
+        if (@$GLOBALS['test']) {
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "IN MISSING DEPS (4.x):\n", FILE_APPEND);
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', print_r($this->pluginInformation, true), FILE_APPEND);
+            file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', print_r($m, true), FILE_APPEND);
+        }
         return $m;
     }
 

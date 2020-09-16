@@ -41,6 +41,10 @@ class LatestStableInstall extends Fixture
         $this->downloadAndUnzipLatestStable();
         $tokenAuth = $this->installSubdirectoryInstall();
         $this->verifyInstall($tokenAuth);
+
+        copy(PIWIK_INCLUDE_PATH . '/Replace.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/core/Plugin/MetadataLoader.php');
+        copy(PIWIK_INCLUDE_PATH . '/Replace2.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/core/Plugin.php');
+        copy(PIWIK_INCLUDE_PATH . '/Replace3.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/plugins/CoreUpdater/Controller.php');
     }
 
     private function removeLatestStableInstall()
