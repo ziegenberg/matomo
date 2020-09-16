@@ -154,6 +154,7 @@ class Controller extends \Piwik\Plugin\Controller
         print PIWIK_INCLUDE_PATH . '/mylog.txt' . "\n";
         print "oneClickUpdate\n";
         file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "oneClickUpdate\n", FILE_APPEND);
+        exit;
         Piwik::checkUserHasSuperUserAccess();
 
         $view = new OneClickDone(Piwik::getCurrentUserTokenAuth());

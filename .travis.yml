@@ -93,11 +93,11 @@ after_script:
   - cd $PIWIK_ROOT_DIR
 
   # output contents of files w/ debugging info to screen
+  - cat $PIWIK_ROOT_DIR/mylog.txt
   - cat $PIWIK_ROOT_DIR/tests/travis/error.log
   - cat $PIWIK_ROOT_DIR/tmp/php-fpm.log
   - cat $PIWIK_ROOT_DIR/tmp/logs/matomo.log
   - cat $PIWIK_ROOT_DIR/config/config.ini.php
-  - cat $PIWIK_ROOT_DIR/mylog.txt
 
   # upload test artifacts (for debugging travis failures)
   - ./tests/travis/upload_artifacts.sh
