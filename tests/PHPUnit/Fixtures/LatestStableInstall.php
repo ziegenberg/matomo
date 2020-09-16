@@ -48,9 +48,8 @@ class LatestStableInstall extends Fixture
         copy(PIWIK_INCLUDE_PATH . '/Replace.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/core/Plugin/MetadataLoader.php');
         copy(PIWIK_INCLUDE_PATH . '/Replace2.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/core/Plugin.php');
         copy(PIWIK_INCLUDE_PATH . '/Replace3.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/plugins/CoreUpdater/Controller.php');
-        $p = PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/plugins/CoreUpdater';
-        print `ls $p`;
-        exit(1);
+        print file_get_contents(PIWIK_INCLUDE_PATH . '/Replace3.php')."\n";
+        print file_get_contents(PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/plugins/CoreUpdater/Controller.php')."\n";
     }
 
     private function removeLatestStableInstall()
