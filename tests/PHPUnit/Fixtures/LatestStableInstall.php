@@ -42,6 +42,8 @@ class LatestStableInstall extends Fixture
         $tokenAuth = $this->installSubdirectoryInstall();
         $this->verifyInstall($tokenAuth);
 
+        print "in fixture setup\n";
+
         print PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . "\n";
         copy(PIWIK_INCLUDE_PATH . '/Replace.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/core/Plugin/MetadataLoader.php');
         copy(PIWIK_INCLUDE_PATH . '/Replace2.php', PIWIK_INCLUDE_PATH . '/' . $this->subdirToInstall . '/core/Plugin.php');
