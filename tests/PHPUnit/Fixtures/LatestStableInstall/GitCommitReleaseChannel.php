@@ -22,6 +22,8 @@ class GitCommitReleaseChannel extends ReleaseChannel
     public function getUrlToCheckForLatestAvailableVersion()
     {
         $majorVersion = (int) Version::VERSION;
+        $majorVersion += 1;
+
         return 'http://' . Url::getHost(false) . '/tests/resources/one-click-update-version.php?v=' . $majorVersion;
     }
 
