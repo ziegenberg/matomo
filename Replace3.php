@@ -151,6 +151,7 @@ class Controller extends \Piwik\Plugin\Controller
     public function oneClickUpdate()
     {
         $GLOBALS['test'] = 1;
+        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "oneClickUpdate\n", FILE_APPEND);
         Piwik::checkUserHasSuperUserAccess();
 
         $view = new OneClickDone(Piwik::getCurrentUserTokenAuth());
@@ -176,6 +177,7 @@ class Controller extends \Piwik\Plugin\Controller
     public function oneClickUpdatePartTwo()
     {
         $GLOBALS['test'] = 1;
+        file_put_contents(PIWIK_INCLUDE_PATH . '/mylog.txt', "oneClickUpdatePartTwo\n", FILE_APPEND);
         Json::sendHeaderJSON();
 
         $task = "Couldn't update Marketplace plugins.";
