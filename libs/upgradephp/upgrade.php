@@ -482,14 +482,6 @@ if (!function_exists('dump')) {
     }
 }
 
-/**
- * Need to catch that PHP7 error object on php5
- */
-if( !class_exists('\Error')) {
-	class Error {
-
-	}
-}
 
 if(!function_exists('fnmatch')) {
 
