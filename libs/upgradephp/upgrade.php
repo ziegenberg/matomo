@@ -438,20 +438,6 @@ function _readfile($filename, $byteStart, $byteEnd, $useIncludePath = false, $co
 	return false;
 }
 
-/**
- * utf8_decode replacement
- *
- * @param string $data
- * @return string
- */
-if (!function_exists('utf8_decode')) {
-	function utf8_decode($data) {
-		if (function_exists('iconv')) {
-			return @iconv('UTF-8', 'ISO-8859-1', $data);
-		}
-		return $data;
-	}
-}
 
 /**
  * Use strtolower if mb_strtolower doesn't exist (i.e., php not compiled with --enable-mbstring)
