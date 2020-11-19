@@ -59,11 +59,7 @@ class PhpExtensionsCheck implements Diagnostic
     {
         $requiredExtensions = array(
             'zlib',
-            'SPL',
-            'iconv',
             'json',
-            'mbstring',
-            'Reflection',
         );
 
         return $requiredExtensions;
@@ -73,11 +69,7 @@ class PhpExtensionsCheck implements Diagnostic
     {
         $messages = array(
             'zlib'       => 'Installation_SystemCheckZlibHelp',
-            'SPL'        => 'Installation_SystemCheckSplHelp',
-            'iconv'      => 'Installation_SystemCheckIconvHelp',
             'json'       => 'Installation_SystemCheckWarnJsonHelp',
-            'mbstring'   => 'Installation_SystemCheckMbstringHelp',
-            'Reflection' => 'Required extension that is built in PHP, see http://www.php.net/manual/en/book.reflection.php',
         );
 
         return $this->translator->translate($messages[$missingExtension]);
