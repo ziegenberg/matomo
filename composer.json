@@ -54,7 +54,7 @@
         "symfony/event-dispatcher": "~2.6.0",
         "symfony/monolog-bridge": "~2.6.0",
         "szymach/c-pchart": "^2.0",
-        "tecnickcom/tcpdf": "~6.0",
+        "tecnickcom/tcpdf": "dev-main#456b794f1fae9aee5c151a1ee515aae2aaa619a3",
         "tedivm/jshrink": "~v1.4.0",
         "twig/twig": "^3.0",
         "wikimedia/less.php": "^3.0"
