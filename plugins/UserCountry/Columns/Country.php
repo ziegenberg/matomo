@@ -96,53 +96,7 @@ class Country extends Base
             return strtolower($country);
         }
 
-        $country = $this->getCountryUsingProviderExtensionIfValid($userInfo['ip']);
-
-        if (!empty($country)) {
-            return $country;
-        }
-
         return Visit::UNKNOWN_CODE;
-    }
-
-    private function getCountryUsingProviderExtensionIfValid($ipAddress)
-    {
-        if (!Manager::getInstance()->isPluginInstalled('Provider')) {
-            return false;
-        }
-
-        $hostname = $this->getHost($ipAddress);
-        $hostnameExtension = ProviderProvider::getCleanHostname($hostname);
-
-        $hostnameDomain = substr($hostnameExtension, 1 + strrpos($hostnameExtension, '.'));
-        if ($hostnameDomain == 'uk') {
-            $hostnameDomain = 'gb';
-        }
-
-        /** @var RegionDataProvider $regionDataProvider */
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
-
-        if (array_key_exists($hostnameDomain, $regionDataProvider->getCountryList())) {
-            return $hostnameDomain;
-        }
-
-        return false;
-    }
-
-    /**
-     * Returns the hostname given the IP address string
-     *
-     * @param string $ipStr IP Address
-     * @return string hostname (or human-readable IP address)
-     */
-    private function getHost($ipStr)
-    {
-        $ip = IP::fromStringIP($ipStr);
-
-        $host = $ip->getHostname();
-        $host = ($host === null ? $ipStr : $host);
-
-        return trim(strtolower($host));
     }
 
     /**

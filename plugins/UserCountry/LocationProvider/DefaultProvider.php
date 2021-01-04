@@ -8,9 +8,15 @@
  */
 namespace Piwik\Plugins\UserCountry\LocationProvider;
 
+use Matomo\Network\IP;
 use Piwik\Common;
 use Piwik\Config;
+use Piwik\Container\StaticContainer;
+use Piwik\Intl\Data\Provider\RegionDataProvider;
 use Piwik\Piwik;
+use Piwik\Plugin\Manager;
+use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Piwik\Plugins\Provider\Provider as ProviderProvider;
 use Piwik\Plugins\UserCountry\LocationProvider;
 
 /**
@@ -31,17 +37,68 @@ class DefaultProvider extends LocationProvider
      */
     public function getLocation($info)
     {
-        $enableLanguageToCountryGuess = Config::getInstance()->Tracker['enable_language_to_country_guess'];
+        $country = $this->getCountryUsingProviderExtensionIfValid($info['ip']);
 
-        if (empty($info['lang'])) {
-            $info['lang'] = Common::getBrowserLanguage();
+        if (empty($country)) {
+            $enableLanguageToCountryGuess = Config::getInstance()->Tracker['enable_language_to_country_guess'];
+
+            if (empty($info['lang'])) {
+                $info['lang'] = Common::getBrowserLanguage();
+            }
+            $country = Common::getCountry($info['lang'], $enableLanguageToCountryGuess, $info['ip']);
         }
-        $country = Common::getCountry($info['lang'], $enableLanguageToCountryGuess, $info['ip']);
 
         $location = array(parent::COUNTRY_CODE_KEY => $country);
         $this->completeLocationResult($location);
 
         return $location;
+    }
+
+
+    private function getCountryUsingProviderExtensionIfValid($ipAddress)
+    {
+        if (!Manager::getInstance()->isPluginInstalled('Provider') || Common::getRequestVar('dp', 0, 'int') != 1) {
+            return false;
+        }
+
+        $privacyConfig = new PrivacyManagerConfig();
+
+        if ($privacyConfig->useAnonymizedIpForVisitEnrichment) {
+            return false; // when using anonymized ip for enrichment we skip this check
+        }
+
+        $hostname = $this->getHost($ipAddress);
+        $hostnameExtension = ProviderProvider::getCleanHostname($hostname);
+
+        $hostnameDomain = substr($hostnameExtension, 1 + strrpos($hostnameExtension, '.'));
+        if ($hostnameDomain == 'uk') {
+            $hostnameDomain = 'gb';
+        }
+
+        /** @var RegionDataProvider $regionDataProvider */
+        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+
+        if (array_key_exists($hostnameDomain, $regionDataProvider->getCountryList())) {
+            return $hostnameDomain;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns the hostname given the IP address string
+     *
+     * @param string $ipStr IP Address
+     * @return string hostname (or human-readable IP address)
+     */
+    private function getHost($ipStr)
+    {
+        $ip = IP::fromStringIP($ipStr);
+
+        $host = $ip->getHostname();
+        $host = ($host === null ? $ipStr : $host);
+
+        return trim(strtolower($host));
     }
 
     /**
