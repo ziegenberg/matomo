@@ -58,6 +58,11 @@ require_once PIWIK_INCLUDE_PATH . '/DIObject.php';
 
 \Piwik\Plugin\Manager::initPluginDirectories();
 
+// Wire plugin-root resolution so deprecated Piwik\ namespace use can be attributed to the
+// calling plugin. Safe to call per deprecation: getPluginsDirectories() reads already-set
+// globals/constants and performs no autoload (the Manager is loaded above).
+LegacyAutoloader::setPluginRootsResolver(array('Piwik\Plugin\Manager', 'getPluginsDirectories'));
+
 /**
  * Eaccelerator does not support closures and is known to be not compatible with Piwik. Therefore we are disabling
  * it automatically. At this point it looks like Eaccelerator is no longer under development and the bug has not
