@@ -82,6 +82,7 @@
     "autoload": {
         "psr-4": {
             "Piwik\\Plugins\\": "plugins/",
+            "Matomo\\Plugins\\": "plugins/",
             "Piwik\\": "core/"
         },
         "psr-0": {

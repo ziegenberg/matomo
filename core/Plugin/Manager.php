@@ -436,14 +436,22 @@ class Manager
     public static function registerPluginDirAutoload($pluginDirs)
     {
         spl_autoload_register(function ($className) use ($pluginDirs) {
-            if (strpos($className, 'Piwik\Plugins\\') === 0) {
-                $withoutPrefix = str_replace('Piwik\Plugins\\', '', $className);
+            // Through Matomo 6.0 both the legacy `Piwik\Plugins\` and the canonical
+            // `Matomo\Plugins\` plugin namespaces autoload natively, so renamed and
+            // un-renamed plugins installed outside the plugins folder both load.
+            // Removed together with the `Piwik\` alias layer in 7.0.
+            foreach (array('Piwik\Plugins\\', 'Matomo\Plugins\\') as $prefix) {
+                if (strpos($className, $prefix) !== 0) {
+                    continue;
+                }
+                $withoutPrefix = str_replace($prefix, '', $className);
                 $path = str_replace('\\', DIRECTORY_SEPARATOR, $withoutPrefix) . '.php';
                 foreach ($pluginDirs as $pluginsDirectory) {
                     if (file_exists($pluginsDirectory . $path)) {
                         require_once $pluginsDirectory . $path;
                     }
                 }
+                return;
             }
         });
     }
