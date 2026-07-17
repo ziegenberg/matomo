@@ -76,6 +76,7 @@
         "matomo-org/matomo-coding-standards": "dev-master",
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^9.0",
+        "rector/rector": "dev-main",
         "symfony/var-dumper": "~6.4.0",
         "symfony/yaml": "~6.4.0"
     },
@@ -97,7 +98,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Piwik\\Tests\\": "tests/PHPUnit/"
+            "Piwik\\Tests\\": "tests/PHPUnit/",
+            "Utils\\Rector\\": "utils/rector/src",
+            "Utils\\Rector\\Tests\\": "utils/rector/tests"
         }
     },
     "scripts": {
