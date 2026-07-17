@@ -46,12 +46,17 @@ return array(
         Piwik\DI::get('Piwik\Plugins\Diagnostics\Diagnostic\ReportInformational'),
         Piwik\DI::get('Piwik\Plugins\Diagnostics\Diagnostic\UserInformational'),
         Piwik\DI::get(\Piwik\Plugins\Diagnostics\Diagnostic\ArchiveInvalidationsInformational::class),
+        Piwik\DI::get('Piwik\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceDiagnostic'),
     ),
     // Allows other plugins to disable diagnostics that were previously registered
     'diagnostics.disabled' => array(),
 
     'Piwik\Plugins\Diagnostics\DiagnosticService' => Piwik\DI::autowire()
         ->constructor(Piwik\DI::get('diagnostics.required'), Piwik\DI::get('diagnostics.optional'), Piwik\DI::get('diagnostics.informational'), Piwik\DI::get('diagnostics.disabled')),
+
+    'Piwik\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageProvider' => Piwik\DI::create('Piwik\Plugins\Diagnostics\Diagnostic\RecordedDeprecatedNamespaceUsageProvider'),
+
+    'Piwik\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceDiagnostic' => Piwik\DI::autowire(),
 
     'Piwik\Plugins\Diagnostics\Diagnostic\MemoryLimitCheck' => Piwik\DI::autowire()
         ->constructorParameter('minimumMemoryLimit', Piwik\DI::get('ini.General.minimum_memory_limit')),
