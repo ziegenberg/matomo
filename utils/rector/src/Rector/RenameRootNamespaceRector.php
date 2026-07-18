@@ -43,10 +43,13 @@ use Utils\Rector\Namespace\RootNamespace;
  * The string forms (3) are guarded by RootNamespace::isNamespacePath(), which
  * requires a leading "Piwik\" backslash and a namespace-path remainder, so
  * display text, URLs, translation keys, and serialize payloads are left
- * untouched. Exact class-name strings (in the configured map, including the
- * facade Piwik\Piwik) are skipped and left to RenameStringRector, so the
- * facade's short-name change as a reference is handled by the map. Namespace
- * declarations (1) are renamed by prefix swap, not the map, because every
+ * untouched. A plain exact class-name string (in the configured map, including
+ * the facade Piwik\Piwik) is skipped and left to RenameStringRector, which
+ * handles the facade's short-name change as a reference. A leading-backslash
+ * FQCN string ('\Piwik\Foo') is not matched by RenameStringRector (its keys
+ * have no leading backslash), so an exact mapped class or namespace path in
+ * that form is rewritten here directly, preserving the leading backslash.
+ * Namespace declarations (1) are renamed by prefix swap, not the map, because every
  * Piwik\-rooted namespace becomes Matomo\-rooted. The declared-name rename (2)
  * is map-driven and fires only when the new short name differs (the facade);
  * every other declared name is unchanged.
@@ -289,7 +292,9 @@ CODE_SAMPLE,
 
     /**
      * True when any literal part of the interpolated string is a Piwik\ namespace
-     * path or an exact mapped class name, so the string must be rebuilt.
+     * path or an exact mapped class name (plain or leading-backslash), so the
+     * string must be rebuilt. RenameStringRector does not reach interpolated
+     * parts, so a leading-backslash FQCN part must be rewritten here too.
      */
     private function interpolatedStringNeedsRewrite(InterpolatedString $node): bool
     {
@@ -298,7 +303,9 @@ CODE_SAMPLE,
                 continue;
             }
 
-            if (isset($this->classMap[$part->value]) || RootNamespace::isNamespacePath($part->value)) {
+            [$core] = $this->splitLeadingBackslash($part->value);
+
+            if (isset($this->classMap[$core]) || RootNamespace::isNamespacePath($core)) {
                 return true;
             }
         }
@@ -309,38 +316,78 @@ CODE_SAMPLE,
     /**
      * Rewrite an interpolated-string literal part: an exact mapped class (the
      * facade) takes its mapped value; a Piwik\ namespace path is prefix-swapped;
-     * anything else (display text, URL, translation key) is left unchanged.
+     * anything else (display text, URL, translation key) is left unchanged. A
+     * leading backslash is preserved. RenameStringRector does not reach these
+     * parts, so both plain and leading-backslash exact mapped classes are
+     * rewritten here (no delegation).
      */
     private function rewriteInterpolatedPartValue(string $value): string
     {
-        if (isset($this->classMap[$value])) {
-            return $this->classMap[$value];
+        [$core, $leadingBackslash] = $this->splitLeadingBackslash($value);
+
+        if (isset($this->classMap[$core])) {
+            return $this->withLeadingBackslash($this->classMap[$core], $leadingBackslash);
         }
 
-        if (RootNamespace::isNamespacePath($value)) {
-            return RootNamespace::rewriteRoot($value);
+        if (RootNamespace::isNamespacePath($core)) {
+            return $this->withLeadingBackslash(RootNamespace::rewriteRoot($core), $leadingBackslash);
         }
 
         return $value;
     }
 
     /**
-     * Rewrite the leading Piwik\ root when $value is a namespace path that is
-     * not an exact class name in the map. Returns null when $value is not such
-     * a path (display text, URL, translation key, serialize payload) or is an
-     * exact class name (delegated to RenameStringRector).
+     * Rewrite the leading Piwik\ root of a plain string literal, including the
+     * FQCN form with a leading backslash ('\Piwik\Foo'). A plain exact mapped
+     * class (no leading backslash) is delegated to RenameStringRector (null); a
+     * leading-backslash exact mapped class is rewritten here, because
+     * RenameStringRector's keys have no leading backslash. A Piwik\ namespace
+     * path (plain or leading-backslash) is prefix-swapped, preserving the
+     * leading backslash. Returns null for anything else (display text, URL,
+     * translation key, serialize payload).
      */
     private function rewriteIfNamespacePath(string $value): ?string
     {
-        if (!RootNamespace::isNamespacePath($value)) {
+        [$core, $leadingBackslash] = $this->splitLeadingBackslash($value);
+
+        if (isset($this->classMap[$core])) {
+            return $leadingBackslash ? '\\' . $this->classMap[$core] : null;
+        }
+
+        if (!RootNamespace::isNamespacePath($core)) {
             return null;
         }
 
-        if (isset($this->classMap[$value])) {
-            return null;
+        return $this->withLeadingBackslash(RootNamespace::rewriteRoot($core), $leadingBackslash);
+    }
+
+    /**
+     * Strip an optional single leading backslash from $value. A leading
+     * backslash marks the FQCN string form ('\Piwik\Foo'); the built-in
+     * RenameStringRector does not match it (its keys have no leading backslash),
+     * so the custom rule rewrites such strings directly. The returned core has
+     * no leading backslash, so the classMap lookup and isNamespacePath() /
+     * rewriteRoot() operate on the same Piwik\-rooted form as a plain string.
+     *
+     * @return array{0: string, 1: bool} [core, hadLeadingBackslash]
+     */
+    private function splitLeadingBackslash(string $value): array
+    {
+        if ($value !== '' && $value[0] === '\\') {
+            return [substr($value, 1), true];
         }
 
-        return RootNamespace::rewriteRoot($value);
+        return [$value, false];
+    }
+
+    /**
+     * Prepend a leading backslash to $rewritten when $leadingBackslash is true,
+     * preserving the FQCN string form. Shared by the plain-string and
+     * interpolated-string rewriters.
+     */
+    private function withLeadingBackslash(string $rewritten, bool $leadingBackslash): string
+    {
+        return $leadingBackslash ? '\\' . $rewritten : $rewritten;
     }
 
     /**
