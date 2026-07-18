@@ -69,6 +69,18 @@ final class NamespaceMap
      * Build the map from an explicit PSR-4 prefix=>dirs mapping by scanning the
      * directories for declared class-likes. Exposed for testing.
      *
+     * The map is built from both pre-rename (Piwik\) and post-rename (Matomo\)
+     * declarations: a Piwik\X declaration maps Piwik\X => Matomo\X, and a
+     * Matomo\X declaration reverse-derives the same Piwik\X => Matomo\X entry.
+     * Reverse-derivation makes the map complete after a partial or completed
+     * rename, so the migration is re-runnable: a rector pass that rebuilds the
+     * map from already-renamed source still maps every class. The facade
+     * (whose short name changes) is handled in both directions.
+     *
+     * Only directories under the renamed roots (core/, plugins/, tests/) are
+     * scanned, so always-Matomo\ library classes in vendor/ are never picked
+     * up.
+     *
      * @param array<string, string[]> $prefixToDirs
      */
     public static function fromPrefixPaths(array $prefixToDirs): self
@@ -80,14 +92,10 @@ final class NamespaceMap
             foreach ($dirs as $dir) {
                 foreach (self::phpFiles($dir) as $file) {
                     foreach (self::declaredFqca($parser, $file) as $fqcn) {
-                        if (strpos($fqcn, RootNamespace::OLD_PREFIX) !== 0) {
-                            continue;
-                        }
-
-                        if ($fqcn === RootNamespace::FACADE_OLD) {
-                            $map[$fqcn] = RootNamespace::FACADE_NEW;
-                        } else {
-                            $map[$fqcn] = RootNamespace::NEW_PREFIX . substr($fqcn, strlen(RootNamespace::OLD_PREFIX));
+                        if (strpos($fqcn, RootNamespace::OLD_PREFIX) === 0) {
+                            $map[$fqcn] = self::toNew($fqcn);
+                        } elseif (strpos($fqcn, RootNamespace::NEW_PREFIX) === 0) {
+                            $map[self::toOld($fqcn)] = $fqcn;
                         }
                     }
                 }
@@ -97,6 +105,32 @@ final class NamespaceMap
         ksort($map);
 
         return new self($map);
+    }
+
+    /**
+     * Map a pre-rename Piwik\ FQCN to its Matomo\ target. The facade
+     * Piwik\Piwik (whose short name changes) maps to Matomo\Matomo.
+     */
+    private static function toNew(string $oldFqcn): string
+    {
+        if ($oldFqcn === RootNamespace::FACADE_OLD) {
+            return RootNamespace::FACADE_NEW;
+        }
+
+        return RootNamespace::NEW_PREFIX . substr($oldFqcn, strlen(RootNamespace::OLD_PREFIX));
+    }
+
+    /**
+     * Reverse-derive the pre-rename Piwik\ name of a post-rename Matomo\ FQCN.
+     * The facade Matomo\Matomo reverses to Piwik\Piwik, not Piwik\Matomo.
+     */
+    private static function toOld(string $newFqcn): string
+    {
+        if ($newFqcn === RootNamespace::FACADE_NEW) {
+            return RootNamespace::FACADE_OLD;
+        }
+
+        return RootNamespace::OLD_PREFIX . substr($newFqcn, strlen(RootNamespace::NEW_PREFIX));
     }
 
     /**

@@ -36,6 +36,14 @@ $loader = require __DIR__ . '/vendor/autoload.php';
 $namespaceMap = NamespaceMap::fromClassLoader($loader);
 $classMap = $namespaceMap->toArray();
 
+// Piwik\Manifest is a release-generated class (config/manifest.inc.php, stubbed in
+// bootstrap-phpstan.php) that is not under a PSR-4 root, so it is absent from the
+// generated map. Add it explicitly so core/FileIntegrity.php's string
+// (class_exists('Piwik\Manifest')) and Name-node (\Piwik\Manifest::$files)
+// references rename consistently to Matomo\Manifest. The release build that emits
+// manifest.inc.php must declare Matomo\Manifest to match.
+$classMap['Piwik\\Manifest'] = 'Matomo\\Manifest';
+
 return RectorConfig::configure()
     ->withPaths([
         __DIR__ . '/config',
