@@ -433,13 +433,21 @@ class Manager
     public static function registerPluginDirAutoload($pluginDirs)
     {
         spl_autoload_register(function ($className) use ($pluginDirs) {
-            if (strpos($className, 'Piwik\Plugins\\') === 0) {
-                $withoutPrefix = str_replace('Piwik\Plugins\\', '', $className);
-                $path = str_replace('\\', DIRECTORY_SEPARATOR, $withoutPrefix) . '.php';
-                foreach ($pluginDirs as $pluginsDirectory) {
-                    if (file_exists($pluginsDirectory . $path)) {
-                        require_once $pluginsDirectory . $path;
+            // Through the 6.x release line both the legacy `Piwik\Plugins\` and the
+            // canonical `Matomo\Plugins\` prefixes map to the plugin directories, so
+            // plugins installed outside the standard plugins folder keep loading
+            // natively regardless of their migration state.
+            $prefixes = array('Piwik\Plugins\\', 'Matomo\Plugins\\');
+            foreach ($prefixes as $prefix) {
+                if (strpos($className, $prefix) === 0) {
+                    $withoutPrefix = substr($className, strlen($prefix));
+                    $path = str_replace('\\', DIRECTORY_SEPARATOR, $withoutPrefix) . '.php';
+                    foreach ($pluginDirs as $pluginsDirectory) {
+                        if (file_exists($pluginsDirectory . $path)) {
+                            require_once $pluginsDirectory . $path;
+                        }
                     }
+                    return;
                 }
             }
         });
