@@ -1,6 +1,7 @@
 <?php
 
 use Piwik\Plugins\Diagnostics\Diagnostic\CronArchivingLastRunCheck;
+use Piwik\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageInformational;
 use Piwik\Plugins\Diagnostics\Diagnostic\RequiredPrivateDirectories;
 use Piwik\Plugins\Diagnostics\Diagnostic\RecommendedPrivateDirectories;
 
@@ -46,6 +47,7 @@ return array(
         Piwik\DI::get('Piwik\Plugins\Diagnostics\Diagnostic\ReportInformational'),
         Piwik\DI::get('Piwik\Plugins\Diagnostics\Diagnostic\UserInformational'),
         Piwik\DI::get(\Piwik\Plugins\Diagnostics\Diagnostic\ArchiveInvalidationsInformational::class),
+        Piwik\DI::get(DeprecatedNamespaceUsageInformational::class),
     ),
     // Allows other plugins to disable diagnostics that were previously registered
     'diagnostics.disabled' => array(),
