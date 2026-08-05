@@ -58,6 +58,52 @@ class LegacyAutoloader
         self::patchComposerIncludeOnce();
 
         spl_autoload_register(array(self::class, 'load'), true, true);
+
+        // Bootstrap catch-up pass. Eager aliasing in `load()` only aliases a
+        // class when it is autoloaded, but some code paths load files via direct
+        // `require_once` (plugin/component discovery) or before this loader
+        // registers (e.g. PHPUnit `@runInSeparateProcess`). Those classes never
+        // trigger `load()`, so their `Piwik\` alias is never created and a later
+        // PHP type check against the `Piwik\` name fails (`TypeError`). The
+        // catch-up pass closes that load-order gap: it aliases every `Matomo\`
+        // class already declared at bootstrap to its `Piwik\` counterpart so the
+        // alias set no longer depends on load order. This is defense-in-depth
+        // for the third-party alias layer; bundled code is migrated lockstep
+        // and no longer relies on it. Runs once at bootstrap over
+        // only the classes loaded so far — not a per-request tree scan.
+        self::aliasAlreadyDeclaredClasses();
+    }
+
+    /**
+     * Bootstrap catch-up pass (public test seam). Aliases every `Matomo\` class
+     * already declared to its `Piwik\` counterpart. Called once from
+     * {@see register()} so the alias set covers classes loaded before the loader
+     * registered (the load-order gap). Also callable from tests to exercise the
+     * catch-up after loading a fixture.
+     */
+    public static function catchUp()
+    {
+        self::aliasAlreadyDeclaredClasses();
+    }
+
+    /**
+     * Iterate the classes/interfaces/traits already declared at bootstrap and
+     * `class_alias` any `Matomo\` class to its `Piwik\` counterpart when the
+     * alias does not yet exist. Runs once at bootstrap over only the classes
+     * loaded so far — not a per-request tree scan.
+     */
+    private static function aliasAlreadyDeclaredClasses()
+    {
+        foreach (get_declared_classes() as $class) {
+            if (strncmp($class, 'Matomo\\', 7) !== 0) {
+                continue;
+            }
+
+            $opposite = self::getOppositeName($class);
+            if ($opposite !== $class) {
+                self::aliasIfMissing($class, $opposite);
+            }
+        }
     }
 
     /**

@@ -92,6 +92,33 @@ class LegacyAutoLoaderTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * The bootstrap catch-up pass closes the load-order gap: a `Matomo\` class
+     * loaded via direct `require_once` (bypassing the autoloader) still gets its
+     * `Piwik\` alias when the catch-up runs, so a later PHP type check against
+     * the `Piwik\` name resolves. This is the `@runInSeparateProcess` / direct-
+     * require load order that eager aliasing in `load()` alone cannot cover.
+     */
+    public function testCatchUpAliasesClassesLoadedBeforeAutoloaderRegistered()
+    {
+        // Load a Matomo\ class via direct require_once (bypasses the autoloader,
+        // so load() never fires and no Piwik\ alias is created eagerly).
+        require_once PIWIK_INCLUDE_PATH . '/tests/resources/MatomoEagerAliasTarget.php';
+        $this->assertTrue(class_exists('Matomo\EagerAliasTarget', false), 'fixture loaded via require_once');
+
+        // No Piwik\ alias should exist yet (load() never ran for this class).
+        $this->assertFalse(class_exists('Piwik\EagerAliasTarget', false), 'no Piwik\ alias before catch-up');
+
+        // The catch-up pass aliases every already-declared Matomo\ class.
+        \LegacyAutoloader::catchUp();
+
+        $this->assertTrue(class_exists('Piwik\EagerAliasTarget', false), 'Piwik\ alias created by catch-up pass');
+        $this->assertTrue(
+            new \Piwik\EagerAliasTarget() instanceof \Matomo\EagerAliasTarget,
+            'Piwik\ resolves to the same class entry after catch-up'
+        );
+    }
+
+    /**
      * A `Piwik\X` return type is satisfied by a returned `Matomo\X` instance,
      * because loading `Matomo\X` eagerly aliased `Piwik\X` to it. This is the
      * type-check position a lazy alias layer could not satisfy.
