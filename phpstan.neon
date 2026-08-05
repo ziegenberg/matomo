@@ -36,7 +36,7 @@ parameters:
         - "#Unsafe usage of new static#"
         # Monolog\Logger and Symfony's ConsoleFormatter are marked @final only via
         # a docblock annotation, not the final keyword. Both are extended on purpose:
-        # Piwik\Log\Logger is a proxy that adds Matomo's logger interface, and
+        # Matomo\Log\Logger is a proxy that adds Matomo's logger interface, and
         # ConsoleFormatter augments the console output with %extra.*% placeholders.
         # These are deliberate, long-standing integrations rather than accidental
         # subclassing, so the soft-final hint is intentionally overridden here.
@@ -47,10 +47,10 @@ parameters:
             identifier: class.extendsFinalByPhpDoc
             path: plugins/Monolog/Formatter/ConsoleFormatter.php
     universalObjectCratesClasses:
-        - Piwik\Config
-        - Piwik\View
-        - Piwik\ViewDataTable\Config
-        - Piwik\Session\SessionNamespace
+        - Matomo\Config
+        - Matomo\View
+        - Matomo\ViewDataTable\Config
+        - Matomo\Session\SessionNamespace
     # These constants point at the installation directory, so any require() built from them
     # resolves differently per environment (local/ddev vs CI) and per analysis mode: parallel
     # workers do not see the bootstrapped values, the single-process analyser does. Treating
