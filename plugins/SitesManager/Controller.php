@@ -14,7 +14,6 @@ use Matomo\API\ResponseBuilder;
 use Matomo\Common;
 use Matomo\Config;
 use Matomo\Http\JsonResponse;
-use Matomo\Matomo;
 use Matomo\Plugin\Manager;
 use Matomo\Plugins\SitesManager\SiteContentDetection\Matomo;
 use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
@@ -41,7 +40,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
      */
     public function index()
     {
-        Matomo::checkUserHasSomeAdminAccess();
+        \Matomo\Matomo::checkUserHasSomeAdminAccess();
         SitesManager::dieIfSitesAdminIsDisabled();
 
         $pluginManager = Manager::getInstance();
@@ -58,7 +57,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
 
     public function globalSettings()
     {
-        Matomo::checkUserHasSuperUserAccess();
+        \Matomo\Matomo::checkUserHasSuperUserAccess();
 
         return $this->renderTemplate(
             'globalSettings',
@@ -70,7 +69,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
 
     public function getGlobalSettings()
     {
-        Matomo::checkUserHasSomeViewAccess();
+        \Matomo\Matomo::checkUserHasSomeViewAccess();
 
         $response = new ResponseBuilder(Common::getRequestVar('format'));
 
@@ -134,7 +133,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
      */
     public function ignoreNoDataMessage()
     {
-        Matomo::checkUserHasSomeViewAccess();
+        \Matomo\Matomo::checkUserHasSomeViewAccess();
 
         $this->markNoDataMessageIgnored();
 
@@ -148,7 +147,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
     #[JsonResponse]
     public function dismissNoDataMessage(): string
     {
-        Matomo::checkUserHasSomeViewAccess();
+        \Matomo\Matomo::checkUserHasSomeViewAccess();
 
         $this->markNoDataMessageIgnored();
 
@@ -209,14 +208,14 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
                  * @param string $tabContent  Content of the tab
                  * @param SiteContentDetector $detector  Instance of SiteContentDetector, holding current detection results
                  */
-                Matomo::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.content', [&$tabContent, $this->siteContentDetector]);
+                \Matomo\Matomo::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.content', [&$tabContent, $this->siteContentDetector]);
                 /**
                  * Event that can be used to manipulate the content of a record on the others tab on the no data page
                  *
                  * @param string $othersInstruction  Content of the record
                  * @param SiteContentDetector $detector  Instance of SiteContentDetector, holding current detection results
                  */
-                Matomo::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.others', [&$othersInstruction, $this->siteContentDetector]);
+                \Matomo\Matomo::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.others', [&$othersInstruction, $this->siteContentDetector]);
 
                 if (!empty($tabContent)) {
                     $trackingMethods[] = [
@@ -273,7 +272,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
         // add integration and others tab
         $trackingMethods[] = [
             'id'                   => 'Integrations',
-            'name'                 => Matomo::translate('SitesManager_Integrations'),
+            'name'                 => \Matomo\Matomo::translate('SitesManager_Integrations'),
             'type'                 => SiteContentDetectionAbstract::TYPE_OTHER,
             'content'              => $this->renderIntegrationsTab($instructionUrls),
             'icon'                 => './plugins/SitesManager/images/integrations.svg',
@@ -286,7 +285,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
         ];
         $trackingMethods[] = [
             'id'                   => 'Other',
-            'name'                 => Matomo::translate('SitesManager_SiteWithoutDataOtherWays'),
+            'name'                 => \Matomo\Matomo::translate('SitesManager_SiteWithoutDataOtherWays'),
             'type'                 => SiteContentDetectionAbstract::TYPE_OTHER,
             'content'              => $this->renderOthersTab($othersInstructions),
             'icon'                 => './plugins/SitesManager/images/others.svg',
@@ -343,9 +342,9 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
         if (!Manager::getInstance()->isPluginLoaded('GoogleAnalyticsImporter')) {
             $googleAnalyticsImporterInstruction = [
                 'id'                => 'GoogleAnalyticsImporter',
-                'name'              => Matomo::translate('CoreAdminHome_ImportFromGoogleAnalytics'),
+                'name'              => \Matomo\Matomo::translate('CoreAdminHome_ImportFromGoogleAnalytics'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Matomo::translate(
+                'othersInstruction' => \Matomo\Matomo::translate(
                     'CoreAdminHome_ImportFromGoogleAnalyticsDescription',
                     [Url::getExternalLinkTag('https://plugins.matomo.org/GoogleAnalyticsImporter'), '</a>']
                 ),
@@ -355,7 +354,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
         /**
          * @ignore
          */
-        Matomo::postEvent('SitesManager.siteWithoutData.customizeImporterMessage', [&$googleAnalyticsImporterInstruction]);
+        \Matomo\Matomo::postEvent('SitesManager.siteWithoutData.customizeImporterMessage', [&$googleAnalyticsImporterInstruction]);
 
         return $googleAnalyticsImporterInstruction;
     }
@@ -377,36 +376,36 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
             $othersInstructions,
             [
                 'id'                => 'ImageTracking',
-                'name'              => Matomo::translate('CoreAdminHome_ImageTracking'),
+                'name'              => \Matomo\Matomo::translate('CoreAdminHome_ImageTracking'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Matomo::translate(
+                'othersInstruction' => \Matomo\Matomo::translate(
                     'SitesManager_ImageTrackingDescription',
                     [Url::getExternalLinkTag('https://matomo.org/docs/tracking-api/reference/'), '</a>']
                 ),
             ],
             [
                 'id'                => 'LogAnalytics',
-                'name'              => Matomo::translate('SitesManager_LogAnalytics'),
+                'name'              => \Matomo\Matomo::translate('SitesManager_LogAnalytics'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Matomo::translate(
+                'othersInstruction' => \Matomo\Matomo::translate(
                     'SitesManager_LogAnalyticsDescription',
                     [Url::getExternalLinkTag('https://matomo.org/log-analytics/'), '</a>']
                 ),
             ],
             [
                 'id'                => 'MobileAppsAndSDKs',
-                'name'              => Matomo::translate('SitesManager_MobileAppsAndSDKs'),
+                'name'              => \Matomo\Matomo::translate('SitesManager_MobileAppsAndSDKs'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Matomo::translate(
+                'othersInstruction' => \Matomo\Matomo::translate(
                     'SitesManager_MobileAppsAndSDKsDescription',
                     [Url::getExternalLinkTag('https://matomo.org/integrate/#programming-language-platforms-and-frameworks'), '</a>']
                 ),
             ],
             [
                 'id'                => 'HttpTrackingApi',
-                'name'              => Matomo::translate('CoreAdminHome_HttpTrackingApi'),
+                'name'              => \Matomo\Matomo::translate('CoreAdminHome_HttpTrackingApi'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Matomo::translate(
+                'othersInstruction' => \Matomo\Matomo::translate(
                     'CoreAdminHome_HttpTrackingApiDescription',
                     [Url::getExternalLinkTag('https://developer.matomo.org/api-reference/tracking-api'), '</a>']
                 ),
@@ -451,7 +450,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
             return '';
         }
 
-        return Matomo::translate(
+        return \Matomo\Matomo::translate(
             'SitesManager_SiteWithoutDataDetectedSite',
             [
                 $detectedCms::getName(),
@@ -465,7 +464,7 @@ class Controller extends \Matomo\Plugin\ControllerAdmin
     {
         $request = \Matomo\Request::fromRequest();
         $idSite = $request->getIntegerParameter('idSite', 0);
-        if (!$idSite || !Matomo::isUserHasAdminAccess($idSite)) {
+        if (!$idSite || !\Matomo\Matomo::isUserHasAdminAccess($idSite)) {
             return Url::addCampaignParametersToMatomoLink('https://matomo.org/faq/general/manage-users/#imanadmin-creating-users');
         }
 

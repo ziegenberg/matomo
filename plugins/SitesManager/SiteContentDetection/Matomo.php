@@ -11,7 +11,6 @@ namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
 use Matomo\API\Request;
 use Matomo\Common;
-use Matomo\Matomo;
 use Matomo\Plugin\Manager;
 use Matomo\Plugins\CustomVariables\CustomVariables;
 use Matomo\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
@@ -24,7 +23,7 @@ class Matomo extends SiteContentDetectionAbstract
 {
     public static function getName(): string
     {
-        return Matomo::translate('CoreAdminHome_JavaScriptCode');
+        return \Matomo\Matomo::translate('CoreAdminHome_JavaScriptCode');
     }
 
     public static function getIcon(): string
@@ -87,7 +86,7 @@ class Matomo extends SiteContentDetectionAbstract
     public function getRecommendationDetails(SiteContentDetector $detector): array
     {
         $details = parent::getRecommendationDetails($detector);
-        $details['text'] = Matomo::translate('SitesManager_SetupMatomoTracker');
+        $details['text'] = \Matomo\Matomo::translate('SitesManager_SetupMatomoTracker');
         return $details;
     }
 
@@ -109,10 +108,10 @@ class Matomo extends SiteContentDetectionAbstract
         $consentManagerName = $consentManager::getName();
         $consentManagerUrl = $consentManager::getInstructionUrl();
         $consentManagerIsConnected = in_array($consentManagerId, $detector->connectedConsentManagers);
-        $notificationMessage = '<p>' . Matomo::translate('PrivacyManager_ConsentManagerDetected', [$consentManagerName, Url::getExternalLinkTag($consentManagerUrl), '</a>']) . '</p>';
+        $notificationMessage = '<p>' . \Matomo\Matomo::translate('PrivacyManager_ConsentManagerDetected', [$consentManagerName, Url::getExternalLinkTag($consentManagerUrl), '</a>']) . '</p>';
 
         if (!empty($consentManagerIsConnected)) {
-            $notificationMessage .= '<p>' . Matomo::translate('SitesManager_ConsentManagerConnected', [$consentManagerName]) . '</p>';
+            $notificationMessage .= '<p>' . \Matomo\Matomo::translate('SitesManager_ConsentManagerConnected', [$consentManagerName]) . '</p>';
         }
 
         return $notificationMessage;
