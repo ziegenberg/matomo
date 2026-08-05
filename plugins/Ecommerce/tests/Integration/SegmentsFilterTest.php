@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\tests\Integration;
+namespace Matomo\Plugins\Ecommerce\tests\Integration;
 
-use Piwik\Cache;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Cache;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Ecommerce

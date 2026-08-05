@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Container;
+namespace Matomo\Container;
 
 use DI\Definition\Exception\InvalidDefinition;
 use DI\Definition\Source\DefinitionSource;
 use DI\Definition\ValueDefinition;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
 
 /**
  * Expose the INI config into PHP-DI.

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
-use Piwik\QuickForm2;
+use Matomo\QuickForm2;
 
 class FormDefaultSettings extends QuickForm2
 {

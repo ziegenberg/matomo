@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Access;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Cache as PiwikCache;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Tracker;
-use Piwik\Log\LoggerInterface;
+use Matomo\Access;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Cache as PiwikCache;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Tracker;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Simple cache mechanism used in Tracker to avoid requesting settings from mysql on every request
@@ -132,7 +132,7 @@ class Cache
              * @param array &$content Array mapping of site attribute names with values.
              * @param int $idSite The site ID to get attributes for.
              */
-            Piwik::postEvent('Tracker.Cache.getSiteAttributes', [&$content, $idSite]);
+            Matomo::postEvent('Tracker.Cache.getSiteAttributes', [&$content, $idSite]);
 
             $logger = StaticContainer::get(LoggerInterface::class);
             $logger->debug("Website $idSite tracker cache was re-created.");
@@ -213,7 +213,7 @@ class Cache
          * @param array &$cacheContent Array of cached data. Each piece of data must be
          *                             mapped by name.
          */
-        Piwik::postEvent('Tracker.setTrackerCacheGeneral', [&$cacheContent]);
+        Matomo::postEvent('Tracker.setTrackerCacheGeneral', [&$cacheContent]);
         self::setCacheGeneral($cacheContent);
 
         $logger = StaticContainer::get(LoggerInterface::class);

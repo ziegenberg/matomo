@@ -7,41 +7,41 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome;
+namespace Matomo\Plugins\CoreAdminHome;
 
 use Exception;
 use Monolog\Handler\StreamHandler;
-use Piwik\API\Request;
-use Piwik\Changes\UserChanges;
-use Piwik\Log\Logger;
-use Piwik\Access;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\ArchiveProcessor;
-use Piwik\Config;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\CronArchive;
-use Piwik\Date;
-use Piwik\Log\LoggerInterface;
-use Piwik\Metrics\Formatter;
-use Piwik\Period\Factory;
-use Piwik\Piwik;
-use Piwik\Request as PiwikRequest;
-use Piwik\Segment;
-use Piwik\Scheduler\Scheduler;
-use Piwik\SettingsServer;
-use Piwik\Site;
-use Piwik\Tracker\Failures;
-use Piwik\Url;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
+use Matomo\API\Request;
+use Matomo\Changes\UserChanges;
+use Matomo\Log\Logger;
+use Matomo\Access;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\ArchiveProcessor;
+use Matomo\Config;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\CronArchive;
+use Matomo\Date;
+use Matomo\Log\LoggerInterface;
+use Matomo\Metrics\Formatter;
+use Matomo\Period\Factory;
+use Matomo\Matomo;
+use Matomo\Request as PiwikRequest;
+use Matomo\Segment;
+use Matomo\Scheduler\Scheduler;
+use Matomo\SettingsServer;
+use Matomo\Site;
+use Matomo\Tracker\Failures;
+use Matomo\Url;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
 
 /**
  * Provides administrative API methods for scheduling, archiving, tracking failures, and opt-out code generation.
  *
- * @method static \Piwik\Plugins\CoreAdminHome\API getInstance()
+ * @method static \Matomo\Plugins\CoreAdminHome\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private Scheduler $scheduler;
 
@@ -71,7 +71,7 @@ class API extends \Piwik\Plugin\API
      */
     public function runScheduledTasks(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         return $this->scheduler->run();
     }
@@ -84,7 +84,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setArchiveSettings($enableBrowserTriggerArchiving, $todayArchiveTimeToLive): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!Controller::isGeneralSettingsAdminEnabled()) {
             throw new Exception('General settings admin is not enabled');
@@ -103,7 +103,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setTrustedHosts($trustedHosts): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!Controller::isGeneralSettingsAdminEnabled()) {
             throw new Exception('General settings admin is not enabled');
@@ -126,7 +126,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setBrandingSettings($useCustomLogo, $hasCustomLogo, $hasCustomFavicon): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $customLogo = new CustomLogo();
         $response = [];
 
@@ -186,7 +186,7 @@ class API extends \Piwik\Plugin\API
             throw new Exception("Specify a value for &idSites= as a comma separated list of website IDs, for which your token_auth has 'admin' permission");
         }
 
-        Piwik::checkUserHasAdminAccess($idSites);
+        Matomo::checkUserHasAdminAccess($idSites);
 
         if (!empty($segment)) {
             $segment = new Segment($segment, $idSites);
@@ -215,13 +215,13 @@ class API extends \Piwik\Plugin\API
      */
     public function runCronArchiving(): void
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         // HTTP request: logs needs to be dumped in the HTTP response (on top of existing log destinations)
-        /** @var \Piwik\Log\Logger $logger */
+        /** @var \Matomo\Log\Logger $logger */
         $logger = StaticContainer::get(LoggerInterface::class);
         $handler = new StreamHandler('php://output', Logger::INFO);
-        $handler->setFormatter(StaticContainer::get('Piwik\Plugins\Monolog\Formatter\LineMessageFormatter'));
+        $handler->setFormatter(StaticContainer::get('Matomo\Plugins\Monolog\Formatter\LineMessageFormatter'));
         $logger->pushHandler($handler);
 
         $archiver = new CronArchive();
@@ -235,12 +235,12 @@ class API extends \Piwik\Plugin\API
      */
     public function deleteAllTrackingFailures(): void
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $this->trackingFailures->deleteAllTrackingFailures();
         } else {
-            Piwik::checkUserHasSomeAdminAccess();
+            Matomo::checkUserHasSomeAdminAccess();
             $idSites = Access::getInstance()->getSitesIdWithAdminAccess();
-            Piwik::checkUserHasAdminAccess($idSites);
+            Matomo::checkUserHasAdminAccess($idSites);
             $this->trackingFailures->deleteTrackingFailures($idSites);
         }
     }
@@ -253,7 +253,7 @@ class API extends \Piwik\Plugin\API
      */
     public function deleteTrackingFailure(int $idSite, $idFailure): void
     {
-        Piwik::checkUserHasAdminAccess($idSite);
+        Matomo::checkUserHasAdminAccess($idSite);
 
         $this->trackingFailures->deleteTrackingFailure($idSite, $idFailure);
     }
@@ -266,12 +266,12 @@ class API extends \Piwik\Plugin\API
      */
     public function getTrackingFailures(): array
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $failures = $this->trackingFailures->getAllFailures();
         } else {
-            Piwik::checkUserHasSomeAdminAccess();
+            Matomo::checkUserHasSomeAdminAccess();
             $idSites = Access::getInstance()->getSitesIdWithAdminAccess();
-            Piwik::checkUserHasAdminAccess($idSites);
+            Matomo::checkUserHasAdminAccess($idSites);
 
             $failures = $this->trackingFailures->getFailuresForSites($idSites);
         }
@@ -290,9 +290,9 @@ class API extends \Piwik\Plugin\API
     public function archiveReports(int $idSite, string $period, string $date, $segment = false, $plugin = false, $report = false)
     {
         if ($this->shouldRequireSuperUserForArchiveReports()) {
-            Piwik::checkUserHasSuperUserAccess();
+            Matomo::checkUserHasSuperUserAccess();
         } else {
-            Piwik::checkUserHasViewAccess($idSite);
+            Matomo::checkUserHasViewAccess($idSite);
         }
 
         // if cron archiving is running, we will invalidate in CronArchive, not here
@@ -324,7 +324,7 @@ class API extends \Piwik\Plugin\API
          *
          * @internal
          */
-        Piwik::postEvent('CoreAdminHome.archiveReports.start', [
+        Matomo::postEvent('CoreAdminHome.archiveReports.start', [
             $idSite,
             $period,
             $segmentObj,
@@ -355,7 +355,7 @@ class API extends \Piwik\Plugin\API
          *
          * @internal
          */
-        Piwik::postEvent('CoreAdminHome.archiveReports.complete', [
+        Matomo::postEvent('CoreAdminHome.archiveReports.complete', [
             $idSite,
             $period,
             $segmentObj,
@@ -504,11 +504,11 @@ class API extends \Piwik\Plugin\API
      */
     public function whatIsNewMarkAllChangesReadForCurrentUser(): bool
     {
-        Piwik::checkUserHasSomeViewAccess();
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
 
         $model = new UsersModel();
-        $user = $model->getUser(Piwik::getCurrentUserLogin());
+        $user = $model->getUser(Matomo::getCurrentUserLogin());
         if (!empty($user)) {
             $userChanges = new UserChanges($user);
             $userChanges->markChangesAsRead();

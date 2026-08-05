@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Feedback;
+namespace Matomo\Plugins\Feedback;
 
-use Piwik\Date;
-use Piwik\View;
-use Piwik\Piwik;
-use Piwik\Common;
-use Piwik\Plugins\Feedback\FeedbackReminder;
+use Matomo\Date;
+use Matomo\View;
+use Matomo\Matomo;
+use Matomo\Common;
+use Matomo\Plugins\Feedback\FeedbackReminder;
 
-class Feedback extends \Piwik\Plugin
+class Feedback extends \Matomo\Plugin
 {
     public const NEVER_REMIND_ME_AGAIN = "-1";
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -97,7 +97,7 @@ class Feedback extends \Piwik\Plugin
     public function renderViewsAndAddToPage(&$pageHtml)
     {
         //only show on superuser
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return $pageHtml;
         }
         $feedbackQuestionBanner = $this->renderFeedbackQuestion();
@@ -117,7 +117,7 @@ class Feedback extends \Piwik\Plugin
 
     public function showQuestionBanner()
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             return false;
         }
 
@@ -128,7 +128,7 @@ class Feedback extends \Piwik\Plugin
 
         $shouldShowQuestionBanner = true;
 
-        Piwik::postEvent('Feedback.showQuestionBanner', [&$shouldShowQuestionBanner]);
+        Matomo::postEvent('Feedback.showQuestionBanner', [&$shouldShowQuestionBanner]);
 
         if (!$shouldShowQuestionBanner) {
             return false;
@@ -141,7 +141,7 @@ class Feedback extends \Piwik\Plugin
         // If there isn't any reminder date set, or never remind me was selected previously (-1) we determine a new date
         if ($nextReminderDate === false || $nextReminderDate <= 0) {
             // if user was created within the last 6 months, we set the date to 6 months after his creation date
-            $userCreatedDate = Piwik::getCurrentUserCreationDate();
+            $userCreatedDate = Matomo::getCurrentUserCreationDate();
             if (!empty($userCreatedDate) && Date::factory($userCreatedDate)->addMonth(6)->getTimestamp() > $now) {
                 $nextReminder = Date::factory($userCreatedDate)->addMonth(6)->toString('Y-m-d');
                 $feedbackReminder->setUserOption($nextReminder);

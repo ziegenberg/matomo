@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Unit;
+namespace Matomo\Plugins\CoreHome\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
 
 /**
  * @group CoreHome
@@ -25,7 +25,7 @@ class EvolutionMetricTest extends TestCase
     public function testShouldDoProportionalComparisionIfCurrentPeriodIncomplete()
     {
         $currentData = new DataTable();
-        $cPeriod = new \Piwik\Period\Week(Date::factory('2021-10-10'));
+        $cPeriod = new \Matomo\Period\Week(Date::factory('2021-10-10'));
         $currentData->setMetadata('period', $cPeriod);
 
         // If the archived date meta data value exists on the row then it will be used
@@ -36,7 +36,7 @@ class EvolutionMetricTest extends TestCase
         $row->setMetadata(DataTable::ARCHIVED_DATE_METADATA_NAME, '2021-10-07 00:00:00');
 
         $pastData = new DataTable();
-        $sPeriod = new \Piwik\Period\Week(Date::factory('2021-10-03'));
+        $sPeriod = new \Matomo\Period\Week(Date::factory('2021-10-03'));
         $pastData->setMetadata('period', $sPeriod);
 
         $ratio = EvolutionMetric::getRatio($currentData, $pastData, $row);
@@ -47,11 +47,11 @@ class EvolutionMetricTest extends TestCase
     public function testShouldNotDoProportionalComparisionIfCurrentPeriodComplete()
     {
         $currentData = new DataTable();
-        $cPeriod = new \Piwik\Period\Week(Date::factory('2021-10-10'));
+        $cPeriod = new \Matomo\Period\Week(Date::factory('2021-10-10'));
         $currentData->setMetadata('period', $cPeriod);
 
         $pastData = new DataTable();
-        $sPeriod = new \Piwik\Period\Week(Date::factory('2021-10-03'));
+        $sPeriod = new \Matomo\Period\Week(Date::factory('2021-10-03'));
         $pastData->setMetadata('period', $sPeriod);
 
         $ratio = EvolutionMetric::getRatio($currentData, $pastData, new Row());

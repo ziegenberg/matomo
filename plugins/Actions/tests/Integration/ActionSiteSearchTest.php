@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\tests\Unit;
+namespace Matomo\Plugins\Actions\tests\Unit;
 
-use Piwik\Plugins\Actions\Actions\ActionSiteSearch;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Request;
+use Matomo\Plugins\Actions\Actions\ActionSiteSearch;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Request;
 
 /**
  * @group Actions

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\Model;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Period\Month;
-use Piwik\Log\LoggerInterface;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\Model;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Period\Month;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Service that purges temporary, error-ed, invalid and custom range archives from archive tables.
@@ -28,7 +28,7 @@ use Piwik\Log\LoggerInterface;
  * Error-ed archives are purged w/o constraint.
  *
  * Invalid archives are purged if a new, valid, archive exists w/ the same site, date, period combination.
- * Archives are marked as invalid via Piwik\Archive\ArchiveInvalidator.
+ * Archives are marked as invalid via Matomo\Archive\ArchiveInvalidator.
  */
 class ArchivePurger
 {
@@ -328,7 +328,7 @@ class ArchivePurger
         $deletedCount = $this->model->deleteArchivesWithPeriod(
             $numericTable,
             $blobTable,
-            Piwik::$idPeriods['range'],
+            Matomo::$idPeriods['range'],
             $this->purgeCustomRangesOlderThan
         );
 

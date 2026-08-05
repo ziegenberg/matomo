@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics\Writer;
+namespace Matomo\Plugins\ArchivingMetrics\Writer;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\ArchivingMetrics\Context;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\ArchivingMetrics\Context;
 
 final class DbWriter implements WriterInterface
 {

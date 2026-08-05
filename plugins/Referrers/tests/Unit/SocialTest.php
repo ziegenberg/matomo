@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Unit;
+namespace Matomo\Plugins\Referrers\tests\Unit;
 
-use Piwik\Plugins\Referrers\Social;
+use Matomo\Plugins\Referrers\Social;
 
 /**
  * @group Social
@@ -60,10 +60,10 @@ class SocialTest extends \PHPUnit\Framework\TestCase
             array('http://lastfm.com.tr', 'Last.fm'),
             array('http://t.co/test', 'Twitter'),
             array('http://x.com/', 'Twitter'),
-            array('http://xxt.co/test', \Piwik\Piwik::translate('General_Unknown')),
-            array('asdfasdfadsf.com', \Piwik\Piwik::translate('General_Unknown')),
-            array('http://xwayn.com', \Piwik\Piwik::translate('General_Unknown')),
-            array('http://live.com/test', \Piwik\Piwik::translate('General_Unknown')),
+            array('http://xxt.co/test', \Matomo\Matomo::translate('General_Unknown')),
+            array('asdfasdfadsf.com', \Matomo\Matomo::translate('General_Unknown')),
+            array('http://xwayn.com', \Matomo\Matomo::translate('General_Unknown')),
+            array('http://live.com/test', \Matomo\Matomo::translate('General_Unknown')),
         );
     }
 

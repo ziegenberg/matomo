@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\Plugins;
+namespace Matomo\Plugins\Marketplace\Plugins;
 
 use Matomo\Cache\Eager;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\Plugins\Marketplace\Plugins;
-use Piwik\Plugins\Marketplace\SiteAwareLinks;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\Plugins\Marketplace\Plugins;
+use Matomo\Plugins\Marketplace\SiteAwareLinks;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 class InvalidLicenses
 {
@@ -86,7 +86,7 @@ class InvalidLicenses
 
         $message = $this->translator->translate('Marketplace_LicenseExceededDescription', array($plugins, '<br/>', "<strong>" . $loginUrl, $loginUrlEnd . "</strong>"));
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $message .= ' ' . $this->getSubscritionSummaryMessage();
         }
 
@@ -110,7 +110,7 @@ class InvalidLicenses
 
         $message = $this->translator->translate('Marketplace_LicenseMissingDeactivatedDescription', array($plugins, '<br/>', "<strong>" . $loginUrl, $loginUrlEnd . "</strong>"));
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $message .= ' ' . $this->getSubscritionSummaryMessage();
         }
 
@@ -134,7 +134,7 @@ class InvalidLicenses
 
         $message = $this->translator->translate('Marketplace_LicenseExpiredDescription', array($plugins, '<br/>', "<strong>" . $loginUrl, $loginUrlEnd . "</strong>"));
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $message .= ' ' . $this->getSubscritionSummaryMessage();
         }
 

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Plugin\Dimension;
+namespace Matomo\Tests\Integration\Plugin\Dimension;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Dimension\DimensionMetadataProvider;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Dimension\DimensionMetadataProvider;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugin\Manager as PluginManager;
 
 class DimensionMetadataProviderTest extends IntegrationTestCase
 {
@@ -21,7 +21,7 @@ class DimensionMetadataProviderTest extends IntegrationTestCase
         parent::setUp();
 
         /** @var PluginManager $manager */
-        $manager = StaticContainer::get('Piwik\Plugin\Manager');
+        $manager = StaticContainer::get('Matomo\Plugin\Manager');
         $manager->loadPlugins(array('Events', 'Contents'));
     }
 

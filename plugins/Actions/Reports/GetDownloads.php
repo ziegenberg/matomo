@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\DownloadUrl;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\DownloadUrl;
 
 class GetDownloads extends Base
 {
@@ -20,8 +20,8 @@ class GetDownloads extends Base
         parent::init();
 
         $this->dimension     = new DownloadUrl();
-        $this->name          = Piwik::translate('General_Downloads');
-        $this->documentation = Piwik::translate('Actions_DownloadsReportDocumentation', '<br />');
+        $this->name          = Matomo::translate('General_Downloads');
+        $this->documentation = Matomo::translate('Actions_DownloadsReportDocumentation', '<br />');
         $this->metrics       = array('nb_visits', 'nb_hits');
 
         $this->actionToLoadSubTables = $this->action;
@@ -33,16 +33,16 @@ class GetDownloads extends Base
     public function getMetrics()
     {
         return array(
-            'nb_visits' => Piwik::translate('Actions_ColumnUniqueDownloads'),
-            'nb_hits'   => Piwik::translate('General_Downloads'),
+            'nb_visits' => Matomo::translate('Actions_ColumnUniqueDownloads'),
+            'nb_hits'   => Matomo::translate('General_Downloads'),
         );
     }
 
     protected function getMetricsDocumentation()
     {
         return array(
-            'nb_visits' => Piwik::translate('Actions_ColumnUniqueClicksDocumentation'),
-            'nb_hits'   => Piwik::translate('Actions_ColumnClicksDocumentation'),
+            'nb_visits' => Matomo::translate('Actions_ColumnUniqueClicksDocumentation'),
+            'nb_hits'   => Matomo::translate('Actions_ColumnClicksDocumentation'),
         );
     }
 

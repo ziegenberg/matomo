@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResultItem;
-use Piwik\Plugins\Diagnostics\DiagnosticService;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResultItem;
+use Matomo\Plugins\Diagnostics\DiagnosticService;
 
 /**
  * Run the diagnostics.
@@ -32,7 +32,7 @@ class Run extends ConsoleCommand
     {
         // Replace this with dependency injection once available
         /** @var DiagnosticService $diagnosticService */
-        $diagnosticService = StaticContainer::get('Piwik\Plugins\Diagnostics\DiagnosticService');
+        $diagnosticService = StaticContainer::get('Matomo\Plugins\Diagnostics\DiagnosticService');
 
         $input = $this->getInput();
         $output = $this->getOutput();
@@ -67,7 +67,7 @@ class Run extends ConsoleCommand
         }
 
         if (!$report->hasWarnings() && !$report->hasErrors()) {
-            $output->writeln(sprintf('<info>%s</info>', Piwik::translate('Installation_SystemCheckSummaryNoProblems')));
+            $output->writeln(sprintf('<info>%s</info>', Matomo::translate('Installation_SystemCheckSummaryNoProblems')));
         }
 
         return self::SUCCESS;

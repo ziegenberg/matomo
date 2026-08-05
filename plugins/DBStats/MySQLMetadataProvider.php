@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats;
+namespace Matomo\Plugins\DBStats;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DbHelper;
-use Piwik\Option;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DbHelper;
+use Matomo\Option;
 
 /**
  * Utility class that provides general information about databases, including the size of

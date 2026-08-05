@@ -9,11 +9,11 @@
  *
  */
 
-namespace Piwik\Plugins\LanguagesManager;
+namespace Matomo\Plugins\LanguagesManager;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\DbHelper;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\DbHelper;
 
 class Model
 {

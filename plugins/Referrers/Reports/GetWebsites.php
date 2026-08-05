@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\Referrers\Columns\Website;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\Referrers\Columns\Website;
 
 class GetWebsites extends Base
 {
@@ -21,8 +21,8 @@ class GetWebsites extends Base
     {
         parent::init();
         $this->dimension     = new Website();
-        $this->name          = Piwik::translate('CorePluginsAdmin_Websites');
-        $this->documentation = Piwik::translate('Referrers_WebsitesReportDocumentation', '<br />');
+        $this->name          = Matomo::translate('CorePluginsAdmin_Websites');
+        $this->documentation = Matomo::translate('Referrers_WebsitesReportDocumentation', '<br />');
         $this->recursiveLabelSeparator = '/';
         $this->actionToLoadSubTables = 'getUrlsFromWebsiteId';
         $this->hasGoalMetrics = true;

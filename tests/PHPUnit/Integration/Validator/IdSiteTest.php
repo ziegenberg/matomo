@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation\Loader;
+namespace Matomo\Tests\Unit\Translation\Loader;
 
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Validators\IdSite;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Validators\IdSite;
 
 /**
  * @group Validator
@@ -39,21 +39,21 @@ class IdSiteTest extends IntegrationTestCase
 
     public function testValidateFailValueDoesNotExist()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
 
         $this->validate(99);
     }
 
     public function testValidateFailValueIsEmpty()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
 
         $this->validate(0);
     }
 
     public function testValidateFailValueIsFalse()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
 
         $this->validate(false);
     }

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Common;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Matomo;
 
 class ReferrerAnonymizer
 {
@@ -22,10 +22,10 @@ class ReferrerAnonymizer
     public static function getAvailableAnonymizationOptions(): array
     {
         return [
-            self::EXCLUDE_NONE => Piwik::translate('PrivacyManager_AnonymizeReferrerExcludeNone'),
-            self::EXCLUDE_QUERY => Piwik::translate('PrivacyManager_AnonymizeReferrerExcludeQuery'),
-            self::EXCLUDE_PATH => Piwik::translate('PrivacyManager_AnonymizeReferrerExcludePath'),
-            self::EXCLUDE_ALL => Piwik::translate('PrivacyManager_AnonymizeReferrerExcludeAll'),
+            self::EXCLUDE_NONE => Matomo::translate('PrivacyManager_AnonymizeReferrerExcludeNone'),
+            self::EXCLUDE_QUERY => Matomo::translate('PrivacyManager_AnonymizeReferrerExcludeQuery'),
+            self::EXCLUDE_PATH => Matomo::translate('PrivacyManager_AnonymizeReferrerExcludePath'),
+            self::EXCLUDE_ALL => Matomo::translate('PrivacyManager_AnonymizeReferrerExcludeAll'),
             // but try to track the type still
         ];
     }

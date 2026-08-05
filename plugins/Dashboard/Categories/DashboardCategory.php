@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Dashboard\Categories;
+namespace Matomo\Plugins\Dashboard\Categories;
 
-use Piwik\Category\Category;
-use Piwik\Piwik;
+use Matomo\Category\Category;
+use Matomo\Matomo;
 
 class DashboardCategory extends Category
 {
@@ -20,6 +20,6 @@ class DashboardCategory extends Category
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Dashboard_DashboardCategoryHelp', ['<strong>', '</strong>']) . '</p>';
+        return '<p>' . Matomo::translate('Dashboard_DashboardCategoryHelp', ['<strong>', '</strong>']) . '</p>';
     }
 }

@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\DataAccess;
+namespace Matomo\Tests\Integration\DataAccess;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Period\Day;
-use Piwik\Period\Factory;
-use Piwik\Period\Month;
-use Piwik\Period\Range;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\DataAccess\Model;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Period\Day;
+use Matomo\Period\Factory;
+use Matomo\Period\Month;
+use Matomo\Period\Range;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataAccess\Model;
 
 /**
  * @group Core

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Cache as PiwikCache;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
+use Matomo\Cache as PiwikCache;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
 
 /**
  * Contains helper methods that can be used to get common Piwik settings.
@@ -99,7 +99,7 @@ class SettingsPiwik
          *
          *                                  Add segments to this array in your event handler.
          */
-        Piwik::postEvent('Segments.getKnownSegmentsToArchiveAllSites', array(&$segmentsToProcess));
+        Matomo::postEvent('Segments.getKnownSegmentsToArchiveAllSites', array(&$segmentsToProcess));
 
         $segmentsToProcess = array_unique($segmentsToProcess);
 
@@ -149,7 +149,7 @@ class SettingsPiwik
          *                                  Add segments to this array in your event handler.
          * @param int $idSite The ID of the site to get segments for.
          */
-        Piwik::postEvent('Segments.getKnownSegmentsToArchiveForSite', array(&$segments, $idSite));
+        Matomo::postEvent('Segments.getKnownSegmentsToArchiveForSite', array(&$segments, $idSite));
 
         $segments = array_unique($segments);
 
@@ -300,7 +300,7 @@ class SettingsPiwik
      */
     public static function isSegmentationEnabled(): bool
     {
-        return !Piwik::isUserIsAnonymous()
+        return !Matomo::isUserIsAnonymous()
         || Config::getInstance()->General['anonymous_user_enable_use_segments_API'];
     }
 
@@ -333,8 +333,8 @@ class SettingsPiwik
 
     /**
      * If Piwik uses per-domain config file, make sure CustomLogo is unique
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      * @throws Exception
      */
     public static function rewriteMiscUserPathWithInstanceId(string $path): string

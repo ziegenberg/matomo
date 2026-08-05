@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\Common;
-use Piwik\DataTable\Manager;
-use Piwik\DataTable\Row;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\RankingQuery;
-use Piwik\Timer;
+use Matomo\Common;
+use Matomo\DataTable\Manager;
+use Matomo\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\RankingQuery;
+use Matomo\Timer;
 
 /**
  * @group DataTableTest
@@ -441,8 +441,8 @@ class DataTableTest extends \PHPUnit\Framework\TestCase
 
         $table = DataTable::fromSerializedArray($table);
         $row1  = $table->getFirstRow();
-        self::assertTrue($row1 instanceof \Piwik\DataTable\Row);
-        self::assertFalse($row1 instanceof \Piwik\DataTable\Row\DataTableSummaryRow); // we convert summary rows to Row instances
+        self::assertTrue($row1 instanceof \Matomo\DataTable\Row);
+        self::assertFalse($row1 instanceof \Matomo\DataTable\Row\DataTableSummaryRow); // we convert summary rows to Row instances
 
         self::assertEquals($label, $row1->getColumn('label'));
         self::assertEquals($column2, $row1->getColumn(2));
@@ -1268,7 +1268,7 @@ class DataTableTest extends \PHPUnit\Framework\TestCase
 
     public function testUnrelatedDataTableNotDestructed(): void
     {
-        $mockedDataTable = $this->createPartialMock('\Piwik\DataTable', ['__destruct']);
+        $mockedDataTable = $this->createPartialMock('\Matomo\DataTable', ['__destruct']);
         $mockedDataTable->expects($this->never())->method('__destruct');
 
         $rowBeingDestructed = new Row();
@@ -1303,7 +1303,7 @@ class DataTableTest extends \PHPUnit\Framework\TestCase
 
         // passing a whole className is expected to work. This way we also make sure not all filters are disabled
         // and it only blocks the given one
-        $dataTable2->filter('Piwik\DataTable\Filter\Limit', [10, 10]);
+        $dataTable2->filter('Matomo\DataTable\Filter\Limit', [10, 10]);
         self::assertSame(10, $dataTable2->getRowsCount());
     }
 
@@ -1312,7 +1312,7 @@ class DataTableTest extends \PHPUnit\Framework\TestCase
      */
     public function testSubDataTableIsDestructed(): void
     {
-        $mockedDataTable = $this->getMockBuilder('\Piwik\DataTable')
+        $mockedDataTable = $this->getMockBuilder('\Matomo\DataTable')
             ->onlyMethods(['__destruct'])
             ->getMock();
         $mockedDataTable->expects($this->once())->method('__destruct');

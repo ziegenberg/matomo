@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Feedback;
+namespace Matomo\Plugins\Feedback;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
 
 class FeedbackReminder
 {
@@ -19,7 +19,7 @@ class FeedbackReminder
 
     public function __construct()
     {
-        $this->userLogin = Piwik::getCurrentUserLogin();
+        $this->userLogin = Matomo::getCurrentUserLogin();
     }
 
     public function getUserOption()

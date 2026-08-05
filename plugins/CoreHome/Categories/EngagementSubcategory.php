@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Categories;
+namespace Matomo\Plugins\CoreHome\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class EngagementSubcategory extends Subcategory
 {
@@ -20,7 +20,7 @@ class EngagementSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('CoreHome_EngagementSubcategoryHelp1') . '</p>'
-            . '<p>' . Piwik::translate('CoreHome_EngagementSubcategoryHelp2') . '</p>';
+        return '<p>' . Matomo::translate('CoreHome_EngagementSubcategoryHelp1') . '</p>'
+            . '<p>' . Matomo::translate('CoreHome_EngagementSubcategoryHelp2') . '</p>';
     }
 }

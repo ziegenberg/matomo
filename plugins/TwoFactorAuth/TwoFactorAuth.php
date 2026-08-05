@@ -7,30 +7,30 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth;
+namespace Matomo\Plugins\TwoFactorAuth;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\NoPrivilegesException;
-use Piwik\FrontController;
-use Piwik\IP;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\Controller as LoginController;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserLoginHelper;
-use Piwik\Session;
-use Piwik\Session\SessionFingerprint;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\NoPrivilegesException;
+use Matomo\FrontController;
+use Matomo\IP;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\Controller as LoginController;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserLoginHelper;
+use Matomo\Session;
+use Matomo\Session\SessionFingerprint;
 use Exception;
-use Piwik\SettingsPiwik;
+use Matomo\SettingsPiwik;
 
-class TwoFactorAuth extends \Piwik\Plugin
+class TwoFactorAuth extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -146,7 +146,7 @@ class TwoFactorAuth extends \Piwik\Plugin
 
     public function onSuccessfulSession($login)
     {
-        if (Piwik::getModule() === 'Login' && Piwik::getAction() === 'logme' && $login) {
+        if (Matomo::getModule() === 'Login' && Matomo::getAction() === 'logme' && $login) {
             // we allow user to send an "authCode" along logme to directly log in... if not, user will see the
             // auth code verification screen after logme
             $authCode = Common::getRequestVar('authCode', '', 'string');
@@ -193,22 +193,22 @@ class TwoFactorAuth extends \Piwik\Plugin
             $twoFa = $this->getTwoFa();
 
             if (!empty($login) && TwoFactorAuthentication::isUserUsingTwoFactorAuthentication($login) && $this->isValidTokenAuth($returnedValue)) {
-                $authCode = \Piwik\Request::fromRequest()->getStringParameter('authCode', '');
+                $authCode = \Matomo\Request::fromRequest()->getStringParameter('authCode', '');
                 // we only return an error when the login/password combo was correct. otherwise you could brute force
                 // auth tokens
                 if (!$authCode) {
                     $this->recordFailedTwoFactorAttempt($login);
-                    throw new NoPrivilegesException(Piwik::translate('TwoFactorAuth_MissingAuthCodeAPI'));
+                    throw new NoPrivilegesException(Matomo::translate('TwoFactorAuth_MissingAuthCodeAPI'));
                 }
                 if (!$twoFa->validateAuthCode($login, $authCode)) {
                     $this->recordFailedTwoFactorAttempt($login);
-                    throw new NoPrivilegesException(Piwik::translate('TwoFactorAuth_InvalidAuthCode'));
+                    throw new NoPrivilegesException(Matomo::translate('TwoFactorAuth_InvalidAuthCode'));
                 }
             } elseif (
                 $twoFa->isUserRequiredToHaveTwoFactorEnabled()
                 && (empty($login) || !TwoFactorAuthentication::isUserUsingTwoFactorAuthentication($login))
             ) {
-                throw new Exception(Piwik::translate('TwoFactorAuth_RequiredAuthCodeNotConfiguredAPI'));
+                throw new Exception(Matomo::translate('TwoFactorAuth_RequiredAuthCodeNotConfiguredAPI'));
             }
         }
     }
@@ -219,7 +219,7 @@ class TwoFactorAuth extends \Piwik\Plugin
     private function recordFailedTwoFactorAttempt(string $login): void
     {
         try {
-            $bruteForce = StaticContainer::get('Piwik\Plugins\Login\Security\BruteForceDetection');
+            $bruteForce = StaticContainer::get('Matomo\Plugins\Login\Security\BruteForceDetection');
             if ($bruteForce->isEnabled()) {
                 $bruteForce->addFailedAttempt(IP::getIpFromHeader(), $login);
             }
@@ -250,14 +250,14 @@ class TwoFactorAuth extends \Piwik\Plugin
             if (!Request::isRootRequestApiRequest()) {
                 $this->resetPendingTwoFactorSessionAndRequireFreshLogin($module, $action);
             } elseif (StaticContainer::get(AuthenticationToken::class)->isSessionToken()) {
-                throw new Exception(Piwik::translate('General_YourSessionHasExpired'));
+                throw new Exception(Matomo::translate('General_YourSessionHasExpired'));
             }
             return;
         }
 
         $twoFa = $this->getTwoFa();
 
-        $isUsing2FA = TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Piwik::getCurrentUserLogin());
+        $isUsing2FA = TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Matomo::getCurrentUserLogin());
         if ($isUsing2FA && Session::isStarted()) {
             $sessionFingerprint = new SessionFingerprint();
             if (!$sessionFingerprint->hasVerifiedTwoFactor()) {
@@ -266,7 +266,7 @@ class TwoFactorAuth extends \Piwik\Plugin
                     $action = 'loginTwoFactorAuth';
                 } elseif (StaticContainer::get(AuthenticationToken::class)->isSessionToken()) {
                     // don't allow API requests with session auth if 2fa code hasn't been verified.
-                    throw new Exception(Piwik::translate('General_YourSessionHasExpired'));
+                    throw new Exception(Matomo::translate('General_YourSessionHasExpired'));
                 }
             }
         } elseif (!$isUsing2FA && $twoFa->isUserRequiredToHaveTwoFactorEnabled()) {
@@ -280,7 +280,7 @@ class TwoFactorAuth extends \Piwik\Plugin
         LoginController::clearSession();
         Access::getInstance()->setSessionExpired(true);
 
-        $module = Piwik::getLoginPluginName();
+        $module = Matomo::getLoginPluginName();
         $action = 'login';
     }
 
@@ -298,11 +298,11 @@ class TwoFactorAuth extends \Piwik\Plugin
             return false;
         }
 
-        if ($module === Piwik::getLoginPluginName() && $action === 'logout') {
+        if ($module === Matomo::getLoginPluginName() && $action === 'logout') {
             return false;
         }
 
-        $auth = StaticContainer::get('Piwik\Auth');
+        $auth = StaticContainer::get('Matomo\Auth');
         if (!$auth->getLogin() && method_exists($auth, 'getTokenAuth') && $auth->getTokenAuth()) {
             // when authenticated by token only, we do not require 2fa
             // needed eg for rendering exported widgets authenticated by token
@@ -310,7 +310,7 @@ class TwoFactorAuth extends \Piwik\Plugin
         }
 
         $requiresAuth = true;
-        Piwik::postEvent('TwoFactorAuth.requiresTwoFactorAuthentication', array(&$requiresAuth, $module, $action, $parameters));
+        Matomo::postEvent('TwoFactorAuth.requiresTwoFactorAuthentication', array(&$requiresAuth, $module, $action, $parameters));
 
         return $requiresAuth;
     }
@@ -328,7 +328,7 @@ class TwoFactorAuth extends \Piwik\Plugin
 
         $twoFa = $this->getTwoFa();
 
-        $isUsing2FA = TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Piwik::getCurrentUserLogin());
+        $isUsing2FA = TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Matomo::getCurrentUserLogin());
         if ($isUsing2FA && !Request::isRootRequestApiRequest()) {
             $sessionFingerprint = new SessionFingerprint();
             if (!$sessionFingerprint->hasVerifiedTwoFactor()) {
@@ -345,7 +345,7 @@ class TwoFactorAuth extends \Piwik\Plugin
             return $output;
         }
 
-        $token = Piwik::getCurrentUserTokenAuth();
+        $token = Matomo::getCurrentUserTokenAuth();
         // make sure to not leak the token... otherwise someone could log in using someone's credentials...
         // and then maybe in the auth screen look into the DOM to find the token... and then bypass the
         // auth code using API

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Date;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\Login\PasswordVerifier;
+use Matomo\Date;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Login\PasswordVerifier;
 
 class CustomPasswordVerifier extends PasswordVerifier
 {
@@ -45,7 +45,7 @@ class PasswordVerifierTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 

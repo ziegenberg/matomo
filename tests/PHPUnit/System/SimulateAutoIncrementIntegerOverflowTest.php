@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
 
 /**
  * Simulates the case where there are more than 4 billion visits and pages, and check that Piwik
@@ -74,7 +74,7 @@ class SimulateAutoIncrementIntegerOverflowTest extends SystemTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Config' => \Piwik\DI::decorate(function ($previous) {
+            'Matomo\Config' => \Matomo\DI::decorate(function ($previous) {
                 $general = $previous->General;
                 $general['action_title_category_delimiter'] = "/";
                 $previous->General = $general;

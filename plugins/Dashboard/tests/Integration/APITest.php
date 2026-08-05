@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Dashboard\tests\Integration;
+namespace Matomo\Plugins\Dashboard\tests\Integration;
 
-use Piwik\Plugins\Dashboard\API;
-use Piwik\Plugins\Dashboard\Dashboard;
-use Piwik\Plugins\Dashboard\Model;
-use Piwik\Plugins\UsersManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Dashboard\API;
+use Matomo\Plugins\Dashboard\Dashboard;
+use Matomo\Plugins\Dashboard\Model;
+use Matomo\Plugins\UsersManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Dashboard
@@ -321,7 +321,7 @@ class APITest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

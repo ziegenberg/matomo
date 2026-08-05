@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Fixtures;
+namespace Matomo\Plugins\PrivacyManager\tests\Fixtures;
 
 use MatomoTracker;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\PrivacyManager\ReferrerAnonymizer;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Cache;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\PrivacyManager\ReferrerAnonymizer;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Cache;
 
 class FewVisitsAnonymizedFixture extends Fixture
 {

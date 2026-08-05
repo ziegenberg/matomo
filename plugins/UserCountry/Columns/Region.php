@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Columns;
+namespace Matomo\Plugins\UserCountry\Columns;
 
-use Piwik\Piwik;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Matomo;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 class Region extends Base
 {
@@ -27,7 +27,7 @@ class Region extends Base
 
     public function getAcceptValues()
     {
-        return '01, 02, OR, P8,…<br/>' . Piwik::translate('General_ForExampleShort') . ' region=BFC;country=fr';
+        return '01, 02, OR, P8,…<br/>' . Matomo::translate('General_ForExampleShort') . ' region=BFC;country=fr';
     }
 
     /**

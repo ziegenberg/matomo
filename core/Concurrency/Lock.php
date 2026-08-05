@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Concurrency;
+namespace Matomo\Concurrency;
 
-use Piwik\Common;
-use Piwik\Date;
+use Matomo\Common;
+use Matomo\Date;
 
 class Lock
 {

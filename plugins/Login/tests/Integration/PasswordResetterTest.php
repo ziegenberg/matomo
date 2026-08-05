@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Auth;
-use Piwik\Container\StaticContainer;
-use Piwik\DI;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Login\PasswordResetter;
-use Piwik\Plugins\Login\PasswordResetUserIsInvalidException;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Auth;
+use Matomo\Container\StaticContainer;
+use Matomo\DI;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Login\PasswordResetter;
+use Matomo\Plugins\Login\PasswordResetUserIsInvalidException;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group PasswordResetterTest
@@ -311,8 +311,8 @@ class PasswordResetterTest extends IntegrationTestCase
         return [
             'observers.global' => DI::add([
                 ['Test.Mail.send', DI::value(function (PHPMailer $mail) {
-                    $subjectReset = Piwik::translate('Login_PasswordResetEmailSubject');
-                    $subjectCancel = Piwik::translate('Login_PasswordResetCancelEmailSubject');
+                    $subjectReset = Matomo::translate('Login_PasswordResetEmailSubject');
+                    $subjectCancel = Matomo::translate('Login_PasswordResetCancelEmailSubject');
 
                     if ($subjectReset === $mail->Subject) {
                         $body = $mail->createBody();

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\System;
+namespace Matomo\Plugins\CoreAdminHome\tests\System;
 
-use Piwik\Plugins\CoreAdminHome\tests\Fixture\TrackingFailures;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\CoreAdminHome\tests\Fixture\TrackingFailures;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group CoreAdminHome

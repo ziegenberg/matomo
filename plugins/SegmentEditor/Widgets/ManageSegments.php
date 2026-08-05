@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\Widgets;
+namespace Matomo\Plugins\SegmentEditor\Widgets;
 
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\WidgetConfig;
 
-class ManageSegments extends \Piwik\Widget\Widget
+class ManageSegments extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {
-        $idSite = \Piwik\Request::fromRequest()->getIntegerParameter('idSite', 0);
+        $idSite = \Matomo\Request::fromRequest()->getIntegerParameter('idSite', 0);
 
         $config->setCategoryId('General_Visitors');
         $config->setSubcategoryId('CoreHome_Segments');

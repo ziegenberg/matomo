@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Proxy;
+namespace Matomo\Plugins\Proxy;
 
-use Piwik\AssetManager;
-use Piwik\AssetManager\UIAsset;
-use Piwik\Exception\StylesheetLessCompileException;
-use Piwik\Exception\ThingNotFoundException;
-use Piwik\Plugin\Manager;
-use Piwik\ProxyHttp;
-use Piwik\Request;
+use Matomo\AssetManager;
+use Matomo\AssetManager\UIAsset;
+use Matomo\Exception\StylesheetLessCompileException;
+use Matomo\Exception\ThingNotFoundException;
+use Matomo\Plugin\Manager;
+use Matomo\ProxyHttp;
+use Matomo\Request;
 
 /**
  * Controller for proxy services
  *
  */
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public const JS_MIME_TYPE = 'application/javascript; charset=UTF-8';
 

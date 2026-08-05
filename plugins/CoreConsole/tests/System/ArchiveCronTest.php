@@ -7,34 +7,34 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\tests\System;
+namespace Matomo\Plugins\CoreConsole\tests\System;
 
-use Piwik\Archive\ArchivePurger;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CronArchive;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\Model;
-use Piwik\Http;
-use Piwik\Log\Logger;
-use Piwik\Log\LoggerInterface;
-use Piwik\Period\Day;
-use Piwik\Period\Month;
-use Piwik\Period\Week;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Site;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
-use Piwik\Container\Container;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Segment;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\ManySitesImportedLogs;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Archive\ArchivePurger;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CronArchive;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\Model;
+use Matomo\Http;
+use Matomo\Log\Logger;
+use Matomo\Log\LoggerInterface;
+use Matomo\Period\Day;
+use Matomo\Period\Month;
+use Matomo\Period\Week;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Site;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Container\Container;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Segment;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\ManySitesImportedLogs;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Tests to call the cron core:archive command script and check there is no error,
@@ -438,7 +438,7 @@ class ArchiveCronTest extends SystemTestCase
         // since it wouldn't trigger the child day archive. then later the day archive would be updated, and not the range, resulting
         // in inaccurate data)
         Rules::setBrowserTriggerArchiving(true);
-        \Piwik\Plugins\VisitsSummary\API::getInstance()->get(1, 'day', '2012-08-09');
+        \Matomo\Plugins\VisitsSummary\API::getInstance()->get(1, 'day', '2012-08-09');
         Rules::setBrowserTriggerArchiving(false);
 
         $rangeArchivesInvalid = Db::fetchAll("SELECT idarchive, name, date1, date2 FROM " . $table . " WHERE period = 5 and name LIKE 'done.%' and value = " . ArchiveWriter::DONE_INVALIDATED);
@@ -524,17 +524,17 @@ class ArchiveCronTest extends SystemTestCase
         Date::$now = strtotime('2015-01-01 00:00:00');
 
         return array(
-            LoggerInterface::class => \Piwik\DI::get(Logger::class),
+            LoggerInterface::class => \Matomo\DI::get(Logger::class),
 
             // for some reason, w/o real translations archiving segments in CronArchive fails. the data returned by CliMulti
             // is a translation token, and nothing else.
-            'Piwik\Translation\Translator' => function (Container $c) {
-                return new \Piwik\Translation\Translator($c->get('Piwik\Translation\Loader\LoaderInterface'));
+            'Matomo\Translation\Translator' => function (Container $c) {
+                return new \Matomo\Translation\Translator($c->get('Matomo\Translation\Loader\LoaderInterface'));
             },
 
             'Tests.log.allowAllHandlers' => true,
 
-            CronArchive\SegmentArchiving::class => \Piwik\DI::autowire()
+            CronArchive\SegmentArchiving::class => \Matomo\DI::autowire()
                 // Oldest reports are for 2012, so ensure segments are processed for that year
                 ->constructorParameter('beginningOfTimeLastNInYears', date('Y') - 2012),
         );

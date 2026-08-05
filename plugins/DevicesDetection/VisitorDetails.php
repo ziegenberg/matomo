@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection;
+namespace Matomo\Plugins\DevicesDetection;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/DevicesDetection/functions.php';
 
@@ -130,7 +130,7 @@ class VisitorDetails extends VisitorDetailsAbstract
         $deviceTypeIcon = $visit->getColumn('deviceTypeIcon');
         $deviceBrand    = $visit->getColumn('deviceBrand');
         $deviceModel    = $visit->getColumn('deviceModel');
-        if ($deviceBrand == Piwik::translate('General_Unknown')) {
+        if ($deviceBrand == Matomo::translate('General_Unknown')) {
             $deviceName = $deviceModel;
         } else {
             $deviceName = trim($deviceBrand . " " . $deviceModel);

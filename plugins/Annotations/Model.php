@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Annotations;
+namespace Matomo\Plugins\Annotations;
 
-use Piwik\Common;
-use Piwik\Db;
+use Matomo\Common;
+use Matomo\Db;
 
 /**
  * @phpstan-type Annotation array{id:int, idsite:int, date:string, note:string, starred:int, user:string}

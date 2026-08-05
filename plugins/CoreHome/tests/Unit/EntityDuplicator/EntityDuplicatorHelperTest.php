@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Unit\EntityDuplicator;
+namespace Matomo\Plugins\CoreHome\tests\Unit\EntityDuplicator;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Plugins\CoreHome\EntityDuplicator\EntityDuplicatorHelper;
+use Matomo\Plugins\CoreHome\EntityDuplicator\EntityDuplicatorHelper;
 
 /**
  * @group CoreHome

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\Commands\Update;
+namespace Matomo\Plugins\CoreUpdater\Commands\Update;
 
-use Piwik\Updater\Migration;
-use Piwik\Updater\UpdateObserver;
+use Matomo\Updater\Migration;
+use Matomo\Updater\UpdateObserver;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**

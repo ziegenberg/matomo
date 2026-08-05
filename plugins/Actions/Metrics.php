@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions;
+namespace Matomo\Plugins\Actions;
 
-use Piwik\Metrics as PiwikMetrics;
-use Piwik\Piwik;
-use Piwik\Tracker\Action;
+use Matomo\Metrics as PiwikMetrics;
+use Matomo\Matomo;
+use Matomo\Tracker\Action;
 
 /**
  * Class encapsulating logic to process Day/Period Archiving for the Actions reports
@@ -96,7 +96,7 @@ class Metrics
             ),
         );
 
-        Piwik::postEvent('Actions.Archiving.addActionMetrics', array(&$metricsConfig));
+        Matomo::postEvent('Actions.Archiving.addActionMetrics', array(&$metricsConfig));
 
         return $metricsConfig;
     }

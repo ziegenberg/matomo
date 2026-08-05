@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Unit;
+namespace Matomo\Plugins\Diagnostics\tests\Unit;
 
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Plugins\Diagnostics\DiagnosticReport;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\Diagnostics\DiagnosticReport;
 
 class DiagnosticReportTest extends \PHPUnit\Framework\TestCase
 {

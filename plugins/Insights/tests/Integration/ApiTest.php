@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\tests\Integration;
+namespace Matomo\Plugins\Insights\tests\Integration;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Cache as PiwikCache;
-use Piwik\DataTable;
-use Piwik\Plugins\Insights\API;
-use Piwik\Plugins\Insights\tests\Fixtures\SomeVisitsDifferentPathsOnTwoDays;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Cache as PiwikCache;
+use Matomo\DataTable;
+use Matomo\Plugins\Insights\API;
+use Matomo\Plugins\Insights\tests\Fixtures\SomeVisitsDifferentPathsOnTwoDays;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Insights

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection;
+namespace Matomo\Plugins\DevicesDetection;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 use DeviceDetector\Parser\OperatingSystem as OperatingSystemParser;
 use DeviceDetector\Parser\Device\AbstractDeviceParser as DeviceParser;
 use DeviceDetector\Parser\Client\Browser as BrowserParser;
-use Piwik\Tracker\Settings;
+use Matomo\Tracker\Settings;
 
 function getBrandLogo($label)
 {
@@ -32,7 +32,7 @@ function getBrowserFamilyFullName($label)
             return $name;
         }
     }
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 function getBrowserFamilyLogo($label)
@@ -58,14 +58,14 @@ function getBrowserNameWithVersion($label)
     } elseif (strlen($short) > 2 && $short !== 'UNK') {
         return trim($short . ' ' . $ver);
     }
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 function getBrowserName($label)
 {
     // Return early if the label is empty so that we don't try to manipulate an empty value
     if (empty($label)) {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     $short    = substr($label, 0, 2);
@@ -77,7 +77,7 @@ function getBrowserName($label)
         return $label;
     }
 
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 /**
@@ -137,7 +137,7 @@ function getDeviceBrandLabel($label)
         return ucfirst(DeviceParser::$deviceBrands[$label]);
     }
 
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 function getClientTypeMapping()
@@ -170,12 +170,12 @@ function getClientTypeLabel($label)
         array_key_exists($label, $clientTypes) &&
         isset($translations[$clientTypes[$label]])
     ) {
-        return Piwik::translate($translations[$clientTypes[$label]]);
+        return Matomo::translate($translations[$clientTypes[$label]]);
     } elseif (isset($translations[$label])) {
-        return Piwik::translate($translations[$label]);
+        return Matomo::translate($translations[$label]);
     }
 
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 function getDeviceTypeLabel($label)
@@ -204,12 +204,12 @@ function getDeviceTypeLabel($label)
         in_array($label, $deviceTypes) &&
         isset($translations[array_search($label, $deviceTypes)])
     ) {
-        return Piwik::translate($translations[array_search($label, $deviceTypes)]);
+        return Matomo::translate($translations[array_search($label, $deviceTypes)]);
     } elseif (isset($translations[$label])) {
-        return Piwik::translate($translations[$label]);
+        return Matomo::translate($translations[$label]);
     }
 
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 function getDeviceTypeLogo($label)
@@ -235,22 +235,22 @@ function getModelName($label)
     }
     if ($brand) {
         $brand = getDeviceBrandLabel($brand);
-        if ($brand == Piwik::translate('General_Unknown')) {
+        if ($brand == Matomo::translate('General_Unknown')) {
             $brand = null;
         }
     }
     if (!$model) {
-        $model = Piwik::translate('General_Unknown');
+        $model = Matomo::translate('General_Unknown');
     } else {
         if (strpos($model, 'generic ') === 0) {
             $model = substr($model, 8);
             if ($model == 'mobile') {
-                $model = Piwik::translate(
+                $model = Matomo::translate(
                     'DevicesDetection_GenericDevice',
-                    Piwik::translate('DevicesDetection_MobileDevice')
+                    Matomo::translate('DevicesDetection_MobileDevice')
                 );
             } else {
-                $model = Piwik::translate('DevicesDetection_GenericDevice', getDeviceTypeLabel($model));
+                $model = Matomo::translate('DevicesDetection_GenericDevice', getDeviceTypeLabel($model));
             }
         }
     }
@@ -268,15 +268,15 @@ function getOSFamilyFullName($label)
     $label = OperatingSystemParser::getOsFamily(_mapLegacyOsShortCodes($label));
 
     if ($label == 'unknown') {
-        $label = Piwik::translate('General_Unknown');
+        $label = Matomo::translate('General_Unknown');
     } elseif ($label == 'Gaming Console') {
-        $label = Piwik::translate('DevicesDetection_Console');
+        $label = Matomo::translate('DevicesDetection_Console');
     }
 
     if ($label !== null) {
         return $label;
     }
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 function getOsFamilyLogo($label)
@@ -293,7 +293,7 @@ function getOsFullName($label)
 {
     // Return early if the label is empty so that we don't try to manipulate an empty value
     if (empty($label)) {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     if (substr($label, 0, 3) == Settings::OS_BOT) {
@@ -307,7 +307,7 @@ function getOsFullName($label)
             return $name;
         }
     }
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 function _mapLegacyOsShortCodes($shortCode): string
@@ -426,5 +426,5 @@ function getBrowserEngineName($engineName)
         }
         return $engineName;
     }
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }

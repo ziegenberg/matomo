@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Metrics;
+namespace Matomo\Tests\Unit\Metrics;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Metrics\Sorter;
-use Piwik\Metrics\Sorter\Config;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Metrics\Sorter;
+use Matomo\Metrics\Sorter\Config;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
 
 /**
  * @group Core

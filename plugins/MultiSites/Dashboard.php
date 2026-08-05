@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites;
+namespace Matomo\Plugins\MultiSites;
 
-use Piwik\API\DataTablePostProcessor;
-use Piwik\API\Request;
-use Piwik\API\ResponseBuilder;
-use Piwik\Columns\Dimension;
-use Piwik\NumberFormatter;
-use Piwik\DataTable;
-use Piwik\DataTable\Row\DataTableSummaryRow;
-use Piwik\Period;
-use Piwik\Plugins\PrivacyManager\DataRounding;
-use Piwik\Site;
+use Matomo\API\DataTablePostProcessor;
+use Matomo\API\Request;
+use Matomo\API\ResponseBuilder;
+use Matomo\Columns\Dimension;
+use Matomo\NumberFormatter;
+use Matomo\DataTable;
+use Matomo\DataTable\Row\DataTableSummaryRow;
+use Matomo\Period;
+use Matomo\Plugins\PrivacyManager\DataRounding;
+use Matomo\Site;
 
 /**
  * Fetches and formats the response of `MultiSites.getAll` in a way that it can be used by the All Websites
@@ -173,7 +173,7 @@ class Dashboard
 
     private function formatMetrics(array &$metrics): void
     {
-        if (\Piwik\Request::fromRequest()->getStringParameter('format_metrics', '0') === '0') {
+        if (\Matomo\Request::fromRequest()->getStringParameter('format_metrics', '0') === '0') {
             return; // do not format metrics if requires unformatted
         }
 
@@ -249,7 +249,7 @@ class Dashboard
         $request['serialize'] = 0;
         $request['expanded'] = 0;
         $request['totals'] = 0;
-        $request['format_metrics'] = \Piwik\Request::fromRequest()->getStringParameter('format_metrics', '1');
+        $request['format_metrics'] = \Matomo\Request::fromRequest()->getStringParameter('format_metrics', '1');
         $request['disable_generic_filters'] = 1;
 
         $responseBuilder = new ResponseBuilder('json', $request);
@@ -364,7 +364,7 @@ class Dashboard
         $table->disableFilter('Sort');
 
         // make sites flat and limit
-        $table->filter('Piwik\Plugins\MultiSites\DataTable\Filter\NestedSitesLimiter', [$filterOffset, $filterLimit]);
+        $table->filter('Matomo\Plugins\MultiSites\DataTable\Filter\NestedSitesLimiter', [$filterOffset, $filterLimit]);
     }
 
     private function enrichValues(array $sites): array

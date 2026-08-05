@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\Diagnostics\Diagnostic\ArchiveInvalidationsInformational;
-use Piwik\Translation\Translator;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\Diagnostics\Diagnostic\ArchiveInvalidationsInformational;
+use Matomo\Translation\Translator;
 
 /**
  * Diagnostic command that returns archiving invalidation metrics
@@ -51,8 +51,8 @@ class ArchivingMetrics extends ConsoleCommand
      * Get an archiving metrics array from the diagnostics class
      *
      * @return array
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     public function getMetrics(): array
     {

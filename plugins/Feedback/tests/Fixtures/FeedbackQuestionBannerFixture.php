@@ -1,11 +1,11 @@
 <?php
 
-namespace Piwik\Plugins\Feedback\tests\Fixtures;
+namespace Matomo\Plugins\Feedback\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Settings\Storage\Backend\PluginSettingsTable;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\Tests\Fixtures\UITestFixture;
+use Matomo\Date;
+use Matomo\Settings\Storage\Backend\PluginSettingsTable;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Tests\Fixtures\UITestFixture;
 
 class FeedbackQuestionBannerFixture extends UITestFixture
 {

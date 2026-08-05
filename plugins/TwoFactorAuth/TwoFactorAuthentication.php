@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth;
+namespace Matomo\Plugins\TwoFactorAuth;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
-use Piwik\Plugins\UsersManager\Model;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
+use Matomo\Plugins\UsersManager\Model;
 use Exception;
-use Piwik\SettingsPiwik;
+use Matomo\SettingsPiwik;
 
 require_once PIWIK_DOCUMENT_ROOT . '/libs/Authenticator/TwoFactorAuthenticator.php';
 
@@ -69,7 +69,7 @@ class TwoFactorAuthentication
         $this->saveSecret($login, '');
         $this->recoveryCodeDao->deleteAllRecoveryCodesForLogin($login);
 
-        Piwik::postEvent('TwoFactorAuth.disabled', array($login));
+        Matomo::postEvent('TwoFactorAuth.disabled', array($login));
     }
 
     private static function isAnonymous(string $login): bool

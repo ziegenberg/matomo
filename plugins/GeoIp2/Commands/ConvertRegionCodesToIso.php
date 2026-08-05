@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\Commands;
+namespace Matomo\Plugins\GeoIp2\Commands;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
 
 class ConvertRegionCodesToIso extends ConsoleCommand
 {

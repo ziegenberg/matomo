@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration\Tracker;
+namespace Matomo\Plugins\CoreHome\tests\Integration\Tracker;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugins\CoreHome\Tracker\VisitRequestProcessor;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugins\CoreHome\Tracker\VisitRequestProcessor;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * @group CoreHome
@@ -224,7 +224,7 @@ class VisitRequestProcessorTest extends IntegrationTestCase
         $request = new Request($requestParams);
         $request->setCurrentTimestamp(Date::factory($requestDate)->getTimestamp());
 
-        $visit = self::$fixture->piwikEnvironment->getContainer()->make('Piwik\Plugins\CoreHome\Tracker\VisitRequestProcessor', $params);
+        $visit = self::$fixture->piwikEnvironment->getContainer()->make('Matomo\Plugins\CoreHome\Tracker\VisitRequestProcessor', $params);
 
         return [$visit, $request];
     }

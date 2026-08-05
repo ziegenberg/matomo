@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\UserLoginHelper;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\UserLoginHelper;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager

@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration;
 
 use Exception;
-use Piwik\Access;
-use Piwik\Container\StaticContainer;
-use Piwik\NoAccessException;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Plugins\PrivacyManager\API;
-use Piwik\Plugins\PrivacyManager\Settings\IpAddressMaskLength;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Container\StaticContainer;
+use Matomo\NoAccessException;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Plugins\PrivacyManager\API;
+use Matomo\Plugins\PrivacyManager\Settings\IpAddressMaskLength;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group PrivacyManager
@@ -155,7 +155,7 @@ class ApiTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

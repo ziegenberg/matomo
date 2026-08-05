@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports;
+namespace Matomo\Plugins\ScheduledReports;
 
-use Piwik\Common;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Matomo;
 
 class GeneratedReport
 {
@@ -95,7 +95,7 @@ class GeneratedReport
      */
     public function getReportDescription()
     {
-        return Piwik::translate('General_Report') . ' ' . $this->reportTitle . " - " . $this->prettyDate;
+        return Matomo::translate('General_Report') . ' ' . $this->reportTitle . " - " . $this->prettyDate;
     }
 
     public function getDisplayDescription(): string

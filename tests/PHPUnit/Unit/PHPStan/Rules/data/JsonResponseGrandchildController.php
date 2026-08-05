@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules\data;
+namespace Matomo\Tests\Unit\PHPStan\Rules\data;
 
 // nearest ancestor (Intermediate) already dropped the attribute -> must NOT be flagged
 class JsonResponseGrandchildController extends JsonResponseIntermediateController

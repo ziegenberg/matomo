@@ -7,38 +7,38 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\PluginsArchiver;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\DataAccess\ArchiveSelector;
-use Piwik\Date;
-use Piwik\Notification;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreHome\SystemSummary;
-use Piwik\Plugins\Diagnostics\Diagnostics;
-use Piwik\Plugins\UsersManager\API as UsersManagerApi;
-use Piwik\Segment;
-use Piwik\SettingsServer;
-use Piwik\Site;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\PluginsArchiver;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\DataAccess\ArchiveSelector;
+use Matomo\Date;
+use Matomo\Notification;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreHome\SystemSummary;
+use Matomo\Plugins\Diagnostics\Diagnostics;
+use Matomo\Plugins\UsersManager\API as UsersManagerApi;
+use Matomo\Segment;
+use Matomo\SettingsServer;
+use Matomo\Site;
+use Matomo\Url;
+use Matomo\View;
 
-class SegmentEditor extends \Piwik\Plugin
+class SegmentEditor extends \Matomo\Plugin
 {
     public const NO_DATA_UNPROCESSED_SEGMENT_ID = 'nodata_segment_not_processed';
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -85,7 +85,7 @@ class SegmentEditor extends \Piwik\Plugin
 
     public function addSystemSummaryItems(&$systemSummary): void
     {
-        $storedSegments = StaticContainer::get('Piwik\Plugins\SegmentEditor\Services\StoredSegmentService');
+        $storedSegments = StaticContainer::get('Matomo\Plugins\SegmentEditor\Services\StoredSegmentService');
         $segments = $storedSegments->getAllSegmentsAndIgnoreVisibility();
         $numSegments = count($segments);
 
@@ -101,9 +101,9 @@ class SegmentEditor extends \Piwik\Plugin
                 }
             }
 
-            $message = Piwik::translate('CoreHome_SystemSummaryNSegmentsWithBreakdown', [$numSegments, $numAutoArchiveSegments, $numRealTimeSegments]);
+            $message = Matomo::translate('CoreHome_SystemSummaryNSegmentsWithBreakdown', [$numSegments, $numAutoArchiveSegments, $numRealTimeSegments]);
         } else {
-            $message = Piwik::translate('CoreHome_SystemSummaryNSegments', [$numSegments]);
+            $message = Matomo::translate('CoreHome_SystemSummaryNSegments', [$numSegments]);
         }
 
         $systemSummary[] = new SystemSummary\Item($key = 'segments', $message, $value = null, $url = null, $icon = 'icon-segment', $order = 6);
@@ -242,7 +242,7 @@ class SegmentEditor extends \Piwik\Plugin
      */
     private function getSegmentIfIsUnprocessed(): ?array
     {
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
 
         $idSite = $request->getIntegerParameter('idSite', -1);
         if (
@@ -276,7 +276,7 @@ class SegmentEditor extends \Piwik\Plugin
         }
 
         // check if segment archive does not exist
-        $processorParams = new \Piwik\ArchiveProcessor\Parameters($site, $period, $segment);
+        $processorParams = new \Matomo\ArchiveProcessor\Parameters($site, $period, $segment);
         $archiveIdAndStats = ArchiveSelector::getArchiveIdAndVisits($processorParams, null);
         if (
             !empty($archiveIdAndStats['idArchives'])
@@ -292,7 +292,7 @@ class SegmentEditor extends \Piwik\Plugin
         }
 
         // if no visits recorded, data will not appear, so don't show the message
-        $liveModel = new \Piwik\Plugins\Live\Model();
+        $liveModel = new \Matomo\Plugins\Live\Model();
         $visits = $liveModel->queryLogVisits($idSites, $periodStr, $date, $segment->getString(), $offset = 0, $limit = 1, false, false, 'ASC');
         if (empty($visits)) {
             return null;
@@ -314,7 +314,7 @@ class SegmentEditor extends \Piwik\Plugin
         }
 
         // get the earliest date to rearchive
-        $earliestDateToRearchive =  Piwik::getEarliestDateToRearchive();
+        $earliestDateToRearchive =  Matomo::getEarliestDateToRearchive();
 
         //get the request end period
         $endDate = $period->getDateEnd();

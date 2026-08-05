@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Transitions;
+namespace Matomo\Plugins\Transitions;
 
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\Matomo;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     /**
      * Since the metric translations are taken from different plugins,
@@ -70,7 +70,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public static function getTranslation($key)
     {
-        return Piwik::translate(self::$metricTranslations[$key]);
+        return Matomo::translate(self::$metricTranslations[$key]);
     }
 
     /**
@@ -88,7 +88,7 @@ class Controller extends \Piwik\Plugin\Controller
     {
         $translations = self::$metricTranslations + self::$jsTranslations;
         foreach ($translations as &$message) {
-            $message = Piwik::translate($message);
+            $message = Matomo::translate($message);
         }
         return $translations;
     }

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleLogTables;
+namespace Matomo\Plugins\ExampleLogTables;
 
-use Piwik\Common;
+use Matomo\Common;
 
-class ExampleLogTables extends \Piwik\Plugin
+class ExampleLogTables extends \Matomo\Plugin
 {
     public function registerEvents()
     {

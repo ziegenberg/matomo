@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\API\Request;
-use Piwik\Piwik;
+use Matomo\API\Request;
+use Matomo\Matomo;
 
 class Levels
 {
@@ -97,23 +97,23 @@ class Levels
 
     public function getCurrentDescription()
     {
-        $login = Piwik::getCurrentUserLogin();
+        $login = Matomo::getCurrentUserLogin();
         $numChallengesCompleted = $this->getNumChallengesCompleted();
         $numChallengesTotal = $this->getNumChallengesTotal();
 
         if ($numChallengesCompleted <= ($numChallengesTotal / 4)) {
-            return Piwik::translate('Tour_Part1Title', $login);
+            return Matomo::translate('Tour_Part1Title', $login);
         }
 
         if ($numChallengesCompleted <= ($numChallengesTotal / 2)) {
-            return Piwik::translate('Tour_Part2Title', $login);
+            return Matomo::translate('Tour_Part2Title', $login);
         }
 
         if ($numChallengesCompleted <= ($numChallengesTotal / 1.333)) {
-            return Piwik::translate('Tour_Part3Title', $login);
+            return Matomo::translate('Tour_Part3Title', $login);
         }
 
-        return Piwik::translate('Tour_Part4Title', $login);
+        return Matomo::translate('Tour_Part4Title', $login);
     }
 
     private function getNumChallengesTotal()
@@ -127,21 +127,21 @@ class Levels
         $numChallengesTotal = $this->getNumChallengesTotal();
 
         $levels = array(
-            0 => Piwik::translate('Tour_MatomoBeginner'),
-            5 => Piwik::translate('Tour_MatomoIntermediate'),
+            0 => Matomo::translate('Tour_MatomoBeginner'),
+            5 => Matomo::translate('Tour_MatomoIntermediate'),
         );
 
         if ($numChallengesTotal > 10) {
             // the number of challenges varies from Matomo to Matomo depending on activated plugins and activated
             // features. Therefore we may remove some levels if there aren't too many challenges available.
-            $levels[10] = Piwik::translate('Tour_MatomoTalent');
+            $levels[10] = Matomo::translate('Tour_MatomoTalent');
         }
 
         if ($numChallengesTotal > 15) {
-            $levels[15] = Piwik::translate('Tour_MatomoProfessional');
+            $levels[15] = Matomo::translate('Tour_MatomoProfessional');
         }
 
-        $levels[$numChallengesTotal] = Piwik::translate('Tour_MatomoExpert');
+        $levels[$numChallengesTotal] = Matomo::translate('Tour_MatomoExpert');
 
         return $levels;
     }

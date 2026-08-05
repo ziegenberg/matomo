@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Config as PiwikConfig;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db\Schema;
-use Piwik\Development;
-use Piwik\Exception\MissingFilePermissionException;
-use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuTop;
-use Piwik\Notification;
-use Piwik\Notification\Manager as NotificationManager;
-use Piwik\Piwik;
-use Piwik\Plugins\CorePluginsAdmin\CorePluginsAdmin;
-use Piwik\Plugins\Marketplace\Marketplace;
-use Piwik\Tracker\TrackerConfig;
-use Piwik\Url;
-use Piwik\Version;
-use Piwik\View;
-use Piwik\ProxyHttp;
-use Piwik\SettingsPiwik;
+use Matomo\Config as PiwikConfig;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db\Schema;
+use Matomo\Development;
+use Matomo\Exception\MissingFilePermissionException;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Menu\MenuTop;
+use Matomo\Notification;
+use Matomo\Notification\Manager as NotificationManager;
+use Matomo\Matomo;
+use Matomo\Plugins\CorePluginsAdmin\CorePluginsAdmin;
+use Matomo\Plugins\Marketplace\Marketplace;
+use Matomo\Tracker\TrackerConfig;
+use Matomo\Url;
+use Matomo\Version;
+use Matomo\View;
+use Matomo\ProxyHttp;
+use Matomo\SettingsPiwik;
 
 /**
  * Base class of plugin controllers that provide administrative functionality.
@@ -46,7 +46,7 @@ abstract class ControllerAdmin extends Controller
     {
         $statsEnabled = PiwikConfig::getInstance()->Tracker['record_statistics'];
         if ($statsEnabled == "0") {
-            $notification = new Notification(Piwik::translate('General_StatisticsAreNotRecorded'));
+            $notification = new Notification(Matomo::translate('General_StatisticsAreNotRecorded'));
             $notification->context = Notification::CONTEXT_INFO;
             Notification\Manager::notify('ControllerAdmin_StatsAreNotRecorded', $notification);
         }
@@ -58,11 +58,11 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             return;
         }
 
-        if (!Piwik::isUserHasSomeAdminAccess()) {
+        if (!Matomo::isUserHasSomeAdminAccess()) {
             return;
         }
 
@@ -70,14 +70,14 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        $expired = StaticContainer::get('Piwik\Plugins\Marketplace\Plugins\InvalidLicenses');
+        $expired = StaticContainer::get('Matomo\Plugins\Marketplace\Plugins\InvalidLicenses');
 
         $messageLicenseMissing = $expired->getMessageNoLicense();
         if (!empty($messageLicenseMissing)) {
             $notification = new Notification($messageLicenseMissing);
             $notification->raw = true;
             $notification->context = Notification::CONTEXT_ERROR;
-            $notification->title = Piwik::translate('Marketplace_LicenseMissing');
+            $notification->title = Matomo::translate('Marketplace_LicenseMissing');
             Notification\Manager::notify('ControllerAdmin_LicenseMissingWarning', $notification);
         }
 
@@ -86,7 +86,7 @@ abstract class ControllerAdmin extends Controller
             $notification = new Notification($messageExceeded);
             $notification->raw = true;
             $notification->context = Notification::CONTEXT_WARNING;
-            $notification->title = Piwik::translate('Marketplace_LicenseExceeded');
+            $notification->title = Matomo::translate('Marketplace_LicenseExceeded');
             Notification\Manager::notify('ControllerAdmin_LicenseExceededWarning', $notification);
         }
 
@@ -95,24 +95,24 @@ abstract class ControllerAdmin extends Controller
             $notification = new Notification($messageExpired);
             $notification->raw = true;
             $notification->context = Notification::CONTEXT_WARNING;
-            $notification->title = Piwik::translate('Marketplace_LicenseExpired');
+            $notification->title = Matomo::translate('Marketplace_LicenseExpired');
             Notification\Manager::notify('ControllerAdmin_LicenseExpiredWarning', $notification);
         }
     }
 
     private static function notifyAnyInvalidPlugin()
     {
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
-        $missingPlugins = \Piwik\Plugin\Manager::getInstance()->getMissingPlugins();
+        $missingPlugins = \Matomo\Plugin\Manager::getInstance()->getMissingPlugins();
 
         if (empty($missingPlugins)) {
             return;
         }
 
-        $invalidPluginsWarning = Piwik::translate('CoreAdminHome_InvalidPluginsWarning', [
+        $invalidPluginsWarning = Matomo::translate('CoreAdminHome_InvalidPluginsWarning', [
             self::getPiwikVersion(),
             '<strong>' . implode('</strong>,&nbsp;<wbr><strong>', $missingPlugins) . '</strong>',
         ]);
@@ -121,18 +121,18 @@ abstract class ControllerAdmin extends Controller
             $pluginsLink = Url::getCurrentQueryStringWithParametersModified([
                 'module' => 'CorePluginsAdmin', 'action' => 'plugins',
             ]);
-            $invalidPluginsWarning .= '<br/>' . Piwik::translate('CoreAdminHome_InvalidPluginsYouCanUninstall', [
+            $invalidPluginsWarning .= '<br/>' . Matomo::translate('CoreAdminHome_InvalidPluginsYouCanUninstall', [
                 '<a href="' . $pluginsLink . '">',
                 '</a>',
             ]);
         } else {
-            $invalidPluginsWarning .= '<br/>' . Piwik::translate('CoreAdminHome_InvalidPluginsAdminDisabled');
+            $invalidPluginsWarning .= '<br/>' . Matomo::translate('CoreAdminHome_InvalidPluginsAdminDisabled');
         }
 
         $notification = new Notification($invalidPluginsWarning);
         $notification->raw = true;
         $notification->context = Notification::CONTEXT_WARNING;
-        $notification->title = Piwik::translate('General_Warning');
+        $notification->title = Matomo::translate('General_Warning');
         Notification\Manager::notify('ControllerAdmin_InvalidPluginsWarning', $notification);
     }
 
@@ -158,7 +158,7 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
@@ -170,11 +170,11 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        $message = Piwik::translate('General_CurrentlyUsingUnsecureHttp');
+        $message = Matomo::translate('General_CurrentlyUsingUnsecureHttp');
 
         $message .= " ";
 
-        $message .= Piwik::translate(
+        $message .= Matomo::translate(
             'General_ReadThisToLearnMore',
             [Url::getExternalLinkTag('https://matomo.org/faq/how-to/faq_91/'), '</a>']
         );
@@ -187,7 +187,7 @@ abstract class ControllerAdmin extends Controller
 
     private static function notifyIfDevelopmentModeOnButNotInstalledThroughGit()
     {
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
@@ -199,7 +199,7 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        $message = Piwik::translate('General_WarningDevelopmentModeOnButNotGitInstalled');
+        $message = Matomo::translate('General_WarningDevelopmentModeOnButNotGitInstalled');
 
         $notification = new Notification($message);
         $notification->context = Notification::CONTEXT_WARNING;
@@ -264,7 +264,7 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
@@ -272,10 +272,10 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        $youMustUpgradePHP = Piwik::translate('General_YouMustUpgradePhpVersionToReceiveNextMajorMatomo');
-        $message =  Piwik::translate('General_MatomoCannotBeUpgradedToNextMajorBecausePhpIsTooOld')
+        $youMustUpgradePHP = Matomo::translate('General_YouMustUpgradePhpVersionToReceiveNextMajorMatomo');
+        $message =  Matomo::translate('General_MatomoCannotBeUpgradedToNextMajorBecausePhpIsTooOld')
             .     ' '
-            .  sprintf(Piwik::translate('General_PleaseUpgradeYourPhpVersionForNextMajorMatomo'), self::getNextRequiredMinimumPHP())
+            .  sprintf(Matomo::translate('General_PleaseUpgradeYourPhpVersionForNextMajorMatomo'), self::getNextRequiredMinimumPHP())
         ;
 
         $notification = new Notification($message);
@@ -332,7 +332,7 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
@@ -348,15 +348,15 @@ abstract class ControllerAdmin extends Controller
             ? 'MariaDB'
             : 'MySQL';
 
-        $message = Piwik::translate('General_MatomoCannotBeUpgradedToNextMajorBecauseDatabaseIsTooOld')
+        $message = Matomo::translate('General_MatomoCannotBeUpgradedToNextMajorBecauseDatabaseIsTooOld')
             . ' '
-            . Piwik::translate(
+            . Matomo::translate(
                 'General_PleaseUpgradeYourDatabaseVersionForNextMajorMatomo',
                 [$databaseType, $requiredVersion]
             );
 
         $notification = new Notification($message);
-        $notification->title = Piwik::translate('General_YouMustUpgradeDatabaseVersionToReceiveNextMajorMatomo');
+        $notification->title = Matomo::translate('General_YouMustUpgradeDatabaseVersionToReceiveNextMajorMatomo');
         $notification->priority = Notification::PRIORITY_LOW;
         $notification->context = Notification::CONTEXT_WARNING;
         $notification->type = Notification::TYPE_TRANSIENT;
@@ -370,7 +370,7 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        $notifyPhpIsEOL = Piwik::hasUserSuperUserAccess() && self::isPhpVersionEOL();
+        $notifyPhpIsEOL = Matomo::hasUserSuperUserAccess() && self::isPhpVersionEOL();
         if (!$notifyPhpIsEOL) {
             return;
         }
@@ -380,17 +380,17 @@ abstract class ControllerAdmin extends Controller
         $message = '';
 
         if (version_compare(PHP_VERSION, self::getNextRequiredMinimumPHP(), '<')) {
-            $message = Piwik::translate(
+            $message = Matomo::translate(
                 'General_WarningPiwikWillStopSupportingPHPVersion',
                 [$deprecatedMajorPhpVersion, self::getNextRequiredMinimumPHP()]
             ) . '<br/>';
         }
 
-        $message .= Piwik::translate('General_WarningPhpVersionXIsTooOld', $deprecatedMajorPhpVersion);
+        $message .= Matomo::translate('General_WarningPhpVersionXIsTooOld', $deprecatedMajorPhpVersion);
 
         $notification = new Notification($message);
         $notification->raw = true;
-        $notification->title = Piwik::translate('General_Warning');
+        $notification->title = Matomo::translate('General_Warning');
         $notification->priority = Notification::PRIORITY_LOW;
         $notification->context = Notification::CONTEXT_WARNING;
         $notification->type = Notification::TYPE_TRANSIENT;
@@ -404,18 +404,18 @@ abstract class ControllerAdmin extends Controller
             return;
         }
 
-        $isEOL = Piwik::hasUserSuperUserAccess() && Schema::getInstance()->hasReachedEOL();
+        $isEOL = Matomo::hasUserSuperUserAccess() && Schema::getInstance()->hasReachedEOL();
         if (!$isEOL) {
             return;
         }
 
         $databaseVersion = Schema::getInstance()->getVersion();
 
-        $message = Piwik::translate('General_WarningDatabaseVersionXIsTooOld', [Schema::getInstance()->getDatabaseType(), $databaseVersion]);
+        $message = Matomo::translate('General_WarningDatabaseVersionXIsTooOld', [Schema::getInstance()->getDatabaseType(), $databaseVersion]);
 
         $notification = new Notification($message);
         $notification->raw = true;
-        $notification->title = Piwik::translate('General_Warning');
+        $notification->title = Matomo::translate('General_Warning');
         $notification->priority = Notification::PRIORITY_LOW;
         $notification->context = Notification::CONTEXT_WARNING;
         $notification->type = Notification::TYPE_TRANSIENT;
@@ -427,10 +427,10 @@ abstract class ControllerAdmin extends Controller
     {
         if (
             !Development::isEnabled()
-            && Piwik::hasUserSuperUserAccess()
+            && Matomo::hasUserSuperUserAccess()
             && TrackerConfig::getConfigValue($trackerSetting)
         ) {
-            $message = Piwik::translate('General_WarningDebugOnDemandEnabled');
+            $message = Matomo::translate('General_WarningDebugOnDemandEnabled');
             $message = sprintf(
                 $message,
                 '"' . $trackerSetting . '"',
@@ -439,7 +439,7 @@ abstract class ControllerAdmin extends Controller
                 '"config/config.ini.php"'
             );
             $notification = new Notification($message);
-            $notification->title = Piwik::translate('General_Warning');
+            $notification->title = Matomo::translate('General_Warning');
             $notification->priority = Notification::PRIORITY_LOW;
             $notification->context = Notification::CONTEXT_WARNING;
             $notification->type = Notification::TYPE_TRANSIENT;
@@ -457,7 +457,7 @@ abstract class ControllerAdmin extends Controller
      *                               config is `0`. If not `0`, this variable will not be defined.
      * - **topMenu** - The result of `MenuTop::getInstance()->getMenu()`.
      * - **enableFrames** - The value of the `[General] enable_framed_pages` INI config option. If
-     *                    true, {@link Piwik\View::setXFrameOptions()} is called on the view.
+     *                    true, {@link Matomo\View::setXFrameOptions()} is called on the view.
      * - **isSuperUser** - Whether the current user is a superuser or not.
      * - **usingOldGeoIPPlugin** - Whether this Piwik install is currently using the old GeoIP
      *                             plugin or not.
@@ -486,7 +486,7 @@ abstract class ControllerAdmin extends Controller
             $view->setXFrameOptions('sameorigin');
         }
 
-        $view->isSuperUser = Piwik::hasUserSuperUserAccess();
+        $view->isSuperUser = Matomo::hasUserSuperUserAccess();
 
         self::notifyAnyInvalidLicense();
         self::notifyAnyInvalidPlugin();
@@ -505,7 +505,7 @@ abstract class ControllerAdmin extends Controller
          *
          * **Example**
          *
-         *     public function onTriggerAdminNotifications(Piwik\Widget\WidgetsList $list)
+         *     public function onTriggerAdminNotifications(Matomo\Widget\WidgetsList $list)
          *     {
          *         if ($pluginFooIsNotConfigured) {
          *              $notification = new Notification('The plugin foo has not been configured yet');
@@ -515,7 +515,7 @@ abstract class ControllerAdmin extends Controller
          *     }
          *
          */
-        Piwik::postEvent('Controller.triggerAdminNotifications');
+        Matomo::postEvent('Controller.triggerAdminNotifications');
 
         $view->adminMenu = MenuAdmin::getInstance()->getMenu();
 

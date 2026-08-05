@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Plugins\Tour\Dao\DataFinder;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\Plugins\Tour\Dao\DataFinder;
+use Matomo\Url;
 
 class ChallengeCustomLogo extends Challenge
 {
@@ -30,12 +30,12 @@ class ChallengeCustomLogo extends Challenge
 
     public function getName()
     {
-        return Piwik::translate('Tour_UploadLogo');
+        return Matomo::translate('Tour_UploadLogo');
     }
 
     public function getDescription()
     {
-        return Piwik::translate('CoreAdminHome_CustomLogoHelpText');
+        return Matomo::translate('CoreAdminHome_CustomLogoHelpText');
     }
 
     public function getId()

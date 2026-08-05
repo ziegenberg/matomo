@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Plugin;
+namespace Matomo\Settings\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
 use Exception;
-use Piwik\Settings\Setting;
+use Matomo\Settings\Setting;
 
 /**
  * Describes a per user setting. Each user will be able to change this setting for themselves,
  * but not for other users.
  *
- * See {@link \Piwik\Settings\Setting}.
+ * See {@link \Matomo\Settings\Setting}.
  */
 class UserSetting extends Setting
 {
@@ -45,7 +45,7 @@ class UserSetting extends Setting
 
         $this->userLogin = $userLogin;
 
-        $factory = StaticContainer::get('Piwik\Settings\Storage\Factory');
+        $factory = StaticContainer::get('Matomo\Settings\Storage\Factory');
         $this->storage = $factory->getPluginStorage($this->pluginName, $this->userLogin);
     }
 
@@ -61,7 +61,7 @@ class UserSetting extends Setting
         }
 
         // performance improvement, do not detect this in __construct otherwise likely rather "big" query to DB.
-        $this->hasWritePermission = Piwik::isUserHasSomeViewAccess();
+        $this->hasWritePermission = Matomo::isUserHasSomeViewAccess();
 
         return $this->hasWritePermission;
     }

@@ -1,8 +1,8 @@
 <?php
 
-use Piwik\Config;
-use Piwik\Tracker;
-use Piwik\Tracker\Cache;
+use Matomo\Config;
+use Matomo\Tracker;
+use Matomo\Tracker\Cache;
 
 $GLOBALS['PIWIK_TRACKER_DEBUG'] = false;
 
@@ -57,10 +57,10 @@ class Matomo_LocalTracker extends MatomoTracker
         $plugins = Config::getInstance()->Plugins['Plugins'];
         $oldTrackerConfig = Config::getInstance()->Tracker;
 
-        \Piwik\Plugin\Manager::getInstance()->unloadPlugins();
+        \Matomo\Plugin\Manager::getInstance()->unloadPlugins();
 
         // modify config
-        \Piwik\SettingsServer::setIsTrackerApiRequest();
+        \Matomo\SettingsServer::setIsTrackerApiRequest();
         $GLOBALS['PIWIK_TRACKER_LOCAL_TRACKING'] = true;
         Tracker::$initTrackerMode = false;
         Tracker::setTestEnvironment($testEnvironmentArgs, $method);
@@ -84,7 +84,7 @@ class Matomo_LocalTracker extends MatomoTracker
         $request = new Tracker\RequestSet();
         $request->setRequests($requests);
 
-        \Piwik\Plugin\Manager::getInstance()->loadTrackerPlugins();
+        \Matomo\Plugin\Manager::getInstance()->loadTrackerPlugins();
         $handler = Tracker\Handler\Factory::make();
 
         $response = $localTracker->main($handler, $request);
@@ -103,11 +103,11 @@ class Matomo_LocalTracker extends MatomoTracker
         $_SERVER['HTTP_USER_AGENT'] = $oldUserAgent;
         $_COOKIE = $oldCookie;
         $GLOBALS['PIWIK_TRACKER_LOCAL_TRACKING'] = false;
-        \Piwik\SettingsServer::setIsNotTrackerApiRequest();
+        \Matomo\SettingsServer::setIsNotTrackerApiRequest();
         unset($_GET['bots']);
 
         // reload plugins
-        \Piwik\Plugin\Manager::getInstance()->loadPlugins($plugins);
+        \Matomo\Plugin\Manager::getInstance()->loadPlugins($plugins);
 
         return $output;
     }

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\Fixtures;
+namespace Matomo\Plugins\TwoFactorAuth\tests\Fixtures;
 
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates tracker testing data for our TwoFactorAuthTest

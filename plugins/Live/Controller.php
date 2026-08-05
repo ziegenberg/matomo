@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
-use Piwik\API\Request;
-use Piwik\Config\GeneralConfig;
-use Piwik\Piwik;
-use Piwik\DataTable;
-use Piwik\Plugins\Live\Exception\MaxExecutionTimeExceededException;
-use Piwik\Plugins\Live\Visualizations\VisitorLog;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Config\GeneralConfig;
+use Matomo\Matomo;
+use Matomo\DataTable;
+use Matomo\Plugins\Live\Exception\MaxExecutionTimeExceededException;
+use Matomo\Plugins\Live\Visualizations\VisitorLog;
+use Matomo\Url;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public const SIMPLE_VISIT_COUNT_WIDGET_LAST_MINUTES_CONFIG_KEY = 'live_widget_visitor_count_last_minutes';
 
@@ -37,19 +37,19 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function widget()
     {
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
         Live::checkIsVisitorLogEnabled($this->idSite);
 
         $view = new View('@Live/index');
         $view->idSite = $this->idSite;
-        $view->isWidgetized = \Piwik\Request::fromRequest()->getIntegerParameter('widget', 0);
+        $view->isWidgetized = \Matomo\Request::fromRequest()->getIntegerParameter('widget', 0);
         $view->liveRefreshAfterMs = GeneralConfig::getIntegerConfigValue('live_widget_refresh_after_seconds', 0, $this->idSite) * 1000;
         return $this->render($view);
     }
 
     public function ajaxTotalVisitors()
     {
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
         $view = new View('@Live/ajaxTotalVisitors');
         $view = $this->setCounters($view);
@@ -66,7 +66,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function indexVisitorLog()
     {
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
         Live::checkIsVisitorLogEnabled($this->idSite);
 
         $view = new View('@Live/indexVisitorLog.twig');
@@ -84,12 +84,12 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function getLastVisitsStart()
     {
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
         Live::checkIsVisitorLogEnabled($this->idSite);
 
         // hack, ensure we load today's visits by default
         $_GET['date'] = 'today';
-        \Piwik\Period\Factory::checkPeriodIsEnabled('day');
+        \Matomo\Period\Factory::checkPeriodIsEnabled('day');
         $_GET['period'] = 'day';
 
         $view = new View('@Live/getLastVisitsStart');
@@ -196,7 +196,7 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public function getVisitorProfilePopup()
     {
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
         Live::checkIsVisitorProfileEnabled($this->idSite);
 
         $visitorData = Request::processRequest('Live.getVisitorProfile');
@@ -241,10 +241,10 @@ class Controller extends \Piwik\Plugin\Controller
     public function getVisitList()
     {
         $this->checkSitePermission();
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
-        $filterLimit  = \Piwik\Request::fromRequest()->getIntegerParameter('filter_offset', 0);
-        $startCounter = \Piwik\Request::fromRequest()->getIntegerParameter('start_number', 0);
+        $filterLimit  = \Matomo\Request::fromRequest()->getIntegerParameter('filter_offset', 0);
+        $startCounter = \Matomo\Request::fromRequest()->getIntegerParameter('start_number', 0);
         $limit        = GeneralConfig::getIntegerConfigValue('live_visitor_profile_max_visits_to_aggregate', 0, $this->idSite);
 
         if ($startCounter >= $limit) {
@@ -285,7 +285,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     private function setWidgetizedVisitorProfileUrl($view)
     {
-        if (\Piwik\Plugin\Manager::getInstance()->isPluginLoaded('Widgetize')) {
+        if (\Matomo\Plugin\Manager::getInstance()->isPluginLoaded('Widgetize')) {
             $view->widgetizedLink = Url::getCurrentQueryStringWithParametersModified(array(
                                                                                           'module'            => 'Widgetize',
                                                                                           'action'            => 'iframe',

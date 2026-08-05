@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Dashboard;
+namespace Matomo\Plugins\Dashboard;
 
-use Piwik\API\Request;
-use Piwik\Piwik;
+use Matomo\API\Request;
+use Matomo\Matomo;
 
 /**
  * The Dashboard API lets you manage user dashboards and retrieve their widget configurations.
  *
- * @method static \Piwik\Plugins\Dashboard\API getInstance()
+ * @method static \Matomo\Plugins\Dashboard\API getInstance()
  *
  * @phpstan-type DashboardWidget array{module: string, action: string}
  * @phpstan-type DashboardInfo array{name: string, id: int, widgets: list<DashboardWidget>}
  * @phpstan-type DashboardRecord array{name: string, iddashboard: int, layout: mixed}
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private Dashboard $dashboard;
 
@@ -42,12 +42,12 @@ class API extends \Piwik\Plugin\API
      */
     public function getDashboards(string $login = '', bool $returnDefaultIfEmpty = true): array
     {
-        $login = $login ?: Piwik::getCurrentUserLogin();
+        $login = $login ?: Matomo::getCurrentUserLogin();
 
         $dashboards = [];
 
-        if (!Piwik::isUserIsAnonymous()) {
-            Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
+        if (!Matomo::isUserIsAnonymous()) {
+            Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
             $dashboards = $this->getUserDashboards($login);
         }
 
@@ -70,7 +70,7 @@ class API extends \Piwik\Plugin\API
     public function createNewDashboardForUser(string $login, string $dashboardName = '', bool $addDefaultWidgets = true)
     {
         $this->checkLoginIsNotAnonymous($login);
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
 
         $layout = '{}';
 
@@ -92,10 +92,10 @@ class API extends \Piwik\Plugin\API
      */
     public function removeDashboard(int $idDashboard, string $login = ''): void
     {
-        $login = $login ?: Piwik::getCurrentUserLogin();
+        $login = $login ?: Matomo::getCurrentUserLogin();
 
         $this->checkLoginIsNotAnonymous($login);
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
 
         $this->model->deleteDashboardForUser($idDashboard, $login);
     }
@@ -110,7 +110,7 @@ class API extends \Piwik\Plugin\API
      */
     public function copyDashboardToUser(int $idDashboard, string $copyToUser, string $dashboardName = '')
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         // get users only returns users of sites the current user has at least admin access to
         /** @var array $users */
@@ -127,7 +127,7 @@ class API extends \Piwik\Plugin\API
             throw new \Exception(sprintf('Cannot copy dashboard to user %s, user not found.', $copyToUser));
         }
 
-        $login  = Piwik::getCurrentUserLogin();
+        $login  = Matomo::getCurrentUserLogin();
         $layout = $this->dashboard->getLayoutForUser($login, $idDashboard);
 
         if ($layout !== false) {
@@ -145,10 +145,10 @@ class API extends \Piwik\Plugin\API
      */
     public function resetDashboardLayout(int $idDashboard, string $login = ''): void
     {
-        $login = $login ?: Piwik::getCurrentUserLogin();
+        $login = $login ?: Matomo::getCurrentUserLogin();
 
         $this->checkLoginIsNotAnonymous($login);
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
 
         $layout = $this->dashboard->getDefaultLayout();
 
@@ -162,7 +162,7 @@ class API extends \Piwik\Plugin\API
     {
         $defaultLayout = $this->dashboard->getDefaultLayout();
         $defaultLayout = $this->dashboard->decodeLayout($defaultLayout);
-        $defaultDashboard = ['name' => Piwik::translate('Dashboard_Dashboard'), 'layout' => $defaultLayout, 'iddashboard' => 1];
+        $defaultDashboard = ['name' => Matomo::translate('Dashboard_Dashboard'), 'layout' => $defaultLayout, 'iddashboard' => 1];
 
         $widgets = $this->getVisibleWidgetsWithinDashboard($defaultDashboard);
 
@@ -213,7 +213,7 @@ class API extends \Piwik\Plugin\API
 
     private function checkLoginIsNotAnonymous(string $login): void
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         if (strtolower($login) === 'anonymous') {
             throw new \Exception('This method can\'t be performed for anonymous user');

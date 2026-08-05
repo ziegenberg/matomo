@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Metrics\Formatter;
+namespace Matomo\Plugins\CoreVisualizations\Metrics\Formatter;
 
-use Piwik\Common;
-use Piwik\Metrics\Formatter;
+use Matomo\Common;
+use Matomo\Metrics\Formatter;
 
 /**
  * A metrics formatter that prettifies metric values without returning string values.

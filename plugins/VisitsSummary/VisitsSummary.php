@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitsSummary;
+namespace Matomo\Plugins\VisitsSummary;
 
-use Piwik\DataTable;
-use Piwik\Plugins\CoreHome\Columns\UserId;
-use Piwik\Plugins\VisitsSummary\Reports\Get;
+use Matomo\DataTable;
+use Matomo\Plugins\CoreHome\Columns\UserId;
+use Matomo\Plugins\VisitsSummary\Reports\Get;
 
 /**
  * Note: This plugin does not hook on Daily and Period Archiving like other plugins because it reports the
@@ -19,10 +19,10 @@ use Piwik\Plugins\VisitsSummary\Reports\Get;
  * LogAggregator/PluginsArchiver ahead of other plugins' archiving.
  * These metrics can be used by other plugins so they need to be processed up front.
  */
-class VisitsSummary extends \Piwik\Plugin
+class VisitsSummary extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

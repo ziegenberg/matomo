@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Reports;
+namespace Matomo\Plugins\Goals\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Goals\Columns\DaysToConversion;
-use Piwik\Plugins\Goals\Archiver;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Goals\Columns\DaysToConversion;
+use Matomo\Plugins\Goals\Archiver;
 
 class GetDaysToConversion extends Base
 {
@@ -22,8 +22,8 @@ class GetDaysToConversion extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('Goals_DaysToConv');
-        $this->documentation = Piwik::translate('Goals_DaysToConvReportDocumentation');
+        $this->name = Matomo::translate('Goals_DaysToConv');
+        $this->documentation = Matomo::translate('Goals_DaysToConvReportDocumentation');
         $this->dimension = new DaysToConversion();
         $this->constantRowsCount = true;
         $this->processedMetrics = [];
@@ -37,7 +37,7 @@ class GetDaysToConversion extends Base
     public function getMetricsDocumentation()
     {
         return [
-            'nb_conversions' => Piwik::translate('Goals_DaysToConvColumnDocumentation'),
+            'nb_conversions' => Matomo::translate('Goals_DaysToConvColumnDocumentation'),
         ];
     }
 

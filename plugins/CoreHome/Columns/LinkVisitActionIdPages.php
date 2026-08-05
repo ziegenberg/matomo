@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\MetricsList;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Action;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\MetricsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Action;
 
 class LinkVisitActionIdPages extends ActionDimension
 {
@@ -39,8 +39,8 @@ class LinkVisitActionIdPages extends ActionDimension
     public function configureMetrics(MetricsList $metricsList, DimensionMetricFactory $dimensionMetricFactory)
     {
         $metric = $dimensionMetricFactory->createMetric(ArchivedMetric::AGGREGATION_UNIQUE);
-        $metric->setTranslatedName(Piwik::translate('General_ColumnPageviews'));
-        $metric->setDocumentation(Piwik::translate('General_ColumnPageviewsDocumentation'));
+        $metric->setTranslatedName(Matomo::translate('General_ColumnPageviews'));
+        $metric->setDocumentation(Matomo::translate('General_ColumnPageviewsDocumentation'));
         $metric->setName('pageviews');
         $metricsList->addMetric($metric);
     }

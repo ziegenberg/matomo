@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\DataTable\Filter;
+namespace Matomo\Plugins\Referrers\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
 
 class UrlsFromWebsiteId extends BaseFilter
 {
@@ -33,7 +33,7 @@ class UrlsFromWebsiteId extends BaseFilter
         $table->filter('ColumnCallbackAddMetadata', array('label', 'url', function ($label) {
             return htmlspecialchars_decode($label);
         }));
-        $table->filter('GroupBy', array('label', 'Piwik\Plugins\Referrers\getPathFromUrl'));
+        $table->filter('GroupBy', array('label', 'Matomo\Plugins\Referrers\getPathFromUrl'));
 
         foreach ($table->getRowsWithoutSummaryRow() as $row) {
             $subtable = $row->getSubtable();

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Transitions;
+namespace Matomo\Plugins\Transitions;
 
-use Piwik\Common;
-use Piwik\Config;
+use Matomo\Common;
+use Matomo\Config;
 
-class Transitions extends \Piwik\Plugin
+class Transitions extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

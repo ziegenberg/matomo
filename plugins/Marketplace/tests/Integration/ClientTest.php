@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration\Api;
+namespace Matomo\Plugins\Marketplace\tests\Integration\Api;
 
 use Matomo\Cache\Backend\NullCache;
 use Matomo\Cache\Lazy;
-use Piwik\Filesystem;
-use Piwik\Log\NullLogger;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Environment as TestEnvironment;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Service as TestService;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Client as ClientBuilder;
+use Matomo\Filesystem;
+use Matomo\Log\NullLogger;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Environment as TestEnvironment;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Service as TestService;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Client as ClientBuilder;
 
 /**
  * @group Plugins
@@ -61,7 +61,7 @@ class ClientTest extends IntegrationTestCase
 
     public function testGetPluginInfoShouldThrowExceptionIfNotAllowedToRequestPlugin()
     {
-        $this->expectException(\Piwik\Plugins\Marketplace\Api\Exception::class);
+        $this->expectException(\Matomo\Plugins\Marketplace\Api\Exception::class);
         $this->expectExceptionMessage('Requested plugin does not exist.');
 
         $this->service->returnFixture('v2.0_plugins_CustomPlugin1_info-access_token-notexistingtoken.json');

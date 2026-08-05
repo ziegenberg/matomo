@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
 
-use Piwik\Common;
-use Piwik\DataTable\Filter\CalculateEvolutionFilter;
-use Piwik\Metrics;
-use Piwik\NoAccessException;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Site;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\DataTable\Filter\CalculateEvolutionFilter;
+use Matomo\Metrics;
+use Matomo\NoAccessException;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Site;
+use Matomo\Url;
 
 /**
  * DataTable Visualization that derives from Sparklines.
  */
-class Config extends \Piwik\ViewDataTable\Config
+class Config extends \Matomo\ViewDataTable\Config
 {
     /**
      * Holds metrics / column names that will be used to fetch data from the configured $requestConfig API.
@@ -56,7 +56,7 @@ class Config extends \Piwik\ViewDataTable\Config
      *
      * The function is passed two parameters:
      * - an array mapping column names with column values ['column' => 123]
-     * - an array of \Piwik\Plugin\Metrics objects available for the report - useful for formatting values
+     * - an array of \Matomo\Plugin\Metrics objects available for the report - useful for formatting values
      *
      * compute_evolution(array, array)
      *
@@ -157,7 +157,7 @@ class Config extends \Piwik\ViewDataTable\Config
      * It will show a sparkline image, the value of the resolved metric name and a descrption. Optionally, multiple
      * values can be shown after a sparkline image by passing multiple metric names
      * (eg array('nb_visits', 'nb_actions')). The data will be requested from the configured api method see
-     * {@link \Piwik\ViewDataTable\RequestConfig::$apiMethodToRequestDataTable}.
+     * {@link \Matomo\ViewDataTable\RequestConfig::$apiMethodToRequestDataTable}.
      *
      * Example:
      * $config->addSparklineMetric('nb_visits');
@@ -339,16 +339,16 @@ class Config extends \Piwik\ViewDataTable\Config
     {
         $tooltip = '';
         if (!empty($params['period'])) {
-            $periodTranslated = Piwik::translate('Intl_Period' . ucfirst($params['period']));
-            $tooltip = Piwik::translate('General_SparklineTooltipUsedPeriod', $periodTranslated);
+            $periodTranslated = Matomo::translate('Intl_Period' . ucfirst($params['period']));
+            $tooltip = Matomo::translate('General_SparklineTooltipUsedPeriod', $periodTranslated);
             if (!empty($params['date'])) {
                 $period = Period\Factory::build('day', $params['date']);
-                $tooltip .= ' ' . Piwik::translate('General_Period') . ': ' . $period->getLocalizedShortString() . '.';
+                $tooltip .= ' ' . Matomo::translate('General_Period') . ': ' . $period->getLocalizedShortString() . '.';
 
                 if (!empty($params['compareDates'])) {
                     foreach ($params['compareDates'] as $index => $comparisonDate) {
                         $comparePeriod = Period\Factory::build('day', $comparisonDate);
-                        $tooltip .= ' ' . Piwik::translate('General_Period') . ' ' . ($index + 2) . ': ' . $comparePeriod->getLocalizedShortString() . '.';
+                        $tooltip .= ' ' . Matomo::translate('General_Period') . ' ' . ($index + 2) . ': ' . $comparePeriod->getLocalizedShortString() . '.';
                     }
                 }
             }
@@ -449,7 +449,7 @@ class Config extends \Piwik\ViewDataTable\Config
      * - period: day, week, month, year
      *
      * @param array $paramsToSet array( 'date' => 'last50', 'viewDataTable' =>'sparkline' )
-     * @throws \Piwik\NoAccessException
+     * @throws \Matomo\NoAccessException
      * @return array
      */
     public function getGraphParamsModified($paramsToSet = array())

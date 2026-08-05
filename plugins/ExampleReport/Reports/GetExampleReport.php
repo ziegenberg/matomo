@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleReport\Reports;
+namespace Matomo\Plugins\ExampleReport\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\ExitPageUrl;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\ExitPageUrl;
 
 /**
  * This class defines a new report.
@@ -24,9 +24,9 @@ class GetExampleReport extends Base
     {
         parent::init();
 
-        $this->name          = Piwik::translate('ExampleReportName');
+        $this->name          = Matomo::translate('ExampleReportName');
         $this->dimension     = new ExitPageUrl();
-        $this->documentation = Piwik::translate('ExampleReportDocumentation');
+        $this->documentation = Matomo::translate('ExampleReportDocumentation');
 
         // This defines in which order your report appears in the mobile app, in the menu and in the list of widgets
         $this->order = 999;
@@ -69,7 +69,7 @@ class GetExampleReport extends Base
      * Here you can define related reports that will be shown below the reports. Just return an array of related
      * report instances if there are any.
      *
-     * @return \Piwik\Plugin\Report[]
+     * @return \Matomo\Plugin\Report[]
      */
     public function getRelatedReports()
     {

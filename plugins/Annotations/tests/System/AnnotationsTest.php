@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Annotations\tests\System;
+namespace Matomo\Plugins\Annotations\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Date;
-use Piwik\Plugins\Annotations\Annotations;
-use Piwik\Plugins\Annotations\API;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\TwoSitesWithAnnotations;
+use Matomo\API\Request;
+use Matomo\Date;
+use Matomo\Plugins\Annotations\Annotations;
+use Matomo\Plugins\Annotations\API;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\TwoSitesWithAnnotations;
 use Exception;
 
 /**
@@ -433,7 +433,7 @@ class AnnotationsTest extends SystemTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

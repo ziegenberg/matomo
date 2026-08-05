@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration;
 
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\PrivacyManager\API;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\PrivacyManager\API;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Class Plugins_SitesManagerTest
@@ -35,9 +35,9 @@ class PrivacyManagerTest extends IntegrationTestCase
         parent::setUp();
 
         $this->manager = new PrivacyManager();
-        \Piwik\Option::set('delete_logs_enable', 1);
-        \Piwik\Option::set('delete_logs_older_than', self::DELETE_LOGS_OLDER_THAN);
-        \Piwik\Option::set('delete_reports_keep_week_reports', 1);
+        \Matomo\Option::set('delete_logs_enable', 1);
+        \Matomo\Option::set('delete_logs_older_than', self::DELETE_LOGS_OLDER_THAN);
+        \Matomo\Option::set('delete_reports_keep_week_reports', 1);
     }
 
     public function tearDown(): void
@@ -122,7 +122,7 @@ class PrivacyManagerTest extends IntegrationTestCase
     public function testHaveLogsBeenPurgedWhenDateIsPastLogDeleteButLogsAreDisabled()
     {
         $this->setUIEnabled(true);
-        \Piwik\Option::set('delete_logs_enable', 0);
+        \Matomo\Option::set('delete_logs_enable', 0);
 
         $_GET['date'] = Date::now()->subDay(self::DELETE_LOGS_OLDER_THAN + 1000)->toString();
         $_GET['period'] = 'date';
@@ -156,7 +156,7 @@ class PrivacyManagerTest extends IntegrationTestCase
     public function testHaveLogsBeenPurgedWhenPassingManualLogDeletionDateValueShouldAssumeLogDeletionIsEnabled()
     {
         $this->setUIEnabled(true);
-        \Piwik\Option::set('delete_logs_enable', 0);
+        \Matomo\Option::set('delete_logs_enable', 0);
 
         $_GET['date'] = Date::now()->subDay(498)->toString();
         $_GET['period'] = 'date';
@@ -215,7 +215,7 @@ class PrivacyManagerTest extends IntegrationTestCase
 
     private function setUIEnabled($enabled)
     {
-        \Piwik\Config::getInstance()->General['enable_delete_old_data_settings_admin'] = $enabled;
+        \Matomo\Config::getInstance()->General['enable_delete_old_data_settings_admin'] = $enabled;
     }
 
     private function getDefaultPurgeSettings()

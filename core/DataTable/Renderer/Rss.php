@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Renderer;
+namespace Matomo\DataTable\Renderer;
 
 use Exception;
-use Piwik\Archive;
-use Piwik\Common;
-use Piwik\DataTable\Renderer;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\SettingsPiwik;
+use Matomo\Archive;
+use Matomo\Common;
+use Matomo\DataTable\Renderer;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\SettingsPiwik;
 
 /**
  * RSS Feed.

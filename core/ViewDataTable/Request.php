@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ViewDataTable;
+namespace Matomo\ViewDataTable;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Common;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Common;
 
 class Request
 {
     /**
-     * @var null|\Piwik\ViewDataTable\RequestConfig
+     * @var null|\Matomo\ViewDataTable\RequestConfig
      */
     public $requestConfig;
 

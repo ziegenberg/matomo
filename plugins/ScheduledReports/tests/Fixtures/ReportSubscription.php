@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests\Fixtures;
+namespace Matomo\Plugins\ScheduledReports\tests\Fixtures;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\ScheduledReports\API;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\ScheduledReports\API;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Tests\Framework\Fixture;
 
 class ReportSubscription extends Fixture
 {

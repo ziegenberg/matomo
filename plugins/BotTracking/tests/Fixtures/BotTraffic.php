@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Fixtures;
+namespace Matomo\Plugins\BotTracking\tests\Fixtures;
 
 use MatomoTracker;
-use Piwik\Date;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Tests\Framework\Fixture;
 
 class BotTraffic extends Fixture
 {

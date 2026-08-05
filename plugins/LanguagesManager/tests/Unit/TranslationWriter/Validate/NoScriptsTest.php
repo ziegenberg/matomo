@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\tests\Unit\TranslationWriter\Validate;
+namespace Matomo\Plugins\LanguagesManager\tests\Unit\TranslationWriter\Validate;
 
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
 
 /**
  * @group LanguagesManager

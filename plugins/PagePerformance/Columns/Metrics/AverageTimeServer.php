@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * The average amount of time the server needs to start serving a page. Calculated as
@@ -25,11 +25,11 @@ class AverageTimeServer extends AveragePerformanceMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeServer');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeServer');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeServerDocumentation');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeServerDocumentation');
     }
 }

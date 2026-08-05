@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Widget;
+namespace Matomo\Widget;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Development;
-use Piwik\Piwik;
-use Piwik\Report\ReportWidgetFactory;
+use Matomo\Container\StaticContainer;
+use Matomo\Development;
+use Matomo\Matomo;
+use Matomo\Report\ReportWidgetFactory;
 
 /**
  * Manages the global list of reports that can be displayed as dashboard widgets.
@@ -172,7 +172,7 @@ class WidgetsList
     {
         $list = new static();
 
-        $widgets = StaticContainer::get('Piwik\Plugin\WidgetsProvider');
+        $widgets = StaticContainer::get('Matomo\Plugin\WidgetsProvider');
 
         $widgetContainerConfigs = $widgets->getWidgetContainerConfigs();
         foreach ($widgetContainerConfigs as $config) {
@@ -188,7 +188,7 @@ class WidgetsList
             }
         }
 
-        $reports = StaticContainer::get('Piwik\Plugin\ReportsProvider');
+        $reports = StaticContainer::get('Matomo\Plugin\ReportsProvider');
         $reports = $reports->getAllReports();
         foreach ($reports as $report) {
             if ($report->isEnabled()) {
@@ -202,14 +202,14 @@ class WidgetsList
          *
          * **Example**
          *
-         *     public function removeWidgetConfigs(Piwik\Widget\WidgetsList $list)
+         *     public function removeWidgetConfigs(Matomo\Widget\WidgetsList $list)
          *     {
          *         $list->remove($category='General_Visits'); // remove all widgets having this category
          *     }
          *
          * @param WidgetsList $list An instance of the WidgetsList. You can change the list of widgets this way.
          */
-        Piwik::postEvent('Widget.filterWidgets', array($list));
+        Matomo::postEvent('Widget.filterWidgets', array($list));
 
         return $list;
     }

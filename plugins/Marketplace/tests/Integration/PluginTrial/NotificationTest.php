@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration\PluginTrial;
+namespace Matomo\Plugins\Marketplace\tests\Integration\PluginTrial;
 
-use Piwik\Notification\Manager;
-use Piwik\Plugins\Marketplace\PluginTrial\Notification;
-use Piwik\Plugins\Marketplace\PluginTrial\Storage;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Notification\Manager;
+use Matomo\Plugins\Marketplace\PluginTrial\Notification;
+use Matomo\Plugins\Marketplace\PluginTrial\Storage;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Marketplace
@@ -104,7 +104,7 @@ class NotificationTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

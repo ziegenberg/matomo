@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class CharacterLength extends BaseValidator
 {
@@ -46,11 +46,11 @@ class CharacterLength extends BaseValidator
         $lenValue = mb_strlen($value);
 
         if (isset($this->min) && $this->min > $lenValue) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorCharacterTooShort', array($lenValue, $this->min)));
+            throw new Exception(Matomo::translate('General_ValidatorErrorCharacterTooShort', array($lenValue, $this->min)));
         }
 
         if (isset($this->max) && $this->max < $lenValue) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorCharacterTooLong', array($lenValue, $this->max)));
+            throw new Exception(Matomo::translate('General_ValidatorErrorCharacterTooLong', array($lenValue, $this->max)));
         }
     }
 }

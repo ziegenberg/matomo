@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\Goals\API as APIGoals;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API as APIGoals;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Adds two websites and tracks visits from two visitors on different days.

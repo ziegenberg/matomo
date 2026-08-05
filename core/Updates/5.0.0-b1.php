@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Db;
-use Piwik\Common;
-use Piwik\DbHelper;
-use Piwik\SettingsPiwik;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Db as DbAlias;
-use Piwik\Updater\Migration\Factory;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration\Custom as CustomMigration;
-use Piwik\Plugins\Goals\Commands\CalculateConversionPages;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Db;
+use Matomo\Common;
+use Matomo\DbHelper;
+use Matomo\SettingsPiwik;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Db as DbAlias;
+use Matomo\Updater\Migration\Factory;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration\Custom as CustomMigration;
+use Matomo\Plugins\Goals\Commands\CalculateConversionPages;
 
 /**
  * Update for version 5.0.0-b1

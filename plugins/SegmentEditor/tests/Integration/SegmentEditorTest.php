@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\Integration;
+namespace Matomo\Plugins\SegmentEditor\tests\Integration;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CronArchive\ReArchiveList;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Plugins\SegmentEditor\Model;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CronArchive\ReArchiveList;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Plugins\SegmentEditor\Model;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 use Exception;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Plugins\SegmentEditor\SegmentEditor;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Plugins\SegmentEditor\SegmentEditor;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
 
 /**
  * Class Plugins_SegmentEditorTest
@@ -36,8 +36,8 @@ class SegmentEditorTest extends IntegrationTestCase
 
         Date::$now = strtotime('2020-03-01 00:00:00');
 
-        \Piwik\Plugin\Manager::getInstance()->loadPlugin('SegmentEditor');
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->loadPlugin('SegmentEditor');
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
 
         // setup the access layer
         FakeAccess::setIdSitesView(array(1, 2));
@@ -158,7 +158,7 @@ class SegmentEditorTest extends IntegrationTestCase
             'auto_archive' => '1',
             'ts_last_edit' => Date::now()->getDatetime(),
             'ts_created' => Date::now()->getDatetime(),
-            'login' => Piwik::getCurrentUserLogin(),
+            'login' => Matomo::getCurrentUserLogin(),
             'deleted' => '0',
             'starred' => '0',
             'starred_by' => null,
@@ -285,7 +285,7 @@ class SegmentEditorTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

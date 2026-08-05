@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Widgets;
+namespace Matomo\Plugins\Ecommerce\Widgets;
 
-use Piwik\Common;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Live\Live;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Live\Live;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Site;
 
-class GetEcommerceLog extends \Piwik\Widget\Widget
+class GetEcommerceLog extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

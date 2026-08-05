@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Plugins\UserCountry\Diagnostic\GeolocationDiagnostic;
-use Piwik\Url;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\UserCountry\Diagnostic\GeolocationDiagnostic;
+use Matomo\Url;
 
 class ChallengeConfigureGeolocation extends Challenge
 {
@@ -24,12 +24,12 @@ class ChallengeConfigureGeolocation extends Challenge
 
     public function getName()
     {
-        return Piwik::translate('Tour_ConfigureGeolocation');
+        return Matomo::translate('Tour_ConfigureGeolocation');
     }
 
     public function getDescription()
     {
-        return Piwik::translate('Tour_ConfigureGeolocationDescription');
+        return Matomo::translate('Tour_ConfigureGeolocationDescription');
     }
 
     public function getId()

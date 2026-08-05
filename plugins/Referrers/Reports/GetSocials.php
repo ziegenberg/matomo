@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
-use Piwik\Plugins\Referrers\Columns\SocialNetwork;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
+use Matomo\Plugins\Referrers\Columns\SocialNetwork;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetSocials extends Base
 {
@@ -23,8 +23,8 @@ class GetSocials extends Base
     {
         parent::init();
         $this->dimension     = new SocialNetwork();
-        $this->name          = Piwik::translate('Referrers_Socials');
-        $this->documentation = Piwik::translate('Referrers_SocialsReportDocumentation', '<br />');
+        $this->name          = Matomo::translate('Referrers_Socials');
+        $this->documentation = Matomo::translate('Referrers_SocialsReportDocumentation', '<br />');
         $this->actionToLoadSubTables = 'getUrlsForSocial';
         $this->hasGoalMetrics = true;
         $this->order = 11;

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\Columns\Dimension;
-use Piwik\Columns\Discriminator;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\Discriminator;
 
 class GoalDimension extends Dimension
 {

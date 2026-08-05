@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-use Piwik\Common;
-use Piwik\FrontController;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Request;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
+use Matomo\Common;
+use Matomo\FrontController;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Request;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     private Translator $translator;
 
@@ -46,7 +46,7 @@ class Controller extends \Piwik\Plugin\Controller
         if (empty($columns)) {
             $columns = Common::getRequestVar('columns', false);
             if (false !== $columns) {
-                $columns = Piwik::getArrayFromApiParameter($columns);
+                $columns = Matomo::getArrayFromApiParameter($columns);
             }
         }
         if (false !== $columns) {
@@ -75,7 +75,7 @@ class Controller extends \Piwik\Plugin\Controller
         $visibleRows = Common::getRequestVar('rows', false);
         if ($visibleRows !== false) {
             // this happens when the row picker has been used
-            $visibleRows = Piwik::getArrayFromApiParameter($visibleRows);
+            $visibleRows = Matomo::getArrayFromApiParameter($visibleRows);
             $visibleRows = array_map('urldecode', $visibleRows);
 
             // typeReferrer is redundant if rows are defined, so make sure it's not used

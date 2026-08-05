@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\tests\Integration;
+namespace Matomo\Plugins\GeoIp2\tests\Integration;
 
 /**
  * @group GeoIp2

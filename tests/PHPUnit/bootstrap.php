@@ -1,11 +1,11 @@
 <?php
 
-use Piwik\Application\Environment;
-use Piwik\Intl\Locale;
-use Piwik\Config;
-use Piwik\SettingsPiwik;
-use Piwik\Tests\Framework\TestingEnvironmentManipulator;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Application\Environment;
+use Matomo\Intl\Locale;
+use Matomo\Config;
+use Matomo\SettingsPiwik;
+use Matomo\Tests\Framework\TestingEnvironmentManipulator;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 
 define('PIWIK_TEST_MODE', true);
 define('PIWIK_PRINT_ERROR_BACKTRACE', false);
@@ -48,7 +48,7 @@ $GLOBALS['MATOMO_PLUGIN_DIRS'] = array(
 require_once PIWIK_INCLUDE_PATH . '/core/bootstrap.php';
 
 if (getenv('PIWIK_USE_XHPROF') == 1) {
-    \Piwik\Profiler::setupProfilerXHProf();
+    \Matomo\Profiler::setupProfilerXHProf();
 }
 
 function setPiwikDomainFromEnvVar()
@@ -75,7 +75,7 @@ function setupRootContainer($enable = false)
         Environment::setGlobalEnvironmentManipulator(new TestingEnvironmentManipulator($vars));
     }
 
-    $rootTestEnvironment = new \Piwik\Application\Environment(null);
+    $rootTestEnvironment = new \Matomo\Application\Environment(null);
     $rootTestEnvironment->init();
 }
 
@@ -89,7 +89,7 @@ function prepareServerVariables(Config $config)
 
     if ('@REQUEST_URI@' === $testConfig['request_uri']) {
         // config not done yet, if Piwik is installed we can automatically configure request_uri and http_host
-        $url = \Piwik\SettingsPiwik::getPiwikUrl();
+        $url = \Matomo\SettingsPiwik::getPiwikUrl();
 
         if (!empty($url)) {
             $parsedUrl = parse_url($url);

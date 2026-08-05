@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Piwik;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Matomo;
 
 /**
  * Truncates a {@link DataTable} by merging all rows after a certain index into a new summary
@@ -75,7 +75,7 @@ class Truncate extends BaseFilter
         parent::__construct($table);
         $this->truncateAfter = $truncateAfter;
         if ($labelSummaryRow === null) {
-            $labelSummaryRow = Piwik::translate('General_Others');
+            $labelSummaryRow = Matomo::translate('General_Others');
         }
         $this->labelSummaryRow = $labelSummaryRow;
         $this->columnToSortByBeforeTruncating = $columnToSortByBeforeTruncating;

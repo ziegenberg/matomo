@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Segment;
+namespace Matomo\Segment;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Columns\Dimension;
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Piwik;
-use Piwik\Plugin\Segment;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Matomo;
+use Matomo\Plugin\Segment;
 
 /**
  * Manages the global list of segments that can be used.
@@ -125,7 +125,7 @@ class SegmentsList
          *
          * @param SegmentsList $list An instance of the SegmentsList. You can add segments to the list this way.
          */
-        Piwik::postEvent('Segment.addSegments', [$list]);
+        Matomo::postEvent('Segment.addSegments', [$list]);
 
         foreach (Dimension::getAllDimensions() as $dimension) {
             $dimension->configureSegments($list, new DimensionSegmentFactory($dimension));
@@ -144,7 +144,7 @@ class SegmentsList
          * @param SegmentsList $list An instance of the SegmentsList.
          * @param array $idSites
          */
-        Piwik::postEvent('Segment.filterSegments', [&$list, $idSites]);
+        Matomo::postEvent('Segment.filterSegments', [&$list, $idSites]);
 
         $cache->save($cacheKey, $list);
 

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\CoreAdminHome\Controller;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Plugins\Tour\Dao\DataFinder;
-use Piwik\Plugins\UserCountry\UserCountry;
-use Piwik\Plugins\UsersManager\UsersManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\CoreAdminHome\Controller;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Plugins\Tour\Dao\DataFinder;
+use Matomo\Plugins\UserCountry\UserCountry;
+use Matomo\Plugins\UsersManager\UsersManager;
 
 class Challenges
 {
@@ -109,7 +109,7 @@ class Challenges
          *
          * @param Challenge[] $challenges An array of challenges
          */
-        Piwik::postEvent('Tour.filterChallenges', array(&$challenges));
+        Matomo::postEvent('Tour.filterChallenges', array(&$challenges));
 
         return $challenges;
     }

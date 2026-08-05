@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Plugins\CoreAdminHome\Commands\MigrateAnnotations;
-use Piwik\Plugins\CoreAdminHome\Commands\PurgeLegacyAnnotations;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Custom as CustomMigration;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration;
+use Matomo\Plugins\CoreAdminHome\Commands\MigrateAnnotations;
+use Matomo\Plugins\CoreAdminHome\Commands\PurgeLegacyAnnotations;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Custom as CustomMigration;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration;
 
 /**
  * Update for version 5.5.0-b2

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\System;
+namespace Matomo\Plugins\API\tests\System;
 
-use Piwik\Cache;
-use Piwik\Plugins\SitesManager\tests\Fixtures\ManySites;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Policy\PolicyManager;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Cache;
+use Matomo\Plugins\SitesManager\tests\Fixtures\ManySites;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Policy\PolicyManager;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group API

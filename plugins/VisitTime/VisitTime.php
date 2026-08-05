@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime;
+namespace Matomo\Plugins\VisitTime;
 
-use Piwik\Plugins\SegmentEditor\Settings\LimitSegments;
-use Piwik\Segment\SegmentsList;
+use Matomo\Plugins\SegmentEditor\Settings\LimitSegments;
+use Matomo\Segment\SegmentsList;
 
 // empty plugin definition, otherwise plugin won't be installed during test run
-class VisitTime extends \Piwik\Plugin
+class VisitTime extends \Matomo\Plugin
 {
     public function registerEvents()
     {

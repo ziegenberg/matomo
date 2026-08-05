@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Identifier;
@@ -47,7 +47,7 @@ class JsonResponseReturnTypeRule implements Rule
 
         return [
             RuleErrorBuilder::message(sprintf(
-                'Controller action %s() is marked #[\\Piwik\\Http\\JsonResponse] and must declare a'
+                'Controller action %s() is marked #[\Matomo\Http\JsonResponse] and must declare a'
                 . ' "string" return type.',
                 $node->name->toString()
             ))

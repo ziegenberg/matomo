@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Access\Role;
+namespace Matomo\Access\Role;
 
-use Piwik\Access\Role;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Access\Role;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class Write extends Role
 {
@@ -19,7 +19,7 @@ class Write extends Role
 
     public function getName(): string
     {
-        return Piwik::translate('UsersManager_PrivWrite');
+        return Matomo::translate('UsersManager_PrivWrite');
     }
 
     public function getId(): string
@@ -29,7 +29,7 @@ class Write extends Role
 
     public function getDescription(): string
     {
-        return Piwik::translate('UsersManager_PrivWriteDescription');
+        return Matomo::translate('UsersManager_PrivWriteDescription');
     }
 
     public function getHelpUrl(): string

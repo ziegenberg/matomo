@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\TranslationWriter\Validate;
+namespace Matomo\Plugins\LanguagesManager\TranslationWriter\Validate;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\LanguageDataProvider;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\LanguageDataProvider;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
 
 class CoreTranslations extends ValidateAbstract
 {
@@ -61,9 +61,9 @@ class CoreTranslations extends ValidateAbstract
         }
 
         /** @var LanguageDataProvider $languageDataProvider */
-        $languageDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\LanguageDataProvider');
+        $languageDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\LanguageDataProvider');
         /** @var RegionDataProvider $regionDataProvider */
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         $allLanguages = $languageDataProvider->getLanguageList();
         $allCountries = $regionDataProvider->getCountryList();

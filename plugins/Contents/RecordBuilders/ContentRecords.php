@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Contents\RecordBuilders;
+namespace Matomo\Plugins\Contents\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\Contents\Archiver;
-use Piwik\RankingQuery;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\Contents\Archiver;
+use Matomo\RankingQuery;
 
 class ContentRecords extends RecordBuilder
 {

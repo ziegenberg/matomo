@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
-use Piwik\Plugins\Actions\Columns\PageUrl;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
-use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\BounceRate;
+use Matomo\Plugins\Actions\Columns\PageUrl;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetPageUrls extends Base
 {
@@ -28,9 +28,9 @@ class GetPageUrls extends Base
         parent::init();
 
         $this->dimension     = new PageUrl();
-        $this->name          = Piwik::translate('Actions_PageUrls');
-        $this->documentation = Piwik::translate('Actions_PagesReportDocumentation', '<br />')
-                             . '<br />' . Piwik::translate('General_UsePlusMinusIconsDocumentation');
+        $this->name          = Matomo::translate('Actions_PageUrls');
+        $this->documentation = Matomo::translate('Actions_PagesReportDocumentation', '<br />')
+                             . '<br />' . Matomo::translate('General_UsePlusMinusIconsDocumentation');
 
         $this->actionToLoadSubTables = $this->action;
         $this->order   = 2;
@@ -54,7 +54,7 @@ class GetPageUrls extends Base
     public function getMetrics()
     {
         $metrics = parent::getMetrics();
-        $metrics['nb_visits'] = Piwik::translate('General_ColumnUniquePageviews');
+        $metrics['nb_visits'] = Matomo::translate('General_ColumnUniquePageviews');
 
         return $metrics;
     }
@@ -62,8 +62,8 @@ class GetPageUrls extends Base
     protected function getMetricsDocumentation()
     {
         $metrics = parent::getMetricsDocumentation();
-        $metrics['nb_visits'] = Piwik::translate('General_ColumnUniquePageviewsDocumentation');
-        $metrics['bounce_rate'] = Piwik::translate('General_ColumnPageBounceRateDocumentation');
+        $metrics['nb_visits'] = Matomo::translate('General_ColumnUniquePageviewsDocumentation');
+        $metrics['bounce_rate'] = Matomo::translate('General_ColumnPageBounceRateDocumentation');
 
         return $metrics;
     }

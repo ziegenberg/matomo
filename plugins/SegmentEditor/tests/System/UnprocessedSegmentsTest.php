@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\System;
+namespace Matomo\Plugins\SegmentEditor\tests\System;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Plugins\VisitsSummary;
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\CronArchive\SegmentArchiving;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Plugins\VisitsSummary;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\CronArchive\SegmentArchiving;
 
 /**
  * @group SegmentEditor
@@ -267,12 +267,12 @@ class UnprocessedSegmentsTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            Config::class => \Piwik\DI::decorate(function (Config $previous) {
+            Config::class => \Matomo\DI::decorate(function (Config $previous) {
                 $previous->General['browser_archiving_disabled_enforce'] = 1;
                 return $previous;
             }),
 
-            SegmentArchiving::class => \Piwik\DI::autowire()
+            SegmentArchiving::class => \Matomo\DI::autowire()
                 ->constructorParameter('beginningOfTimeLastNInYears', 15),
         ];
     }

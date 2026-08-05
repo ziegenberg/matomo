@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Unit;
+namespace Matomo\Plugins\PrivacyManager\tests\Unit;
 
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
 
 /**
  * Class DoNotTrackHeaderCheckerTest
@@ -85,7 +85,7 @@ class DoNotTrackHeaderCheckerTest extends \PHPUnit\Framework\TestCase
      */
     protected function makeConfig()
     {
-        return new \Piwik\Plugins\PrivacyManager\tests\Framework\Mock\Config();
+        return new \Matomo\Plugins\PrivacyManager\tests\Framework\Mock\Config();
     }
 
     /**

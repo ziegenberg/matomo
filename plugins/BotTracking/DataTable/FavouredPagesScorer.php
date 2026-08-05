@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\DataTable;
+namespace Matomo\Plugins\BotTracking\DataTable;
 
 use InvalidArgumentException;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
+use Matomo\Plugins\BotTracking\Metrics;
 
 /**
  * Materialises the bounded 0–100 Discrepancy Score as a real column on the merged favoured-pages
- * table. Invoked during archiving by {@see \Piwik\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages}
+ * table. Invoked during archiving by {@see \Matomo\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages}
  * — for the day record and, re-run, for each higher period's recomputed union.
  *
  * A stored column rather than a ProcessedMetric: the score is table-relative (the `volume` term is

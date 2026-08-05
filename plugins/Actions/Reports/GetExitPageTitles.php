@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\ExitPageTitle;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
-use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\ExitPageTitle;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
+use Matomo\Plugins\Actions\Columns\Metrics\BounceRate;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetExitPageTitles extends Base
 {
@@ -27,9 +27,9 @@ class GetExitPageTitles extends Base
         parent::init();
 
         $this->dimension     = new ExitPageTitle();
-        $this->name          = Piwik::translate('Actions_ExitPageTitles');
-        $this->documentation = Piwik::translate('Actions_ExitPageTitlesReportDocumentation', '<br />')
-                             . ' ' . Piwik::translate('General_UsePlusMinusIconsDocumentation');
+        $this->name          = Matomo::translate('Actions_ExitPageTitles');
+        $this->documentation = Matomo::translate('Actions_ExitPageTitlesReportDocumentation', '<br />')
+                             . ' ' . Matomo::translate('General_UsePlusMinusIconsDocumentation');
         $this->subcategoryId = 'Actions_SubmenuPagesExit';
 
         $this->metrics = array('exit_nb_visits', 'nb_visits');
@@ -66,7 +66,7 @@ class GetExitPageTitles extends Base
     public function getMetrics()
     {
         $metrics = parent::getMetrics();
-        $metrics['nb_visits'] = Piwik::translate('General_ColumnUniquePageviews');
+        $metrics['nb_visits'] = Matomo::translate('General_ColumnUniquePageviews');
 
         return $metrics;
     }
@@ -74,7 +74,7 @@ class GetExitPageTitles extends Base
     protected function getMetricsDocumentation()
     {
         $metrics = parent::getMetricsDocumentation();
-        $metrics['nb_visits'] = Piwik::translate('General_ColumnUniquePageviewsDocumentation');
+        $metrics['nb_visits'] = Matomo::translate('General_ColumnUniquePageviewsDocumentation');
 
         unset($metrics['bounce_rate']);
         unset($metrics['avg_time_on_page']);

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Morpheus;
+namespace Matomo\Plugins\Morpheus;
 
-class Morpheus extends \Piwik\Plugin
+class Morpheus extends \Matomo\Plugin
 {
     private const DARK_MONOCHROME_ICONS_MANIFEST = 'plugins/Morpheus/icons/dist/dark-monochrome-icons.json';
 

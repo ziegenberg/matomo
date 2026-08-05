@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Emails;
+namespace Matomo\Plugins\UsersManager\Emails;
 
-use Piwik\Config;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\TokenNotifications\AuthTokenExpirationWarningEmailNotification;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\TokenNotifications\AuthTokenExpirationWarningEmailNotification;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
+use Matomo\View;
 
 class AuthTokenExpirationWarningNotificationEmail extends Mail
 {
@@ -52,7 +52,7 @@ class AuthTokenExpirationWarningNotificationEmail extends Mail
     private function getExpirationWarningPeriodPretty(): string
     {
         $expirationPeriodDays = Config::getInstance()->General['auth_token_expiration_notification_days'];
-        return $expirationPeriodDays . ' ' . Piwik::translate('Intl_PeriodDay' . ($expirationPeriodDays === 1 ? '' : 's'));
+        return $expirationPeriodDays . ' ' . Matomo::translate('Intl_PeriodDay' . ($expirationPeriodDays === 1 ? '' : 's'));
     }
 
     protected function getInstanceUrl(): string
@@ -69,7 +69,7 @@ class AuthTokenExpirationWarningNotificationEmail extends Mail
     }
     protected function getDefaultSubject(): string
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'UsersManager_AuthTokenExpirationWarningEmailSubjectAll',
             [
                 $this->getInstanceUrl(),

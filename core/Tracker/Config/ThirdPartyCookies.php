@@ -1,14 +1,14 @@
 <?php
 
-namespace Piwik\Tracker\Config;
+namespace Matomo\Tracker\Config;
 
-use Piwik\Piwik;
-use Piwik\Settings\Interfaces\ConfigSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
-use Piwik\Policy\CnilPolicy;
+use Matomo\Matomo;
+use Matomo\Settings\Interfaces\ConfigSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
+use Matomo\Policy\CnilPolicy;
 
 /**
  * @implements ConfigSettingInterface<bool|null>
@@ -69,7 +69,7 @@ class ThirdPartyCookies implements
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate('General_ThirdPartyCookieSettingNote');
+        return Matomo::translate('General_ThirdPartyCookieSettingNote');
     }
 
     protected static function compareStrictness($value1, $value2): bool
@@ -82,7 +82,7 @@ class ThirdPartyCookies implements
 
     public static function getTitle(): string
     {
-        return Piwik::translate('General_ThirdPartyCookieSettingTitle');
+        return Matomo::translate('General_ThirdPartyCookieSettingTitle');
     }
 
     public static function getInstance(?int $idSite = null): self

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations;
 
-use Piwik\Common;
-use Piwik\Plugin\Visualization;
+use Matomo\Common;
+use Matomo\Plugin\Visualization;
 
 /**
  * Generates a tag cloud from a given data array.

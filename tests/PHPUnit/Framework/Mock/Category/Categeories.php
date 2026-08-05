@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock\Category;
+namespace Matomo\Tests\Framework\Mock\Category;
 
-use Piwik\Category\Category;
-use Piwik\Category\Subcategory;
-use Piwik\Plugin;
+use Matomo\Category\Category;
+use Matomo\Category\Subcategory;
+use Matomo\Plugin;
 
 /**
  * FakeCategories for UnitTests

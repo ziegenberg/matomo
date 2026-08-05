@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations;
 
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Period\Factory;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines\Config;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Period\Factory;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines\Config;
 
 class EvolutionPeriodSelector
 {

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\AssetManager\UIAssetCacheBuster;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CoreAdminHome\Controller;
-use Piwik\Plugins\CorePluginsAdmin\CorePluginsAdmin;
-use Piwik\View\ViewInterface;
-use Piwik\View\SecurityPolicy;
+use Matomo\AssetManager\UIAssetCacheBuster;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CoreAdminHome\Controller;
+use Matomo\Plugins\CorePluginsAdmin\CorePluginsAdmin;
+use Matomo\View\ViewInterface;
+use Matomo\View\SecurityPolicy;
 use Twig\Environment;
 
 /**
@@ -151,7 +151,7 @@ class View implements ViewInterface
         $this->initializeTwig();
 
         $this->piwik_version = Version::VERSION;
-        $this->userLogin = Piwik::getCurrentUserLogin();
+        $this->userLogin = Matomo::getCurrentUserLogin();
         $this->isSuperUser = Access::getInstance()->hasSuperUserAccess();
         // following is used in ajaxMacros called macro (showMoreHelp as passed in other templates) - requestErrorDiv
         $isGeneralSettingsAdminEnabled = Controller::isGeneralSettingsAdminEnabled();
@@ -165,7 +165,7 @@ class View implements ViewInterface
             // pass (occurs when DB cannot be connected to, perhaps piwik URL cache should be stored in config file...)
         }
 
-        $this->userRequiresPasswordConfirmation = Piwik::doesUserRequirePasswordConfirmation(Piwik::getCurrentUserLogin());
+        $this->userRequiresPasswordConfirmation = Matomo::doesUserRequirePasswordConfirmation(Matomo::getCurrentUserLogin());
     }
 
     /**
@@ -257,16 +257,16 @@ class View implements ViewInterface
     public function render()
     {
         try {
-            $this->currentModule = Piwik::getModule();
-            $this->currentAction = Piwik::getAction();
+            $this->currentModule = Matomo::getModule();
+            $this->currentAction = Matomo::getAction();
 
             $this->url = Common::sanitizeInputValue(Url::getCurrentUrl());
-            $this->token_auth = Piwik::getCurrentUserTokenAuth();
-            $this->userHasSomeAdminAccess = Piwik::isUserHasSomeAdminAccess();
-            $this->userIsAnonymous = Piwik::isUserIsAnonymous();
-            $this->userIsSuperUser = Piwik::hasUserSuperUserAccess();
+            $this->token_auth = Matomo::getCurrentUserTokenAuth();
+            $this->userHasSomeAdminAccess = Matomo::isUserHasSomeAdminAccess();
+            $this->userIsAnonymous = Matomo::isUserIsAnonymous();
+            $this->userIsSuperUser = Matomo::hasUserSuperUserAccess();
             $this->latest_version_available = UpdateCheck::isNewestVersionAvailable();
-            $this->showUpdateNotificationToUser = !SettingsPiwik::isShowUpdateNotificationToSuperUsersOnlyEnabled() || Piwik::hasUserSuperUserAccess();
+            $this->showUpdateNotificationToUser = !SettingsPiwik::isShowUpdateNotificationToSuperUsersOnlyEnabled() || Matomo::hasUserSuperUserAccess();
             $this->disableLink = Common::getRequestVar('disableLink', 0, 'int');
             $this->isWidget = Common::getRequestVar('widget', 0, 'int');
             $this->isMultiServerEnvironment = SettingsPiwik::isMultiServerEnvironment();
@@ -274,7 +274,7 @@ class View implements ViewInterface
             $this->shouldPropagateTokenAuth = $this->shouldPropagateTokenAuthInAjaxRequests();
             $this->isAutoUpdateEnabled = SettingsPiwik::isAutoUpdateEnabled();
 
-            $piwikAds = StaticContainer::get('Piwik\ProfessionalServices\Advertising');
+            $piwikAds = StaticContainer::get('Matomo\ProfessionalServices\Advertising');
             $this->areAdsForProfessionalServicesEnabled = $piwikAds->areAdsForProfessionalServicesEnabled();
 
             if (Development::isEnabled()) {
@@ -284,7 +284,7 @@ class View implements ViewInterface
             }
             $this->cacheBuster = $cacheBuster;
 
-            $this->loginModule = Piwik::getLoginPluginName();
+            $this->loginModule = Matomo::getLoginPluginName();
         } catch (Exception $e) {
             Log::debug($e);
 
@@ -494,7 +494,7 @@ class View implements ViewInterface
     private function validTokenAuthInUrl()
     {
         $token = StaticContainer::get(AuthenticationToken::class);
-        return (!$token->wasTokenAuthProvidedSecurely() && $token->getAuthToken() === Piwik::getCurrentUserTokenAuth());
+        return (!$token->wasTokenAuthProvidedSecurely() && $token->getAuthToken() === Matomo::getCurrentUserTokenAuth());
     }
 
     /**

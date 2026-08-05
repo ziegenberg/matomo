@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\SomeVisitsWithLongUrls;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\SomeVisitsWithLongUrls;
 
 /**
  * Tests that filter_truncate works recursively in Page URLs report AND in the case there are 2 different data Keywords -> search engine

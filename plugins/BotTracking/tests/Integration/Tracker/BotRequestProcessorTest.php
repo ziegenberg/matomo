@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Integration\Tracker;
+namespace Matomo\Plugins\BotTracking\tests\Integration\Tracker;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Log\NullLogger;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\BotTracking\Tracker\BotRequestProcessor;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Log\NullLogger;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\BotTracking\Tracker\BotRequestProcessor;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
 
 /**
  * @group BotTracking

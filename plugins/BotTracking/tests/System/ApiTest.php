@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\System;
+namespace Matomo\Plugins\BotTracking\tests\System;
 
-use Piwik\Plugins\BotTracking\Reports\AIChatbotsRealTimeWidgets;
-use Piwik\Plugins\BotTracking\tests\Fixtures\BotTraffic;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\BotTracking\Reports\AIChatbotsRealTimeWidgets;
+use Matomo\Plugins\BotTracking\tests\Fixtures\BotTraffic;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group BotTracking

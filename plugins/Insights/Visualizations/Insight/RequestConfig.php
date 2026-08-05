@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\Visualizations\Insight;
+namespace Matomo\Plugins\Insights\Visualizations\Insight;
 
-use Piwik\Plugins\Insights\InsightReport;
-use Piwik\ViewDataTable\RequestConfig as VisualizationRequestConfig;
+use Matomo\Plugins\Insights\InsightReport;
+use Matomo\ViewDataTable\RequestConfig as VisualizationRequestConfig;
 
 class RequestConfig extends VisualizationRequestConfig
 {

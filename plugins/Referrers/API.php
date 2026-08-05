@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Archive;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\Referrers\Columns\Metrics\VisitorsFromReferrerPercent;
-use Piwik\Plugins\Referrers\DataTable\Filter\GroupDifferentSocialWritings;
-use Piwik\Site;
-use Piwik\Tracker\Action;
+use Matomo\API\Request;
+use Matomo\Archive;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\Referrers\Columns\Metrics\VisitorsFromReferrerPercent;
+use Matomo\Plugins\Referrers\DataTable\Filter\GroupDifferentSocialWritings;
+use Matomo\Site;
+use Matomo\Tracker\Action;
 
 /**
  * The Referrers API lets you access reports about websites, search engines, keywords, social networks,
@@ -31,9 +31,9 @@ use Piwik\Tracker\Action;
  * "getReferrerType" returns the Referrer overview report. "getCampaigns" returns the list of all campaigns (and all campaign keywords if the parameter &expanded=1 is set).
  * "getSocials" returns social network referrers, and "getAIAssistants" returns AI assistant referrers.
  *
- * @method static \Piwik\Plugins\Referrers\API getInstance()
+ * @method static \Matomo\Plugins\Referrers\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns the referrer overview report with distinct referrer counts and percentage metrics.
@@ -52,7 +52,7 @@ class API extends \Piwik\Plugin\API
      */
     public function get($idSite, string $period, string $date, ?string $segment = null, $columns = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $dataTableReferrersType = $this->getReferrerType($idSite, $period, $date, $segment);
         $dataTable = $this->createReferrerTypeTable($dataTableReferrersType);
@@ -92,7 +92,7 @@ class API extends \Piwik\Plugin\API
         });
 
         if (!empty($requestedColumns)) {
-            $requestedColumns = Piwik::getArrayFromApiParameter($columns);
+            $requestedColumns = Matomo::getArrayFromApiParameter($columns);
             $dataTable->filter(DataTable\Filter\ColumnDelete::class, [[], $requestedColumns]);
         }
 
@@ -139,7 +139,7 @@ class API extends \Piwik\Plugin\API
         bool $expanded = false,
         bool $_setReferrerTypeLabel = true
     ) {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $this->checkSingleSite($idSite, 'getReferrerType');
 
@@ -183,7 +183,7 @@ class API extends \Piwik\Plugin\API
         }
 
         // set subtable IDs for each row to the label (which holds the int referrer type)
-        $dataTable->filter('Piwik\Plugins\Referrers\DataTable\Filter\SetGetReferrerTypeSubtables', [$idSite, $period, $date, $segment, $expanded]);
+        $dataTable->filter('Matomo\Plugins\Referrers\DataTable\Filter\SetGetReferrerTypeSubtables', [$idSite, $period, $date, $segment, $expanded]);
 
         $dataTable->filter('AddSegmentByLabelMapping', [
             'referrerType',
@@ -234,7 +234,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAll($idSite, string $period, string $date, ?string $segment = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $this->checkSingleSite($idSite, 'getAll');
         /** @var DataTable|DataTable\Map $dataTable */
@@ -309,18 +309,18 @@ class API extends \Piwik\Plugin\API
      */
     public function getKeywords($idSite, string $period, string $date, ?string $segment = null, bool $expanded = false, bool $flat = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $dataTable = Archive::createDataTableFromArchive(Archiver::KEYWORDS_RECORD_NAME, $idSite, $period, $date, $segment, $expanded, $flat);
 
         if ($flat) {
-            $dataTable->filterSubtables('Piwik\Plugins\Referrers\DataTable\Filter\SearchEnginesFromKeywordId', [$dataTable]);
+            $dataTable->filterSubtables('Matomo\Plugins\Referrers\DataTable\Filter\SearchEnginesFromKeywordId', [$dataTable]);
         } else {
             $dataTable->filter('AddSegmentByLabel', ['referrerKeyword', '', $allowEmptyValue = true]);
             $dataTable->queueFilter('PrependSegment', ['referrerType==search;']);
         }
 
-        $dataTable->queueFilter('Piwik\Plugins\Referrers\DataTable\Filter\KeywordNotDefined');
+        $dataTable->queueFilter('Matomo\Plugins\Referrers\DataTable\Filter\KeywordNotDefined');
 
         return $dataTable;
     }
@@ -332,7 +332,7 @@ class API extends \Piwik\Plugin\API
      */
     public static function getKeywordNotDefinedString(): string
     {
-        return Piwik::translate('General_NotDefined', Piwik::translate('General_ColumnKeyword'));
+        return Matomo::translate('General_NotDefined', Matomo::translate('General_ColumnKeyword'));
     }
 
     /**
@@ -362,12 +362,12 @@ class API extends \Piwik\Plugin\API
      */
     public function getSearchEnginesFromKeywordId($idSite, string $period, string $date, int $idSubtable, ?string $segment = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $dataTable = $this->getDataTable(Archiver::KEYWORDS_RECORD_NAME, $idSite, $period, $date, $segment, false, $idSubtable);
         $keywords  = $this->getKeywords($idSite, $period, $date, $segment);
         $keyword   = $keywords->getRowFromIdSubDataTable($idSubtable)->getColumn('label');
 
-        $dataTable->filter('Piwik\Plugins\Referrers\DataTable\Filter\SearchEnginesFromKeywordId', [$keywords, $idSubtable]);
+        $dataTable->filter('Matomo\Plugins\Referrers\DataTable\Filter\SearchEnginesFromKeywordId', [$keywords, $idSubtable]);
         $dataTable->filter('AddSegmentByLabel', ['referrerName']);
         $dataTable->queueFilter('PrependSegment', ['referrerKeyword==' . $keyword . ';referrerType==search;']);
 
@@ -395,7 +395,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSearchEngines($idSite, string $period, string $date, ?string $segment = null, bool $expanded = false, bool $flat = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $dataTable = Archive::createDataTableFromArchive(Archiver::SEARCH_ENGINES_RECORD_NAME, $idSite, $period, $date, $segment, $expanded, $flat);
 
         if ($flat) {
@@ -414,7 +414,7 @@ class API extends \Piwik\Plugin\API
                 },
             ]);
             $dataTable->filterSubtables(
-                'Piwik\Plugins\Referrers\DataTable\Filter\KeywordsFromSearchEngineId',
+                'Matomo\Plugins\Referrers\DataTable\Filter\KeywordsFromSearchEngineId',
                 [$dataTable]
             );
         } else {
@@ -456,7 +456,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getKeywordsFromSearchEngineId($idSite, string $period, string $date, int $idSubtable, ?string $segment = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $dataTable = $this->getDataTable(Archiver::SEARCH_ENGINES_RECORD_NAME, $idSite, $period, $date, $segment, false, $idSubtable);
 
@@ -465,7 +465,7 @@ class API extends \Piwik\Plugin\API
         $searchEngines->applyQueuedFilters();
         $row  = $searchEngines->getRowFromIdSubDataTable($idSubtable);
 
-        $dataTable->filter('Piwik\Plugins\Referrers\DataTable\Filter\KeywordsFromSearchEngineId', [$searchEngines, $idSubtable]);
+        $dataTable->filter('Matomo\Plugins\Referrers\DataTable\Filter\KeywordsFromSearchEngineId', [$searchEngines, $idSubtable]);
         $dataTable->filter('AddSegmentByLabel', ['referrerKeyword']);
 
         if (!empty($row)) {
@@ -496,7 +496,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getCampaigns($idSite, string $period, string $date, ?string $segment = null, bool $expanded = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $dataTable = $this->getDataTable(Archiver::CAMPAIGNS_RECORD_NAME, $idSite, $period, $date, $segment, $expanded);
 
         $dataTable->filter('AddSegmentByLabel', ['referrerName']);
@@ -522,7 +522,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getKeywordsFromCampaignId($idSite, string $period, string $date, int $idSubtable, ?string $segment = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $campaigns = $this->getCampaigns($idSite, $period, $date, $segment);
         $campaigns->applyQueuedFilters();
         $row = $campaigns->getRowFromIdSubDataTable($idSubtable);
@@ -555,11 +555,11 @@ class API extends \Piwik\Plugin\API
      */
     public function getWebsites($idSite, string $period, string $date, ?string $segment = null, bool $expanded = false, bool $flat = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $dataTable = Archive::createDataTableFromArchive(Archiver::WEBSITES_RECORD_NAME, $idSite, $period, $date, $segment, $expanded, $flat, null);
 
         if ($flat) {
-            $dataTable->filterSubtables('Piwik\Plugins\Referrers\DataTable\Filter\UrlsFromWebsiteId');
+            $dataTable->filterSubtables('Matomo\Plugins\Referrers\DataTable\Filter\UrlsFromWebsiteId');
         } else {
             $dataTable->filter('AddSegmentByLabel', ['referrerName']);
         }
@@ -587,9 +587,9 @@ class API extends \Piwik\Plugin\API
      */
     public function getUrlsFromWebsiteId($idSite, string $period, string $date, int $idSubtable, ?string $segment = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $dataTable = $this->getDataTable(Archiver::WEBSITES_RECORD_NAME, $idSite, $period, $date, $segment, $expanded = false, $idSubtable);
-        $dataTable->filter('Piwik\Plugins\Referrers\DataTable\Filter\UrlsFromWebsiteId');
+        $dataTable->filter('Matomo\Plugins\Referrers\DataTable\Filter\UrlsFromWebsiteId');
         $dataTable->filter('MetadataCallbackAddMetadata', [
             'url', 'segment', function ($url) {
                 return 'referrerUrl==' . urlencode($url);
@@ -621,7 +621,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSocials($idSite, string $period, string $date, ?string $segment = null, bool $expanded = false, bool $flat = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $dataTable = Archive::createDataTableFromArchive(Archiver::SOCIAL_NETWORKS_RECORD_NAME, $idSite, $period, $date, $segment, $expanded, $flat);
 
@@ -674,7 +674,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIAssistants($idSite, string $period, string $date, ?string $segment = null, bool $expanded = false, bool $flat = false, ?string $secondaryDimension = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $archiveName = Archiver::AI_ASSISTANTS_ENTRY_URL_RECORD_NAME;
 
@@ -701,7 +701,7 @@ class API extends \Piwik\Plugin\API
         ]);
 
         if ($flat) {
-            $dataTable->filterSubtables('Piwik\Plugins\Referrers\DataTable\Filter\UrlsForAIAssistant');
+            $dataTable->filterSubtables('Matomo\Plugins\Referrers\DataTable\Filter\UrlsForAIAssistant');
             // don't link flattened report
             $dataTable->filterSubtables('ColumnCallbackDeleteMetadata', ['url']);
             $dataTable->filter('ColumnCallbackDeleteMetadata', ['url']);
@@ -863,7 +863,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUrlsForSocial($idSite, string $period, string $date, ?string $segment = null, ?int $idSubtable = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $dataTable = $this->getDataTable(Archiver::SOCIAL_NETWORKS_RECORD_NAME, $idSite, $period, $date, $segment, true, $idSubtable);
 
@@ -892,7 +892,7 @@ class API extends \Piwik\Plugin\API
         });
 
         $dataTable->filter('AddSegmentByLabel', ['referrerUrl']);
-        $dataTable->filter('Piwik\Plugins\Referrers\DataTable\Filter\UrlsForSocial');
+        $dataTable->filter('Matomo\Plugins\Referrers\DataTable\Filter\UrlsForSocial');
         $dataTable->queueFilter('ReplaceColumnNames');
         return $dataTable;
     }
@@ -920,7 +920,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getEntryPageUrlsForAIAssistant($idSite, string $period, string $date, ?string $segment = null, ?int $idSubtable = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $aiAssistants = $this->getAIAssistants($idSite, $period, $date, $segment);
         $aiAssistants->applyQueuedFilters();
         $row       = $aiAssistants->getRowFromIdSubDataTable($idSubtable);
@@ -934,7 +934,7 @@ class API extends \Piwik\Plugin\API
 
         $dataTable->filter('AddSegmentByLabel', ['entryPageUrl']);
         $dataTable->queueFilter('PrependSegment', ['referrerName==' . $assistant . ';referrerType==ai;']);
-        $dataTable->filter('Piwik\Plugins\Referrers\DataTable\Filter\UrlsForAIAssistant');
+        $dataTable->filter('Matomo\Plugins\Referrers\DataTable\Filter\UrlsForAIAssistant');
         $dataTable->queueFilter('ReplaceColumnNames');
         return $dataTable;
     }
@@ -962,7 +962,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getEntryPageTitlesForAIAssistant($idSite, string $period, string $date, ?string $segment = null, ?int $idSubtable = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $aiAssistants = $this->getAIAssistants($idSite, $period, $date, $segment);
         $aiAssistants->applyQueuedFilters();
         $row       = $aiAssistants->getRowFromIdSubDataTable($idSubtable);
@@ -1147,7 +1147,7 @@ class API extends \Piwik\Plugin\API
      */
     private function getNumeric(string $name, $idSite, string $period, string $date, ?string $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         return $archive->getDataTableFromNumeric($name);
     }
@@ -1241,7 +1241,7 @@ class API extends \Piwik\Plugin\API
                 }
 
                 if ($newTable->getRowsCount()) {
-                    $newTable->filter('Piwik\Plugins\Referrers\DataTable\Filter\UrlsForSocial');
+                    $newTable->filter('Matomo\Plugins\Referrers\DataTable\Filter\UrlsForSocial');
                     $row->setSubtable($newTable);
                 }
             }

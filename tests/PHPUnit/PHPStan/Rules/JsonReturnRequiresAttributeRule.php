@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -61,7 +61,7 @@ class JsonReturnRequiresAttributeRule implements Rule
         return [
             RuleErrorBuilder::message(sprintf(
                 'Controller action %s() returns a JSON response but is not marked'
-                . ' #[\\Piwik\\Http\\JsonResponse]. Add the attribute so Matomo applies the JSON'
+                . ' #[\Matomo\Http\JsonResponse]. Add the attribute so Matomo applies the JSON'
                 . ' Content-Type after the action; do not send the header manually.',
                 $node->name->toString()
             ))

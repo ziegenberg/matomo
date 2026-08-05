@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Categories;
+namespace Matomo\Plugins\Goals\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class ManageGoalsSubcategory extends Subcategory
 {
@@ -21,7 +21,7 @@ class ManageGoalsSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Goals_ManageGoalsSubcategoryHelp1') . '</p>'
-            . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/tracking-goals-web-analytics/') . Piwik::translate('Goals_ManageGoalsSubcategoryHelp2') . '</a></p>';
+        return '<p>' . Matomo::translate('Goals_ManageGoalsSubcategoryHelp1') . '</p>'
+            . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/tracking-goals-web-analytics/') . Matomo::translate('Goals_ManageGoalsSubcategoryHelp2') . '</a></p>';
     }
 }

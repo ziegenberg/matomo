@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class Regex extends BaseValidator
 {
@@ -20,7 +20,7 @@ class Regex extends BaseValidator
         }
 
         if (@preg_match($value, '') === false) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorNoValidRegex', array($value)));
+            throw new Exception(Matomo::translate('General_ValidatorErrorNoValidRegex', array($value)));
         }
     }
 }

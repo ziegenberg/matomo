@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker;
+namespace Matomo\Plugins\CustomJsTracker;
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     public function schedule()
     {
@@ -20,7 +20,7 @@ class Tasks extends \Piwik\Plugin\Tasks
 
     public function updateTracker()
     {
-        $updater = StaticContainer::get('Piwik\Plugins\CustomJsTracker\TrackerUpdater');
+        $updater = StaticContainer::get('Matomo\Plugins\CustomJsTracker\TrackerUpdater');
         $updater->update();
     }
 }

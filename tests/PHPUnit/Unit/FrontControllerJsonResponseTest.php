@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Common;
-use Piwik\FrontController;
-use Piwik\Http\JsonResponse;
+use Matomo\Common;
+use Matomo\FrontController;
+use Matomo\Http\JsonResponse;
 
 /**
  * @group Core

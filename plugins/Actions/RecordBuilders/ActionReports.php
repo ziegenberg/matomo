@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\RecordBuilders;
+namespace Matomo\Plugins\Actions\RecordBuilders;
 
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\Cache;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics as PiwikMetrics;
-use Piwik\Plugins\Actions\Archiver;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\Actions\Metrics;
-use Piwik\RankingQuery;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\Cache;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics as PiwikMetrics;
+use Matomo\Plugins\Actions\Archiver;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\Actions\Metrics;
+use Matomo\RankingQuery;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
 
 class ActionReports extends ArchiveProcessor\RecordBuilder
 {
@@ -891,7 +891,7 @@ class ActionReports extends ArchiveProcessor\RecordBuilder
         $site = $archiveProcessor->getParams()->getSite();
 
         if (
-            !\Piwik\Common::isGoalPluginEnabled() ||
+            !\Matomo\Common::isGoalPluginEnabled() ||
             GeneralConfig::getConfigValue('disable_archive_actions_goals', $site->getId())
         ) {
             return;

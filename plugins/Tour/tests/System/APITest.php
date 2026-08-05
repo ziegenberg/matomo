@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\tests\System;
+namespace Matomo\Plugins\Tour\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Piwik;
-use Piwik\Plugins\Tour\Engagement\Challenge;
-use Piwik\Plugins\Tour\tests\Fixtures\SimpleFixtureTrackFewVisits;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\Matomo;
+use Matomo\Plugins\Tour\Engagement\Challenge;
+use Matomo\Plugins\Tour\tests\Fixtures\SimpleFixtureTrackFewVisits;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Tour
@@ -80,7 +80,7 @@ class APITest extends SystemTestCase
 
     public function testGetLevelWhenNothingCompleted()
     {
-        Piwik::addAction('API.Tour.getChallenges.end', function (&$challenges) {
+        Matomo::addAction('API.Tour.getChallenges.end', function (&$challenges) {
             foreach ($challenges as &$challenge) {
                 $challenge['isSkipped'] = false;
                 $challenge['isCompleted'] = false;

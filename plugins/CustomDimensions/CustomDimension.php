@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions;
+namespace Matomo\Plugins\CustomDimensions;
 
-use Piwik\Columns\Dimension;
-use Piwik\Plugins\CustomDimensions\Dao\AutoSuggest;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
-use Piwik\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
+use Matomo\Columns\Dimension;
+use Matomo\Plugins\CustomDimensions\Dao\AutoSuggest;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
 
 class CustomDimension extends Dimension
 {

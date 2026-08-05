@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -40,8 +40,8 @@ class JsonResponseAttributePlacementRule implements Rule
         if (!JsonResponseRuleHelper::isControllerScope($scope)) {
             return [
                 RuleErrorBuilder::message(sprintf(
-                    'Attribute #[\\Piwik\\Http\\JsonResponse] has no effect on %s(); it is only applied'
-                    . ' to controller actions (methods of a Piwik\\Plugin\\Controller subclass).',
+                    'Attribute #[\Matomo\Http\JsonResponse] has no effect on %s(); it is only applied'
+                    . ' to controller actions (methods of a Matomo\Plugin\Controller subclass).',
                     $methodName
                 ))
                     ->identifier('matomo.jsonResponse.notInController')
@@ -53,7 +53,7 @@ class JsonResponseAttributePlacementRule implements Rule
         if (!$node->isPublic()) {
             return [
                 RuleErrorBuilder::message(sprintf(
-                    'Attribute #[\\Piwik\\Http\\JsonResponse] must be applied to a public controller'
+                    'Attribute #[\Matomo\Http\JsonResponse] must be applied to a public controller'
                     . ' action, but %s() is not public.',
                     $methodName
                 ))

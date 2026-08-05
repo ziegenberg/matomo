@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Unit;
+namespace Matomo\Plugins\CoreHome\tests\Unit;
 
-use Piwik\Plugin\ThemeStyles;
-use Piwik\Plugins\CoreHome\CoreHome;
+use Matomo\Plugin\ThemeStyles;
+use Matomo\Plugins\CoreHome\CoreHome;
 
 /**
  * @group CoreHome

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Http;
+namespace Matomo\Http;
 
 use DI\FactoryInterface;
-use Piwik\Exception\ThingNotFoundException;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugin\WidgetsProvider;
+use Matomo\Exception\ThingNotFoundException;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugin\WidgetsProvider;
 
 /**
  * Resolves the controller that will handle the request.
@@ -60,12 +60,12 @@ class ControllerResolver
 
     private function createPluginController($module, $action)
     {
-        $controllerClass = "Piwik\\Plugins\\$module\\Controller";
+        $controllerClass = "Matomo\\Plugins\\{$module}\\Controller";
         if (!class_exists($controllerClass)) {
             return null;
         }
 
-        /** @var \Piwik\Plugin\Controller $controller */
+        /** @var \Matomo\Plugin\Controller $controller */
         $controller = $this->abstractFactory->make($controllerClass);
 
         $action = $action ?: $controller->getDefaultAction();
@@ -105,6 +105,6 @@ class ControllerResolver
 
     private function createCoreHomeController()
     {
-        return $this->abstractFactory->make('Piwik\Plugins\CoreHome\Controller');
+        return $this->abstractFactory->make('Matomo\Plugins\CoreHome\Controller');
     }
 }

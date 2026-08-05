@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\DataTable\BaseFilter;
 
 /**
  * Executes a callback for each row of a {@link DataTable} and adds the result as a new
@@ -18,7 +18,7 @@ use Piwik\DataTable\BaseFilter;
  *
  * **Basic usage example**
  *
- *     $dataTable->filter('ColumnCallbackAddMetadata', array('label', 'logo', 'Piwik\Plugins\MyPlugin\getLogoFromLabel'));
+ *     $dataTable->filter('ColumnCallbackAddMetadata', array('label', 'logo', 'Matomo\Plugins\MyPlugin\getLogoFromLabel'));
  *
  * @api
  */

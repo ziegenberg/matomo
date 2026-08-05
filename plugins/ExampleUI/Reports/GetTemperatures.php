@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI\Reports;
+namespace Matomo\Plugins\ExampleUI\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 /**
  * This class defines a new report.
@@ -27,7 +27,7 @@ class GetTemperatures extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('ExampleUI_GetTemperaturesDataTable');
+        $this->name = Matomo::translate('ExampleUI_GetTemperaturesDataTable');
         $this->documentation = 'This is an example documentation of a report.';
         $this->subcategoryId = 'ExampleUI_GetTemperaturesDataTable';
         $this->order = 110;

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Settings;
+namespace Matomo\Plugins\PrivacyManager\Settings;
 
-use Piwik\Piwik;
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Settings\Interfaces\CustomSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Policy\CnilPolicy;
+use Matomo\Matomo;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Settings\Interfaces\CustomSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Policy\CnilPolicy;
 
 /**
  * @implements CustomSettingInterface<int|null>
@@ -60,18 +60,18 @@ class IPAnonymisation implements CustomSettingInterface, PolicyComparisonInterfa
 
     public static function getTitle(): string
     {
-        return Piwik::translate('PrivacyManager_AnonymizeIpPolicySettingTitle');
+        return Matomo::translate('PrivacyManager_AnonymizeIpPolicySettingTitle');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
         // TODO add dynamic messaging
-        return Piwik::translate('PrivacyManager_AnonymizeIpPolicySettingRequirementNote');
+        return Matomo::translate('PrivacyManager_AnonymizeIpPolicySettingRequirementNote');
     }
 
     public static function getInlineHelp(): string
     {
-        return Piwik::translate('PrivacyManager_AnonymizeIpInlineHelp');
+        return Matomo::translate('PrivacyManager_AnonymizeIpInlineHelp');
     }
 
     public static function getPolicyRequirements(): array

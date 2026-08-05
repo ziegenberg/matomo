@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\PrivacyManager\tests\Unit;
+namespace Matomo\Plugins\PrivacyManager\tests\Unit;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\Contents\Columns\Metrics\InteractionRate;
-use Piwik\Plugins\PrivacyManager\DataRounding;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\Contents\Columns\Metrics\InteractionRate;
+use Matomo\Plugins\PrivacyManager\DataRounding;
 
 /**
  * @group PrivacyManager
@@ -425,8 +425,8 @@ class DataRoundingTest extends \PHPUnit\Framework\TestCase
             'nb_actions' => 21,
             'revenue' => 18.75,
         ], [
-            'nb_actions' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'revenue' => \Piwik\Columns\Dimension::TYPE_MONEY,
+            'nb_actions' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'revenue' => \Matomo\Columns\Dimension::TYPE_MONEY,
         ]);
 
         $this->assertSame(20, $rounded['nb_actions']);
@@ -445,14 +445,14 @@ class DataRoundingTest extends \PHPUnit\Framework\TestCase
             'max_event_value' => 21,
             'nb_actions' => 21,
         ], [
-            'max_actions' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'max_actions_returning' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'max_actions_human' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'max_time_network' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'max_time_generation' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'max_bandwidth' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'max_event_value' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'nb_actions' => \Piwik\Columns\Dimension::TYPE_NUMBER,
+            'max_actions' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'max_actions_returning' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'max_actions_human' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'max_time_network' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'max_time_generation' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'max_bandwidth' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'max_event_value' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'nb_actions' => \Matomo\Columns\Dimension::TYPE_NUMBER,
         ]);
 
         $this->assertSame(21, $rounded['max_actions']);
@@ -591,9 +591,9 @@ class DataRoundingTest extends \PHPUnit\Framework\TestCase
             'sum_bandwidth' => 7148,
             'nb_visits' => 16,
         ], [
-            'entry_sum_visit_length' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'sum_bandwidth' => \Piwik\Columns\Dimension::TYPE_NUMBER,
-            'nb_visits' => \Piwik\Columns\Dimension::TYPE_NUMBER,
+            'entry_sum_visit_length' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'sum_bandwidth' => \Matomo\Columns\Dimension::TYPE_NUMBER,
+            'nb_visits' => \Matomo\Columns\Dimension::TYPE_NUMBER,
         ]);
 
         $this->assertSame(14, $rounded['entry_sum_visit_length']);

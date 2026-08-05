@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Import a same visitor, over three different days, in reverse chronological order

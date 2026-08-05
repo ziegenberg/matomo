@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\RecordBuilders;
+namespace Matomo\Plugins\Events\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\Events\Archiver;
-use Piwik\RankingQuery;
-use Piwik\Tracker\Action;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\Events\Archiver;
+use Matomo\RankingQuery;
+use Matomo\Tracker\Action;
 
 class EventReports extends RecordBuilder
 {

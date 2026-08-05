@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Unit;
+namespace Matomo\Plugins\CoreVisualizations\tests\Unit;
 
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 /**
  * @group CoreVisualizations
@@ -130,7 +130,7 @@ class GraphTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @return \Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar
+     * @return \Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar
      */
     private function getMockGraph(array $firstDataRow)
     {
@@ -140,7 +140,7 @@ class GraphTest extends \PHPUnit\Framework\TestCase
         $dataTable = new DataTable();
         $dataTable->setRows(array($row));
 
-        $bar = $this->getMockBuilder('Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar')
+        $bar = $this->getMockBuilder('Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar')
             ->setMethods(['getDataTable'])
             ->setConstructorArgs(['', ''])
             ->getMock();

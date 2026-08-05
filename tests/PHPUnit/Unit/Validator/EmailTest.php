@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation\Loader;
+namespace Matomo\Tests\Unit\Translation\Loader;
 
-use Piwik\Validators\Email;
+use Matomo\Validators\Email;
 
 /**
  * @group Validator
@@ -42,7 +42,7 @@ class EmailTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateFailValueIsNotValidEmail($email)
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('ValidatorErrorNotEmailLike');
 
         $this->validate($email);

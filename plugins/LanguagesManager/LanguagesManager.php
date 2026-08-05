@@ -9,28 +9,28 @@
  *
  */
 
-namespace Piwik\Plugins\LanguagesManager;
+namespace Matomo\Plugins\LanguagesManager;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Cookie;
-use Piwik\Intl\Locale;
-use Piwik\Nonce;
-use Piwik\Piwik;
-use Piwik\ProxyHttp;
-use Piwik\Translation\Translator;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Cookie;
+use Matomo\Intl\Locale;
+use Matomo\Nonce;
+use Matomo\Matomo;
+use Matomo\ProxyHttp;
+use Matomo\Translation\Translator;
+use Matomo\View;
 
-class LanguagesManager extends \Piwik\Plugin
+class LanguagesManager extends \Matomo\Plugin
 {
     public const LANGUAGE_SELECTION_NONCE = 'LanguagesManager.selection';
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -104,7 +104,7 @@ class LanguagesManager extends \Piwik\Plugin
     public function initLanguage()
     {
         /** @var Translator $translator */
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
 
         $language = Common::getRequestVar('language', '', 'string');
         if (empty($language)) {
@@ -149,7 +149,7 @@ class LanguagesManager extends \Piwik\Plugin
     public static function uses12HourClockForCurrentUser()
     {
         try {
-            $currentUser = Piwik::getCurrentUserLogin();
+            $currentUser = Matomo::getCurrentUserLogin();
             return Request::processRequest('LanguagesManager.uses12HourClockForUser', array('login' => $currentUser));
         } catch (Exception $e) {
             return false;
@@ -166,7 +166,7 @@ class LanguagesManager extends \Piwik\Plugin
             $languageCode = Common::extractLanguageAndRegionCodeFromBrowserLanguage(Common::getBrowserLanguage(), API::getInstance()->getAvailableLanguages());
         }
         if (!is_string($languageCode) || !API::getInstance()->isLanguageAvailable($languageCode)) {
-            $languageCode = StaticContainer::get('Piwik\Translation\Translator')->getDefaultLanguage();
+            $languageCode = StaticContainer::get('Matomo\Translation\Translator')->getDefaultLanguage();
         }
         return $languageCode;
     }
@@ -196,7 +196,7 @@ class LanguagesManager extends \Piwik\Plugin
         }
 
         try {
-            $currentUser = Piwik::getCurrentUserLogin();
+            $currentUser = Matomo::getCurrentUserLogin();
             return API::getInstance()->getLanguageForUser($currentUser);
         } catch (Exception $e) {
             return false;

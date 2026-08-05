@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific;
+namespace Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
-use Piwik\Plugins\Goals\Goals;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
+use Matomo\Plugins\Goals\Goals;
 
 /**
  * Attributed Revenue for a specific goal.
@@ -31,12 +31,12 @@ class RevenueEntry extends GoalSpecificProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate(Piwik::translate('Goals_NRevenue'), $this->getGoalName());
+        return Matomo::translate(Matomo::translate('Goals_NRevenue'), $this->getGoalName());
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('Goals_ColumnRevenueAttributedDocumentation', $this->getGoalNameForDocs());
+        return Matomo::translate('Goals_ColumnRevenueAttributedDocumentation', $this->getGoalNameForDocs());
     }
 
     public function getDependentMetrics()

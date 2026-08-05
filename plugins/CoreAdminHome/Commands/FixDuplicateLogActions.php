@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\Actions;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Date;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\CoreAdminHome\Model\DuplicateActionRemover;
-use Piwik\Timer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\Actions;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Date;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\CoreAdminHome\Model\DuplicateActionRemover;
+use Matomo\Timer;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Finds duplicate actions rows in log_action and removes them. Fixes references to duplicate
@@ -69,7 +69,7 @@ class FixDuplicateLogActions extends ConsoleCommand
     ) {
         parent::__construct();
 
-        $this->archiveInvalidator = $invalidator ?: StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+        $this->archiveInvalidator = $invalidator ?: StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
         $this->duplicateActionRemover = $duplicateActionRemover ?: new DuplicateActionRemover();
         $this->actionsAccess = $actionsAccess ?: new Actions();
         $this->logger = $logger ?: StaticContainer::get(LoggerInterface::class);

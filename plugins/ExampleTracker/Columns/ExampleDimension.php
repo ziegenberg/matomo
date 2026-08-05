@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleTracker\Columns;
+namespace Matomo\Plugins\ExampleTracker\Columns;
 
-use Piwik\Columns\Dimension;
+use Matomo\Columns\Dimension;
 
 /**
  * This example dimension only defines a name and does not track any data. It's supposed to be only used in reports.

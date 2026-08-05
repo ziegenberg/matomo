@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable;
+namespace Matomo\DataTable;
 
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 /**
- * A {@link Piwik\DataTable} where every row has two columns: **label** and **value**.
+ * A {@link Matomo\DataTable} where every row has two columns: **label** and **value**.
  *
  * Simple DataTables are only used to slightly alter the output of some renderers
  * (notably the XML renderer).

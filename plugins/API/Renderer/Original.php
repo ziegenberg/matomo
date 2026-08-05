@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Renderer;
+namespace Matomo\Plugins\API\Renderer;
 
-use Piwik\API\ApiRenderer;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\Plugins\Monolog\Processor\ExceptionToTextProcessor;
+use Matomo\API\ApiRenderer;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\Plugins\Monolog\Processor\ExceptionToTextProcessor;
 
 class Original extends ApiRenderer
 {

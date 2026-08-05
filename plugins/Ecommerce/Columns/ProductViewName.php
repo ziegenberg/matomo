@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Columns;
+namespace Matomo\Plugins\Ecommerce\Columns;
 
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\Join\ActionNameJoin;
-use Piwik\Common;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CustomVariables\Tracker\CustomVariablesRequestProcessor;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\Join\ActionNameJoin;
+use Matomo\Common;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CustomVariables\Tracker\CustomVariablesRequestProcessor;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TableLogAction;
 
 class ProductViewName extends ActionDimension
 {

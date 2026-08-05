@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\KeywordwithNoSearchResult;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
-use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\KeywordwithNoSearchResult;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
+use Matomo\Plugins\Actions\Columns\Metrics\BounceRate;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
 
 class GetSiteSearchNoResultKeywords extends SiteSearchBase
 {
@@ -23,8 +23,8 @@ class GetSiteSearchNoResultKeywords extends SiteSearchBase
     {
         parent::init();
         $this->dimension     = new KeywordwithNoSearchResult();
-        $this->name          = Piwik::translate('Actions_WidgetSearchNoResultKeywords');
-        $this->documentation = Piwik::translate('Actions_SiteSearchIntro') . '<br /><br />' . Piwik::translate('Actions_SiteSearchKeywordsNoResultDocumentation');
+        $this->name          = Matomo::translate('Actions_WidgetSearchNoResultKeywords');
+        $this->documentation = Matomo::translate('Actions_SiteSearchIntro') . '<br /><br />' . Matomo::translate('Actions_SiteSearchKeywordsNoResultDocumentation');
         $this->metrics       = array('nb_visits');
         $this->processedMetrics = array(
             new AverageTimeOnPage(),
@@ -40,22 +40,22 @@ class GetSiteSearchNoResultKeywords extends SiteSearchBase
     public function getMetrics()
     {
         return array(
-            'nb_visits' => Piwik::translate('Actions_ColumnSearches'),
+            'nb_visits' => Matomo::translate('Actions_ColumnSearches'),
         );
     }
 
     public function getProcessedMetrics()
     {
         return array(
-            'exit_rate' => Piwik::translate('Actions_ColumnSearchExits'),
+            'exit_rate' => Matomo::translate('Actions_ColumnSearchExits'),
         );
     }
 
     protected function getMetricsDocumentation()
     {
         return array(
-            'nb_visits' => Piwik::translate('Actions_ColumnSearchesDocumentation'),
-            'exit_rate' => Piwik::translate('Actions_ColumnSearchExitsDocumentation'),
+            'nb_visits' => Matomo::translate('Actions_ColumnSearchesDocumentation'),
+            'exit_rate' => Matomo::translate('Actions_ColumnSearchExitsDocumentation'),
         );
     }
 

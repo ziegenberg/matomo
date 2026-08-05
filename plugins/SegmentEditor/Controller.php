@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
-use Piwik\Piwik;
-use Piwik\Plugins\SegmentEditor;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorAPI;
-use Piwik\Request;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Matomo;
+use Matomo\Plugins\SegmentEditor;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorAPI;
+use Matomo\Request;
+use Matomo\Url;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     /** The requested period */
     protected $period;
@@ -32,7 +32,7 @@ class Controller extends \Piwik\Plugin\Controller
         $this->strDate = Request::fromRequest()->getStringParameter('date', 'yesterday');
         $this->currentSegmentDefinition = Request::fromRequest()->getStringParameter('segment', '');
         $this->checkSitePermission();
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
     }
 
     public function manageSegments(): string
@@ -46,7 +46,7 @@ class Controller extends \Piwik\Plugin\Controller
 
         $allVisitsSegment = [
             'definition' => '',
-            'name' => Piwik::translate('SegmentEditor_DefaultAllVisits'),
+            'name' => Matomo::translate('SegmentEditor_DefaultAllVisits'),
             'fixed' => true,
             'starred' => false,
         ];
@@ -133,7 +133,7 @@ class Controller extends \Piwik\Plugin\Controller
         );
         $translations = array();
         foreach ($translationKeys as $key) {
-            $translations[$key] = Piwik::translate($key);
+            $translations[$key] = Matomo::translate($key);
         }
         return $translations;
     }

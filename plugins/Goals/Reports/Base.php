@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Reports;
+namespace Matomo\Plugins\Goals\Reports;
 
-use Piwik\API\Request;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\API\Request;
+use Matomo\Matomo;
+use Matomo\Url;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     protected $orderGoal = 50;
 
@@ -38,9 +38,9 @@ abstract class Base extends \Piwik\Plugin\Report
 
         // for goal overview
         if ($isGoalSummaryReport) {
-            $this->name = Piwik::translate('Goals_GoalsOverview');
+            $this->name = Matomo::translate('Goals_GoalsOverview');
         } else {
-            $this->name = $goalNameFormatter(['name' => Piwik::translate('Goals_GoalsOverview')]);
+            $this->name = $goalNameFormatter(['name' => Matomo::translate('Goals_GoalsOverview')]);
         }
         $this->parameters = ['idGoal' => 0];
         $this->order = $this->orderGoal;

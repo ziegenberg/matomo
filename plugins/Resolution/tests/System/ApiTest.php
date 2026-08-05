@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution\tests\System;
+namespace Matomo\Plugins\Resolution\tests\System;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\Plugins\PrivacyManager\FeatureFlags\PrivacyCompliance;
-use Piwik\Plugins\Resolution\tests\Fixtures\TwoSitesWithResolutions;
-use Piwik\Policy\PolicyManager;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\Plugins\PrivacyManager\FeatureFlags\PrivacyCompliance;
+use Matomo\Plugins\Resolution\tests\Fixtures\TwoSitesWithResolutions;
+use Matomo\Policy\PolicyManager;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Plugins

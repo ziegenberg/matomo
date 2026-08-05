@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Plugins\UsersManager\Model as UsersManagerModel;
-use Piwik\Tests\Fixtures\ThreeSitesWithSharedVisitors;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Plugins\UsersManager\Model as UsersManagerModel;
+use Matomo\Tests\Fixtures\ThreeSitesWithSharedVisitors;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Core

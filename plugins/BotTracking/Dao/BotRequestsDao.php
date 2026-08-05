@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Dao;
+namespace Matomo\Plugins\BotTracking\Dao;
 
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Tracker\Action;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Tracker\Action;
 
 class BotRequestsDao
 {

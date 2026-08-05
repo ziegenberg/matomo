@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Measurable\Type;
+namespace Matomo\Measurable\Type;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Measurable\Type;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Measurable\Type;
 
 class TypeManager
 {
@@ -20,7 +20,7 @@ class TypeManager
      */
     public function getAllTypes()
     {
-        $components = PluginManager::getInstance()->findComponents('Type', '\\Piwik\\Measurable\\Type');
+        $components = PluginManager::getInstance()->findComponents('Type', '\Matomo\Measurable\Type');
 
         $instances = array();
         foreach ($components as $component) {

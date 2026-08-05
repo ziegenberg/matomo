@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Db;
+namespace Matomo\Db;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\ExceptionHandler;
-use Piwik\Log;
-use Piwik\SettingsServer;
-use Piwik\SettingsPiwik;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\ExceptionHandler;
+use Matomo\Log;
+use Matomo\SettingsServer;
+use Matomo\SettingsPiwik;
 
 class BatchInsert
 {

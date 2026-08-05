@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin\Dimension;
+namespace Matomo\Plugin\Dimension;
 
-use Piwik\CacheId;
-use Piwik\Cache as PiwikCache;
-use Piwik\Columns\Dimension;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugin;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\CacheId;
+use Matomo\Cache as PiwikCache;
+use Matomo\Columns\Dimension;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugin;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 use Exception;
 
 /**
@@ -112,7 +112,7 @@ abstract class ActionDimension extends Dimension
      */
     public static function getDimensions(Plugin $plugin)
     {
-        $dimensions = $plugin->findMultipleComponents('Columns', '\\Piwik\\Plugin\\Dimension\\ActionDimension');
+        $dimensions = $plugin->findMultipleComponents('Columns', '\Matomo\Plugin\Dimension\ActionDimension');
         $instances  = array();
 
         foreach ($dimensions as $dimension) {

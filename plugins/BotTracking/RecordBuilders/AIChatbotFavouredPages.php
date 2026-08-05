@@ -9,22 +9,22 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\RecordBuilders;
+namespace Matomo\Plugins\BotTracking\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Db;
-use Piwik\Plugins\BotTracking\Archiver;
-use Piwik\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
-use Piwik\Plugins\BotTracking\DataTable\FavouredPagesScorer;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\RankingQuery;
-use Piwik\Tracker\Action;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Db;
+use Matomo\Plugins\BotTracking\Archiver;
+use Matomo\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
+use Matomo\Plugins\BotTracking\DataTable\FavouredPagesScorer;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\RankingQuery;
+use Matomo\Tracker\Action;
 
 /**
  * Builds the two flat blob records backing the Human-Favoured and AI-Favoured Pages reports, keyed by

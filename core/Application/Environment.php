@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Application;
+namespace Matomo\Application;
 
-use Piwik\Container\Container;
-use Piwik\Application\Kernel\EnvironmentValidator;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Application\Kernel\PluginList;
-use Piwik\Container\ContainerFactory;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
+use Matomo\Container\Container;
+use Matomo\Application\Kernel\EnvironmentValidator;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Application\Kernel\PluginList;
+use Matomo\Container\ContainerFactory;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
 
 /**
  * Encapsulates Piwik environment setup and access.
@@ -99,7 +99,7 @@ class Environment
 
         $this->invokeEnvironmentBootstrappedHook();
 
-        Piwik::postEvent('Environment.bootstrapped'); // this event should be removed eventually
+        Matomo::postEvent('Environment.bootstrapped'); // this event should be removed eventually
     }
 
     /**
@@ -185,7 +185,7 @@ class Environment
     private function validateEnvironment()
     {
         /** @var EnvironmentValidator $validator */
-        $validator = $this->container->get('Piwik\Application\Kernel\EnvironmentValidator');
+        $validator = $this->container->get('Matomo\Application\Kernel\EnvironmentValidator');
         $validator->validate();
     }
 

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\System;
+namespace Matomo\Plugins\TwoFactorAuth\tests\System;
 
-use Piwik\Plugins\TwoFactorAuth\tests\Fixtures\SimpleFixtureTrackFewVisits;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
-use Piwik\Plugins\TwoFactorAuth\SystemSettings;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication;
+use Matomo\Plugins\TwoFactorAuth\tests\Fixtures\SimpleFixtureTrackFewVisits;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
+use Matomo\Plugins\TwoFactorAuth\SystemSettings;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication;
 
 /**
  * @group TwoFactorAuth
@@ -60,9 +60,9 @@ class TwoFactorAuthTest extends SystemTestCase
     public function testOnRequestDispatchEndNotRequired()
     {
         $this->settings->twoFactorAuthRequired->setValue(true);
-        $html = '<html>' . Piwik::getCurrentUserTokenAuth() . '</html>';
-        $expected = '<html>' . Piwik::getCurrentUserTokenAuth() . '</html>';
-        Piwik::postEvent('Request.dispatch.end', array(&$html, 'module', 'action', array()));
+        $html = '<html>' . Matomo::getCurrentUserTokenAuth() . '</html>';
+        $expected = '<html>' . Matomo::getCurrentUserTokenAuth() . '</html>';
+        Matomo::postEvent('Request.dispatch.end', array(&$html, 'module', 'action', array()));
         $this->assertSame($expected, $html);
     }
 

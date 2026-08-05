@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Columns;
+namespace Matomo\Plugins\UserCountry\Columns;
 
-use Piwik\Common;
-use Piwik\Exception\InvalidRequestParameterException;
+use Matomo\Common;
+use Matomo\Exception\InvalidRequestParameterException;
 use Matomo\Network\IPUtils;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugins\UserCountry\VisitorGeolocator;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Request;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugins\UserCountry\VisitorGeolocator;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Request;
 
 abstract class Base extends VisitDimension
 {
@@ -81,7 +81,7 @@ abstract class Base extends VisitDimension
         return $userInfo;
     }
 
-    private function getIpAddress($anonymizedIp, \Piwik\Tracker\Request $request)
+    private function getIpAddress($anonymizedIp, \Matomo\Tracker\Request $request)
     {
         $privacyConfig = new PrivacyManagerConfig();
 

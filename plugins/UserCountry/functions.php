@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry;
+namespace Matomo\Plugins\UserCountry;
 
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Tracker\Visit;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Tracker\Visit;
 
 /**
  * Return the flag image path for a given country
@@ -44,9 +44,9 @@ function getFlagFromCode($code)
 function continentTranslate($label)
 {
     if ($label == 'unk' || $label == '') {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
-    return Piwik::translate('Intl_Continent_' . $label);
+    return Matomo::translate('Intl_Continent_' . $label);
 }
 
 /**
@@ -58,7 +58,7 @@ function continentTranslate($label)
 function countryTranslate($label)
 {
     if ($label == Visit::UNKNOWN_CODE || $label == '') {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     if (strtolower($label) == 'ti') {
@@ -67,7 +67,7 @@ function countryTranslate($label)
 
     // Try to get name from Intl plugin
     $key = 'Intl_Country_' . strtoupper($label);
-    $country = Piwik::translate($key);
+    $country = Matomo::translate($key);
 
     if ($country != $key) {
         return $country;
@@ -75,13 +75,13 @@ function countryTranslate($label)
 
     // Handle special country codes
     $key = 'UserCountry_country_' . $label;
-    $country = Piwik::translate($key);
+    $country = Matomo::translate($key);
 
     if ($country != $key) {
         return $country;
     }
 
-    return Piwik::translate('General_Unknown');
+    return Matomo::translate('General_Unknown');
 }
 
 /**
@@ -118,7 +118,7 @@ function getRegionNameFromCodes($countryCode, $regionCode)
     $name = GeoIp2::getRegionNameFromCodes($countryCode, $regionCode);
 
     // fallback if no translation with GeoIP2
-    if ($name == Piwik::translate('General_Unknown')) {
+    if ($name == Matomo::translate('General_Unknown')) {
         $name = getLegacyRegionNameFromCodes($countryCode, $regionCode);
     }
 
@@ -149,7 +149,7 @@ function getLegacyRegionNameFromCodes($countryCode, $regionCode)
     if (isset($regionNames[$countryCode][$regionCode])) {
         return $regionNames[$countryCode][$regionCode];
     } else {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 }
 
@@ -186,7 +186,7 @@ function getRegionName($label)
     }
 
     if ($label == '') {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     list($regionCode, $countryCode) = explode(Archiver::LOCATION_SEPARATOR, $label);
@@ -208,7 +208,7 @@ function getPrettyRegionName($label)
     }
 
     if ($label == '') {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     list($regionCode, $countryCode) = explode(Archiver::LOCATION_SEPARATOR, $label);
@@ -236,7 +236,7 @@ function getPrettyCityName($label)
     }
 
     if ($label == '') {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     // get city name, region code & country code
@@ -246,7 +246,7 @@ function getPrettyCityName($label)
     $countryCode = @$parts[2];
 
     if ($cityName == Visit::UNKNOWN_CODE || $cityName == '') {
-        $cityName = Piwik::translate('General_Unknown');
+        $cityName = Matomo::translate('General_Unknown');
     }
 
     $result = $cityName;

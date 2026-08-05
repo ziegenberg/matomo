@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\Integration;
+namespace Matomo\Plugins\SegmentEditor\tests\Integration;
 
-use Piwik\Plugins\SegmentEditor\SegmentFormatter;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SegmentEditor\SegmentFormatter;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group SegmentFormatterTest

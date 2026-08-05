@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Unit;
+namespace Matomo\Plugins\Referrers\tests\Unit;
 
-use Piwik\DataTable\Row;
-use Piwik\Plugins\Referrers\Columns\Metrics\VisitorsFromReferrerPercent;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\Referrers\Columns\Metrics\VisitorsFromReferrerPercent;
 
 /**
  * @group Referrers

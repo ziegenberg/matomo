@@ -7,12 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3.0 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Unit\Diagnostic;
-
-use Piwik\Legacy\DeprecatedNamespace;
-use Piwik\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageInformational;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Translation\Translator;
+namespace Matomo\Plugins\Diagnostics\tests\Unit\Diagnostic;
 
 /**
  * @group Diagnostics
@@ -21,20 +16,14 @@ use Piwik\Translation\Translator;
  */
 class DeprecatedNamespaceUsageInformationalTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        DeprecatedNamespace::reset();
-    }
-
     /**
      * Returns a translator mock that exposes the translation id and any
      * parameters so assertions can verify which key was used and that the
-     * dynamic plugin / class data was passed through.
+     * dynamic plugin name was passed through.
      */
-    private function makeTranslator(): Translator
+    private function makeTranslator(): \Matomo\Translation\Translator
     {
-        $translator = $this->createMock(Translator::class);
+        $translator = $this->createMock(\Matomo\Translation\Translator::class);
         $translator->method('translate')->willReturnCallback(function ($id, $args = []) {
             $args = is_array($args) ? $args : [$args];
 
@@ -44,31 +33,32 @@ class DeprecatedNamespaceUsageInformationalTest extends \PHPUnit\Framework\TestC
         return $translator;
     }
 
-    public function testExecuteWithNoRecordedUsageReturnsCleanInformationalResult()
+    public function testExecuteWithNoInjectedUsageReturnsCleanInformationalResult()
     {
-        $diagnostic = new DeprecatedNamespaceUsageInformational($this->makeTranslator(), []);
+        $diagnostic = new \Matomo\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageInformational(
+            $this->makeTranslator(),
+            []
+        );
 
         $results = $diagnostic->execute();
 
         $this->assertCount(1, $results);
         $this->assertSame('Diagnostics_DeprecatedNamespaceUsage', $results[0]->getLabel());
-        $this->assertSame(DiagnosticResult::STATUS_INFORMATIONAL, $results[0]->getItems()[0]->getStatus());
+        $this->assertSame(\Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult::STATUS_INFORMATIONAL, $results[0]->getItems()[0]->getStatus());
         $this->assertStringContainsString('Diagnostics_DeprecatedNamespaceUsageNone', $results[0]->getItems()[0]->getComment());
     }
 
-    public function testExecuteWithRecordedUsageReturnsOneResultPerPluginNamingItAndListingItsClasses()
+    public function testExecuteWithUsageReturnsOneResultPerPluginNamingItAndListingItsFiles()
     {
         $usage = [
-            'FooBar' => [
-                'Piwik\Foo' => 'Matomo\Foo',
-                'Piwik\Bar' => 'Matomo\Bar',
-            ],
-            'Baz' => [
-                'Piwik\Qux' => 'Matomo\Qux',
-            ],
+            'FooBar' => ['Controller.php', 'API.php'],
+            'Baz' => ['Service.php'],
         ];
 
-        $diagnostic = new DeprecatedNamespaceUsageInformational($this->makeTranslator(), $usage);
+        $diagnostic = new \Matomo\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageInformational(
+            $this->makeTranslator(),
+            $usage
+        );
 
         $results = $diagnostic->execute();
 
@@ -77,48 +67,60 @@ class DeprecatedNamespaceUsageInformationalTest extends \PHPUnit\Framework\TestC
 
         // Results are sorted by plugin name for stable output.
         $this->assertStringContainsString('Baz', $results[0]->getLabel());
-        $this->assertSame(DiagnosticResult::STATUS_INFORMATIONAL, $results[0]->getItems()[0]->getStatus());
+        $this->assertSame(\Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult::STATUS_INFORMATIONAL, $results[0]->getItems()[0]->getStatus());
         $comment = $results[0]->getItems()[0]->getComment();
-        $this->assertStringContainsString('Piwik\Qux', $comment);
-        $this->assertStringContainsString('Matomo\Qux', $comment);
+        $this->assertStringContainsString('Service.php', $comment);
+        $this->assertStringContainsString('1 file', $comment);
 
         $this->assertStringContainsString('FooBar', $results[1]->getLabel());
-        $this->assertSame(DiagnosticResult::STATUS_INFORMATIONAL, $results[1]->getItems()[0]->getStatus());
+        $this->assertSame(\Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult::STATUS_INFORMATIONAL, $results[1]->getItems()[0]->getStatus());
         $comment = $results[1]->getItems()[0]->getComment();
-        $this->assertStringContainsString('Piwik\Foo', $comment);
-        $this->assertStringContainsString('Matomo\Foo', $comment);
-        $this->assertStringContainsString('Piwik\Bar', $comment);
-        $this->assertStringContainsString('Matomo\Bar', $comment);
+        $this->assertStringContainsString('Controller.php', $comment);
+        $this->assertStringContainsString('API.php', $comment);
+        $this->assertStringContainsString('2 files', $comment);
     }
 
-    public function testExecuteAttributesUnattributableUsageToMatomoCore()
+    public function testExecuteSummarisesFilesBeyondTheListLimit()
     {
-        // Unattributed (core) usage is recorded under the empty-string key.
-        $usage = [
-            '' => [
-                'Piwik\Something' => 'Matomo\Something',
-            ],
-        ];
+        $files = [];
+        for ($i = 1; $i <= 7; $i++) {
+            $files[] = "File$i.php";
+        }
 
-        $diagnostic = new DeprecatedNamespaceUsageInformational($this->makeTranslator(), $usage);
+        $usage = ['Big' => $files];
+
+        $diagnostic = new \Matomo\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageInformational(
+            $this->makeTranslator(),
+            $usage
+        );
 
         $results = $diagnostic->execute();
 
         $this->assertCount(1, $results);
-        $this->assertStringContainsString('Diagnostics_DeprecatedNamespaceUsageCore', $results[0]->getLabel());
-        $this->assertStringContainsString('Piwik\Something', $results[0]->getItems()[0]->getComment());
+        $comment = $results[0]->getItems()[0]->getComment();
+        // Exactly the first five are listed by name.
+        $this->assertStringContainsString('File1.php', $comment);
+        $this->assertStringContainsString('File5.php', $comment);
+        $this->assertStringNotContainsString('File6.php', $comment);
+        // The rest are summarised as a count.
+        $this->assertStringContainsString('7 files', $comment);
+        $this->assertStringContainsString('2 more', $comment);
     }
 
-    public function testExecuteWithoutInjectedUsageReadsLiveFromDeprecatedNamespace()
+    public function testExecuteWithoutInjectedUsageReadsLiveFromScan()
     {
-        // No usage recorded live => clean entry, proving the null-injection
-        // fallback reads from DeprecatedNamespace::getRecordedUsage().
-        $diagnostic = new DeprecatedNamespaceUsageInformational($this->makeTranslator());
+        // No usage injected: the diagnostic falls back to a live scan of installed
+        // plugins. Whatever it returns, executing must not throw and must return
+        // an array of DiagnosticResult (either the clean row or per-plugin rows).
+        $diagnostic = new \Matomo\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageInformational(
+            $this->makeTranslator()
+        );
 
         $results = $diagnostic->execute();
 
-        $this->assertCount(1, $results);
-        $this->assertSame('Diagnostics_DeprecatedNamespaceUsage', $results[0]->getLabel());
-        $this->assertSame(DiagnosticResult::STATUS_INFORMATIONAL, $results[0]->getItems()[0]->getStatus());
+        $this->assertNotEmpty($results);
+        foreach ($results as $result) {
+            $this->assertInstanceOf(\Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult::class, $result);
+        }
     }
 }

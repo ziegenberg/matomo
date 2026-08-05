@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Emails;
+namespace Matomo\Plugins\CoreAdminHome\Emails;
 
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Url;
+use Matomo\View;
 
 class JsTrackingCodeMissingEmail extends Mail
 {
@@ -79,7 +79,7 @@ class JsTrackingCodeMissingEmail extends Mail
 
     protected function getDefaultSubject()
     {
-        return Piwik::translate('CoreAdminHome_MissingTrackingCodeEmailSubject', ["'" . Site::getNameFor($this->idSite) . "'"]);
+        return Matomo::translate('CoreAdminHome_MissingTrackingCodeEmailSubject', ["'" . Site::getNameFor($this->idSite) . "'"]);
     }
 
     protected function getDefaultBodyView()

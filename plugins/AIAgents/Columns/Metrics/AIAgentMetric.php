@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\Columns\Metrics;
+namespace Matomo\Plugins\AIAgents\Columns\Metrics;
 
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * Processed metric for AIAgents.get API method which just copies VisitsSummary.get
@@ -51,7 +51,7 @@ class AIAgentMetric extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate(self::TRANSLATIONS[$this->getName()]);
+        return Matomo::translate(self::TRANSLATIONS[$this->getName()]);
     }
 
     public function format($value, Formatter $formatter)

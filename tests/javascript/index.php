@@ -30,8 +30,8 @@ try {
     $mysql = false;
 }
 
-use \Piwik\Plugins\CustomJsTracker\TrackerUpdater;
-use \Piwik\Plugins\CustomJsTracker\TrackingCode\JsTestPluginTrackerFiles;
+use Matomo\Plugins\CustomJsTracker\TrackerUpdater;
+use Matomo\Plugins\CustomJsTracker\TrackingCode\JsTestPluginTrackerFiles;
 
 $targetFileName = '/tests/resources/matomo.test.js';
 $sourceFile = PIWIK_DOCUMENT_ROOT . TrackerUpdater::DEVELOPMENT_PIWIK_JS;
@@ -107,13 +107,13 @@ testTrackPageViewAsync();
 
     <?php
     include_once $root . '/core/Filesystem.php';
-    $files = \Piwik\Filesystem::globr($root . '/plugins/'.$testPluginPath.'/tests/javascript', 'head.php');
+    $files = \Matomo\Filesystem::globr($root . '/plugins/'.$testPluginPath.'/tests/javascript', 'head.php');
     foreach ($files as $file) {
         include_once $file;
     }
     if ($testPluginPath !== '*') {
         // CI would always include tag manager
-        $files = \Piwik\Filesystem::globr($root . '/plugins/TagManager/tests/javascript', 'head.php');
+        $files = \Matomo\Filesystem::globr($root . '/plugins/TagManager/tests/javascript', 'head.php');
         foreach ($files as $file) {
             include_once $file;
         }
@@ -5644,13 +5644,13 @@ function customAddEventListener(element, eventType, eventHandler, useCapture) {
 
 <?php
     include_once $root . '/core/Filesystem.php';
-    $files = \Piwik\Filesystem::globr($root . '/plugins/'.$testPluginPath.'/tests/javascript', 'index.php');
+    $files = \Matomo\Filesystem::globr($root . '/plugins/'.$testPluginPath.'/tests/javascript', 'index.php');
     foreach ($files as $file) {
         include_once $file;
     }
     if ($testPluginPath !== '*') {
         // CI would always include tag manager
-        $files = \Piwik\Filesystem::globr($root . '/plugins/TagManager/tests/javascript', 'index.php');
+        $files = \Matomo\Filesystem::globr($root . '/plugins/TagManager/tests/javascript', 'index.php');
         foreach ($files as $file) {
             include_once $file;
         }

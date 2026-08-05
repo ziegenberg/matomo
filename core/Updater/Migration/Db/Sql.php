@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Db;
+namespace Matomo\Updater\Migration\Db;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Updater\Migration\Db as DbMigration;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Updater\Migration\Db as DbMigration;
 
 /**
  * Executes a given SQL query.

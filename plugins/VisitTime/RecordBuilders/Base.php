@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\RecordBuilders;
+namespace Matomo\Plugins\VisitTime\RecordBuilders;
 
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\DataTable;
-use Piwik\Metrics;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\DataTable;
+use Matomo\Metrics;
 
 abstract class Base extends RecordBuilder
 {

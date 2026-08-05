@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Updater\Migration\Plugin;
+namespace Matomo\Tests\Integration\Updater\Migration\Plugin;
 
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Updater\Migration\Plugin\Activate;
-use Piwik\Updater\Migration\Plugin\Factory;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Updater\Migration\Plugin\Activate;
+use Matomo\Updater\Migration\Plugin\Factory;
 
 /**
  * @group Core

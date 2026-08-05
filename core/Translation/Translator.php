@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Translation;
+namespace Matomo\Translation;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\Piwik;
-use Piwik\Translation\Loader\LoaderInterface;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\Matomo;
+use Matomo\Translation\Loader\LoaderInterface;
 
 /**
  * Translates messages.
@@ -253,7 +253,7 @@ class Translator
          *
          * @param array &$result The whole list of client side translation keys.
          */
-        Piwik::postEvent('Translate.getClientSideTranslationKeys', array(&$result));
+        Matomo::postEvent('Translate.getClientSideTranslationKeys', array(&$result));
 
         $result = array_unique($result);
 

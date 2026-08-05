@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Commands;
+namespace Matomo\Plugins\UserCountry\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\UserCountry\VisitorGeolocator;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Timer;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\UserCountry\VisitorGeolocator;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Timer;
 
 class AttributeHistoricalDataWithLocations extends ConsoleCommand
 {
@@ -164,7 +164,7 @@ class AttributeHistoricalDataWithLocations extends ConsoleCommand
         $dateRangeString = $this->getInput()->getArgument(self::DATES_RANGE_ARGUMENT);
 
         $dates = explode(',', $dateRangeString);
-        $dates = array_map(array('Piwik\Date', 'factory'), $dates);
+        $dates = array_map(array('Matomo\Date', 'factory'), $dates);
 
         if (count($dates) != 2) {
             throw new \InvalidArgumentException('Invalid date range supplied: ' . $dateRangeString);

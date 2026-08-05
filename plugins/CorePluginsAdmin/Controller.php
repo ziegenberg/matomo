@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin;
+namespace Matomo\Plugins\CorePluginsAdmin;
 
 use Exception;
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\MissingFilePermissionException;
-use Piwik\ExceptionHandler;
-use Piwik\Filechecks;
-use Piwik\Filesystem;
-use Piwik\Nonce;
-use Piwik\Notification;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\CorePluginsAdmin\Model\TagManagerTeaser;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\Marketplace\Marketplace;
-use Piwik\Plugins\Marketplace\Controller as MarketplaceController;
-use Piwik\Plugins\Marketplace\Plugins;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Translation\Translator;
-use Piwik\Url;
-use Piwik\Version;
-use Piwik\View;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\MissingFilePermissionException;
+use Matomo\ExceptionHandler;
+use Matomo\Filechecks;
+use Matomo\Filesystem;
+use Matomo\Nonce;
+use Matomo\Notification;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\CorePluginsAdmin\Model\TagManagerTeaser;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\Marketplace\Marketplace;
+use Matomo\Plugins\Marketplace\Controller as MarketplaceController;
+use Matomo\Plugins\Marketplace\Plugins;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Translation\Translator;
+use Matomo\Url;
+use Matomo\Version;
+use Matomo\View;
 
 class Controller extends Plugin\ControllerAdmin
 {
@@ -78,7 +78,7 @@ class Controller extends Plugin\ControllerAdmin
             $this->marketplacePlugins = $marketplacePlugins;
         } elseif (Marketplace::isMarketplaceEnabled()) {
             // we load it manually as marketplace might not be loaded
-            $this->marketplacePlugins = StaticContainer::get('Piwik\Plugins\Marketplace\Plugins');
+            $this->marketplacePlugins = StaticContainer::get('Matomo\Plugins\Marketplace\Plugins');
         }
 
         parent::__construct();
@@ -87,7 +87,7 @@ class Controller extends Plugin\ControllerAdmin
     public function uploadPlugin()
     {
         $this->dieIfPluginsAdminIsDisabled();
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!CorePluginsAdmin::isPluginUploadEnabled()) {
             throw new \Exception('Plugin upload disabled by config');
@@ -97,8 +97,8 @@ class Controller extends Plugin\ControllerAdmin
 
         if (
             !$this->passwordVerify->isPasswordCorrect(
-                Piwik::getCurrentUserLogin(),
-                \Piwik\Request::fromRequest()->getStringParameter('confirmPassword')
+                Matomo::getCurrentUserLogin(),
+                \Matomo\Request::fromRequest()->getStringParameter('confirmPassword')
             )
         ) {
             throw new \Exception($this->translator->translate('Login_LoginPasswordNotCorrect'));
@@ -135,9 +135,9 @@ class Controller extends Plugin\ControllerAdmin
     public function tagManagerTeaser()
     {
         $this->dieIfPluginsAdminIsDisabled();
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
-        $tagManagerTeaser = new TagManagerTeaser(Piwik::getCurrentUserLogin());
+        $tagManagerTeaser = new TagManagerTeaser(Matomo::getCurrentUserLogin());
 
         if (!$tagManagerTeaser->shouldShowTeaser()) {
             $this->redirectToIndex('CoreHome', 'index');
@@ -145,13 +145,13 @@ class Controller extends Plugin\ControllerAdmin
         }
 
         $nonce = '';
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $nonce = Nonce::getNonce(static::ACTIVATE_NONCE);
         }
 
         $view = new View('@CorePluginsAdmin/tagManagerTeaser');
         $this->setGeneralVariablesView($view);
-        $view->contactEmail = implode(',', Piwik::getContactEmailAddresses());
+        $view->contactEmail = implode(',', Matomo::getContactEmailAddresses());
         $view->nonce = $nonce;
         return $view->render();
     }
@@ -159,11 +159,11 @@ class Controller extends Plugin\ControllerAdmin
     public function disableActivateTagManagerPage()
     {
         $this->dieIfPluginsAdminIsDisabled();
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
-        $tagManagerTeaser = new TagManagerTeaser(Piwik::getCurrentUserLogin());
+        $tagManagerTeaser = new TagManagerTeaser(Matomo::getCurrentUserLogin());
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $tagManagerTeaser->disableGlobally();
         } else {
             $tagManagerTeaser->disableForUser();
@@ -175,7 +175,7 @@ class Controller extends Plugin\ControllerAdmin
 
     private function dieIfPluginsAdminIsDisabled()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
         if (!CorePluginsAdmin::isPluginsAdminEnabled()) {
             throw new \Exception('Enabling, disabling and uninstalling plugins has been disabled by Piwik admins.
             Please contact your Piwik admins with your request so they can assist you.');
@@ -184,7 +184,7 @@ class Controller extends Plugin\ControllerAdmin
 
     private function createPluginsOrThemesView($template, $themesOnly)
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $view = $this->configureView('@CorePluginsAdmin/' . $template);
 
@@ -242,7 +242,7 @@ class Controller extends Plugin\ControllerAdmin
 
     protected function configureView($template)
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $view = new View($template);
         $this->setBasicVariablesView($view);
@@ -363,11 +363,11 @@ class Controller extends Plugin\ControllerAdmin
                 $errorMessage .= $lastError['backtrace'];
             }
 
-            if (Piwik::isUserIsAnonymous()) {
+            if (Matomo::isUserIsAnonymous()) {
                 $errorMessage = 'A fatal error occurred.';
             }
 
-            $response = new \Piwik\API\ResponseBuilder($outputFormat, [], false); // don't print the exception backtrace since it will be useless
+            $response = new \Matomo\API\ResponseBuilder($outputFormat, [], false); // don't print the exception backtrace since it will be useless
             $message  = $response->getResponseException(new Exception($errorMessage));
 
             return $message;
@@ -384,13 +384,13 @@ class Controller extends Plugin\ControllerAdmin
         $view = new View('@CorePluginsAdmin/safemode');
         $view->lastError   = $lastError;
         $view->isAllowedToTroubleshootAsSuperUser = $this->isAllowedToTroubleshootAsSuperUser();
-        $view->isSuperUser = Piwik::hasUserSuperUserAccess();
-        $view->isAnonymousUser = Piwik::isUserIsAnonymous();
+        $view->isSuperUser = Matomo::hasUserSuperUserAccess();
+        $view->isAnonymousUser = Matomo::isUserIsAnonymous();
         $view->plugins         = $this->pluginManager->loadAllPluginsAndGetTheirInfo();
         $view->deactivateNonce = Nonce::getNonce(static::DEACTIVATE_NONCE);
         $view->deactivateIAmSuperUserSalt = Common::getRequestVar('i_am_super_user', '', 'string');
         $view->uninstallNonce  = Nonce::getNonce(static::UNINSTALL_NONCE);
-        $view->contactEmail  = implode(',', Piwik::getContactEmailAddresses());
+        $view->contactEmail  = implode(',', Matomo::getContactEmailAddresses());
         $view->piwikVersion    = Version::VERSION;
         $view->showVersion     = !Common::getRequestVar('tests_hide_piwik_version', 0);
         $view->pluginCausesIssue = '';
@@ -534,7 +534,7 @@ class Controller extends Plugin\ControllerAdmin
 
     public function showLicense()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $pluginName = Common::getRequestVar('pluginName', null, 'string');
 
@@ -559,7 +559,7 @@ class Controller extends Plugin\ControllerAdmin
 
     protected function initPluginModification($nonceName)
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         Nonce::checkNonce($nonceName);
 

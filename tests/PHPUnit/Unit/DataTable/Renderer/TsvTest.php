@@ -9,9 +9,9 @@
 
 namespace DataTable\Renderer;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Renderer\Tsv;
-use Piwik\Tests\Unit\DataTable\Renderer\RendererTestCase;
+use Matomo\DataTable;
+use Matomo\DataTable\Renderer\Tsv;
+use Matomo\Tests\Unit\DataTable\Renderer\RendererTestCase;
 
 /**
  * @group DataTableTest

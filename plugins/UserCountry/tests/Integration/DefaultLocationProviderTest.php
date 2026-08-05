@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\Integration;
+namespace Matomo\Plugins\UserCountry\tests\Integration;
 
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\UserCountry\LocationProvider\DefaultProvider;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\UserCountry\LocationProvider\DefaultProvider;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group bla

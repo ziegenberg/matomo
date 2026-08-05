@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Metrics;
+namespace Matomo\Metrics;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\NumberFormatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\Metric;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugin\Report;
-use Piwik\Site;
-use Piwik\Tracker\GoalManager;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\NumberFormatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\Metric;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugin\Report;
+use Matomo\Site;
+use Matomo\Tracker\GoalManager;
 
 /**
- * Contains methods to format metric values. Passed to the {@link \Piwik\Plugin\Metric::format()}
+ * Contains methods to format metric values. Passed to the {@link \Matomo\Plugin\Metric::format()}
  * method when formatting Metrics.
  */
 class Formatter
@@ -71,7 +71,7 @@ class Formatter
             if ($days == 0) {
                 $time    = sprintf("%02s", $hours) . ':' . sprintf("%02s", $minutes) . ':' . sprintf("%02s", $seconds);
             } else {
-                $time    = sprintf(Piwik::translate('Intl_NDays'), $days) . " " . sprintf("%02s", $hours) . ':' . sprintf("%02s", $minutes) . ':' . sprintf("%02s", $seconds);
+                $time    = sprintf(Matomo::translate('Intl_NDays'), $days) . " " . sprintf("%02s", $hours) . ':' . sprintf("%02s", $minutes) . ':' . sprintf("%02s", $seconds);
             }
             $centiSeconds = intval($numberOfSeconds * 100) % 100;
             if ($centiSeconds) {
@@ -99,15 +99,15 @@ class Formatter
         $seconds   = NumberFormatter::getInstance()->formatNumber(round($seconds, $precision), $precision);
 
         if ($years > 0) {
-            $return = sprintf(Piwik::translate('General_YearsDays'), $years, $days);
+            $return = sprintf(Matomo::translate('General_YearsDays'), $years, $days);
         } elseif ($days > 0) {
-            $return = sprintf(Piwik::translate('General_DaysHours'), $days, $hours);
+            $return = sprintf(Matomo::translate('General_DaysHours'), $days, $hours);
         } elseif ($hours > 0) {
-            $return = sprintf(Piwik::translate('General_HoursMinutes'), $hours, $minutes);
+            $return = sprintf(Matomo::translate('General_HoursMinutes'), $hours, $minutes);
         } elseif ($minutes > 0) {
-            $return = sprintf(Piwik::translate('General_MinutesSeconds'), $minutes, $seconds);
+            $return = sprintf(Matomo::translate('General_MinutesSeconds'), $minutes, $seconds);
         } else {
-            $return = sprintf(Piwik::translate('Intl_NSecondsShort'), $seconds);
+            $return = sprintf(Matomo::translate('Intl_NSecondsShort'), $seconds);
         }
 
         if ($isNegative) {
@@ -285,6 +285,6 @@ class Formatter
      */
     private function getMetricsToFormat(DataTable $dataTable, ?Report $report = null)
     {
-        return Report::getMetricsForTable($dataTable, $report, $baseType = 'Piwik\\Plugin\\Metric');
+        return Report::getMetricsForTable($dataTable, $report, $baseType = 'Matomo\Plugin\Metric');
     }
 }

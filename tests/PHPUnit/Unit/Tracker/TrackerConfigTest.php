@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Tracker;
+namespace Matomo\Tests\Unit\Tracker;
 
-use Piwik\Config;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
-use Piwik\Tracker\TrackerConfig;
+use Matomo\Config;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Tracker\TrackerConfig;
 
 class TrackerConfigTest extends UnitTestCase
 {

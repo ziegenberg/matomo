@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserLanguage\Columns;
+namespace Matomo\Plugins\UserLanguage\Columns;
 
-use Piwik\Common;
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Common;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserLanguage/functions.php';
 
@@ -31,7 +31,7 @@ class Language extends VisitDimension
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\UserLanguage\languageTranslateWithCode($value);
+        return \Matomo\Plugins\UserLanguage\languageTranslateWithCode($value);
     }
 
     /**

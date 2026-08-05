@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules\data;
+namespace Matomo\Tests\Unit\PHPStan\Rules\data;
 
-use Piwik\Http\JsonResponse;
+use Matomo\Http\JsonResponse;
 
-class JsonResponseInheritanceBaseController extends \Piwik\Plugin\Controller
+class JsonResponseInheritanceBaseController extends \Matomo\Plugin\Controller
 {
     #[JsonResponse]
     public function jsonAction(): string

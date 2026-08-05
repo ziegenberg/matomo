@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest;
+namespace Matomo\Plugins\VisitorInterest;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Piwik;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Matomo;
 
 /**
  * VisitorInterest API lets you access visitor engagement distribution reports, including visits by pages viewed,
  * visit duration, days since last visit, and visit count.
  *
- * @method static \Piwik\Plugins\VisitorInterest\API getInstance()
+ * @method static \Matomo\Plugins\VisitorInterest\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @param int|string|int[] $idSite
@@ -28,7 +28,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable($name);
         $dataTable->queueFilter('ReplaceColumnNames');
@@ -58,9 +58,9 @@ class API extends \Piwik\Plugin\API
         $dataTable->queueFilter('Sort', ['label', 'asc', true, false]);
         $dataTable->queueFilter('AddSegmentByRangeLabel', ['visitDuration']);
         $dataTable->queueFilter('BeautifyTimeRangeLabels', [
-            Piwik::translate('VisitorInterest_BetweenXYSeconds'),
-            Piwik::translate('Intl_OneMinuteShort'),
-            Piwik::translate('Intl_NMinutesShort'),
+            Matomo::translate('VisitorInterest_BetweenXYSeconds'),
+            Matomo::translate('Intl_OneMinuteShort'),
+            Matomo::translate('Intl_NMinutesShort'),
         ]);
         return $dataTable;
     }
@@ -88,8 +88,8 @@ class API extends \Piwik\Plugin\API
         $dataTable->queueFilter('Sort', ['label', 'asc', true, false]);
         $dataTable->queueFilter('AddSegmentByRangeLabel', ['actions']);
         $dataTable->queueFilter('BeautifyRangeLabels', [
-            Piwik::translate('VisitorInterest_OnePage'),
-            Piwik::translate('VisitorInterest_NPages'),
+            Matomo::translate('VisitorInterest_OnePage'),
+            Matomo::translate('VisitorInterest_NPages'),
         ]);
         return $dataTable;
     }
@@ -122,8 +122,8 @@ class API extends \Piwik\Plugin\API
         );
         $dataTable->queueFilter('AddSegmentByRangeLabel', ['daysSinceLastVisit']);
         $dataTable->queueFilter('BeautifyRangeLabels', [
-            Piwik::translate('Intl_OneDay'),
-            Piwik::translate('Intl_NDays'),
+            Matomo::translate('Intl_OneDay'),
+            Matomo::translate('Intl_NDays'),
         ]);
         return $dataTable;
     }
@@ -157,8 +157,8 @@ class API extends \Piwik\Plugin\API
 
         $dataTable->queueFilter('AddSegmentByRangeLabel', ['visitCount']);
         $dataTable->queueFilter('BeautifyRangeLabels', [
-            Piwik::translate('General_OneVisit'),
-            Piwik::translate('General_NVisits'),
+            Matomo::translate('General_OneVisit'),
+            Matomo::translate('General_NVisits'),
         ]);
 
         return $dataTable;

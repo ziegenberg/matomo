@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Session;
+namespace Matomo\Tests\Unit\Session;
 
-use Piwik\Date;
-use Piwik\Session\SessionFingerprint;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Session\SessionFingerprint;
+use Matomo\Tests\Framework\Fixture;
 
 class SessionFingerprintTest extends \PHPUnit\Framework\TestCase
 {

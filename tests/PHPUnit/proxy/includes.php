@@ -20,4 +20,4 @@ $GLOBALS['MATOMO_PLUGIN_DIRS'] = array(
 
 require_once PIWIK_INCLUDE_PATH . '/core/bootstrap.php';
 
-Piwik\SettingsServer::setMaxExecutionTime(0);
+Matomo\SettingsServer::setMaxExecutionTime(0);

@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Core\Plugin;
+namespace Matomo\Tests\Core\Plugin;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Config;
-use Piwik\Plugin\ComponentFactory;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugin\Report;
+use Matomo\Config;
+use Matomo\Plugin\ComponentFactory;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugin\Report;
 
 /**
  * @group Core
  */
 class ComponentFactoryTest extends TestCase
 {
-    public const REPORT_CLASS_NAME = 'Piwik\\Plugin\\Report';
+    public const REPORT_CLASS_NAME = 'Matomo\Plugin\Report';
 
     public function setUp(): void
     {
@@ -49,7 +49,7 @@ class ComponentFactoryTest extends TestCase
 
         $report = ComponentFactory::factory($module, $action, self::REPORT_CLASS_NAME);
 
-        $this->assertInstanceOf('Piwik\Plugins\ExampleReport\Reports\GetExampleReport', $report);
+        $this->assertInstanceOf('Matomo\Plugins\ExampleReport\Reports\GetExampleReport', $report);
     }
 
     public function testFactoryShouldNotFindAComponentIfPluginIsActivatedButComponentNotExists()
@@ -95,7 +95,7 @@ class ComponentFactoryTest extends TestCase
             return $report->getAction() == 'getExampleReport';
         });
 
-        $this->assertInstanceOf('Piwik\Plugins\ExampleReport\Reports\GetExampleReport', $report);
+        $this->assertInstanceOf('Matomo\Plugins\ExampleReport\Reports\GetExampleReport', $report);
     }
 
     public function testGetComponentIfShouldNotFindAComponentIfPluginIsActivatedButComponentNotExists()

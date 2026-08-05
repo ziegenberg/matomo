@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\Visualizations;
+namespace Matomo\Plugins\Insights\Visualizations;
 
-use Piwik\Common;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugin\Visualization;
-use Piwik\Plugins\Insights\API;
+use Matomo\Common;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugin\Visualization;
+use Matomo\Plugins\Insights\API;
 
 /**
  * InsightsVisualization Visualization.

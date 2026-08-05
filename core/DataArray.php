@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\DataTable\Filter\EnrichRecordWithGoalMetricSums;
-use Piwik\Tracker\GoalManager;
+use Matomo\DataTable\Filter\EnrichRecordWithGoalMetricSums;
+use Matomo\Tracker\GoalManager;
 
 /**
  * The DataArray is a data structure used to aggregate datasets,
@@ -395,7 +395,7 @@ class DataArray
     /**
      * Converts array to a datatable
      *
-     * @return \Piwik\DataTable
+     * @return \Matomo\DataTable
      */
     public function asDataTable()
     {

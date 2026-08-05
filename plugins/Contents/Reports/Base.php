@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Contents\Reports;
+namespace Matomo\Plugins\Contents\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Contents\Dimensions;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Url;
-use Piwik\Widget\WidgetsList;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Contents\Dimensions;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Url;
+use Matomo\Widget\WidgetsList;
 
 abstract class Base extends Report
 {
@@ -59,7 +59,7 @@ abstract class Base extends Report
         if ($this->hasSubtableId()) {
             $apiMethod = $view->requestConfig->getApiMethodToRequest();
             $label     = Dimensions::getSubtableLabelForApiMethod($apiMethod);
-            $view->config->addTranslation('label', Piwik::translate($label));
+            $view->config->addTranslation('label', Matomo::translate($label));
         }
     }
 

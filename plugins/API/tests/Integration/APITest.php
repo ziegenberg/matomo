@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\Integration;
+namespace Matomo\Plugins\API\tests\Integration;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Http\BadRequestException;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\API\API;
-use Piwik\Plugins\API\BulkRequestLimit;
-use Piwik\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Plugins\UsersManager\Model as UsersManagerModel;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Http\BadRequestException;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\API\API;
+use Matomo\Plugins\API\BulkRequestLimit;
+use Matomo\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Plugins\UsersManager\Model as UsersManagerModel;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group API
@@ -210,7 +210,7 @@ class APITest extends IntegrationTestCase
         $this->enterSessionRootScope();
 
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+        $this->expectExceptionMessage(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
 
         try {
             $this->getBulkRequestAsRootApiRequest([
@@ -230,7 +230,7 @@ class APITest extends IntegrationTestCase
         $this->enterSessionRootScope();
 
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+        $this->expectExceptionMessage(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
 
         try {
             $this->getBulkRequestAsRootApiRequest([
@@ -249,7 +249,7 @@ class APITest extends IntegrationTestCase
         $this->enterSessionRootScope();
 
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+        $this->expectExceptionMessage(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
 
         try {
             $this->getBulkRequestAsRootApiRequest([
@@ -268,7 +268,7 @@ class APITest extends IntegrationTestCase
         $this->enterRealTokenRootScope();
 
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+        $this->expectExceptionMessage(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
 
         try {
             $this->getBulkRequestAsRootApiRequest([
@@ -287,7 +287,7 @@ class APITest extends IntegrationTestCase
         $this->enterAnonymousRootScope();
 
         $this->expectException(BadRequestException::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+        $this->expectExceptionMessage(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
 
         try {
             $this->getBulkRequestAsRootApiRequest([
@@ -539,7 +539,7 @@ class APITest extends IntegrationTestCase
         Config::getInstance()->General['API_bulk_request_limit'] = 2;
 
         $out = '';
-        $plugin = new \Piwik\Plugins\API\Plugin();
+        $plugin = new \Matomo\Plugins\API\Plugin();
         $plugin->getJsGlobalVariables($out);
 
         $this->assertStringContainsString('piwik.apiBulkRequestLimit = 2;', $out);
@@ -665,32 +665,32 @@ class APITest extends IntegrationTestCase
 
     private function makeSureTestRunsInContextOfAnonymousUser()
     {
-        Piwik::postEvent('Request.initAuthenticationObject');
+        Matomo::postEvent('Request.initAuthenticationObject');
 
         $access = Access::getInstance();
         $this->hasSuperUserAccess = $access->hasSuperUserAccess();
         $access->setSuperUserAccess(false);
-        $access->reloadAccess(StaticContainer::get('Piwik\Auth'));
+        $access->reloadAccess(StaticContainer::get('Matomo\Auth'));
         Request::reloadAuthUsingTokenAuth(array('token_auth' => 'anonymous'));
     }
 
     private function setAnonymousContext(): void
     {
-        Piwik::postEvent('Request.initAuthenticationObject');
+        Matomo::postEvent('Request.initAuthenticationObject');
 
         $access = Access::getInstance();
         $access->setSuperUserAccess(false);
-        $access->reloadAccess(StaticContainer::get('Piwik\Auth'));
+        $access->reloadAccess(StaticContainer::get('Matomo\Auth'));
         Request::reloadAuthUsingTokenAuth(['token_auth' => 'anonymous']);
     }
 
     private function setSuperUserContext(): void
     {
-        Piwik::postEvent('Request.initAuthenticationObject');
+        Matomo::postEvent('Request.initAuthenticationObject');
 
         $access = Access::getInstance();
         $access->setSuperUserAccess(true);
-        $access->reloadAccess(StaticContainer::get('Piwik\Auth'));
+        $access->reloadAccess(StaticContainer::get('Matomo\Auth'));
         Request::reloadAuthUsingTokenAuth(['token_auth' => Fixture::getTokenAuth()]);
     }
 

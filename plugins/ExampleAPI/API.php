@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleAPI;
+namespace Matomo\Plugins\ExampleAPI;
 
-use Piwik\DataTable\Row;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Version;
+use Matomo\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Version;
 
 /**
  * The ExampleAPI is useful to developers building a custom Matomo plugin.
  *
  * Please see the <a href='https://github.com/piwik/piwik/blob/master/plugins/ExampleAPI/API.php' rel='noreferrer' target='_blank'>source code in in the file plugins/ExampleAPI/API.php</a> for more documentation.
- * @method static \Piwik\Plugins\ExampleAPI\API getInstance()
+ * @method static \Matomo\Plugins\ExampleAPI\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Defines if the parameters passed to the public API methods in this class will be automatically sanitized or not.
@@ -37,7 +37,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMatomoVersion(): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         return Version::VERSION;
     }
 

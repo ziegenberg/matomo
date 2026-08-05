@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Renderer;
+namespace Matomo\DataTable\Renderer;
 
-use Piwik\Common;
-use Piwik\DataTable\Renderer;
-use Piwik\DataTable\Simple;
-use Piwik\DataTable;
-use Piwik\Filesystem;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\ProxyHttp;
-use Piwik\Request;
+use Matomo\Common;
+use Matomo\DataTable\Renderer;
+use Matomo\DataTable\Simple;
+use Matomo\DataTable;
+use Matomo\Filesystem;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\ProxyHttp;
+use Matomo\Request;
 
 /**
  * CSV export
@@ -275,7 +275,7 @@ class Csv extends Renderer
      */
     protected function renderHeader(): void
     {
-        $fileName = Piwik::translate('General_Export');
+        $fileName = Matomo::translate('General_Export');
 
         $period = Request::fromRequest()->getStringParameter('period', '');
         $date   = Request::fromRequest()->getStringParameter('date', '');
@@ -326,7 +326,7 @@ class Csv extends Renderer
                     && is_array(reset($value))
                 ) {
                     foreach ($value as $level1Key => $level1Value) {
-                        $inner = $name === 'goals' ? Piwik::translate('Goals_GoalX', $level1Key) : $name . ' ' . $level1Key;
+                        $inner = $name === 'goals' ? Matomo::translate('Goals_GoalX', $level1Key) : $name . ' ' . $level1Key;
                         $columnNameTemplate = '%s (' . $inner . ')';
 
                         $this->flattenColumnArray($level1Value, $csvRow, $columnNameTemplate);
@@ -405,7 +405,7 @@ class Csv extends Renderer
                     }
                     //if a metadata and a column have the same name make sure they don't overwrite
                     if ($this->translateColumnNames) {
-                        $name = Piwik::translate('General_Metadata') . ': ' . $name;
+                        $name = Matomo::translate('General_Metadata') . ': ' . $name;
                     } else {
                         $name = 'metadata_' . $name;
                     }

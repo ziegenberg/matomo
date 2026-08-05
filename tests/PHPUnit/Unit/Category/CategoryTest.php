@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Category;
+namespace Matomo\Tests\Unit\Category;
 
-use Piwik\Category\Category;
-use Piwik\Category\Subcategory;
+use Matomo\Category\Category;
+use Matomo\Category\Subcategory;
 
 /**
  * @group Category

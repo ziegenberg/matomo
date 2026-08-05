@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\tests\Integration;
+namespace Matomo\Plugins\Monolog\tests\Integration;
 
 use Exception;
-use Piwik\Application\Environment;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\Log;
-use Piwik\Plugins\Monolog\tests\Integration\Fixture\LoggerWrapper;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Application\Environment;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\Log;
+use Matomo\Plugins\Monolog\tests\Integration\Fixture\LoggerWrapper;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -277,7 +277,7 @@ class LogTest extends IntegrationTestCase
             'ini.log.string_message_format' => self::STRING_MESSAGE_FORMAT,
             'ini.log.string_message_format_trace' => self::STRING_MESSAGE_FORMAT,
             'ini.log.logger_file_path' => self::getLogFileLocation(),
-            Log\LoggerInterface::class => \Piwik\DI::get(Log\Logger::class),
+            Log\LoggerInterface::class => \Matomo\DI::get(Log\Logger::class),
             'Tests.log.allowAllHandlers' => true,
         ));
         $newEnv->init();

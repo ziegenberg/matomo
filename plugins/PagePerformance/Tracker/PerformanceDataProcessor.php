@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Tracker;
+namespace Matomo\Plugins\PagePerformance\Tracker;
 
-use Piwik\Common;
-use Piwik\Log;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomCompletion;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomProcessing;
-use Piwik\Plugins\PagePerformance\Columns\TimeNetwork;
-use Piwik\Plugins\PagePerformance\Columns\TimeServer;
-use Piwik\Plugins\PagePerformance\Columns\TimeOnLoad;
-use Piwik\Plugins\PagePerformance\Columns\TimeTransfer;
-use Piwik\Tracker;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\ActionPageview;
-use Piwik\Tracker\Model;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestProcessor;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\Log;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomCompletion;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomProcessing;
+use Matomo\Plugins\PagePerformance\Columns\TimeNetwork;
+use Matomo\Plugins\PagePerformance\Columns\TimeServer;
+use Matomo\Plugins\PagePerformance\Columns\TimeOnLoad;
+use Matomo\Plugins\PagePerformance\Columns\TimeTransfer;
+use Matomo\Tracker;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\ActionPageview;
+use Matomo\Tracker\Model;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestProcessor;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * Handles tracker requests containing performance data.

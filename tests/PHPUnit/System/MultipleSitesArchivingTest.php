@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\Config;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Fixtures\ThreeSitesWithSharedVisitors;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\Config;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Fixtures\ThreeSitesWithSharedVisitors;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Core
@@ -30,17 +30,17 @@ class MultipleSitesArchivingTest extends SystemTestCase
 
         $extraSite = Fixture::createWebsite(self::$fixture->dateTime, $ecommerce = 1, "the site");
 
-        Piwik::addAction("ArchiveProcessor.Parameters.getIdSites", function (&$sites, $period) use ($extraSite) {
+        Matomo::addAction("ArchiveProcessor.Parameters.getIdSites", function (&$sites, $period) use ($extraSite) {
             if (reset($sites) == $extraSite) {
                 $sites = array(1, 2, 3);
             }
         });
 
-        Piwik::addAction('CronArchive.getIdSitesNotUsingTracker', function (&$idSitesNotUsingTradker) use ($extraSite) {
+        Matomo::addAction('CronArchive.getIdSitesNotUsingTracker', function (&$idSitesNotUsingTradker) use ($extraSite) {
             $idSitesNotUsingTradker[] = $extraSite;
         });
 
-        Piwik::addAction('ArchiveProcessor.shouldAggregateFromRawData', function (&$shouldAggregateFromRawData, Parameters $params) {
+        Matomo::addAction('ArchiveProcessor.shouldAggregateFromRawData', function (&$shouldAggregateFromRawData, Parameters $params) {
             if ($params->getSite()->getId() == 4) {
                 $shouldAggregateFromRawData = true;
             }

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
-use Piwik\Config;
-use Piwik\Db\AdapterInterface;
-use Piwik\DbHelper;
-use Piwik\Log\LoggerInterface;
+use Matomo\Config;
+use Matomo\Db\AdapterInterface;
+use Matomo\DbHelper;
+use Matomo\Log\LoggerInterface;
 use Exception;
 
 class ArchivingDbAdapter
@@ -119,8 +119,8 @@ class ArchivingDbAdapter
             return call_user_func_array([$this->wrapped, $function], $args);
         } catch (\Exception $e) {
             if (
-                $this->isErrNo($e, \Piwik\Updater\Migration\Db::ERROR_CODE_MAX_EXECUTION_TIME_EXCEEDED_QUERY_INTERRUPTED) ||
-                $this->isErrNo($e, \Piwik\Updater\Migration\Db::ERROR_CODE_MAX_EXECUTION_TIME_EXCEEDED_SORT_ABORTED)
+                $this->isErrNo($e, \Matomo\Updater\Migration\Db::ERROR_CODE_MAX_EXECUTION_TIME_EXCEEDED_QUERY_INTERRUPTED) ||
+                $this->isErrNo($e, \Matomo\Updater\Migration\Db::ERROR_CODE_MAX_EXECUTION_TIME_EXCEEDED_SORT_ABORTED)
             ) {
                 $this->logger->warning(
                     'Archiver query exceeded maximum execution time: {details}',

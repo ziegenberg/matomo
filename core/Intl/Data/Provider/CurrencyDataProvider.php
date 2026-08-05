@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Intl\Data\Provider;
+namespace Matomo\Intl\Data\Provider;
 
-use Piwik\Config\GeneralConfig;
+use Matomo\Config\GeneralConfig;
 
 /**
  * Provides currency data.

@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\EntryPageTitle;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
-use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\EntryPageTitle;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
+use Matomo\Plugins\Actions\Columns\Metrics\BounceRate;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetEntryPageTitles extends Base
 {
@@ -27,9 +27,9 @@ class GetEntryPageTitles extends Base
         parent::init();
 
         $this->dimension     = new EntryPageTitle();
-        $this->name          = Piwik::translate('Actions_EntryPageTitles');
-        $this->documentation = Piwik::translate('Actions_EntryPageTitlesReportDocumentation', '<br />')
-                             . ' ' . Piwik::translate('General_UsePlusMinusIconsDocumentation');
+        $this->name          = Matomo::translate('Actions_EntryPageTitles');
+        $this->documentation = Matomo::translate('Actions_EntryPageTitlesReportDocumentation', '<br />')
+                             . ' ' . Matomo::translate('General_UsePlusMinusIconsDocumentation');
         $this->metrics = array('entry_nb_visits', 'entry_bounce_count');
         $this->processedMetrics = array(
             new AverageTimeOnPage(),
@@ -63,7 +63,7 @@ class GetEntryPageTitles extends Base
     protected function getMetricsDocumentation()
     {
         $metrics = parent::getMetricsDocumentation();
-        $metrics['bounce_rate'] = Piwik::translate('General_ColumnPageBounceRateDocumentation');
+        $metrics['bounce_rate'] = Matomo::translate('General_ColumnPageBounceRateDocumentation');
 
         // remove these metrics from API.getProcessedReport version of this report
         unset($metrics['avg_time_on_page']);

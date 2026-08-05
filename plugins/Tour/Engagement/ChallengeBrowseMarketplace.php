@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class ChallengeBrowseMarketplace extends Challenge
 {
     public function getName()
     {
-        return Piwik::translate('Tour_BrowseMarketplace');
+        return Matomo::translate('Tour_BrowseMarketplace');
     }
 
     public function getDescription()
     {
-        return Piwik::translate('Marketplace_PluginDescription');
+        return Matomo::translate('Marketplace_PluginDescription');
     }
 
     public function getId()

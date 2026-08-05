@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Scheduler;
+namespace Matomo\Tests\Unit\Scheduler;
 
-use Piwik\Date;
-use Piwik\Log\NullLogger;
-use Piwik\Option;
-use Piwik\Plugin;
-use Piwik\Scheduler\ScheduledTaskLock;
-use Piwik\Scheduler\Scheduler;
-use Piwik\Scheduler\Task;
-use Piwik\Scheduler\Timetable;
-use Piwik\Tests\Framework\Mock\Concurrency\LockBackend\InMemoryLockBackend;
-use Piwik\Tests\Framework\Mock\PiwikOption;
+use Matomo\Date;
+use Matomo\Log\NullLogger;
+use Matomo\Option;
+use Matomo\Plugin;
+use Matomo\Scheduler\ScheduledTaskLock;
+use Matomo\Scheduler\Scheduler;
+use Matomo\Scheduler\Task;
+use Matomo\Scheduler\Timetable;
+use Matomo\Tests\Framework\Mock\Concurrency\LockBackend\InMemoryLockBackend;
+use Matomo\Tests\Framework\Mock\PiwikOption;
 
 /**
  * @group Scheduler
@@ -62,7 +62,7 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
     {
         self::stubPiwikOption($timetable);
 
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $scheduler = new Scheduler($taskLoader, new NullLogger(), new ScheduledTaskLock(new InMemoryLockBackend()));
 
         $this->assertEquals($expectedTime, $scheduler->getScheduledTimeForMethod($className, $methodName, $methodParameter));
@@ -78,7 +78,7 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
         $plugin = new Plugin();
         $task = new Task($plugin, 'getVersion', null, null);
 
-        $taskLoader = $this->getMockBuilder('Piwik\Scheduler\TaskLoader')
+        $taskLoader = $this->getMockBuilder('Matomo\Scheduler\TaskLoader')
             ->disableOriginalConstructor()
             ->getMock();
         $scheduler = new Scheduler($taskLoader, new NullLogger(), new ScheduledTaskLock(new InMemoryLockBackend()));
@@ -95,7 +95,7 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
     {
         $now = time();
 
-        $dailySchedule = $this->createPartialMock('Piwik\Scheduler\Schedule\Daily', array('getTime'));
+        $dailySchedule = $this->createPartialMock('Matomo\Scheduler\Schedule\Daily', array('getTime'));
         $dailySchedule->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue($now));
@@ -182,7 +182,7 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
      */
     public function testRun($expectedTimetable, $expectedExecutedTasks, $timetableBeforeTaskExecution, $configuredTasks)
     {
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $taskLoader->expects($this->atLeastOnce())
             ->method('loadTasks')
             ->willReturn($configuredTasks);
@@ -215,7 +215,7 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
      */
     public function testRunTaskNow($expectedTimetable, $expectedExecutedTasks, $timetableBeforeTaskExecution, $configuredTasks)
     {
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $taskLoader->expects($this->atLeastOnce())
             ->method('loadTasks')
             ->willReturn($configuredTasks);
@@ -245,20 +245,20 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
     {
         // Mock timetable
         $now = time() - 60;
-        $taskName = 'Piwik\Tests\Unit\Scheduler\SchedulerTest.randomTask';
+        $taskName = 'Matomo\Tests\Unit\Scheduler\SchedulerTest.randomTask';
         $timetableData = serialize([$taskName => $now]);
 
         self::stubPiwikOption($timetableData);
 
         // Create task
-        $dailySchedule = $this->createPartialMock('Piwik\Scheduler\Schedule\Daily', array('getTime'));
+        $dailySchedule = $this->createPartialMock('Matomo\Scheduler\Schedule\Daily', array('getTime'));
         $dailySchedule->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue($now));
 
         // Setup scheduler
         $tasks = [new Task($this, 'randomTask', null, $dailySchedule)];
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $taskLoader->expects($this->atLeastOnce())
             ->method('loadTasks')
             ->willReturn($tasks);
@@ -287,20 +287,20 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
     {
         // Mock timetable
         $now = time() - 60;
-        $taskName = 'Piwik\Tests\Unit\Scheduler\SchedulerTest.randomTask';
+        $taskName = 'Matomo\Tests\Unit\Scheduler\SchedulerTest.randomTask';
         $timetableData = serialize([$taskName => $now]);
 
         self::stubPiwikOption($timetableData);
 
         // Create task
-        $dailySchedule = $this->createPartialMock('Piwik\Scheduler\Schedule\Daily', array('getTime'));
+        $dailySchedule = $this->createPartialMock('Matomo\Scheduler\Schedule\Daily', array('getTime'));
         $dailySchedule->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue($now));
 
         // Setup scheduler
         $tasks = [new Task($this, 'randomTask', null, $dailySchedule)];
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $taskLoader->expects($this->atLeastOnce())
             ->method('loadTasks')
             ->willReturn($tasks);
@@ -329,20 +329,20 @@ class SchedulerTest extends \PHPUnit\Framework\TestCase
     {
         // Mock timetable
         $now = time() - 60;
-        $taskName = 'Piwik\Tests\Unit\Scheduler\SchedulerTest.randomTask';
+        $taskName = 'Matomo\Tests\Unit\Scheduler\SchedulerTest.randomTask';
         $timetableData = serialize([$taskName => $now]);
 
         self::stubPiwikOption($timetableData);
 
         // Create task
-        $dailySchedule = $this->createPartialMock('Piwik\Scheduler\Schedule\Daily', array('getTime'));
+        $dailySchedule = $this->createPartialMock('Matomo\Scheduler\Schedule\Daily', array('getTime'));
         $dailySchedule->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue($now));
 
         // Setup scheduler
         $tasks = [new Task($this, 'randomTask', null, $dailySchedule, Task::HIGHEST_PRIORITY, -1)];
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $taskLoader->expects($this->atLeastOnce())
             ->method('loadTasks')
             ->willReturn($tasks);

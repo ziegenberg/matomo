@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\tests\System;
+namespace Matomo\Plugins\Monolog\tests\System;
 
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Log\Logger;
-use Piwik\Log\LoggerInterface;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Log\Logger;
+use Matomo\Log\LoggerInterface;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 use MatomoTracker;
 
 /**
@@ -91,8 +91,8 @@ class TrackerLoggingTest extends SystemTestCase
     public static function provideContainerConfigBeforeClass()
     {
         return array(
-            LoggerInterface::class => \Piwik\DI::get(Logger::class),
-            Config::class => \Piwik\DI::decorate(function (Config $config) {
+            LoggerInterface::class => \Matomo\DI::get(Logger::class),
+            Config::class => \Matomo\DI::decorate(function (Config $config) {
                 $config->tests['enable_logging'] = 1;
                 $config->log['log_writers'] = ['screen'];
                 return $config;

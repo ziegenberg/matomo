@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Changes;
+namespace Matomo\Changes;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
 
 /**
  * CoreHome user changes class
@@ -27,7 +27,7 @@ class UserChanges
     public function __construct(array $user)
     {
         $this->user = $user;
-        $this->changesModel = StaticContainer::get(\Piwik\Changes\Model::class);
+        $this->changesModel = StaticContainer::get(\Matomo\Changes\Model::class);
     }
 
     /**
@@ -91,7 +91,7 @@ class UserChanges
     /**
      * Record all changes as read
      *
-     * @throws \Piwik\Tracker\Db\DbException
+     * @throws \Matomo\Tracker\Db\DbException
      */
     public function markChangesAsRead(): void
     {

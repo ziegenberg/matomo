@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\ReportEmailGenerator;
+namespace Matomo\Plugins\ScheduledReports\ReportEmailGenerator;
 
-use Piwik\Mail;
-use Piwik\Plugins\ScheduledReports\GeneratedReport;
-use Piwik\Plugins\ScheduledReports\ReportEmailGenerator;
+use Matomo\Mail;
+use Matomo\Plugins\ScheduledReports\GeneratedReport;
+use Matomo\Plugins\ScheduledReports\ReportEmailGenerator;
 
 class HtmlReportEmailGenerator extends ReportEmailGenerator
 {

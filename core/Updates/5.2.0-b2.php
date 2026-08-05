@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Db;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updates;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Db;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updates;
 
 class Updates_5_2_0_b2 extends Updates
 {
@@ -60,7 +60,7 @@ class Updates_5_2_0_b2 extends Updates
         try {
             $db = Db::get();
 
-            $metadataProvider = StaticContainer::get('Piwik\Plugins\DBStats\MySQLMetadataProvider');
+            $metadataProvider = StaticContainer::get('Matomo\Plugins\DBStats\MySQLMetadataProvider');
             $userTableStatus = $metadataProvider->getTableStatus('user');
             if (empty($userTableStatus['Collation'] ?? null)) {
                 // if there is no user table, or no collation for it, abort detection

@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\Integration;
+namespace Matomo\Plugins\SitesManager\tests\Integration;
 
-use Piwik\Access\Role\Admin;
-use Piwik\Access\Role\View;
-use Piwik\Access\Role\Write;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\IntranetMeasurable\Type as IntranetType;
-use Piwik\Plugins\MobileAppMeasurable;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Plugins\WebsiteMeasurable\Type as WebsiteType;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Plugins\SitesManager\Model;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Measurable\Measurable;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access\Role\Admin;
+use Matomo\Access\Role\View;
+use Matomo\Access\Role\Write;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\IntranetMeasurable\Type as IntranetType;
+use Matomo\Plugins\MobileAppMeasurable;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Plugins\WebsiteMeasurable\Type as WebsiteType;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Plugins\SitesManager\Model;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Measurable\Measurable;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 use Exception;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Policy\PolicyManager;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Policy\PolicyManager;
 
 /**
  * Class Plugins_SitesManagerTest
@@ -295,11 +295,11 @@ class ApiTest extends IntegrationTestCase
     }
 
     /**
-     * @return \Piwik\Plugins\WebsiteMeasurable\MeasurableSettings
+     * @return \Matomo\Plugins\WebsiteMeasurable\MeasurableSettings
      */
     private function getWebsiteMeasurable($idSite)
     {
-        $settings = StaticContainer::get('Piwik\Plugin\SettingsProvider');
+        $settings = StaticContainer::get('Matomo\Plugin\SettingsProvider');
         return $settings->getMeasurableSettings('WebsiteMeasurable', $idSite, null);
     }
 
@@ -1412,7 +1412,7 @@ class ApiTest extends IntegrationTestCase
         $called = 0;
         $deletedSiteId = null;
 
-        Piwik::addAction('SitesManager.deleteSite.end', function ($param) use (&$called, &$deletedSiteId) {
+        Matomo::addAction('SitesManager.deleteSite.end', function ($param) use (&$called, &$deletedSiteId) {
             $called++;
             $deletedSiteId = $param;
         });
@@ -1621,7 +1621,7 @@ class ApiTest extends IntegrationTestCase
         // Make sure we're not Super user
         FakeAccess::$superUser = false;
         FakeAccess::$identity = 'user1';
-        $this->assertFalse(Piwik::hasUserSuperUserAccess());
+        $this->assertFalse(Matomo::hasUserSuperUserAccess());
 
         $this->assertGetSitesIdFromSiteUrlMatchesBothHttpAndHttpsUrls();
     }
@@ -1675,7 +1675,7 @@ class ApiTest extends IntegrationTestCase
         FakeAccess::setIdSitesView([1]);
         FakeAccess::setIdSitesAdmin([]);
 
-        $this->assertFalse(Piwik::hasUserSuperUserAccess());
+        $this->assertFalse(Matomo::hasUserSuperUserAccess());
         $idsites = API::getInstance()->getSitesIdFromSiteUrl('http://piwik.com');
         $this->assertEquals(1, count($idsites));
 
@@ -2105,7 +2105,7 @@ class ApiTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 }

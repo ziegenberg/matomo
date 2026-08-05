@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Config;
-use Piwik\Exception\MissingFilePermissionException;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Config;
+use Matomo\Exception\MissingFilePermissionException;
 
 class DumpConfigTestMockIniFileChain extends Config\IniFileChain
 {
@@ -553,7 +553,7 @@ class ConfigTest extends TestCase
         $correctContent = file_get_contents($userFile);
         $incorrectContent = 'incorrrect content';
 
-        \Piwik\Piwik::addAction('Core.configFileSanityCheckFailed', function ($path) use (&$expectedPath) {
+        \Matomo\Matomo::addAction('Core.configFileSanityCheckFailed', function ($path) use (&$expectedPath) {
             $expectedPath = $path;
         });
 

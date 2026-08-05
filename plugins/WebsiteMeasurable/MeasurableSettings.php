@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\WebsiteMeasurable;
+namespace Matomo\Plugins\WebsiteMeasurable;
 
-use Piwik\IP;
-use Piwik\Measurable\Type\TypeManager;
+use Matomo\IP;
+use Matomo\Measurable\Type\TypeManager;
 use Matomo\Network\IPUtils;
-use Piwik\Piwik;
-use Piwik\Plugins\WebsiteMeasurable\Settings\Urls;
-use Piwik\Settings\Measurable\MeasurableProperty;
-use Piwik\Settings\Setting;
-use Piwik\Settings\FieldConfig;
-use Piwik\Plugins\SitesManager;
+use Matomo\Matomo;
+use Matomo\Plugins\WebsiteMeasurable\Settings\Urls;
+use Matomo\Settings\Measurable\MeasurableProperty;
+use Matomo\Settings\Setting;
+use Matomo\Settings\FieldConfig;
+use Matomo\Plugins\SitesManager;
 use Exception;
-use Piwik\Url;
-use Piwik\UrlHelper;
+use Matomo\Url;
+use Matomo\UrlHelper;
 
 /**
  * Defines Settings for ExampleSettingsPlugin.
@@ -30,7 +30,7 @@ use Piwik\UrlHelper;
  * $settings->autoRefresh->getValue();
  * $settings->metric->getValue();
  */
-class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
+class MeasurableSettings extends \Matomo\Settings\Measurable\MeasurableSettings
 {
     /** @var Setting */
     public $urls;
@@ -139,10 +139,10 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     private function makeExcludeUnknownUrls(): MeasurableProperty
     {
         return $this->makeProperty('exclude_unknown_urls', $default = false, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->title = Piwik::translate('SitesManager_OnlyMatchedUrlsAllowed');
-            $field->inlineHelp = Piwik::translate('SitesManager_OnlyMatchedUrlsAllowedHelp')
+            $field->title = Matomo::translate('SitesManager_OnlyMatchedUrlsAllowed');
+            $field->inlineHelp = Matomo::translate('SitesManager_OnlyMatchedUrlsAllowedHelp')
                 . '<br />'
-                . Piwik::translate('SitesManager_OnlyMatchedUrlsAllowedHelpExamples');
+                . Matomo::translate('SitesManager_OnlyMatchedUrlsAllowedHelpExamples');
             $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
         });
     }
@@ -150,19 +150,19 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     private function makeKeepUrlFragments(SitesManager\API $sitesManagerApi): MeasurableProperty
     {
         return $this->makeProperty('keep_url_fragment', $default = '0', FieldConfig::TYPE_STRING, function (FieldConfig $field) use ($sitesManagerApi) {
-            $field->title = Piwik::translate('SitesManager_KeepURLFragmentsLong');
+            $field->title = Matomo::translate('SitesManager_KeepURLFragmentsLong');
             $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
 
             if ($sitesManagerApi->getKeepURLFragmentsGlobal()) {
-                $default = Piwik::translate('General_Yes');
+                $default = Matomo::translate('General_Yes');
             } else {
-                $default = Piwik::translate('General_No');
+                $default = Matomo::translate('General_No');
             }
 
             $field->availableValues = [
-                '0' => $default . ' (' . Piwik::translate('General_Default') . ')',
-                '1' => Piwik::translate('General_Yes'),
-                '2' => Piwik::translate('General_No'),
+                '0' => $default . ' (' . Matomo::translate('General_Default') . ')',
+                '1' => Matomo::translate('General_Yes'),
+                '2' => Matomo::translate('General_No'),
             ];
         });
     }
@@ -172,10 +172,10 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
         return $this->makeProperty('excluded_ips', $default = [], FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
             $ip = IP::getIpFromHeader();
 
-            $field->title = Piwik::translate('SitesManager_ExcludedIps');
-            $field->inlineHelp = Piwik::translate('SitesManager_HelpExcludedIpAddresses', ['1.2.3.4/24', '1.2.3.*', '1.2.*.*'])
+            $field->title = Matomo::translate('SitesManager_ExcludedIps');
+            $field->inlineHelp = Matomo::translate('SitesManager_HelpExcludedIpAddresses', ['1.2.3.4/24', '1.2.3.*', '1.2.*.*'])
                 . '<br /><br />'
-                . Piwik::translate('SitesManager_YourCurrentIpAddressIs', ['<i>' . $ip . '</i>']);
+                . Matomo::translate('SitesManager_YourCurrentIpAddressIs', ['<i>' . $ip . '</i>']);
             $field->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
             $field->uiControlAttributes = [
               'cols' => '20',
@@ -190,7 +190,7 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
 
                     foreach ($ips as $ip) {
                         if (IPUtils::getIPRangeBounds($ip) === null) {
-                            throw new Exception(Piwik::translate('SitesManager_ExceptionInvalidIPFormat', [$ip, "1.2.3.4, 1.2.3.*, or 1.2.3.4/5"]));
+                            throw new Exception(Matomo::translate('SitesManager_ExceptionInvalidIPFormat', [$ip, "1.2.3.4, 1.2.3.*, or 1.2.3.4/5"]));
                         }
                     }
                 }
@@ -212,10 +212,10 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     {
         $self = $this;
         return $this->makeProperty('excluded_parameters', $default = [], FieldConfig::TYPE_ARRAY, function (FieldConfig $field) use ($self) {
-            $field->title = Piwik::translate('SitesManager_ExcludedParameters');
-            $field->inlineHelp = Piwik::translate('SitesManager_ListOfQueryParametersToExclude', "/^sess.*|.*[dD]ate$/")
+            $field->title = Matomo::translate('SitesManager_ExcludedParameters');
+            $field->inlineHelp = Matomo::translate('SitesManager_ListOfQueryParametersToExclude', "/^sess.*|.*[dD]ate$/")
                 . '<br /><br />'
-                . Piwik::translate('SitesManager_PiwikWillAutomaticallyExcludeCommonSessionParameters', ['phpsessid, sessionid, ...']);
+                . Matomo::translate('SitesManager_PiwikWillAutomaticallyExcludeCommonSessionParameters', ['phpsessid, sessionid, ...']);
             $field->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
             $field->uiControlAttributes = ['cols' => '20', 'rows' => '4'];
             $field->transform = function ($value) use ($self) {
@@ -228,13 +228,13 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     {
         $self = $this;
         return $this->makeProperty('excluded_user_agents', $default = [], FieldConfig::TYPE_ARRAY, function (FieldConfig $field) use ($self) {
-            $field->title = Piwik::translate('SitesManager_ExcludedUserAgents');
-            $field->inlineHelp = Piwik::translate('SitesManager_GlobalExcludedUserAgentHelp1')
+            $field->title = Matomo::translate('SitesManager_ExcludedUserAgents');
+            $field->inlineHelp = Matomo::translate('SitesManager_GlobalExcludedUserAgentHelp1')
                 . '<br /><br />'
-                . Piwik::translate('SitesManager_GlobalListExcludedUserAgents_Desc')
+                . Matomo::translate('SitesManager_GlobalListExcludedUserAgents_Desc')
                 . '<br />'
-                . Piwik::translate('SitesManager_GlobalExcludedUserAgentHelp2') . " "
-                . Piwik::translate('SitesManager_GlobalExcludedUserAgentHelp3', "/bot|spider|crawl|scanner/i")
+                . Matomo::translate('SitesManager_GlobalExcludedUserAgentHelp2') . " "
+                . Matomo::translate('SitesManager_GlobalExcludedUserAgentHelp3', "/bot|spider|crawl|scanner/i")
             ;
             $field->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
             $field->uiControlAttributes = ['cols' => '20', 'rows' => '4'];
@@ -248,22 +248,22 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     {
         $self = $this;
         return $this->makeProperty('excluded_referrers', $default = [], FieldConfig::TYPE_ARRAY, function (FieldConfig $field) use ($sitesManagerApi, $self) {
-            $field->title = Piwik::translate('SitesManager_ExcludedReferrers');
+            $field->title = Matomo::translate('SitesManager_ExcludedReferrers');
 
             $referrersGlobal = $sitesManagerApi->getExcludedReferrersGlobal();
 
-            $field->inlineHelp = Piwik::translate('SitesManager_ExcludedReferrersHelp')
+            $field->inlineHelp = Matomo::translate('SitesManager_ExcludedReferrersHelp')
                 . '<br /><br />'
-                . Piwik::translate('SitesManager_ExcludedReferrersHelpDetails')
+                . Matomo::translate('SitesManager_ExcludedReferrersHelpDetails')
                 . '<br />'
-                . Piwik::translate('SitesManager_ExcludedReferrersHelpExamples', [
+                . Matomo::translate('SitesManager_ExcludedReferrersHelpExamples', [
                     'www.example.org',
                     'http://example.org/mypath',
                     'https://www.example.org/?param=1',
                     'https://sub.example.org/',
                 ])
                 . '<br /><br />'
-                . Piwik::translate('SitesManager_ExcludedReferrersHelpSubDomains', [
+                . Matomo::translate('SitesManager_ExcludedReferrersHelpSubDomains', [
                     '.sub.example.org',
                     'http://sub.example.org/mypath',
                     'https://new.sub.example.org/',
@@ -272,7 +272,7 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
 
             if (!empty($referrersGlobal)) {
                 $field->inlineHelp .= '<br /><br />'
-                    . '<strong>' . Piwik::translate('SitesManager_GlobalListExcludedReferrers') . '</strong><br />'
+                    . '<strong>' . Matomo::translate('SitesManager_GlobalListExcludedReferrers') . '</strong><br />'
                     . $referrersGlobal;
             }
             $field->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
@@ -290,7 +290,7 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
                         $prefixedUrl = 'https://' . ltrim(preg_replace('/^https?:\/\//', '', $url), '.');
                         $parsedUrl = @parse_url($prefixedUrl);
                         if (false === $parsedUrl || !UrlHelper::isLookLikeUrl($prefixedUrl)) {
-                            throw new Exception(Piwik::translate('SitesManager_ExceptionInvalidUrl', [$url]));
+                            throw new Exception(Matomo::translate('SitesManager_ExceptionInvalidUrl', [$url]));
                         }
                     }
                 }
@@ -304,12 +304,12 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     private function makeSiteSearch(): MeasurableProperty
     {
         return $this->makeProperty('sitesearch', $default = 1, FieldConfig::TYPE_INT, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Actions_SubmenuSitesearch');
-            $field->inlineHelp = Piwik::translate('SitesManager_SiteSearchUse');
+            $field->title = Matomo::translate('Actions_SubmenuSitesearch');
+            $field->inlineHelp = Matomo::translate('SitesManager_SiteSearchUse');
             $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
             $field->availableValues = [
-                1 => Piwik::translate('SitesManager_EnableSiteSearch'),
-                0 => Piwik::translate('SitesManager_DisableSiteSearch'),
+                1 => Matomo::translate('SitesManager_EnableSiteSearch'),
+                0 => Matomo::translate('SitesManager_DisableSiteSearch'),
             ];
         });
     }
@@ -319,10 +319,10 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
         $settings = $this;
         return $this->makeSetting('use_default_site_search_params', $default = true, FieldConfig::TYPE_BOOL, function (FieldConfig $field) use ($sitesManagerApi, $settings) {
 
-            if (Piwik::hasUserSuperUserAccess()) {
-                $title = Piwik::translate('SitesManager_SearchUseDefault', ["<a href='#globalSettings'>","</a>"]);
+            if (Matomo::hasUserSuperUserAccess()) {
+                $title = Matomo::translate('SitesManager_SearchUseDefault', ["<a href='#globalSettings'>","</a>"]);
             } else {
-                $title = Piwik::translate('SitesManager_SearchUseDefault', ['', '']);
+                $title = Matomo::translate('SitesManager_SearchUseDefault', ['', '']);
             }
 
             $field->title = $title;
@@ -336,12 +336,12 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
             $searchKeywordsGlobal = $sitesManagerApi->getSearchKeywordParametersGlobal();
             $searchCategoryGlobal = $sitesManagerApi->getSearchCategoryParametersGlobal();
 
-            $field->description  = Piwik::translate('SitesManager_SearchKeywordLabel');
-            $field->description .= ' (' . Piwik::translate('General_Default') . ')';
+            $field->description  = Matomo::translate('SitesManager_SearchKeywordLabel');
+            $field->description .= ' (' . Matomo::translate('General_Default') . ')';
             $field->description .= ': ';
             $field->description .= $searchKeywordsGlobal;
             $field->description .= ' & ';
-            $field->description .= Piwik::translate('SitesManager_SearchCategoryLabel');
+            $field->description .= Matomo::translate('SitesManager_SearchCategoryLabel');
             $field->description .= ': ';
             $field->description .= $searchCategoryGlobal;
             $field->transform = function ($value) use ($settings) {
@@ -357,9 +357,9 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     {
         $settings = $this;
         return $this->makeProperty('sitesearch_keyword_parameters', $default = [], FieldConfig::TYPE_ARRAY, function (FieldConfig $field) use ($settings) {
-            $field->title = Piwik::translate('SitesManager_SearchKeywordLabel');
+            $field->title = Matomo::translate('SitesManager_SearchKeywordLabel');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->inlineHelp = Piwik::translate('SitesManager_SearchKeywordParametersDesc');
+            $field->inlineHelp = Matomo::translate('SitesManager_SearchKeywordParametersDesc');
             $field->condition = 'sitesearch && !use_default_site_search_params';
             $field->transform = function ($value) use ($settings) {
                 if ($settings->unsetSiteSearchKeywords) {
@@ -373,11 +373,11 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     private function makeSiteSearchCategory()
     {
         return $this->makeProperty('sitesearch_category_parameters', $default = [], FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('SitesManager_SearchCategoryLabel');
+            $field->title = Matomo::translate('SitesManager_SearchCategoryLabel');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->inlineHelp = Piwik::translate('Goals_Optional')
+            $field->inlineHelp = Matomo::translate('Goals_Optional')
                 . '<br /><br />'
-                . Piwik::translate('SitesManager_SearchCategoryParametersDesc');
+                . Matomo::translate('SitesManager_SearchCategoryParametersDesc');
 
             $field->condition = 'sitesearch && !use_default_site_search_params';
         });
@@ -386,17 +386,17 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
     private function makeEcommerce()
     {
         return $this->makeProperty('ecommerce', $default = 0, FieldConfig::TYPE_INT, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Goals_Ecommerce');
-            $field->inlineHelp = Piwik::translate('SitesManager_EcommerceHelp')
+            $field->title = Matomo::translate('Goals_Ecommerce');
+            $field->inlineHelp = Matomo::translate('SitesManager_EcommerceHelp')
                 . '<br />'
-                . Piwik::translate(
+                . Matomo::translate(
                     'SitesManager_PiwikOffersEcommerceAnalytics',
                     ["<a href='" . Url::addCampaignParametersToMatomoLink('https://matomo.org/docs/ecommerce-analytics/') . "' target='_blank'>", '</a>']
                 );
             $field->uiControl = FieldConfig::UI_CONTROL_SINGLE_SELECT;
             $field->availableValues = [
-                0 => Piwik::translate('SitesManager_NotAnEcommerceSite'),
-                1 => Piwik::translate('SitesManager_EnableEcommerce'),
+                0 => Matomo::translate('SitesManager_NotAnEcommerceSite'),
+                1 => Matomo::translate('SitesManager_EnableEcommerce'),
             ];
         });
     }

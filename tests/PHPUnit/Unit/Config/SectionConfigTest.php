@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Config;
+namespace Matomo\Tests\Unit\Config;
 
-use Piwik\Config;
-use Piwik\Config\SectionConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Config;
+use Matomo\Config\SectionConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
 
 class SectionConfigTest extends UnitTestCase
 {

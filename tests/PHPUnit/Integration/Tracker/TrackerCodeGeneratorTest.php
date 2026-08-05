@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Config;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\Mock\Plugin\Manager;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\TrackerCodeGenerator;
+use Matomo\Config;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\Mock\Plugin\Manager;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\TrackerCodeGenerator;
 
 /**
  * @group Core
@@ -30,7 +30,7 @@ class TrackerCodeGeneratorTest extends IntegrationTestCase
             'http://another-domain/piwik',
             'https://another-domain/piwik',
         );
-        $idSite = \Piwik\Plugins\SitesManager\API::getInstance()->addSite('Site name here <-->', $urls);
+        $idSite = \Matomo\Plugins\SitesManager\API::getInstance()->addSite('Site name here <-->', $urls);
         $jsTag = $generator->generate(
             $idSite,
             'http://piwik-server/piwik',
@@ -118,7 +118,7 @@ class TrackerCodeGeneratorTest extends IntegrationTestCase
     {
         $generator = new TrackerCodeGenerator();
 
-        Piwik::addAction('Tracker.getJavascriptCode', function (&$codeImpl) {
+        Matomo::addAction('Tracker.getJavascriptCode', function (&$codeImpl) {
             $codeImpl['protocol'] = 'https://';
         });
 
@@ -179,7 +179,7 @@ class TrackerCodeGeneratorTest extends IntegrationTestCase
     {
         $generator = new TrackerCodeGenerator();
 
-        Piwik::addAction('Tracker.getJavascriptCode', function (&$codeImpl) {
+        Matomo::addAction('Tracker.getJavascriptCode', function (&$codeImpl) {
             $codeImpl['optionsBeforeTrackerUrl'] .= "_paq.push(['setAPIUrl', 'http://localhost/statistics']);\n    ";
         });
 
@@ -241,7 +241,7 @@ class TrackerCodeGeneratorTest extends IntegrationTestCase
     {
         $generator = new TrackerCodeGenerator();
 
-        Piwik::addAction('Tracker.getJavascriptCode', function (&$codeImpl) {
+        Matomo::addAction('Tracker.getJavascriptCode', function (&$codeImpl) {
             $codeImpl['loadAsync'] = false;
         });
 

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings\Plugin;
+namespace Matomo\Tests\Integration\Settings\Plugin;
 
-use Piwik\Db;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Plugin\UserSetting;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\Mock\Settings\FakeUserSettings;
-use Piwik\Tests\Integration\Settings\IntegrationTestCase;
+use Matomo\Db;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Plugin\UserSetting;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\Mock\Settings\FakeUserSettings;
+use Matomo\Tests\Integration\Settings\IntegrationTestCase;
 
 /**
  * @group PluginSettings

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\Categories;
+namespace Matomo\Plugins\Live\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class RealTimeVisitorsSubcategory extends Subcategory
 {
@@ -20,8 +20,8 @@ class RealTimeVisitorsSubcategory extends Subcategory
 
     public function getHelp()
     {
-        $result = '<p>' . Piwik::translate('Live_RealTimeHelp1') . '</p>';
-        $result .= '<p>' . Piwik::translate('Live_RealTimeHelp2') . '</p>';
+        $result = '<p>' . Matomo::translate('Live_RealTimeHelp1') . '</p>';
+        $result .= '<p>' . Matomo::translate('Live_RealTimeHelp2') . '</p>';
         return $result;
     }
 }

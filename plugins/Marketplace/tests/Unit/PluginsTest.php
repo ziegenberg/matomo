@@ -1,9 +1,9 @@
 <?php
 
-namespace Piwik\Plugins\Marketplace\tests\Unit;
+namespace Matomo\Plugins\Marketplace\tests\Unit;
 
-use Piwik\Plugins\Marketplace\Plugins;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Plugins\Marketplace\Plugins;
+use Matomo\Tests\Framework\Fixture;
 use ReflectionClass;
 
 /**
@@ -21,9 +21,9 @@ class PluginsTest extends \PHPUnit\Framework\TestCase
         Fixture::loadAllTranslations();
 
         $pluginsClass = new Plugins(
-            $this->createMock('Piwik\Plugins\Marketplace\Api\Client'),
-            $this->createMock('Piwik\Plugins\Marketplace\Consumer'),
-            $this->createMock('Piwik\ProfessionalServices\Advertising')
+            $this->createMock('Matomo\Plugins\Marketplace\Api\Client'),
+            $this->createMock('Matomo\Plugins\Marketplace\Consumer'),
+            $this->createMock('Matomo\ProfessionalServices\Advertising')
         );
 
         $pluginsReflection = new ReflectionClass($pluginsClass);

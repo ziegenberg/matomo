@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Columns;
+namespace Matomo\Columns;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\Metric;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\Metric;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * Manages the global list of metrics that can be used in reports.
@@ -123,7 +123,7 @@ class MetricsList
          *
          * @param MetricsList $list An instance of the MetricsList. You can add metrics to the list this way.
          */
-        Piwik::postEvent('Metric.addMetrics', array($list));
+        Matomo::postEvent('Metric.addMetrics', array($list));
 
         $dimensions = Dimension::getAllDimensions();
         foreach ($dimensions as $dimension) {
@@ -147,21 +147,21 @@ class MetricsList
          *
          * @param MetricsList $list An instance of the MetricsList. You can add metrics to the list this way.
          */
-        Piwik::postEvent('Metric.addComputedMetrics', array($list, $computedFactory));
+        Matomo::postEvent('Metric.addComputedMetrics', array($list, $computedFactory));
 
         /**
          * Triggered to filter metrics.
          *
          * **Example**
          *
-         *     public function removeMetrics(Piwik\Columns\MetricsList $list)
+         *     public function removeMetrics(Matomo\Columns\MetricsList $list)
          *     {
          *         $list->remove($category='General_Visits'); // remove all metrics having this category
          *     }
          *
          * @param MetricsList $list An instance of the MetricsList. You can change the list of metrics this way.
          */
-        Piwik::postEvent('Metric.filterMetrics', array($list));
+        Matomo::postEvent('Metric.filterMetrics', array($list));
 
         $availableMetrics = array();
         foreach ($list->getMetrics() as $metric) {

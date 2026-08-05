@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific;
+namespace Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
-use Piwik\Plugins\Goals\Goals;
-use Piwik\Tracker\GoalManager;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
+use Matomo\Plugins\Goals\Goals;
+use Matomo\Tracker\GoalManager;
 
 /**
  * Revenue per entry for a specific goal. Calculated as:
@@ -36,16 +36,16 @@ class RevenuePerEntry extends GoalSpecificProcessedMetric
 
     public function getTranslatedName()
     {
-        return $this->getGoalName() . ' ' . Piwik::translate('General_ColumnValuePerEntry');
+        return $this->getGoalName() . ' ' . Matomo::translate('General_ColumnValuePerEntry');
     }
 
     public function getDocumentation()
     {
-        if ($this->idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
-            return Piwik::translate('Goals_ColumnAverageOrderRevenueDocumentation', $this->getGoalNameForDocs());
+        if ($this->idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+            return Matomo::translate('Goals_ColumnAverageOrderRevenueDocumentation', $this->getGoalNameForDocs());
         }
 
-        return Piwik::translate('Goals_ColumnRevenuePerEntryDocumentation', Piwik::translate('Goals_EcommerceAndGoalsMenu'));
+        return Matomo::translate('Goals_ColumnRevenuePerEntryDocumentation', Matomo::translate('Goals_EcommerceAndGoalsMenu'));
     }
 
     public function getDependentMetrics()
@@ -64,7 +64,7 @@ class RevenuePerEntry extends GoalSpecificProcessedMetric
 
         $goalRevenue = (float) $this->getMetric($goalMetrics, 'revenue', $mappingFromNameToIdGoal);
 
-        return Piwik::getQuotientSafe($goalRevenue, $nbEntrances == 0 ? $conversions : $nbEntrances, GoalManager::REVENUE_PRECISION);
+        return Matomo::getQuotientSafe($goalRevenue, $nbEntrances == 0 ? $conversions : $nbEntrances, GoalManager::REVENUE_PRECISION);
     }
 
     public function format($value, Formatter $formatter)

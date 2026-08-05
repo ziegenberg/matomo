@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Handler;
+namespace Matomo\Plugins\Monolog\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\LogRecord;
-use Piwik\Log\Logger;
-use Piwik\Common;
-use Piwik\Notification;
-use Piwik\Notification\Manager;
+use Matomo\Log\Logger;
+use Matomo\Common;
+use Matomo\Notification;
+use Matomo\Notification\Manager;
 use Zend_Session_Exception;
 
 /**

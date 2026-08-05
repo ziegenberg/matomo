@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome;
+namespace Matomo\Plugins\CoreHome;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Plugins\CoreHome\Columns\VisitGoalBuyer;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugins\CoreHome\Columns\VisitGoalBuyer;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {

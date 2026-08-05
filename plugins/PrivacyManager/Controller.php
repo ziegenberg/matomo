@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Common;
-use Piwik\Config as PiwikConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Metrics\Formatter;
-use Piwik\Nonce;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\LanguagesManager\API as APILanguagesManager;
-use Piwik\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
-use Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
-use Piwik\SiteContentDetector;
-use Piwik\Scheduler\Scheduler;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Config as PiwikConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Metrics\Formatter;
+use Matomo\Nonce;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\LanguagesManager\API as APILanguagesManager;
+use Matomo\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
+use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
+use Matomo\SiteContentDetector;
+use Matomo\Scheduler\Scheduler;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     public const OPTION_LAST_DELETE_PIWIK_LOGS = "lastDelete_piwik_logs";
     public const ACTIVATE_DNT_NONCE = 'PrivacyManager.activateDnt';
@@ -82,7 +82,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function gdprOverview()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $purgeDataSettings = PrivacyManager::getPurgeDataSettings();
 
@@ -90,11 +90,11 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
         if ($purgeDataSettings['delete_reports_older_than'] > 12) {
             $years = floor($purgeDataSettings['delete_reports_older_than'] / 12);
-            $reportRetention .=  $years . ' ' . Piwik::translate($years > 1 ? 'Intl_PeriodYears' : 'Intl_PeriodYear') . ' ';
+            $reportRetention .=  $years . ' ' . Matomo::translate($years > 1 ? 'Intl_PeriodYears' : 'Intl_PeriodYear') . ' ';
         }
         if ($purgeDataSettings['delete_reports_older_than'] % 12 > 0) {
             $months = floor($purgeDataSettings['delete_reports_older_than'] % 12);
-            $reportRetention .= $months . ' ' . Piwik::translate($months > 1 ? 'Intl_PeriodMonths' : 'Intl_PeriodMonth');
+            $reportRetention .= $months . ' ' . Matomo::translate($months > 1 ? 'Intl_PeriodMonths' : 'Intl_PeriodMonth');
         }
 
         $rawDataRetention = '';
@@ -103,18 +103,18 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             // only show months when it is more than 90 days...
             $months = floor($purgeDataSettings['delete_logs_older_than'] / 30.4);
             $daysLeft = round($purgeDataSettings['delete_logs_older_than'] - ($months * 30.4));
-            $rawDataRetention .= $months . ' ' . Piwik::translate($months > 1 ? 'Intl_PeriodMonths' : 'Intl_PeriodMonth') . ' ';
+            $rawDataRetention .= $months . ' ' . Matomo::translate($months > 1 ? 'Intl_PeriodMonths' : 'Intl_PeriodMonth') . ' ';
 
             if ($daysLeft > 0) {
-                $rawDataRetention .= $daysLeft . ' ' . Piwik::translate($daysLeft > 1 ? 'Intl_PeriodDays' : 'Intl_PeriodDay');
+                $rawDataRetention .= $daysLeft . ' ' . Matomo::translate($daysLeft > 1 ? 'Intl_PeriodDays' : 'Intl_PeriodDay');
             }
         } elseif ($purgeDataSettings['delete_logs_older_than'] > 0) {
             $days = $purgeDataSettings['delete_logs_older_than'];
-            $rawDataRetention .= $days . ' ' . Piwik::translate($days > 1 ? 'Intl_PeriodDays' : 'Intl_PeriodDay');
+            $rawDataRetention .= $days . ' ' . Matomo::translate($days > 1 ? 'Intl_PeriodDays' : 'Intl_PeriodDay');
         }
 
         $afterGDPROverviewIntroContent = '';
-        Piwik::postEvent('Template.afterGDPROverviewIntro', [&$afterGDPROverviewIntroContent]);
+        Matomo::postEvent('Template.afterGDPROverviewIntro', [&$afterGDPROverviewIntroContent]);
 
         return $this->renderTemplate('gdprOverview', [
             'reportRetention'     => trim($reportRetention),
@@ -127,15 +127,15 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function usersOptOut()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $doNotTrackOptions = [
             ['key' => '1',
-                'value' => Piwik::translate('PrivacyManager_DoNotTrack_Enable'),
-                'description' => Piwik::translate('General_Recommended')],
+                'value' => Matomo::translate('PrivacyManager_DoNotTrack_Enable'),
+                'description' => Matomo::translate('General_Recommended')],
             ['key' => '0',
-                'value' => Piwik::translate('PrivacyManager_DoNotTrack_Disable'),
-                'description' => Piwik::translate('General_NotRecommended')],
+                'value' => Matomo::translate('PrivacyManager_DoNotTrack_Disable'),
+                'description' => Matomo::translate('General_NotRecommended')],
         ];
 
         $dntChecker = new DoNotTrackHeaderChecker();
@@ -160,7 +160,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function consent()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $view = new View('@PrivacyManager/askingForConsent');
 
@@ -189,21 +189,21 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function gdprTools()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         return $this->renderTemplate('gdprTools');
     }
 
     public function ePrivacyLaws()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         return $this->renderTemplate('ePrivacyLaws');
     }
 
     public function understandingYourLegalObligations()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         return $this->renderTemplate('understandingYourLegalObligations');
     }
@@ -214,7 +214,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
      */
     public function getDatabaseSize()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $view = new View('@PrivacyManager/getDatabaseSize');
 
         $forceEstimate = Common::getRequestVar('forceEstimate', 0);
@@ -226,7 +226,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function compliance(): string
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $view = new View('@PrivacyManager/compliance');
         $view->language = LanguagesManager::getLanguageCodeForCurrentUser();
@@ -237,10 +237,10 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function privacySettings()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $view = new View('@PrivacyManager/privacySettings');
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $api = API::getInstance();
 
             $view->deleteData = $this->getDeleteDataInfo();
@@ -254,7 +254,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $view->language = LanguagesManager::getLanguageCodeForCurrentUser();
         $this->setBasicVariablesView($view);
 
-        $logDataAnonymizations = StaticContainer::get('Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations');
+        $logDataAnonymizations = StaticContainer::get('Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations');
         $view->anonymizations = $logDataAnonymizations->getAllEntries();
         return $view->render();
     }
@@ -273,7 +273,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $doDatabaseSizeEstimate = PiwikConfig::getInstance()->Deletelogs['enable_auto_database_size_estimate'];
 
         // determine the DB size & purged DB size
-        $metadataProvider = StaticContainer::get('Piwik\Plugins\DBStats\MySQLMetadataProvider');
+        $metadataProvider = StaticContainer::get('Matomo\Plugins\DBStats\MySQLMetadataProvider');
         $tableStatuses = $metadataProvider->getAllTablesStatus();
 
         $totalBytes = 0;
@@ -319,14 +319,14 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     private function getDeleteDataInfo()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $deleteDataInfos = [];
         $deleteDataInfos["config"] = PrivacyManager::getPurgeDataSettings();
         $deleteDataInfos["deleteTables"] =
             "<br/>" . implode(", ", LogDataPurger::getDeleteTableLogTables());
 
         /** @var Scheduler $scheduler */
-        $scheduler = StaticContainer::getContainer()->get('Piwik\Scheduler\Scheduler');
+        $scheduler = StaticContainer::getContainer()->get('Matomo\Scheduler\Scheduler');
 
         $scheduleTimetable = $scheduler->getScheduledTimeForMethod("PrivacyManager", "deleteLogTables");
 

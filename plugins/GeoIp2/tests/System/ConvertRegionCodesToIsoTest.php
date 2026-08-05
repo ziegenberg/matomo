@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\tests\System;
+namespace Matomo\Plugins\GeoIp2\tests\System;
 
-use Piwik\Option;
-use Piwik\Plugins\GeoIp2\Commands\ConvertRegionCodesToIso;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Option;
+use Matomo\Plugins\GeoIp2\Commands\ConvertRegionCodesToIso;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 

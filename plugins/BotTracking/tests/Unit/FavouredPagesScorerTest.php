@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Unit;
+namespace Matomo\Plugins\BotTracking\tests\Unit;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
-use Piwik\Plugins\BotTracking\DataTable\FavouredPagesScorer;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
+use Matomo\Plugins\BotTracking\DataTable\FavouredPagesScorer;
+use Matomo\Plugins\BotTracking\Metrics;
 
 /**
  * @group BotTracking

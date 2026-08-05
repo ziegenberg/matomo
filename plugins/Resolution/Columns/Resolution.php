@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution\Columns;
+namespace Matomo\Plugins\Resolution\Columns;
 
-use Piwik\Plugins\Resolution\Resolution as ResolutionPlugin;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Plugins\Resolution\Resolution as ResolutionPlugin;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class Resolution extends VisitDimension
 {

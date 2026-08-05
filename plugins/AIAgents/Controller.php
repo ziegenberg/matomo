@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\AIAgents;
+namespace Matomo\Plugins\AIAgents;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Controller as PluginController;
-use Piwik\Request;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
+use Matomo\Matomo;
+use Matomo\Plugin\Controller as PluginController;
+use Matomo\Request;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
 
 class Controller extends PluginController
 {
@@ -32,7 +32,7 @@ class Controller extends PluginController
         $columns = Request::fromRequest()->getParameter('columns', false);
 
         if (false !== $columns) {
-            $columns = Piwik::getArrayFromApiParameter($columns);
+            $columns = Matomo::getArrayFromApiParameter($columns);
         }
 
         $documentation = $this->translator->translate('AIAgents_AIAgentVisitsDocumentation')

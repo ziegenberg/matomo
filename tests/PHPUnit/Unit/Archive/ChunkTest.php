@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Archive;
+namespace Matomo\Tests\Unit\Archive;
 
-use Piwik\Archive\Chunk;
+use Matomo\Archive\Chunk;
 
 /**
  * @group ChunkTest

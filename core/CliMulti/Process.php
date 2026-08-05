@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\CliMulti;
+namespace Matomo\CliMulti;
 
-use Piwik\CliMulti;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\SettingsServer;
+use Matomo\CliMulti;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\SettingsServer;
 
 /**
  * There are three different states

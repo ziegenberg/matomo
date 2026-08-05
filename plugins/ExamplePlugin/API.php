@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin;
+namespace Matomo\Plugins\ExamplePlugin;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric;
-use Piwik\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric2;
-use Piwik\Segment;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric;
+use Matomo\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric2;
+use Matomo\Segment;
 
 /**
  * API for plugin ExamplePlugin
  *
- * @method static \Piwik\Plugins\ExamplePlugin\API getInstance()
+ * @method static \Matomo\Plugins\ExamplePlugin\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Example method. Please remove if you do not need this API method.
@@ -44,7 +44,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExampleReport(string $idSite, string $period, string $date, ?string $segment = null): DataTable
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $table = DataTable::makeFromSimpleArray(array(
             array('label' => 'My Label 1', 'nb_visits' => '1'),
@@ -60,7 +60,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExampleArchivedMetric(string $idSite, string $period, string $date, ?string $segment = null): DataTable\DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $archive = Archive::build($idSite, $period, $date, $segment);
         return $archive->getDataTableFromNumeric([ExampleMetric::EXAMPLEPLUGIN_METRIC_NAME, ExampleMetric2::EXAMPLEPLUGIN_CONST_METRIC_NAME]);
@@ -68,7 +68,7 @@ class API extends \Piwik\Plugin\API
 
     public function getSegmentHash(string $idSite, string $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $segment = new Segment($segment, [$idSite]);
         return $segment->getHash();

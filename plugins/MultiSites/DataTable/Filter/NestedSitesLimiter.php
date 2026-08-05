@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\DataTable\Filter;
+namespace Matomo\Plugins\MultiSites\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable\Row;
-use Piwik\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable\Row;
+use Matomo\DataTable;
 
 /**
  * Makes sure to not have any subtables anymore and applies the limit to the flattened table.

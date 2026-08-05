@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Category;
+namespace Matomo\Category;
 
 /**
  * Base type for subcategories.
@@ -27,8 +27,8 @@ namespace Piwik\Category;
 class Subcategory
 {
     /**
-     * The id of the subcategory, see eg {@link Piwik\Widget\WidgetConfig::setSubcategoryId()`} or
-     * {@link Piwik\Report\getSubcategoryId()}. The id will be used in the Piwik reporting URL and as the name
+     * The id of the subcategory, see eg {@link Matomo\Widget\WidgetConfig::setSubcategoryId()`} or
+     * {@link Matomo\Report\getSubcategoryId()}. The id will be used in the Piwik reporting URL and as the name
      * in the Piwik reporting submenu. If you want to define a different URL and name, specify a {@link $name}.
      * For example you might want to have the actual GoalId (eg '4') in the URL but the actual goal name in the
      * submenu (eg 'Downloads'). In this case one should specify `$id=4;$name='Downloads'`.
@@ -39,7 +39,7 @@ class Subcategory
 
     /**
      * The id of the category the subcategory belongs to, must be specified.
-     * See {@link Piwik\Widget\WidgetConfig::setCategoryId()`} or {@link Piwik\Report\getCategoryId()}.
+     * See {@link Matomo\Widget\WidgetConfig::setCategoryId()`} or {@link Matomo\Report\getCategoryId()}.
      *
      * @var string A translation key eg 'General_Visits' or 'Goals_Goals'
      */

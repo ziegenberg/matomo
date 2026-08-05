@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\Integration;
+namespace Matomo\Plugins\SegmentEditor\tests\Integration;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Plugins\SegmentEditor\SegmentQueryDecorator;
-use Piwik\Segment;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Plugins\SegmentEditor\SegmentQueryDecorator;
+use Matomo\Segment;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group SegmentEditor
@@ -36,14 +36,14 @@ class SegmentQueryDecoratorTest extends IntegrationTestCase
         Fixture::createWebsite('2011-01-01');
 
         $this->segmentQueryDecorator = self::$fixture->piwikEnvironment->getContainer()->get(
-            'Piwik\Plugins\SegmentEditor\SegmentQueryDecorator'
+            'Matomo\Plugins\SegmentEditor\SegmentQueryDecorator'
         );
 
         Rules::setBrowserTriggerArchiving(false);
 
         /** @var API $segmentEditorApi */
         $segmentEditorApi = self::$fixture->piwikEnvironment->getContainer()->get(
-            'Piwik\Plugins\SegmentEditor\API'
+            'Matomo\Plugins\SegmentEditor\API'
         );
         $segmentEditorApi->add('segment 1', 'visitCount<2', $idSite = false, $autoArchive = true);
         $segmentEditorApi->add('segment 2', 'countryCode==fr', $idSite = false, $autoArchive = true);

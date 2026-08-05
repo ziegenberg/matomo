@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection;
+namespace Matomo\Plugins\DevicesDetection;
 
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const BROWSER_SEPARATOR = ';';
     public const DEVICE_TYPE_RECORD_NAME = 'DevicesDetection_types';

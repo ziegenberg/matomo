@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Updater;
-use Piwik\Updates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updater\Migration;
+use Matomo\Common;
+use Matomo\Updater;
+use Matomo\Updates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updater\Migration;
 
 class Updates_0_6_rc1 extends Updates
 {
@@ -55,8 +55,8 @@ class Updates_0_6_rc1 extends Updates
         );
         $disabledPlugins = array();
         foreach ($pluginsToDisableMessage as $pluginToDisable => $warningMessage) {
-            if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated($pluginToDisable)) {
-                \Piwik\Plugin\Manager::getInstance()->deactivatePlugin($pluginToDisable);
+            if (\Matomo\Plugin\Manager::getInstance()->isPluginActivated($pluginToDisable)) {
+                \Matomo\Plugin\Manager::getInstance()->deactivatePlugin($pluginToDisable);
                 $disabledPlugins[] = $warningMessage;
             }
         }

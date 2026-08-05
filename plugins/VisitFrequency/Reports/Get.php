@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitFrequency\Reports;
+namespace Matomo\Plugins\VisitFrequency\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
-use Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
-use Piwik\Plugins\CoreHome\Columns\Metrics\BounceRate;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\VisitFrequency\API;
-use Piwik\Plugins\VisitFrequency\Columns\Metrics\ReturningMetric;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
+use Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
+use Matomo\Plugins\CoreHome\Columns\Metrics\BounceRate;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\VisitFrequency\API;
+use Matomo\Plugins\VisitFrequency\Columns\Metrics\ReturningMetric;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
-class Get extends \Piwik\Plugin\Report
+class Get extends \Matomo\Plugin\Report
 {
     protected function init()
     {
         parent::init();
         $this->categoryId    = 'General_Actions';
-        $this->name          = Piwik::translate('VisitFrequency_ColumnReturningVisits');
-        $this->documentation = Piwik::translate('VisitFrequency_VisitFrequencyReportDocumentation');
+        $this->name          = Matomo::translate('VisitFrequency_ColumnReturningVisits');
+        $this->documentation = Matomo::translate('VisitFrequency_VisitFrequencyReportDocumentation');
         $this->processedMetrics = [
             new ReturningMetric(new AverageTimeOnSite(), API::RETURNING_COLUMN_SUFFIX),
             new ReturningMetric(new ActionsPerVisit(), API::RETURNING_COLUMN_SUFFIX),
@@ -98,7 +98,7 @@ class Get extends \Piwik\Plugin\Report
         ];
 
         foreach ($translations as $metric => $key) {
-            $translations[$metric] = Piwik::translate('VisitFrequency_' . $key);
+            $translations[$metric] = Matomo::translate('VisitFrequency_' . $key);
         }
 
         return $translations;

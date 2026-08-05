@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Handler;
+namespace Matomo\Plugins\Monolog\Handler;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\LogRecord;
-use Piwik\Common;
-use Piwik\Db;
+use Matomo\Common;
+use Matomo\Db;
 
 /**
  * Writes log to database.

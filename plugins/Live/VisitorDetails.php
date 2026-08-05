@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\DataTable;
-use Piwik\Metrics\Formatter;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\DataTable;
+use Matomo\Metrics\Formatter;
 use Matomo\Network\IPUtils;
-use Piwik\Piwik;
-use Piwik\Site;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Plugins\Referrers\API as APIReferrers;
-use Piwik\View;
+use Matomo\Matomo;
+use Matomo\Site;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Plugins\Referrers\API as APIReferrers;
+use Matomo\View;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {
@@ -285,7 +285,7 @@ class VisitorDetails extends VisitorDetailsAbstract
             $referrerType === false
             || $referrerType == 'direct'
         ) {
-            return Piwik::translate('Referrers_DirectEntry');
+            return Matomo::translate('Referrers_DirectEntry');
         }
 
         if ($referrerType == 'search') {
@@ -302,7 +302,7 @@ class VisitorDetails extends VisitorDetailsAbstract
         }
 
         if ($referrerType == 'campaign') {
-            $summary = Piwik::translate('Referrers_ColumnCampaign') . ': ' . $visit->getColumn('referrerName');
+            $summary = Matomo::translate('Referrers_ColumnCampaign') . ': ' . $visit->getColumn('referrerName');
             $keyword = $visit->getColumn('referrerKeyword');
             if (!empty($keyword)) {
                 $summary .= ' - ' . $keyword;
@@ -323,7 +323,7 @@ class VisitorDetails extends VisitorDetailsAbstract
             return $this->cachedAdditionalSiteUrls[$idSite];
         }
 
-        $sitesModel = new \Piwik\Plugins\SitesManager\Model();
+        $sitesModel = new \Matomo\Plugins\SitesManager\Model();
         $additionalSiteUrls = $sitesModel->getAliasSiteUrlsFromId($idSite);
 
         $this->cachedAdditionalSiteUrls[$idSite] = $additionalSiteUrls;

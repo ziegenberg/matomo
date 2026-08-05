@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Unit\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\tests\Unit\Diagnostic;
 
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResultItem;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResultItem;
 
 class DiagnosticResultTest extends \PHPUnit\Framework\TestCase
 {
@@ -31,7 +31,7 @@ class DiagnosticResultTest extends \PHPUnit\Framework\TestCase
     {
         $result = DiagnosticResult::singleResult('Label', DiagnosticResult::STATUS_ERROR);
 
-        $this->assertInstanceOf('Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult', $result);
+        $this->assertInstanceOf('Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult', $result);
         $this->assertEquals('Label', $result->getLabel());
         $this->assertEquals(DiagnosticResult::STATUS_ERROR, $result->getStatus());
     }

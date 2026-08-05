@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\ThreeSitesWithManyVisitsWithSiteSearch;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\ThreeSitesWithManyVisitsWithSiteSearch;
 
 /**
  * Testing the various use cases w/ internal Site Search tracking

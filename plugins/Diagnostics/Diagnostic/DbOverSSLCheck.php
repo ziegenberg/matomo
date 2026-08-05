@@ -1,11 +1,11 @@
 <?php
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 /**
  * Check if Piwik is connected with database through ssl.

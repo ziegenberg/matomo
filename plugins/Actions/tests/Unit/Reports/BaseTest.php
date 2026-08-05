@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\tests\Unit\Reports;
+namespace Matomo\Plugins\Actions\tests\Unit\Reports;
 
-use Piwik\Config;
-use Piwik\Plugins\Actions\Reports\GetEntryPageTitles;
-use Piwik\Plugins\Actions\Reports\GetPageTitles;
-use Piwik\Plugins\Actions\Reports\GetPageUrls;
+use Matomo\Config;
+use Matomo\Plugins\Actions\Reports\GetEntryPageTitles;
+use Matomo\Plugins\Actions\Reports\GetPageTitles;
+use Matomo\Plugins\Actions\Reports\GetPageUrls;
 
 class BaseTest extends \PHPUnit\Framework\TestCase
 {

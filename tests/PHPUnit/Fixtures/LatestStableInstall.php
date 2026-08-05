@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Config;
-use Piwik\Filesystem;
-use Piwik\Http;
-use Piwik\Plugins\CoreUpdater\ReleaseChannel\LatestStable;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Unzip;
-use Piwik\Version;
+use Matomo\Config;
+use Matomo\Filesystem;
+use Matomo\Http;
+use Matomo\Plugins\CoreUpdater\ReleaseChannel\LatestStable;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Unzip;
+use Matomo\Version;
 
 class LatestStableInstall extends Fixture
 {

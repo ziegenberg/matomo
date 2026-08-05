@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\JsTrackerInstallCheck\tests\Integration;
+namespace Matomo\Plugins\JsTrackerInstallCheck\tests\Integration;
 
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class JsTrackerInstallCheckIntegrationTestCase extends IntegrationTestCase
 {

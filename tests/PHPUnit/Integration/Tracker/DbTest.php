@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Timer;
-use Piwik\Tracker;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Timer;
+use Matomo\Tracker;
 
 /**
  * Tracker DB test
@@ -106,7 +106,7 @@ class DbTest extends IntegrationTestCase
 
     public function testFetchOneNotExistingTable()
     {
-        $this->expectException(\Piwik\Tracker\Db\DbException::class);
+        $this->expectException(\Matomo\Tracker\Db\DbException::class);
         $this->expectExceptionMessage('doesn\'t exist');
 
         $db = Tracker::getDatabase();
@@ -117,7 +117,7 @@ class DbTest extends IntegrationTestCase
 
     public function testQueryErrorWhenInsertingDuplicateRow()
     {
-        $this->expectException(\Piwik\Tracker\Db\DbException::class);
+        $this->expectException(\Matomo\Tracker\Db\DbException::class);
         $this->expectExceptionMessage('Duplicate entry');
 
         $this->insertRowId();

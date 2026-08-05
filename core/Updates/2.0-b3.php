@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Updater;
-use Piwik\Updates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updater;
+use Matomo\Updates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 class Updates_2_0_b3 extends Updates
 {
@@ -43,7 +43,7 @@ class Updates_2_0_b3 extends Updates
         $updater->executeMigrations(__FILE__, $this->getMigrations($updater));
 
         try {
-            \Piwik\Plugin\Manager::getInstance()->activatePlugin('Events');
+            \Matomo\Plugin\Manager::getInstance()->activatePlugin('Events');
         } catch (\Exception $e) {
         }
     }

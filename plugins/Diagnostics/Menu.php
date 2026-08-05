@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics;
+namespace Matomo\Plugins\Diagnostics;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
 
 /**
  * This class allows you to add, remove or rename menu items.
  * To configure a menu (such as Admin Menu, Reporting Menu, User Menu...) simply call the corresponding methods as
  * described in the API-Reference https://developer.matomo.org/api-reference/Piwik/Menu/MenuAbstract
  */
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $menu->addDiagnosticItem('Diagnostics_ConfigFileTitle', $this->urlForAction('configfile'), $orderId = 30);
         }
     }

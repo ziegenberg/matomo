@@ -7,42 +7,42 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
 use DeviceDetector\DeviceDetector;
 use Exception;
-use Piwik\Access;
-use Piwik\API\Request as ApiRequest;
-use Piwik\Access\CapabilitiesProvider;
-use Piwik\Access\Role\Admin;
-use Piwik\Access\RolesProvider;
-use Piwik\Auth\Password;
-use Piwik\Common;
-use Piwik\Concurrency\Lock;
-use Piwik\Concurrency\LockBackend;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\NoAccessException;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\ThemeStyles;
-use Piwik\Plugins\CoreAdminHome\Emails\AnonymousAccessEnabledEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\UserDeletedEmail;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\UsersManager\Emails\UserInfoChangedEmail;
-use Piwik\Plugins\UsersManager\Repository\UserRepository;
-use Piwik\Plugins\UsersManager\Validators\AllowedEmailDomain;
-use Piwik\Plugins\UsersManager\Validators\Email;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Tracker\Cache;
-use Piwik\Url;
-use Piwik\Validators\BaseValidator;
-use Piwik\Validators\NotEmpty;
-use Piwik\Validators\NumberRange;
+use Matomo\Access;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Access\CapabilitiesProvider;
+use Matomo\Access\Role\Admin;
+use Matomo\Access\RolesProvider;
+use Matomo\Auth\Password;
+use Matomo\Common;
+use Matomo\Concurrency\Lock;
+use Matomo\Concurrency\LockBackend;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\NoAccessException;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\ThemeStyles;
+use Matomo\Plugins\CoreAdminHome\Emails\AnonymousAccessEnabledEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\UserDeletedEmail;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\UsersManager\Emails\UserInfoChangedEmail;
+use Matomo\Plugins\UsersManager\Repository\UserRepository;
+use Matomo\Plugins\UsersManager\Validators\AllowedEmailDomain;
+use Matomo\Plugins\UsersManager\Validators\Email;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Tracker\Cache;
+use Matomo\Url;
+use Matomo\Validators\BaseValidator;
+use Matomo\Validators\NotEmpty;
+use Matomo\Validators\NumberRange;
 
 /**
  * The UsersManager API lets you Manage Users and their permissions to access specific websites.
@@ -58,7 +58,7 @@ use Piwik\Validators\NumberRange;
  *
  * @phpstan-import-type UserRow from Model
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const OPTION_NAME_PREFERENCE_SEPARATOR = '_';
 
@@ -145,7 +145,7 @@ class API extends \Piwik\Plugin\API
      * Example of how you would overwrite the UsersManager_API with your own class:
      * Call the following in your plugin __construct() for example:
      *
-     * StaticContainer::getContainer()->set('UsersManager_API', \Piwik\Plugins\MyCustomUsersManager\API::getInstance());
+     * StaticContainer::getContainer()->set('UsersManager_API', \Matomo\Plugins\MyCustomUsersManager\API::getInstance());
      *
      * @return API
      */
@@ -159,7 +159,7 @@ class API extends \Piwik\Plugin\API
             }
             self::$instance = $instance;
         } catch (Exception $e) {
-            self::$instance = StaticContainer::get('Piwik\Plugins\UsersManager\API');
+            self::$instance = StaticContainer::get('Matomo\Plugins\UsersManager\API');
             StaticContainer::getContainer()->set('UsersManager_API', self::$instance);
         }
 
@@ -174,7 +174,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAvailableRoles(): array
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $response = [];
 
@@ -197,7 +197,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAvailableCapabilities(): array
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $response = [];
 
@@ -221,7 +221,7 @@ class API extends \Piwik\Plugin\API
      * Plugins can add custom preference names by declaring them in their `config/config.php` like this:
      *
      * ```php
-     * return array('usersmanager.user_preference_names' => \Piwik\DI::add(array('preference_name_1', 'preference_name_2')));
+     * return array('usersmanager.user_preference_names' => \Matomo\DI::add(array('preference_name_1', 'preference_name_2')));
      * ```
      *
      * @param string $userLogin Login of the user whose preference should be updated.
@@ -230,7 +230,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setUserPreference(string $userLogin, string $preferenceName, $preferenceValue): void
     {
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
 
         $userLogin = $this->getCanonicalLogin($userLogin);
 
@@ -239,7 +239,7 @@ class API extends \Piwik\Plugin\API
         }
 
         if (strtolower($userLogin) === 'anonymous') {
-            Piwik::checkUserHasSuperUserAccess();
+            Matomo::checkUserHasSuperUserAccess();
         }
 
         $this->assertPreferenceNameIsSupported($preferenceName);
@@ -268,9 +268,9 @@ class API extends \Piwik\Plugin\API
             // the default value for first parameter is there to have it an optional parameter in the HTTP API
             // in PHP it won't be optional. Could move parameter to the end of the method but did not want to break
             // BC
-            $userLogin = Piwik::getCurrentUserLogin();
+            $userLogin = Matomo::getCurrentUserLogin();
         }
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
 
         $optionValue = $this->getPreferenceValue($userLogin, $preferenceName);
 
@@ -286,7 +286,7 @@ class API extends \Piwik\Plugin\API
      */
     public function initUserPreferenceWithDefault(string $userLogin, string $preferenceName): void
     {
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
 
         $optionValue = $this->getPreferenceValue($userLogin, $preferenceName);
 
@@ -306,7 +306,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAllUsersPreferences(array $preferenceNames): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $supportedPreferenceNames = [];
         foreach ($preferenceNames as $preferenceName) {
@@ -362,7 +362,7 @@ class API extends \Piwik\Plugin\API
             case self::PREFERENCE_THEME_MODE:
                 return self::PREFERENCE_DEFAULT_THEME_MODE;
             case self::PREFERENCE_DEFAULT_REPORT:
-                $viewableSiteIds = \Piwik\Plugins\SitesManager\API::getInstance()->getSitesIdWithAtLeastViewAccess($login);
+                $viewableSiteIds = \Matomo\Plugins\SitesManager\API::getInstance()->getSitesIdWithAtLeastViewAccess($login);
                 if (!empty($viewableSiteIds)) {
                     return reset($viewableSiteIds);
                 }
@@ -395,7 +395,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsersPlusRole(int $idSite, $limit = null, $offset = 0, $filter_search = null, $filter_access = null, $filter_status = null): array
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             // anonymous user should never see any results.
             Common::sendHeader('X-Matomo-Total-Results: 0');
             return [];
@@ -418,7 +418,7 @@ class API extends \Piwik\Plugin\API
             // if the current user is not the superuser, only select users that have access to a site this user
             // has admin access to
             $loginsToLimit = null;
-            if (!Piwik::hasUserSuperUserAccess()) {
+            if (!Matomo::hasUserSuperUserAccess()) {
                 $adminIdSites = Access::getInstance()->getSitesIdWithAdminAccess();
                 if (empty($adminIdSites)) { // sanity check
                     throw new \Exception("The current admin user does not have access to any sites.");
@@ -479,7 +479,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsers(string $userLogins = ''): array
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $logins = [];
 
@@ -499,7 +499,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsersLogin(): array
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $logins = $this->model->getUsersLogin();
         $logins = $this->userFilter->filterLogins($logins);
@@ -517,7 +517,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsersSitesFromAccess(string $access): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->checkAccessType($access);
 
@@ -536,7 +536,7 @@ class API extends \Piwik\Plugin\API
 
         foreach ($access as $entry) {
             if (!$this->isValidAccessType($entry)) {
-                throw new Exception(Piwik::translate(
+                throw new Exception(Matomo::translate(
                     "UsersManager_ExceptionAccessValues",
                     [implode(", ", $this->getAllRolesAndCapabilities()), $entry]
                 ));
@@ -569,7 +569,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsersAccessFromSite(int $idSite): array
     {
-        Piwik::checkUserHasAdminAccess($idSite);
+        Matomo::checkUserHasAdminAccess($idSite);
 
         $usersAccess = $this->model->getUsersAccessFromSite($idSite);
         $usersAccess = $this->userFilter->filterLoginIndexedArray($usersAccess);
@@ -586,7 +586,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsersWithSiteAccess(int $idSite, string $access): array
     {
-        Piwik::checkUserHasAdminAccess($idSite);
+        Matomo::checkUserHasAdminAccess($idSite);
         $this->checkAccessType($access);
 
         $logins = $this->model->getUsersLoginWithSiteAccess($idSite, $access);
@@ -611,12 +611,12 @@ class API extends \Piwik\Plugin\API
      */
     public function getSitesAccessFromUser(string $userLogin): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->checkUserExists($userLogin);
         // Super users have 'admin' access for every site
-        if (Piwik::hasTheUserSuperUserAccess($userLogin)) {
+        if (Matomo::hasTheUserSuperUserAccess($userLogin)) {
             $return = [];
-            $siteManagerModel = new \Piwik\Plugins\SitesManager\Model();
+            $siteManagerModel = new \Matomo\Plugins\SitesManager\Model();
             $sites = $siteManagerModel->getAllSites();
             foreach ($sites as $site) {
                 $return[] = [
@@ -649,15 +649,15 @@ class API extends \Piwik\Plugin\API
         $filter_search = null,
         $filter_access = null
     ): array {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         $this->checkUserExists($userLogin);
 
-        if (Piwik::hasTheUserSuperUserAccess($userLogin)) {
+        if (Matomo::hasTheUserSuperUserAccess($userLogin)) {
             throw new \Exception("This method should not be used with superusers.");
         }
 
         $idSites = null;
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             $idSites = $this->access->getSitesIdWithAdminAccess();
             if (empty($idSites)) { // sanity check
                 throw new \Exception("The current admin user does not have access to any sites.");
@@ -698,7 +698,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUser(string $userLogin): array
     {
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
         $this->checkUserExists($userLogin);
 
         $user = $this->model->getUser($userLogin);
@@ -719,7 +719,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUserByEmail(string $userEmail): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->checkUserEmailExists($userEmail);
 
         $user = $this->model->getUserByEmail($userEmail);
@@ -752,7 +752,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ): void {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         UsersManager::dieIfUsersAdminIsDisabled();
 
         // check password confirmation only when using session auth
@@ -766,9 +766,9 @@ class API extends \Piwik\Plugin\API
 
         $initialIdSite = $initialIdSite === null ? null : intval($initialIdSite);
 
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             if (empty($initialIdSite)) {
-                throw new \Exception(Piwik::translate("UsersManager_AddUserNoInitialAccessError"));
+                throw new \Exception(Matomo::translate("UsersManager_AddUserNoInitialAccessError"));
             }
         }
 
@@ -787,7 +787,7 @@ class API extends \Piwik\Plugin\API
          * @param string $email The new user's e-mail.
          * @param string $inviterLogin The login of the user who created the new user
          */
-        Piwik::postEvent('UsersManager.addUser.end', [$userLogin, $email, Piwik::getCurrentUserLogin()]);
+        Matomo::postEvent('UsersManager.addUser.end', [$userLogin, $email, Matomo::getCurrentUserLogin()]);
     }
 
     /**
@@ -807,7 +807,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ): void {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         UsersManager::dieIfUsersAdminIsDisabled();
 
         // check password confirmation only when using session auth
@@ -819,12 +819,12 @@ class API extends \Piwik\Plugin\API
             $expiryInDays = GeneralConfig::getConfigValue('default_invite_user_token_expiry_days');
         }
 
-        BaseValidator::check(Piwik::translate('UsersManager_ExpiryInDays'), (int) $expiryInDays, [
+        BaseValidator::check(Matomo::translate('UsersManager_ExpiryInDays'), (int) $expiryInDays, [
             new NumberRange(self::MIN_INVITE_EXPIRY_IN_DAYS, self::MAX_INVITE_EXPIRY_IN_DAYS),
         ]);
 
         if (empty($initialIdSite)) {
-            throw new \Exception(Piwik::translate("UsersManager_AddUserNoInitialAccessError"));
+            throw new \Exception(Matomo::translate("UsersManager_AddUserNoInitialAccessError"));
         } else {
             // check if the site exists
             new Site($initialIdSite);
@@ -838,7 +838,7 @@ class API extends \Piwik\Plugin\API
          * @param string $userLogin The new user's login.
          * @param string $email The new user's e-mail.
          */
-        Piwik::postEvent('UsersManager.inviteUser.end', [$userLogin, $email]);
+        Matomo::postEvent('UsersManager.inviteUser.end', [$userLogin, $email]);
     }
 
     /**
@@ -856,7 +856,7 @@ class API extends \Piwik\Plugin\API
         ?string $passwordConfirmation = null
     ): void {
         $this->executeConcurrencySafe($userLogin, function () use ($userLogin, $hasSuperUserAccess, $passwordConfirmation) {
-            Piwik::checkUserHasSuperUserAccess();
+            Matomo::checkUserHasSuperUserAccess();
             $this->checkUserIsNotAnonymous($userLogin);
             UsersManager::dieIfUsersAdminIsDisabled();
 
@@ -873,9 +873,9 @@ class API extends \Piwik\Plugin\API
             $this->checkUserExists($userLogin);
 
             if (!$hasSuperUserAccess && $this->isUserTheOnlyUserHavingSuperUserAccess($userLogin)) {
-                $message = Piwik::translate("UsersManager_ExceptionRemoveSuperUserAccessOnlySuperUser", $userLogin)
+                $message = Matomo::translate("UsersManager_ExceptionRemoveSuperUserAccessOnlySuperUser", $userLogin)
                     . " "
-                    . Piwik::translate("UsersManager_ExceptionYouMustGrantSuperUserAccessFirst");
+                    . Matomo::translate("UsersManager_ExceptionYouMustGrantSuperUserAccessFirst");
                 throw new Exception($message);
             }
 
@@ -893,7 +893,7 @@ class API extends \Piwik\Plugin\API
      */
     public function hasSuperUserAccess(): bool
     {
-        return Piwik::hasUserSuperUserAccess();
+        return Matomo::hasUserSuperUserAccess();
     }
 
     /**
@@ -903,7 +903,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsersHavingSuperUserAccess(): array
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $users = $this->model->getUsersHavingSuperUserAccess();
 
@@ -940,7 +940,7 @@ class API extends \Piwik\Plugin\API
 
         $isEmailNotificationOnInConfig = GeneralConfig::getConfigValue('enable_update_users_email');
 
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
         UsersManager::dieIfUsersAdminIsDisabled();
         $this->checkUserIsNotAnonymous($userLogin);
         $this->checkUserExists($userLogin);
@@ -1014,7 +1014,7 @@ class API extends \Piwik\Plugin\API
          * @param string $userLogin The user's login handle.
          * @param boolean $passwordHasBeenUpdated Flag containing information about password change.
          */
-        Piwik::postEvent('UsersManager.updateUser.end', [$userLogin, $passwordHasBeenUpdated, $email, $password]);
+        Matomo::postEvent('UsersManager.updateUser.end', [$userLogin, $passwordHasBeenUpdated, $email, $password]);
     }
 
     /**
@@ -1029,7 +1029,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ) {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         UsersManager::dieIfUsersAdminIsDisabled();
         $this->checkUserIsNotAnonymous($userLogin);
 
@@ -1043,16 +1043,16 @@ class API extends \Piwik\Plugin\API
         $user = $this->model->getUser($userLogin);
 
         // If user is not a super user check if the user was invited by the current user
-        if (!Piwik::hasUserSuperUserAccess()) {
-            if ($user['invited_by'] !== Piwik::getCurrentUserLogin() || !$this->model->isPendingUser($userLogin)) {
-                throw new NoAccessException(Piwik::translate('UsersManager_ExceptionUserDoesNotExist', $userLogin));
+        if (!Matomo::hasUserSuperUserAccess()) {
+            if ($user['invited_by'] !== Matomo::getCurrentUserLogin() || !$this->model->isPendingUser($userLogin)) {
+                throw new NoAccessException(Matomo::translate('UsersManager_ExceptionUserDoesNotExist', $userLogin));
             }
         }
 
         if ($this->isUserTheOnlyUserHavingSuperUserAccess($userLogin)) {
-            $message = Piwik::translate("UsersManager_ExceptionDeleteOnlyUserWithSuperUserAccess", $userLogin)
+            $message = Matomo::translate("UsersManager_ExceptionDeleteOnlyUserWithSuperUserAccess", $userLogin)
               . " "
-              . Piwik::translate("UsersManager_ExceptionYouMustGrantSuperUserAccessFirst");
+              . Matomo::translate("UsersManager_ExceptionYouMustGrantSuperUserAccessFirst");
             throw new Exception($message);
         }
 
@@ -1060,8 +1060,8 @@ class API extends \Piwik\Plugin\API
 
         $container = StaticContainer::getContainer();
         $email = $container->make(UserDeletedEmail::class, [
-          'login'        => Piwik::getCurrentUserLogin(),
-          'emailAddress' => Piwik::getCurrentUserEmail(),
+          'login'        => Matomo::getCurrentUserLogin(),
+          'emailAddress' => Matomo::getCurrentUserEmail(),
           'userLogin'    => $userLogin,
         ]);
         $email->safeSend();
@@ -1081,7 +1081,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ): void {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (StaticContainer::get(AuthenticationToken::class)->isSessionToken()) {
             $this->confirmCurrentUserPassword($passwordConfirmation);
@@ -1108,10 +1108,10 @@ class API extends \Piwik\Plugin\API
             return true;
         }
 
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
 
-        if ($userLogin === Piwik::getCurrentUserLogin()) {
+        if ($userLogin === Matomo::getCurrentUserLogin()) {
             return true;
         }
 
@@ -1126,8 +1126,8 @@ class API extends \Piwik\Plugin\API
      */
     public function userEmailExists(string $userEmail): bool
     {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
 
         return $this->model->userEmailExists($userEmail);
     }
@@ -1140,8 +1140,8 @@ class API extends \Piwik\Plugin\API
      */
     public function getUserLoginFromUserEmail(string $userEmail): string
     {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $this->checkUserEmailExists($userEmail);
 
@@ -1204,7 +1204,7 @@ class API extends \Piwik\Plugin\API
             strtolower($userLogin) === 'anonymous' &&
             (is_array($access) || !in_array($access, ['view', 'noaccess'], true))
         ) {
-            throw new Exception(Piwik::translate(
+            throw new Exception(Matomo::translate(
                 "UsersManager_ExceptionAnonymousAccessNotPossible",
                 ['noaccess', 'view']
             ));
@@ -1219,12 +1219,12 @@ class API extends \Piwik\Plugin\API
 
             if (count($roles) < 1) {
                 $ids = implode(', ', $this->roleProvider->getAllRoleIds());
-                throw new Exception(Piwik::translate('UsersManager_ExceptionNoRoleSet', $ids));
+                throw new Exception(Matomo::translate('UsersManager_ExceptionNoRoleSet', $ids));
             }
 
             if (count($roles) > 1) {
                 $ids = implode(', ', $this->roleProvider->getAllRoleIds());
-                throw new Exception(Piwik::translate('UsersManager_ExceptionMultipleRoleSet', $ids));
+                throw new Exception(Matomo::translate('UsersManager_ExceptionMultipleRoleSet', $ids));
             }
         } else {
             // as only one access is set, we require it to be a role or "noaccess"...
@@ -1245,7 +1245,7 @@ class API extends \Piwik\Plugin\API
             if ($access === 'noaccess') {
                 // if the access is noaccess then we don't save it as this is the default value
                 // when no access are specified
-                Piwik::postEvent('UsersManager.removeSiteAccess', [$userLogin, $idSites]);
+                Matomo::postEvent('UsersManager.removeSiteAccess', [$userLogin, $idSites]);
             } else {
                 $role = array_shift($roles);
                 $this->model->addUserAccess($userLogin, $role, $idSites);
@@ -1265,7 +1265,7 @@ class API extends \Piwik\Plugin\API
                     $siteNames[] = Site::getNameFor($idSite);
                 }
 
-                $superUsers = Piwik::getAllSuperUserAccessEmailAddresses();
+                $superUsers = Matomo::getAllSuperUserAccessEmailAddresses();
                 foreach ($superUsers as $login => $email) {
                     $email = $container->make(AnonymousAccessEnabledEmail::class, array(
                         'login' => $login,
@@ -1302,7 +1302,7 @@ class API extends \Piwik\Plugin\API
             $idSites = $this->getIdSitesCheckAdminAccess($idSites);
 
             if (strtolower($userLogin) === 'anonymous') {
-                throw new Exception(Piwik::translate("UsersManager_ExceptionAnonymousNoCapabilities"));
+                throw new Exception(Matomo::translate("UsersManager_ExceptionAnonymousNoCapabilities"));
             }
 
             $this->checkUserExists($userLogin);
@@ -1334,7 +1334,7 @@ class API extends \Piwik\Plugin\API
         foreach ($idSites as $idSite) {
             if (!array_key_exists($idSite, $sitesIdWithRole)) {
                 throw new Exception(
-                    Piwik::translate('UsersManager_ExceptionNoCapabilitiesWithoutRole', [$userLogin, $idSite])
+                    Matomo::translate('UsersManager_ExceptionNoCapabilitiesWithoutRole', [$userLogin, $idSite])
                 );
             }
         }
@@ -1439,7 +1439,7 @@ class API extends \Piwik\Plugin\API
 
         if ($idSites === 'all') {
             // in case idSites is all we grant access to all the websites on which the current connected user has an 'admin' access
-            $idSites = \Piwik\Plugins\SitesManager\API::getInstance()->getSitesIdWithAdminAccess();
+            $idSites = \Matomo\Plugins\SitesManager\API::getInstance()->getSitesIdWithAdminAccess();
         } else {
             // in case the idSites is an integer we build an array
             $idSites = Site::getIdSitesFromIdSitesString($idSites, false, true);
@@ -1451,7 +1451,7 @@ class API extends \Piwik\Plugin\API
 
         // it is possible to set user access on websites only for the websites admin
         // basically an admin can give the view or the admin access to any user for the websites they manage
-        Piwik::checkUserHasAdminAccess($idSites);
+        Matomo::checkUserHasAdminAccess($idSites);
 
         if (!is_array($idSites)) {
             $idSites = [$idSites];
@@ -1463,14 +1463,14 @@ class API extends \Piwik\Plugin\API
     private function checkUserExists(string $userLogin): void
     {
         if (!$this->userExists($userLogin)) {
-            throw new Exception(Piwik::translate("UsersManager_ExceptionUserDoesNotExist", $userLogin));
+            throw new Exception(Matomo::translate("UsersManager_ExceptionUserDoesNotExist", $userLogin));
         }
     }
 
     private function checkUserEmailExists(string $userEmail): void
     {
         if (!$this->userEmailExists($userEmail)) {
-            throw new Exception(Piwik::translate("UsersManager_ExceptionUserDoesNotExist", $userEmail));
+            throw new Exception(Matomo::translate("UsersManager_ExceptionUserDoesNotExist", $userEmail));
         }
     }
 
@@ -1479,7 +1479,7 @@ class API extends \Piwik\Plugin\API
         $userLogin = $this->getCanonicalLogin($userLogin);
 
         if (strtolower($userLogin) === 'anonymous') {
-            throw new Exception(Piwik::translate("UsersManager_ExceptionEditAnonymous"));
+            throw new Exception(Matomo::translate("UsersManager_ExceptionEditAnonymous"));
         }
     }
 
@@ -1494,7 +1494,7 @@ class API extends \Piwik\Plugin\API
 
         foreach ($userLogins as $userLogin) {
             if (isset($superusers[$userLogin])) {
-                throw new Exception(Piwik::translate("UsersManager_ExceptionUserHasSuperUserAccess", $userLogin));
+                throw new Exception(Matomo::translate("UsersManager_ExceptionUserHasSuperUserAccess", $userLogin));
             }
         }
     }
@@ -1541,11 +1541,11 @@ class API extends \Piwik\Plugin\API
     ) {
         // Only allowed as a top-level request, not nested within another API request.
         if (ApiRequest::isRootRequestApiRequest() && !ApiRequest::isCurrentApiRequestTheRootApiRequest()) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionCreateTokenAuthWithinNestedRequest'));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionCreateTokenAuthWithinNestedRequest'));
         }
 
         $user = $this->model->getUser($userLogin);
-        if (empty($user) && Piwik::isValidEmailString($userLogin)) {
+        if (empty($user) && Matomo::isValidEmailString($userLogin)) {
             $user = $this->model->getUserByEmail($userLogin);
             if (!empty($user['login'])) {
                 $userLogin = $user['login'];
@@ -1554,12 +1554,12 @@ class API extends \Piwik\Plugin\API
 
         // A logged-in user may only create a token for their own account. Creating a token
         // for a different account requires that account's credentials via an anonymous request.
-        $currentLogin = Piwik::getCurrentUserLogin();
+        $currentLogin = Matomo::getCurrentUserLogin();
         if (
             strtolower((string) $currentLogin) !== 'anonymous'
             && ($user['login'] ?? $userLogin) !== $currentLogin
         ) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionCreateTokenAuthForOtherUser'));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionCreateTokenAuthForOtherUser'));
         }
 
         if (empty($user) || !$this->passwordVerifier->isPasswordCorrect($userLogin, $passwordConfirmation)) {
@@ -1568,10 +1568,10 @@ class API extends \Piwik\Plugin\API
                  * @ignore
                  * @internal
                  */
-                Piwik::postEvent('Login.authenticate.failed', [$userLogin]);
+                Matomo::postEvent('Login.authenticate.failed', [$userLogin]);
             }
 
-            throw new \Exception(Piwik::translate('UsersManager_CurrentPasswordNotCorrect'));
+            throw new \Exception(Matomo::translate('UsersManager_CurrentPasswordNotCorrect'));
         }
 
         if (empty($expireDate) && !empty($expireHours) && is_numeric($expireHours)) {
@@ -1593,10 +1593,10 @@ class API extends \Piwik\Plugin\API
      */
     public function newsletterSignup(): array
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
-        $userLogin = Piwik::getCurrentUserLogin();
-        $email = Piwik::getCurrentUserEmail();
+        $userLogin = Matomo::getCurrentUserLogin();
+        $email = Matomo::getCurrentUserEmail();
 
         $success = NewsletterSignup::signupForNewsletter($userLogin, $email, true);
         $result = $success ? ['success' => true] : ['error' => true];
@@ -1606,7 +1606,7 @@ class API extends \Piwik\Plugin\API
     private function isUserHasAdminAccessTo(int $idSite): bool
     {
         try {
-            Piwik::checkUserHasAdminAccess([$idSite]);
+            Matomo::checkUserHasAdminAccess([$idSite]);
             return true;
         } catch (NoAccessException $ex) {
             return false;
@@ -1617,7 +1617,7 @@ class API extends \Piwik\Plugin\API
     {
         $userExists = $this->model->userExists($userLogin);
         if (!$userExists) {
-            throw new Exception(Piwik::translate("UsersManager_ExceptionUserDoesNotExist", $userLogin));
+            throw new Exception(Matomo::translate("UsersManager_ExceptionUserDoesNotExist", $userLogin));
         }
     }
 
@@ -1689,7 +1689,7 @@ class API extends \Piwik\Plugin\API
         $mail = new UserInfoChangedEmail($type, $newValue, $deviceDescription, $user['login']);
 
         $mail->addTo($emailTo, $user['login']);
-        $mail->setSubject(Piwik::translate($subject));
+        $mail->setSubject(Matomo::translate($subject));
 
         $mail->send();
     }
@@ -1719,7 +1719,7 @@ class API extends \Piwik\Plugin\API
         if (!empty($deviceName)) {
             $description = $deviceName;
         } else {
-            $description = Piwik::translate('General_Unknown');
+            $description = Matomo::translate('General_Unknown');
         }
 
         $deviceBrand = $uaParser->getBrandName();
@@ -1745,28 +1745,28 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ): void {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         // check password confirmation only when using session auth
         if (StaticContainer::get(AuthenticationToken::class)->isSessionToken()) {
             $this->confirmCurrentUserPassword($passwordConfirmation);
         }
 
-        BaseValidator::check(Piwik::translate('UsersManager_ExpiryInDays'), (int) $expiryInDays, [
+        BaseValidator::check(Matomo::translate('UsersManager_ExpiryInDays'), (int) $expiryInDays, [
             new NumberRange(self::MIN_INVITE_EXPIRY_IN_DAYS, self::MAX_INVITE_EXPIRY_IN_DAYS),
         ]);
 
         if (!$this->model->isPendingUser($userLogin)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionUserDoesNotExist', $userLogin));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionUserDoesNotExist', $userLogin));
         }
 
         /** @phpstan-var UserRow $user */
         $user = $this->model->getUser($userLogin);
 
         // If user is not a super user check if the user was invited by the current user
-        if (!Piwik::hasUserSuperUserAccess()) {
-            if ($user['invited_by'] !== Piwik::getCurrentUserLogin()) {
-                throw new NoAccessException(Piwik::translate('UsersManager_ExceptionResendInviteDenied', $userLogin));
+        if (!Matomo::hasUserSuperUserAccess()) {
+            if ($user['invited_by'] !== Matomo::getCurrentUserLogin()) {
+                throw new NoAccessException(Matomo::translate('UsersManager_ExceptionResendInviteDenied', $userLogin));
             }
         }
 
@@ -1777,7 +1777,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param string $userLogin The new user's login.
          */
-        Piwik::postEvent('UsersManager.inviteUser.resendInvite', [$userLogin, $user['email']]);
+        Matomo::postEvent('UsersManager.inviteUser.resendInvite', [$userLogin, $user['email']]);
     }
 
     /**
@@ -1794,28 +1794,28 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ): string {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         // check password confirmation only when using session auth
         if (StaticContainer::get(AuthenticationToken::class)->isSessionToken()) {
             $this->confirmCurrentUserPassword($passwordConfirmation);
         }
 
-        BaseValidator::check(Piwik::translate('UsersManager_ExpiryInDays'), (int) $expiryInDays, [
+        BaseValidator::check(Matomo::translate('UsersManager_ExpiryInDays'), (int) $expiryInDays, [
             new NumberRange(self::MIN_INVITE_EXPIRY_IN_DAYS, self::MAX_INVITE_EXPIRY_IN_DAYS),
         ]);
 
         if (!$this->model->isPendingUser($userLogin)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionUserDoesNotExist', $userLogin));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionUserDoesNotExist', $userLogin));
         }
 
         /** @phpstan-var UserRow $user */
         $user = $this->model->getUser($userLogin);
 
         // If user is not a super user check if the user was invited by the current user
-        if (!Piwik::hasUserSuperUserAccess()) {
-            if ($user['invited_by'] !== Piwik::getCurrentUserLogin()) {
-                throw new NoAccessException(Piwik::translate('UsersManager_ExceptionResendInviteDenied', $userLogin));
+        if (!Matomo::hasUserSuperUserAccess()) {
+            if ($user['invited_by'] !== Matomo::getCurrentUserLogin()) {
+                throw new NoAccessException(Matomo::translate('UsersManager_ExceptionResendInviteDenied', $userLogin));
             }
         }
 
@@ -1826,10 +1826,10 @@ class API extends \Piwik\Plugin\API
          *
          * @param string $userLogin The new user's login.
          */
-        Piwik::postEvent('UsersManager.inviteUser.generateInviteLinkToken', [$userLogin, $user['email']]);
+        Matomo::postEvent('UsersManager.inviteUser.generateInviteLinkToken', [$userLogin, $user['email']]);
 
         return SettingsPiwik::getPiwikUrl() . 'index.php?' . Url::getQueryStringFromParameters([
-                'module' => Piwik::getLoginPluginName(),
+                'module' => Matomo::getLoginPluginName(),
                 'action' => 'acceptInvitation',
                 'token'  => $token,
             ]);

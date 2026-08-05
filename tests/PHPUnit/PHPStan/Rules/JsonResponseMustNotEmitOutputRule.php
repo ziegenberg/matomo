@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -44,7 +44,7 @@ class JsonResponseMustNotEmitOutputRule implements Rule
 
         foreach (JsonResponseRuleHelper::findOutputStatements($node) as $output) {
             $errors[] = RuleErrorBuilder::message(sprintf(
-                'Controller action %s() is marked #[\\Piwik\\Http\\JsonResponse] but emits output'
+                'Controller action %s() is marked #[\Matomo\Http\JsonResponse] but emits output'
                 . ' (echo/print/flush) before returning; this commits the response headers early and'
                 . ' can prevent the JSON Content-Type from being applied. Return the JSON string instead.',
                 $node->name->toString()

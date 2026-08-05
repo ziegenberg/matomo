@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Container\StaticContainer;
-use Piwik\EventDispatcher;
-use Piwik\Http;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Version;
+use Matomo\Container\StaticContainer;
+use Matomo\EventDispatcher;
+use Matomo\Http;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Version;
 
 /**
  * @group Core
@@ -366,10 +366,10 @@ class HttpTest extends \PHPUnit\Framework\TestCase
     {
         $params = null;
         $params2 = null;
-        Piwik::addAction('Http.sendHttpRequest', function () use (&$params) {
+        Matomo::addAction('Http.sendHttpRequest', function () use (&$params) {
             $params = func_get_args();
         });
-        Piwik::addAction('Http.sendHttpRequest.end', function () use (&$params2) {
+        Matomo::addAction('Http.sendHttpRequest.end', function () use (&$params2) {
             $params2 = func_get_args();
         });
         $destinationPath = PIWIK_USER_PATH . '/tmp/latest/LATEST';
@@ -423,7 +423,7 @@ class HttpTest extends \PHPUnit\Framework\TestCase
 
     public function testHttpReturnsResultOfPostedEvent()
     {
-        Piwik::addAction('Http.sendHttpRequest', function ($url, $args, &$response, &$status, &$headers) {
+        Matomo::addAction('Http.sendHttpRequest', function ($url, $args, &$response, &$status, &$headers) {
             $response = '{test: true}';
             $status = 204;
             $headers = array('content-length' => 948);

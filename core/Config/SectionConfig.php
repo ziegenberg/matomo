@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Config;
+namespace Matomo\Config;
 
-use Piwik\Config;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Config;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
 
 abstract class SectionConfig
 {

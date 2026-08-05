@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Categories;
+namespace Matomo\Plugins\Ecommerce\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class EcommerceOverviewSubcategory extends Subcategory
 {
@@ -21,9 +21,9 @@ class EcommerceOverviewSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Ecommerce_EcommerceOverviewSubcategoryHelp1') . '</p>'
-            . '<p>' . Piwik::translate('Ecommerce_EcommerceOverviewSubcategoryHelp2') . '</p>'
+        return '<p>' . Matomo::translate('Ecommerce_EcommerceOverviewSubcategoryHelp1') . '</p>'
+            . '<p>' . Matomo::translate('Ecommerce_EcommerceOverviewSubcategoryHelp2') . '</p>'
             . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/ecommerce-analytics/', null, null, 'App.Ecommerce.Overview')
-            . Piwik::translate('Ecommerce_EcommerceOverviewSubcategoryHelp3') . '</a></p>';
+            . Matomo::translate('Ecommerce_EcommerceOverviewSubcategoryHelp3') . '</a></p>';
     }
 }

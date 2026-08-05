@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Category;
+namespace Matomo\Category;
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * Holds the list of categories (with their subcategories) available in the Piwik reporting menu.
@@ -87,7 +87,7 @@ class CategoryList
     {
         $list = new CategoryList();
 
-        $categories = StaticContainer::get('Piwik\Plugin\Categories');
+        $categories = StaticContainer::get('Matomo\Plugin\Categories');
 
         foreach ($categories->getAllCategories() as $category) {
             $list->addCategory($category);

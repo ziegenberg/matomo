@@ -10,18 +10,18 @@
 namespace PHPUnit\Unit\ArchiveProcessor;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\DataTable\Manager;
-use Piwik\DataTable\Row;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Plugins\Goals\RecordBuilders\GeneralGoalsRecords;
-use Piwik\Segment;
-use Piwik\Site;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\DataTable\Manager;
+use Matomo\DataTable\Row;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Plugins\Goals\RecordBuilders\GeneralGoalsRecords;
+use Matomo\Segment;
+use Matomo\Site;
 
 class RecordBuilderTest extends TestCase
 {

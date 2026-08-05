@@ -1,18 +1,17 @@
 <?php
 
 return array(
-    'Piwik\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator' => Piwik\DI::autowire('Piwik\Plugins\TwoFactorAuth\Dao\TwoFaSecretStaticGenerator'),
-    'Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeRandomGenerator' => Piwik\DI::autowire('Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeStaticGenerator'),
-    'Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication' => Piwik\DI::decorate(function ($previous) {
-        /** @var Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication $previous */
-
-        if (!\Piwik\SettingsPiwik::isMatomoInstalled()) {
+    'Matomo\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator' => Matomo\DI::autowire('Matomo\Plugins\TwoFactorAuth\Dao\TwoFaSecretStaticGenerator'),
+    'Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeRandomGenerator' => Matomo\DI::autowire('Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeStaticGenerator'),
+    'Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication' => Matomo\DI::decorate(function ($previous) {
+        /** @var Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication $previous */
+        if (!\Matomo\SettingsPiwik::isMatomoInstalled()) {
             return $previous;
         }
 
-        $fakeCorrectAuthCode = \Piwik\Container\StaticContainer::get('test.vars.fakeCorrectAuthCode');
-        if (!empty($fakeCorrectAuthCode) && !\Piwik\Common::isPhpCliMode()) {
-            $staticSecret = new \Piwik\Plugins\TwoFactorAuth\Dao\TwoFaSecretStaticGenerator();
+        $fakeCorrectAuthCode = \Matomo\Container\StaticContainer::get('test.vars.fakeCorrectAuthCode');
+        if (!empty($fakeCorrectAuthCode) && !\Matomo\Common::isPhpCliMode()) {
+            $staticSecret = new \Matomo\Plugins\TwoFactorAuth\Dao\TwoFaSecretStaticGenerator();
             $secret = $staticSecret->generateSecret();
 
             require_once PIWIK_DOCUMENT_ROOT . '/libs/Authenticator/TwoFactorAuthenticator.php';
@@ -27,33 +26,32 @@ return array(
 
         return $previous;
     }),
-    'Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao' => Piwik\DI::decorate(function ($previous) {
-        /** @var Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao $previous */
-
-        if (!\Piwik\SettingsPiwik::isMatomoInstalled()) {
+    'Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao' => Matomo\DI::decorate(function ($previous) {
+        /** @var Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao $previous */
+        if (!\Matomo\SettingsPiwik::isMatomoInstalled()) {
             return $previous;
         }
 
-        $restoreCodes = \Piwik\Container\StaticContainer::get('test.vars.restoreRecoveryCodes');
+        $restoreCodes = \Matomo\Container\StaticContainer::get('test.vars.restoreRecoveryCodes');
         if (!empty($restoreCodes)) {
             // we ensure this recovery code always works for those users
             foreach (array('with2FA', 'with2FADisable') as $user) {
                 $previous->useRecoveryCode($user, '123456'); // we are using it first to make sure there is no duplicate
                 $previous->insertRecoveryCode($user, '123456');
-                \Piwik\Option::deleteLike(\Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication::OPTION_PREFIX_TWO_FA_CODE_USED . '%');
+                \Matomo\Option::deleteLike(\Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication::OPTION_PREFIX_TWO_FA_CODE_USED . '%');
             }
         }
 
         return $previous;
     }),
-    'Piwik\Plugins\TwoFactorAuth\SystemSettings' => Piwik\DI::decorate(function ($previous) {
-        /** @var Piwik\Plugins\TwoFactorAuth\SystemSettings $previous */
-        if (!\Piwik\SettingsPiwik::isMatomoInstalled()) {
+    'Matomo\Plugins\TwoFactorAuth\SystemSettings' => Matomo\DI::decorate(function ($previous) {
+        /** @var Matomo\Plugins\TwoFactorAuth\SystemSettings $previous */
+        if (!\Matomo\SettingsPiwik::isMatomoInstalled()) {
             return $previous;
         }
 
-        Piwik\Access::doAsSuperUser(function () use ($previous) {
-            $requireTwoFa = \Piwik\Container\StaticContainer::get('test.vars.requireTwoFa');
+        Matomo\Access::doAsSuperUser(function () use ($previous) {
+            $requireTwoFa = \Matomo\Container\StaticContainer::get('test.vars.requireTwoFa');
             if (!empty($requireTwoFa)) {
                 $previous->twoFactorAuthRequired->setValue(1);
             } else {

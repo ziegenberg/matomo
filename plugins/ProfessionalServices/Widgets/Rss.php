@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices\Widgets;
+namespace Matomo\Plugins\ProfessionalServices\Widgets;
 
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\WidgetConfig;
 
-class Rss extends \Piwik\Widget\Widget
+class Rss extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

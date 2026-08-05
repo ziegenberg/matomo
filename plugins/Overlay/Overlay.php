@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Overlay;
+namespace Matomo\Plugins\Overlay;
 
-use Piwik\Url;
-use Piwik\UrlHelper;
+use Matomo\Url;
+use Matomo\UrlHelper;
 
-class Overlay extends \Piwik\Plugin
+class Overlay extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

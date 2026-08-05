@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\System;
+namespace Matomo\Plugins\UserCountry\tests\System;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\UserCountry\Commands\AttributeHistoricalDataWithLocations;
-use Piwik\Tests\Fixtures\ManyVisitsWithGeoIP;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\UserCountry\Commands\AttributeHistoricalDataWithLocations;
+use Matomo\Tests\Fixtures\ManyVisitsWithGeoIP;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 

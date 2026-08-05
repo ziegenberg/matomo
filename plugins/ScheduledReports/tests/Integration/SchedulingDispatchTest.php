@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests\Integration;
+namespace Matomo\Plugins\ScheduledReports\tests\Integration;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\Date;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\ReportRenderer;
-use Piwik\Scheduler\Schedule\Schedule;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Date;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\ReportRenderer;
+use Matomo\Scheduler\Schedule\Schedule;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/ScheduledReports/ScheduledReports.php';
 
@@ -44,7 +44,7 @@ class SchedulingDispatchTest extends IntegrationTestCase
 
         FakeAccess::$superUser = true;
 
-        \Piwik\Plugin\Manager::getInstance()->loadPlugins([
+        \Matomo\Plugin\Manager::getInstance()->loadPlugins([
             'API',
             'UserCountry',
             'ScheduledReports',
@@ -54,7 +54,7 @@ class SchedulingDispatchTest extends IntegrationTestCase
             'Live',
             'SegmentEditor',
         ]);
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
 
         APISitesManager::getInstance()->addSite('Test', ['http://piwik.net']);
         FakeAccess::setIdSitesView([$this->idSite]);
@@ -75,9 +75,9 @@ class SchedulingDispatchTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
-            'observers.global' => \Piwik\DI::add([
-                ['Test.Mail.send', \Piwik\DI::value(function (PHPMailer $mail) {
+            'Matomo\Access' => new FakeAccess(),
+            'observers.global' => \Matomo\DI::add([
+                ['Test.Mail.send', \Matomo\DI::value(function (PHPMailer $mail) {
                     $this->mailsSent[] = clone $mail;
                     $mail->preSend();
                 })],

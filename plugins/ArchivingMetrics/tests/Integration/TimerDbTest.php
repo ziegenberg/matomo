@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics\tests\Integration;
+namespace Matomo\Plugins\ArchivingMetrics\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Period;
-use Piwik\Plugins\ArchivingMetrics\Clock\Clock;
-use Piwik\Plugins\ArchivingMetrics\Context;
-use Piwik\Plugins\ArchivingMetrics\Timer;
-use Piwik\Plugins\ArchivingMetrics\Writer\DbWriter;
-use Piwik\Segment;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Period;
+use Matomo\Plugins\ArchivingMetrics\Clock\Clock;
+use Matomo\Plugins\ArchivingMetrics\Context;
+use Matomo\Plugins\ArchivingMetrics\Timer;
+use Matomo\Plugins\ArchivingMetrics\Writer\DbWriter;
+use Matomo\Segment;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ArchivingMetrics
@@ -30,7 +30,7 @@ class TimerDbTest extends IntegrationTestCase
 {
     public function testItWritesAndReadsFromDatabase(): void
     {
-        $period = new Period\Day(\Piwik\Date::factory('2020-11-01'));
+        $period = new Period\Day(\Matomo\Date::factory('2020-11-01'));
         $segment = new Segment('', [1]);
         $context = new Context(1, $period, $segment, '');
 

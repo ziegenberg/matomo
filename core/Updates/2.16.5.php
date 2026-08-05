@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Date;
-use Piwik\Plugins\ScheduledReports\API as ScheduledReportsAPI;
-use Piwik\Plugins\ScheduledReports\Model as ScheduledReportsModel;
-use Piwik\Site;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
+use Matomo\Date;
+use Matomo\Plugins\ScheduledReports\API as ScheduledReportsAPI;
+use Matomo\Plugins\ScheduledReports\Model as ScheduledReportsModel;
+use Matomo\Site;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
 
 /**
  * Update for version 2.16.5.

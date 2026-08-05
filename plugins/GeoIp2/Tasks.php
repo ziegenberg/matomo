@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2;
+namespace Matomo\Plugins\GeoIp2;
 
-use Piwik\Plugins\UserCountry\UserCountry;
-use Piwik\SettingsPiwik;
+use Matomo\Plugins\UserCountry\UserCountry;
+use Matomo\SettingsPiwik;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     public function schedule()
     {

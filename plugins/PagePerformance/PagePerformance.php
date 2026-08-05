@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance;
+namespace Matomo\Plugins\PagePerformance;
 
-use Piwik\DataTable;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\DataTable;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
 
-class PagePerformance extends \Piwik\Plugin
+class PagePerformance extends \Matomo\Plugin
 {
     public static $availableForMethods = [
         'getPageUrls',
@@ -32,7 +32,7 @@ class PagePerformance extends \Piwik\Plugin
     }
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\Unit\DataTable;
+namespace Matomo\Plugins\API\tests\Unit\DataTable;
 
-use Piwik\DataTable;
-use Piwik\Plugins\API\DataTable\MergeDataTables;
+use Matomo\DataTable;
+use Matomo\Plugins\API\DataTable\MergeDataTables;
 
 class MergeDataTablesTest extends \PHPUnit\Framework\TestCase
 {

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ViewDataTable;
+namespace Matomo\ViewDataTable;
 
-use Piwik\Common;
+use Matomo\Common;
 
 /**
- * Contains base request properties for {@link Piwik\Plugin\ViewDataTable} instances. Manipulating
- * these properties will change the way a {@link Piwik\Plugin\ViewDataTable} loads report data.
+ * Contains base request properties for {@link Matomo\Plugin\ViewDataTable} instances. Manipulating
+ * these properties will change the way a {@link Matomo\Plugin\ViewDataTable} loads report data.
  *
  * <a name="client-side-parameters-desc"></a>
  * **Client Side Parameters**
@@ -33,13 +33,13 @@ use Piwik\Common;
  *
  * **Reusing base properties**
  *
- * Many of the properties in this class only have meaning for the {@link Piwik\Plugin\Visualization}
- * class, but can be set for other visualizations that extend {@link Piwik\Plugin\ViewDataTable}
+ * Many of the properties in this class only have meaning for the {@link Matomo\Plugin\Visualization}
+ * class, but can be set for other visualizations that extend {@link Matomo\Plugin\ViewDataTable}
  * directly.
  *
- * Visualizations that extend {@link Piwik\Plugin\ViewDataTable} directly and want to re-use these
+ * Visualizations that extend {@link Matomo\Plugin\ViewDataTable} directly and want to re-use these
  * properties must make sure the properties are used in the exact same way they are used in
- * {@link Piwik\Plugin\Visualization}.
+ * {@link Matomo\Plugin\Visualization}.
  *
  * **Defining new request properties**
  *
@@ -242,7 +242,7 @@ class RequestConfig
     /**
      * Whether to run generic filters on the DataTable before rendering or not.
      *
-     * @see Piwik\API\DataTableGenericFilter
+     * @see Matomo\API\DataTableGenericFilter
      *
      * Default value: false
      */
@@ -273,14 +273,14 @@ class RequestConfig
     public $idSubtable = false;
 
     /**
-     * Dimension ID to pivot by. See {@link Piwik\DataTable\Filter\PivotByDimension} for more info.
+     * Dimension ID to pivot by. See {@link Matomo\DataTable\Filter\PivotByDimension} for more info.
      *
      * @var string|false
      */
     public $pivotBy = false;
 
     /**
-     * The column to display in a pivot table, eg, `'nb_visits'`. See {@link Piwik\DataTable\Filter\PivotByDimension}
+     * The column to display in a pivot table, eg, `'nb_visits'`. See {@link Matomo\DataTable\Filter\PivotByDimension}
      * for more info.
      *
      * @var string|false
@@ -288,7 +288,7 @@ class RequestConfig
     public $pivotByColumn = false;
 
     /**
-     * The maximum number of columns to display in a pivot table. See {@link Piwik\DataTable\Filter\PivotByDimension}
+     * The maximum number of columns to display in a pivot table. See {@link Matomo\DataTable\Filter\PivotByDimension}
      * for more info.
      *
      * @var int|false

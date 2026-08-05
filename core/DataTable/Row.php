@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable;
+namespace Matomo\DataTable;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\Period;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\Period;
+use Matomo\Log\LoggerInterface;
 
 /**
- * This is what a {@link Piwik\DataTable} is composed of.
+ * This is what a {@link Matomo\DataTable} is composed of.
  *
  * DataTable rows contain columns, metadata and a subtable ID. Columns and metadata
  * are stored as an array of name => value mappings.
@@ -283,7 +283,7 @@ class Row extends \ArrayObject
      * Sums a DataTable to this row's subtable. If this row has no subtable a new
      * one is created.
      *
-     * See {@link Piwik\DataTable::addDataTable()} to learn how DataTables are summed.
+     * See {@link Matomo\DataTable::addDataTable()} to learn how DataTables are summed.
      *
      * @param DataTable $subTable Table to sum to this row's subtable.
      */
@@ -318,7 +318,7 @@ class Row extends \ArrayObject
     }
 
     /**
-     * Returns `true` if the subtable is currently loaded in memory via {@link Piwik\DataTable\Manager}.
+     * Returns `true` if the subtable is currently loaded in memory via {@link Matomo\DataTable\Manager}.
      *
      * @return bool
      */
@@ -462,7 +462,7 @@ class Row extends \ArrayObject
      *
      * Columns in `$rowToSum` that don't exist in `$this` are added to `$this`.
      *
-     * @param \Piwik\DataTable\Row $rowToSum The row to sum to this row.
+     * @param \Matomo\DataTable\Row $rowToSum The row to sum to this row.
      * @param bool $enableCopyMetadata Whether metadata should be copied or not.
      * @param array|bool|null $aggregationOperations for columns that should not be summed, determine which
      *                                     aggregation should be used (min, max). format:
@@ -744,8 +744,8 @@ class Row extends \ArrayObject
      *
      * Column order is not important.
      *
-     * @param \Piwik\DataTable\Row $row1 first to compare
-     * @param \Piwik\DataTable\Row $row2 second to compare
+     * @param \Matomo\DataTable\Row $row1 first to compare
+     * @param \Matomo\DataTable\Row $row2 second to compare
      * @return bool
      */
     public static function isEqual(Row $row1, Row $row2)

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
-use Piwik\Category\CategoryList;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreHome\CoreHome;
-use Piwik\Report\ReportWidgetConfig;
-use Piwik\Category\Category;
-use Piwik\Category\Subcategory;
-use Piwik\Widget\WidgetContainerConfig;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Widget\WidgetsList;
+use Matomo\Category\CategoryList;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreHome\CoreHome;
+use Matomo\Report\ReportWidgetConfig;
+use Matomo\Category\Category;
+use Matomo\Category\Subcategory;
+use Matomo\Widget\WidgetContainerConfig;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Widget\WidgetsList;
 
 class WidgetMetadata
 {
@@ -60,8 +60,8 @@ class WidgetMetadata
                     $metadataOverrides = [
                         'category' => $widgetConfig->getCategoryId(),
                         'subcategory' => $widgetConfig->getSubcategoryId(),
-                        'name' => Piwik::translate($widget->getCategoryId()) . ': '
-                            . Piwik::translate($widget->getName()),
+                        'name' => Matomo::translate($widget->getCategoryId()) . ': '
+                            . Matomo::translate($widget->getName()),
                     ];
                 }
 
@@ -87,7 +87,7 @@ class WidgetMetadata
         $widgetName = !empty($metadataOverrides['name']) ? $metadataOverrides['name'] : $widget->getName();
 
         $item = array(
-            'name' => Piwik::translate($widgetName),
+            'name' => Matomo::translate($widgetName),
         );
 
         if (isset($categoryList)) {
@@ -202,7 +202,7 @@ class WidgetMetadata
             'name'   => $category->getDisplayName(),
             'order'  => $category->getOrder(),
             'icon'   => $category->getIcon(),
-            'help'   => Piwik::translate($category->getHelp()),
+            'help'   => Matomo::translate($category->getHelp()),
             'widget' => $category->getWidget() ?: null,
             'groups' => $category->getGroups(),
         );
@@ -220,9 +220,9 @@ class WidgetMetadata
 
         return array(
             'id'    => (string) $subcategory->getId(),
-            'name'  => Piwik::translate($subcategory->getName()),
+            'name'  => Matomo::translate($subcategory->getName()),
             'order' => $subcategory->getOrder(),
-            'help' => Piwik::translate($subcategory->getHelp()),
+            'help' => Matomo::translate($subcategory->getHelp()),
         );
     }
 

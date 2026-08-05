@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\EntryPageUrl;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
-use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\EntryPageUrl;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
+use Matomo\Plugins\Actions\Columns\Metrics\BounceRate;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Plugin\ReportsProvider;
 
 class GetEntryPageUrls extends Base
 {
@@ -25,9 +25,9 @@ class GetEntryPageUrls extends Base
         parent::init();
 
         $this->dimension     = new EntryPageUrl();
-        $this->name          = Piwik::translate('Actions_SubmenuPagesEntry');
-        $this->documentation = Piwik::translate('Actions_EntryPagesReportDocumentation', '<br />')
-                             . '<br />' . Piwik::translate('General_UsePlusMinusIconsDocumentation');
+        $this->name          = Matomo::translate('Actions_SubmenuPagesEntry');
+        $this->documentation = Matomo::translate('Actions_EntryPagesReportDocumentation', '<br />')
+                             . '<br />' . Matomo::translate('General_UsePlusMinusIconsDocumentation');
 
         $this->metrics = array('entry_nb_visits', 'entry_bounce_count');
         $this->processedMetrics = array(
@@ -58,7 +58,7 @@ class GetEntryPageUrls extends Base
     protected function getMetricsDocumentation()
     {
         $metrics = parent::getMetricsDocumentation();
-        $metrics['bounce_rate'] = Piwik::translate('General_ColumnPageBounceRateDocumentation');
+        $metrics['bounce_rate'] = Matomo::translate('General_ColumnPageBounceRateDocumentation');
 
         unset($metrics['avg_time_on_page']);
         unset($metrics['exit_rate']);

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Widget\WidgetsList;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Widget\WidgetsList;
 
 class GenerateWidget extends GeneratePluginBase
 {
@@ -33,7 +33,7 @@ class GenerateWidget extends GeneratePluginBase
         $widgetName = $this->getWidgetName();
         $category   = $this->getCategory();
 
-        if ($category === Piwik::translate($category)) {
+        if ($category === Matomo::translate($category)) {
             // no translation found...
             $category = $this->makeTranslationIfPossible($pluginName, $category);
         }
@@ -111,7 +111,7 @@ class GenerateWidget extends GeneratePluginBase
         $categories = array();
         foreach (WidgetsList::get()->getWidgetConfigs() as $widget) {
             if ($widget->getCategoryId()) {
-                $categories[] = Piwik::translate($widget->getCategoryId());
+                $categories[] = Matomo::translate($widget->getCategoryId());
             }
         }
         $categories = array_values(array_unique($categories));
@@ -148,7 +148,7 @@ class GenerateWidget extends GeneratePluginBase
             $validate($category);
         }
 
-        $translationKey = StaticContainer::get('Piwik\Translation\Translator')->findTranslationKeyForTranslation($category);
+        $translationKey = StaticContainer::get('Matomo\Translation\Translator')->findTranslationKeyForTranslation($category);
         if (!empty($translationKey)) {
             return $translationKey;
         }

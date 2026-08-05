@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports;
+namespace Matomo\Plugins\ScheduledReports;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Log;
-use Piwik\Option;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\Model as UserModel;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\ReportRenderer;
-use Piwik\Scheduler\Schedule\Schedule;
-use Piwik\SettingsPiwik;
-use Piwik\Tracker;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Log;
+use Matomo\Option;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\Model as UserModel;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\ReportRenderer;
+use Matomo\Scheduler\Schedule\Schedule;
+use Matomo\SettingsPiwik;
+use Matomo\Tracker;
+use Matomo\View;
 
-class ScheduledReports extends \Piwik\Plugin
+class ScheduledReports extends \Matomo\Plugin
 {
     public const DISPLAY_FORMAT_GRAPHS_ONLY_FOR_KEY_METRICS = 1; // Display Tables Only (Graphs only for key metrics)
     public const DISPLAY_FORMAT_GRAPHS_ONLY = 2; // Display Graphs Only for all reports
@@ -74,7 +74,7 @@ class ScheduledReports extends \Piwik\Plugin
     public const OPTION_KEY_LAST_SENT_DATERANGE = 'report_last_sent_daterange_';
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -226,7 +226,7 @@ class ScheduledReports extends \Piwik\Plugin
         $availableDisplayFormats = array_keys(self::getDisplayFormats());
         if (!in_array($reportFormat, $availableDisplayFormats)) {
             throw new Exception(
-                Piwik::translate(
+                Matomo::translate(
                 // General_ExceptionInvalidAggregateReportsFormat should be named General_ExceptionInvalidDisplayFormat
                     'General_ExceptionInvalidAggregateReportsFormat',
                     array($reportFormat, implode(', ', $availableDisplayFormats))
@@ -276,14 +276,14 @@ class ScheduledReports extends \Piwik\Plugin
             return;
         }
 
-        $availableReportMetadata = \Piwik\Plugins\API\API::getInstance()->getReportMetadata($idSite);
+        $availableReportMetadata = \Matomo\Plugins\API\API::getInstance()->getReportMetadata($idSite);
 
         $filteredReportMetadata = array();
         foreach ($availableReportMetadata as $reportMetadata) {
             // removing reports from the API category and MultiSites.getOne
             if (
                 $reportMetadata['category'] == 'API' ||
-                $reportMetadata['category'] == Piwik::translate('General_MultiSitesSummary') && $reportMetadata['name'] == Piwik::translate('General_SingleWebsitesDashboard')
+                $reportMetadata['category'] == Matomo::translate('General_MultiSitesSummary') && $reportMetadata['name'] == Matomo::translate('General_SingleWebsitesDashboard')
             ) {
                 continue;
             }
@@ -334,8 +334,8 @@ class ScheduledReports extends \Piwik\Plugin
                     $displayFormat == self::DISPLAY_FORMAT_GRAPHS_ONLY || $displayFormat == self::DISPLAY_FORMAT_TABLES_AND_GRAPHS
                     :
                     $displayFormat != self::DISPLAY_FORMAT_TABLES_ONLY)
-                && \Piwik\SettingsServer::isGdExtensionEnabled()
-                && \Piwik\Plugin\Manager::getInstance()->isPluginActivated('ImageGraph')
+                && \Matomo\SettingsServer::isGdExtensionEnabled()
+                && \Matomo\Plugin\Manager::getInstance()->isPluginActivated('ImageGraph')
                 && !empty($metadata['imageGraphUrl']);
 
             $processedReport['evolutionGraph'] = $evolutionGraph;
@@ -344,8 +344,8 @@ class ScheduledReports extends \Piwik\Plugin
             if ($metadata['module'] == 'MultiSites') {
                 $columns = $processedReport['columns'];
 
-                foreach (\Piwik\Plugins\MultiSites\API::getApiMetrics($enhanced = true) as $metricSettings) {
-                    unset($columns[$metricSettings[\Piwik\Plugins\MultiSites\API::METRIC_EVOLUTION_COL_NAME_KEY]]);
+                foreach (\Matomo\Plugins\MultiSites\API::getApiMetrics($enhanced = true) as $metricSettings) {
+                    unset($columns[$metricSettings[\Matomo\Plugins\MultiSites\API::METRIC_EVOLUTION_COL_NAME_KEY]]);
                 }
 
                 $processedReport['metadata'] = $metadata;
@@ -387,8 +387,8 @@ class ScheduledReports extends \Piwik\Plugin
      * @param $additionalFiles
      * @param Period|null $period
      * @param $force
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     public function sendReport(
         $reportType,
@@ -450,8 +450,8 @@ class ScheduledReports extends \Piwik\Plugin
         }
 
         if ($reportParameters[self::EMAIL_ME_PARAMETER] == 1) {
-            if (Piwik::getCurrentUserLogin() == $report['login']) {
-                $emails[] = Piwik::getCurrentUserEmail();
+            if (Matomo::getCurrentUserLogin() == $report['login']) {
+                $emails[] = Matomo::getCurrentUserEmail();
             } else {
                 try {
                     $user = APIUsersManager::getInstance()->getUser($report['login']);
@@ -492,7 +492,7 @@ class ScheduledReports extends \Piwik\Plugin
 
             if ($textContent) {
                 $link = SettingsPiwik::getPiwikUrl() . 'index.php?module=ScheduledReports&action=unsubscribe&token=' . $tokens[$email];
-                $mail->setBodyText($textContent . "\n\n" . Piwik::translate('ScheduledReports_UnsubscribeFooter', [$link]));
+                $mail->setBodyText($textContent . "\n\n" . Matomo::translate('ScheduledReports_UnsubscribeFooter', [$link]));
             }
 
             try {
@@ -562,7 +562,7 @@ class ScheduledReports extends \Piwik\Plugin
         $eMailMe = $parameters[self::EMAIL_ME_PARAMETER];
 
         if ($eMailMe) {
-            $recipients[] = Piwik::getCurrentUserEmail();
+            $recipients[] = Matomo::getCurrentUserEmail();
         }
 
         if (isset($parameters[self::ADDITIONAL_EMAILS_PARAMETER])) {
@@ -575,7 +575,7 @@ class ScheduledReports extends \Piwik\Plugin
     public static function templateReportParametersScheduledReports(&$out)
     {
         $view = new View('@ScheduledReports/reportParametersScheduledReports');
-        $view->currentUserEmail = Piwik::getCurrentUserEmail();
+        $view->currentUserEmail = Matomo::getCurrentUserEmail();
         $view->reportType = self::EMAIL_TYPE;
         $view->defaultDisplayFormat = self::DEFAULT_DISPLAY_FORMAT;
         $view->defaultEmailMe = self::EMAIL_ME_PARAMETER_DEFAULT_VALUE;
@@ -597,7 +597,7 @@ class ScheduledReports extends \Piwik\Plugin
         if (!$updatedSegment['enable_all_users']) {
             // which reports would become invisible to other users?
             foreach ($reportsUsingSegment as $report) {
-                if ($report['login'] == Piwik::getCurrentUserLogin()) {
+                if ($report['login'] == Matomo::getCurrentUserLogin()) {
                     continue;
                 }
                 $reportsNeedSegment[] = $report;
@@ -638,13 +638,13 @@ class ScheduledReports extends \Piwik\Plugin
     protected function throwExceptionReportsAreUsingSegment($reportsUsingSegment)
     {
         $reportList = '';
-        $reportNameJoinText = ' ' . Piwik::translate('General_And') . ' ';
+        $reportNameJoinText = ' ' . Matomo::translate('General_And') . ' ';
         foreach ($reportsUsingSegment as $report) {
             $reportList .= '\'' . $report['description'] . '\'' . $reportNameJoinText;
         }
         $reportList = rtrim($reportList, $reportNameJoinText);
 
-        $errorMessage = Piwik::translate('ScheduledReports_Segment_Deletion_Error', $reportList);
+        $errorMessage = Matomo::translate('ScheduledReports_Segment_Deletion_Error', $reportList);
         throw new Exception($errorMessage);
     }
 
@@ -683,8 +683,8 @@ class ScheduledReports extends \Piwik\Plugin
             $email = trim($email);
             if (empty($email)) {
                 $email = false;
-            } elseif (!Piwik::isValidEmailString($email)) {
-                throw new Exception(Piwik::translate('UsersManager_ExceptionInvalidEmail') . ' (' . $email . ')');
+            } elseif (!Matomo::isValidEmailString($email)) {
+                throw new Exception(Matomo::translate('UsersManager_ExceptionInvalidEmail') . ' (' . $email . ')');
             }
         }
         $additionalEmails = array_values(array_unique(array_filter($additionalEmails)));
@@ -695,12 +695,12 @@ class ScheduledReports extends \Piwik\Plugin
     {
         $displayFormats = array(
             // ScheduledReports_AggregateReportsFormat_TablesOnly should be named ScheduledReports_DisplayFormat_GraphsOnlyForKeyMetrics
-            self::DISPLAY_FORMAT_GRAPHS_ONLY_FOR_KEY_METRICS => Piwik::translate('ScheduledReports_AggregateReportsFormat_TablesOnly'),
+            self::DISPLAY_FORMAT_GRAPHS_ONLY_FOR_KEY_METRICS => Matomo::translate('ScheduledReports_AggregateReportsFormat_TablesOnly'),
             // ScheduledReports_AggregateReportsFormat_GraphsOnly should be named ScheduledReports_DisplayFormat_GraphsOnly
-            self::DISPLAY_FORMAT_GRAPHS_ONLY                 => Piwik::translate('ScheduledReports_AggregateReportsFormat_GraphsOnly'),
+            self::DISPLAY_FORMAT_GRAPHS_ONLY                 => Matomo::translate('ScheduledReports_AggregateReportsFormat_GraphsOnly'),
             // ScheduledReports_AggregateReportsFormat_TablesAndGraphs should be named ScheduledReports_DisplayFormat_TablesAndGraphs
-            self::DISPLAY_FORMAT_TABLES_AND_GRAPHS           => Piwik::translate('ScheduledReports_AggregateReportsFormat_TablesAndGraphs'),
-            self::DISPLAY_FORMAT_TABLES_ONLY                 => Piwik::translate('ScheduledReports_DisplayFormat_TablesOnly'),
+            self::DISPLAY_FORMAT_TABLES_AND_GRAPHS           => Matomo::translate('ScheduledReports_AggregateReportsFormat_TablesAndGraphs'),
+            self::DISPLAY_FORMAT_TABLES_ONLY                 => Matomo::translate('ScheduledReports_DisplayFormat_TablesOnly'),
         );
         return $displayFormats;
     }
@@ -712,10 +712,10 @@ class ScheduledReports extends \Piwik\Plugin
     public static function getPeriodToFrequency()
     {
         return array(
-            Schedule::PERIOD_NEVER => Piwik::translate('General_Never'),
-            Schedule::PERIOD_DAY   => Piwik::translate('General_Daily'),
-            Schedule::PERIOD_WEEK  => Piwik::translate('General_Weekly'),
-            Schedule::PERIOD_MONTH => Piwik::translate('General_Monthly'),
+            Schedule::PERIOD_NEVER => Matomo::translate('General_Never'),
+            Schedule::PERIOD_DAY   => Matomo::translate('General_Daily'),
+            Schedule::PERIOD_WEEK  => Matomo::translate('General_Weekly'),
+            Schedule::PERIOD_MONTH => Matomo::translate('General_Monthly'),
         );
     }
 
@@ -723,16 +723,16 @@ class ScheduledReports extends \Piwik\Plugin
     {
         return [
             Schedule::PERIOD_DAY   => [
-                'single' => Piwik::translate('Intl_PeriodDay'),
-                'plural' => Piwik::translate('Intl_PeriodDays'),
+                'single' => Matomo::translate('Intl_PeriodDay'),
+                'plural' => Matomo::translate('Intl_PeriodDays'),
             ],
             Schedule::PERIOD_WEEK  => [
-                'single' => Piwik::translate('Intl_PeriodWeek'),
-                'plural' => Piwik::translate('Intl_PeriodWeeks'),
+                'single' => Matomo::translate('Intl_PeriodWeek'),
+                'plural' => Matomo::translate('Intl_PeriodWeeks'),
             ],
             Schedule::PERIOD_MONTH => [
-                'single' => Piwik::translate('Intl_PeriodMonth'),
-                'plural' => Piwik::translate('Intl_PeriodMonths'),
+                'single' => Matomo::translate('Intl_PeriodMonth'),
+                'plural' => Matomo::translate('Intl_PeriodMonths'),
             ],
         ];
     }

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Development;
-use Piwik\FileIntegrity;
-use Piwik\Filesystem;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Development;
+use Matomo\FileIntegrity;
+use Matomo\Filesystem;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * Diagnostic command that finds all unexpected files in the Matomo installation directory and provides an option to

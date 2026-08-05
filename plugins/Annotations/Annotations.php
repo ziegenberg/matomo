@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Annotations;
+namespace Matomo\Plugins\Annotations;
 
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionViz;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionViz;
 
 /**
  * Annotations plugins. Provides the ability to attach text notes to
  * dates for each site. Notes can be viewed, modified, deleted or starred.
  *
  */
-class Annotations extends \Piwik\Plugin
+class Annotations extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -119,6 +119,6 @@ class Annotations extends \Piwik\Plugin
     public static function canUserModifyOrDelete(array $annotation): bool
     {
         // only users with write access may modify or delete annotations
-        return Piwik::isUserHasWriteAccess($annotation['idsite']);
+        return Matomo::isUserHasWriteAccess($annotation['idsite']);
     }
 }

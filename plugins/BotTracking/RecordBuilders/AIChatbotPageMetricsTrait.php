@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\RecordBuilders;
+namespace Matomo\Plugins\BotTracking\RecordBuilders;
 
 use InvalidArgumentException;
-use Piwik\ArchiveProcessor;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable;
-use Piwik\Db;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\RankingQuery;
+use Matomo\ArchiveProcessor;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable;
+use Matomo\Db;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\RankingQuery;
 
 /**
  * Shared AI-chatbot page/document URL aggregation, used by the Content Requests

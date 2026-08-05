@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API\DataTableManipulator;
+namespace Matomo\API\DataTableManipulator;
 
-use Piwik\API\DataTableManipulator;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\API\DataTableManipulator;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugin\ReportsProvider;
 
 /**
  * This class is responsible for flattening data tables.

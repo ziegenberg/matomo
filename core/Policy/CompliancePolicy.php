@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Policy;
+namespace Matomo\Policy;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Interfaces\ConfigSettingInterface;
-use Piwik\Settings\Interfaces\MeasurableSettingInterface;
-use Piwik\Settings\Interfaces\SystemSettingInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
-use Piwik\Settings\Interfaces\Traits\Setters\MeasurableSetterTrait;
-use Piwik\Settings\Interfaces\Traits\Setters\SystemSetterTrait;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Interfaces\ConfigSettingInterface;
+use Matomo\Settings\Interfaces\MeasurableSettingInterface;
+use Matomo\Settings\Interfaces\SystemSettingInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
+use Matomo\Settings\Interfaces\Traits\Setters\MeasurableSetterTrait;
+use Matomo\Settings\Interfaces\Traits\Setters\SystemSetterTrait;
 
 /**
  * @implements SystemSettingInterface<bool>
@@ -55,7 +55,7 @@ abstract class CompliancePolicy implements SystemSettingInterface, MeasurableSet
          *
          * @param string &$description of the policy.
          */
-        Piwik::postEvent('CompliancePolicy.updatePolicyDescription', [&$description, static::class]);
+        Matomo::postEvent('CompliancePolicy.updatePolicyDescription', [&$description, static::class]);
 
         $shouldShowWarnings = true;
 
@@ -66,7 +66,7 @@ abstract class CompliancePolicy implements SystemSettingInterface, MeasurableSet
          *
          * @param bool &$shouldShowWarnings set to false if the warnings should be hidden
          */
-        Piwik::postEvent('CompliancePolicy.shouldShowWarnings', [&$shouldShowWarnings, static::class]);
+        Matomo::postEvent('CompliancePolicy.shouldShowWarnings', [&$shouldShowWarnings, static::class]);
 
         if ($shouldShowWarnings) {
             $warnings = static::generateWarnings();
@@ -132,7 +132,7 @@ abstract class CompliancePolicy implements SystemSettingInterface, MeasurableSet
 
     protected static function getConfigSection(): string
     {
-        return Piwik::getPluginNameOfMatomoClass(static::class);
+        return Matomo::getPluginNameOfMatomoClass(static::class);
     }
 
     protected static function getConfigSettingName(): string
@@ -165,7 +165,7 @@ abstract class CompliancePolicy implements SystemSettingInterface, MeasurableSet
          * @param int|null $idSite
          * @param class-string<CompliancePolicy> The compliance policy in question
          */
-        Piwik::postEvent('CompliancePolicy.setActiveStatus', [$isActive, $idSite, static::class]);
+        Matomo::postEvent('CompliancePolicy.setActiveStatus', [$isActive, $idSite, static::class]);
     }
 
     /**

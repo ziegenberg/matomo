@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce;
+namespace Matomo\Plugins\Ecommerce;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\FrontController;
-use Piwik\Http;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\Live\Live;
-use Piwik\View;
-use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\FrontController;
+use Matomo\Http;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\Live\Live;
+use Matomo\View;
+use Matomo\ViewDataTable\Factory as ViewDataTableFactory;
 
-class Controller extends \Piwik\Plugins\Goals\Controller
+class Controller extends \Matomo\Plugins\Goals\Controller
 {
-    public function __construct(\Piwik\Translation\Translator $translator)
+    public function __construct(\Matomo\Translation\Translator $translator)
     {
         parent::__construct($translator);
     }
@@ -30,15 +30,15 @@ class Controller extends \Piwik\Plugins\Goals\Controller
     public function getSparklines()
     {
         $content = $this->renderSharedSparklineView(
-            Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
+            Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
             $allowMultiple = true,
             [
-                'nb_conversions' => Piwik::translate('General_EcommerceOrders'),
-                'nb_visits_converted' => Piwik::translate('General_NVisits'),
-                'conversion_rate' => Piwik::translate('Goals_ConversionRate', Piwik::translate('General_EcommerceOrders')),
-                'revenue' => Piwik::translate('General_TotalRevenue'),
-                'items' => Piwik::translate('General_PurchasedProducts'),
-                'avg_order_revenue' => Piwik::translate('General_AverageOrderValue'),
+                'nb_conversions' => Matomo::translate('General_EcommerceOrders'),
+                'nb_visits_converted' => Matomo::translate('General_NVisits'),
+                'conversion_rate' => Matomo::translate('Goals_ConversionRate', Matomo::translate('General_EcommerceOrders')),
+                'revenue' => Matomo::translate('General_TotalRevenue'),
+                'items' => Matomo::translate('General_PurchasedProducts'),
+                'avg_order_revenue' => Matomo::translate('General_AverageOrderValue'),
             ],
             [
                 ['items', 40],
@@ -47,12 +47,12 @@ class Controller extends \Piwik\Plugins\Goals\Controller
         );
 
         $content .= $this->renderSharedSparklineView(
-            Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
+            Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
             $allowMultiple = false,
             [
-                'nb_conversions' => Piwik::translate('General_AbandonedCarts'),
-                'conversion_rate' => Piwik::translate('Goals_ConversionRate', Piwik::translate('Goals_AbandonedCart')),
-                'revenue' => Piwik::translate('Ecommerce_RevenueLeftInCart'),
+                'nb_conversions' => Matomo::translate('General_AbandonedCarts'),
+                'conversion_rate' => Matomo::translate('Goals_ConversionRate', Matomo::translate('Goals_AbandonedCart')),
+                'revenue' => Matomo::translate('Ecommerce_RevenueLeftInCart'),
             ]
         );
 
@@ -71,7 +71,7 @@ class Controller extends \Piwik\Plugins\Goals\Controller
         array $translations,
         array $extraSparklineMetrics = []
     ): string {
-        return \Piwik\Context::executeWithQueryParameters([
+        return \Matomo\Context::executeWithQueryParameters([
             'idSite' => $this->idSite,
             'idGoal' => $idGoal,
             'allow_multiple' => (int) $allowMultiple,

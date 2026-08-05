@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats\tests\Mocks;
+namespace Matomo\Plugins\DBStats\tests\Mocks;
 
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\Plugins\DBStats\MySQLMetadataDataAccess;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\Plugins\DBStats\MySQLMetadataDataAccess;
 
 class MockDataAccess extends MySQLMetadataDataAccess
 {

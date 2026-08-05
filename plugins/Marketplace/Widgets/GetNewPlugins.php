@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\Widgets;
+namespace Matomo\Plugins\Marketplace\Widgets;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
-use Piwik\Plugins\Marketplace\Input\Sort;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Plugins\Marketplace\Input\Sort;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 class GetNewPlugins extends Widget
 {
@@ -31,12 +31,12 @@ class GetNewPlugins extends Widget
         $config->setCategoryId('Marketplace_Marketplace');
         $config->setName('Marketplace_LatestMarketplaceUpdates');
         $config->setOrder(19);
-        $config->setIsEnabled(!Piwik::isUserIsAnonymous());
+        $config->setIsEnabled(!Matomo::isUserIsAnonymous());
     }
 
     public function render()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $isAdminPage = Common::getRequestVar('isAdminPage', 0, 'int');
 

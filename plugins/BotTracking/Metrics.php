@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking;
+namespace Matomo\Plugins\BotTracking;
 
-use Piwik\Piwik;
-use Piwik\Columns\Dimension;
+use Matomo\Matomo;
+use Matomo\Columns\Dimension;
 
 class Metrics
 {
@@ -95,14 +95,14 @@ class Metrics
     public static function getMetricTranslations(): array
     {
         return [
-            self::METRIC_AI_CHATBOTS_REQUESTS              => Piwik::translate('BotTracking_ColumnRequests'),
-            self::METRIC_AI_CHATBOTS_ACQUIRED_VISITS       => Piwik::translate('BotTracking_ColumnAcquiredVisits'),
-            self::METRIC_AI_CHATBOTS_UNIQUE_PAGE_URLS      => Piwik::translate('BotTracking_ColumnUniquePageUrls'),
-            self::METRIC_AI_CHATBOTS_UNIQUE_DOCUMENT_URLS  => Piwik::translate('BotTracking_ColumnUniqueDocumentUrls'),
-            self::METRIC_AI_CHATBOTS_UNIQUE_CHATBOTS       => Piwik::translate('BotTracking_ColumnUniqueAiChatbots'),
-            self::METRIC_AI_CHATBOTS_NOT_FOUND_REQUESTS    => Piwik::translate('BotTracking_ColumnNotFoundRequests'),
-            self::METRIC_AI_CHATBOTS_SERVER_ERROR_REQUESTS => Piwik::translate('BotTracking_ColumnServerErrorRequests'),
-            self::METRIC_AI_CHATBOTS_CLICK_THROUGH_RATE    => Piwik::translate('BotTracking_ColumnClickThroughRate'),
+            self::METRIC_AI_CHATBOTS_REQUESTS              => Matomo::translate('BotTracking_ColumnRequests'),
+            self::METRIC_AI_CHATBOTS_ACQUIRED_VISITS       => Matomo::translate('BotTracking_ColumnAcquiredVisits'),
+            self::METRIC_AI_CHATBOTS_UNIQUE_PAGE_URLS      => Matomo::translate('BotTracking_ColumnUniquePageUrls'),
+            self::METRIC_AI_CHATBOTS_UNIQUE_DOCUMENT_URLS  => Matomo::translate('BotTracking_ColumnUniqueDocumentUrls'),
+            self::METRIC_AI_CHATBOTS_UNIQUE_CHATBOTS       => Matomo::translate('BotTracking_ColumnUniqueAiChatbots'),
+            self::METRIC_AI_CHATBOTS_NOT_FOUND_REQUESTS    => Matomo::translate('BotTracking_ColumnNotFoundRequests'),
+            self::METRIC_AI_CHATBOTS_SERVER_ERROR_REQUESTS => Matomo::translate('BotTracking_ColumnServerErrorRequests'),
+            self::METRIC_AI_CHATBOTS_CLICK_THROUGH_RATE    => Matomo::translate('BotTracking_ColumnClickThroughRate'),
         ];
     }
 
@@ -112,14 +112,14 @@ class Metrics
     public static function getMetricDocumentation(): array
     {
         return [
-            self::METRIC_AI_CHATBOTS_REQUESTS              => Piwik::translate('BotTracking_ColumnRequestsDocumentation'),
-            self::METRIC_AI_CHATBOTS_ACQUIRED_VISITS       => Piwik::translate('BotTracking_ColumnAcquiredVisitsDocumentation'),
-            self::METRIC_AI_CHATBOTS_UNIQUE_PAGE_URLS      => Piwik::translate('BotTracking_ColumnUniquePageUrlsDocumentation'),
-            self::METRIC_AI_CHATBOTS_UNIQUE_DOCUMENT_URLS  => Piwik::translate('BotTracking_ColumnUniqueDocumentUrlsDocumentation'),
-            self::METRIC_AI_CHATBOTS_UNIQUE_CHATBOTS       => Piwik::translate('BotTracking_ColumnUniqueAiChatbotsDocumentation'),
-            self::METRIC_AI_CHATBOTS_NOT_FOUND_REQUESTS    => Piwik::translate('BotTracking_ColumnNotFoundRequestsDocumentation'),
-            self::METRIC_AI_CHATBOTS_SERVER_ERROR_REQUESTS => Piwik::translate('BotTracking_ColumnServerErrorRequestsDocumentation'),
-            self::METRIC_AI_CHATBOTS_CLICK_THROUGH_RATE    => Piwik::translate('BotTracking_ColumnClickThroughRateDocumentation'),
+            self::METRIC_AI_CHATBOTS_REQUESTS              => Matomo::translate('BotTracking_ColumnRequestsDocumentation'),
+            self::METRIC_AI_CHATBOTS_ACQUIRED_VISITS       => Matomo::translate('BotTracking_ColumnAcquiredVisitsDocumentation'),
+            self::METRIC_AI_CHATBOTS_UNIQUE_PAGE_URLS      => Matomo::translate('BotTracking_ColumnUniquePageUrlsDocumentation'),
+            self::METRIC_AI_CHATBOTS_UNIQUE_DOCUMENT_URLS  => Matomo::translate('BotTracking_ColumnUniqueDocumentUrlsDocumentation'),
+            self::METRIC_AI_CHATBOTS_UNIQUE_CHATBOTS       => Matomo::translate('BotTracking_ColumnUniqueAiChatbotsDocumentation'),
+            self::METRIC_AI_CHATBOTS_NOT_FOUND_REQUESTS    => Matomo::translate('BotTracking_ColumnNotFoundRequestsDocumentation'),
+            self::METRIC_AI_CHATBOTS_SERVER_ERROR_REQUESTS => Matomo::translate('BotTracking_ColumnServerErrorRequestsDocumentation'),
+            self::METRIC_AI_CHATBOTS_CLICK_THROUGH_RATE    => Matomo::translate('BotTracking_ColumnClickThroughRateDocumentation'),
         ];
     }
 

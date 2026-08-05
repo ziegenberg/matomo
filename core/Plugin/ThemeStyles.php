@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class ThemeStyles
 {
@@ -383,7 +383,7 @@ class ThemeStyles
         /**
          * @ignore
          */
-        Piwik::postEvent('Theme.configureThemeVariables', [$result]);
+        Matomo::postEvent('Theme.configureThemeVariables', [$result]);
 
         return $result;
     }

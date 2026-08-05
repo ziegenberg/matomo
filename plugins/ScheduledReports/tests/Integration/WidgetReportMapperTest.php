@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests\Integration;
+namespace Matomo\Plugins\ScheduledReports\tests\Integration;
 
-use Piwik\Plugins\ScheduledReports\WidgetReportMapper;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Report\ReportWidgetConfig;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Widget\WidgetsList;
+use Matomo\Plugins\ScheduledReports\WidgetReportMapper;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Report\ReportWidgetConfig;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Widget\WidgetsList;
 
 /**
  * @group ScheduledReports
@@ -29,7 +29,7 @@ class WidgetReportMapperTest extends IntegrationTestCase
         parent::setUp();
 
         self::setSuperUser();
-        \Piwik\Plugin\Manager::getInstance()->loadPlugins(array(
+        \Matomo\Plugin\Manager::getInstance()->loadPlugins(array(
             'API',
             'CoreHome',
             'ScheduledReports',
@@ -40,7 +40,7 @@ class WidgetReportMapperTest extends IntegrationTestCase
             'Goals',
             'Funnels',
         ));
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
 
         SitesManagerAPI::getInstance()->addSite('Test', array('http://piwik.net'));
     }
@@ -115,13 +115,13 @@ class WidgetReportMapperTest extends IntegrationTestCase
     {
         $mapper = new WidgetReportMapper();
 
-        $goalWidget = new class extends \Piwik\Report\ReportWidgetConfig {
+        $goalWidget = new class extends \Matomo\Report\ReportWidgetConfig {
             public function getUniqueId()
             {
                 return 'widgetGoal_71';
             }
         };
-        $funnelWidget = new class extends \Piwik\Report\ReportWidgetConfig {
+        $funnelWidget = new class extends \Matomo\Report\ReportWidgetConfig {
             public function getUniqueId()
             {
                 return 'widgetFunnelsfunnelReportidGoal0idFunnel1';
@@ -142,20 +142,20 @@ class WidgetReportMapperTest extends IntegrationTestCase
     {
         $mapper = new WidgetReportMapper();
 
-        $actionWidget = new \Piwik\Widget\WidgetConfig();
+        $actionWidget = new \Matomo\Widget\WidgetConfig();
         $actionWidget->setModule('Events')->setAction('getAction')->setParameters(array(
             'secondaryDimension' => 'eventName',
         ));
-        $nameWidget = new \Piwik\Widget\WidgetConfig();
+        $nameWidget = new \Matomo\Widget\WidgetConfig();
         $nameWidget->setModule('Events')->setAction('getName')->setParameters(array(
             'secondaryDimension' => 'eventAction',
         ));
-        $categoryWidget = new \Piwik\Widget\WidgetConfig();
+        $categoryWidget = new \Matomo\Widget\WidgetConfig();
         $categoryWidget->setModule('Events')->setAction('getCategory')->setParameters(array(
             'secondaryDimension' => 'eventAction',
         ));
 
-        $eventsContainer = new \Piwik\Plugins\Events\Widgets\EventsByDimension();
+        $eventsContainer = new \Matomo\Plugins\Events\Widgets\EventsByDimension();
         $eventsContainer->setWidgetConfigs(array($actionWidget, $nameWidget, $categoryWidget));
 
         $this->setMapperWidgetConfigs($mapper, array($eventsContainer));
@@ -285,7 +285,7 @@ class WidgetReportMapperTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

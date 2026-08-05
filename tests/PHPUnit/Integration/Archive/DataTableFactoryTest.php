@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Archive;
+namespace Matomo\Tests\Integration\Archive;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Period;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Archive\DataTableFactory;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Period;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Archive\DataTableFactory;
 
 /**
  * @group DataTableFactoryTest
@@ -375,7 +375,7 @@ class DataTableFactoryTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\DataTable\Filter;
+namespace Matomo\Plugins\Insights\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
+use Matomo\DataTable\BaseFilter;
 
 /**
  * Limits the number of positive and negative values. A value is considered as positive if the value of $columnToRead

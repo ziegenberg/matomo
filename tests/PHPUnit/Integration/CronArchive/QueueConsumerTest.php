@@ -7,35 +7,35 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\CronArchive;
+namespace Matomo\Tests\Integration\CronArchive;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Period\Day;
-use Piwik\Period\Factory;
-use Piwik\Period\Month;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
-use Piwik\Period\Range;
-use Piwik\Plugins\CustomDimensions;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive;
-use Piwik\CronArchive\FixedSiteIds;
-use Piwik\CronArchive\QueueConsumer;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\Model;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Segment;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Log\LoggerInterface;
-use Piwik\Log\NullLogger;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Period\Day;
+use Matomo\Period\Factory;
+use Matomo\Period\Month;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
+use Matomo\Period\Range;
+use Matomo\Plugins\CustomDimensions;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive;
+use Matomo\CronArchive\FixedSiteIds;
+use Matomo\CronArchive\QueueConsumer;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\Model;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Segment;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Log\LoggerInterface;
+use Matomo\Log\NullLogger;
 
 class QueueConsumerTest extends IntegrationTestCase
 {
@@ -47,7 +47,7 @@ class QueueConsumerTest extends IntegrationTestCase
         Fixture::createWebsite('2015-02-03');
 
         // force archiving so we don't skip those without visits
-        Piwik::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
+        Matomo::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
             $idSites[] = 1;
             $idSites[] = 2;
             $idSites[] = 3;
@@ -157,7 +157,7 @@ class QueueConsumerTest extends IntegrationTestCase
         Rules::setBrowserTriggerArchiving(true);
 
         // force archiving so we don't skip those without visits
-        Piwik::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
+        Matomo::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
             $idSites[] = 1;
             $idSites[] = 2;
         });
@@ -484,7 +484,7 @@ class QueueConsumerTest extends IntegrationTestCase
         Fixture::createWebsite('2015-02-03');
 
         // force archiving so we don't skip those without visits
-        Piwik::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
+        Matomo::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
             $idSites[] = 1;
         });
 
@@ -564,7 +564,7 @@ class QueueConsumerTest extends IntegrationTestCase
         Rules::setBrowserTriggerArchiving(true);
 
         // force archiving so we don't skip those without visits
-        Piwik::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
+        Matomo::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
             $idSites[] = 1;
         });
 
@@ -693,7 +693,7 @@ class QueueConsumerTest extends IntegrationTestCase
         Rules::setBrowserTriggerArchiving(true);
 
         // force archiving so we don't skip those without visits
-        Piwik::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
+        Matomo::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
             $idSites[] = 1;
         });
 
@@ -742,7 +742,7 @@ class QueueConsumerTest extends IntegrationTestCase
         Fixture::createWebsite('2021-11-16');
 
         // force archiving so we don't skip those without visits
-        Piwik::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
+        Matomo::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) {
             $idSites[] = 1;
             $idSites[] = 2;
             $idSites[] = 3;
@@ -1096,7 +1096,7 @@ class QueueConsumerTest extends IntegrationTestCase
      */
     public function testHasIntersectingPeriod($archivesToProcess, $invalidatedArchive, $expected)
     {
-        $periods = array_flip(Piwik::$idPeriods);
+        $periods = array_flip(Matomo::$idPeriods);
         foreach ($archivesToProcess as &$archive) {
             $periodLabel = $periods[$archive['period']];
             $archive['periodObj'] = Factory::build($periodLabel, $archive['date1']);
@@ -1185,7 +1185,7 @@ class QueueConsumerTest extends IntegrationTestCase
         /** @var QueueConsumer $queueConsumer */
         $queueConsumer = $this->getQueueConsumerWithMocks();
 
-        $periods = array_flip(Piwik::$idPeriods);
+        $periods = array_flip(Matomo::$idPeriods);
 
         if ('range' === $periods[$archiveToProcess['period']]) {
             $archiveToProcess['periodObj'] = Factory::build(

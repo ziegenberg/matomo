@@ -1,9 +1,9 @@
 <?php
 
-namespace Piwik\Plugins\TestRunner\Commands;
+namespace Matomo\Plugins\TestRunner\Commands;
 
-use Piwik\Exception\Exception;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Exception\Exception;
+use Matomo\Plugin\ConsoleCommand;
 
 class CheckDirectDependencyUse extends ConsoleCommand
 {

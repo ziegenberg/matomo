@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin\Dimension;
+namespace Matomo\Plugin\Dimension;
 
-use Piwik\CacheId;
-use Piwik\Cache as PiwikCache;
-use Piwik\Columns\Dimension;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Plugin;
+use Matomo\CacheId;
+use Matomo\Cache as PiwikCache;
+use Matomo\Columns\Dimension;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Plugin;
 
 /**
  * Defines a new conversion dimension that records any visit related information during tracking.
@@ -73,7 +73,7 @@ abstract class ConversionDimension extends Dimension
      */
     public static function getDimensions(Plugin $plugin)
     {
-        $dimensions = $plugin->findMultipleComponents('Columns', '\\Piwik\\Plugin\\Dimension\\ConversionDimension');
+        $dimensions = $plugin->findMultipleComponents('Columns', '\Matomo\Plugin\Dimension\ConversionDimension');
         $instances  = array();
 
         foreach ($dimensions as $dimension) {

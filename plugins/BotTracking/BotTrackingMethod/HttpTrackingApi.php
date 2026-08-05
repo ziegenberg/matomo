@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\BotTrackingMethod;
+namespace Matomo\Plugins\BotTracking\BotTrackingMethod;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class HttpTrackingApi extends BotTrackingMethodAbstract
 {
     public static function getName(): string
     {
-        return Piwik::translate('BotTracking_NoDataHttpTrackingApi');
+        return Matomo::translate('BotTracking_NoDataHttpTrackingApi');
     }
 
     public static function getSiteContentDetectionId(): ?string
@@ -46,7 +46,7 @@ class HttpTrackingApi extends BotTrackingMethodAbstract
         $knowledgeBaseLink = Url::getExternalLinkTag('https://matomo.org/docs/tracking-api/');
         $referenceLink     = Url::getExternalLinkTag('https://developer.matomo.org/api-reference/tracking-api');
 
-        $description = Piwik::translate(
+        $description = Matomo::translate(
             'BotTracking_NoDataHttpTrackingApiDescription',
             [$knowledgeBaseLink, '</a>', $referenceLink, '</a>']
         );

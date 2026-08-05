@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\tests\System;
+namespace Matomo\Plugins\Goals\tests\System;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\Goals\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\Goals\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class NumericAttributeGoalTrackingTest extends IntegrationTestCase
 {

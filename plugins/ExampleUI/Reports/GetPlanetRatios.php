@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI\Reports;
+namespace Matomo\Plugins\ExampleUI\Reports;
 
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Cloud;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Cloud;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 /**
  * This class defines a new report.

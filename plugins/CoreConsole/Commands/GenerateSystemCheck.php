@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Common;
-use Piwik\Plugin\Manager;
+use Matomo\Common;
+use Matomo\Plugin\Manager;
 
 class GenerateSystemCheck extends GeneratePluginBase
 {

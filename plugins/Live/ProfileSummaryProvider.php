@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Plugin;
-use Piwik\Piwik;
-use Piwik\Plugins\Live\ProfileSummary\ProfileSummaryAbstract;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Plugin;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\ProfileSummary\ProfileSummaryAbstract;
 
 class ProfileSummaryProvider
 {
@@ -50,7 +50,7 @@ class ProfileSummaryProvider
              *
              * @param ProfileSummaryAbstract[] $profileSummaries An array of profile summaries
              */
-            Piwik::postEvent('Live.addProfileSummaries', array(&$instances));
+            Matomo::postEvent('Live.addProfileSummaries', array(&$instances));
 
             foreach ($this->getAllProfileSummaryClasses() as $className) {
                 $instances[] = new $className();
@@ -72,7 +72,7 @@ class ProfileSummaryProvider
              *
              * @param ProfileSummaryAbstract[] $profileSummaries An array of profile summaries
              */
-            Piwik::postEvent('Live.filterProfileSummaries', array(&$instances));
+            Matomo::postEvent('Live.filterProfileSummaries', array(&$instances));
 
             $cache->save($cacheId, $instances);
         }
@@ -88,6 +88,6 @@ class ProfileSummaryProvider
      */
     protected function getAllProfileSummaryClasses()
     {
-        return $this->pluginManager->findMultipleComponents('ProfileSummary', 'Piwik\Plugins\Live\ProfileSummary\ProfileSummaryAbstract');
+        return $this->pluginManager->findMultipleComponents('ProfileSummary', 'Matomo\Plugins\Live\ProfileSummary\ProfileSummaryAbstract');
     }
 }

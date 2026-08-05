@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Session\SessionNamespace;
-use Piwik\Url;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Session\SessionNamespace;
+use Matomo\Url;
 
 class PasswordVerifier
 {
@@ -52,11 +52,11 @@ class PasswordVerifier
          * @ignore
          * @internal
          */
-        Piwik::postEvent('Login.beforeLoginCheckAllowed');
+        Matomo::postEvent('Login.beforeLoginCheckAllowed');
 
         // Use an isolated copy so the check does not mutate the shared auth object.
-        /** @var \Piwik\Auth $authAdapter */
-        $authAdapter = clone StaticContainer::get('Piwik\Auth');
+        /** @var \Matomo\Auth $authAdapter */
+        $authAdapter = clone StaticContainer::get('Matomo\Auth');
         $authAdapter->setLogin($userLogin);
         $authAdapter->setPasswordHash(null);// ensure authentication happens on password
         $authAdapter->setPassword($password);
@@ -71,7 +71,7 @@ class PasswordVerifier
          * @ignore
          * @internal
          */
-        Piwik::postEvent('Login.recordFailedLoginAttempt', [$userLogin]);
+        Matomo::postEvent('Login.recordFailedLoginAttempt', [$userLogin]);
         return false;
     }
 
@@ -120,7 +120,7 @@ class PasswordVerifier
     public function setPasswordVerifiedCorrectly(?string $login = null)
     {
         if ($login === null) {
-            $login = Piwik::getCurrentUserLogin();
+            $login = Matomo::getCurrentUserLogin();
         }
 
         $sessionNamespace = $this->getLoginSession();
@@ -159,7 +159,7 @@ class PasswordVerifier
             && !empty($sessionNamespace->redirectParams)
             // ensure the password was verified for the user currently performing the action.
             && !empty($sessionNamespace->passwordVerifiedLogin)
-            && $sessionNamespace->passwordVerifiedLogin === Piwik::getCurrentUserLogin()
+            && $sessionNamespace->passwordVerifiedLogin === Matomo::getCurrentUserLogin()
         ) {
             return Date::factory($sessionNamespace->lastPasswordAuth)->addPeriod(self::VERIFY_VALID_FOR_MINUTES, 'minute');
         }
@@ -231,7 +231,7 @@ class PasswordVerifier
         $sessionNamespace->setExpirationSeconds(self::VERIFY_VALID_FOR_MINUTES * 60 * 5, 'redirectParams');
 
         if ($this->enableRedirect) {
-            Piwik::redirectToModule(Piwik::getLoginPluginName(), 'confirmPassword');
+            Matomo::redirectToModule(Matomo::getLoginPluginName(), 'confirmPassword');
         }
     }
 }

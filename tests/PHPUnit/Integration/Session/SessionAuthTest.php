@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Session;
+namespace Matomo\Tests\Integration\Session;
 
-use Piwik\AuthResult;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Session\SessionAuth;
-use Piwik\Session\SessionFingerprint;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\Session;
-use Piwik\Session\SaveHandler\DbTable;
+use Matomo\AuthResult;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Session\SessionAuth;
+use Matomo\Session\SessionFingerprint;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Session;
+use Matomo\Session\SaveHandler\DbTable;
 
 class SessionAuthTest extends IntegrationTestCase
 {
@@ -186,7 +186,7 @@ class SessionAuthTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            SessionAuth::class => \Piwik\DI::autowire()
+            SessionAuth::class => \Matomo\DI::autowire()
                 ->constructorParameter('shouldDestroySession', false),
         ];
     }

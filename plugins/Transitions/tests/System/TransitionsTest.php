@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Transitions\tests\System;
+namespace Matomo\Plugins\Transitions\tests\System;
 
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\SomeVisitsManyPageviewsWithTransitions;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\SomeVisitsManyPageviewsWithTransitions;
 
 /**
  * Tests the transitions plugin.

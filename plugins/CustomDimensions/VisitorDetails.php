@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions;
+namespace Matomo\Plugins\CustomDimensions;
 
-use Piwik\API\Request;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
-use Piwik\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\View;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {

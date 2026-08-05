@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Mail;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugin\ConsoleCommand\ConsoleCommandConsoleOutput;
-use Piwik\Plugin\ConsoleCommand\ConsoleCommandBufferedOutput;
+use Matomo\Container\StaticContainer;
+use Matomo\Mail;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugin\ConsoleCommand\ConsoleCommandConsoleOutput;
+use Matomo\Plugin\ConsoleCommand\ConsoleCommandBufferedOutput;
 
 /**
  * Diagnostic command that returns consolidated information about the status of archiving
@@ -50,7 +50,7 @@ class ArchivingStatus extends ConsoleCommand
 
         // Queue
         $this->outputSectionHeader($output, 'Invalidation Queue');
-        $archiveTableDao = StaticContainer::get('Piwik\DataAccess\ArchiveTableDao');
+        $archiveTableDao = StaticContainer::get('Matomo\DataAccess\ArchiveTableDao');
         $headers = ['Invalidation', 'Segment', 'Site', 'Period', 'Date', 'Time Queued', 'Waiting', 'Started', 'Processing', 'Status'];
         $queue = $archiveTableDao->getInvalidationQueueData(true);
         $this->renderTable($headers, $queue);

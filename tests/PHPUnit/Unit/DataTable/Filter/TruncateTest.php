@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\DataTable\Filter;
+namespace Matomo\Tests\Unit\DataTable\Filter;
 
-use Piwik\DataTable\Filter\Truncate;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable\Filter\Truncate;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * @group DataTableTest
@@ -22,7 +22,7 @@ class TruncateTest extends \PHPUnit\Framework\TestCase
     {
         // remark: this unit test would become invalid and would need to be rewritten if
         // Truncate filter stops calling getRowsCount() on the DataTable being filtered.
-        $mockedDataTable = $this->createPartialMock('\Piwik\DataTable', array('getRowsCount'));
+        $mockedDataTable = $this->createPartialMock('\Matomo\DataTable', array('getRowsCount'));
         $mockedDataTable->expects($this->never())->method('getRowsCount');
 
         $dataTableBeingFiltered = new DataTable();
@@ -46,7 +46,7 @@ class TruncateTest extends \PHPUnit\Framework\TestCase
 
         // remark: this unit test would become invalid and would need to be rewritten if
         // Truncate filter stops calling getIdSubDataTable() on rows associated with a SubDataTable
-        $rowBeingFiltered = $this->createPartialMock('\Piwik\DataTable\Row', array('getIdSubDataTable'));
+        $rowBeingFiltered = $this->createPartialMock('\Matomo\DataTable\Row', array('getIdSubDataTable'));
         $rowBeingFiltered->expects($this->never())->method('getIdSubDataTable');
 
         $dataTableBeingFiltered->addRow($rowBeingFiltered);

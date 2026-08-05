@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Renderer;
+namespace Matomo\Plugins\API\Renderer;
 
-use Piwik\API\ApiRenderer;
-use Piwik\Common;
-use Piwik\DataTable\Renderer;
-use Piwik\Piwik;
-use Piwik\Plugins\Monolog\Processor\ExceptionToTextProcessor;
-use Piwik\ProxyHttp;
+use Matomo\API\ApiRenderer;
+use Matomo\Common;
+use Matomo\DataTable\Renderer;
+use Matomo\Matomo;
+use Matomo\Plugins\Monolog\Processor\ExceptionToTextProcessor;
+use Matomo\ProxyHttp;
 
 /**
  * API output renderer for JSON.
@@ -56,7 +56,7 @@ class Json extends ApiRenderer
 
     public function renderArray($array)
     {
-        if (Piwik::isMultiDimensionalArray($array)) {
+        if (Matomo::isMultiDimensionalArray($array)) {
             $jsonRenderer = Renderer::factory('json');
             $jsonRenderer->setTable($array);
             $result = $jsonRenderer->render();
@@ -64,7 +64,7 @@ class Json extends ApiRenderer
             $result = parent::renderDataTable($array);
 
             // if $array is a simple associative array, remove the JSON root array that is added by renderDataTable
-            if (!empty($array) && Piwik::isAssociativeArray($array)) {
+            if (!empty($array) && Matomo::isAssociativeArray($array)) {
                 $result = substr($result, 1, strlen($result) - 2);
             }
         }

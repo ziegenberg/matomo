@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Referrers\Columns\WebsitePage;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Referrers\Columns\WebsitePage;
 
 class GetUrlsForSocial extends Base
 {
@@ -19,8 +19,8 @@ class GetUrlsForSocial extends Base
     {
         parent::init();
         $this->dimension     = new WebsitePage();
-        $this->name          = Piwik::translate('Referrers_Socials');
-        $this->documentation = Piwik::translate('Referrers_WebsitesReportDocumentation', '<br />');
+        $this->name          = Matomo::translate('Referrers_Socials');
+        $this->documentation = Matomo::translate('Referrers_WebsitesReportDocumentation', '<br />');
         $this->isSubtableReport = true;
         $this->order = 12;
     }

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\Columns;
+namespace Matomo\Plugins\VisitTime\Columns;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/VisitTime/functions.php';
 
@@ -29,7 +29,7 @@ class LocalTime extends VisitDimension
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\VisitTime\getTimeLabel($value);
+        return \Matomo\Plugins\VisitTime\getTimeLabel($value);
     }
 
     /**

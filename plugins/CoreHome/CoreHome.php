@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome;
+namespace Matomo\Plugins\CoreHome;
 
-use Piwik\Access;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Columns\ComputedMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DbHelper;
-use Piwik\IP;
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\ComputedMetric;
-use Piwik\Plugin\ThemeStyles;
-use Piwik\Plugins\SegmentEditor\Settings\LimitSegments;
-use Piwik\Segment\SegmentsList;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Tracker\Model as TrackerModel;
+use Matomo\Access;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Columns\ComputedMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DbHelper;
+use Matomo\IP;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\ComputedMetric;
+use Matomo\Plugin\ThemeStyles;
+use Matomo\Plugins\SegmentEditor\Settings\LimitSegments;
+use Matomo\Segment\SegmentsList;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Tracker\Model as TrackerModel;
 
-class CoreHome extends \Piwik\Plugin
+class CoreHome extends \Matomo\Plugin
 {
     /**
      * Defines a widget container layout that will display all widgets within a container inside a "tab" menu
@@ -38,7 +38,7 @@ class CoreHome extends \Piwik\Plugin
     public const WIDGET_CONTAINER_LAYOUT_BY_DIMENSION = 'ByDimension';
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -84,7 +84,7 @@ class CoreHome extends \Piwik\Plugin
             return;
         }
 
-        $isApi = Piwik::getModule() === 'API' && (Piwik::getAction() == '' || Piwik::getAction() == 'index');
+        $isApi = Matomo::getModule() === 'API' && (Matomo::getAction() == '' || Matomo::getAction() == 'index');
 
         if ($isApi) {
             // will be checked in API itself to make sure we return an API response in the proper format.
@@ -442,7 +442,7 @@ class CoreHome extends \Piwik\Plugin
         if (
             SettingsPiwik::isMatomoInstalled()
             && Common::getRequestVar('module', '') != 'CoreUpdater'
-            && Piwik::isUserHasSomeViewAccess()
+            && Matomo::isUserHasSomeViewAccess()
         ) {
             /*
              * Executed as super user to ensure we are able to add translations for all menu entries that might be displayed.

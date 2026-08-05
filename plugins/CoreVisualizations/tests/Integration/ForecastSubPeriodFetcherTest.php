@@ -9,22 +9,22 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Integration;
+namespace Matomo\Plugins\CoreVisualizations\tests\Integration;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Config;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Plugin;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSubPeriodFetcher;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorApi;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Config;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Plugin;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSubPeriodFetcher;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorApi;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreVisualizations
@@ -73,7 +73,7 @@ class ForecastSubPeriodFetcherTest extends IntegrationTestCase
         }
 
         // Trigger archiving for the day so the inner API.get request has a row to return.
-        \Piwik\API\Request::processRequest('API.get', [
+        \Matomo\API\Request::processRequest('API.get', [
             'idSite' => 1,
             'period' => 'day',
             'date'   => self::TRACKING_DATE,
@@ -138,7 +138,7 @@ class ForecastSubPeriodFetcherTest extends IntegrationTestCase
             // Already active.
         }
 
-        \Piwik\Plugins\Goals\API::getInstance()->addGoal(
+        \Matomo\Plugins\Goals\API::getInstance()->addGoal(
             1,
             'Thank You',
             'url',
@@ -160,7 +160,7 @@ class ForecastSubPeriodFetcherTest extends IntegrationTestCase
             }
         }
 
-        \Piwik\API\Request::processRequest('Goals.get', [
+        \Matomo\API\Request::processRequest('Goals.get', [
             'idSite'    => 1,
             'period'    => 'day',
             'date'      => self::TRACKING_DATE,
@@ -225,7 +225,7 @@ class ForecastSubPeriodFetcherTest extends IntegrationTestCase
             $tracker->doTrackPageView($url);
         }
 
-        \Piwik\API\Request::processRequest('API.get', [
+        \Matomo\API\Request::processRequest('API.get', [
             'idSite' => 1,
             'period' => 'day',
             'date'   => self::TRACKING_DATE,
@@ -334,7 +334,7 @@ class ForecastSubPeriodFetcherTest extends IntegrationTestCase
         }
 
         // Archive the day so both modules' sub-period reads have a row to return.
-        \Piwik\API\Request::processRequest('API.get', [
+        \Matomo\API\Request::processRequest('API.get', [
             'idSite'    => 1,
             'period'    => 'day',
             'date'      => self::TRACKING_DATE,
@@ -468,7 +468,7 @@ class ForecastSubPeriodFetcherTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 }

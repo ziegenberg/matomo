@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserLanguage\tests\Fixtures;
+namespace Matomo\Plugins\UserLanguage\tests\Fixtures;
 
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Date;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Date;
 
 class LanguageFixture extends Fixture
 {

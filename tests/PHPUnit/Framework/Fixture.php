@@ -7,55 +7,55 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework;
+namespace Matomo\Tests\Framework;
 
-use Piwik\Access;
-use Piwik\Application\Environment;
-use Piwik\ArchiveProcessor\PluginsArchiver;
-use Piwik\Auth;
-use Piwik\Auth\Password;
+use Matomo\Access;
+use Matomo\Application\Environment;
+use Matomo\ArchiveProcessor\PluginsArchiver;
+use Matomo\Auth;
+use Matomo\Auth\Password;
 use Matomo\Cache\Backend\File;
-use Piwik\Cache as PiwikCache;
-use Piwik\CliMulti\CliPhp;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataTable\Manager as DataTableManager;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\EventDispatcher;
-use Piwik\FrontController;
+use Matomo\Cache as PiwikCache;
+use Matomo\CliMulti\CliPhp;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataTable\Manager as DataTableManager;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\EventDispatcher;
+use Matomo\FrontController;
 use Matomo\Ini\IniReader;
-use Piwik\Log;
-use Piwik\NumberFormatter;
-use Piwik\Option;
-use Piwik\Plugin;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\LanguagesManager\API as APILanguagesManager;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
-use Piwik\Plugins\PrivacyManager\IPAnonymizer;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\ReportRenderer;
-use Piwik\Session\SaveHandler\DbTable;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Singleton;
-use Piwik\Site;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\Mock\File as MockFileMethods;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tracker;
-use Piwik\Tracker\Cache;
+use Matomo\Log;
+use Matomo\NumberFormatter;
+use Matomo\Option;
+use Matomo\Plugin;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\LanguagesManager\API as APILanguagesManager;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
+use Matomo\Plugins\PrivacyManager\IPAnonymizer;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\ReportRenderer;
+use Matomo\Session\SaveHandler\DbTable;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Singleton;
+use Matomo\Site;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\Mock\File as MockFileMethods;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tracker;
+use Matomo\Tracker\Cache;
 use MatomoTracker;
 use Matomo_LocalTracker;
-use Piwik\Updater;
+use Matomo\Updater;
 use Exception;
 use ReflectionClass;
 
@@ -174,11 +174,11 @@ class Fixture extends \PHPUnit\Framework\Assert
     public function loginAsSuperUser()
     {
         /** @var Auth $auth */
-        $auth = $this->piwikEnvironment->getContainer()->get('Piwik\Auth');
+        $auth = $this->piwikEnvironment->getContainer()->get('Matomo\Auth');
         $auth->setLogin(Fixture::ADMIN_USER_LOGIN);
         $auth->setPassword(Fixture::ADMIN_USER_PASSWORD);
         Access::getInstance()->setSuperUserAccess(false);
-        Access::getInstance()->reloadAccess(StaticContainer::get('Piwik\Auth'));
+        Access::getInstance()->reloadAccess(StaticContainer::get('Matomo\Auth'));
     }
 
     /** Adds data to Piwik. Creates sites, tracks visits, imports log files, etc. */
@@ -330,7 +330,7 @@ class Fixture extends \PHPUnit\Framework\Assert
         PiwikCache::getTransientCache()->flushAll();
 
         // In some cases the Factory might be filled with settings that contain an invalid database connection
-        StaticContainer::getContainer()->set('Piwik\Settings\Storage\Factory', new \Piwik\Settings\Storage\Factory());
+        StaticContainer::getContainer()->set('Matomo\Settings\Storage\Factory', new \Matomo\Settings\Storage\Factory());
 
         if (
             $this->overwriteExisting
@@ -353,7 +353,7 @@ class Fixture extends \PHPUnit\Framework\Assert
      * NOTE: This method should not be used to get a TestingEnvironmentVariables instance.
      * Instead just create a new instance.
      *
-     * @return null|\Piwik\Tests\Framework\TestingEnvironmentVariables
+     * @return null|\Matomo\Tests\Framework\TestingEnvironmentVariables
      */
     public function getTestEnvironment()
     {
@@ -418,10 +418,10 @@ class Fixture extends \PHPUnit\Framework\Assert
         PiwikCache::getLazyCache()->flushAll();
         ArchiveTableCreator::clear();
         EventDispatcher::getInstance()->clearCache();
-        \Piwik\Plugins\ScheduledReports\API::$cache = [];
+        \Matomo\Plugins\ScheduledReports\API::$cache = [];
         Singleton::clearAll();
         PluginsArchiver::$archivers = [];
-        \Piwik\Notification\Manager::cancelAllNotifications();
+        \Matomo\Notification\Manager::cancelAllNotifications();
 
         Plugin\API::unsetAllInstances();
         $_GET = $_REQUEST = [];
@@ -435,12 +435,12 @@ class Fixture extends \PHPUnit\Framework\Assert
 
     public static function resetTranslations()
     {
-        StaticContainer::get('Piwik\Translation\Translator')->reset();
+        StaticContainer::get('Matomo\Translation\Translator')->reset();
     }
 
     public static function loadAllTranslations()
     {
-        StaticContainer::get('Piwik\Translation\Translator')->addDirectory(PIWIK_INCLUDE_PATH . '/lang');
+        StaticContainer::get('Matomo\Translation\Translator')->addDirectory(PIWIK_INCLUDE_PATH . '/lang');
         Manager::getInstance()->loadPluginTranslations();
     }
 
@@ -461,7 +461,7 @@ class Fixture extends \PHPUnit\Framework\Assert
     }
 
     /**
-     * @param \Piwik\Tests\Framework\TestingEnvironmentVariables|null $testEnvironment Ignored.
+     * @param \Matomo\Tests\Framework\TestingEnvironmentVariables|null $testEnvironment Ignored.
      * @param bool|false $testCaseClass Ignored.
      * @param array $extraPluginsToLoad Ignoerd.
      */
@@ -673,7 +673,7 @@ class Fixture extends \PHPUnit\Framework\Assert
             $t = new MatomoTracker($idSite, self::getTrackerUrl());
         }
         $t->setForceVisitDateTime($dateTime);
-        $t->configCookieDomain = \Piwik\Url::getHost();
+        $t->configCookieDomain = \Matomo\Url::getHost();
 
         if ($defaultInit) {
             $t->setTokenAuth(self::getTokenAuth());
@@ -759,7 +759,7 @@ class Fixture extends \PHPUnit\Framework\Assert
      */
     public static function getTokenAuth()
     {
-        $model = new \Piwik\Plugins\UsersManager\Model();
+        $model = new \Matomo\Plugins\UsersManager\Model();
         $user  = $model->getUser(self::ADMIN_USER_LOGIN);
 
         if (!empty($user)) {
@@ -776,7 +776,7 @@ class Fixture extends \PHPUnit\Framework\Assert
         $login    = self::ADMIN_USER_LOGIN;
         $password = $passwordHelper->hash(UsersManager::getPasswordHash(self::ADMIN_USER_PASSWORD));
 
-        $model = new \Piwik\Plugins\UsersManager\Model();
+        $model = new \Matomo\Plugins\UsersManager\Model();
         $user  = $model->getUser($login);
 
         if ($removeExisting) {

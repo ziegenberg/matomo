@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Fixtures\CoreArchiverProcessSignal;
+namespace Matomo\Plugins\CoreAdminHome\tests\Fixtures\CoreArchiverProcessSignal;
 
-use Piwik\Option;
+use Matomo\Option;
 use RuntimeException;
 
 class StepControl

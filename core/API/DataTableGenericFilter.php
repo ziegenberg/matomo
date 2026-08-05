@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugin\Report;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugin\Report;
 
 class DataTableGenericFilter
 {

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\Commands;
+namespace Matomo\Plugins\LanguagesManager\Commands;
 
-use Piwik\Plugins\LanguagesManager\API;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\ByBaseTranslations;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\ByParameterCount;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\EmptyTranslations;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\EncodedEntities;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\CoreTranslations;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Writer;
+use Matomo\Plugins\LanguagesManager\API;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\ByBaseTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\ByParameterCount;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\EmptyTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\EncodedEntities;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\CoreTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Writer;
 
 class SetTranslations extends TranslationBase
 {

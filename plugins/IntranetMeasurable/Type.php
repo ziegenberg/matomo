@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\IntranetMeasurable;
+namespace Matomo\Plugins\IntranetMeasurable;
 
-class Type extends \Piwik\Measurable\Type
+class Type extends \Matomo\Measurable\Type
 {
     public const ID = 'intranet';
     protected $name = 'IntranetMeasurable_Intranet';

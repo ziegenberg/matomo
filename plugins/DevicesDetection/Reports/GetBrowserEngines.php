@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Reports;
+namespace Matomo\Plugins\DevicesDetection\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
-use Piwik\Plugins\DevicesDetection\Columns\BrowserEngine;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
+use Matomo\Plugins\DevicesDetection\Columns\BrowserEngine;
 
 class GetBrowserEngines extends Base
 {
@@ -20,8 +20,8 @@ class GetBrowserEngines extends Base
     {
         parent::init();
         $this->dimension     = new BrowserEngine();
-        $this->name          = Piwik::translate('DevicesDetection_BrowserEngines');
-        $this->documentation = Piwik::translate('DevicesDetection_BrowserEngineDocumentation', '<br />');
+        $this->name          = Matomo::translate('DevicesDetection_BrowserEngines');
+        $this->documentation = Matomo::translate('DevicesDetection_BrowserEngineDocumentation', '<br />');
         $this->order = 10;
 
         $this->subcategoryId = 'DevicesDetection_Software';

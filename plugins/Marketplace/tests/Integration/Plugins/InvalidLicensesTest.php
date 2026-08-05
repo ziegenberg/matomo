@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration\Plugins;
+namespace Matomo\Plugins\Marketplace\tests\Integration\Plugins;
 
 use Matomo\Cache\Backend\ArrayCache;
 use Matomo\Cache\Eager;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\Marketplace\Consumer;
-use Piwik\Plugins\Marketplace\Plugins;
-use Piwik\Plugins\Marketplace\Plugins\InvalidLicenses;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Consumer as ConsumerBuilder;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\Marketplace\Consumer;
+use Matomo\Plugins\Marketplace\Plugins;
+use Matomo\Plugins\Marketplace\Plugins\InvalidLicenses;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Consumer as ConsumerBuilder;
 
 class CustomInvalidLicenses extends InvalidLicenses
 {
@@ -282,8 +282,8 @@ class InvalidLicensesTest extends IntegrationTestCase
      */
     private function buildInvalidLicense($consumer)
     {
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
-        $advertising = StaticContainer::get('Piwik\ProfessionalServices\Advertising');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
+        $advertising = StaticContainer::get('Matomo\ProfessionalServices\Advertising');
         $client = $consumer->getApiClient();
         $plugins = new Plugins($client, $consumer, $advertising);
 

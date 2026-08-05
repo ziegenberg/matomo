@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Reports;
+namespace Matomo\Plugins\UserCountry\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\UserCountry\Columns\City;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\UserCountry\Columns\City;
 
 class GetCity extends Base
 {
@@ -19,8 +19,8 @@ class GetCity extends Base
     {
         parent::init();
         $this->dimension      = new City();
-        $this->name           = Piwik::translate('UserCountry_City');
-        $this->documentation  = Piwik::translate('UserCountry_getCityDocumentation') . '<br/>' . $this->getGeoIPReportDocSuffix();
+        $this->name           = Matomo::translate('UserCountry_City');
+        $this->documentation  = Matomo::translate('UserCountry_getCityDocumentation') . '<br/>' . $this->getGeoIPReportDocSuffix();
         $this->order = 10;
     }
 

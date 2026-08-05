@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Columns;
+namespace Matomo\Plugins\Referrers\Columns;
 
-use Piwik\Common;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TrackerConfig;
-use Piwik\Tracker\Visitor;
+use Matomo\Common;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TrackerConfig;
+use Matomo\Tracker\Visitor;
 
 class Website extends Base
 {

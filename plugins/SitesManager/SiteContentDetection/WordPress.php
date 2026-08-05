@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\SettingsPiwik;
-use Piwik\SiteContentDetector;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\SettingsPiwik;
+use Matomo\SiteContentDetector;
+use Matomo\Url;
+use Matomo\View;
 
 class WordPress extends SiteContentDetectionAbstract
 {
@@ -52,7 +52,7 @@ class WordPress extends SiteContentDetectionAbstract
     public function renderInstructionsTab(SiteContentDetector $detector): string
     {
         $view     = new View("@SitesManager/_wordpressTabInstructions");
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
         $idSite = $request->getIntegerParameter('idSite', 0);
         $period = $request->getStringParameter('period', 'day');
         $date = $request->getStringParameter('date', 'yesterday');
@@ -79,7 +79,7 @@ class WordPress extends SiteContentDetectionAbstract
 
         return sprintf(
             '<p>%s</p>',
-            Piwik::translate(
+            Matomo::translate(
                 'SitesManager_SiteWithoutDataWordpressDescription',
                 [
                     Url::getExternalLinkTag('https://matomo.org/faq/new-to-piwik/how-do-i-install-the-matomo-tracking-code-on-wordpress/'),

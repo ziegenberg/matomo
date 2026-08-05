@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Columns;
+namespace Matomo\Plugins\DevicesDetection\Columns;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Metrics\Formatter;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 use DeviceDetector\Parser\Device\AbstractDeviceParser as DeviceParser;
 
 class DeviceType extends Base
@@ -34,7 +34,7 @@ class DeviceType extends Base
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\DevicesDetection\getDeviceTypeLabel($value);
+        return \Matomo\Plugins\DevicesDetection\getDeviceTypeLabel($value);
     }
 
     public function getEnumColumnValues()

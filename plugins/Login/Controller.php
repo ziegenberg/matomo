@@ -7,44 +7,44 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
 use Exception;
-use Piwik\Access;
-use Piwik\Auth\Password;
-use Piwik\Auth\PasswordStrength;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Exception\RedirectException;
-use Piwik\IP;
-use Piwik\Log;
-use Piwik\Nonce;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\Emails\UserAcceptInvitationEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\UserDeclinedInvitationEmail;
-use Piwik\Plugins\LanguagesManager\LanguagesHelper;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
-use Piwik\Plugins\PrivacyManager\SystemSettings;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\Plugins\UsersManager\UserLoginHelper;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\QuickForm2;
-use Piwik\Request;
-use Piwik\Session;
-use Piwik\Session\SessionInitializer;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
-use Piwik\UrlHelper;
-use Piwik\View;
+use Matomo\Access;
+use Matomo\Auth\Password;
+use Matomo\Auth\PasswordStrength;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Exception\RedirectException;
+use Matomo\IP;
+use Matomo\Log;
+use Matomo\Nonce;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\Emails\UserAcceptInvitationEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\UserDeclinedInvitationEmail;
+use Matomo\Plugins\LanguagesManager\LanguagesHelper;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Plugins\PrivacyManager\SystemSettings;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Plugins\UsersManager\UserLoginHelper;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\QuickForm2;
+use Matomo\Request;
+use Matomo\Session;
+use Matomo\Session\SessionInitializer;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
+use Matomo\UrlHelper;
+use Matomo\View;
 
 /**
  * Login controller
  * @api
  */
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     public const NONCE_CONFIRMRESETPASSWORD = 'loginConfirmResetPassword';
     public const NONCE_CONFIRMCANCELRESETPASSWORD = 'loginConfirmCancelResetPassword';
@@ -55,12 +55,12 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     protected $passwordResetter;
 
     /**
-     * @var \Piwik\Auth
+     * @var \Matomo\Auth
      */
     protected $auth;
 
     /**
-     * @var \Piwik\Session\SessionInitializer
+     * @var \Matomo\Session\SessionInitializer
      */
     protected $sessionInitializer;
 
@@ -86,7 +86,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     /**
      * @param PasswordResetter $passwordResetter
-     * @param \Piwik\Auth $auth
+     * @param \Matomo\Auth $auth
      * @param SessionInitializer $sessionInitializer
      * @param PasswordVerifier $passwordVerify
      * @param BruteForceDetection $bruteForceDetection
@@ -110,32 +110,32 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $this->passwordResetter = $passwordResetter;
 
         if (empty($auth)) {
-            $auth = StaticContainer::get('Piwik\Auth');
+            $auth = StaticContainer::get('Matomo\Auth');
         }
         $this->auth = $auth;
 
         if (empty($passwordVerify)) {
-            $passwordVerify = StaticContainer::get('Piwik\Plugins\Login\PasswordVerifier');
+            $passwordVerify = StaticContainer::get('Matomo\Plugins\Login\PasswordVerifier');
         }
         $this->passwordVerify = $passwordVerify;
 
         if (empty($sessionInitializer)) {
-            $sessionInitializer = new \Piwik\Session\SessionInitializer();
+            $sessionInitializer = new \Matomo\Session\SessionInitializer();
         }
         $this->sessionInitializer = $sessionInitializer;
 
         if (empty($bruteForceDetection)) {
-            $bruteForceDetection = StaticContainer::get('Piwik\Plugins\Login\Security\BruteForceDetection');
+            $bruteForceDetection = StaticContainer::get('Matomo\Plugins\Login\Security\BruteForceDetection');
         }
         $this->bruteForceDetection = $bruteForceDetection;
 
         if (empty($systemSettings)) {
-            $systemSettings = StaticContainer::get('Piwik\Plugins\Login\SystemSettings');
+            $systemSettings = StaticContainer::get('Matomo\Plugins\Login\SystemSettings');
         }
         $this->systemSettings = $systemSettings;
 
         if (empty($passwordStrength)) {
-            $passwordStrength = StaticContainer::get('Piwik\Auth\PasswordStrength');
+            $passwordStrength = StaticContainer::get('Matomo\Auth\PasswordStrength');
         }
         $this->passwordStrength = $passwordStrength;
     }
@@ -206,7 +206,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     {
         $this->setBasicVariablesNoneAdminView($view);
 
-        $view->linkTitle = Piwik::getRandomTitle();
+        $view->linkTitle = Matomo::getRandomTitle();
 
         // crsf token: don't trust the submitted value; generate/fetch it from session data
         $view->nonce = Nonce::getNonce('Login.login');
@@ -214,8 +214,8 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function confirmPassword()
     {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
 
         if (!$this->passwordVerify->hasPasswordVerifyBeenRequested()) {
             throw new Exception('Not available');
@@ -234,18 +234,18 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $errorMessage = Nonce::verifyNonceWithErrorMessage($nonceKey, $nonce);
             if ($errorMessage !== '') {
                 $messageNoAccess = $errorMessage;
-            } elseif ($this->passwordVerify->isPasswordCorrect(Piwik::getCurrentUserLogin(), $password)) {
-                $this->passwordVerify->setPasswordVerifiedCorrectly(Piwik::getCurrentUserLogin());
+            } elseif ($this->passwordVerify->isPasswordCorrect(Matomo::getCurrentUserLogin(), $password)) {
+                $this->passwordVerify->setPasswordVerifiedCorrectly(Matomo::getCurrentUserLogin());
                 return '';
             } else {
-                $messageNoAccess = Piwik::translate('Login_WrongPasswordEntered');
+                $messageNoAccess = Matomo::translate('Login_WrongPasswordEntered');
             }
         }
 
         return $this->renderTemplate('@Login/confirmPassword', [
           'nonce'             => Nonce::getNonce($nonceKey),
           'AccessErrorString' => $messageNoAccess,
-          'loginPlugin'       => Piwik::getLoginPluginName(),
+          'loginPlugin'       => Matomo::getLoginPluginName(),
         ]);
     }
 
@@ -267,13 +267,13 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
         $login = Access::doAsSuperUser(function () use ($login) {
             try {
-                $user = \Piwik\Plugins\UsersManager\API::getInstance()->getUser($login);
+                $user = \Matomo\Plugins\UsersManager\API::getInstance()->getUser($login);
             } catch (\Exception $e) {
                 // if a user can't be found for any reason we throw a generic exception below to avoid enumeration
             }
 
             if (empty($user)) {
-                throw new Exception(Piwik::translate('Login_LoginPasswordNotCorrect'));
+                throw new Exception(Matomo::translate('Login_LoginPasswordNotCorrect'));
             }
 
             // Note: Not using Piwik::hasTheUserSuperUserAccess here on purpose as that would require
@@ -287,7 +287,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             foreach ($superUsers as $superUser) {
                 if ($user['login'] === $superUser['login']) {
                     throw new Exception(
-                        Piwik::translate('Login_ExceptionInvalidSuperUserAccessAuthenticationMethod', ["logme"])
+                        Matomo::translate('Login_ExceptionInvalidSuperUserAccessAuthenticationMethod', ["logme"])
                     );
                 }
             }
@@ -308,7 +308,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function bruteForceLog()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         return $this->renderTemplate('bruteForceLog', [
           'blockedIps'     => $this->bruteForceDetection->getCurrentlyBlockedIps(),
@@ -331,10 +331,10 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                 <p><strong>%s:</strong> %s</p>
                 <p><a href="%s">%s</a></p>
             </div>',
-            Piwik::translate('General_Error'),
+            Matomo::translate('General_Error'),
             htmlentities($errorMessage, Common::HTML_ENCODING_QUOTE_STYLE, 'UTF-8', $doubleEncode = false),
-            'index.php?module=' . Piwik::getLoginPluginName(),
-            Piwik::translate('Login_LogIn')
+            'index.php?module=' . Matomo::getLoginPluginName(),
+            Matomo::translate('Login_LogIn')
         );
     }
 
@@ -374,14 +374,14 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             (!empty($urlToRedirect) && false === $parsedUrl)
             || (!empty($parsedUrl['scheme']) && empty($parsedUrl['host']))
         ) {
-            $e = new \Piwik\Exception\Exception('The redirect URL is not valid.');
+            $e = new \Matomo\Exception\Exception('The redirect URL is not valid.');
             $e->setIsHtmlMessage();
             throw $e;
         }
 
         // only use redirect url if host is trusted
         if (!empty($parsedUrl['host']) && !Url::isValidHost($parsedUrl['host'])) {
-            $e = new \Piwik\Exception\Exception('The redirect URL host is not valid, it is not a trusted host. If this URL is trusted, you can allow this in your config.ini.php file by adding the line <i>trusted_hosts[] = "' . Common::sanitizeInputValue($parsedUrl['host']) . '"</i> under <i>[General]</i>');
+            $e = new \Matomo\Exception\Exception('The redirect URL host is not valid, it is not a trusted host. If this URL is trusted, you can allow this in your config.ini.php file by adding the line <i>trusted_hosts[] = "' . Common::sanitizeInputValue($parsedUrl['host']) . '"</i> under <i>[General]</i>');
             $e->setIsHtmlMessage();
             throw $e;
         }
@@ -395,7 +395,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $redirect = Request::fromRequest()->getStringParameter('form_redirect', '');
             $module = Request::fromQueryString(UrlHelper::getQueryFromUrl($redirect))->getStringParameter('module', '');
             // when module is login, we redirect to home...
-            if (!empty($module) && $module !== 'Login' && $module !== Piwik::getLoginPluginName() && $redirect) {
+            if (!empty($module) && $module !== 'Login' && $module !== Matomo::getLoginPluginName() && $redirect) {
                 $host = Url::getHostFromUrl($redirect);
                 $currentHost = Url::getHost();
                 $currentHost = explode(':', $currentHost, 2)[0];
@@ -449,7 +449,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             return $this->renderResetPasswordView([$firstStepFormErrors]);
         }
 
-        return $this->renderResetPasswordView([], Piwik::translate('Login_ConfirmationLinkPossiblySent'));
+        return $this->renderResetPasswordView([], Matomo::translate('Login_ConfirmationLinkPossiblySent'));
     }
 
     private function renderResetPasswordView(array $formErrors = [], ?string $responseMessage = null): string
@@ -513,7 +513,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         return $this->renderTemplateAs('@Login/initiateCancelResetPassword', [
             'nonce'        => $nonce,
             'errorMessage' => $errorMessage,
-            'loginPlugin' => Piwik::getLoginPluginName(),
+            'loginPlugin' => Matomo::getLoginPluginName(),
             'login' => $login,
             'resetToken' => $resetToken,
         ], 'basic');
@@ -554,7 +554,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
          *
          * @param string $cancelResetPasswordContent The content to render.
          */
-        Piwik::postEvent('Template.loginCancelResetPasswordContent', [&$cancelResetPasswordContent]);
+        Matomo::postEvent('Template.loginCancelResetPasswordContent', [&$cancelResetPasswordContent]);
 
         return $this->renderTemplateAs(
             '@Login/cancelResetPassword',
@@ -611,7 +611,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                 $this->passwordResetter->setHashedPasswordForLogin($login, $passwordHash);
                 return $this->resetPasswordSuccess();
             } else {
-                $errorMessage = Piwik::translate('Login_ConfirmPasswordResetWrongPassword');
+                $errorMessage = Matomo::translate('Login_ConfirmPasswordResetWrongPassword');
             }
         }
 
@@ -620,7 +620,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         return $this->renderTemplateAs('@Login/confirmResetPassword', [
           'nonce'        => $nonce,
           'errorMessage' => $errorMessage,
-          'loginPlugin' => Piwik::getLoginPluginName(),
+          'loginPlugin' => Matomo::getLoginPluginName(),
         ], 'basic');
     }
 
@@ -632,7 +632,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     public function resetPasswordSuccess()
     {
         $_POST = []; // prevent showing error message username and password is missing
-        return $this->login($errorMessage = null, $infoMessage = Piwik::translate('Login_PasswordChanged'));
+        return $this->login($errorMessage = null, $infoMessage = Matomo::translate('Login_PasswordChanged'));
     }
 
     /**
@@ -655,13 +655,13 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
      */
     public function logout()
     {
-        Piwik::postEvent('Login.logout', [Piwik::getCurrentUserLogin()]);
+        Matomo::postEvent('Login.logout', [Matomo::getCurrentUserLogin()]);
 
         self::clearSession();
 
         $logoutUrl = @Config::getInstance()->General['login_logout_url'];
         if (empty($logoutUrl)) {
-            Piwik::redirectToModule('CoreHome');
+            Matomo::redirectToModule('CoreHome');
         } else {
             Url::redirectToUrl($logoutUrl);
         }
@@ -691,11 +691,11 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         // if no user matches the invite token
         if (!$user) {
             $this->bruteForceDetection->addFailedAttempt(IP::getIpFromHeader());
-            throw new RedirectException(Piwik::translate('Login_InvalidOrExpiredTokenV2'), SettingsPiwik::getPiwikUrl(), 3);
+            throw new RedirectException(Matomo::translate('Login_InvalidOrExpiredTokenV2'), SettingsPiwik::getPiwikUrl(), 3);
         }
 
         if (!empty($user['invite_expired_at']) && Date::factory($user['invite_expired_at'])->isEarlier(Date::now())) {
-            throw new RedirectException(Piwik::translate('Login_InvalidOrExpiredTokenV2'), SettingsPiwik::getPiwikUrl(), 3);
+            throw new RedirectException(Matomo::translate('Login_InvalidOrExpiredTokenV2'), SettingsPiwik::getPiwikUrl(), 3);
         }
 
         // if form was sent
@@ -707,17 +707,17 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $conditionCheck = $postRequest->getBoolParameter('conditionCheck', false);
 
             if (empty($password)) {
-                $error = Piwik::translate('Login_PasswordRequired');
+                $error = Matomo::translate('Login_PasswordRequired');
             }
 
             // check if terms accepted and privacy
             if (!$conditionCheck && ($privacyPolicyUrl || $termsAndConditionUrl)) {
                 if ($privacyPolicyUrl && $termsAndConditionUrl) {
-                    $error = Piwik::translate('Login_AcceptPrivacyPolicyAndTermsAndCondition');
+                    $error = Matomo::translate('Login_AcceptPrivacyPolicyAndTermsAndCondition');
                 } elseif ($privacyPolicyUrl) {
-                    $error = Piwik::translate('Login_AcceptPrivacyPolicy');
+                    $error = Matomo::translate('Login_AcceptPrivacyPolicy');
                 } elseif ($termsAndConditionUrl) {
-                    $error = Piwik::translate('Login_AcceptTermsAndCondition');
+                    $error = Matomo::translate('Login_AcceptTermsAndCondition');
                 }
             }
 
@@ -736,7 +736,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
             // confirm matching passwords
             if ($password !== $passwordConfirmation) {
-                $error = Piwik::translate('Login_PasswordsDoNotMatch');
+                $error = Matomo::translate('Login_PasswordsDoNotMatch');
             }
 
             if (!$error) {
@@ -777,7 +777,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                  * @param string $email The invited user's e-mail.
                  * @param string $inviterLogin The login of the user, who invited this user
                  */
-                Piwik::postEvent('UsersManager.inviteUser.accepted', [$user['login'], $user['email'], $user['invited_by']]);
+                Matomo::postEvent('UsersManager.inviteUser.accepted', [$user['login'], $user['email'], $user['invited_by']]);
 
                 $this->authenticateAndRedirect($user['login'], $passwordConfirmation);
             }
@@ -789,7 +789,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $view->termsAndCondition = $termsAndConditionUrl;
         $view->privacyPolicyUrl = $privacyPolicyUrl;
         $view->token = $token;
-        $view->loginPlugin = Piwik::getLoginPluginName();
+        $view->loginPlugin = Matomo::getLoginPluginName();
         $view->passwordStrengthValidationRules = $this->passwordStrength->getRules();
         $this->configureView($view);
         self::setHostValidationVariablesView($view);
@@ -808,11 +808,11 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         // if no user matches the invite token
         if (!$user) {
             $this->bruteForceDetection->addFailedAttempt(IP::getIpFromHeader());
-            throw new Exception(Piwik::translate('Login_InvalidOrExpiredToken'));
+            throw new Exception(Matomo::translate('Login_InvalidOrExpiredToken'));
         }
 
         if (!empty($user['invite_expired_at']) && Date::factory($user['invite_expired_at'])->isEarlier(Date::now())) {
-            throw new Exception(Piwik::translate('Login_InvalidOrExpiredToken'));
+            throw new Exception(Matomo::translate('Login_InvalidOrExpiredToken'));
         }
 
         $view = new View('@Login/invitationDecline');
@@ -848,11 +848,11 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
              * @param string $email The invited user's e-mail.
              * @param string $inviterLogin The login of the user, who invited this user
              */
-            Piwik::postEvent('UsersManager.inviteUser.declined', [$user['login'], $user['email'], $user['invited_by']]);
+            Matomo::postEvent('UsersManager.inviteUser.declined', [$user['login'], $user['email'], $user['invited_by']]);
         }
 
         $view->token = $token;
-        $view->loginPlugin = Piwik::getLoginPluginName();
+        $view->loginPlugin = Matomo::getLoginPluginName();
         $this->configureView($view);
         self::setHostValidationVariablesView($view);
         return $view->render();

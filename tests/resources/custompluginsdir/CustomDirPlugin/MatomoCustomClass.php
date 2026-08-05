@@ -12,7 +12,7 @@ namespace Matomo\Plugins\CustomDirPlugin;
 /**
  * Test fixture for the dual plugin-namespace autoload roots in a custom plugin
  * directory. Used to assert that a `Matomo\Plugins\`-namespaced class installed outside
- * the standard plugins folder autoloads under both the `Piwik\Plugins\` and
+ * the standard plugins folder autoloads under both the `Matomo\Plugins\` and
  * `Matomo\Plugins\` prefixes.
  */
 class MatomoCustomClass

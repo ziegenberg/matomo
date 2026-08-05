@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration\PluginTrial;
+namespace Matomo\Plugins\Marketplace\tests\Integration\PluginTrial;
 
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugins\Marketplace\Emails\RequestTrialNotificationEmail;
-use Piwik\Plugins\Marketplace\PluginTrial\Request;
-use Piwik\Plugins\Marketplace\PluginTrial\Storage;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugins\Marketplace\Emails\RequestTrialNotificationEmail;
+use Matomo\Plugins\Marketplace\PluginTrial\Request;
+use Matomo\Plugins\Marketplace\PluginTrial\Storage;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Marketplace
@@ -62,7 +62,7 @@ class RequestTest extends IntegrationTestCase
     {
         Fixture::createSuperUser();
 
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
             $sentMail = $mail;
         });
 

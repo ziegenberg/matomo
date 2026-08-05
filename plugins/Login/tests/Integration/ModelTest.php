@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Date;
-use Piwik\Plugins\Login\Model;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Date;
+use Matomo\Plugins\Login\Model;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class ModelTest extends IntegrationTestCase
 {
@@ -89,7 +89,7 @@ class ModelTest extends IntegrationTestCase
     public function testHasNotifiedUserAboutSuspiciousLoginsReturnsFalseIfLastTimeSentIsBeforeTwoWeeks()
     {
         $optionName = 'BruteForceDetection.suspiciousLoginCountNotified.theuser';
-        Option::set($optionName, \Piwik\Date::now()->subWeek(3)->getTimestamp());
+        Option::set($optionName, \Matomo\Date::now()->subWeek(3)->getTimestamp());
 
         $result = $this->testInstance->hasNotifiedUserAboutSuspiciousLogins('theuser');
         $this->assertFalse($result);
@@ -98,7 +98,7 @@ class ModelTest extends IntegrationTestCase
     public function testHasNotifiedUserAboutSuspiciousLoginsReturnsTrueIfLastTimeSentIsWithinTwoWeeks()
     {
         $optionName = 'BruteForceDetection.suspiciousLoginCountNotified.theuser';
-        Option::set($optionName, \Piwik\Date::now()->subWeek(1)->getTimestamp());
+        Option::set($optionName, \Matomo\Date::now()->subWeek(1)->getTimestamp());
 
         $result = $this->testInstance->hasNotifiedUserAboutSuspiciousLogins('theuser');
         $this->assertTrue($result);

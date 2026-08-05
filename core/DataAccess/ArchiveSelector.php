@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
 use Exception;
-use Piwik\Archive;
-use Piwik\Archive\Chunk;
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Segment;
-use Piwik\Log\LoggerInterface;
+use Matomo\Archive;
+use Matomo\Archive\Chunk;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Segment;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Data Access object used to query archives

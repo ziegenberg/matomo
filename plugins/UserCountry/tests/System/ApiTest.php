@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\System;
+namespace Matomo\Plugins\UserCountry\tests\System;
 
-use Piwik\Plugins\UserCountry\tests\Fixtures\ManySitesManyVisitsWithGeoIp;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\UserCountry\tests\Fixtures\ManySitesManyVisitsWithGeoIp;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group UserCountry2

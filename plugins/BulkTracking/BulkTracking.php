@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking;
+namespace Matomo\Plugins\BulkTracking;
 
-use Piwik\Plugins\BulkTracking\Tracker\Handler;
-use Piwik\Plugins\BulkTracking\Tracker\Requests;
-use Piwik\Tracker\RequestSet;
+use Matomo\Plugins\BulkTracking\Tracker\Handler;
+use Matomo\Plugins\BulkTracking\Tracker\Requests;
+use Matomo\Tracker\RequestSet;
 
-class BulkTracking extends \Piwik\Plugin
+class BulkTracking extends \Matomo\Plugin
 {
     /**
      * @var Requests
@@ -21,7 +21,7 @@ class BulkTracking extends \Piwik\Plugin
     private $requests;
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

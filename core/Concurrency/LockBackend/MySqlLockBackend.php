@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Concurrency\LockBackend;
+namespace Matomo\Concurrency\LockBackend;
 
-use Piwik\Common;
-use Piwik\Concurrency\LockBackend;
-use Piwik\Db;
+use Matomo\Common;
+use Matomo\Concurrency\LockBackend;
+use Matomo\Db;
 
 class MySqlLockBackend implements LockBackend
 {

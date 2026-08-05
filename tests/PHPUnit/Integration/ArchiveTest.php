@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Archive;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\CronArchive;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Period\Factory;
-use Piwik\Plugins\VisitsSummary\API;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\CronArchive;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Period\Factory;
+use Matomo\Plugins\VisitsSummary\API;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ArchiveTest
@@ -390,7 +390,7 @@ class ArchiveTest extends IntegrationTestCase
         // update ts_archived of archives as archiving doesn't take up Date::$now as it's running in separate requests
         Db::query("UPDATE " . Common::prefixTable('archive_numeric_2020_05') . " SET ts_archived = ?", [Date::now()->getDatetime()]);
 
-        $dataTable = \Piwik\Plugins\VisitsSummary\API::getInstance()->get(1, 'day', 'yesterday');
+        $dataTable = \Matomo\Plugins\VisitsSummary\API::getInstance()->get(1, 'day', 'yesterday');
         self::assertEquals(1, $dataTable->getFirstRow()->getColumn('nb_visits'));
 
         // Track a new visits for yesterday, which should result in an invalidation record for that day
@@ -405,7 +405,7 @@ class ArchiveTest extends IntegrationTestCase
         $archiver->init();
         $archiver->run();
 
-        $dataTable = \Piwik\Plugins\VisitsSummary\API::getInstance()->get(1, 'day', 'yesterday');
+        $dataTable = \Matomo\Plugins\VisitsSummary\API::getInstance()->get(1, 'day', 'yesterday');
         self::assertEquals(2, $dataTable->getFirstRow()->getColumn('nb_visits'));
     }
 

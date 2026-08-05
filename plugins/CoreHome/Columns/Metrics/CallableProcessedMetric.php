@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\Columns\Metrics;
 
-use Piwik\DataTable\Row;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\DataTable\Row;
+use Matomo\Plugin\ProcessedMetric;
 
 class CallableProcessedMetric extends ProcessedMetric
 {

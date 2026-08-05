@@ -7,33 +7,33 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\TestCase;
+namespace Matomo\Tests\Framework\TestCase;
 
 use Exception;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\Manager;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Http;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\ReportRenderer;
-use Piwik\Site;
-use Piwik\Tests\Framework\Mock\File as MockFileMethods;
-use Piwik\Tests\Framework\TestRequest\ApiTestConfig;
-use Piwik\Tests\Framework\TestRequest\Collection;
-use Piwik\Tests\Framework\TestRequest\Response;
-use Piwik\Log;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\Manager;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Http;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\ReportRenderer;
+use Matomo\Site;
+use Matomo\Tests\Framework\Mock\File as MockFileMethods;
+use Matomo\Tests\Framework\TestRequest\ApiTestConfig;
+use Matomo\Tests\Framework\TestRequest\Collection;
+use Matomo\Tests\Framework\TestRequest\Response;
+use Matomo\Log;
 use PHPUnit\Framework\TestCase;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 /**
  * Base class for System tests.
@@ -125,7 +125,7 @@ abstract class SystemTestCase extends TestCase
         }
 
         foreach (self::$apisToFilterResponse as $api => $apiValue) {
-            Piwik::addAction($apiValue['actionName'], function (&$reports, $info) use ($api, $apiValue) {
+            Matomo::addAction($apiValue['actionName'], function (&$reports, $info) use ($api, $apiValue) {
                 $filterValues = array();
                 if ($apiValue['filterKey'] === 'module') {
                     $filterValues = self::getAllowedModulesToFilterApiResponse($api);
@@ -198,7 +198,7 @@ abstract class SystemTestCase extends TestCase
                     'otherRequestParameters' => array(
                         'idReport'     => 1,
                         'reportFormat' => ReportRenderer::HTML_FORMAT,
-                        'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                        'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                         'serialize' => 0,
                     ),
                 ),
@@ -219,7 +219,7 @@ abstract class SystemTestCase extends TestCase
                     'otherRequestParameters' => array(
                         'idReport'     => 1,
                         'reportFormat' => ReportRenderer::CSV_FORMAT,
-                        'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                        'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                         'serialize' => 0,
                     ),
                 ),
@@ -240,7 +240,7 @@ abstract class SystemTestCase extends TestCase
                     'otherRequestParameters' => array(
                         'idReport'     => 1,
                         'reportFormat' => ReportRenderer::TSV_FORMAT,
-                        'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                        'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                         'serialize' => 0,
                     ),
                 ),
@@ -263,7 +263,7 @@ abstract class SystemTestCase extends TestCase
                          'otherRequestParameters' => array(
                              'idReport'     => 1,
                              'reportFormat' => ReportRenderer::PDF_FORMAT,
-                             'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                             'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                              'serialize' => 0,
                          ),
                      ),
@@ -284,7 +284,7 @@ abstract class SystemTestCase extends TestCase
                      'fileExtension'          => 'sms.txt',
                      'otherRequestParameters' => array(
                          'idReport'   => 2,
-                         'outputType' => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                         'outputType' => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                          'serialize' => 0,
                      ),
                  ),
@@ -304,7 +304,7 @@ abstract class SystemTestCase extends TestCase
                      'fileExtension'          => 'sms.txt',
                      'otherRequestParameters' => array(
                          'idReport'   => 3,
-                         'outputType' => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                         'outputType' => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                          'serialize' => 0,
                      ),
                  ),
@@ -326,7 +326,7 @@ abstract class SystemTestCase extends TestCase
                          'otherRequestParameters' => array(
                              'idReport'     => 4,
                              'reportFormat' => ReportRenderer::HTML_FORMAT,
-                             'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                             'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                              'serialize' => 0,
                          ),
                      ),
@@ -346,7 +346,7 @@ abstract class SystemTestCase extends TestCase
                          'fileExtension'          => 'html',
                          'otherRequestParameters' => array(
                              'idReport'     => 5,
-                             'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                             'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                              'serialize' => 0,
                          ),
                      ),
@@ -366,7 +366,7 @@ abstract class SystemTestCase extends TestCase
                         'fileExtension'          => 'html',
                         'otherRequestParameters' => array(
                             'idReport'     => 6,
-                            'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                            'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                             'serialize' => 0,
                         ),
                     ),
@@ -386,7 +386,7 @@ abstract class SystemTestCase extends TestCase
                         'fileExtension'          => 'html',
                         'otherRequestParameters' => array(
                             'idReport'     => 7,
-                            'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                            'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                             'serialize' => 0,
                         ),
                     ),
@@ -750,7 +750,7 @@ abstract class SystemTestCase extends TestCase
         if ($this->lastLanguage != $langId) {
             $_GET['language'] = $langId;
             /** @var Translator $translator */
-            $translator = StaticContainer::get('Piwik\Translation\Translator');
+            $translator = StaticContainer::get('Matomo\Translation\Translator');
             $translator->setCurrentLanguage($langId);
         }
 
@@ -933,4 +933,4 @@ abstract class SystemTestCase extends TestCase
     }
 }
 
-SystemTestCase::$fixture = new \Piwik\Tests\Framework\Fixture();
+SystemTestCase::$fixture = new \Matomo\Tests\Framework\Fixture();

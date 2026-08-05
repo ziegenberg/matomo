@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules;
+namespace Matomo\Tests\Unit\PHPStan\Rules;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
-use Piwik\Tests\PHPStan\Rules\JsonResponseAttributePlacementRule;
+use Matomo\Tests\PHPStan\Rules\JsonResponseAttributePlacementRule;
 
 /**
  * @group Core
@@ -31,13 +31,13 @@ class JsonResponseAttributePlacementRuleTest extends RuleTestCase
             __DIR__ . '/data/NotAController.php',
         ], [
             [
-                'Attribute #[\Piwik\Http\JsonResponse] must be applied to a public controller action, but'
+                'Attribute #[\Matomo\Http\JsonResponse] must be applied to a public controller action, but'
                 . ' notPublic() is not public.',
                 52,
             ],
             [
-                'Attribute #[\Piwik\Http\JsonResponse] has no effect on build(); it is only applied to'
-                . ' controller actions (methods of a Piwik\Plugin\Controller subclass).',
+                'Attribute #[\Matomo\Http\JsonResponse] has no effect on build(); it is only applied to'
+                . ' controller actions (methods of a Matomo\Plugin\Controller subclass).',
                 19,
             ],
         ]);

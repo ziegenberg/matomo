@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Session\SaveHandler;
+namespace Matomo\Session\SaveHandler;
 
-use Piwik\Db;
-use Piwik\DbHelper;
+use Matomo\Db;
+use Matomo\DbHelper;
 use Exception;
-use Piwik\SettingsPiwik;
-use Piwik\Updater\Migration;
+use Matomo\SettingsPiwik;
+use Matomo\Updater\Migration;
 use Zend_Session;
 
 /**

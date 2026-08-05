@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataTableFactory;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Period\Factory;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\Evolution;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as JqplotEvolutionGraph;
-use Piwik\ViewDataTable\RequestConfig;
-use Piwik\Site;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataTableFactory;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Period\Factory;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\Evolution;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as JqplotEvolutionGraph;
+use Matomo\ViewDataTable\RequestConfig;
+use Matomo\Site;
 use ReflectionMethod;
 
 /**

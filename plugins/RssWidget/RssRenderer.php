@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\RssWidget;
+namespace Matomo\Plugins\RssWidget;
 
-use Piwik\Cache;
+use Matomo\Cache;
 use Matomo\Cache\Lazy;
-use Piwik\Http;
+use Matomo\Http;
 
 class RssRenderer
 {

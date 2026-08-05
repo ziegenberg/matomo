@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
 
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph\Config as GraphConfig;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph\Config as GraphConfig;
 
 /**
  * DataTable Visualization that derives from HtmlTable and sets show_extra_columns to true.

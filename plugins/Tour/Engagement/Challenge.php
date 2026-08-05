@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
 
 /**
  * Defines a new challenge which a super user needs to complete in order to become a "Matomo expert".
@@ -63,7 +63,7 @@ abstract class Challenge
      * By default challenges are enabled, if is not appropriate to display a challenge at this time because some condition
      * has not been met then the challenge can be set as disabled by overriding this method. The constructor code will
      * still be run every time the challenges are loaded. To disable a challenge based on plugin availablilty it is better
-     * to add a check to the Piwik\Plugins\Tour\Engagement::getChallenges() method
+     * to add a check to the Matomo\Plugins\Tour\Engagement::getChallenges() method
      *
      * @return bool
      */
@@ -146,7 +146,7 @@ abstract class Challenge
 
     private function storeAttribute(string $login, $appendix)
     {
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return;
         }
         $settings = $this->getAccessManager()->getAll('Tour', $login);

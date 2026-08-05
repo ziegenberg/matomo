@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime;
+namespace Matomo\Plugins\VisitTime;
 
 use Exception;
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Site;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Site;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/VisitTime/functions.php';
 
 /**
  * VisitTime API lets you access reports by Hour (Server time), and by Hour Local Time of your visitors.
  *
- * @method static \Piwik\Plugins\VisitTime\API getInstance()
+ * @method static \Matomo\Plugins\VisitTime\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @param int|string|int[] $idSite
@@ -34,7 +34,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable($name);
 
@@ -95,7 +95,7 @@ class API extends \Piwik\Plugin\API
         if ($table instanceof DataTable\Map && $table->getKeyName() === 'idSite') {
             foreach ($table->getDataTables() as $siteId => $dataTable) {
                 $timezone = Site::getTimezoneFor($siteId);
-                $dataTable->filter('Piwik\Plugins\VisitTime\DataTable\Filter\AddSegmentByLabelInUTC', [$timezone, $period, $date]);
+                $dataTable->filter('Matomo\Plugins\VisitTime\DataTable\Filter\AddSegmentByLabelInUTC', [$timezone, $period, $date]);
 
                 if ($hideFutureHoursWhenToday) {
                     $dataTable->filter(function (DataTable $dataTable) use ($siteId, $period, $date) {
@@ -106,7 +106,7 @@ class API extends \Piwik\Plugin\API
         } else {
             $idSite = (int)$idSite;
             $timezone = Site::getTimezoneFor($idSite);
-            $table->filter('Piwik\Plugins\VisitTime\DataTable\Filter\AddSegmentByLabelInUTC', [$timezone, $period, $date]);
+            $table->filter('Matomo\Plugins\VisitTime\DataTable\Filter\AddSegmentByLabelInUTC', [$timezone, $period, $date]);
 
             if ($hideFutureHoursWhenToday) {
                 $table->filter(function (DataTable $dataTable) use ($idSite, $period, $date) {
@@ -135,7 +135,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getByDayOfWeek($idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         // metrics to query
         $metrics = Metrics::getVisitsMetricNames();

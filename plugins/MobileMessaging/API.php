@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging;
+namespace Matomo\Plugins\MobileMessaging;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Matomo;
 
 /**
  * The MobileMessaging API lets you manage SMS credentials, phone number verification, and SMS account settings.
  *
  * @phpstan-import-type PhoneNumbers from Model
  *
- * @method static \Piwik\Plugins\MobileMessaging\API getInstance()
+ * @method static \Matomo\Plugins\MobileMessaging\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const VERIFICATION_CODE_LENGTH = 5;
     public const SMS_FROM = 'Matomo';
@@ -40,7 +40,7 @@ class API extends \Piwik\Plugin\API
      */
     public function areSMSAPICredentialProvided(): bool
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $credential = $this->model->getSMSAPICredential();
         return isset($credential[MobileMessaging::API_KEY_OPTION]);
@@ -86,20 +86,20 @@ class API extends \Piwik\Plugin\API
      */
     public function addPhoneNumber(string $phoneNumber): void
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $phoneNumber = $this->sanitizePhoneNumber($phoneNumber);
 
         // Check format matches the international public telecommunication numbering plan (E.164)
         // See https://en.wikipedia.org/wiki/E.164
         if (!preg_match('/^\+[0-9]{5,30}$/', $phoneNumber)) {
-            throw new \Exception(Piwik::translate('MobileMessaging_IncorrectNumberFormat', $phoneNumber));
+            throw new \Exception(Matomo::translate('MobileMessaging_IncorrectNumberFormat', $phoneNumber));
         }
 
-        $phoneNumbers = $this->model->getPhoneNumbers(Piwik::getCurrentUserLogin(), false);
+        $phoneNumbers = $this->model->getPhoneNumbers(Matomo::getCurrentUserLogin(), false);
 
         if (!empty($phoneNumbers[$phoneNumber])) {
-            throw new \Exception(Piwik::translate('MobileMessaging_NumberAlreadyAdded', $phoneNumber));
+            throw new \Exception(Matomo::translate('MobileMessaging_NumberAlreadyAdded', $phoneNumber));
         }
 
         $unverifiedPhoneNumbers = array_filter(
@@ -110,7 +110,7 @@ class API extends \Piwik\Plugin\API
         );
 
         if (count($unverifiedPhoneNumbers) >= 3) {
-            throw new \Exception(Piwik::translate('MobileMessaging_TooManyUnverifiedNumbersError'));
+            throw new \Exception(Matomo::translate('MobileMessaging_TooManyUnverifiedNumbersError'));
         }
 
         $this->sendVerificationCodeAndAddPhoneNumber($phoneNumber);
@@ -123,11 +123,11 @@ class API extends \Piwik\Plugin\API
      */
     public function resendVerificationCode(string $phoneNumber): void
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $phoneNumber = $this->sanitizePhoneNumber($phoneNumber);
 
-        $phoneNumbers = $this->model->getPhoneNumbers(Piwik::getCurrentUserLogin(), false);
+        $phoneNumbers = $this->model->getPhoneNumbers(Matomo::getCurrentUserLogin(), false);
 
         if (empty($phoneNumbers[$phoneNumber])) {
             throw new \Exception("The phone number $phoneNumber has not yet been added.");
@@ -138,7 +138,7 @@ class API extends \Piwik\Plugin\API
         }
 
         if ($phoneNumbers[$phoneNumber]['requestTime'] > Date::getNowTimestamp() - 60) {
-            throw new \Exception(Piwik::translate('MobileMessaging_VerificationCodeRecentlySentError', $phoneNumber));
+            throw new \Exception(Matomo::translate('MobileMessaging_VerificationCodeRecentlySentError', $phoneNumber));
         }
 
         $this->sendVerificationCodeAndAddPhoneNumber($phoneNumber);
@@ -148,18 +148,18 @@ class API extends \Piwik\Plugin\API
     {
         $verificationCode = Common::getRandomString(6, 'abcdefghijklmnoprstuvwxyz0123456789');
 
-        $smsText = Piwik::translate(
+        $smsText = Matomo::translate(
             'MobileMessaging_VerificationText',
             array(
                 $verificationCode,
-                Piwik::translate('General_Settings'),
-                Piwik::translate('MobileMessaging_SettingsMenu'),
+                Matomo::translate('General_Settings'),
+                Matomo::translate('MobileMessaging_SettingsMenu'),
             )
         );
 
         $this->model->sendSMS($smsText, $phoneNumber, self::SMS_FROM);
 
-        $this->model->addPhoneNumber(Piwik::getCurrentUserLogin(), $phoneNumber, $verificationCode);
+        $this->model->addPhoneNumber(Matomo::getCurrentUserLogin(), $phoneNumber, $verificationCode);
     }
 
     private function sanitizePhoneNumber(string $phoneNumber): string
@@ -169,7 +169,7 @@ class API extends \Piwik\Plugin\API
 
         // Avoid that any method tries to handle phone numbers that are obviously too long
         if (strlen($phoneNumber) > 100) {
-            throw new \Exception(Piwik::translate('MobileMessaging_IncorrectNumberFormat', $phoneNumber));
+            throw new \Exception(Matomo::translate('MobileMessaging_IncorrectNumberFormat', $phoneNumber));
         }
 
         return $phoneNumber;
@@ -199,9 +199,9 @@ class API extends \Piwik\Plugin\API
      */
     public function getPhoneNumbers(): array
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
-        return $this->model->getPhoneNumbers(Piwik::getCurrentUserLogin(), false);
+        return $this->model->getPhoneNumbers(Matomo::getCurrentUserLogin(), false);
     }
 
     /**
@@ -211,11 +211,11 @@ class API extends \Piwik\Plugin\API
      */
     public function removePhoneNumber(string $phoneNumber): void
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $phoneNumber = $this->sanitizePhoneNumber($phoneNumber);
 
-        $this->model->removePhoneNumber(Piwik::getCurrentUserLogin(), $phoneNumber);
+        $this->model->removePhoneNumber(Matomo::getCurrentUserLogin(), $phoneNumber);
 
         /**
          * Triggered after a phone number has been deleted. This event should be used to clean up any data that is
@@ -231,7 +231,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param string $phoneNumber The phone number that was just deleted.
          */
-        Piwik::postEvent('MobileMessaging.deletePhoneNumber', array($phoneNumber));
+        Matomo::postEvent('MobileMessaging.deletePhoneNumber', array($phoneNumber));
     }
 
     /**
@@ -243,11 +243,11 @@ class API extends \Piwik\Plugin\API
      */
     public function validatePhoneNumber(string $phoneNumber, string $verificationCode): bool
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $phoneNumber = $this->sanitizePhoneNumber($phoneNumber);
 
-        return $this->model->verifyPhoneNumber(Piwik::getCurrentUserLogin(), $phoneNumber, $verificationCode);
+        return $this->model->verifyPhoneNumber(Matomo::getCurrentUserLogin(), $phoneNumber, $verificationCode);
     }
 
     /**
@@ -273,7 +273,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setDelegatedManagement(bool $delegatedManagement): void
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->model->setDelegatedManagement($delegatedManagement);
     }
 
@@ -284,12 +284,12 @@ class API extends \Piwik\Plugin\API
      */
     public function getDelegatedManagement(): bool
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         return $this->model->getDelegatedManagement();
     }
 
     private function checkCredentialManagementRights(): void
     {
-        $this->getDelegatedManagement() ? Piwik::checkUserIsNotAnonymous() : Piwik::checkUserHasSuperUserAccess();
+        $this->getDelegatedManagement() ? Matomo::checkUserIsNotAnonymous() : Matomo::checkUserHasSuperUserAccess();
     }
 }

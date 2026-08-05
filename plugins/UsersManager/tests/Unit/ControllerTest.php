@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Unit;
+namespace Matomo\Plugins\UsersManager\tests\Unit;
 
-use Piwik\Auth\PasswordStrength;
-use Piwik\Plugin\ThemeStyles;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\UsersManager\Controller;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Translation\Translator;
+use Matomo\Auth\PasswordStrength;
+use Matomo\Plugin\ThemeStyles;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\UsersManager\Controller;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Translation\Translator;
 
 /**
  * @group UsersManager

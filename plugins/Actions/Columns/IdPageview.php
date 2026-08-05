@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns;
+namespace Matomo\Plugins\Actions\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Plugin\Dimension\ActionDimension;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Plugin\Dimension\ActionDimension;
 
 class IdPageview extends ActionDimension
 {

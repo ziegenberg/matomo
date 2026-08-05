@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Reports;
+namespace Matomo\Plugins\DevicesDetection\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\DevicesDetection\Columns\Os;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\DevicesDetection\Columns\Os;
+use Matomo\Plugin\ReportsProvider;
 
 class GetOsFamilies extends Base
 {
@@ -20,8 +20,8 @@ class GetOsFamilies extends Base
     {
         parent::init();
         $this->dimension     = new Os();
-        $this->name          = Piwik::translate('DevicesDetection_OperatingSystemFamilies');
-        $this->documentation = Piwik::translate('DevicesDetection_OperatingSystemFamiliesReportDocumentation');
+        $this->name          = Matomo::translate('DevicesDetection_OperatingSystemFamilies');
+        $this->documentation = Matomo::translate('DevicesDetection_OperatingSystemFamiliesReportDocumentation');
         $this->order = 8;
 
         $this->subcategoryId = 'DevicesDetection_Software';

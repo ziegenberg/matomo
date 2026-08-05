@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\tests\Integration;
+namespace Matomo\Plugins\MultiSites\tests\Integration;
 
-use Piwik\Access;
-use Piwik\FrontController;
-use Piwik\Plugins\MultiSites\API as APIMultiSites;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\FrontController;
+use Matomo\Plugins\MultiSites\API as APIMultiSites;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Class Plugins_MultiSitesTest
@@ -33,8 +33,8 @@ class MultiSitesTest extends IntegrationTestCase
 
         $this->idSiteAccess = APISitesManager::getInstance()->addSite("test", "http://test");
 
-        \Piwik\Plugin\Manager::getInstance()->loadPlugins(['MultiSites', 'VisitsSummary', 'Actions']);
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->loadPlugins(['MultiSites', 'VisitsSummary', 'Actions']);
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
     }
 
     /**

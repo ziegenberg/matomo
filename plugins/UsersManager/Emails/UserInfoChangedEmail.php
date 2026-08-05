@@ -1,13 +1,13 @@
 <?php
 
-namespace Piwik\Plugins\UsersManager\Emails;
+namespace Matomo\Plugins\UsersManager\Emails;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\IP;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\IP;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\View;
 
 class UserInfoChangedEmail extends Mail
 {
@@ -64,7 +64,7 @@ class UserInfoChangedEmail extends Mail
         $view->type = $this->type;
         $view->accountName = Common::sanitizeInputValue($this->login);
         $view->newEmail = Common::sanitizeInputValue($this->changedNewValue);
-        $view->changeBySuperUser = $this->login !== Piwik::getCurrentUserLogin();
+        $view->changeBySuperUser = $this->login !== Matomo::getCurrentUserLogin();
         $view->ipAddress = IP::getIpFromHeader();
         $view->deviceDescription = $deviceDescription;
         return $view;

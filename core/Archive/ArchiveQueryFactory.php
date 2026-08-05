@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
-use Piwik\Archive;
-use Piwik\Period;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Period\Factory as PeriodFactory;
+use Matomo\Archive;
+use Matomo\Period;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Period\Factory as PeriodFactory;
 
 class ArchiveQueryFactory
 {
@@ -23,7 +23,7 @@ class ArchiveQueryFactory
     }
 
     /**
-     * @see \Piwik\Archive::build()
+     * @see \Matomo\Archive::build()
      */
     public function build($idSites, $strPeriod, $strDate, $strSegment = false, $_restrictSitesToLogin = false)
     {
@@ -35,7 +35,7 @@ class ArchiveQueryFactory
     }
 
     /**
-     * @see \Piwik\Archive::factory()
+     * @see \Matomo\Archive::factory()
      */
     public function factory(Segment $segment, array $periods, array $idSites, $idSiteIsAll = false, $isMultipleDate = false)
     {

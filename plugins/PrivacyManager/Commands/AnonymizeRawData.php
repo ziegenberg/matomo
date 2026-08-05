@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Commands;
+namespace Matomo\Plugins\PrivacyManager\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Site;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Site;
 
 class AnonymizeRawData extends ConsoleCommand
 {
@@ -61,7 +61,7 @@ class AnonymizeRawData extends ConsoleCommand
         $anonymizeLocation = $input->getOption('anonymize-location');
         $anonymizeUserId = $input->getOption('anonymize-userid');
 
-        $logDataAnonymizations = StaticContainer::get('Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations');
+        $logDataAnonymizations = StaticContainer::get('Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations');
 
         [$startDate, $endDate] = $logDataAnonymizations->getStartAndEndDate($date);
         $output->writeln(sprintf('Start date is "%s", end date is "%s"', $startDate, $endDate));

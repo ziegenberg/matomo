@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns;
+namespace Matomo\Plugins\Actions\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\MetricsList;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\ComputedMetric;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Tracker\Action;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\MetricsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\ComputedMetric;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Tracker\Action;
 
 /**
  * Page generation time has been deprecated in favor of new metrics in Page Performance plugin
@@ -46,12 +46,12 @@ class PageGenerationTime extends ActionDimension
 
         $metric3 = $dimensionMetricFactory->createMetric(ArchivedMetric::AGGREGATION_COUNT_WITH_NUMERIC_VALUE);
         $metric3->setName('pageviews_with_generation_time');
-        $metric3->setTranslatedName(Piwik::translate('General_ColumnViewsWithGenerationTime'));
+        $metric3->setTranslatedName(Matomo::translate('General_ColumnViewsWithGenerationTime'));
         $metricsList->addMetric($metric3);
 
         $metric = $dimensionMetricFactory->createComputedMetric($metric1->getName(), $metric3->getName(), ComputedMetric::AGGREGATION_AVG);
         $metric->setName('avg_page_generation_time');
-        $metric->setTranslatedName(Piwik::translate('General_ColumnAverageGenerationTime'));
+        $metric->setTranslatedName(Matomo::translate('General_ColumnAverageGenerationTime'));
         $metricsList->addMetric($metric);
     }
 }

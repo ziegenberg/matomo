@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\Integration;
+namespace Matomo\Plugins\TwoFactorAuth\tests\Integration;
 
-use Piwik\Plugins\TwoFactorAuth\SystemSettings;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Url;
+use Matomo\Plugins\TwoFactorAuth\SystemSettings;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Url;
 
 /**
  * @group TwoFactorAuth

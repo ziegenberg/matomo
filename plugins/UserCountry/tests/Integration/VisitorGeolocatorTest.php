@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\Integration;
+namespace Matomo\Plugins\UserCountry\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Db;
+use Matomo\Common;
+use Matomo\Db;
 use Matomo\Network\IPUtils;
-use Piwik\Plugins\UserCountry\VisitorGeolocator;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tests\Framework\TestDataHelper\LogHelper;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Visit;
-use Piwik\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
+use Matomo\Plugins\UserCountry\VisitorGeolocator;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestDataHelper\LogHelper;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Visit;
+use Matomo\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
 
 require_once PIWIK_INCLUDE_PATH . '/tests/PHPUnit/Framework/Mock/LocationProvider.php';
 
@@ -366,7 +366,7 @@ class VisitorGeolocatorTest extends IntegrationTestCase
      */
     protected function getProviderMock()
     {
-        return $this->getMockBuilder('\Piwik\Plugins\UserCountry\LocationProvider')
+        return $this->getMockBuilder('\Matomo\Plugins\UserCountry\LocationProvider')
             ->setMethods(array('getId', 'getInfo', 'getLocation', 'isAvailable', 'isWorking', 'getSupportedLocationInfo'))
             ->disableOriginalConstructor()
             ->getMock();

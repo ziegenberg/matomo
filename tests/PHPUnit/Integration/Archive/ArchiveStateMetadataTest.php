@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Archive;
+namespace Matomo\Tests\Integration\Archive;
 
-use Piwik\Archive;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Config;
-use Piwik\DataAccess\Model;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Log\NullLogger;
-use Piwik\Segment;
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Config;
+use Matomo\DataAccess\Model;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Log\NullLogger;
+use Matomo\Segment;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ArchiveStateMetadataTest

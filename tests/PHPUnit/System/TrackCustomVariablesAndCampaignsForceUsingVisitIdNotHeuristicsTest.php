@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\SomeVisitsCustomVariablesCampaignsNotHeuristics;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\SomeVisitsCustomVariablesCampaignsNotHeuristics;
 
 /**
  * Test tracker & API when forcing the use of visit ID instead of heuristics. Also

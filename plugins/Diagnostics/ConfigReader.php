@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics;
+namespace Matomo\Plugins\Diagnostics;
 
-use Piwik\Development;
+use Matomo\Development;
 use Matomo\Ini\IniReader;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Settings as PiwikSettings;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Settings as PiwikSettings;
 
 /**
  * A diagnostic report contains all the results of all the diagnostics.
@@ -130,7 +130,7 @@ class ConfigReader
      * for already existing configured config values that overwrite a plugin system setting.
      *
      * @param array $configValues
-     * @param \Piwik\Settings\Plugin\SystemSettings[] $systemSettings
+     * @param \Matomo\Settings\Plugin\SystemSettings[] $systemSettings
      * @return array
      */
     public function addConfigValuesFromSystemSettings($configValues, $systemSettings)

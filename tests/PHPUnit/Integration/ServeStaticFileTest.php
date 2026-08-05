@@ -12,14 +12,14 @@
  * serverStaticFile.test.php has been created to avoid making too many modifications to /tests/core/Piwik.test.php
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
 // This is Piwik logo, the static file used in this test suit
 
 use Exception;
-use Piwik\ProxyHttp;
-use Piwik\SettingsServer;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\ProxyHttp;
+use Matomo\SettingsServer;
+use Matomo\Tests\Framework\Fixture;
 
 define("TEST_FILE_LOCATION", realpath(dirname(__FILE__) . "/../../resources/lipsum.txt"));
 define("TEST_FILE_CONTENT_TYPE", "text/plain");
@@ -591,7 +591,7 @@ class ServeStaticFileTest extends \PHPUnit\Framework\TestCase
 
     private function getCompressedFileLocation()
     {
-        return \Piwik\AssetManager::getInstance()->getAssetDirectory() . '/' . basename(TEST_FILE_LOCATION);
+        return \Matomo\AssetManager::getInstance()->getAssetDirectory() . '/' . basename(TEST_FILE_LOCATION);
     }
 
     private function removeCompressedFiles()

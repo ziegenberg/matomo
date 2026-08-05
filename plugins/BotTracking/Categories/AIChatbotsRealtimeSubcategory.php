@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Categories;
+namespace Matomo\Plugins\BotTracking\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class AIChatbotsRealtimeSubcategory extends Subcategory
 {
@@ -24,8 +24,8 @@ class AIChatbotsRealtimeSubcategory extends Subcategory
     {
         return sprintf(
             '<p>%1$s</p><p>%2$s</p>',
-            Piwik::translate('BotTracking_AIChatbotsRealtimeHelp1'),
-            Piwik::translate('BotTracking_AIChatbotsRealtimeHelp2')
+            Matomo::translate('BotTracking_AIChatbotsRealtimeHelp1'),
+            Matomo::translate('BotTracking_AIChatbotsRealtimeHelp2')
         );
     }
 }

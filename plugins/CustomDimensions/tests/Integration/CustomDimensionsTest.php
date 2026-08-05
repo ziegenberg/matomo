@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Integration;
+namespace Matomo\Plugins\CustomDimensions\tests\Integration;
 
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
-use Piwik\Plugins\CustomDimensions\VisitorDetails;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugins\CustomDimensions\VisitorDetails;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
 
 /**
  * @group CustomDimensions
@@ -233,7 +233,7 @@ class CustomDimensionsTest extends IntegrationTestCase
         $config = new Configuration();
         $this->assertNotEmpty($config->getCustomDimensionsForSite($idSite = 1));
 
-        \Piwik\API\Request::processRequest('SitesManager.deleteSite', array('idSite' => $idSite));
+        \Matomo\API\Request::processRequest('SitesManager.deleteSite', array('idSite' => $idSite));
 
         // verify removed
         $this->assertSame(array(), $config->getCustomDimensionsForSite($idSite));

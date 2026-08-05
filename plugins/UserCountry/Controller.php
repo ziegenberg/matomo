@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry;
+namespace Matomo\Plugins\UserCountry;
 
 use Exception;
-use Piwik\Common;
-use Piwik\IP;
-use Piwik\Notification;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\UserCountry\LocationProvider\DefaultProvider;
-use Piwik\Plugins\UserCountry\LocationProvider\DisabledProvider;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\IP;
+use Matomo\Notification;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\UserCountry\LocationProvider\DefaultProvider;
+use Matomo\Plugins\UserCountry\LocationProvider\DisabledProvider;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     public function getDistinctCountries()
     {
@@ -34,7 +34,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     public function adminIndex()
     {
         $this->dieIfGeolocationAdminIsDisabled();
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $view = new View('@UserCountry/adminIndex');
 
         $allProviderInfo = LocationProvider::getAllProviderInfo($newline = '<br/>', $includeExtra = true);
@@ -47,9 +47,9 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $provider = LocationProvider::getProviderById(LocationProvider::getCurrentProviderId());
 
             if ($provider) {
-                $message = Piwik::translate('UserCountry_GeolocationProviderBroken', '<strong>' . $provider->getInfo()['title'] . '</strong>');
+                $message = Matomo::translate('UserCountry_GeolocationProviderBroken', '<strong>' . $provider->getInfo()['title'] . '</strong>');
             } else {
-                $message = Piwik::translate('UserCountry_GeolocationProviderUnavailable', '<strong>' . LocationProvider::getCurrentProviderId() . '</strong>');
+                $message = Matomo::translate('UserCountry_GeolocationProviderUnavailable', '<strong>' . LocationProvider::getCurrentProviderId() . '</strong>');
             }
 
             $notification          = new Notification($message);
@@ -59,7 +59,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         } else {
             $isWorking = LocationProvider::getCurrentProvider()->isWorking();
             if (true !== $isWorking) {
-                $message = Piwik::translate('UserCountry_GeolocationProviderBroken', '<strong>' . LocationProvider::getCurrentProvider()->getInfo()['title'] . '</strong>');
+                $message = Matomo::translate('UserCountry_GeolocationProviderBroken', '<strong>' . LocationProvider::getCurrentProvider()->getInfo()['title'] . '</strong>');
 
                 if ($isWorking) {
                     $message .= '<br /><br />' . $isWorking;
@@ -111,7 +111,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     public function getLocationUsingProvider()
     {
         $this->dieIfGeolocationAdminIsDisabled();
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $providerId = Common::getRequestVar('id');
         $provider = LocationProvider::getProviderById($providerId);

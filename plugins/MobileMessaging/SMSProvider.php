@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging;
+namespace Matomo\Plugins\MobileMessaging;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin;
-use Piwik\Piwik;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin;
+use Matomo\Matomo;
 
 /**
  * The SMSProvider abstract class is used as a base class for SMS provider implementations. To create your own custom
@@ -117,7 +117,7 @@ abstract class SMSProvider
         $providers = self::findAvailableSmsProviders();
 
         if (!array_key_exists($provider, $providers)) {
-            throw new \Exception(Piwik::translate(
+            throw new \Exception(Matomo::translate(
                 'MobileMessaging_Exception_UnknownProvider',
                 array($provider, implode(', ', array_keys($providers)))
             ));
@@ -134,7 +134,7 @@ abstract class SMSProvider
      */
     public static function findAvailableSmsProviders()
     {
-        $smsProviders = Plugin\Manager::getInstance()->findMultipleComponents('SMSProvider', 'Piwik\Plugins\MobileMessaging\SMSProvider');
+        $smsProviders = Plugin\Manager::getInstance()->findMultipleComponents('SMSProvider', 'Matomo\Plugins\MobileMessaging\SMSProvider');
 
         $providers = array();
 
@@ -181,7 +181,7 @@ abstract class SMSProvider
      */
     public static function truncate($string, $maximumNumberOfConcatenatedSMS, $appendedString = 'MobileMessaging_SMS_Content_Too_Long')
     {
-        $appendedString = Piwik::translate($appendedString);
+        $appendedString = Matomo::translate($appendedString);
 
         $smsContentContainsUCS2Chars = self::containsUCS2Characters($string);
         $maxCharsAllowed = self::maxCharsAllowed($maximumNumberOfConcatenatedSMS, $smsContentContainsUCS2Chars);

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Contents\Columns;
+namespace Matomo\Plugins\Contents\Columns;
 
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\Join\ActionNameJoin;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugins\Contents\Actions\ActionContent;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\Join\ActionNameJoin;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugins\Contents\Actions\ActionContent;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TableLogAction;
 
 class ContentTarget extends ActionDimension
 {

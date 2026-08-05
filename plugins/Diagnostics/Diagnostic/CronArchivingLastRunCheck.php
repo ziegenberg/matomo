@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\CronArchive;
-use Piwik\Date;
-use Piwik\Metrics\Formatter;
-use Piwik\Option;
-use Piwik\Plugins\Intl\DateTimeFormatProvider;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\CronArchive;
+use Matomo\Date;
+use Matomo\Metrics\Formatter;
+use Matomo\Option;
+use Matomo\Plugins\Intl\DateTimeFormatProvider;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 /**
  * Check if cron archiving has run in the last 24-48 hrs.

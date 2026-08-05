@@ -9,12 +9,12 @@
 
 namespace PHPUnit\Integration\Tracker;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class UserIdVisitorIdTest extends IntegrationTestCase
 {

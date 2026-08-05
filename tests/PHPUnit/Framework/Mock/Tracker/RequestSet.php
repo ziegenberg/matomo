@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock\Tracker;
+namespace Matomo\Tests\Framework\Mock\Tracker;
 
 use Exception;
 
-class RequestSet extends \Piwik\Tracker\RequestSet
+class RequestSet extends \Matomo\Tracker\RequestSet
 {
     private $throwExceptionOnInit = false;
 

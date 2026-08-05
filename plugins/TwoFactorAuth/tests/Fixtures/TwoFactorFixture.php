@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\Fixtures;
+namespace Matomo\Plugins\TwoFactorAuth\tests\Fixtures;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\UsersManager\API as UsersAPI;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\UsersManager\API as UsersAPI;
 
 class TwoFactorFixture extends Fixture
 {
@@ -72,7 +72,7 @@ class TwoFactorFixture extends Fixture
 
     public function setUpUsers()
     {
-        \Piwik\Plugins\UsersManager\API::getInstance()->addUser(
+        \Matomo\Plugins\UsersManager\API::getInstance()->addUser(
             $this->superUserWith2Fa,
             $this->userPassword,
             $this->superUserWith2Fa . '@matomo.org'
@@ -81,7 +81,7 @@ class TwoFactorFixture extends Fixture
         $userUpdater->setSuperUserAccessWithoutCurrentPassword($this->superUserWith2Fa, true);
 
         foreach ([$this->userWith2Fa, $this->userWithout2Fa, $this->userWith2FaDisable, $this->userNo2Fa] as $user) {
-            \Piwik\Plugins\UsersManager\API::getInstance()->addUser($user, $this->userPassword, $user . '@matomo.org');
+            \Matomo\Plugins\UsersManager\API::getInstance()->addUser($user, $this->userPassword, $user . '@matomo.org');
             // we cannot set superuser as logme won't work for super user
             UsersAPI::getInstance()->setUserAccess($user, 'view', [$this->idSite, $this->idSite2]);
 

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
 
 class ArchivedMetric extends Metric
 {
@@ -168,7 +168,7 @@ class ArchivedMetric extends Metric
     public function getTranslatedName()
     {
         if (!empty($this->translatedName)) {
-            return Piwik::translate($this->translatedName);
+            return Matomo::translate($this->translatedName);
         }
 
         return $this->translatedName;

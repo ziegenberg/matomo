@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Db;
+namespace Matomo\Tests\Integration\Db;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Db\BatchInsert;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Db\BatchInsert;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class BatchInsertTest extends IntegrationTestCase
 {

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\TranslationWriter;
+namespace Matomo\Plugins\LanguagesManager\TranslationWriter;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\FilterAbstract;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\ValidateAbstract;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\FilterAbstract;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\ValidateAbstract;
 
 /**
  * Writes translations to file.
@@ -96,10 +96,10 @@ class Writer
         $this->setLanguage($language);
 
         if (!empty($pluginName)) {
-            $installedPlugins = \Piwik\Plugin\Manager::getInstance()->readPluginsDirectory();
+            $installedPlugins = \Matomo\Plugin\Manager::getInstance()->readPluginsDirectory();
 
             if (!in_array($pluginName, $installedPlugins)) {
-                throw new Exception(Piwik::translate('General_ExceptionLanguageFileNotFound', array($pluginName)));
+                throw new Exception(Matomo::translate('General_ExceptionLanguageFileNotFound', array($pluginName)));
             }
 
             $this->pluginName = $pluginName;
@@ -114,7 +114,7 @@ class Writer
     public function setLanguage($language)
     {
         if (!preg_match('/^([a-z]{2,3}(-[a-z]{2,3})?)$/i', $language)) {
-            throw new Exception(Piwik::translate('General_ExceptionLanguageFileNotFound', array($language)));
+            throw new Exception(Matomo::translate('General_ExceptionLanguageFileNotFound', array($language)));
         }
 
         $this->language = strtolower($language);

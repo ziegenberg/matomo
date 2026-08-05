@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Row;
+namespace Matomo\DataTable\Row;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * A special row whose column values are the aggregate of the row's subtable.
@@ -20,7 +20,7 @@ use Piwik\DataTable\Row;
  * Non-numeric columns are bypassed during summation and do not appear in this
  * rows columns.
  *
- * See {@link Piwik\DataTable\Row::sumRow()} for more information on the algorithm.
+ * See {@link Matomo\DataTable\Row::sumRow()} for more information on the algorithm.
  *
  */
 class DataTableSummaryRow extends Row

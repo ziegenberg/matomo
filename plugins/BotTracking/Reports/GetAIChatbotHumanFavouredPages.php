@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
+use Matomo\Matomo;
+use Matomo\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
 
 class GetAIChatbotHumanFavouredPages extends AbstractAIChatbotFavouredPagesReport
 {
@@ -20,8 +20,8 @@ class GetAIChatbotHumanFavouredPages extends AbstractAIChatbotFavouredPagesRepor
     {
         parent::init();
 
-        $this->name          = Piwik::translate('BotTracking_AIChatbotsHumanFavouredPagesTitle');
-        $this->documentation = Piwik::translate('BotTracking_AIChatbotsHumanFavouredPagesDocumentation');
+        $this->name          = Matomo::translate('BotTracking_AIChatbotsHumanFavouredPagesTitle');
+        $this->documentation = Matomo::translate('BotTracking_AIChatbotsHumanFavouredPagesDocumentation');
         // Order 40 keeps this the second-to-last widget so it pairs with AI-Favoured (order 50)
         // into the side-by-side row — see the layout contract in
         // AbstractAIChatbotFavouredPagesReport::configureWidgets().

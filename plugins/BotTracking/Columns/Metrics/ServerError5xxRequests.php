@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Columns\Metrics;
+namespace Matomo\Plugins\BotTracking\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\AggregatedMetric;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\Columns\Dimension;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\AggregatedMetric;
+use Matomo\Plugins\BotTracking\Metrics;
 
 class ServerError5xxRequests extends AggregatedMetric
 {
@@ -26,12 +26,12 @@ class ServerError5xxRequests extends AggregatedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('BotTracking_ColumnServerError5xxRequests');
+        return Matomo::translate('BotTracking_ColumnServerError5xxRequests');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('BotTracking_ColumnServerError5xxRequestsDocumentation');
+        return Matomo::translate('BotTracking_ColumnServerError5xxRequestsDocumentation');
     }
 
     /**

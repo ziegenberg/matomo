@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Reports;
+namespace Matomo\Plugins\DevicesDetection\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Plugins\DevicesDetection\Columns\DeviceModel;
-use Piwik\Policy\PolicyManager;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Plugins\DevicesDetection\Columns\DeviceModel;
+use Matomo\Policy\PolicyManager;
 
 class GetModel extends Base
 {
@@ -21,8 +21,8 @@ class GetModel extends Base
     {
         parent::init();
         $this->dimension     = new DeviceModel();
-        $this->name          = Piwik::translate('DevicesDetection_DeviceModel');
-        $this->documentation = Piwik::translate('DevicesDetection_DeviceModelReportDocumentation');
+        $this->name          = Matomo::translate('DevicesDetection_DeviceModel');
+        $this->documentation = Matomo::translate('DevicesDetection_DeviceModelReportDocumentation');
         $this->order = 2;
         $this->hasGoalMetrics = true;
         $this->subcategoryId = 'DevicesDetection_Devices';
@@ -32,7 +32,7 @@ class GetModel extends Base
     {
         $view->config->show_search = true;
         $view->config->show_exclude_low_population = false;
-        $view->config->addTranslation('label', Piwik::translate("DevicesDetection_dataTableLabelModels"));
+        $view->config->addTranslation('label', Matomo::translate("DevicesDetection_dataTableLabelModels"));
     }
 
     public function isEnabled()

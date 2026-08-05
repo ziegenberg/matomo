@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\tests\System;
+namespace Matomo\Plugins\MultiSites\tests\System;
 
-use Piwik\Piwik;
-use Piwik\Plugins\MultiSites\tests\Fixtures\ManySitesWithVisits;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Matomo;
+use Matomo\Plugins\MultiSites\tests\Fixtures\ManySitesWithVisits;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group MultiSites
@@ -101,7 +101,7 @@ class ApiTest extends SystemTestCase
     {
         $params['testSuffix'] .= '_filtered';
 
-        Piwik::addAction('MultiSites.filterSites', function (&$idSites) {
+        Matomo::addAction('MultiSites.filterSites', function (&$idSites) {
             $idSites = array_filter($idSites, function ($idSite) {
                 return $idSite != 2 && $idSite != 10;
             });

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Db;
+namespace Matomo\Db;
 
 use Zend_Db_Table;
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class Adapter
 {
@@ -81,7 +81,7 @@ class Adapter
      */
     private static function getAdapterClassName($adapterName)
     {
-        $className = 'Piwik\Db\Adapter\\' . str_replace(' ', '\\', ucwords(str_replace(array('_', '\\'), ' ', strtolower($adapterName))));
+        $className = 'Matomo\Db\Adapter\\' . str_replace(' ', '\\', ucwords(str_replace(array('_', '\\'), ' ', strtolower($adapterName))));
         if (!class_exists($className)) {
             throw new \Exception(sprintf("Adapter '%s' is not valid. Maybe check that your Matomo configuration files in config/*.ini.php are readable by the webserver.", $adapterName));
         }
@@ -106,7 +106,7 @@ class Adapter
         $adapters = array();
 
         foreach ($adapterNames as $adapterName) {
-            $className = '\Piwik\Db\Adapter\\' . $adapterName;
+            $className = '\Matomo\Db\Adapter\\' . $adapterName;
             if (call_user_func(array($className, 'isEnabled'))) {
                 $adapters[] = strtoupper($adapterName);
             }
@@ -134,10 +134,10 @@ class Adapter
     {
         $safeMessageMap = array(
             // add any exception search terms and their replacement message here
-            '[2006]'                        => Piwik::translate('General_ExceptionDatabaseUnavailable'),
-            'MySQL server has gone away'    => Piwik::translate('General_ExceptionDatabaseUnavailable'),
-            '[1698]'                        => Piwik::translate('General_ExceptionDatabaseAccess'),
-            'Access denied'                 => Piwik::translate('General_ExceptionDatabaseAccess'),
+            '[2006]'                        => Matomo::translate('General_ExceptionDatabaseUnavailable'),
+            'MySQL server has gone away'    => Matomo::translate('General_ExceptionDatabaseUnavailable'),
+            '[1698]'                        => Matomo::translate('General_ExceptionDatabaseAccess'),
+            'Access denied'                 => Matomo::translate('General_ExceptionDatabaseAccess'),
         );
 
         foreach ($safeMessageMap as $search_term => $safeMessage) {

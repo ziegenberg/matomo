@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\tests\Framework\TestCase;
+namespace Matomo\Plugins\BulkTracking\tests\Framework\TestCase;
 
-use Piwik\Plugin;
-use Piwik\Plugins\BulkTracking\BulkTracking;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\BulkTracking\tests\Framework\Mock\Tracker\Requests;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\RequestSet;
+use Matomo\Plugin;
+use Matomo\Plugins\BulkTracking\BulkTracking;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\BulkTracking\tests\Framework\Mock\Tracker\Requests;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\RequestSet;
 
 /**
  * @group BulkTracking

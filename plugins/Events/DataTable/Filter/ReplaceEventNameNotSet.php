@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\DataTable\Filter;
+namespace Matomo\Plugins\Events\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugins\Events\Archiver;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugins\Events\Archiver;
 
 class ReplaceEventNameNotSet extends BaseFilter
 {
@@ -31,7 +31,7 @@ class ReplaceEventNameNotSet extends BaseFilter
     {
         $row = $table->getRowFromLabel(Archiver::EVENT_NAME_NOT_SET);
         if ($row) {
-            $row->setColumn('label', Piwik::translate('General_NotDefined', Piwik::translate('Events_EventName')));
+            $row->setColumn('label', Matomo::translate('General_NotDefined', Matomo::translate('Events_EventName')));
         }
     }
 }

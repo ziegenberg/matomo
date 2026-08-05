@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
-use Piwik\API\Request;
-use Piwik\Piwik;
-use Piwik\SiteContentDetector;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Matomo;
+use Matomo\SiteContentDetector;
+use Matomo\Url;
+use Matomo\View;
 
 class GoogleTagManager extends SiteContentDetectionAbstract
 {
     public static function getName(): string
     {
-        return Piwik::translate('SitesManager_SiteWithoutDataGoogleTagManager');
+        return Matomo::translate('SitesManager_SiteWithoutDataGoogleTagManager');
     }
 
     public static function getIcon(): string
@@ -70,7 +70,7 @@ class GoogleTagManager extends SiteContentDetectionAbstract
         $jsTag = Request::processRequest(
             'SitesManager.getJavascriptTag',
             [
-                'idSite' => \Piwik\Request::fromRequest()->getIntegerParameter('idSite'),
+                'idSite' => \Matomo\Request::fromRequest()->getIntegerParameter('idSite'),
                 'piwikUrl' => $piwikUrl,
             ]
         );
@@ -89,7 +89,7 @@ class GoogleTagManager extends SiteContentDetectionAbstract
 
         return sprintf(
             '<p>%s</p>',
-            Piwik::translate(
+            Matomo::translate(
                 'SitesManager_SiteWithoutDataGoogleTagManagerDescription',
                 [
                     Url::getExternalLinkTag('https://matomo.org/faq/new-to-piwik/how-do-i-use-matomo-analytics-within-gtm-google-tag-manager'),

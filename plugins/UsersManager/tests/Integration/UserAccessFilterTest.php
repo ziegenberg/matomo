@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
-use Piwik\Access;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserAccessFilter;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserAccessFilter;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager

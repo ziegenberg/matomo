@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
-use Piwik\ArchiveProcessor;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive\Performance\Logger;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable\Manager;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugin\Archiver;
-use Piwik\Log;
-use Piwik\Timer;
+use Matomo\ArchiveProcessor;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive\Performance\Logger;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable\Manager;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugin\Archiver;
+use Matomo\Log;
+use Matomo\Timer;
 use Exception;
 
 /**
@@ -85,7 +85,7 @@ class PluginsArchiver
          * @param bool $shouldAggregateFromRawData  Set to true, to aggregate from raw data, or false to aggregate multiple reports.
          * @param Parameters $params
          */
-        Piwik::postEvent('ArchiveProcessor.shouldAggregateFromRawData', array(&$shouldAggregateFromRawData, $this->params));
+        Matomo::postEvent('ArchiveProcessor.shouldAggregateFromRawData', array(&$shouldAggregateFromRawData, $this->params));
 
         $this->shouldAggregateFromRawData = $shouldAggregateFromRawData;
     }
@@ -248,7 +248,7 @@ class PluginsArchiver
     protected static function getPluginArchivers()
     {
         if (empty(static::$archivers)) {
-            $pluginNames = \Piwik\Plugin\Manager::getInstance()->getActivatedPlugins();
+            $pluginNames = \Matomo\Plugin\Manager::getInstance()->getActivatedPlugins();
             $archivers = array();
             foreach ($pluginNames as $pluginName) {
                 $archivers[$pluginName] = self::getPluginArchiverClass($pluginName);
@@ -260,10 +260,10 @@ class PluginsArchiver
 
     private static function getPluginArchiverClass(string $pluginName): ?string
     {
-        $klassName = 'Piwik\\Plugins\\' . $pluginName . '\\Archiver';
+        $klassName = 'Matomo\Plugins\\' . $pluginName . '\\Archiver';
         if (
             class_exists($klassName)
-            && is_subclass_of($klassName, 'Piwik\\Plugin\\Archiver')
+            && is_subclass_of($klassName, 'Matomo\Plugin\Archiver')
         ) {
             return $klassName;
         }
@@ -300,7 +300,7 @@ class PluginsArchiver
 
         if (
             $this->params->getRequestedPlugin() &&
-            !\Piwik\Plugin\Manager::getInstance()->isPluginLoaded($this->params->getRequestedPlugin())
+            !\Matomo\Plugin\Manager::getInstance()->isPluginLoaded($this->params->getRequestedPlugin())
         ) {
             return false;
         }
@@ -354,12 +354,12 @@ class PluginsArchiver
          * Subscribers to this event can configure the plugin archiver, for example prevent the archiving of a plugin's data
          * by calling `$archiver->disable()` method.
          *
-         * @param \Piwik\Plugin\Archiver &$archiver The newly created plugin archiver instance.
+         * @param \Matomo\Plugin\Archiver &$archiver The newly created plugin archiver instance.
          * @param string $pluginName The name of plugin of which archiver instance was created.
          * @param Parameters $params Object containing archive parameters (Site, Period, Date and Segment)
          * @param bool false This parameter is deprecated and will be removed.
          */
-        Piwik::postEvent('Archiving.makeNewArchiverObject', array($archiver, $pluginName, $this->params, false));
+        Matomo::postEvent('Archiving.makeNewArchiverObject', array($archiver, $pluginName, $this->params, false));
 
         return $archiver;
     }

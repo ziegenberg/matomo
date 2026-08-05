@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
-use Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
-use Piwik\SiteContentDetector;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
+use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
+use Matomo\SiteContentDetector;
 
 class ChallengeSetupConsentManager extends Challenge
 {
@@ -38,12 +38,12 @@ class ChallengeSetupConsentManager extends Challenge
 
     public function getName()
     {
-        return Piwik::translate('Tour_ConnectConsentManager', [$this->getConsentManagerName()]);
+        return Matomo::translate('Tour_ConnectConsentManager', [$this->getConsentManagerName()]);
     }
 
     public function getDescription()
     {
-        return Piwik::translate('Tour_ConnectConsentManagerIntro', [$this->getConsentManagerName()]);
+        return Matomo::translate('Tour_ConnectConsentManagerIntro', [$this->getConsentManagerName()]);
     }
 
     public function getId()

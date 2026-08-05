@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\ProfileSummary;
+namespace Matomo\Plugins\DevicesDetection\ProfileSummary;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Live\ProfileSummary\ProfileSummaryAbstract;
-use Piwik\View;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\ProfileSummary\ProfileSummaryAbstract;
+use Matomo\View;
 
 /**
  * Class DevicesSummary
@@ -23,7 +23,7 @@ class DevicesSummary extends ProfileSummaryAbstract
      */
     public function getName()
     {
-        return Piwik::translate('DevicesDetection_Devices');
+        return Matomo::translate('DevicesDetection_Devices');
     }
 
     /**

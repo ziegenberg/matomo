@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Reports;
+namespace Matomo\Plugins\Events\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Events\Columns\EventName;
+use Matomo\Matomo;
+use Matomo\Plugins\Events\Columns\EventName;
 
 /**
  * Report metadata class for the Events.getNameFromCategoryId class.
@@ -23,7 +23,7 @@ class GetNameFromCategoryId extends Base
         $this->processedMetrics = [];
 
         $this->dimension     = new EventName();
-        $this->name          = Piwik::translate('Events_EventNames');
+        $this->name          = Matomo::translate('Events_EventNames');
         $this->isSubtableReport = true;
     }
 }

@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Session;
+namespace Matomo\Session;
 
-use Piwik\Auth;
-use Piwik\AuthResult;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\Session;
-use Piwik\Log\LoggerInterface;
+use Matomo\Auth;
+use Matomo\AuthResult;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Session;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Validates already authenticated sessions.
  *
- * See {@link \Piwik\Session\SessionFingerprint} for more info.
+ * See {@link \Matomo\Session\SessionFingerprint} for more info.
  */
 class SessionAuth implements Auth
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Date;
-use Piwik\Tracker\FingerprintSalt;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Date;
+use Matomo\Tracker\FingerprintSalt;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

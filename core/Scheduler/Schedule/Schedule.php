@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Scheduler\Schedule;
+namespace Matomo\Scheduler\Schedule;
 
 use Exception;
-use Piwik\Date;
+use Matomo\Date;
 
 /**
  * Describes the interval on which a scheduled task is executed. Use the {@link factory()} method
  * to create Schedule instances.
  *
- * @see \Piwik\Scheduler\Task
+ * @see \Matomo\Scheduler\Task
  */
 abstract class Schedule
 {

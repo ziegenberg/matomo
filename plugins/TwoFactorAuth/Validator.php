@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth;
+namespace Matomo\Plugins\TwoFactorAuth;
 
-use Piwik\Common;
-use Piwik\Exception\NotYetInstalledException;
-use Piwik\Piwik;
-use Piwik\Session\SessionFingerprint;
+use Matomo\Common;
+use Matomo\Exception\NotYetInstalledException;
+use Matomo\Matomo;
+use Matomo\Session\SessionFingerprint;
 use Exception;
-use Piwik\SettingsPiwik;
+use Matomo\SettingsPiwik;
 
 class Validator
 {
@@ -36,12 +36,12 @@ class Validator
             return false;
         }
 
-        return !Piwik::isUserIsAnonymous();
+        return !Matomo::isUserIsAnonymous();
     }
 
     public function checkCanUseTwoFa()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         if (!SettingsPiwik::isMatomoInstalled()) {
             throw new NotYetInstalledException('Matomo is not set up yet');
@@ -57,14 +57,14 @@ class Validator
 
     public function check2FaEnabled()
     {
-        if (!TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Piwik::getCurrentUserLogin())) {
+        if (!TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Matomo::getCurrentUserLogin())) {
             throw new Exception('not available');
         }
     }
 
     public function check2FaNotEnabled()
     {
-        if (TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Piwik::getCurrentUserLogin())) {
+        if (TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Matomo::getCurrentUserLogin())) {
             throw new Exception('not available');
         }
     }
@@ -98,7 +98,7 @@ class Validator
             return false;
         }
 
-        return $sessionUser === Piwik::getCurrentUserLogin();
+        return $sessionUser === Matomo::getCurrentUserLogin();
     }
 
     public function checkCurrentUserMatchesSessionUser()

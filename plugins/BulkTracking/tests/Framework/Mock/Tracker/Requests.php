@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\tests\Framework\Mock\Tracker;
+namespace Matomo\Plugins\BulkTracking\tests\Framework\Mock\Tracker;
 
-class Requests extends \Piwik\Plugins\BulkTracking\Tracker\Requests
+class Requests extends \Matomo\Plugins\BulkTracking\Tracker\Requests
 {
     private $rawData;
     private $requiresAuth = false;

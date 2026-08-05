@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\Diagnostic;
+namespace Matomo\Plugins\CoreUpdater\Diagnostic;
 
-use Piwik\Config\GeneralConfig;
-use Piwik\Http;
-use Piwik\Plugins\Diagnostics\Diagnostic\Diagnostic;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\Config\GeneralConfig;
+use Matomo\Http;
+use Matomo\Plugins\Diagnostics\Diagnostic\Diagnostic;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 /**
  * Check if an update via HTTPS is possible

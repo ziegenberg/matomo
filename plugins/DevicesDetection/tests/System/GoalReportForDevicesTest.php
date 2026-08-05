@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\tests\System;
+namespace Matomo\Plugins\DevicesDetection\tests\System;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\DataTable;
-use Piwik\Plugins\DevicesDetection\tests\Fixtures\MultiDeviceGoalConversions;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\DataTable;
+use Matomo\Plugins\DevicesDetection\tests\Fixtures\MultiDeviceGoalConversions;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  *

@@ -1,12 +1,12 @@
 <?php
 
-use Piwik\Notification;
+use Matomo\Notification;
 
 return [
-    'observers.global' => Piwik\DI::add([
+    'observers.global' => Matomo\DI::add([
         [
             'Request.dispatch',
-            Piwik\DI::value(
+            Matomo\DI::value(
                 function () {
                     if (!empty($_GET['setNotifications']) && $_GET['setNotifications'] == 1) {
                         // trigger some notification

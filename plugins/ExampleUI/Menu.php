@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI;
+namespace Matomo\Plugins\ExampleUI;
 
-use Piwik\Menu\MenuAdmin;
+use Matomo\Menu\MenuAdmin;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {

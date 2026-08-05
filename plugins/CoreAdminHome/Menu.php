@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome;
+namespace Matomo\Plugins\CoreAdminHome;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuTop;
-use Piwik\Piwik;
-use Piwik\Changes\UserChanges;
-use Piwik\Changes\Model as ChangesModel;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Menu\MenuTop;
+use Matomo\Matomo;
+use Matomo\Changes\UserChanges;
+use Matomo\Changes\Model as ChangesModel;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
@@ -28,7 +28,7 @@ class Menu extends \Piwik\Plugin\Menu
         $menu->addDiagnosticItem('', [], 6);
         $menu->addDevelopmentItem('', [], 40);
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $menu->addSystemItem(
                 'General_GeneralSettings',
                 $this->urlForAction('generalSettings'),
@@ -36,7 +36,7 @@ class Menu extends \Piwik\Plugin\Menu
             );
         }
 
-        if (!Piwik::isUserIsAnonymous()) {
+        if (!Matomo::isUserIsAnonymous()) {
             $menu->addMeasurableItem(
                 'CoreAdminHome_TrackingCode',
                 $this->urlForAction('trackingCodeGenerator'),
@@ -44,7 +44,7 @@ class Menu extends \Piwik\Plugin\Menu
             );
         }
 
-        if (Piwik::isUserHasSomeAdminAccess()) {
+        if (Matomo::isUserHasSomeAdminAccess()) {
             $menu->addDiagnosticItem(
                 'CoreAdminHome_TrackingFailures',
                 $this->urlForAction('trackingFailures'),
@@ -57,11 +57,11 @@ class Menu extends \Piwik\Plugin\Menu
     {
         $url = $this->urlForModuleAction('CoreAdminHome', 'home');
         $menu->registerMenuIcon('CoreAdminHome_Administration', 'icon-settings');
-        $menu->addItem('CoreAdminHome_Administration', null, $url, 980, Piwik::translate('CoreAdminHome_Administration'));
+        $menu->addItem('CoreAdminHome_Administration', null, $url, 980, Matomo::translate('CoreAdminHome_Administration'));
 
-        if (!Piwik::isUserIsAnonymous() && Piwik::isUserHasSomeViewAccess()) {
+        if (!Matomo::isUserIsAnonymous() && Matomo::isUserHasSomeViewAccess()) {
             $model = new UsersModel();
-            $user = $model->getUser(Piwik::getCurrentUserLogin());
+            $user = $model->getUser(Matomo::getCurrentUserLogin());
             if ($user) {
                 $userChanges = new UserChanges($user);
                 $newChangesStatus = $userChanges->getNewChangesStatus();
@@ -75,10 +75,10 @@ class Menu extends \Piwik\Plugin\Menu
                         null,
                         'javascript:',
                         990,
-                        Piwik::translate('CoreAdminHome_WhatIsNewTooltip'),
+                        Matomo::translate('CoreAdminHome_WhatIsNewTooltip'),
                         $icon,
                         "Piwik_Popover.createPopupAndLoadUrl('module=CoreAdminHome&action=whatIsNew', '" .
-                        addslashes(Piwik::translate('CoreAdminHome_WhatIsNewTooltip')) . "','what-is-new-popup')",
+                        addslashes(Matomo::translate('CoreAdminHome_WhatIsNewTooltip')) . "','what-is-new-popup')",
                         null,
                         null,
                         $userChanges->getNewChangesCount()

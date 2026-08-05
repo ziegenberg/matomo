@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Report;
+namespace Matomo\Tests\Integration\Report;
 
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugin\Manager as PluginManager;
 
 /**
  * @group Core
@@ -38,7 +38,7 @@ class ReportTest extends \PHPUnit\Framework\TestCase
         $this->assertGreaterThan(20, count($reports));
 
         foreach ($reports as $report) {
-            $this->assertInstanceOf('Piwik\Plugin\Report', $report);
+            $this->assertInstanceOf('Matomo\Plugin\Report', $report);
         }
     }
 

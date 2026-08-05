@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Reports;
+namespace Matomo\Plugins\Events\Reports;
 
-use Piwik\DataTable;
-use Piwik\EventDispatcher;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Events\API;
-use Piwik\Plugins\Events\Columns\Metrics\AverageEventValue;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Url;
-use Piwik\Widget\WidgetsList;
+use Matomo\DataTable;
+use Matomo\EventDispatcher;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Events\API;
+use Matomo\Plugins\Events\Columns\Metrics\AverageEventValue;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Url;
+use Matomo\Widget\WidgetsList;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     protected function init()
     {
@@ -37,8 +37,8 @@ abstract class Base extends \Piwik\Plugin\Report
     {
         $documentation = parent::getMetricsDocumentation();
 
-        $documentation['nb_visits'] = Piwik::translate('Events_ColumnNbVisitsDocumentation');
-        $documentation['nb_uniq_visitors'] = Piwik::translate('Events_ColumnNbUniqVisitorsDocumentation');
+        $documentation['nb_visits'] = Matomo::translate('Events_ColumnNbVisitsDocumentation');
+        $documentation['nb_uniq_visitors'] = Matomo::translate('Events_ColumnNbUniqVisitorsDocumentation');
 
         return $documentation;
     }

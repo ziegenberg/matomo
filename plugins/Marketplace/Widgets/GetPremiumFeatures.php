@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\Widgets;
+namespace Matomo\Plugins\Marketplace\Widgets;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
-use Piwik\Plugins\Marketplace\Input\Sort;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Matomo;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Plugins\Marketplace\Input\Sort;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 class GetPremiumFeatures extends Widget
 {
@@ -31,12 +31,12 @@ class GetPremiumFeatures extends Widget
         $config->setSubcategoryId('Marketplace_PaidPlugins');
         $config->setName('Marketplace_PaidPlugins');
         $config->setOrder(20);
-        $config->setIsEnabled(!Piwik::isUserIsAnonymous());
+        $config->setIsEnabled(!Matomo::isUserIsAnonymous());
     }
 
     public function render()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
         $template = 'getPremiumFeatures';
 
         $plugins = $this->marketplaceApiClient->searchForPlugins('', '', Sort::METHOD_LAST_UPDATED, PurchaseType::TYPE_PAID);

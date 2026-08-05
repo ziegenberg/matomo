@@ -8,12 +8,12 @@
  *
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Update for version 6.0.0-b1

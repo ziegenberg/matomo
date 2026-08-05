@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Development;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Development;
+use Matomo\Plugin\ConsoleCommand;
 
 class DevelopmentManageTestFiles extends ConsoleCommand
 {

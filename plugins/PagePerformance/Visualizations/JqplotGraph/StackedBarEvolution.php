@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Visualizations\JqplotGraph;
+namespace Matomo\Plugins\PagePerformance\Visualizations\JqplotGraph;
 
-use Piwik\Common;
-use Piwik\Period\Range;
-use Piwik\Plugins\PagePerformance\JqplotDataGenerator;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\Period\Range;
+use Matomo\Plugins\PagePerformance\JqplotDataGenerator;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Site;
 
 /**
  * Visualization that renders HTML for a line graph using jqPlot.

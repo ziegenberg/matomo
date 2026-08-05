@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Handler;
+namespace Matomo\Plugins\Monolog\Handler;
 
 use Monolog\Handler\AbstractHandler;
 use Monolog\LogRecord;
-use Piwik\Log\Logger;
+use Matomo\Log\Logger;
 
 /**
  * Handler used to detect whether a certain level of log has been emitted.

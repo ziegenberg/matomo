@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\Marketplace\Emails;
+namespace Matomo\Plugins\Marketplace\Emails;
 
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\View;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\View;
 
 class RequestTrialNotificationEmail extends Mail
 {
@@ -39,7 +39,7 @@ class RequestTrialNotificationEmail extends Mail
 
     protected function getDefaultSubject(): string
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'Marketplace_RequestTrialNotificationEmailSubject',
             [
                 $this->pluginDisplayName,

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Policy\PolicyManager;
-use Piwik\Plugins\PrivacyManager\Settings\CampaignParameterValuesMasked;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Policy\PolicyManager;
+use Matomo\Plugins\PrivacyManager\Settings\CampaignParameterValuesMasked;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Common
@@ -79,7 +79,7 @@ class CommonTest extends IntegrationTestCase
         $this->assertTrue(CampaignParameterValuesMasked::isPlaceholderValue($placeholder));
         $this->assertFalse(CampaignParameterValuesMasked::isPlaceholderValue('newsletter'));
         $this->assertSame(
-            Piwik::translate('PrivacyManager_CampaignParameterDiscarded'),
+            Matomo::translate('PrivacyManager_CampaignParameterDiscarded'),
             CampaignParameterValuesMasked::formatValue($placeholder)
         );
     }

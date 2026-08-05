@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\ArchiveProcessor;
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Context;
-use Piwik\DataAccess\ArchiveSelector;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\Model;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\SettingsServer;
-use Piwik\Site;
-use Piwik\Log\LoggerInterface;
-use Piwik\CronArchive\SegmentArchiving;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\ArchiveProcessor;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Context;
+use Matomo\DataAccess\ArchiveSelector;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\Model;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\SettingsServer;
+use Matomo\Site;
+use Matomo\Log\LoggerInterface;
+use Matomo\CronArchive\SegmentArchiving;
 
 /**
  * This class uses PluginsArchiver class to trigger data aggregation and create archives.
@@ -436,7 +436,7 @@ class Loader
             $idSites = array();
 
             // leaving undocumented unless decided otherwise
-            Piwik::postEvent('Archiving.getIdSitesToArchiveWhenNoVisits', array(&$idSites));
+            Matomo::postEvent('Archiving.getIdSitesToArchiveWhenNoVisits', array(&$idSites));
 
             $this->cache->save($cacheKey, $idSites);
         }
@@ -664,7 +664,7 @@ class Loader
              *
              * @param bool $idSitesNotUsingTracker The list of idSites that rather import data instead of using the tracker
              */
-            Piwik::postEvent('CronArchive.getIdSitesNotUsingTracker', array(&$idSitesNotUsingTracker));
+            Matomo::postEvent('CronArchive.getIdSitesNotUsingTracker', array(&$idSitesNotUsingTracker));
 
             $cache->save($cacheKey, $idSitesNotUsingTracker);
         }

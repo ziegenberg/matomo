@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\RecordBuilders;
+namespace Matomo\Plugins\VisitTime\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\Sort;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\Plugins\VisitTime\Archiver;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\Sort;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\Plugins\VisitTime\Archiver;
 
 class ServerTime extends Base
 {

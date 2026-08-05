@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Reports;
+namespace Matomo\Plugins\UserCountry\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\UserCountry\UserCountry;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\UserCountry\UserCountry;
+use Matomo\Url;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     protected function init()
     {
@@ -25,7 +25,7 @@ abstract class Base extends \Piwik\Plugin\Report
 
     protected function getGeoIPReportDocSuffix()
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'UserCountry_GeoIPDocumentationSuffix',
             [
                 Url::getExternalLinkTag('http://www.maxmind.com/?rId=piwik'),
@@ -46,15 +46,15 @@ abstract class Base extends \Piwik\Plugin\Report
             // if there's only one row whose label is 'Unknown', display a message saying there's no data
             if (
                 $dataTable->getRowsCount() == 1
-                && $dataTable->getFirstRow()->getColumn('label') == Piwik::translate('General_Unknown')
+                && $dataTable->getFirstRow()->getColumn('label') == Matomo::translate('General_Unknown')
             ) {
-                $footerMessage = Piwik::translate('UserCountry_NoDataForGeoIPReport1');
+                $footerMessage = Matomo::translate('UserCountry_NoDataForGeoIPReport1');
 
                 $userCountry = new UserCountry();
                 // if GeoIP is working, don't display this part of the message
                 if (!$userCountry->isGeoIPWorking()) {
                     $params = ['module' => 'UserCountry', 'action' => 'adminIndex'];
-                    $footerMessage .= ' ' . Piwik::translate(
+                    $footerMessage .= ' ' . Matomo::translate(
                         'UserCountry_NoDataForGeoIPReport2',
                         [
                             '<a target="_blank" href="' . Url::getCurrentQueryStringWithParametersModified($params) . '">',
@@ -64,7 +64,7 @@ abstract class Base extends \Piwik\Plugin\Report
                         ]
                     );
                 } else {
-                    $footerMessage .= ' ' . Piwik::translate(
+                    $footerMessage .= ' ' . Matomo::translate(
                         'UserCountry_ToGeolocateOldVisits',
                         [Url::getExternalLinkTag('https://matomo.org/faq/how-to/faq_167'), '</a>']
                     );

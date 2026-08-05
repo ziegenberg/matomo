@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\tests\Mock;
+namespace Matomo\Plugins\BulkTracking\tests\Mock;
 
-use Piwik\Tests\Framework\Mock\Tracker\Response;
+use Matomo\Tests\Framework\Mock\Tracker\Response;
 
 class TrackerResponse extends Response
 {

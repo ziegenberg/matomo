@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
-        if (Piwik::isUserHasSomeAdminAccess() && UsersManager::isUsersAdminEnabled()) {
+        if (Matomo::isUserHasSomeAdminAccess() && UsersManager::isUsersAdminEnabled()) {
             $menu->addSystemItem('UsersManager_MenuUsers', $this->urlForAction('index'), $order = 15);
         }
 
-        if (Piwik::hasUserSuperUserAccess() && API::getInstance()->getSitesAccessFromUser('anonymous')) {
+        if (Matomo::hasUserSuperUserAccess() && API::getInstance()->getSitesAccessFromUser('anonymous')) {
             $menu->addSystemItem('UsersManager_AnonymousUser', $this->urlForAction('anonymousSettings'), $order = 16);
         }
 
-        if (!Piwik::isUserIsAnonymous()) {
+        if (!Matomo::isUserIsAnonymous()) {
             $menu->addItem('UsersManager_MenuPersonal', 'General_Settings', $this->urlForAction('userSettings'), 0);
             $menu->addItem('UsersManager_MenuPersonal', 'General_Security', $this->urlForAction('userSecurity'), 1);
         }

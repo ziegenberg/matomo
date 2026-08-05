@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
-use Piwik\Container\Container;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Config;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\Container\Container;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Config;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
 
 /**
  * @group Core
@@ -100,7 +100,7 @@ class SetConfigTest extends ConsoleCommandTestCase
         ));
 
         $this->assertNotEquals(0, $code, $this->getCommandDisplayOutputErrorMessage());
-        self::assertStringContainsString('[Piwik\Exception\MissingFilePermissionException]', $this->applicationTester->getDisplay());
+        self::assertStringContainsString('[Matomo\Exception\MissingFilePermissionException]', $this->applicationTester->getDisplay());
     }
 
     public function testCommandSucceedsWhenArgumentsUsed()
@@ -185,9 +185,9 @@ class SetConfigTest extends ConsoleCommandTestCase
     {
         return array(
             // use a config instance that will save to a test INI file
-            'Piwik\Config' => function (Container $c) {
+            'Matomo\Config' => function (Container $c) {
                 /** @var GlobalSettingsProvider $actualGlobalSettingsProvider */
-                $actualGlobalSettingsProvider = $c->get('Piwik\Application\Kernel\GlobalSettingsProvider');
+                $actualGlobalSettingsProvider = $c->get('Matomo\Application\Kernel\GlobalSettingsProvider');
 
                 $config = SetConfigTest::makeNewConfig();
 

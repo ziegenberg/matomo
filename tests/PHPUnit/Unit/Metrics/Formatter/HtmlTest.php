@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Metrics\Formatter;
+namespace Matomo\Tests\Unit\Metrics\Formatter;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Metrics\Formatter\Html;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Container\StaticContainer;
+use Matomo\Metrics\Formatter\Html;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
 
 /**
  * @group Core
@@ -81,7 +81,7 @@ class HtmlTest extends \PHPUnit\Framework\TestCase
 
     public function testGetPrettyMoneyUsesNonBreakingSpaces()
     {
-        StaticContainer::get('Piwik\Translation\Translator')->setCurrentLanguage('de');
+        StaticContainer::get('Matomo\Translation\Translator')->setCurrentLanguage('de');
 
         $expected = html_entity_decode('1&nbsp;€');
         $value = $this->formatter->getPrettyMoney(1, 1);

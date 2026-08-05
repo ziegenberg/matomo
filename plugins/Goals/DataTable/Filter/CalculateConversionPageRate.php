@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\DataTable\Filter;
+namespace Matomo\Plugins\Goals\DataTable\Filter;
 
-use Piwik\Plugins\Goals\Archiver as GoalsArchiver;
-use Piwik\Archive;
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Site;
+use Matomo\Plugins\Goals\Archiver as GoalsArchiver;
+use Matomo\Archive;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Site;
 
 class CalculateConversionPageRate extends BaseFilter
 {
@@ -73,7 +73,7 @@ class CalculateConversionPageRate extends BaseFilter
                         isset($goalsCol[$goalIdString][Metrics::INDEX_GOAL_NB_CONVERSIONS_PAGE_UNIQ])
                         && isset($goalTotals[$goalIdString])
                     ) {
-                        $rate = Piwik::getQuotientSafe(
+                        $rate = Matomo::getQuotientSafe(
                             $goalsCol[$goalIdString][Metrics::INDEX_GOAL_NB_CONVERSIONS_PAGE_UNIQ],
                             $goalTotals[$goalIdString],
                             3

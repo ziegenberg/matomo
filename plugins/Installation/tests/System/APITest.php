@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation\tests\System;
+namespace Matomo\Plugins\Installation\tests\System;
 
-use Piwik\Http;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Http;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Installation
@@ -29,7 +29,7 @@ class APITest extends SystemTestCase
     {
         parent::setUpBeforeClass();
 
-        $testingEnvironment = new \Piwik\Tests\Framework\TestingEnvironmentVariables();
+        $testingEnvironment = new \Matomo\Tests\Framework\TestingEnvironmentVariables();
         $testingEnvironment->configFileLocal = PIWIK_INCLUDE_PATH . '/plugins/Installation/tests/resources/config.ini.php';
         $testingEnvironment->save();
     }

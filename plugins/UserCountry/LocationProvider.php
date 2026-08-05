@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry;
+namespace Matomo\Plugins\UserCountry;
 
 use Exception;
-use Piwik\Common;
-use Piwik\IP;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\UserCountry\LocationProvider\DefaultProvider;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugins\UserCountry\LocationProvider\DisabledProvider;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\TrackerConfig;
+use Matomo\Common;
+use Matomo\IP;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\UserCountry\LocationProvider\DefaultProvider;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugins\UserCountry\LocationProvider\DisabledProvider;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\TrackerConfig;
 
 /**
  * @see plugins/UserCountry/functions.php
@@ -216,7 +216,7 @@ abstract class LocationProvider
      */
     protected static function getLocationProviders(Plugin $plugin)
     {
-        $locationProviders = $plugin->findMultipleComponents('LocationProvider', 'Piwik\\Plugins\\UserCountry\\LocationProvider');
+        $locationProviders = $plugin->findMultipleComponents('LocationProvider', 'Matomo\Plugins\UserCountry\LocationProvider');
         $instances  = [];
 
         foreach ($locationProviders as $locationProvider) {
@@ -346,7 +346,7 @@ abstract class LocationProvider
      *
      * This function should not be called by the Tracker.
      *
-     * @return \Piwik\Plugins\UserCountry\LocationProvider|null
+     * @return \Matomo\Plugins\UserCountry\LocationProvider|null
      */
     public static function getCurrentProvider()
     {
@@ -394,7 +394,7 @@ abstract class LocationProvider
      * Returns a provider instance by ID or false if the ID is invalid or unavailable.
      *
      * @param string $providerId
-     * @return \Piwik\Plugins\UserCountry\LocationProvider|null
+     * @return \Matomo\Plugins\UserCountry\LocationProvider|null
      */
     public static function getProviderById($providerId)
     {
@@ -482,7 +482,7 @@ abstract class LocationProvider
     public static function prettyFormatLocation($locationInfo, $newline = "\n", $includeExtra = false)
     {
         if ($locationInfo === false) {
-            return Piwik::translate('General_Unknown');
+            return Matomo::translate('General_Unknown');
         }
 
         // add latitude/longitude line
@@ -526,7 +526,7 @@ abstract class LocationProvider
         if ($includeExtra) {
             $lines[] = '';
 
-            $unknown = Piwik::translate('General_Unknown');
+            $unknown = Matomo::translate('General_Unknown');
 
             $org = !empty($locationInfo[self::ORG_KEY]) ? $locationInfo[self::ORG_KEY] : $unknown;
             $lines[] = "Org: $org";

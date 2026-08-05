@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleVue\Widgets;
+namespace Matomo\Plugins\ExampleVue\Widgets;
 
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 class GetExampleVue extends Widget
 {

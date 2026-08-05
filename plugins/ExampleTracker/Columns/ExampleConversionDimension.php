@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleTracker\Columns;
+namespace Matomo\Plugins\ExampleTracker\Columns;
 
-use Piwik\Common;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
+use Matomo\Common;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
 
 /**
  * This example dimension counts achievement points for each user. A user gets one achievement point for each action

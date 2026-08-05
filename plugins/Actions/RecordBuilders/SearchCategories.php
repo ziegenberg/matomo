@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\RecordBuilders;
+namespace Matomo\Plugins\Actions\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\DataTable;
-use Piwik\Plugins\Actions\Archiver;
-use Piwik\Plugins\Actions\ArchivingHelper;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\DataTable;
+use Matomo\Plugins\Actions\Archiver;
+use Matomo\Plugins\Actions\ArchivingHelper;
 
 class SearchCategories extends ArchiveProcessor\RecordBuilder
 {

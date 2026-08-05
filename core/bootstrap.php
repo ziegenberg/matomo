@@ -56,7 +56,7 @@ require_once PIWIK_INCLUDE_PATH . '/libs/upgradephp/dev.php';
 
 require_once PIWIK_INCLUDE_PATH . '/DIObject.php';
 
-\Piwik\Plugin\Manager::initPluginDirectories();
+\Matomo\Plugin\Manager::initPluginDirectories();
 
 /**
  * Eaccelerator does not support closures and is known to be not compatible with Piwik. Therefore we are disabling

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth;
+namespace Matomo\Plugins\TwoFactorAuth;
 
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Settings\Setting;
-use Piwik\Settings\FieldConfig;
-use Piwik\Url;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Settings\Setting;
+use Matomo\Settings\FieldConfig;
+use Matomo\Url;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication;
 
-class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
+class SystemSettings extends \Matomo\Settings\Plugin\SystemSettings
 {
     /** @var Setting */
     public $twoFactorAuthRequired;
@@ -33,11 +33,11 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     private function createRequire2FA()
     {
         $setting = $this->makeSetting('twoFactorAuthRequired', $default = false, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->title = Piwik::translate('TwoFactorAuth_RequireTwoFAForAll');
-            $field->description = Piwik::translate('TwoFactorAuth_RequireTwoFAForAllInformation');
+            $field->title = Matomo::translate('TwoFactorAuth_RequireTwoFAForAll');
+            $field->description = Matomo::translate('TwoFactorAuth_RequireTwoFAForAllInformation');
             $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
 
-            $isWritable = defined('PIWIK_TEST_MODE') || TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Piwik::getCurrentUserLogin());
+            $isWritable = defined('PIWIK_TEST_MODE') || TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Matomo::getCurrentUserLogin());
             if (!$isWritable) {
                 $field->uiControlAttributes = ['disabled' => 'disabled'];
             }

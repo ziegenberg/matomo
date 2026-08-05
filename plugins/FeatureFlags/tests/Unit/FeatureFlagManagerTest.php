@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\tests\Unit;
+namespace Matomo\Plugins\FeatureFlags\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
-use Piwik\Plugins\FeatureFlags\FeatureFlagStorageInterface;
-use Piwik\Plugins\FeatureFlags\ForcedFeatureFlagStateInterface;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Plugins\FeatureFlags\FeatureFlagStorageInterface;
+use Matomo\Plugins\FeatureFlags\ForcedFeatureFlagStateInterface;
 
 class FeatureFlagManagerTest extends TestCase
 {

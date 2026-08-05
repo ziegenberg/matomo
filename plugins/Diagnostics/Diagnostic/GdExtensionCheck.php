@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\SettingsServer;
-use Piwik\Translation\Translator;
+use Matomo\SettingsServer;
+use Matomo\Translation\Translator;
 
 /**
  * Check that the GD extension is installed and the correct version.

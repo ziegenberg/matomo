@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
-use Piwik\Archive;
-use Piwik\ArchiveProcessor;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Piwik;
+use Matomo\Archive;
+use Matomo\ArchiveProcessor;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Matomo;
 
 /**
  * Inherit from this class to define archiving logic for one or more records.
@@ -770,7 +770,7 @@ abstract class RecordBuilder
 
     public function getPluginName(): string
     {
-        return Piwik::getPluginNameOfMatomoClass(get_class($this));
+        return Matomo::getPluginNameOfMatomoClass(get_class($this));
     }
 
     /**

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\tests\Integration\Columns\Metrics;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreHome
@@ -43,7 +43,7 @@ class EvolutionMetricTest extends IntegrationTestCase
     private function assertNoFailureOnComputeForLabel($label): void
     {
         $pastData = new DataTable();
-        $cPeriod = new \Piwik\Period\Week(Date::factory('2021-10-10'));
+        $cPeriod = new \Matomo\Period\Week(Date::factory('2021-10-10'));
         $pastData->setMetadata('period', $cPeriod);
 
         $evolution = new EvolutionMetric('nb_visits', $pastData);

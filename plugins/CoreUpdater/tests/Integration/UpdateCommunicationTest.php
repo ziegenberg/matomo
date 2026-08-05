@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\tests\Integration;
+namespace Matomo\Plugins\CoreUpdater\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Option;
-use Piwik\Plugins\CoreUpdater\UpdateCommunication;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\UpdateCheck;
-use Piwik\Version;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\Option;
+use Matomo\Plugins\CoreUpdater\UpdateCommunication;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\UpdateCheck;
+use Matomo\Version;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\View;
 
 /**
  * @group Plugins
@@ -156,7 +156,7 @@ class UpdateCommunicationTest extends IntegrationTestCase
      */
     private function getCommunicationMock($methodsToOverwrite)
     {
-        return $this->getMockBuilder('\Piwik\Plugins\CoreUpdater\UpdateCommunication')
+        return $this->getMockBuilder('\Matomo\Plugins\CoreUpdater\UpdateCommunication')
                     ->setMethods($methodsToOverwrite)
                     ->getMock();
     }

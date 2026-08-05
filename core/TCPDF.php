@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
 
@@ -32,7 +32,7 @@ class TCPDF extends \TCPDF
         if ($this->currentPageNo > 1) {
             $this->SetY(-15);
             $this->SetFont($this->footer_font[0], $this->footer_font[1], $this->footer_font[2]);
-            $this->Cell(0, 10, $this->footerContent . Piwik::translate('ScheduledReports_Pagination', array($this->getAliasNumPage(), $this->getAliasNbPages())), 0, false, 'C', 0, '', 0, false, 'T', 'M');
+            $this->Cell(0, 10, $this->footerContent . Matomo::translate('ScheduledReports_Pagination', array($this->getAliasNumPage(), $this->getAliasNbPages())), 0, false, 'C', 0, '', 0, false, 'T', 'M');
         }
     }
 

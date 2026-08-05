@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Heartbeat;
+namespace Matomo\Plugins\Heartbeat;
 
-use Piwik\Plugin;
+use Matomo\Plugin;
 
 class Heartbeat extends Plugin
 {

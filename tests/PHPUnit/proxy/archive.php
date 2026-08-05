@@ -1,7 +1,7 @@
 <?php
-use Piwik\Application\Environment;
-use Piwik\Tests\Framework\TestingEnvironmentManipulator;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Application\Environment;
+use Matomo\Tests\Framework\TestingEnvironmentManipulator;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 
 define('PIWIK_ARCHIVE_NO_TRUNCATE', true);
 

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class TranslationHelper
 {
@@ -17,18 +17,18 @@ class TranslationHelper
     {
         // Return either "Goals by %s" or "Goals %s", depending on the category
         if ($category === 'General_Visit') {
-                return Piwik::translate('Goals_GoalsAdjective', Piwik::translate('Goals_CategoryText' . $category));
+                return Matomo::translate('Goals_GoalsAdjective', Matomo::translate('Goals_CategoryText' . $category));
         }
-        return Piwik::translate('Goals_GoalsBy', Piwik::translate('Goals_CategoryText' . $category));
+        return Matomo::translate('Goals_GoalsBy', Matomo::translate('Goals_CategoryText' . $category));
     }
 
     public function translateEcommerceMetricCategory($category)
     {
         // Return either "Sales by %s" or "Sales %s", depending on the category
         if ($category === 'General_Visit') {
-                return Piwik::translate('Ecommerce_SalesAdjective', Piwik::translate('Goals_CategoryText' . $category));
+                return Matomo::translate('Ecommerce_SalesAdjective', Matomo::translate('Goals_CategoryText' . $category));
         }
-        return Piwik::translate('Ecommerce_SalesBy', Piwik::translate('Goals_CategoryText' . $category));
+        return Matomo::translate('Ecommerce_SalesBy', Matomo::translate('Goals_CategoryText' . $category));
     }
 
     public function getTranslationForCompleteDescription($match, $patternType, $pattern)
@@ -60,24 +60,24 @@ class TranslationHelper
     {
         switch ($match) {
             case 'manually':
-                return Piwik::translate('Goals_ManuallyTriggeredUsingJavascriptFunction');
+                return Matomo::translate('Goals_ManuallyTriggeredUsingJavascriptFunction');
 
             case 'url':
-                return Piwik::translate('Goals_VisitUrl');
+                return Matomo::translate('Goals_VisitUrl');
 
             case 'title':
-                return Piwik::translate('Goals_VisitPageTitle');
+                return Matomo::translate('Goals_VisitPageTitle');
 
             case 'event_category':
             case 'event_action':
             case 'event_name':
-                return Piwik::translate('Goals_SendEvent');
+                return Matomo::translate('Goals_SendEvent');
 
             case 'file':
-                return Piwik::translate('Goals_Download');
+                return Matomo::translate('Goals_Download');
 
             case 'external_website':
-                return Piwik::translate('Goals_ClickOutlink');
+                return Matomo::translate('Goals_ClickOutlink');
 
             default:
                 return '';
@@ -90,22 +90,22 @@ class TranslationHelper
             case 'regex':
                 return sprintf(
                     '%s %s',
-                    Piwik::translate('Goals_Pattern'),
-                    Piwik::translate('Goals_MatchesExpression', array($pattern))
+                    Matomo::translate('Goals_Pattern'),
+                    Matomo::translate('Goals_MatchesExpression', array($pattern))
                 );
 
             case 'contains':
                 return sprintf(
                     '%s %s',
-                    Piwik::translate('Goals_Pattern'),
-                    Piwik::translate('Goals_Contains', array($pattern))
+                    Matomo::translate('Goals_Pattern'),
+                    Matomo::translate('Goals_Contains', array($pattern))
                 );
 
             case 'exact':
                 return sprintf(
                     '%s %s',
-                    Piwik::translate('Goals_Pattern'),
-                    Piwik::translate('Goals_IsExactly', array($pattern))
+                    Matomo::translate('Goals_Pattern'),
+                    Matomo::translate('Goals_IsExactly', array($pattern))
                 );
 
             default:

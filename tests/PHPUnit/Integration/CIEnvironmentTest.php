@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Db;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Db;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -32,10 +32,10 @@ class CIEnvironmentTest extends IntegrationTestCase
         switch ($mysqlAdapter) {
             case 'PDO_MYSQL':
             case 'PDO\MYSQL':
-                $this->assertInstanceOf('Piwik\Db\Adapter\Pdo\Mysql', $db);
+                $this->assertInstanceOf('Matomo\Db\Adapter\Pdo\Mysql', $db);
                 break;
             case 'MYSQLI':
-                $this->assertInstanceOf('Piwik\Db\Adapter\Mysqli', $db);
+                $this->assertInstanceOf('Matomo\Db\Adapter\Mysqli', $db);
                 break;
         }
     }

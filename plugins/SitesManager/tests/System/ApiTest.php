@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\System;
+namespace Matomo\Plugins\SitesManager\tests\System;
 
-use Piwik\Db\Schema\Mysql;
-use Piwik\Option;
-use Piwik\Plugins\SitesManager\tests\Fixtures\ManySites;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Db\Schema\Mysql;
+use Matomo\Option;
+use Matomo\Plugins\SitesManager\tests\Fixtures\ManySites;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group SitesManager

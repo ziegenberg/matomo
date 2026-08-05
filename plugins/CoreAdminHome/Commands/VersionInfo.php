@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Version;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Version;
 
 class VersionInfo extends ConsoleCommand
 {

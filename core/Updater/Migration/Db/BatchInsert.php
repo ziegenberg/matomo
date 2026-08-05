@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Db;
+namespace Matomo\Updater\Migration\Db;
 
-use Piwik\Db;
-use Piwik\Updater\Migration;
+use Matomo\Db;
+use Matomo\Updater\Migration;
 
 /**
  * Inserts multiple records into an existing table.

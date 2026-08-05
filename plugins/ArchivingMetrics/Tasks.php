@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics;
+namespace Matomo\Plugins\ArchivingMetrics;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     public const DEFAULT_RETENTION_DAYS = 180;
 
@@ -28,7 +28,7 @@ class Tasks extends \Piwik\Plugin\Tasks
 
     /**
      * To test execute the following command:
-     * `./console core:run-scheduled-tasks --force "Piwik\Plugins\ArchivingMetrics\Tasks.purgeOldMetrics"`
+     * `./console core:run-scheduled-tasks --force "Matomo\Plugins\ArchivingMetrics\Tasks.purgeOldMetrics"`
      */
     public function purgeOldMetrics()
     {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Unit\DataTable\Filter;
+namespace Matomo\Plugins\CustomDimensions\tests\Unit\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugins\CustomDimensions\Archiver;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\CustomDimensions\Archiver;
 
 /**
  * @group CustomDimensions
@@ -21,7 +21,7 @@ use Piwik\Plugins\CustomDimensions\Archiver;
  */
 class AddSegmentMetadataTest extends \PHPUnit\Framework\TestCase
 {
-    private $filter = 'Piwik\Plugins\CustomDimensions\DataTable\Filter\AddSegmentMetadata';
+    private $filter = 'Matomo\Plugins\CustomDimensions\DataTable\Filter\AddSegmentMetadata';
 
     public function testFilter()
     {

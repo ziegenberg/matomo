@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Unit;
+namespace Matomo\Plugins\Referrers\tests\Unit;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugins\Referrers\DataTable\Filter\GroupDifferentSocialWritings;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\Referrers\DataTable\Filter\GroupDifferentSocialWritings;
 
 /**
  * @group DataTableTest

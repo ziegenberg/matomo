@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
 
 /**
  * Converts for each row of a {@link DataTable} a segmentValue to a segment (expression). The name of the segment
@@ -25,7 +25,7 @@ use Piwik\DataTable;
 class AddSegmentBySegmentValue extends BaseFilter
 {
     /**
-     * @var \Piwik\Plugin\Report
+     * @var \Matomo\Plugin\Report
      */
     private $report;
 
@@ -64,7 +64,7 @@ class AddSegmentBySegmentValue extends BaseFilter
 
         $this->enableRecursive(true);
 
-        /** @var \Piwik\Plugin\Segment $segment */
+        /** @var \Matomo\Plugin\Segment $segment */
         $segment     = reset($segments);
         $segmentName = $segment->getSegment();
 

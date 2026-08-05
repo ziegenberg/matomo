@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Widgets;
+namespace Matomo\Plugins\Events\Widgets;
 
-use Piwik\Plugins\CoreHome\CoreHome;
-use Piwik\Widget\WidgetContainerConfig;
+use Matomo\Plugins\CoreHome\CoreHome;
+use Matomo\Widget\WidgetContainerConfig;
 
 class EventsByDimension extends WidgetContainerConfig
 {

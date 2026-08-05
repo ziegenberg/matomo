@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\Integration\Filter\DataComparisonFilter;
+namespace Matomo\Plugins\API\tests\Integration\Filter\DataComparisonFilter;
 
-use Piwik\DataTable;
-use Piwik\Period\Factory;
-use Piwik\Plugins\API\Filter\DataComparisonFilter\ComparisonRowGenerator;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
+use Matomo\Period\Factory;
+use Matomo\Plugins\API\Filter\DataComparisonFilter\ComparisonRowGenerator;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class ComparisonRowGeneratorTest extends IntegrationTestCase
 {

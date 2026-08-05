@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreHome\EntityDuplicator;
+namespace Matomo\Plugins\CoreHome\EntityDuplicator;
 
 class EntityDuplicatorHelper
 {

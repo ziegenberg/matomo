@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CustomVariables\CustomVariables;
-use Piwik\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
-use Piwik\Site;
-use Piwik\SiteContentDetector;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CustomVariables\CustomVariables;
+use Matomo\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
+use Matomo\Site;
+use Matomo\SiteContentDetector;
+use Matomo\Url;
+use Matomo\View;
 
 class Matomo extends SiteContentDetectionAbstract
 {
     public static function getName(): string
     {
-        return Piwik::translate('CoreAdminHome_JavaScriptCode');
+        return Matomo::translate('CoreAdminHome_JavaScriptCode');
     }
 
     public static function getIcon(): string
@@ -60,7 +60,7 @@ class Matomo extends SiteContentDetectionAbstract
         $dntChecker = new DoNotTrackHeaderChecker();
         $maxCustomVariables = 0;
         $matomoUrl = Url::getCurrentUrlWithoutFileName();
-        $idSite = \Piwik\Request::fromRequest()->getIntegerParameter('idSite');
+        $idSite = \Matomo\Request::fromRequest()->getIntegerParameter('idSite');
         $jsTag = Request::processRequest('SitesManager.getJavascriptTag', ['idSite' => $idSite, 'piwikUrl' => $matomoUrl]);
 
         if (Manager::getInstance()->isPluginActivated('CustomVariables')) {
@@ -87,7 +87,7 @@ class Matomo extends SiteContentDetectionAbstract
     public function getRecommendationDetails(SiteContentDetector $detector): array
     {
         $details = parent::getRecommendationDetails($detector);
-        $details['text'] = Piwik::translate('SitesManager_SetupMatomoTracker');
+        $details['text'] = Matomo::translate('SitesManager_SetupMatomoTracker');
         return $details;
     }
 
@@ -109,10 +109,10 @@ class Matomo extends SiteContentDetectionAbstract
         $consentManagerName = $consentManager::getName();
         $consentManagerUrl = $consentManager::getInstructionUrl();
         $consentManagerIsConnected = in_array($consentManagerId, $detector->connectedConsentManagers);
-        $notificationMessage = '<p>' . Piwik::translate('PrivacyManager_ConsentManagerDetected', [$consentManagerName, Url::getExternalLinkTag($consentManagerUrl), '</a>']) . '</p>';
+        $notificationMessage = '<p>' . Matomo::translate('PrivacyManager_ConsentManagerDetected', [$consentManagerName, Url::getExternalLinkTag($consentManagerUrl), '</a>']) . '</p>';
 
         if (!empty($consentManagerIsConnected)) {
-            $notificationMessage .= '<p>' . Piwik::translate('SitesManager_ConsentManagerConnected', [$consentManagerName]) . '</p>';
+            $notificationMessage .= '<p>' . Matomo::translate('SitesManager_ConsentManagerConnected', [$consentManagerName]) . '</p>';
         }
 
         return $notificationMessage;

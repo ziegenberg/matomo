@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
-use Piwik\Access;
-use Piwik\Auth;
-use Piwik\NoAccessException;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Site as PiwikSite;
+use Matomo\Access;
+use Matomo\Auth;
+use Matomo\NoAccessException;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Site as PiwikSite;
 
 /**
  * FakeAccess for UnitTests
@@ -134,11 +134,11 @@ class FakeAccess extends Access
     {
         $cap = $this->capabilityProvider->getCapability($capability);
 
-        if ($cap && Piwik::isUserHasAdminAccess($idSites) && $cap->hasRoleCapability(Access\Role\Admin::ID)) {
+        if ($cap && Matomo::isUserHasAdminAccess($idSites) && $cap->hasRoleCapability(Access\Role\Admin::ID)) {
             return;
-        } elseif ($cap && Piwik::isUserHasWriteAccess($idSites) && $cap->hasRoleCapability(Access\Role\Write::ID)) {
+        } elseif ($cap && Matomo::isUserHasWriteAccess($idSites) && $cap->hasRoleCapability(Access\Role\Write::ID)) {
             return;
-        } elseif ($cap && Piwik::isUserHasViewAccess($idSites) && $cap->hasRoleCapability(Access\Role\View::ID)) {
+        } elseif ($cap && Matomo::isUserHasViewAccess($idSites) && $cap->hasRoleCapability(Access\Role\View::ID)) {
             return;
         }
 

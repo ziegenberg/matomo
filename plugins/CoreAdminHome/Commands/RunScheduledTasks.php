@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\FrontController;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Scheduler\Scheduler;
+use Matomo\Container\StaticContainer;
+use Matomo\FrontController;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Scheduler\Scheduler;
 
 class RunScheduledTasks extends ConsoleCommand
 {

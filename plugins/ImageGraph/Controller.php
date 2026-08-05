@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ImageGraph;
+namespace Matomo\Plugins\ImageGraph;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugins\API\API as APIPlugins;
-use Piwik\SettingsPiwik;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugins\API\API as APIPlugins;
+use Matomo\SettingsPiwik;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     /**
      * @internal For Debugging only
@@ -23,11 +23,11 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public function index()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         $idSite = $this->idSite ?: 1;
         $period = Common::getRequestVar('period', 'day', 'string');
         $date = Common::getRequestVar('date', 'today', 'string');
-        $_GET['token_auth'] = Piwik::getCurrentUserTokenAuth();
+        $_GET['token_auth'] = Matomo::getCurrentUserTokenAuth();
         $reports = APIPlugins::getInstance()->getReportMetadata($idSite, $period, $date);
         $plot = array();
         foreach ($reports as $report) {
@@ -48,7 +48,7 @@ class Controller extends \Piwik\Plugin\Controller
     // Draw graphs for all sizes (DEBUG)
     public function testAllSizes()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $view = new View('@ImageGraph/testAllSizes');
         $this->setGeneralVariablesView($view);
@@ -56,7 +56,7 @@ class Controller extends \Piwik\Plugin\Controller
         $period = Common::getRequestVar('period', 'day', 'string');
         $date = Common::getRequestVar('date', 'today', 'string');
 
-        $_GET['token_auth'] = Piwik::getCurrentUserTokenAuth();
+        $_GET['token_auth'] = Matomo::getCurrentUserTokenAuth();
         $availableReports = APIPlugins::getInstance()->getReportMetadata($this->idSite, $period, $date);
         $view->availableReports = $availableReports;
         $view->graphTypes = array(

@@ -1,13 +1,13 @@
 <?php
 
-namespace Piwik\Plugins\testpluginUpdates;
+namespace Matomo\Plugins\testpluginUpdates;
 
-use Piwik\Updates as PiwikUpdates;
+use Matomo\Updates as PiwikUpdates;
 
 class Updates_0_5 extends PiwikUpdates
 {
-    function doUpdate(\Piwik\Updater $updater)
+    function doUpdate(\Matomo\Updater $updater)
     {
-        throw new \Piwik\Exception\MissingFilePermissionException('make sure this exception is thrown');
+        throw new \Matomo\Exception\MissingFilePermissionException('make sure this exception is thrown');
     }
 }

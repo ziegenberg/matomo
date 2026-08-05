@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin\tests\System;
+namespace Matomo\Plugins\ExamplePlugin\tests\System;
 
-use Piwik\Plugins\ExamplePlugin\tests\Fixtures\SimpleFixtureTrackFewVisits;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\ExamplePlugin\tests\Fixtures\SimpleFixtureTrackFewVisits;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group ExamplePlugin

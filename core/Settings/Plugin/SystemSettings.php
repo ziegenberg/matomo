@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Plugin;
+namespace Matomo\Settings\Plugin;
 
-use Piwik\Piwik;
-use Piwik\Settings\Settings;
+use Matomo\Matomo;
+use Matomo\Settings\Settings;
 
 /**
  * Base class of all system settings providers. Plugins that define their own configuration settings
@@ -19,9 +19,9 @@ use Piwik\Settings\Settings;
  * Descendants of this class should implement the {@link init()} method and call the
  * {@link makeSetting()} method to create a system setting for this plugin.
  *
- * For an example, see {@link Piwik\Plugins\ExampleSettingsPlugin\SystemSettings}.
+ * For an example, see {@link Matomo\Plugins\ExampleSettingsPlugin\SystemSettings}.
  *
- * $systemSettings = new Piwik\Plugins\ExampleSettingsPlugin\SystemSettings(); // get instance via dependency injection
+ * $systemSettings = new Matomo\Plugins\ExampleSettingsPlugin\SystemSettings(); // get instance via dependency injection
  * $systemSettings->yourSetting->getValue();
  *
  * @api
@@ -101,6 +101,6 @@ abstract class SystemSettings extends Settings
          *
          * @param Settings $settings The plugin settings object.
          */
-        Piwik::postEvent('SystemSettings.updated', array($this));
+        Matomo::postEvent('SystemSettings.updated', array($this));
     }
 }

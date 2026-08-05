@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Fixtures;
+namespace Matomo\Plugins\PrivacyManager\tests\Fixtures;
 
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Period\Day;
-use Piwik\Period\Month;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
-use Piwik\Piwik;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\Goals\API as ApiGoals;
-use Piwik\Tracker\LogTable;
-use Piwik\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Period\Day;
+use Matomo\Period\Month;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
+use Matomo\Matomo;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\Goals\API as ApiGoals;
+use Matomo\Tracker\LogTable;
+use Matomo\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
 
 require_once PIWIK_INCLUDE_PATH . '/tests/PHPUnit/Framework/Mock/LocationProvider.php';
 
@@ -241,7 +241,7 @@ class MultipleSitesMultipleVisitsFixture extends Fixture
             $extraLogTable->install();
         }
 
-        Piwik::addAction('LogTables.addLogTables', function (&$logTables) use ($extraLogTables) {
+        Matomo::addAction('LogTables.addLogTables', function (&$logTables) use ($extraLogTables) {
             foreach ($extraLogTables as $extraLogTable) {
                 $logTables[] = $extraLogTable;
             }
@@ -268,7 +268,7 @@ class MultipleSitesMultipleVisitsFixture extends Fixture
         Fixture::createSuperUser(false);
 
         // we make sure by default nothing is anonymized
-        $privacyConfig = new \Piwik\Plugins\PrivacyManager\Config();
+        $privacyConfig = new \Matomo\Plugins\PrivacyManager\Config();
         $privacyConfig->ipAddressMaskLength = 0;
         $privacyConfig->ipAnonymizerEnabled = false;
 
@@ -287,7 +287,7 @@ class MultipleSitesMultipleVisitsFixture extends Fixture
 
     private function setSiteVisitorLogsDisabled($idSite)
     {
-        $settings = new \Piwik\Plugins\Live\MeasurableSettings($idSite);
+        $settings = new \Matomo\Plugins\Live\MeasurableSettings($idSite);
         $settings->disableVisitorLog->setValue(true);
         $settings->save();
     }

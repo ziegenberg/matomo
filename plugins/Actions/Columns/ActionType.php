@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns;
+namespace Matomo\Plugins\Actions\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Development;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\ActionDimension;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Development;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\ActionDimension;
 use Exception;
 
 /**
@@ -33,7 +33,7 @@ class ActionType extends ActionDimension
 
     public function getAcceptValues()
     {
-        return Piwik::translate('Actions_ActionTypeSegmentHelp', 'pageviews, contents, sitesearches, events, outlinks, downloads');
+        return Matomo::translate('Actions_ActionTypeSegmentHelp', 'pageviews, contents, sitesearches, events, outlinks, downloads');
     }
 
     public function getEnumColumnValues()
@@ -57,7 +57,7 @@ class ActionType extends ActionDimension
          *
          * @param array $availableTypes
          */
-        Piwik::postEvent('Actions.addActionTypes', [&$availableTypes]);
+        Matomo::postEvent('Actions.addActionTypes', [&$availableTypes]);
 
         $types = [];
 

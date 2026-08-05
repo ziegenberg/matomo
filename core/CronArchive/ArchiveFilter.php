@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\CronArchive;
+namespace Matomo\CronArchive;
 
-use Piwik\Archive;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Period\Factory;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugins\SegmentEditor\Model as SegmentEditorModel;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Log\LoggerInterface;
+use Matomo\Archive;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Period\Factory;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugins\SegmentEditor\Model as SegmentEditorModel;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Log\LoggerInterface;
 
 class ArchiveFilter
 {
@@ -65,7 +65,7 @@ class ArchiveFilter
     public function __construct()
     {
         $this->setRestrictToPeriods('');
-        $this->periodIdsToLabels = array_flip(Piwik::$idPeriods);
+        $this->periodIdsToLabels = array_flip(Matomo::$idPeriods);
     }
 
     /**
@@ -170,7 +170,7 @@ class ArchiveFilter
     public function setSegmentsToForceFromSegmentIds($idSegments)
     {
         /** @var SegmentEditorModel $segmentEditorModel */
-        $segmentEditorModel = StaticContainer::get('Piwik\Plugins\SegmentEditor\Model');
+        $segmentEditorModel = StaticContainer::get('Matomo\Plugins\SegmentEditor\Model');
         $segments = $segmentEditorModel->getAllSegmentsAndIgnoreVisibility();
 
         $segments = array_filter($segments, function ($segment) use ($idSegments) {

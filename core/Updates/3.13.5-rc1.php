@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
 
 class Updates_3_13_5_rc1 extends PiwikUpdates
 {

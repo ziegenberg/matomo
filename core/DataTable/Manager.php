@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable;
+namespace Matomo\DataTable;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataTable;
+use Matomo\Common;
+use Matomo\DataTable;
 
 /**
  * The DataTable\Manager registers all the instantiated DataTable and provides an

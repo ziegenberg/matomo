@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules;
+namespace Matomo\Tests\Unit\PHPStan\Rules;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
-use Piwik\Tests\PHPStan\Rules\JsonResponseMustNotEmitOutputRule;
+use Matomo\Tests\PHPStan\Rules\JsonResponseMustNotEmitOutputRule;
 
 /**
  * @group Core
@@ -26,7 +26,7 @@ class JsonResponseMustNotEmitOutputRuleTest extends RuleTestCase
 
     public function testRule(): void
     {
-        $message = 'Controller action %s() is marked #[\Piwik\Http\JsonResponse] but emits output'
+        $message = 'Controller action %s() is marked #[\Matomo\Http\JsonResponse] but emits output'
             . ' (echo/print/flush) before returning; this commits the response headers early and can'
             . ' prevent the JSON Content-Type from being applied. Return the JSON string instead.';
 

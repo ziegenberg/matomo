@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\CliMulti;
-use Piwik\Common;
-use Piwik\Option;
-use Piwik\Tracker;
+use Matomo\CliMulti;
+use Matomo\Common;
+use Matomo\Option;
+use Matomo\Tracker;
 
 class ScheduledTasksRunner
 {

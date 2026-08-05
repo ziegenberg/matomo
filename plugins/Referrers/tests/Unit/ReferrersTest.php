@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Unit;
+namespace Matomo\Plugins\Referrers\tests\Unit;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/Referrers/Referrers.php';
 
@@ -35,6 +35,6 @@ class ReferrersTest extends \PHPUnit\Framework\TestCase
      */
     public function testRemoveUrlProtocol($url, $expected)
     {
-        $this->assertEquals($expected, \Piwik\Plugins\Referrers\removeUrlProtocol($url));
+        $this->assertEquals($expected, \Matomo\Plugins\Referrers\removeUrlProtocol($url));
     }
 }

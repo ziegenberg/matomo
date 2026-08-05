@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Config;
-use Piwik\Nonce;
-use Piwik\Session\SessionNamespace;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Nonce;
+use Matomo\Session\SessionNamespace;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group NonceTest

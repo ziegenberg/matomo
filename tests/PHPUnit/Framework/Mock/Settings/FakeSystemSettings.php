@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock\Settings;
+namespace Matomo\Tests\Framework\Mock\Settings;
 
-class FakeSystemSettings extends \Piwik\Plugins\ExampleSettingsPlugin\SystemSettings
+class FakeSystemSettings extends \Matomo\Plugins\ExampleSettingsPlugin\SystemSettings
 {
     protected $pluginName = 'ExampleSettingsPlugin';
 

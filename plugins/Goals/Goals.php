@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\API\Request;
-use Piwik\Columns\ComputedMetricFactory;
-use Piwik\Columns\Dimension;
-use Piwik\Columns\MetricsList;
-use Piwik\Common;
-use Piwik\DataTable\Filter\AddColumnsProcessedMetricsGoal;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\ComputedMetric;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\CoreHome\SystemSummary;
-use Piwik\Plugins\Goals\RecordBuilders\ProductRecord;
-use Piwik\Tracker\GoalManager;
-use Piwik\Category\Subcategory;
-use Piwik\Plugins\SegmentEditor\Settings\LimitSegments;
-use Piwik\Segment\SegmentsList;
+use Matomo\API\Request;
+use Matomo\Columns\ComputedMetricFactory;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\MetricsList;
+use Matomo\Common;
+use Matomo\DataTable\Filter\AddColumnsProcessedMetricsGoal;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\ComputedMetric;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\CoreHome\SystemSummary;
+use Matomo\Plugins\Goals\RecordBuilders\ProductRecord;
+use Matomo\Tracker\GoalManager;
+use Matomo\Category\Subcategory;
+use Matomo\Plugins\SegmentEditor\Settings\LimitSegments;
+use Matomo\Segment\SegmentsList;
 
-class Goals extends \Piwik\Plugin
+class Goals extends \Matomo\Plugin
 {
     public static function getReportsWithGoalMetrics()
     {
@@ -93,7 +93,7 @@ class Goals extends \Piwik\Plugin
     }
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -132,7 +132,7 @@ class Goals extends \Piwik\Plugin
         $goalModel = new Model();
         $numGoals = $goalModel->getActiveGoalCount();
 
-        $systemSummary[] = new SystemSummary\Item($key = 'goals', Piwik::translate('Goals_NGoals', $numGoals), $value = null, array('module' => 'Goals', 'action' => 'manage'), $icon = 'icon-goal', $order = 7);
+        $systemSummary[] = new SystemSummary\Item($key = 'goals', Matomo::translate('Goals_NGoals', $numGoals), $value = null, array('module' => 'Goals', 'action' => 'manage'), $icon = 'icon-goal', $order = 7);
     }
 
     public function addComputedMetrics(MetricsList $list, ComputedMetricFactory $computedMetricFactory)
@@ -142,8 +142,8 @@ class Goals extends \Piwik\Plugin
 
         foreach ($goals as $goal) {
             $metric = $computedMetricFactory->createComputedMetric('goal_' .  $goal['idgoal'] . '_conversion', 'nb_uniq_visitors', ComputedMetric::AGGREGATION_RATE);
-            $goalName = '"' . Piwik::translate('Goals_GoalX', $goal['name']) . '"';
-            $metricName = Piwik::translate('Goals_ConversionRate', $goalName);
+            $goalName = '"' . Matomo::translate('Goals_GoalX', $goal['name']) . '"';
+            $metricName = Matomo::translate('Goals_ConversionRate', $goalName);
             $metric->setTranslatedName($metricName);
             $list->addMetric($metric);
         }
@@ -239,7 +239,7 @@ class Goals extends \Piwik\Plugin
             'avg_order_revenue' => 'General_AverageOrderValue',
         );
 
-        $metrics = array_map(array('\\Piwik\\Piwik', 'translate'), $metrics);
+        $metrics = array_map(array('\Matomo\Matomo', 'translate'), $metrics);
 
         $translations = array_merge($translations, $metrics);
     }
@@ -280,13 +280,13 @@ class Goals extends \Piwik\Plugin
         // These metrics will also be available for some reports, for each goal
         // Example: Conversion rate for Goal 2 for the keyword 'piwik'
         $goalProcessedMetrics = array(
-            'revenue_per_visit' => Piwik::translate('General_ColumnValuePerVisit'),
+            'revenue_per_visit' => Matomo::translate('General_ColumnValuePerVisit'),
         );
 
         $goalMetrics = array(
-            'nb_conversions'  => Piwik::translate('Goals_ColumnConversions'),
-            'conversion_rate' => Piwik::translate('General_ColumnConversionRate'),
-            'revenue'         => Piwik::translate('General_ColumnRevenue'),
+            'nb_conversions'  => Matomo::translate('Goals_ColumnConversions'),
+            'conversion_rate' => Matomo::translate('General_ColumnConversionRate'),
+            'revenue'         => Matomo::translate('General_ColumnRevenue'),
         );
 
         $goalMetricTypes = [
@@ -298,13 +298,13 @@ class Goals extends \Piwik\Plugin
 
         // special goal metrics for Actions page reports
         $pageGoalMetrics = array_merge($goalMetrics, [
-            'nb_conversions_attrib' => Piwik::translate('Goals_ColumnConversions'),
-            'revenue_attrib' => Piwik::translate('General_ColumnRevenue'),
+            'nb_conversions_attrib' => Matomo::translate('Goals_ColumnConversions'),
+            'revenue_attrib' => Matomo::translate('General_ColumnRevenue'),
         ]);
         unset($pageGoalMetrics['revenue']);
 
         $pageGoalProcessedMetrics = array_merge($goalProcessedMetrics, [
-            'nb_conversions_page_rate' => Piwik::translate('Goals_ConversionRatePageViewedBeforeGeneric'),
+            'nb_conversions_page_rate' => Matomo::translate('Goals_ConversionRatePageViewedBeforeGeneric'),
         ]);
 
         $pageGoalMetricTypes = array_merge($goalMetricTypes, [
@@ -316,14 +316,14 @@ class Goals extends \Piwik\Plugin
 
         // special goal metrics for Actions entry page reports
         $entryPageGoalMetrics = array_merge($goalMetrics, [
-            'nb_conversions_entry' => Piwik::translate('Goals_ColumnConversions'),
-            'revenue_entry' => Piwik::translate('General_ColumnRevenue'),
+            'nb_conversions_entry' => Matomo::translate('Goals_ColumnConversions'),
+            'revenue_entry' => Matomo::translate('General_ColumnRevenue'),
         ]);
         unset($entryPageGoalMetrics['revenue']);
 
         $entryPageGoalProcessedMetrics = array_merge($goalProcessedMetrics, [
-            'revenue_per_entry' => Piwik::translate('General_ColumnValuePerEntry'),
-            'nb_conversions_entry_rate' => Piwik::translate('General_ColumnConversionRate'),
+            'revenue_per_entry' => Matomo::translate('General_ColumnValuePerEntry'),
+            'nb_conversions_entry_rate' => Matomo::translate('General_ColumnConversionRate'),
         ]);
 
         $entryPageGoalMetricTypes = array_merge($goalMetricTypes, [
@@ -335,11 +335,11 @@ class Goals extends \Piwik\Plugin
         unset($entryPageGoalMetricTypes['revenue']);
 
         // add ecommerce metrics if idGoal is an ecommerce goal
-        $idGoal = \Piwik\Request::fromRequest()->getParameter('idGoal', '');
-        if ($idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+        $idGoal = \Matomo\Request::fromRequest()->getParameter('idGoal', '');
+        if ($idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
             $extraEcommerceProcessedMetrics = [
-                'avg_order_revenue' => Piwik::translate('General_AverageOrderValue'),
-                'items' => Piwik::translate('General_PurchasedProducts'),
+                'avg_order_revenue' => Matomo::translate('General_AverageOrderValue'),
+                'items' => Matomo::translate('General_PurchasedProducts'),
             ];
 
             $extraEcommerceMetricTypes = [
@@ -408,13 +408,13 @@ class Goals extends \Piwik\Plugin
         }
 
         $reportsWithGoals[] = array('category' => 'General_Visit',
-            'name'     => Piwik::translate('Goals_VisitsUntilConv'),
+            'name'     => Matomo::translate('Goals_VisitsUntilConv'),
             'module'   => 'Goals',
             'action'   => 'getVisitsUntilConversion',
             'viewDataTable' => 'table',
         );
         $reportsWithGoals[] = array('category' => 'General_Visit',
-            'name'     => Piwik::translate('Goals_DaysToConv'),
+            'name'     => Matomo::translate('Goals_DaysToConv'),
             'module'   => 'Goals',
             'action'   => 'getDaysToConversion',
             'viewDataTable' => 'table',
@@ -450,7 +450,7 @@ class Goals extends \Piwik\Plugin
          * @ignore
          * @deprecated since 2.5.0
          */
-        Piwik::postEvent('Goals.getReportsWithGoalMetrics', array(&$reportsWithGoals));
+        Matomo::postEvent('Goals.getReportsWithGoalMetrics', array(&$reportsWithGoals));
 
         return $reportsWithGoals;
     }

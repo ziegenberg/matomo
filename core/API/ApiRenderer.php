@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataTable\Renderer;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\SettingsServer;
+use Matomo\Common;
+use Matomo\DataTable\Renderer;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\SettingsServer;
 
 /**
  * API renderer
@@ -25,7 +25,7 @@ abstract class ApiRenderer
     /** @var array */
     protected $request;
 
-    /** @var \Piwik\Request */
+    /** @var \Matomo\Request */
     protected $requestObj;
 
     /** @var bool */
@@ -37,7 +37,7 @@ abstract class ApiRenderer
     final public function __construct($request)
     {
         $this->request = is_array($request) ? $request : [];
-        $this->requestObj = new \Piwik\Request($this->request);
+        $this->requestObj = new \Matomo\Request($this->request);
         $this->init();
     }
 
@@ -131,7 +131,7 @@ abstract class ApiRenderer
     {
         $formatToCheck = '\\' . ucfirst(strtolower($format));
 
-        $rendererClassnames = Plugin\Manager::getInstance()->findMultipleComponents('Renderer', 'Piwik\\API\\ApiRenderer');
+        $rendererClassnames = Plugin\Manager::getInstance()->findMultipleComponents('Renderer', 'Matomo\API\ApiRenderer');
 
         foreach ($rendererClassnames as $klassName) {
             if (Common::stringEndsWith($klassName, $formatToCheck)) {
@@ -146,7 +146,7 @@ abstract class ApiRenderer
 
         $availableRenderers = implode(', ', $availableRenderers);
         Common::sendHeader('Content-Type: text/plain; charset=utf-8');
-        throw new Exception(Piwik::translate('General_ExceptionInvalidRendererFormat', array($format, $availableRenderers)));
+        throw new Exception(Matomo::translate('General_ExceptionInvalidRendererFormat', array($format, $availableRenderers)));
     }
 
     private static function getFormatFromClass(string $klassname): string

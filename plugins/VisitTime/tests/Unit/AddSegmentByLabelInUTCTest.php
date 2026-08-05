@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\tests\Unit;
+namespace Matomo\Plugins\VisitTime\tests\Unit;
 
-use Piwik\DataTable\Row;
-use Piwik\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\DataTable;
 
 /**
  * @group VisitTime
@@ -19,7 +19,7 @@ use Piwik\DataTable;
  */
 class AddSegmentByLabelInUTCTest extends \PHPUnit\Framework\TestCase
 {
-    private $filter = 'Piwik\Plugins\VisitTime\DataTable\Filter\AddSegmentByLabelInUTC';
+    private $filter = 'Matomo\Plugins\VisitTime\DataTable\Filter\AddSegmentByLabelInUTC';
 
     /**
      * @var DataTable

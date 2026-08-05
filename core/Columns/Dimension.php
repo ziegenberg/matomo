@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Columns;
+namespace Matomo\Columns;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\Segment;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\Segment;
 use Exception;
-use Piwik\CacheId;
-use Piwik\Cache as PiwikCache;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Metrics\Formatter;
-use Piwik\Segment\SegmentsList;
+use Matomo\CacheId;
+use Matomo\Cache as PiwikCache;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Metrics\Formatter;
+use Matomo\Segment\SegmentsList;
 
 /**
  * @api
@@ -353,7 +353,7 @@ abstract class Dimension
     public function getName()
     {
         if (!empty($this->nameSingular)) {
-            return Piwik::translate($this->nameSingular);
+            return Matomo::translate($this->nameSingular);
         }
 
         return $this->nameSingular;
@@ -367,7 +367,7 @@ abstract class Dimension
     public function getNamePlural()
     {
         if (!empty($this->namePlural)) {
-            return Piwik::translate($this->namePlural);
+            return Matomo::translate($this->namePlural);
         }
 
         return $this->getName();
@@ -441,10 +441,10 @@ abstract class Dimension
         switch ($this->type) {
             case Dimension::TYPE_BOOL:
                 if (empty($value)) {
-                    return Piwik::translate('General_No');
+                    return Matomo::translate('General_No');
                 }
 
-                return Piwik::translate('General_Yes');
+                return Matomo::translate('General_Yes');
             case Dimension::TYPE_ENUM:
                 $values = $this->getEnumColumnValues();
                 if (isset($values[$value])) {
@@ -472,7 +472,7 @@ abstract class Dimension
     }
 
     /**
-     * Overwrite this method to configure segments. To do so just create an instance of a {@link \Piwik\Plugin\Segment}
+     * Overwrite this method to configure segments. To do so just create an instance of a {@link \Matomo\Plugin\Segment}
      * class, configure it and call the {@link addSegment()} method. You can add one or more segments for this
      * dimension. Example:
      *
@@ -536,7 +536,7 @@ abstract class Dimension
         $method = new \ReflectionMethod($this, $method);
         $declaringClass = $method->getDeclaringClass();
 
-        return 0 === strpos($declaringClass->name, 'Piwik\Plugins');
+        return 0 === strpos($declaringClass->name, 'Matomo\Plugins');
     }
 
     /**
@@ -616,7 +616,7 @@ abstract class Dimension
     public function getAcceptValues()
     {
         if (!empty($this->acceptValues) && strpos($this->acceptValues, '_')) {
-            return Piwik::translate($this->acceptValues);
+            return Matomo::translate($this->acceptValues);
         }
 
         return $this->acceptValues;
@@ -685,7 +685,7 @@ abstract class Dimension
     protected function generateIdFromClass($className)
     {
         // parse plugin name & dimension name
-        $regex = "/Piwik\\\\Plugins\\\\([^\\\\]+)\\\\" . self::COMPONENT_SUBNAMESPACE . "\\\\([^\\\\]+)/";
+        $regex = "/Matomo\\\\Plugins\\\\([^\\\\]+)\\\\" . self::COMPONENT_SUBNAMESPACE . "\\\\([^\\\\]+)/";
         if (!preg_match($regex, $className, $matches)) {
             throw new Exception("'$className' is located in the wrong directory.");
         }
@@ -725,7 +725,7 @@ abstract class Dimension
              *
              * @param Dimension[] $reports An array of dimensions
              */
-            Piwik::postEvent('Dimension.addDimensions', array(&$instances));
+            Matomo::postEvent('Dimension.addDimensions', array(&$instances));
 
             foreach ($plugins as $plugin) {
                 foreach (self::getDimensions($plugin) as $instance) {
@@ -749,7 +749,7 @@ abstract class Dimension
              *
              * @param Dimension[] $dimensions An array of dimensions
              */
-            Piwik::postEvent('Dimension.filterDimensions', array(&$instances));
+            Matomo::postEvent('Dimension.filterDimensions', array(&$instances));
 
             $cache->save($cacheId, $instances);
         }
@@ -759,7 +759,7 @@ abstract class Dimension
 
     public static function getDimensions(Plugin $plugin)
     {
-        $columns = $plugin->findMultipleComponents('Columns', '\\Piwik\\Columns\\Dimension');
+        $columns = $plugin->findMultipleComponents('Columns', '\Matomo\Columns\Dimension');
         $instances  = array();
         $removedDimensions = self::getRemovedDimensions();
 
@@ -781,9 +781,9 @@ abstract class Dimension
     {
         return [
             // dimensions removed in Matomo 4.0.0
-            'Piwik\Plugins\DevicePlugins\Columns\PluginDirector',
-            'Piwik\Plugins\DevicePlugins\Columns\PluginGears',
-            'Piwik\Plugins\VisitorInterest\Columns\VisitsByDaysSinceLastVisit',
+            'Matomo\Plugins\DevicePlugins\Columns\PluginDirector',
+            'Matomo\Plugins\DevicePlugins\Columns\PluginGears',
+            'Matomo\Plugins\VisitorInterest\Columns\VisitsByDaysSinceLastVisit',
         ];
     }
 

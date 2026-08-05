@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
-use Piwik\Piwik;
-use Piwik\SiteContentDetector;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\SiteContentDetector;
+use Matomo\Url;
 
 class MatomoTagManager extends SiteContentDetectionAbstract
 {
     public static function getName(): string
     {
-        return Piwik::translate('SitesManager_SiteWithoutDataMatomoTagManager');
+        return Matomo::translate('SitesManager_SiteWithoutDataMatomoTagManager');
     }
 
     public static function getIcon(): string
@@ -49,8 +49,8 @@ class MatomoTagManager extends SiteContentDetectionAbstract
 
     public function renderInstructionsTab(SiteContentDetector $detector): string
     {
-        return '<h3>' . Piwik::translate('SitesManager_SiteWithoutDataMatomoTagManager') . '</h3>
-            <p>' . Piwik::translate(
+        return '<h3>' . Matomo::translate('SitesManager_SiteWithoutDataMatomoTagManager') . '</h3>
+            <p>' . Matomo::translate(
             'SitesManager_SiteWithoutDataMatomoTagManagerNotActive',
             [Url::getExternalLinkTag('https://matomo.org/docs/tag-manager/'), '</a>']
         ) . '</p>';

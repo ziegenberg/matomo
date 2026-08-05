@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
 
 /**
  * The average amount for a certain performance metric. Calculated as
@@ -48,7 +48,7 @@ abstract class AveragePerformanceMetric extends ProcessedMetric
         $sumGenerationTime = $this->getMetric($row, 'sum_' . static::ID);
         $hitsWithTimeGeneration = $this->getMetric($row, 'nb_hits_with_' . static::ID);
 
-        return Piwik::getQuotientSafe($sumGenerationTime, $hitsWithTimeGeneration, $precision = 3);
+        return Matomo::getQuotientSafe($sumGenerationTime, $hitsWithTimeGeneration, $precision = 3);
     }
 
     public function format($value, Formatter $formatter)

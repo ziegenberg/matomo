@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Columns;
+namespace Matomo\Plugins\Ecommerce\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Segment\SegmentsList;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Segment\SegmentsList;
 
 class ProductViewCategory4 extends ProductViewCategory
 {

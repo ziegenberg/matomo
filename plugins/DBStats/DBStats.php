@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats;
+namespace Matomo\Plugins\DBStats;
 
-use Piwik\Piwik;
-use Piwik\Plugins\DBStats\tests\Mocks\MockDataAccess;
+use Matomo\Matomo;
+use Matomo\Plugins\DBStats\tests\Mocks\MockDataAccess;
 
-class DBStats extends \Piwik\Plugin
+class DBStats extends \Matomo\Plugin
 {
     public const TIME_OF_LAST_TASK_RUN_OPTION = 'dbstats_time_of_last_cache_task_run';
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -42,7 +42,7 @@ class DBStats extends \Piwik\Plugin
 
     public function setupTestEnvironment($environment)
     {
-        Piwik::addAction("MySQLMetadataProvider.createDao", function (&$dao) {
+        Matomo::addAction("MySQLMetadataProvider.createDao", function (&$dao) {
             $dao = new MockDataAccess();
         });
     }

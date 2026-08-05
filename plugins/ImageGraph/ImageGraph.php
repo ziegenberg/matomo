@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ImageGraph;
+namespace Matomo\Plugins\ImageGraph;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Scheduler\Scheduler;
-use Piwik\Site;
-use Piwik\Url;
-use Piwik\Period\Factory as PeriodFactory;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Scheduler\Scheduler;
+use Matomo\Site;
+use Matomo\Url;
+use Matomo\Period\Factory as PeriodFactory;
 
-class ImageGraph extends \Piwik\Plugin
+class ImageGraph extends \Matomo\Plugin
 {
     private static $CONSTANT_ROW_COUNT_REPORT_EXCEPTIONS = array(
         'Referrers_getReferrerType',
@@ -32,7 +32,7 @@ class ImageGraph extends \Piwik\Plugin
     );
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -108,7 +108,7 @@ class ImageGraph extends \Piwik\Plugin
         $segment = Request::getRawSegmentFromRequest();
 
         /** @var Scheduler $scheduler */
-        $scheduler = StaticContainer::getContainer()->get('Piwik\Scheduler\Scheduler');
+        $scheduler = StaticContainer::getContainer()->get('Matomo\Scheduler\Scheduler');
         $isRunningTask = $scheduler->isRunningTask();
 
         // add the idSubtable if it exists

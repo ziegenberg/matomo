@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\tests\Integration;
+namespace Matomo\Plugins\GeoIp2\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\UserCountry\LocationProvider\DefaultProvider;
-use Piwik\Plugins\UserCountry\VisitorGeolocator;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\UserCountry\LocationProvider\DefaultProvider;
+use Matomo\Plugins\UserCountry\VisitorGeolocator;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * @group GeoIp2

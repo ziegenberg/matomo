@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\BotTrackingMethod;
+namespace Matomo\Plugins\BotTracking\BotTrackingMethod;
 
 abstract class BotTrackingMethodAbstract
 {

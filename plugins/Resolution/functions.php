@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution;
+namespace Matomo\Plugins\Resolution;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 function getConfigurationLabel($str)
 {
@@ -18,11 +18,11 @@ function getConfigurationLabel($str)
     }
     $values = explode(";", $str);
 
-    $os = \Piwik\Plugins\DevicesDetection\getOsFullName($values[0]);
+    $os = \Matomo\Plugins\DevicesDetection\getOsFullName($values[0]);
     $name = $values[1];
-    $browser = \Piwik\Plugins\DevicesDetection\getBrowserName($name);
+    $browser = \Matomo\Plugins\DevicesDetection\getBrowserName($name);
     if ($browser === false) {
-        $browser = Piwik::translate('General_Unknown');
+        $browser = Matomo::translate('General_Unknown');
     }
     $resolution = $values[2];
     return $os . " / " . $browser . " / " . $resolution;

@@ -7,35 +7,35 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\API\DataTablePostProcessor;
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\API\Request as ApiRequest;
-use Piwik\API\ResponseBuilder;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\Date;
-use Piwik\Http\BadRequestException;
-use Piwik\Log;
-use Piwik\Metrics\Formatter\Html as HtmlFormatter;
-use Piwik\NoAccessException;
-use Piwik\Option;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\API\API as ApiApi;
-use Piwik\Plugins\API\Filter\DataComparisonFilter;
-use Piwik\Plugins\Monolog\Processor\ExceptionToTextProcessor;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\SettingsPiwik;
-use Piwik\View;
-use Piwik\ViewDataTable\Manager as ViewDataTableManager;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Log\LoggerInterface;
+use Matomo\API\DataTablePostProcessor;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\API\Request as ApiRequest;
+use Matomo\API\ResponseBuilder;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\Date;
+use Matomo\Http\BadRequestException;
+use Matomo\Log;
+use Matomo\Metrics\Formatter\Html as HtmlFormatter;
+use Matomo\NoAccessException;
+use Matomo\Option;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\API\API as ApiApi;
+use Matomo\Plugins\API\Filter\DataComparisonFilter;
+use Matomo\Plugins\Monolog\Processor\ExceptionToTextProcessor;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\SettingsPiwik;
+use Matomo\View;
+use Matomo\ViewDataTable\Manager as ViewDataTableManager;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Log\LoggerInterface;
 
 /**
  * The base class for report visualizations that output HTML and use JavaScript.
@@ -45,13 +45,13 @@ use Piwik\Log\LoggerInterface;
  * itself:
  *
  * - report documentation,
- * - a header message (if {@link Piwik\ViewDataTable\Config::$show_header_message} is set),
- * - a footer message (if {@link Piwik\ViewDataTable\Config::$show_footer_message} is set),
- * - a list of links to related reports (if {@link Piwik\ViewDataTable\Config::$related_reports} is set),
+ * - a header message (if {@link Matomo\ViewDataTable\Config::$show_header_message} is set),
+ * - a footer message (if {@link Matomo\ViewDataTable\Config::$show_footer_message} is set),
+ * - a list of links to related reports (if {@link Matomo\ViewDataTable\Config::$related_reports} is set),
  * - a button that allows users to switch visualizations,
  * - a control that allows users to export report data in different formats,
  * - a limit control that allows users to change the amount of rows displayed (if
- *   {@link Piwik\ViewDataTable\Config::$show_limit_control} is true),
+ *   {@link Matomo\ViewDataTable\Config::$show_limit_control} is true),
  * - and more depending on the visualization.
  *
  * ### Rendering Process
@@ -62,15 +62,15 @@ use Piwik\Log\LoggerInterface;
  * - The display and request properties that require report data in order to determine a default
  *   value are defaulted. These properties are:
  *
- *   - {@link Piwik\ViewDataTable\Config::$columns_to_display}
- *   - {@link Piwik\ViewDataTable\RequestConfig::$filter_sort_column}
- *   - {@link Piwik\ViewDataTable\RequestConfig::$filter_sort_order}
+ *   - {@link Matomo\ViewDataTable\Config::$columns_to_display}
+ *   - {@link Matomo\ViewDataTable\RequestConfig::$filter_sort_column}
+ *   - {@link Matomo\ViewDataTable\RequestConfig::$filter_sort_order}
  *
- * - Priority filters are applied to the report (see {@link Piwik\ViewDataTable\Config::$filters}).
+ * - Priority filters are applied to the report (see {@link Matomo\ViewDataTable\Config::$filters}).
  * - The filters that are applied to every report in the Reporting API (called **generic filters**)
- *   are applied. (see {@link Piwik\API\Request})
+ *   are applied. (see {@link Matomo\API\Request})
  * - The report's queued filters are applied.
- * - A {@link Piwik\View} instance is created and rendered.
+ * - A {@link Matomo\View} instance is created and rendered.
  *
  * ### Rendering Hooks
  *
@@ -89,8 +89,8 @@ use Piwik\Log\LoggerInterface;
  * - **afterGenericFiltersAreAppliedToLoadedDataTable**: Called after generic filters are applied, but before
  *                                                       queued filters are applied.
  * - **afterAllFiltersAreApplied**: Called after data is loaded and all filters are applied.
- * - **beforeRender**: Called immediately before a {@link Piwik\View} is created and rendered.
- * - **isThereDataToDisplay**: Called after a {@link Piwik\View} is created to determine if the report has
+ * - **beforeRender**: Called immediately before a {@link Matomo\View} is created and rendered.
+ * - **isThereDataToDisplay**: Called after a {@link Matomo\View} is created to determine if the report has
  *                             data or not. If not, a message is displayed to the user.
  *
  * ### The DataTable JavaScript class
@@ -263,14 +263,14 @@ class Visualization extends ViewDataTable
             if (empty($view->properties['show_footer_message'])) {
                 $view->properties['show_footer_message'] = '';
             }
-            $view->properties['show_footer_message'] .= '<br/>' . Piwik::translate('General_VisualizationDoesNotSupportComparison');
+            $view->properties['show_footer_message'] .= '<br/>' . Matomo::translate('General_VisualizationDoesNotSupportComparison');
         }
 
         if (empty($this->dataTable) || !$this->hasAnyData($this->dataTable)) {
             /**
              * @ignore
              */
-            Piwik::postEvent('Visualization.onNoData', [$view]);
+            Matomo::postEvent('Visualization.onNoData', [$view]);
         }
 
         return $view->render();
@@ -600,13 +600,13 @@ class Visualization extends ViewDataTable
             $elapsedSeconds = time() - $date->getTimestamp();
             $timeAgo        = $metricsFormatter->getPrettyTimeFromSeconds($elapsedSeconds);
 
-            return Piwik::translate('CoreHome_ReportGeneratedXAgo', $timeAgo);
+            return Matomo::translate('CoreHome_ReportGeneratedXAgo', $timeAgo);
         }
 
         $prettyDate = $date->getLocalized(Date::DATE_FORMAT_SHORT);
 
         $timezoneAppend = ' (UTC)';
-        return Piwik::translate('CoreHome_ReportGeneratedOn', $prettyDate) . $timezoneAppend;
+        return Matomo::translate('CoreHome_ReportGeneratedOn', $prettyDate) . $timezoneAppend;
     }
 
     /**
@@ -637,7 +637,7 @@ class Visualization extends ViewDataTable
     private function hasReportSegmentDisabled()
     {
         $module = $this->requestConfig->getApiModuleToRequest();
-        $rawSegment = \Piwik\API\Request::getRawSegmentFromRequest();
+        $rawSegment = \Matomo\API\Request::getRawSegmentFromRequest();
 
         if (!empty($rawSegment) && Rules::isSegmentPluginArchivingDisabled($module)) {
             return true;
@@ -679,7 +679,7 @@ class Visualization extends ViewDataTable
      * - etc.
      *
      * The values are loaded:
-     * - from the generic filters that are applied by default @see Piwik\API\DataTableGenericFilter::getGenericFiltersInformation()
+     * - from the generic filters that are applied by default @see Matomo\API\DataTableGenericFilter::getGenericFiltersInformation()
      * - from the values already available in the GET array
      * - from the values set using methods from this class (eg. setSearchPattern(), setLimit(), etc.)
      *
@@ -757,7 +757,7 @@ class Visualization extends ViewDataTable
             }
         }
 
-        $rawSegment = \Piwik\API\Request::getRawSegmentFromRequest();
+        $rawSegment = \Matomo\API\Request::getRawSegmentFromRequest();
         if (!empty($rawSegment)) {
             $javascriptVariablesToSet['segment'] = $rawSegment;
         }
@@ -831,7 +831,7 @@ class Visualization extends ViewDataTable
          *
          * @param Visualization $view The instance to configure.
          */
-        Piwik::postEvent('Visualization.beforeRender', [$this]);
+        Matomo::postEvent('Visualization.beforeRender', [$this]);
     }
 
     private function makeDataTablePostProcessor()

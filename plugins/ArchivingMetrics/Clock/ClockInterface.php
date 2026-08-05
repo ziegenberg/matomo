@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics\Clock;
+namespace Matomo\Plugins\ArchivingMetrics\Clock;
 
 interface ClockInterface
 {

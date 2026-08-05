@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Option;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Updater;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Option;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Updater;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * @group Core

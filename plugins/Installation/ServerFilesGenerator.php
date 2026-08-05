@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\SettingsServer;
-use Piwik\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\SettingsServer;
+use Matomo\Config;
 
 class ServerFilesGenerator
 {

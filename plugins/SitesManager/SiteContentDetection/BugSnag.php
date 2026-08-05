@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
 class BugSnag extends SiteContentDetectionAbstract
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Reports;
+namespace Matomo\Plugins\API\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ReportsProvider;
 
 class Get extends Report
 {
@@ -32,8 +32,8 @@ class Get extends Report
         $this->action = 'get';
 
         $this->categoryId = 'API';
-        $this->name = Piwik::translate('General_MainMetrics');
-        $this->documentation = Piwik::translate('API_MainMetricsReportDocumentation');
+        $this->name = Matomo::translate('General_MainMetrics');
+        $this->documentation = Matomo::translate('API_MainMetricsReportDocumentation');
 
         $this->processedMetrics = array();
         foreach ($this->reportsToMerge as $report) {
@@ -85,7 +85,7 @@ class Get extends Report
         $reports = new ReportsProvider();
         $result = array();
         foreach ($reports->getAllReportClasses() as $reportClass) {
-            if ($reportClass == 'Piwik\\Plugins\\API\\Reports\\Get') {
+            if ($reportClass == 'Matomo\Plugins\API\Reports\Get') {
                 continue;
             }
 

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Widget;
+namespace Matomo\Widget;
 
-use Piwik\View;
+use Matomo\View;
 
 /**
  * Defines a new widget. You can create a new widget using the console command `./console generate:widget`.

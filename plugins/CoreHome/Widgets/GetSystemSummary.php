@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Widgets;
+namespace Matomo\Plugins\CoreHome\Widgets;
 
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\CoreHome\SystemSummary\Item;
-use Piwik\Plugins\SegmentEditor\Services\StoredSegmentService;
-use Piwik\Version;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\CoreHome\SystemSummary\Item;
+use Matomo\Plugins\SegmentEditor\Services\StoredSegmentService;
+use Matomo\Version;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 class GetSystemSummary extends Widget
 {
@@ -37,7 +37,7 @@ class GetSystemSummary extends Widget
         $config->setCategoryId('About Matomo');
         $config->setName('CoreHome_SystemSummaryWidget');
         $config->setOrder(15);
-        $config->setIsEnabled(Piwik::hasUserSuperUserAccess());
+        $config->setIsEnabled(Matomo::hasUserSuperUserAccess());
     }
 
     public function render()
@@ -60,11 +60,11 @@ class GetSystemSummary extends Widget
          *
          * @param Item[] &$systemSummary An array containing system summary items.
          */
-        Piwik::postEvent('System.addSystemSummaryItems', array(&$systemSummary));
+        Matomo::postEvent('System.addSystemSummaryItems', array(&$systemSummary));
 
-        $systemSummary[] = new Item($key = 'piwik-version', Piwik::translate('CoreHome_SystemSummaryPiwikVersion'), Version::VERSION, $url = null, $icon = '', $order = 21);
-        $systemSummary[] = new Item($key = 'mysql-version', Piwik::translate('CoreHome_SystemSummaryMysqlVersion'), $mysqlVersion, $url = null, $icon = '', $order = 22);
-        $systemSummary[] = new Item($key = 'php-version', Piwik::translate('CoreHome_SystemSummaryPhpVersion'), $phpVersion, $url = null, $icon = '', $order = 23);
+        $systemSummary[] = new Item($key = 'piwik-version', Matomo::translate('CoreHome_SystemSummaryPiwikVersion'), Version::VERSION, $url = null, $icon = '', $order = 21);
+        $systemSummary[] = new Item($key = 'mysql-version', Matomo::translate('CoreHome_SystemSummaryMysqlVersion'), $mysqlVersion, $url = null, $icon = '', $order = 22);
+        $systemSummary[] = new Item($key = 'php-version', Matomo::translate('CoreHome_SystemSummaryPhpVersion'), $phpVersion, $url = null, $icon = '', $order = 23);
 
         $systemSummary = array_filter($systemSummary);
         usort($systemSummary, function ($itemA, $itemB) {
@@ -94,7 +94,7 @@ class GetSystemSummary extends Widget
          *
          * @param Item[] &$systemSummary An array containing system summary items.
          */
-        Piwik::postEvent('System.filterSystemSummaryItems', array(&$systemSummary));
+        Matomo::postEvent('System.filterSystemSummaryItems', array(&$systemSummary));
 
         $systemSummary = array_filter($systemSummary);
 

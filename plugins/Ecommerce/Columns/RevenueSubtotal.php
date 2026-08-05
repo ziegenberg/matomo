@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Columns;
+namespace Matomo\Plugins\Ecommerce\Columns;
 
-use Piwik\Tracker\GoalManager;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Tracker\GoalManager;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class RevenueSubtotal extends BaseConversion
 {

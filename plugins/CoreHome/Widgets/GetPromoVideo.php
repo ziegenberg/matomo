@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Widgets;
+namespace Matomo\Plugins\CoreHome\Widgets;
 
-use Piwik\Url;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Translation\Translator;
-use Piwik\View;
+use Matomo\Url;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Translation\Translator;
+use Matomo\View;
 
 class GetPromoVideo extends Widget
 {

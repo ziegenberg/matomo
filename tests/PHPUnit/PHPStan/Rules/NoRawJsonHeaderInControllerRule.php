@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -49,13 +49,13 @@ class NoRawJsonHeaderInControllerRule implements Rule
         foreach ($rawCalls as $call) {
             $message = $hasAttribute
                 ? sprintf(
-                    'Controller action %s() is marked #[\\Piwik\\Http\\JsonResponse], which already'
+                    'Controller action %s() is marked #[\Matomo\Http\JsonResponse], which already'
                     . ' sends the JSON header; remove this redundant Common::sendHeader() call.',
                     $methodName
                 )
                 : sprintf(
                     'Controller action %s() sets a JSON Content-Type via Common::sendHeader(). Mark the'
-                    . ' action with the #[\\Piwik\\Http\\JsonResponse] attribute instead of setting the'
+                    . ' action with the #[\Matomo\Http\JsonResponse] attribute instead of setting the'
                     . ' header directly (use Json::sendHeaderJSON() only for a conditional JSON branch'
                     . ' that cannot use the attribute).',
                     $methodName

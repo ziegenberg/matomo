@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Date;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Date;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class VisitorSecondsSinceOrder extends VisitDimension
 {

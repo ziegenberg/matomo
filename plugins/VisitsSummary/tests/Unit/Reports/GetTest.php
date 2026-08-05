@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitsSummary\tests\Unit\Reports;
+namespace Matomo\Plugins\VisitsSummary\tests\Unit\Reports;
 
-use Piwik\DataTable;
-use Piwik\Plugins\VisitsSummary\Reports\Get;
+use Matomo\DataTable;
+use Matomo\Plugins\VisitsSummary\Reports\Get;
 
 /**
  * @group VisitsSummary

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\TranslationWriter\Filter;
+namespace Matomo\Plugins\LanguagesManager\TranslationWriter\Filter;
 
 class EmptyTranslations extends FilterAbstract
 {

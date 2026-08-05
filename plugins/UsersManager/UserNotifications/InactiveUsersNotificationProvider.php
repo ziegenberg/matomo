@@ -7,18 +7,18 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\UserNotifications;
+namespace Matomo\Plugins\UsersManager\UserNotifications;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\SystemSettings;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\SystemSettings;
 
 final class InactiveUsersNotificationProvider extends UserNotificationProvider
 {
     protected function createNotification(array $users): UserNotificationInterface
     {
-        return new InactiveUsersEmailNotification($users, Piwik::getAllSuperUserAccessEmailAddresses());
+        return new InactiveUsersEmailNotification($users, Matomo::getAllSuperUserAccessEmailAddresses());
     }
 
     protected function getSetsOfUsersToNotify(): array

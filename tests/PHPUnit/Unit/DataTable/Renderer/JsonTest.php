@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\DataTable\Renderer;
+namespace Matomo\Tests\Unit\DataTable\Renderer;
 
-use Piwik\DataTable\Renderer\Json;
+use Matomo\DataTable\Renderer\Json;
 
 /**
  * @group DataTableTest

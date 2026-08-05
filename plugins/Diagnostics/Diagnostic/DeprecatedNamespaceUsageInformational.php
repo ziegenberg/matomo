@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Plugin\Manager;
-use Piwik\Translation\Translator;
+use Matomo\Plugin\Manager;
+use Matomo\Translation\Translator;
 
 /**
  * Informational diagnostic that surfaces deprecated `Piwik\` namespace usage in
@@ -30,7 +30,7 @@ use Piwik\Translation\Translator;
  * @internal Back-compat machinery for the `Piwik\` -> `Matomo\` namespace
  *           migration; removed together with the alias layer in Matomo 7.0.
  */
-class DeprecatedNamespaceUsageInformational implements Diagnostic
+class DeprecatedNamespaceUsageInformational implements \Matomo\Plugins\Diagnostics\Diagnostic\Diagnostic
 {
     /**
      * Maximum number of file paths to list in a single diagnostic result's
@@ -68,7 +68,7 @@ class DeprecatedNamespaceUsageInformational implements Diagnostic
 
         if (empty($usage)) {
             return [
-                DiagnosticResult::informationalResult(
+                \Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult::informationalResult(
                     $this->translator->translate('Diagnostics_DeprecatedNamespaceUsage'),
                     $this->translator->translate('Diagnostics_DeprecatedNamespaceUsageNone')
                 ),
@@ -130,8 +130,8 @@ class DeprecatedNamespaceUsageInformational implements Diagnostic
     /**
      * Recursively scans a plugin directory for PHP files containing a deprecated
      * `Piwik\<Class>` namespace reference (a `Piwik\` followed by an uppercase
-     * letter, so it matches `namespace Piwik\Foo`, `use Piwik\Foo`, `Piwik\Foo`
-     * FQCNs, and `'Piwik\Foo'` strings, but not this scanner's own `Piwik\`
+     * letter, so it matches `namespace Matomo\Foo`, `use Matomo\Foo`, `Matomo\Foo`
+     * FQCNs, and `'Matomo\Foo'` strings, but not this scanner's own `Piwik\`
      * search needle). Test and vendor trees are excluded so development fixtures
      * do not produce noise.
      *

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitsSummary\tests\Integration;
+namespace Matomo\Plugins\VisitsSummary\tests\Integration;
 
-use Piwik\API\Request;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Db;
-use Piwik\Plugins\VisitsSummary\VisitsSummary;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\API\Request;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Db;
+use Matomo\Plugins\VisitsSummary\VisitsSummary;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group VisitsSummary
@@ -180,7 +180,7 @@ class VisitsSummaryTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

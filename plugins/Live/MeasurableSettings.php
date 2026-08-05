@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Live\Settings\VisitorLogDisabled as VisitorLogDisabledSetting;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Measurable\MeasurableSetting;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\Settings\VisitorLogDisabled as VisitorLogDisabledSetting;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Measurable\MeasurableSetting;
 
-class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
+class MeasurableSettings extends \Matomo\Settings\Measurable\MeasurableSettings
 {
     /** @var MeasurableSetting|null */
     public $disableVisitorLog;
@@ -53,8 +53,8 @@ class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
         $type = FieldConfig::TYPE_BOOL;
 
         return $this->makeSetting('disable_visitor_profile', $defaultValue, $type, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Live_DisableVisitorProfile');
-            $field->inlineHelp = Piwik::translate('Live_DisableVisitorProfileDescription');
+            $field->title = Matomo::translate('Live_DisableVisitorProfile');
+            $field->inlineHelp = Matomo::translate('Live_DisableVisitorProfileDescription');
             $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
             $field->condition = 'disable_visitor_log==0';
         });

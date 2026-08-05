@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework;
+namespace Matomo\Tests\Framework;
 
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Plugin\Manager as PluginManager;
 
 /**
  * Sets the test environment.
@@ -110,8 +110,8 @@ class TestingEnvironmentVariables
 
     public function getCoreAndSupportedPlugins()
     {
-        $settings = new \Piwik\Application\Kernel\GlobalSettingsProvider();
-        $pluginList = new \Piwik\Application\Kernel\PluginList($settings);
+        $settings = new \Matomo\Application\Kernel\GlobalSettingsProvider();
+        $pluginList = new \Matomo\Application\Kernel\PluginList($settings);
         $pluginManager = new PluginManager($pluginList);
 
         $disabledPlugins = $pluginList->getCorePluginsDisabledByDefault();

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\TestCase;
+namespace Matomo\Tests\Framework\TestCase;
 
-use Piwik\Application\Environment;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\File;
+use Matomo\Application\Environment;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\File;
 
 /**
  * Base class for Unit tests. Use this if you need to use the DI container in tests. It will be created fresh

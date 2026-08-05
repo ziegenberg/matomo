@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleTracker\Columns;
+namespace Matomo\Plugins\ExampleTracker\Columns;
 
-use Piwik\Common;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Tracker\ActionPageview;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Common;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Tracker\ActionPageview;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 /**
  * This example dimension recognizes a new tracking url parameter that is supposed to save the keywords that were used

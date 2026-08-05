@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\API;
+namespace Matomo\Tests\Unit\API;
 
-use Piwik\API\DataTableGenericFilter;
-use Piwik\DataTable;
+use Matomo\API\DataTableGenericFilter;
+use Matomo\DataTable;
 
 class DataTableGenericFilterTest extends \PHPUnit\Framework\TestCase
 {

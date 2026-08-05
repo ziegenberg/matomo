@@ -7,31 +7,31 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime;
+namespace Matomo\Plugins\VisitTime;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Piwik;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Matomo;
 
 function getTimeLabel($label)
 {
     if (!is_numeric($label)) {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     $time = mktime($label);
     if (empty($time)) {
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     $date             = Date::factory($time);
-    $dateTimeProvider = StaticContainer::get('Piwik\Intl\Data\Provider\DateTimeFormatProvider');
+    $dateTimeProvider = StaticContainer::get('Matomo\Intl\Data\Provider\DateTimeFormatProvider');
 
     if ($dateTimeProvider->uses12HourClock()) {
-        return $date->getLocalized(Piwik::translate('Intl_Format_Hour_12'));
+        return $date->getLocalized(Matomo::translate('Intl_Format_Hour_12'));
     }
 
-    return $date->getLocalized(Piwik::translate('Intl_Format_Hour_24'));
+    return $date->getLocalized(Matomo::translate('Intl_Format_Hour_24'));
 }
 
 /**
@@ -54,7 +54,7 @@ function dayOfWeekFromDate($dateStr)
  */
 function translateDayOfWeek($dayOfWeek)
 {
-    return Piwik::translate('Intl_Day_Long_StandAlone_' . $dayOfWeek);
+    return Matomo::translate('Intl_Day_Long_StandAlone_' . $dayOfWeek);
 }
 
 /**
@@ -65,5 +65,5 @@ function translateDayOfWeek($dayOfWeek)
  */
 function translateMonth($month)
 {
-    return Piwik::translate('Intl_Month_Long_StandAlone_' . $month);
+    return Matomo::translate('Intl_Month_Long_StandAlone_' . $month);
 }

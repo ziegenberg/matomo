@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserId\Reports;
+namespace Matomo\Plugins\UserId\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\UserId\Columns\UserId;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\UserId\Columns\UserId;
+use Matomo\Url;
 
 /**
  * A report showing all unique user IDs and some aggregated information about them. It also allows
@@ -25,9 +25,9 @@ class GetUsers extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('UserId_UserReportTitle');
+        $this->name = Matomo::translate('UserId_UserReportTitle');
         $this->subcategoryId = 'UserId_UserReportTitle';
-        $this->documentation = Piwik::translate('UserId_UserReportDocumentation');
+        $this->documentation = Matomo::translate('UserId_UserReportDocumentation');
         $this->dimension = new UserId();
         $this->metrics = ['label', 'nb_visits', 'nb_actions', 'nb_visits_converted'];
         $this->supportsFlatten = false;
@@ -46,8 +46,8 @@ class GetUsers extends Base
 
     public function configureView(ViewDataTable $view)
     {
-        $view->config->addTranslation('label', Piwik::translate('General_UserId'));
-        $view->config->addTranslation('nb_visits_converted', Piwik::translate('General_VisitConvertedGoal'));
+        $view->config->addTranslation('label', Matomo::translate('General_UserId'));
+        $view->config->addTranslation('nb_visits_converted', Matomo::translate('General_VisitConvertedGoal'));
 
         /*
          * Hide most of the table footer actions, leaving only export icons and pagination
@@ -58,9 +58,9 @@ class GetUsers extends Base
         $view->config->show_related_reports = false;
         $view->config->show_insights = false;
         $view->config->show_pivot_by_subtable = false;
-        $view->config->no_data_message = Piwik::translate('CoreHome_ThereIsNoDataForThisReport') . '<br><br>'
+        $view->config->no_data_message = Matomo::translate('CoreHome_ThereIsNoDataForThisReport') . '<br><br>'
           . sprintf(
-              Piwik::translate('UserId_ThereIsNoDataForThisReportHelp'),
+              Matomo::translate('UserId_ThereIsNoDataForThisReportHelp'),
               Url::getExternalLinkTag('https://matomo.org/docs/user-id/'),
               '</a>'
           );

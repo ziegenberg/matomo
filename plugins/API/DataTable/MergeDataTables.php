@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\DataTable;
+namespace Matomo\Plugins\API\DataTable;
 
-use Piwik\DataTable\Row;
-use Piwik\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\DataTable;
 
 class MergeDataTables
 {

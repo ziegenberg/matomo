@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\ArchiveProcessor;
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Config as PiwikConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\ErrorHandler;
-use Piwik\Log;
-use Piwik\Piwik;
+use Matomo\ArchiveProcessor;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Config as PiwikConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\ErrorHandler;
+use Matomo\Log;
+use Matomo\Matomo;
 
 /**
  * The base class that should be extended by plugins that compute their own
@@ -25,9 +25,9 @@ use Piwik\Piwik;
  * Descendants should implement the {@link aggregateDayReport()} and {@link aggregateMultipleReports()}
  * methods.
  *
- * Both of these methods should persist analytics data using the {@link \Piwik\ArchiveProcessor}
+ * Both of these methods should persist analytics data using the {@link \Matomo\ArchiveProcessor}
  * instance returned by {@link getProcessor()}. The {@link aggregateDayReport()} method should
- * compute analytics data using the {@link \Piwik\DataAccess\LogAggregator} instance
+ * compute analytics data using the {@link \Matomo\DataAccess\LogAggregator} instance
  * returned by {@link getLogAggregator()}.
  *
  * ### Examples
@@ -90,7 +90,7 @@ class Archiver
 
     private function getPluginName(): string
     {
-        return $this->pluginName ?: Piwik::getPluginNameOfMatomoClass(get_class($this));
+        return $this->pluginName ?: Matomo::getPluginNameOfMatomoClass(get_class($this));
     }
 
     /**
@@ -109,7 +109,7 @@ class Archiver
 
             // only select RecordBuilders for the selected plugin
             $recordBuilderClasses = array_filter($recordBuilderClasses, function ($className) use ($pluginName) {
-                return Piwik::getPluginNameOfMatomoClass($className) == $pluginName;
+                return Matomo::getPluginNameOfMatomoClass($className) == $pluginName;
             });
 
             $recordBuilders = array_map(function ($className) {
@@ -131,7 +131,7 @@ class Archiver
              * @param ArchiveProcessor\RecordBuilder[] $recordBuilders An array of RecordBuilder instances
              * @api
              */
-            Piwik::postEvent('Archiver.addRecordBuilders', [&$recordBuilders], false, [$pluginName]);
+            Matomo::postEvent('Archiver.addRecordBuilders', [&$recordBuilders], false, [$pluginName]);
 
             $transientCache->save($cacheKey, $recordBuilders);
         }
@@ -153,7 +153,7 @@ class Archiver
          * @param ArchiveProcessor\RecordBuilder[] $recordBuilders An array of RecordBuilder instances
          * @api
          */
-        Piwik::postEvent('Archiver.filterRecordBuilders', [&$recordBuilders]);
+        Matomo::postEvent('Archiver.filterRecordBuilders', [&$recordBuilders]);
 
         return $recordBuilders;
     }
@@ -265,8 +265,8 @@ class Archiver
      * aggregating individual log table rows isn't a problem. Doing this for any larger period,
      * however, would cause performance degradation.
      *
-     * Aggregate log table rows using a {@link Piwik\DataAccess\LogAggregator} instance. Get a
-     * {@link Piwik\DataAccess\LogAggregator} instance using the {@link getLogAggregator()} method.
+     * Aggregate log table rows using a {@link Matomo\DataAccess\LogAggregator} instance. Get a
+     * {@link Matomo\DataAccess\LogAggregator} instance using the {@link getLogAggregator()} method.
      */
     public function aggregateDayReport()
     {
@@ -280,8 +280,8 @@ class Archiver
      * current period. For example, it is more efficient to aggregate reports for each day of a
      * week than to aggregate each log entry of the week.
      *
-     * Use {@link Piwik\ArchiveProcessor::aggregateNumericMetrics()} and {@link Piwik\ArchiveProcessor::aggregateDataTableRecords()}
-     * to aggregate archived reports. Get the {@link Piwik\ArchiveProcessor} instance using the {@link getProcessor()}
+     * Use {@link Matomo\ArchiveProcessor::aggregateNumericMetrics()} and {@link Matomo\ArchiveProcessor::aggregateDataTableRecords()}
+     * to aggregate archived reports. Get the {@link Matomo\ArchiveProcessor} instance using the {@link getProcessor()}
      * method.
      */
     public function aggregateMultipleReports()
@@ -290,10 +290,10 @@ class Archiver
     }
 
     /**
-     * Returns a {@link Piwik\ArchiveProcessor} instance that can be used to insert archive data for
+     * Returns a {@link Matomo\ArchiveProcessor} instance that can be used to insert archive data for
      * the period, segment and site we are archiving data for.
      *
-     * @return \Piwik\ArchiveProcessor
+     * @return \Matomo\ArchiveProcessor
      * @api
      */
     protected function getProcessor()
@@ -302,10 +302,10 @@ class Archiver
     }
 
     /**
-     * Returns a {@link Piwik\DataAccess\LogAggregator} instance that can be used to aggregate log table rows
+     * Returns a {@link Matomo\DataAccess\LogAggregator} instance that can be used to aggregate log table rows
      * for this period, segment and site.
      *
-     * @return \Piwik\DataAccess\LogAggregator
+     * @return \Matomo\DataAccess\LogAggregator
      * @api
      */
     protected function getLogAggregator()
@@ -418,7 +418,7 @@ class Archiver
     {
         $recordBuilders = self::getAllRecordBuilderClasses();
         foreach ($recordBuilders as $builder) {
-            if ($pluginName === Piwik::getPluginNameOfMatomoClass($builder)) {
+            if ($pluginName === Matomo::getPluginNameOfMatomoClass($builder)) {
                 return true;
             }
         }

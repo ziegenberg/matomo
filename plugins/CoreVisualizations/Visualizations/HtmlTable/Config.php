@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
 
-use Piwik\ViewDataTable\Config as VisualizationConfig;
+use Matomo\ViewDataTable\Config as VisualizationConfig;
 
 /**
  * Configuration for the HtmlTable visualization.

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin\tests\Integration;
+namespace Matomo\Plugins\ExamplePlugin\tests\Integration;
 
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ExamplePlugin

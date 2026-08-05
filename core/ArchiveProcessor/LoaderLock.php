@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
-use Piwik\Db;
-use Piwik\SettingsPiwik;
+use Matomo\Db;
+use Matomo\SettingsPiwik;
 
 class LoaderLock
 {

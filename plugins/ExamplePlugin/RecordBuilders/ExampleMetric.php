@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin\RecordBuilders;
+namespace Matomo\Plugins\ExamplePlugin\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Date;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Date;
 
 /**
  * The RecordBuilder class processes raw data into ready ro read reports.

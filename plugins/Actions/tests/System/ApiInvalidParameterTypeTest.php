@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\tests\System;
+namespace Matomo\Plugins\Actions\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\API\Request;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ApiInvalidParameterTypeTest

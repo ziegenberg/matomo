@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics\Writer;
+namespace Matomo\Plugins\ArchivingMetrics\Writer;
 
-use Piwik\Plugins\ArchivingMetrics\Context;
+use Matomo\Plugins\ArchivingMetrics\Context;
 
 interface WriterInterface
 {

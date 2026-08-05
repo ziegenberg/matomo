@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats;
+namespace Matomo\Plugins\DBStats;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     /**
      * Returns the index for this plugin. Shows every other report defined by this plugin,
@@ -24,7 +24,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
      */
     public function index()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $view = new View('@DBStats/index');
         $this->setBasicVariablesView($view);
 

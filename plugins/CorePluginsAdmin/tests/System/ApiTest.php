@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin\tests\System;
+namespace Matomo\Plugins\CorePluginsAdmin\tests\System;
 
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Fixtures\EmptySite;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Fixtures\EmptySite;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group CorePluginsAdmin

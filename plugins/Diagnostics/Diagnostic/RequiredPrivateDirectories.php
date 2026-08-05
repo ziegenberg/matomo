@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Common;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
 
 /**
  * Checks whether certain directories in Matomo that should be private are accessible through the internet.

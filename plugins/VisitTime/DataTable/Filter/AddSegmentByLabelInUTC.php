@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\DataTable\Filter;
+namespace Matomo\Plugins\VisitTime\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\Period;
+use Matomo\DataTable;
+use Matomo\Period;
 
 /**
  * Adds a segment value to each row by interpreting the label value as hour in the website's timezone and

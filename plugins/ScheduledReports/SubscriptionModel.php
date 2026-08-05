@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports;
+namespace Matomo\Plugins\ScheduledReports;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
 
 class SubscriptionModel
 {
@@ -75,7 +75,7 @@ class SubscriptionModel
         if ($reportParameters['emailMe']) {
             $login = $report['login'];
 
-            $userModel = new \Piwik\Plugins\UsersManager\Model();
+            $userModel = new \Matomo\Plugins\UsersManager\Model();
             $userData = $userModel->getUser($login);
 
             if ($userData['email'] == $email) {
@@ -92,7 +92,7 @@ class SubscriptionModel
             // Reset the cache manually since we didn't call the API method which would do it for us
             APIScheduledReports::$cache = array();
 
-            Piwik::postEvent('Report.unsubscribe', [$report['idreport'], $email]);
+            Matomo::postEvent('Report.unsubscribe', [$report['idreport'], $email]);
 
             $this->removeSubscription($token);
         }

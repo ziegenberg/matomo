@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\tests\Fixtures;
+namespace Matomo\Plugins\Insights\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Adds one website and tracks several visits from one visitor on

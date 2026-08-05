@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour;
+namespace Matomo\Plugins\Tour;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Tour\Engagement\Levels;
-use Piwik\Plugins\Tour\Engagement\Challenges;
+use Matomo\Matomo;
+use Matomo\Plugins\Tour\Engagement\Levels;
+use Matomo\Plugins\Tour\Engagement\Challenges;
 
 /**
  * Provides API methods for Tour challenges and engagement levels.
  *
- * @method static \Piwik\Plugins\Tour\API getInstance()
+ * @method static \Matomo\Plugins\Tour\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private Challenges $challenges;
 
@@ -44,11 +44,11 @@ class API extends \Piwik\Plugin\API
      */
     public function getChallenges(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $challenges = [];
 
-        $login = Piwik::getCurrentUserLogin();
+        $login = Matomo::getCurrentUserLogin();
 
         foreach ($this->challenges->getChallenges() as $challenge) {
             if ($challenge->isDisabled()) {
@@ -76,9 +76,9 @@ class API extends \Piwik\Plugin\API
      */
     public function skipChallenge(string $id): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
-        $login = Piwik::getCurrentUserLogin();
+        $login = Matomo::getCurrentUserLogin();
 
         foreach ($this->challenges->getChallenges() as $challenge) {
             if ($challenge->getId() === $id) {
@@ -108,7 +108,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getLevel(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         return [
             'description' => $this->levels->getCurrentDescription(),

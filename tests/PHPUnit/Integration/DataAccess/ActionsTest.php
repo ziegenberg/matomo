@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\DataAccess;
+namespace Matomo\Tests\Integration\DataAccess;
 
-use Piwik\Common;
-use Piwik\DataAccess\Actions;
-use Piwik\Db;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\DataAccess\Actions;
+use Matomo\Db;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

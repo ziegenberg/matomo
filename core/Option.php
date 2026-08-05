@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Convenient key-value storage for user specified options and temporary
@@ -124,14 +124,14 @@ class Option
 
     /**
      * Singleton instance
-     * @var \Piwik\Option
+     * @var \Matomo\Option
      */
     private static $instance = null;
 
     /**
      * Returns Singleton instance
      *
-     * @return \Piwik\Option
+     * @return \Matomo\Option
      */
     private static function getInstance()
     {

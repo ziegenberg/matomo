@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\DataTable\Filter;
+namespace Matomo\Plugins\Insights\DataTable\Filter;
 
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 /**
  * Removes all rows whose value is too low.

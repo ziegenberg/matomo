@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\Exception;
+namespace Matomo\Plugins\Live\Exception;
 
 class MaxExecutionTimeExceededException extends \Exception
 {

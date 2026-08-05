@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection;
+namespace Matomo\Plugins\DevicesDetection;
 
 use DeviceDetector\ClientHints;
 use DeviceDetector\DeviceDetector;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\ControllerAdmin;
-use Piwik\Request;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\ControllerAdmin;
+use Matomo\Request;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function detection()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $view = new View('@DevicesDetection/detection');
         $this->setBasicVariablesView($view);
@@ -59,7 +59,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function showList()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $view = new View('@DevicesDetection/list');
 

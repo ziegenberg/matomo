@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Auth;
+namespace Matomo\Tests\Unit\Auth;
 
-use Piwik\Auth\PasswordStrength;
+use Matomo\Auth\PasswordStrength;
 
 /**
  * @group Core

@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\tests\Unit\Processor;
+namespace Matomo\Plugins\Monolog\tests\Unit\Processor;
 
 use DateTimeImmutable;
 use Monolog\Level;
 use Monolog\LogRecord;
 use PHPUnit\Framework\TestCase;
-use Piwik\Common;
-use Piwik\Plugins\Monolog\Processor\RequestIdProcessor;
+use Matomo\Common;
+use Matomo\Plugins\Monolog\Processor\RequestIdProcessor;
 
 /**
  * @group Log
- * @covers \Piwik\Plugins\Monolog\Processor\RequestIdProcessor
+ * @covers \Matomo\Plugins\Monolog\Processor\RequestIdProcessor
  */
 class RequestIdProcessorTest extends TestCase
 {

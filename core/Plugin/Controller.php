@@ -7,44 +7,44 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
 use Exception;
-use Piwik\Access;
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Changes\Model as ChangesModel;
-use Piwik\Changes\UserChanges;
-use Piwik\Common;
-use Piwik\Config as PiwikConfig;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Exception\NoPrivilegesException;
-use Piwik\Exception\NoWebsiteFoundException;
-use Piwik\FrontController;
-use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuTop;
-use Piwik\NoAccessException;
-use Piwik\Notification\Manager as NotificationManager;
-use Piwik\Period\Month;
-use Piwik\Period;
-use Piwik\Period\PeriodValidator;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Url;
-use Piwik\Plugin;
-use Piwik\View;
-use Piwik\View\ViewInterface;
-use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
+use Matomo\Access;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Changes\Model as ChangesModel;
+use Matomo\Changes\UserChanges;
+use Matomo\Common;
+use Matomo\Config as PiwikConfig;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Exception\NoPrivilegesException;
+use Matomo\Exception\NoWebsiteFoundException;
+use Matomo\FrontController;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Menu\MenuTop;
+use Matomo\NoAccessException;
+use Matomo\Notification\Manager as NotificationManager;
+use Matomo\Period\Month;
+use Matomo\Period;
+use Matomo\Period\PeriodValidator;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Url;
+use Matomo\Plugin;
+use Matomo\View;
+use Matomo\View\ViewInterface;
+use Matomo\ViewDataTable\Factory as ViewDataTableFactory;
 
 /**
  * Base class of all plugin Controllers.
@@ -60,7 +60,7 @@ use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
  *
  * **Defining a controller**
  *
- *     class Controller extends \Piwik\Plugin\Controller
+ *     class Controller extends \Matomo\Plugin\Controller
  *     {
  *         public function index()
  *         {
@@ -120,7 +120,7 @@ abstract class Controller
     /**
      * The SecurityPolicy object.
      *
-     * @var \Piwik\View\SecurityPolicy
+     * @var \Matomo\View\SecurityPolicy
      * @api
      */
     protected $securityPolicy = null;
@@ -213,25 +213,25 @@ abstract class Controller
         $availablePeriods = self::getEnabledPeriodsInUI();
         $periodNames = array(
             'day'   => array(
-                'singular' => Piwik::translate('Intl_PeriodDay'),
-                'plural' => Piwik::translate('Intl_PeriodDays'),
+                'singular' => Matomo::translate('Intl_PeriodDay'),
+                'plural' => Matomo::translate('Intl_PeriodDays'),
             ),
             'week'  => array(
-                'singular' => Piwik::translate('Intl_PeriodWeek'),
-                'plural' => Piwik::translate('Intl_PeriodWeeks'),
+                'singular' => Matomo::translate('Intl_PeriodWeek'),
+                'plural' => Matomo::translate('Intl_PeriodWeeks'),
             ),
             'month' => array(
-                'singular' => Piwik::translate('Intl_PeriodMonth'),
-                'plural' => Piwik::translate('Intl_PeriodMonths'),
+                'singular' => Matomo::translate('Intl_PeriodMonth'),
+                'plural' => Matomo::translate('Intl_PeriodMonths'),
             ),
             'year'  => array(
-                'singular' => Piwik::translate('Intl_PeriodYear'),
-                'plural' => Piwik::translate('Intl_PeriodYears'),
+                'singular' => Matomo::translate('Intl_PeriodYear'),
+                'plural' => Matomo::translate('Intl_PeriodYears'),
             ),
             // Note: plural is not used for date range
             'range' => array(
-                'singular' => Piwik::translate('General_DateRangeInPeriodList'),
-                'plural' => Piwik::translate('General_DateRangeInPeriodList'),
+                'singular' => Matomo::translate('General_DateRangeInPeriodList'),
+                'plural' => Matomo::translate('General_DateRangeInPeriodList'),
             ),
         );
 
@@ -343,7 +343,7 @@ abstract class Controller
     /**
      * Convenience method that creates and renders a ViewDataTable for a API method.
      *
-     * @param string|\Piwik\Plugin\Report $apiAction The name of the API action (eg, `'getResolution'`) or
+     * @param string|\Matomo\Plugin\Report $apiAction The name of the API action (eg, `'getResolution'`) or
      *                                      an instance of an report.
      * @param bool $controllerAction The name of the Controller action name  that is rendering the report. Defaults
      *                               to the `$apiAction`.
@@ -440,9 +440,9 @@ abstract class Controller
     ) {
         // load translations from meta data
         $idSite = Common::getRequestVar('idSite');
-        $period = Piwik::getPeriod();
-        $date = Piwik::getDate();
-        $meta = \Piwik\Plugins\API\API::getInstance()->getReportMetadata($idSite, $period, $date);
+        $period = Matomo::getPeriod();
+        $date = Matomo::getDate();
+        $meta = \Matomo\Plugins\API\API::getInstance()->getReportMetadata($idSite, $period, $date);
 
         $columns = array_merge($columnsToDisplay ? $columnsToDisplay : array(), $selectableColumns);
         $translations = array_combine($columns, $columns);
@@ -487,12 +487,12 @@ abstract class Controller
      * - period: day, week, month, year
      *
      * @param array $paramsToSet array( 'date' => 'last50', 'viewDataTable' =>'sparkline' )
-     * @throws \Piwik\NoAccessException
+     * @throws \Matomo\NoAccessException
      * @return array
      */
     protected function getGraphParamsModified($paramsToSet = array())
     {
-        $period = $paramsToSet['period'] ?? Piwik::getPeriod();
+        $period = $paramsToSet['period'] ?? Matomo::getPeriod();
 
         if ($period === 'range') {
             return $paramsToSet;
@@ -590,7 +590,7 @@ abstract class Controller
     }
 
     /**
-     * Assigns variables to {@link Piwik\View} instances that display an entire page.
+     * Assigns variables to {@link Matomo\View} instances that display an entire page.
      *
      * The following variables assigned:
      *
@@ -600,8 +600,8 @@ abstract class Controller
      * **prettyDate** - A pretty string description of the current period.
      * **siteName** - The current site's name.
      * **siteMainUrl** - The URL of the current site.
-     * **startDate** - The start date of the current period. A {@link Piwik\Date} instance.
-     * **endDate** - The end date of the current period. A {@link Piwik\Date} instance.
+     * **startDate** - The start date of the current period. A {@link Matomo\Date} instance.
+     * **endDate** - The end date of the current period. A {@link Matomo\Date} instance.
      * **language** - The current language's language code.
      * **config_action_url_category_delimiter** - The value of the `[General] action_url_category_delimiter`
      *                                            INI config option.
@@ -644,10 +644,10 @@ abstract class Controller
         $maxDate = Date::factory('now', $siteTimezone);
         $this->setMaxDateView($maxDate, $view);
 
-        $rawDate = Piwik::getDate(GeneralConfig::getConfigValue('default_day'));
+        $rawDate = Matomo::getDate(GeneralConfig::getConfigValue('default_day'));
         Period::checkDateFormat($rawDate);
 
-        $periodStr = Piwik::getPeriod(GeneralConfig::getConfigValue('default_period'));
+        $periodStr = Matomo::getPeriod(GeneralConfig::getConfigValue('default_period'));
 
         if ($periodStr !== 'range') {
             $date      = Date::factory($this->strDate);
@@ -725,26 +725,26 @@ abstract class Controller
         $view->clientSideConfig = PiwikConfig::getInstance()->getClientSideOptions();
         $view->isSuperUser = Access::getInstance()->hasSuperUserAccess();
         $view->userCurrentRole = Access::getInstance()->getRoleForSite($this->idSite);
-        $view->hasSomeAdminAccess = Piwik::isUserHasSomeAdminAccess();
-        $view->hasSomeViewAccess  = Piwik::isUserHasSomeViewAccess();
-        $view->isUserIsAnonymous  = Piwik::isUserIsAnonymous();
-        $view->hasSuperUserAccess = Piwik::hasUserSuperUserAccess();
+        $view->hasSomeAdminAccess = Matomo::isUserHasSomeAdminAccess();
+        $view->hasSomeViewAccess  = Matomo::isUserHasSomeViewAccess();
+        $view->isUserIsAnonymous  = Matomo::isUserIsAnonymous();
+        $view->hasSuperUserAccess = Matomo::hasUserSuperUserAccess();
         $view->disableTrackingMatomoAppLinks = PiwikConfig::getInstance()->General['disable_tracking_matomo_app_links'];
 
-        if (!Piwik::isUserIsAnonymous()) {
+        if (!Matomo::isUserIsAnonymous()) {
             $this->showWhatIsNew($view);
 
-            $view->contactEmail = implode(',', Piwik::getContactEmailAddresses());
+            $view->contactEmail = implode(',', Matomo::getContactEmailAddresses());
 
             // for BC only. Use contactEmail instead
-            $view->emailSuperUser = implode(',', Piwik::getAllSuperUserAccessEmailAddresses());
+            $view->emailSuperUser = implode(',', Matomo::getAllSuperUserAccessEmailAddresses());
         }
 
         $capabilities = array();
         if ($this->idSite && $this->site) {
             $capabilityProvider = StaticContainer::get(Access\CapabilitiesProvider::class);
             foreach ($capabilityProvider->getAllCapabilities() as $capability) {
-                if (Piwik::isUserHasCapability($this->idSite, $capability->getId())) {
+                if (Matomo::isUserHasCapability($this->idSite, $capability->getId())) {
                     $capabilities[] = $capability->getId();
                 }
             }
@@ -759,7 +759,7 @@ abstract class Controller
         $view->logoLarge = $customLogo->getLogoUrl();
         $view->logoSVG = $customLogo->getSVGLogoUrl();
         $view->hasSVGLogo = $customLogo->hasSVGLogo();
-        $view->contactEmail = implode(',', Piwik::getContactEmailAddresses());
+        $view->contactEmail = implode(',', Matomo::getContactEmailAddresses());
 
         $themeMode = (new UserPreferences())->getThemeMode();
         $view->themeStyles = ThemeStyles::get($themeMode);
@@ -793,7 +793,7 @@ abstract class Controller
     }
 
     /**
-     * Assigns a set of generally useful variables to a {@link Piwik\View} instance.
+     * Assigns a set of generally useful variables to a {@link Matomo\View} instance.
      *
      * The following variables assigned:
      *
@@ -806,7 +806,7 @@ abstract class Controller
      * **logoSVG** - The SVG logo URL to use.
      * **hasSVGLogo** - True if there is a SVG logo, false if otherwise.
      * **enableFrames** - The value of the `[General] enable_framed_pages` INI config option. If
-     *                    true, {@link Piwik\View::setXFrameOptions()} is called on the view.
+     *                    true, {@link Matomo\View::setXFrameOptions()} is called on the view.
      *
      * Also calls {@link setHostValidationVariablesView()}.
      *
@@ -846,7 +846,7 @@ abstract class Controller
         }
 
         $model = new UsersModel();
-        $user = $model->getUser(Piwik::getCurrentUserLogin());
+        $user = $model->getUser(Matomo::getCurrentUserLogin());
         if (!$user) {
             return;
         }
@@ -880,9 +880,9 @@ abstract class Controller
             $validHost = $validHosts[0];
             $invalidHost = Common::sanitizeInputValue(Url::getHost(false));
 
-            $emailSubject = rawurlencode(Piwik::translate('CoreHome_InjectedHostEmailSubject', $invalidHost));
-            $emailBody = rawurlencode(Piwik::translate('CoreHome_InjectedHostEmailBody'));
-            $superUserEmail = rawurlencode(implode(',', Piwik::getContactEmailAddresses()));
+            $emailSubject = rawurlencode(Matomo::translate('CoreHome_InjectedHostEmailSubject', $invalidHost));
+            $emailBody = rawurlencode(Matomo::translate('CoreHome_InjectedHostEmailBody'));
+            $superUserEmail = rawurlencode(implode(',', Matomo::getContactEmailAddresses()));
 
             $mailToUrl = "mailto:$superUserEmail?subject=$emailSubject&body=$emailBody";
             $mailLinkStart = "<a href=\"$mailToUrl\">";
@@ -900,14 +900,14 @@ abstract class Controller
                                                                    ))
                 . "#trustedHostsSection";
 
-            $warningStart = Piwik::translate('CoreHome_InjectedHostWarningIntro', array(
+            $warningStart = Matomo::translate('CoreHome_InjectedHostWarningIntro', array(
                                                                                       '<strong>' . $invalidUrl . '</strong>',
                                                                                       '<strong>' . $validUrl . '</strong>',
                                                                                  )) . ' <br/>';
 
-            if (Piwik::hasUserSuperUserAccess()) {
+            if (Matomo::hasUserSuperUserAccess()) {
                 $view->invalidHostMessage = $warningStart . ' '
-                    . Piwik::translate('CoreHome_InjectedHostSuperUserWarning', array(
+                    . Matomo::translate('CoreHome_InjectedHostSuperUserWarning', array(
                                                                                     "<a href=\"$changeTrustedHostsUrl\">",
                                                                                     $invalidHost,
                                                                                     '</a>',
@@ -915,9 +915,9 @@ abstract class Controller
                                                                                     Common::sanitizeInputValue($validHost),
                                                                                     '</a>',
                                                                                ));
-            } elseif (Piwik::isUserIsAnonymous()) {
+            } elseif (Matomo::isUserIsAnonymous()) {
                 $view->invalidHostMessage = $warningStart . ' '
-                    . Piwik::translate('CoreHome_InjectedHostNonSuperUserWarning', array(
+                    . Matomo::translate('CoreHome_InjectedHostNonSuperUserWarning', array(
                         "<br/><a href=\"$validUrl\">",
                         '</a>',
                         '<span style="display:none">',
@@ -925,7 +925,7 @@ abstract class Controller
                     ));
             } else {
                 $view->invalidHostMessage = $warningStart . ' '
-                    . Piwik::translate('CoreHome_InjectedHostNonSuperUserWarning', array(
+                    . Matomo::translate('CoreHome_InjectedHostNonSuperUserWarning', array(
                                                                                        "<br/><a href=\"$validUrl\">",
                                                                                        '</a>',
                                                                                        $mailLinkStart,
@@ -963,7 +963,7 @@ abstract class Controller
 
         $periodValidator = new PeriodValidator();
 
-        $currentPeriod = Piwik::getPeriod(GeneralConfig::getConfigValue('default_period'));
+        $currentPeriod = Matomo::getPeriod(GeneralConfig::getConfigValue('default_period'));
         $availablePeriods = $periodValidator->getPeriodsAllowedForUI();
 
         if (! $periodValidator->isPeriodAllowedForUI($currentPeriod)) {
@@ -1008,7 +1008,7 @@ abstract class Controller
             // no website ID to default to, so could not redirect
         }
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $siteTableName = Common::prefixTable('site');
             $message = "Error: no website was found in this Matomo installation.
 			<br />Check the table '$siteTableName' in your database, it should contain your Matomo websites.";
@@ -1019,11 +1019,11 @@ abstract class Controller
             throw $ex;
         }
 
-        if (!Piwik::isUserIsAnonymous()) {
-            $currentLogin = Piwik::getCurrentUserLogin();
-            $emails = rawurlencode(implode(',', Piwik::getContactEmailAddresses()));
-            $errorMessage  = sprintf(Piwik::translate('CoreHome_NoPrivilegesAskPiwikAdmin'), $currentLogin, "<br/><a href='mailto:" . $emails . "?subject=Access to Matomo for user $currentLogin'>", "</a>");
-            $errorMessage .= "<br /><br />&nbsp;&nbsp;&nbsp;<b><a href='index.php?module=" . Piwik::getLoginPluginName() . "&amp;action=logout'>&rsaquo; " . Piwik::translate('General_Logout') . "</a></b><br />";
+        if (!Matomo::isUserIsAnonymous()) {
+            $currentLogin = Matomo::getCurrentUserLogin();
+            $emails = rawurlencode(implode(',', Matomo::getContactEmailAddresses()));
+            $errorMessage  = sprintf(Matomo::translate('CoreHome_NoPrivilegesAskPiwikAdmin'), $currentLogin, "<br/><a href='mailto:" . $emails . "?subject=Access to Matomo for user $currentLogin'>", "</a>");
+            $errorMessage .= "<br /><br />&nbsp;&nbsp;&nbsp;<b><a href='index.php?module=" . Matomo::getLoginPluginName() . "&amp;action=logout'>&rsaquo; " . Matomo::translate('General_Logout') . "</a></b><br />";
 
             $ex = new NoPrivilegesException($errorMessage);
             $ex->setIsHtmlMessage();
@@ -1031,7 +1031,7 @@ abstract class Controller
             throw $ex;
         }
 
-        echo FrontController::getInstance()->dispatch(Piwik::getLoginPluginName(), false);
+        echo FrontController::getInstance()->dispatch(Matomo::getLoginPluginName(), false);
         exit;
     }
 
@@ -1047,20 +1047,20 @@ abstract class Controller
      *
      * **The token_auth should never appear in the browser's address bar.**
      *
-     * @throws \Piwik\NoAccessException If the token doesn't match.
+     * @throws \Matomo\NoAccessException If the token doesn't match.
      * @api
      */
     protected function checkTokenInUrl()
     {
         $tokenRequest = StaticContainer::get(AuthenticationToken::class)->getAuthToken();
-        $tokenUser = Piwik::getCurrentUserTokenAuth();
+        $tokenUser = Matomo::getCurrentUserTokenAuth();
 
         if (empty($tokenRequest) && empty($tokenUser)) {
             return; // UI tests
         }
 
         if ($tokenRequest !== $tokenUser) {
-            throw new NoAccessException(Piwik::translate('General_ExceptionSecurityCheckFailed'));
+            throw new NoAccessException(Matomo::translate('General_ExceptionSecurityCheckFailed'));
         }
     }
 

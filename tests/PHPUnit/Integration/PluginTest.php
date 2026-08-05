@@ -9,13 +9,13 @@
 
 namespace PHPUnit\Integration;
 
-use Piwik\CronArchive;
-use Piwik\CronArchive\ReArchiveList;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugin;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\CronArchive;
+use Matomo\CronArchive\ReArchiveList;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugin;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class PluginTest extends IntegrationTestCase
 {

@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Commands;
+namespace Matomo\Plugins\Goals\Commands;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\Goals\Model as GoalsModel;
-use Piwik\Plugins\SitesManager\Model as SitesModel;
-use Piwik\Site;
-use Piwik\Timer;
-use Piwik\Tracker\GoalManager;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\Goals\Model as GoalsModel;
+use Matomo\Plugins\SitesManager\Model as SitesModel;
+use Matomo\Site;
+use Matomo\Timer;
+use Matomo\Tracker\GoalManager;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Command to calculate the pages viewed before conversions and populate the log_conversion.pages_before field

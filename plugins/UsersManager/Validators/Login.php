@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Validators;
+namespace Matomo\Plugins\UsersManager\Validators;
 
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Validators\BaseValidator;
-use Piwik\Validators\Exception;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Validators\BaseValidator;
+use Matomo\Validators\Exception;
 
 class Login extends BaseValidator
 {
@@ -42,7 +42,7 @@ class Login extends BaseValidator
             && $l <= self::LOGIN_MAX_LENGTH
             && (preg_match('/^[A-Za-zÄäÖöÜüß0-9_.@+-]*$/D', $value) > 0))
         ) {
-            throw new Exception(Piwik::translate(
+            throw new Exception(Matomo::translate(
                 'UsersManager_ExceptionInvalidLoginFormat',
                 [self::LOGIN_MIN_LENGTH, self::LOGIN_MAX_LENGTH]
             ));
@@ -61,11 +61,11 @@ class Login extends BaseValidator
     private function isUnique($login)
     {
         if (APIUsersManager::getInstance()->userExists($login)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionLoginExists', $login));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionLoginExists', $login));
         }
 
         if (APIUsersManager::getInstance()->userEmailExists($login)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionLoginExistsAsEmail', $login));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionLoginExistsAsEmail', $login));
         }
     }
 }

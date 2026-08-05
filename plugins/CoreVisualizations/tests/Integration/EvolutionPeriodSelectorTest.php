@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Integration;
+namespace Matomo\Plugins\CoreVisualizations\tests\Integration;
 
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Plugins\CoreVisualizations\Visualizations\EvolutionPeriodSelector;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionGraph;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines\Config;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Plugins\CoreVisualizations\Visualizations\EvolutionPeriodSelector;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionGraph;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines\Config;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreVisualizations
@@ -319,7 +319,7 @@ class EvolutionPeriodSelectorTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

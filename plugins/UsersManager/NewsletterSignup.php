@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Http;
-use Piwik\Option;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\SettingsPiwik;
+use Matomo\Container\StaticContainer;
+use Matomo\Http;
+use Matomo\Option;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\SettingsPiwik;
 
 class NewsletterSignup
 {
@@ -35,7 +35,7 @@ class NewsletterSignup
             'email'     => $email,
             'piwikorg'  => (int)$matomoOrg,
             'piwikpro'  => (int)$professionalServices,
-            'language'  => StaticContainer::get('Piwik\Translation\Translator')->getCurrentLanguage(),
+            'language'  => StaticContainer::get('Matomo\Translation\Translator')->getCurrentLanguage(),
         );
 
         $url .= '?' . Http::buildQuery($params);

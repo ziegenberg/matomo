@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Archive;
+namespace Matomo\Tests\Integration\Archive;
 
-use Piwik\ArchiveProcessor\PluginsArchiver;
-use Piwik\Piwik;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\Plugin\Archiver;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Tracker\Db\DbException;
+use Matomo\ArchiveProcessor\PluginsArchiver;
+use Matomo\Matomo;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\Plugin\Archiver;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Tracker\Db\DbException;
 
 class CustomArchiver extends Archiver
 {
@@ -38,7 +38,7 @@ class CustomPluginsArchiver extends PluginsArchiver
     protected static function getPluginArchivers()
     {
         return array(
-            'MyPluginName' => 'Piwik\Tests\Integration\Archive\CustomArchiver',
+            'MyPluginName' => 'Matomo\Tests\Integration\Archive\CustomArchiver',
         );
     }
 }
@@ -78,7 +78,7 @@ class PluginsArchiverTest extends IntegrationTestCase
 
     public function testPurgeOutdatedArchivesPurgesCorrectTemporaryArchivesWhileKeepingNewerTemporaryArchivesWithBrowserTriggeringEnabled()
     {
-        $this->expectException(\Piwik\ArchiveProcessor\PluginsArchiverException::class);
+        $this->expectException(\Matomo\ArchiveProcessor\PluginsArchiverException::class);
         $this->expectExceptionCode(42);
         $this->expectExceptionMessage('Failed query foo bar - in plugin MyPluginName');
 
@@ -89,13 +89,13 @@ class PluginsArchiverTest extends IntegrationTestCase
     {
         self::expectNotToPerformAssertions();
 
-        Piwik::addAction('ArchiveProcessor.Parameters.getIdSites', function (&$idSites, $period) {
+        Matomo::addAction('ArchiveProcessor.Parameters.getIdSites', function (&$idSites, $period) {
             if (count($idSites) === 1 && reset($idSites) === 1) {
                 $idSites = array(2,3);
             }
         });
 
-        Piwik::addAction('ArchiveProcessor.shouldAggregateFromRawData', function (&$shouldAggregateRawData, Parameters $params) {
+        Matomo::addAction('ArchiveProcessor.shouldAggregateFromRawData', function (&$shouldAggregateRawData, Parameters $params) {
             // needed as by default we would only aggregate for single site
             if ($params->isDayArchive()) {
                 $shouldAggregateRawData = true;

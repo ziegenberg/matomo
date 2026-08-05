@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\API\tests\Integration;
+namespace Matomo\Plugins\API\tests\Integration;
 
-use Piwik\API\Request;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\DataTable\Map;
-use Piwik\Plugins\API\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\API\Request;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\DataTable\Map;
+use Matomo\Plugins\API\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group API

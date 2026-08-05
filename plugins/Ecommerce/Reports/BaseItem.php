@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Reports;
+namespace Matomo\Plugins\Ecommerce\Reports;
 
-use Piwik\Common;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\Goals\Columns\Metrics\AveragePrice;
-use Piwik\Plugins\Goals\Columns\Metrics\AverageQuantity;
-use Piwik\Plugins\Goals\Columns\Metrics\ProductConversionRate;
-use Piwik\Plugins\Goals\Conversions;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Common;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\Goals\Columns\Metrics\AveragePrice;
+use Matomo\Plugins\Goals\Columns\Metrics\AverageQuantity;
+use Matomo\Plugins\Goals\Columns\Metrics\ProductConversionRate;
+use Matomo\Plugins\Goals\Conversions;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 abstract class BaseItem extends Base
 {
@@ -41,8 +41,8 @@ abstract class BaseItem extends Base
     public function getMetrics()
     {
         $metrics = parent::getMetrics();
-        $metrics['revenue'] = Piwik::translate('General_ProductRevenue');
-        $metrics['orders']  = Piwik::translate('General_UniquePurchases');
+        $metrics['revenue'] = Matomo::translate('General_ProductRevenue');
+        $metrics['orders']  = Matomo::translate('General_UniquePurchases');
         return $metrics;
     }
 
@@ -50,25 +50,25 @@ abstract class BaseItem extends Base
     {
         if ($this->isAbandonedCart(false)) {
             return [
-                'revenue'         => Piwik::translate('Goals_ColumnRevenueLeftInCartDocumentation'),
-                'quantity'        => Piwik::translate('Goals_ColumnQuantityLeftInCartDocumentation', $this->name),
-                'avg_price'       => Piwik::translate('Goals_ColumnAveragePriceDocumentation', $this->name),
-                'avg_quantity'    => Piwik::translate('Goals_ColumnAverageQuantityDocumentation', $this->name),
-                'nb_visits'       => Piwik::translate('Goals_ColumnVisitsProductDocumentation', $this->name),
-                'abandoned_carts' => Piwik::translate('Goals_ColumnAbandonedCartsDocumentation', $this->name),
+                'revenue'         => Matomo::translate('Goals_ColumnRevenueLeftInCartDocumentation'),
+                'quantity'        => Matomo::translate('Goals_ColumnQuantityLeftInCartDocumentation', $this->name),
+                'avg_price'       => Matomo::translate('Goals_ColumnAveragePriceDocumentation', $this->name),
+                'avg_quantity'    => Matomo::translate('Goals_ColumnAverageQuantityDocumentation', $this->name),
+                'nb_visits'       => Matomo::translate('Goals_ColumnVisitsProductDocumentation', $this->name),
+                'abandoned_carts' => Matomo::translate('Goals_ColumnAbandonedCartsDocumentation', $this->name),
             ];
         } else {
             return [
-                'revenue'         => Piwik::translate(
+                'revenue'         => Matomo::translate(
                     'Goals_ColumnRevenueDocumentation',
-                    Piwik::translate('Goals_DocumentationRevenueGeneratedByProductSales')
+                    Matomo::translate('Goals_DocumentationRevenueGeneratedByProductSales')
                 ),
-                'quantity'        => Piwik::translate('Goals_ColumnQuantityDocumentation', $this->name),
-                'orders'          => Piwik::translate('Goals_ColumnOrdersDocumentation', $this->name),
-                'avg_price'       => Piwik::translate('Goals_ColumnAveragePriceDocumentation', $this->name),
-                'avg_quantity'    => Piwik::translate('Goals_ColumnAverageQuantityDocumentation', $this->name),
-                'nb_visits'       => Piwik::translate('Goals_ColumnVisitsProductDocumentation', $this->name),
-                'conversion_rate' => Piwik::translate('Goals_ColumnConversionRateProductDocumentation', $this->name),
+                'quantity'        => Matomo::translate('Goals_ColumnQuantityDocumentation', $this->name),
+                'orders'          => Matomo::translate('Goals_ColumnOrdersDocumentation', $this->name),
+                'avg_price'       => Matomo::translate('Goals_ColumnAveragePriceDocumentation', $this->name),
+                'avg_quantity'    => Matomo::translate('Goals_ColumnAverageQuantityDocumentation', $this->name),
+                'nb_visits'       => Matomo::translate('Goals_ColumnVisitsProductDocumentation', $this->name),
+                'conversion_rate' => Matomo::translate('Goals_ColumnConversionRateProductDocumentation', $this->name),
             ];
         }
     }
@@ -120,10 +120,10 @@ abstract class BaseItem extends Base
         }
 
         if ($abandonedCart) {
-            $columns['abandoned_carts'] = Piwik::translate('General_AbandonedCarts');
-            $columns['revenue'] = Piwik::translate('Goals_LeftInCart', $columns['revenue']);
-            $columns['quantity'] = Piwik::translate('Goals_LeftInCart', $columns['quantity']);
-            $columns['avg_quantity'] = Piwik::translate('Goals_LeftInCart', $columns['avg_quantity']);
+            $columns['abandoned_carts'] = Matomo::translate('General_AbandonedCarts');
+            $columns['revenue'] = Matomo::translate('Goals_LeftInCart', $columns['revenue']);
+            $columns['quantity'] = Matomo::translate('Goals_LeftInCart', $columns['quantity']);
+            $columns['avg_quantity'] = Matomo::translate('Goals_LeftInCart', $columns['avg_quantity']);
             unset($columns['orders']);
             unset($columns['conversion_rate']);
 
@@ -154,8 +154,8 @@ abstract class BaseItem extends Base
                 $date   = Common::getRequestVar('date', '', 'string');
 
                 $conversion = new Conversions();
-                $conversions = $conversion->getConversionForGoal(Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER, $idSite, $period, $date);
-                $cartNbConversions = $conversion->getConversionForGoal(Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART, $idSite, $period, $date);
+                $conversions = $conversion->getConversionForGoal(Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER, $idSite, $period, $date);
+                $cartNbConversions = $conversion->getConversionForGoal(Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART, $idSite, $period, $date);
                 $preloadAbandonedCart = $cartNbConversions !== false && $conversions == 0;
 
                 if ($preloadAbandonedCart) {

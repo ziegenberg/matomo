@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\DataAccess;
+namespace Matomo\Tests\Unit\DataAccess;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\Config\DatabaseConfig;
-use Piwik\DataAccess\ArchivingDbAdapter;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\Date;
-use Piwik\Period\Factory;
-use Piwik\Segment;
-use Piwik\Tests\Framework\Mock\Site;
-use Piwik\Tracker\GoalManager;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\Config\DatabaseConfig;
+use Matomo\DataAccess\ArchivingDbAdapter;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\Date;
+use Matomo\Period\Factory;
+use Matomo\Segment;
+use Matomo\Tests\Framework\Mock\Site;
+use Matomo\Tracker\GoalManager;
 
 /**
  * @group Core

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
 /**
  * @api
@@ -252,7 +252,7 @@ class Record
      * hierarchy rebuilt from it are each transformed (the hierarchy after it is built) before being stored.
      *
      * @param callable|null $transform Signature:
-     *                                 function (\Piwik\DataTable $table, ArchiveProcessor $archiveProcessor, Record $record): void
+     *                                 function (\Matomo\DataTable $table, ArchiveProcessor $archiveProcessor, Record $record): void
      *                                 The callback mutates $table in place.
      */
     public function setAggregatedRecordTransform(?callable $transform): Record

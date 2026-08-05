@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Http\BadRequestException;
-use Piwik\Plugins\SitesManager\API;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Http\BadRequestException;
+use Matomo\Plugins\SitesManager\API;
 
 /**
  * Provides access to individual [site entity](/guides/persistence-and-the-mysql-backend#websites-aka-sites) data
@@ -134,7 +134,7 @@ class Site
          * This is not yet public as it doesn't work 100% accurately. Eg if `setSiteFromArray()` is called directly this event will not be triggered.
          * @ignore
          */
-        Piwik::postEvent('Site.setSites', array(&$sites));
+        Matomo::postEvent('Site.setSites', array(&$sites));
     }
 
     /**
@@ -630,7 +630,7 @@ class Site
     {
         $currencyCode = self::getCurrencyFor($idsite);
         $key = 'Intl_CurrencySymbol_' . $currencyCode;
-        $symbol = Piwik::translate($key);
+        $symbol = Matomo::translate($key);
 
         if ($key === $symbol) {
             return $currencyCode;

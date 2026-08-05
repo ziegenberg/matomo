@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Cache as PiwikCache;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DeviceDetector\DeviceDetectorFactory;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Cache as PiwikCache;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DeviceDetector\DeviceDetectorFactory;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
 use Matomo\Network\IP;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\SiteUrls;
-use Piwik\Tracker\Visit\ReferrerSpamFilter;
-use Piwik\Config;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\SiteUrls;
+use Matomo\Tracker\Visit\ReferrerSpamFilter;
+use Matomo\Config;
 
 /**
  * This class contains the logic to exclude some visitors from being tracked as per user settings
@@ -94,7 +94,7 @@ class VisitExcluded
          * @param Request $request The request object which contains all of the request's information
          *
          */
-        Piwik::postEvent('Tracker.isExcludedVisit', array(&$excluded, $this->request));
+        Matomo::postEvent('Tracker.isExcludedVisit', array(&$excluded, $this->request));
 
         /*
          * Following exclude operations happen after the hook.

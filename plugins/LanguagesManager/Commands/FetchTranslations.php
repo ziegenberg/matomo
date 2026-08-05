@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\Commands;
+namespace Matomo\Plugins\LanguagesManager\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\AuthenticationFailedException;
-use Piwik\Plugins\LanguagesManager\API as LanguagesManagerApi;
-use Piwik\Translation\Weblate\API;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\AuthenticationFailedException;
+use Matomo\Plugins\LanguagesManager\API as LanguagesManagerApi;
+use Matomo\Translation\Weblate\API;
 
 class FetchTranslations extends TranslationBase
 {

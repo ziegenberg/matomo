@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Measurable;
+namespace Matomo\Tests\Integration\Measurable;
 
-use Piwik\Plugin;
-use Piwik\Plugins\WebsiteMeasurable\Type as WebsiteType;
-use Piwik\Plugins\WebsiteMeasurable\MeasurableSettings;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugin;
+use Matomo\Plugins\WebsiteMeasurable\Type as WebsiteType;
+use Matomo\Plugins\WebsiteMeasurable\MeasurableSettings;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -93,7 +93,7 @@ class MeasurableSettingsTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

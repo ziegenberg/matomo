@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Http\BadRequestException;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Http\BadRequestException;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -33,7 +33,7 @@ class SiteTest extends IntegrationTestCase
 
         $self = $this;
 
-        Piwik::addAction('Site.setSites', function (&$sites) use ($self) {
+        Matomo::addAction('Site.setSites', function (&$sites) use ($self) {
             foreach ($sites as &$site) {
                 if (strpos($site['name'], $self->siteAppendix) !== 0) {
                     $site['name'] .= $self->siteAppendix;
@@ -44,7 +44,7 @@ class SiteTest extends IntegrationTestCase
 
     public function testConstructorThrowsExceptionIfSiteDoesNotExist()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
         $this->expectExceptionMessage('An unexpected website was found in the request');
 
         $this->makeSite(9999);

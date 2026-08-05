@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns;
+namespace Matomo\Plugins\Goals\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\ColumnDelete;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Columns\Join;
-use Piwik\Plugins\Goals\API;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\ColumnDelete;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Columns\Join;
+use Matomo\Plugins\Goals\API;
 
 class GoalName extends ConversionDimension
 {

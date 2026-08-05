@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\tests\Unit;
+namespace Matomo\Plugins\GeoIp2\tests\Unit;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\GeoIp2\GeoIP2AutoUpdater;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\UserCountry\LocationProvider;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\GeoIp2\GeoIP2AutoUpdater;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\UserCountry\LocationProvider;
 use Exception;
 
 class GeoIp2Test extends \PHPUnit\Framework\TestCase
@@ -52,7 +52,7 @@ class GeoIp2Test extends \PHPUnit\Framework\TestCase
     public function testGeoIpDownloadInvalidUrl($url)
     {
         // unset translations, otherwise Exception message will be translated
-        StaticContainer::get('Piwik\Translation\Translator')->reset();
+        StaticContainer::get('Matomo\Translation\Translator')->reset();
 
         $updater = new PiwikGeoIp2GeoIP2AutoUpdaterPublicTest();
         try {

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\LogTableTemporary;
-use Piwik\Piwik;
-use Piwik\Tracker\LogTable;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\LogTableTemporary;
+use Matomo\Matomo;
+use Matomo\Tracker\LogTable;
 
 class LogTablesProvider
 {
@@ -87,7 +87,7 @@ class LogTablesProvider
     public function getAllLogTables()
     {
         if (!isset($this->tablesCache)) {
-            $tables = $this->pluginManager->findMultipleComponents('Tracker', 'Piwik\\Tracker\\LogTable');
+            $tables = $this->pluginManager->findMultipleComponents('Tracker', 'Matomo\Tracker\LogTable');
 
             $logTables = array();
 
@@ -108,7 +108,7 @@ class LogTablesProvider
              * @internal Only used for tests
              * @ignore
              */
-            Piwik::postEvent('LogTables.addLogTables', array(&$logTables));
+            Matomo::postEvent('LogTables.addLogTables', array(&$logTables));
 
             foreach ($tables as $table) {
                 $logTables[] = StaticContainer::get($table);

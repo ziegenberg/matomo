@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\Emails;
+namespace Matomo\Plugins\Login\Emails;
 
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\View;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\View;
 
 class SuspiciousLoginAttemptsInLastHourEmail extends Mail
 {
@@ -64,7 +64,7 @@ class SuspiciousLoginAttemptsInLastHourEmail extends Mail
 
     private function getDefaultSubject()
     {
-        return Piwik::translate('Login_SuspiciousLoginAttemptsInLastHourEmailSubject');
+        return Matomo::translate('Login_SuspiciousLoginAttemptsInLastHourEmailSubject');
     }
 
     private function getDefaultBodyView()

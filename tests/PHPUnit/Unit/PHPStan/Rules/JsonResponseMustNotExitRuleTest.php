@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules;
+namespace Matomo\Tests\Unit\PHPStan\Rules;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
-use Piwik\Tests\PHPStan\Rules\JsonResponseMustNotExitRule;
+use Matomo\Tests\PHPStan\Rules\JsonResponseMustNotExitRule;
 
 /**
  * @group Core
@@ -26,7 +26,7 @@ class JsonResponseMustNotExitRuleTest extends RuleTestCase
 
     public function testRule(): void
     {
-        $message = 'Controller action %s() is marked #[\Piwik\Http\JsonResponse] but calls exit/die;'
+        $message = 'Controller action %s() is marked #[\Matomo\Http\JsonResponse] but calls exit/die;'
             . ' this bypasses the JSON header handling in FrontController, so the attribute has no'
             . ' effect. Return the JSON string instead, or drop the attribute and send the header'
             . ' manually.';

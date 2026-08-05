@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Columns;
+namespace Matomo\Plugins\Events\Columns;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class TotalEvents extends VisitDimension
 {
@@ -25,7 +25,7 @@ class TotalEvents extends VisitDimension
 
     public function getAcceptValues()
     {
-        return Piwik::translate('Events_EventsSegmentHelp', '&segment=events>0');
+        return Matomo::translate('Events_EventsSegmentHelp', '&segment=events>0');
     }
 
     /**

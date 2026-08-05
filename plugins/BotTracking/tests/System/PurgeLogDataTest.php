@@ -9,21 +9,21 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\System;
+namespace Matomo\Plugins\BotTracking\tests\System;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\LogDeleter;
-use Piwik\Plugin\Dimension\DimensionMetadataProvider;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\PrivacyManager\LogDataPurger;
-use Piwik\Plugins\PrivacyManager\Model\DataSubjects;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\Plugin\LogTablesProvider;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\LogDeleter;
+use Matomo\Plugin\Dimension\DimensionMetadataProvider;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\PrivacyManager\LogDataPurger;
+use Matomo\Plugins\PrivacyManager\Model\DataSubjects;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\Plugin\LogTablesProvider;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group BotTracking
@@ -100,7 +100,7 @@ class PurgeLogDataTest extends SystemTestCase
         $sql       = "SELECT COUNT(*) FROM `{$tableName}`";
         self::assertEquals(4, Db::fetchOne($sql));
 
-        $logTablesProvider = StaticContainer::get('Piwik\Plugin\LogTablesProvider');
+        $logTablesProvider = StaticContainer::get('Matomo\Plugin\LogTablesProvider');
         $dataSubjects      = new DataSubjects($logTablesProvider);
         $result            = $dataSubjects->deleteDataSubjectsForDeletedSites([2]); // idsite 2 still exists
         $this->assertEquals([

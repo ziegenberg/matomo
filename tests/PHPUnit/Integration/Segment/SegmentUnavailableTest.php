@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Segment;
+namespace Matomo\Tests\Integration\Segment;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Cache;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugins\Live\SystemSettings;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Cache;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugins\Live\SystemSettings;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
 
 /**
  * @group Segment
@@ -102,17 +102,17 @@ class SegmentUnavailableTest extends IntegrationTestCase
         $this->checkSegmentAvailable($definition, $name, true);
 
         // Disable the devices detection plugin so the browser name metric will be unavailable
-        \Piwik\Plugin\Manager::getInstance()->deactivatePlugin('DevicesDetection');
-        \Piwik\Plugin\Manager::getInstance()->unloadPlugin('DevicesDetection');
+        \Matomo\Plugin\Manager::getInstance()->deactivatePlugin('DevicesDetection');
+        \Matomo\Plugin\Manager::getInstance()->unloadPlugin('DevicesDetection');
         $this->flushCaches();
 
         // Check that the new segment is no longer returned by the API
         $this->checkSegmentAvailable($definition, $name, false);
 
         // Clean up
-        \Piwik\Plugin\Manager::getInstance()->loadPlugin('DevicesDetection');
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
-        \Piwik\Plugin\Manager::getInstance()->activatePlugin('DevicesDetection');
+        \Matomo\Plugin\Manager::getInstance()->loadPlugin('DevicesDetection');
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->activatePlugin('DevicesDetection');
         API::getInstance()->delete($browserNameSegmentId);
         $this->flushCaches();
     }

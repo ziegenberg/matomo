@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Columns;
+namespace Matomo\Plugins\DevicesDetection\Columns;
 
 use DeviceDetector\Parser\Client\Browser;
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin\Segment;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin\Segment;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 class BrowserName extends Base
 {
@@ -61,7 +61,7 @@ class BrowserName extends Base
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\DevicesDetection\getBrowserName($value);
+        return \Matomo\Plugins\DevicesDetection\getBrowserName($value);
     }
 
     public function onAnyGoalConversion(Request $request, Visitor $visitor, $action)

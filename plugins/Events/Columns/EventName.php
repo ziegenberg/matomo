@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Columns;
+namespace Matomo\Plugins\Events\Columns;
 
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\Join\ActionNameJoin;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugins\Events\Actions\ActionEvent;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\Join\ActionNameJoin;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugins\Events\Actions\ActionEvent;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TableLogAction;
 
 class EventName extends ActionDimension
 {

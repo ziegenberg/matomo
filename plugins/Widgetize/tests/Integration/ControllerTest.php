@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Widgetize\tests\Integration;
+namespace Matomo\Plugins\Widgetize\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Plugins\Widgetize\Controller;
-use Piwik\Plugins\Widgetize\UrlTokenAuthFailedException;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Plugins\Widgetize\Controller;
+use Matomo\Plugins\Widgetize\UrlTokenAuthFailedException;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Widget\WidgetConfig;
 
 /**
  * @group Widgetize
@@ -83,7 +83,7 @@ class ControllerTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 

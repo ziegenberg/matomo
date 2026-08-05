@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Emails;
+namespace Matomo\Plugins\UsersManager\Emails;
 
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugins\LanguagesManager\LanguagesHelper;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserNotifications\UserNotification;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugins\LanguagesManager\LanguagesHelper;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserNotifications\UserNotification;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
+use Matomo\View;
 
 class InactiveUsersNotificationEmail extends Mail
 {
@@ -61,7 +61,7 @@ class InactiveUsersNotificationEmail extends Mail
 
     protected function getDefaultSubject(): string
     {
-        return Piwik::translate('UsersManager_InactiveUsersNotificationEmailSubject');
+        return Matomo::translate('UsersManager_InactiveUsersNotificationEmailSubject');
     }
 
     protected function getDefaultBodyText(): string

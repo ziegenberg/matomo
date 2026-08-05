@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\tests\Integration\Tracker;
+namespace Matomo\Plugins\PagePerformance\tests\Integration\Tracker;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\PagePerformance\Tracker\PerformanceDataProcessor;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\PagePerformance\Tracker\PerformanceDataProcessor;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group PagePerformance

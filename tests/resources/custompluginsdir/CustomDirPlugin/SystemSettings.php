@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDirPlugin;
+namespace Matomo\Plugins\CustomDirPlugin;
 
-use Piwik\Settings\Setting;
-use Piwik\Settings\FieldConfig;
-use Piwik\Validators\NotEmpty;
+use Matomo\Settings\Setting;
+use Matomo\Settings\FieldConfig;
+use Matomo\Validators\NotEmpty;
 
-class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
+class SystemSettings extends \Matomo\Settings\Plugin\SystemSettings
 {
     /** @var Setting */
     public $custom;

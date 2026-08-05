@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\API\DataTableManipulator\Flattener;
-use Piwik\API\DataTableManipulator\LabelFilter;
-use Piwik\API\DataTableManipulator\ReportTotalsCalculator;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Filter\PivotByDimension;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\API\Filter\DataComparisonFilter;
-use Piwik\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
-use Piwik\Plugins\PrivacyManager\DataRounding;
-use Piwik\Request;
+use Matomo\API\DataTableManipulator\Flattener;
+use Matomo\API\DataTableManipulator\LabelFilter;
+use Matomo\API\DataTableManipulator\ReportTotalsCalculator;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Filter\PivotByDimension;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\API\Filter\DataComparisonFilter;
+use Matomo\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
+use Matomo\Plugins\PrivacyManager\DataRounding;
+use Matomo\Request;
 
 /**
  * Processes DataTables that should be served through Piwik's APIs. This processing handles
@@ -149,7 +149,7 @@ class DataTablePostProcessor
 
     public function applyArchiveStateFilter(DataTableInterface $dataTable): DataTableInterface
     {
-        $fetchArchiveState = (new \Piwik\Request($this->request))->getBoolParameter('fetch_archive_state', false);
+        $fetchArchiveState = (new \Matomo\Request($this->request))->getBoolParameter('fetch_archive_state', false);
 
         if (false === $fetchArchiveState) {
             $dataTable->filter(function (DataTable $table) {
@@ -288,8 +288,8 @@ class DataTablePostProcessor
             if (
                 (int) $addGoalProcessedMetrics === 0
                 && $addGoalProcessedMetrics !== '0'
-                && $addGoalProcessedMetrics != Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER
-                && $addGoalProcessedMetrics != Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART
+                && $addGoalProcessedMetrics != Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER
+                && $addGoalProcessedMetrics != Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART
             ) {
                 $addGoalProcessedMetrics = null;
             }

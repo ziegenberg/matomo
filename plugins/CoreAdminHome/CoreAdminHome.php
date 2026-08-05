@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome;
+namespace Matomo\Plugins\CoreAdminHome;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Piwik;
-use Piwik\Site;
-use Piwik\ProxyHttp;
-use Piwik\Plugins\CoreHome\SystemSummary;
-use Piwik\Settings\Storage\Backend\PluginSettingsTable;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Matomo;
+use Matomo\Site;
+use Matomo\ProxyHttp;
+use Matomo\Plugins\CoreHome\SystemSummary;
+use Matomo\Settings\Storage\Backend\PluginSettingsTable;
 
-class CoreAdminHome extends \Piwik\Plugin
+class CoreAdminHome extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -57,8 +57,8 @@ class CoreAdminHome extends \Piwik\Plugin
 
         $message = sprintf(
             '<p>%s</p><p>%s</p>',
-            Piwik::translate('CoreAdminHome_InvalidSiteUrlError', Common::sanitizeInputValue($requestedIdSite)),
-            Piwik::translate('CoreAdminHome_InvalidSiteUrlErrorHelp')
+            Matomo::translate('CoreAdminHome_InvalidSiteUrlError', Common::sanitizeInputValue($requestedIdSite)),
+            Matomo::translate('CoreAdminHome_InvalidSiteUrlErrorHelp')
         );
 
         $output = $this->replaceErrorPageMessage($output, $message);
@@ -117,14 +117,14 @@ class CoreAdminHome extends \Piwik\Plugin
 
     public function addSystemSummaryItems(&$systemSummary)
     {
-        if (Piwik::isUserHasSomeAdminAccess()) {
+        if (Matomo::isUserHasSomeAdminAccess()) {
             $failures = Request::processRequest('CoreAdminHome.getTrackingFailures', [], []);
             $numFailures = count($failures);
             $icon = 'icon-error';
             if ($numFailures === 0) {
                 $icon = 'icon-ok';
             }
-            $systemSummary[] = new SystemSummary\Item($key = 'trackingfailures', Piwik::translate('CoreAdminHome_NTrackingFailures', $numFailures), $value = null, array('module' => 'CoreAdminHome', 'action' => 'trackingFailures'), $icon, $order = 9);
+            $systemSummary[] = new SystemSummary\Item($key = 'trackingfailures', Matomo::translate('CoreAdminHome_NTrackingFailures', $numFailures), $value = null, array('module' => 'CoreAdminHome', 'action' => 'trackingFailures'), $icon, $order = 9);
         }
     }
 
@@ -156,7 +156,7 @@ class CoreAdminHome extends \Piwik\Plugin
 
     public function displayOnlyForSuperUser(&$hide)
     {
-        $hide = !Piwik::hasUserSuperUserAccess();
+        $hide = !Matomo::hasUserSuperUserAccess();
     }
 
     public function addJsGlobalVariables(&$out)

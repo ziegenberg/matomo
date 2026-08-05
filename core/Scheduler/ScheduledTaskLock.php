@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Scheduler;
+namespace Matomo\Scheduler;
 
-use Piwik\Concurrency\Lock;
-use Piwik\Concurrency\LockBackend;
+use Matomo\Concurrency\Lock;
+use Matomo\Concurrency\LockBackend;
 
 class ScheduledTaskLock extends Lock
 {

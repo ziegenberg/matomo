@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\AIAgents;
+namespace Matomo\Plugins\AIAgents;
 
-use Piwik\API\Request;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\API as PluginAPI;
-use Piwik\Plugins\API\DataTable\MergeDataTables;
-use Piwik\Segment;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Site;
+use Matomo\API\Request;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\API as PluginAPI;
+use Matomo\Plugins\API\DataTable\MergeDataTables;
+use Matomo\Segment;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Site;
 
 /**
  * Provides reporting API methods for distinguishing AI agent traffic from human traffic.
  *
- * @method static \Piwik\Plugins\AIAgents\API getInstance()
+ * @method static \Matomo\Plugins\AIAgents\API getInstance()
  */
 class API extends PluginAPI
 {
@@ -58,9 +58,9 @@ class API extends PluginAPI
         string $segment = '',
         $columns = ''
     ): DataTableInterface {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
-        $columns = Piwik::getArrayFromApiParameter($columns);
+        $columns = Matomo::getArrayFromApiParameter($columns);
 
         if ($idSite === 'all' || count(Site::getIdSitesFromIdSitesString($idSite, false, true)) > 1) {
             $resultSet = new DataTable\Map();

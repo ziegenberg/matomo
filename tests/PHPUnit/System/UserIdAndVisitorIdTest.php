@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\API\Proxy;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\FewVisitsWithSetVisitorId;
+use Matomo\API\Proxy;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\FewVisitsWithSetVisitorId;
 
 /**
  * This test tests that when using &cid=, the visitor ID is enforced

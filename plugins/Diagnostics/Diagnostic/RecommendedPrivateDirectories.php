@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Filesystem;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\Filesystem;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 class RecommendedPrivateDirectories extends AbstractPrivateDirectories
 {

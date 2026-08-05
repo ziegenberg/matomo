@@ -7,9 +7,9 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\UserNotifications;
+namespace Matomo\Plugins\UsersManager\UserNotifications;
 
-use Piwik\Plugins\UsersManager\Emails\InactiveUsersNotificationEmail;
+use Matomo\Plugins\UsersManager\Emails\InactiveUsersNotificationEmail;
 
 final class InactiveUsersEmailNotification extends UserEmailNotification
 {

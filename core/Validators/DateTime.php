@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Date;
-use Piwik\Piwik;
+use Matomo\Date;
+use Matomo\Matomo;
 
 class DateTime extends BaseValidator
 {
@@ -21,7 +21,7 @@ class DateTime extends BaseValidator
         }
 
         if (!preg_match('/^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2}):(\d{2})Z?$/', $value)) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorInvalidDateTimeFormat', array($value, 'YYYY-MM-DD HH:MM:SS')));
+            throw new Exception(Matomo::translate('General_ValidatorErrorInvalidDateTimeFormat', array($value, 'YYYY-MM-DD HH:MM:SS')));
         }
 
         try {

@@ -7,36 +7,36 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites;
+namespace Matomo\Plugins\MultiSites;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Archive;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Map;
-use Piwik\DataTable\Row;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\BotTracking\Metrics as BotTrackingMetrics;
-use Piwik\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
-use Piwik\Plugins\PrivacyManager\DataRounding;
-use Piwik\Plugins\Goals\Archiver;
-use Piwik\Plugins\MultiSites\Columns\Metrics\EcommerceOnlyEvolutionMetric;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Scheduler\Scheduler;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
+use Matomo\API\Request;
+use Matomo\Archive;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Map;
+use Matomo\DataTable\Row;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\BotTracking\Metrics as BotTrackingMetrics;
+use Matomo\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
+use Matomo\Plugins\PrivacyManager\DataRounding;
+use Matomo\Plugins\Goals\Archiver;
+use Matomo\Plugins\MultiSites\Columns\Metrics\EcommerceOnlyEvolutionMetric;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Scheduler\Scheduler;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
 
 /**
  * The MultiSites API lets you request the key metrics (visits, page views, revenue) for all Websites in Matomo.
- * @method static \Piwik\Plugins\MultiSites\API getInstance()
+ * @method static \Matomo\Plugins\MultiSites\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const METRIC_TRANSLATION_KEY = 'translation';
     public const METRIC_EVOLUTION_COL_NAME_KEY = 'evolution_column_name';
@@ -117,7 +117,7 @@ class API extends \Piwik\Plugin\API
         ?string $pattern = null,
         $showColumns = []
     ): DataTableInterface {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $idSites = $this->getSitesIdFromPattern($pattern, $_restrictSitesToLogin);
 
@@ -134,7 +134,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param array<int> &$idSites List of idSites that the current user would be allowed to see in all websites dashboard.
          */
-        Piwik::postEvent('MultiSites.filterSites', [&$idSites]);
+        Matomo::postEvent('MultiSites.filterSites', [&$idSites]);
 
         if (!empty($showColumns) && is_string($showColumns)) {
             $showColumns = explode(',', $showColumns);
@@ -169,10 +169,10 @@ class API extends \Piwik\Plugin\API
     {
         if (empty($pattern)) {
             /** @var Scheduler $scheduler */
-            $scheduler = StaticContainer::getContainer()->get('Piwik\Scheduler\Scheduler');
+            $scheduler = StaticContainer::getContainer()->get('Matomo\Scheduler\Scheduler');
             // Then, warm the cache with only the data we should have access to
             if (
-                Piwik::hasUserSuperUserAccess()
+                Matomo::hasUserSuperUserAccess()
                 // Hack: when this API function is called as a Scheduled Task, Super User status is enforced.
                 // This means this function would return ALL websites in all cases.
                 // Instead, we make sure that only the right set of data is returned
@@ -220,7 +220,7 @@ class API extends \Piwik\Plugin\API
      * @param bool $enhanced `true` to include additional goal and ecommerce metrics, `false` to return the default
      *                       metric set.
      * @return DataTable|Map Metrics for the requested website.
-     * @see \Piwik\Plugins\MultiSites\API::getAll()
+     * @see \Matomo\Plugins\MultiSites\API::getAll()
      *
      */
     public function getOne(
@@ -231,7 +231,7 @@ class API extends \Piwik\Plugin\API
         ?string $_restrictSitesToLogin = null,
         bool $enhanced = false
     ): DataTableInterface {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $site = APISitesManager::getInstance()->getSiteFromId($idSite);
 
@@ -271,7 +271,7 @@ class API extends \Piwik\Plugin\API
         string $pattern = '',
         int $filter_limit = 0
     ): array {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         if (Period::isMultiplePeriod($date, $period)) {
             throw new Exception('Multiple periods are not supported');
@@ -404,7 +404,7 @@ class API extends \Piwik\Plugin\API
             $dataTable->queueFilter('ColumnCallbackReplace', [
                 'label', function ($idSite) {
                     if ($idSite == '-1') { // Others row might occur when `filter_truncate` API parameter is used
-                        return Piwik::translate('General_Others');
+                        return Matomo::translate('General_Others');
                     }
                     return Site::getNameFor($idSite);
                 },
@@ -694,7 +694,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param Row[] &$rows An array containing rows, one row for each site. The label columns equals the idSite.
          */
-        Piwik::postEvent('MultiSites.filterRowsForTotalsCalculation', [&$rows]);
+        Matomo::postEvent('MultiSites.filterRowsForTotalsCalculation', [&$rows]);
 
         return $rows;
     }

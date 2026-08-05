@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics\tests\Unit;
+namespace Matomo\Plugins\ArchivingMetrics\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Date;
-use Piwik\Period\Factory;
-use Piwik\Plugins\ArchivingMetrics\Clock\ClockInterface;
-use Piwik\Plugins\ArchivingMetrics\Context;
-use Piwik\Plugins\ArchivingMetrics\Timer;
-use Piwik\Plugins\ArchivingMetrics\Writer\WriterInterface;
-use Piwik\Segment;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Date;
+use Matomo\Period\Factory;
+use Matomo\Plugins\ArchivingMetrics\Clock\ClockInterface;
+use Matomo\Plugins\ArchivingMetrics\Context;
+use Matomo\Plugins\ArchivingMetrics\Timer;
+use Matomo\Plugins\ArchivingMetrics\Writer\WriterInterface;
+use Matomo\Segment;
 
 /**
  * @group ArchivingMetrics

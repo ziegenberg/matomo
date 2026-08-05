@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\PrivacyManager\FeatureFlags;
+namespace Matomo\Plugins\PrivacyManager\FeatureFlags;
 
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
-use Piwik\Plugins\FeatureFlags\ForcedFeatureFlagStateInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\ForcedFeatureFlagStateInterface;
 
 class PrivacyCompliance implements FeatureFlagInterface, ForcedFeatureFlagStateInterface
 {

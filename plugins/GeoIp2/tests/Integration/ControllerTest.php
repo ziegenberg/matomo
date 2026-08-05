@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\tests\Integration;
+namespace Matomo\Plugins\GeoIp2\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Option;
-use Piwik\Plugins\GeoIp2\Controller;
-use Piwik\Plugins\GeoIp2\GeoIP2AutoUpdater;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Option;
+use Matomo\Plugins\GeoIp2\Controller;
+use Matomo\Plugins\GeoIp2\GeoIP2AutoUpdater;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group GeoIp2

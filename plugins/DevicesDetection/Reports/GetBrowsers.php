@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Reports;
+namespace Matomo\Plugins\DevicesDetection\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\DevicesDetection\Columns\BrowserName;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\DevicesDetection\Columns\BrowserName;
+use Matomo\Plugin\ReportsProvider;
 
 class GetBrowsers extends Base
 {
@@ -20,8 +20,8 @@ class GetBrowsers extends Base
     {
         parent::init();
         $this->dimension     = new BrowserName();
-        $this->name          = Piwik::translate('DevicesDetection_Browsers');
-        $this->documentation = Piwik::translate('DevicesDetection_WidgetBrowsersDocumentation');
+        $this->name          = Matomo::translate('DevicesDetection_Browsers');
+        $this->documentation = Matomo::translate('DevicesDetection_WidgetBrowsersDocumentation');
         $this->order = 5;
         $this->subcategoryId = 'DevicesDetection_Software';
         $this->hasGoalMetrics = true;

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Plugin\ReleaseChannels;
-use Piwik\Plugins\CoreUpdater\ReleaseChannel;
-use Piwik\Version;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Plugin\ReleaseChannels;
+use Matomo\Plugins\CoreUpdater\ReleaseChannel;
+use Matomo\Version;
 
 class Environment
 {

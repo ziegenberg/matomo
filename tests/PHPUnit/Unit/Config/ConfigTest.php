@@ -1,9 +1,9 @@
 <?php
 
-namespace Piwik\Tests\Unit\Config;
+namespace Matomo\Tests\Unit\Config;
 
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Config;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Config;
 use PHPUnit\Framework\TestCase;
 
 class ConfigTest extends TestCase

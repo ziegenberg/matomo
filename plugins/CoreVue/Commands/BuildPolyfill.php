@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVue\Commands;
+namespace Matomo\Plugins\CoreVue\Commands;
 
-use Piwik\Filesystem;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Filesystem;
+use Matomo\Plugin\ConsoleCommand;
 
 class BuildPolyfill extends ConsoleCommand
 {
@@ -23,7 +23,7 @@ class BuildPolyfill extends ConsoleCommand
 
     public function isEnabled()
     {
-        return \Piwik\Development::isEnabled();
+        return \Matomo\Development::isEnabled();
     }
 
     protected function doExecute(): int

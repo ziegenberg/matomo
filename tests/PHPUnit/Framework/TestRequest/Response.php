@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\TestRequest;
+namespace Matomo\Tests\Framework\TestRequest;
 
-use Piwik\API\Request;
+use Matomo\API\Request;
 use PHPUnit\Framework\Assert as Asserts;
 use Exception;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Utility class used to obtain and process API responses for API tests.

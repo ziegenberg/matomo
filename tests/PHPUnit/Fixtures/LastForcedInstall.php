@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CorePluginsAdmin\PluginInstaller;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CorePluginsAdmin\PluginInstaller;
 
 class LastForcedInstall extends LatestStableInstall
 {
@@ -32,10 +32,10 @@ class LastForcedInstall extends LatestStableInstall
     {
         // creating a new instance here as otherwise we would change the "global" environment,
         // but we only want to change Matomo version temporarily for this task here
-        $environment = StaticContainer::getContainer()->make('Piwik\Plugins\Marketplace\Environment');
+        $environment = StaticContainer::getContainer()->make('Matomo\Plugins\Marketplace\Environment');
         $environment->setPiwikVersion(self::FORCED_VERSION);
-        /** @var \Piwik\Plugins\Marketplace\Api\Client $marketplaceClient */
-        $marketplaceClient = StaticContainer::getContainer()->make('Piwik\Plugins\Marketplace\Api\Client', [
+        /** @var \Matomo\Plugins\Marketplace\Api\Client $marketplaceClient */
+        $marketplaceClient = StaticContainer::getContainer()->make('Matomo\Plugins\Marketplace\Api\Client', [
             'environment' => $environment,
         ]);
 

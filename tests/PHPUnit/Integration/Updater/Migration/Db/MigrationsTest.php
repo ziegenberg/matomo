@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Updater\Migration\Db;
+namespace Matomo\Tests\Integration\Updater\Migration\Db;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Updater\Migration\Db\Factory;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Updater\Migration\Db\Factory;
 
 /**
  * Test where migrations are actually executed.

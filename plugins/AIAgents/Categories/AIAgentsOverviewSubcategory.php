@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\Categories;
+namespace Matomo\Plugins\AIAgents\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class AIAgentsOverviewSubcategory extends Subcategory
 {
@@ -24,7 +24,7 @@ class AIAgentsOverviewSubcategory extends Subcategory
     {
         return sprintf(
             '<p>%1$s</p>',
-            Piwik::translate('AIAgents_AIAgentsOverviewSubcategoryDescription')
+            Matomo::translate('AIAgents_AIAgentsOverviewSubcategoryDescription')
         );
     }
 }

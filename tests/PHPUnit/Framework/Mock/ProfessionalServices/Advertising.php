@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock\ProfessionalServices;
+namespace Matomo\Tests\Framework\Mock\ProfessionalServices;
 
-class Advertising extends \Piwik\ProfessionalServices\Advertising
+class Advertising extends \Matomo\ProfessionalServices\Advertising
 {
     public function __construct()
     {

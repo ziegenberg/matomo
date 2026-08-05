@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration;
+namespace Matomo\Plugins\Marketplace\tests\Integration;
 
-use Piwik\Plugins\Marketplace\API;
-use Piwik\Plugins\Marketplace\Consumer;
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
-use Piwik\Plugins\Marketplace\Input\Sort;
-use Piwik\Plugins\Marketplace\Plugins;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Client;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Service;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\ProfessionalServices\Advertising;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugin;
+use Matomo\Plugins\Marketplace\API;
+use Matomo\Plugins\Marketplace\Consumer;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Plugins\Marketplace\Input\Sort;
+use Matomo\Plugins\Marketplace\Plugins;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Client;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Service;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\ProfessionalServices\Advertising;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugin;
 
 /**
  * @group Marketplace

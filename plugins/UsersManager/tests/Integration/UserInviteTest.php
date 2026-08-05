@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\API\Request;
-use Piwik\Date;
-use Piwik\EventDispatcher;
-use Piwik\Http;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\Tasks;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\API\Request;
+use Matomo\Date;
+use Matomo\EventDispatcher;
+use Matomo\Http;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\Tasks;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager
@@ -147,9 +147,9 @@ class UserInviteTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
-            'observers.global' => \Piwik\DI::add([
-                ['Test.Mail.send', \Piwik\DI::value(function (PHPMailer $mail) {
+            'Matomo\Access' => new FakeAccess(),
+            'observers.global' => \Matomo\DI::add([
+                ['Test.Mail.send', \Matomo\DI::value(function (PHPMailer $mail) {
                     $body = $mail->createBody();
                     $body = preg_replace("/=[\r\n]+/", '', $body);
                     preg_match('/&token=[\s]*3D([a-zA-Z0-9=\s]+)"/', $body, $matches);

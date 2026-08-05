@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest\tests\Unit\Columns;
+namespace Matomo\Plugins\VisitorInterest\tests\Unit\Columns;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Plugins\VisitorInterest\Columns\VisitorSecondsSinceLast;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Tracker\Visitor;
+use Matomo\Plugins\VisitorInterest\Columns\VisitorSecondsSinceLast;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Tracker\Visitor;
 
 class VisitorSecondsSinceLastTest extends TestCase
 {

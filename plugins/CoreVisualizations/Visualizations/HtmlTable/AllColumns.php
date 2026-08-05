@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
 
-use Piwik\DataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\DataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
 
 /**
  * DataTable Visualization that derives from HtmlTable and sets show_extra_columns to true.

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\Chart;
-use Piwik\Tests\Framework\Mock\FakeLogger;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\Chart;
+use Matomo\Tests\Framework\Mock\FakeLogger;
 
 /**
  * @group Chart

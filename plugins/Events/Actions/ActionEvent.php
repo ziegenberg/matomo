@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Actions;
+namespace Matomo\Plugins\Events\Actions;
 
-use Piwik\Common;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker;
+use Matomo\Common;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker;
 
 /**
  * An Event is composed of a URL, a Category name, an Action name, and optionally a Name and Value.

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices;
+namespace Matomo\Plugins\ProfessionalServices;
 
-use Piwik\Piwik;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Matomo;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
 
 class PromoWidgetDismissal
 {
@@ -25,7 +25,7 @@ class PromoWidgetDismissal
 
     public function dismissPromoWidget(string $widgetName): void
     {
-        $userLogin = Piwik::getCurrentUserLogin();
+        $userLogin = Matomo::getCurrentUserLogin();
         if (empty($userLogin)) {
             return;
         }
@@ -37,7 +37,7 @@ class PromoWidgetDismissal
 
     public function isPromoWidgetDismissedForCurrentUser(string $widgetName): bool
     {
-        $isAnonUser = Piwik::isUserIsAnonymous();
+        $isAnonUser = Matomo::isUserIsAnonymous();
 
         if ($isAnonUser) {
             return false;
@@ -48,7 +48,7 @@ class PromoWidgetDismissal
 
     private function isPromoWidgetDismissed(string $widgetName): bool
     {
-        $userLogin = Piwik::getCurrentUserLogin();
+        $userLogin = Matomo::getCurrentUserLogin();
         if (empty($userLogin)) {
             return false;
         }

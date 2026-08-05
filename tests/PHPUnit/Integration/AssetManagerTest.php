@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\AssetManager\UIAsset\OnDiskUIAsset;
-use Piwik\AssetManager\UIAsset;
-use Piwik\AssetManager;
-use Piwik\AssetManager\UIAssetFetcher\StaticUIAssetFetcher;
-use Piwik\Config;
-use Piwik\Filesystem;
-use Piwik\Plugin;
-use Piwik\Plugin\Manager;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tests\Unit\AssetManager\PluginManagerMock;
-use Piwik\Tests\Unit\AssetManager\PluginMock;
-use Piwik\Tests\Unit\AssetManager\ThemeMock;
-use Piwik\Tests\Unit\AssetManager\UIAssetCacheBusterMock;
+use Matomo\AssetManager\UIAsset\OnDiskUIAsset;
+use Matomo\AssetManager\UIAsset;
+use Matomo\AssetManager;
+use Matomo\AssetManager\UIAssetFetcher\StaticUIAssetFetcher;
+use Matomo\Config;
+use Matomo\Filesystem;
+use Matomo\Plugin;
+use Matomo\Plugin\Manager;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Unit\AssetManager\PluginManagerMock;
+use Matomo\Tests\Unit\AssetManager\PluginMock;
+use Matomo\Tests\Unit\AssetManager\ThemeMock;
+use Matomo\Tests\Unit\AssetManager\UIAssetCacheBusterMock;
 
 /**
  * @group AssetManagerTest
@@ -105,7 +105,7 @@ class AssetManagerTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Plugin\Manager' => \Piwik\DI::autowire('Piwik\Tests\Unit\AssetManager\PluginManagerMock'),
+            'Matomo\Plugin\Manager' => \Matomo\DI::autowire('Matomo\Tests\Unit\AssetManager\PluginManagerMock'),
         );
     }
 

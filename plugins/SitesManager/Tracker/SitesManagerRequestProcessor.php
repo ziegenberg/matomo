@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\Tracker;
+namespace Matomo\Plugins\SitesManager\Tracker;
 
-use Piwik\Date;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestProcessor;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Plugins\SitesManager\Model as SitesManagerModel;
+use Matomo\Date;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestProcessor;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Plugins\SitesManager\Model as SitesManagerModel;
 
 /**
  * Handles site specific logic during tracking.

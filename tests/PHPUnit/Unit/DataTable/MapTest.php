@@ -1,10 +1,10 @@
 <?php
 
-namespace Piwik\Tests\Unit\DataTable;
+namespace Matomo\Tests\Unit\DataTable;
 
-use Piwik\DataTable\Manager;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable\Manager;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * @group DataTableTest
@@ -153,7 +153,7 @@ class MapTest extends \PHPUnit\Framework\TestCase
         $result = $dataTable->mergeChildren();
 
         // check that the result is a DataTable w/ 4 rows
-        $this->assertInstanceOf('\Piwik\DataTable', $result);
+        $this->assertInstanceOf('\Matomo\DataTable', $result);
         $this->assertEquals(4, $result->getRowsCount());
 
         // check that the first two rows have 'subDataTable1' as the label
@@ -182,7 +182,7 @@ class MapTest extends \PHPUnit\Framework\TestCase
         $result = $dataTable->mergeChildren();
 
         // check that the result is a DataTable\Map w/ two DataTable children
-        $this->assertInstanceOf('\Piwik\DataTable\Map', $result);
+        $this->assertInstanceOf('\Matomo\DataTable\Map', $result);
         $this->assertEquals(2, $result->getRowsCount());
 
         // check that the first sub-DataTable is a DataTable with 4 rows

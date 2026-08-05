@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Framework\Mock;
+namespace Matomo\Plugins\Marketplace\tests\Framework\Mock;
 
-use Piwik\Plugins\Marketplace\Consumer as ActualConsumer;
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Plugins\Marketplace\Consumer as ActualConsumer;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
 
 class Consumer
 {

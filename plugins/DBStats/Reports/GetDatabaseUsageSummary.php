@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats\Reports;
+namespace Matomo\Plugins\DBStats\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
 
 /**
  * Shows a datatable that displays how much space the tracker tables, numeric
@@ -22,7 +22,7 @@ class GetDatabaseUsageSummary extends Base
 {
     protected function init()
     {
-        $this->name = Piwik::translate('General_Overview');
+        $this->name = Matomo::translate('General_Overview');
     }
 
     public function getDefaultTypeViewDataTable()
@@ -52,7 +52,7 @@ class GetDatabaseUsageSummary extends Base
 
         $translateSummaryLabel = function ($value) use ($valueToTranslationStr) {
             return isset($valueToTranslationStr[$value])
-                ? Piwik::translate($valueToTranslationStr[$value])
+                ? Matomo::translate($valueToTranslationStr[$value])
                 : $value;
         };
 

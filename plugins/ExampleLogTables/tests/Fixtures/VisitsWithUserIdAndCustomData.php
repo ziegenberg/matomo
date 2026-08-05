@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleLogTables\tests\Fixtures;
+namespace Matomo\Plugins\ExampleLogTables\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\ExampleLogTables\Dao\CustomGroupLog;
-use Piwik\Plugins\ExampleLogTables\Dao\CustomUserLog;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\ExampleLogTables\Dao\CustomGroupLog;
+use Matomo\Plugins\ExampleLogTables\Dao\CustomUserLog;
+use Matomo\Tests\Framework\Fixture;
 
 class VisitsWithUserIdAndCustomData extends Fixture
 {

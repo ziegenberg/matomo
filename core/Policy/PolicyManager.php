@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Policy;
+namespace Matomo\Policy;
 
 use Exception;
-use Piwik\Tracker\Cache;
-use Piwik\Plugin\Manager;
-use Piwik\Policy\Exceptions\CompliancePolicyNotFoundException;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
-use Piwik\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
-use Piwik\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
-use Piwik\Settings\Interfaces\Traits\Getters\OptionGetterTrait;
-use Piwik\Settings\Interfaces\Traits\Getters\SystemGetterTrait;
-use Piwik\Settings\Measurable\MeasurableProperty;
-use Piwik\Settings\Measurable\MeasurableSetting;
-use Piwik\Settings\Plugin\SystemConfigSetting;
-use Piwik\Settings\Plugin\SystemSetting;
-use Piwik\Settings\Setting;
-use Piwik\Tracker\Config\ThirdPartyCookies;
+use Matomo\Tracker\Cache;
+use Matomo\Plugin\Manager;
+use Matomo\Policy\Exceptions\CompliancePolicyNotFoundException;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
+use Matomo\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
+use Matomo\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
+use Matomo\Settings\Interfaces\Traits\Getters\OptionGetterTrait;
+use Matomo\Settings\Interfaces\Traits\Getters\SystemGetterTrait;
+use Matomo\Settings\Measurable\MeasurableProperty;
+use Matomo\Settings\Measurable\MeasurableSetting;
+use Matomo\Settings\Plugin\SystemConfigSetting;
+use Matomo\Settings\Plugin\SystemSetting;
+use Matomo\Settings\Setting;
+use Matomo\Tracker\Config\ThirdPartyCookies;
 
 class PolicyManager
 {

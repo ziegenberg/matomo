@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable\Simple;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Tracker\GoalManager;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable\Simple;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Tracker\GoalManager;
 
 /**
  * Replaces column names in each row of a table using an array that maps old column
@@ -24,7 +24,7 @@ use Piwik\Tracker\GoalManager;
  * (which are integers) with their string column names. In the database, reports are
  * stored with integer metric names because it results in blobs that take up less space.
  * When loading the reports, the column names must be replaced, which is handled by this
- * class. (See {@link Piwik\Metrics} for more information about integer metric names.)
+ * class. (See {@link Matomo\Metrics} for more information about integer metric names.)
  *
  * **Basic example**
  *
@@ -50,7 +50,7 @@ class ReplaceColumnNames extends BaseFilter
      *                                       array('OLD_COLUMN_NAME' => 'NEW_COLUMN NAME',
      *                                             'OLD_COLUMN_NAME2' => 'NEW_COLUMN NAME2')
      *
-     *                                   If null, {@link Piwik\Metrics::$mappingFromIdToName} is used.
+     *                                   If null, {@link Matomo\Metrics::$mappingFromIdToName} is used.
      */
     public function __construct($table, $mappingToApply = null)
     {
@@ -162,9 +162,9 @@ class ReplaceColumnNames extends BaseFilter
         foreach ($columnValue as $idGoal => $goalValues) {
             $mapping = Metrics::$mappingFromIdToNameGoal;
             if ($idGoal == GoalManager::IDGOAL_CART) {
-                $idGoal = Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART;
+                $idGoal = Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART;
             } elseif ($idGoal == GoalManager::IDGOAL_ORDER) {
-                $idGoal = Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER;
+                $idGoal = Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER;
             }
             foreach ($goalValues as $id => $goalValue) {
                 $subColumnName = $mapping[$id];

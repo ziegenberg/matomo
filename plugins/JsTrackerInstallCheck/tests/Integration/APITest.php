@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\JsTrackerInstallCheck\tests\Integration;
+namespace Matomo\Plugins\JsTrackerInstallCheck\tests\Integration;
 
-use Piwik\Plugins\JsTrackerInstallCheck\API;
-use Piwik\Plugins\JsTrackerInstallCheck\JsTrackerInstallCheck;
-use Piwik\Site;
-use Piwik\Tests\Framework\Mock\FakeAccess;
+use Matomo\Plugins\JsTrackerInstallCheck\API;
+use Matomo\Plugins\JsTrackerInstallCheck\JsTrackerInstallCheck;
+use Matomo\Site;
+use Matomo\Tests\Framework\Mock\FakeAccess;
 
 /**
  * @group JsTrackerInstallCheck
@@ -84,7 +84,7 @@ class APITest extends JsTrackerInstallCheckIntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 }

@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Integration\Dao;
+namespace Matomo\Plugins\BotTracking\tests\Integration\Dao;
 
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\TableLogAction;
 
 /**
  * @group BotTracking
@@ -262,7 +262,7 @@ class BotRequestsDaoTest extends IntegrationTestCase
     /**
      * @return array<string, array<string, int|string|null>>
      */
-    private function indexRowsByLabel(\Piwik\DataTable $table): array
+    private function indexRowsByLabel(\Matomo\DataTable $table): array
     {
         $rows = [];
         foreach ($table->getRows() as $row) {

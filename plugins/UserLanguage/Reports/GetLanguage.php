@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserLanguage\Reports;
+namespace Matomo\Plugins\UserLanguage\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\UserLanguage\Columns\Language;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\UserLanguage\Columns\Language;
+use Matomo\Plugin\ReportsProvider;
 
 class GetLanguage extends Base
 {
@@ -20,8 +20,8 @@ class GetLanguage extends Base
     {
         parent::init();
         $this->dimension     = new Language();
-        $this->name          = Piwik::translate('UserLanguage_BrowserLanguage');
-        $this->documentation = Piwik::translate('UserLanguage_getLanguageDocumentation');
+        $this->name          = Matomo::translate('UserLanguage_BrowserLanguage');
+        $this->documentation = Matomo::translate('UserLanguage_getLanguageDocumentation');
         $this->order = 8;
     }
 

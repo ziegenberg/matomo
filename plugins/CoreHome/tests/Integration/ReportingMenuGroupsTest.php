@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration;
+namespace Matomo\Plugins\CoreHome\tests\Integration;
 
-use Piwik\Category\CategoryList;
-use Piwik\Category\Subcategory;
-use Piwik\EventDispatcher;
-use Piwik\Menu\MenuTop;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Category\CategoryList;
+use Matomo\Category\Subcategory;
+use Matomo\EventDispatcher;
+use Matomo\Menu\MenuTop;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreHome

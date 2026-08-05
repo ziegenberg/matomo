@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
-use Piwik\Access;
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\TokenNotifications\TokenNotifierTask;
-use Piwik\Plugins\UsersManager\UserNotifications\UserNotifierTask;
+use Matomo\Access;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\TokenNotifications\TokenNotifierTask;
+use Matomo\Plugins\UsersManager\UserNotifications\UserNotifierTask;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     private Model $usersModel;
 

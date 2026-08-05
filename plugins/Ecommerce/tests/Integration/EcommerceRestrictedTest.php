@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\tests\Integration;
+namespace Matomo\Plugins\Ecommerce\tests\Integration;
 
-use Piwik\Policy\CnilPolicy;
-use Piwik\Plugins\Ecommerce\Settings\EcommerceRestricted;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Plugins\Ecommerce\Settings\EcommerceRestricted;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class EcommerceRestrictedTest extends IntegrationTestCase
 {

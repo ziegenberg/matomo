@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Scheduler;
+namespace Matomo\Scheduler;
 
-use Piwik\Exception\Exception;
+use Matomo\Exception\Exception;
 
 class RetryableException extends Exception
 {

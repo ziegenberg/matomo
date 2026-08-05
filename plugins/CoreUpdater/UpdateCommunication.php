@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater;
+namespace Matomo\Plugins\CoreUpdater;
 
-use Piwik\Config;
-use Piwik\Mail;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\API as UsersManagerApi;
-use Piwik\SettingsPiwik;
-use Piwik\UpdateCheck;
-use Piwik\Url;
-use Piwik\Version;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\Mail;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\API as UsersManagerApi;
+use Matomo\SettingsPiwik;
+use Matomo\UpdateCheck;
+use Matomo\Url;
+use Matomo\Version;
+use Matomo\View;
 
 /**
  * Class to check and notify users via email if there is a core update available.
@@ -65,7 +65,7 @@ class UpdateCommunication
 
         $host = SettingsPiwik::getPiwikUrl();
 
-        $subject  = Piwik::translate('CoreUpdater_NotificationSubjectAvailableCoreUpdate', $latestVersion);
+        $subject  = Matomo::translate('CoreUpdater_NotificationSubjectAvailableCoreUpdate', $latestVersion);
 
         $view = new View('@CoreUpdater/_updateCommunicationEmail.twig');
         $view->latestVersion = $latestVersion;

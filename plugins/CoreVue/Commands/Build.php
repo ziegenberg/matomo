@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVue\Commands;
+namespace Matomo\Plugins\CoreVue\Commands;
 
-use Piwik\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugin\Manager;
+use Matomo\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugin\Manager;
 
 class Build extends ConsoleCommand
 {
@@ -35,7 +35,7 @@ class Build extends ConsoleCommand
 
     public function isEnabled()
     {
-        return \Piwik\Development::isEnabled();
+        return \Matomo\Development::isEnabled();
     }
 
     protected function doExecute(): int

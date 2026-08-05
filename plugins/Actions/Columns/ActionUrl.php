@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns;
+namespace Matomo\Plugins\Actions\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Columns\Join\ActionNameJoin;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugins\Actions\Segment;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Columns\Join\ActionNameJoin;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugins\Actions\Segment;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\TableLogAction;
 
 class ActionUrl extends ActionDimension
 {

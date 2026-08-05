@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin;
 
 /**
  * Get categories and subcategories that are defined by plugins.
@@ -25,10 +25,10 @@ class Categories
         $this->pluginManager = $pluginManager;
     }
 
-    /** @return \Piwik\Category\Category[] */
+    /** @return \Matomo\Category\Category[] */
     public function getAllCategories()
     {
-        $categories = $this->pluginManager->findMultipleComponents('Categories', '\\Piwik\\Category\\Category');
+        $categories = $this->pluginManager->findMultipleComponents('Categories', '\Matomo\Category\Category');
 
         $instances = array();
         foreach ($categories as $category) {
@@ -39,7 +39,7 @@ class Categories
         return $instances;
     }
 
-    /** @return \Piwik\Category\Subcategory[] */
+    /** @return \Matomo\Category\Subcategory[] */
     public function getAllSubcategories()
     {
         $subcategories = array();
@@ -60,9 +60,9 @@ class Categories
          *
          * @param array &$subcategories An array containing a list of subcategories.
          */
-        Piwik::postEvent('Category.addSubcategories', array(&$subcategories));
+        Matomo::postEvent('Category.addSubcategories', array(&$subcategories));
 
-        $classes = $this->pluginManager->findMultipleComponents('Categories', '\\Piwik\\Category\\Subcategory');
+        $classes = $this->pluginManager->findMultipleComponents('Categories', '\Matomo\Category\Subcategory');
 
         foreach ($classes as $subcategory) {
             $subcategories[] = StaticContainer::getContainer()->make($subcategory);

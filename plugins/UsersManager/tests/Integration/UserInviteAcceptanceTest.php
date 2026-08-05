@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
-use Piwik\Date;
-use Piwik\Http;
-use Piwik\Piwik;
-use Piwik\Plugins\LanguagesManager\Model as LanguagesManagerModel;
-use Piwik\Plugins\UsersManager\Model as UsersManagerModel;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Date;
+use Matomo\Http;
+use Matomo\Matomo;
+use Matomo\Plugins\LanguagesManager\Model as LanguagesManagerModel;
+use Matomo\Plugins\UsersManager\Model as UsersManagerModel;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager
@@ -131,7 +131,7 @@ class UserInviteAcceptanceTest extends IntegrationTestCase
         [$greeting, $message] = $this->extractContentFromEmailBody($acceptInvitationEmail['contents']);
 
         $this->assertEquals(
-            Piwik::translate(
+            Matomo::translate(
                 'General_HelloUser',
                 [Fixture::ADMIN_USER_LOGIN],
                 $this->invitedByUserLanguage
@@ -139,7 +139,7 @@ class UserInviteAcceptanceTest extends IntegrationTestCase
             $greeting
         );
         $this->assertEquals(
-            Piwik::translate(
+            Matomo::translate(
                 'CoreAdminHome_SecurityNotificationUserAcceptInviteBody',
                 [$this->pendingUser['login']],
                 $this->invitedByUserLanguage

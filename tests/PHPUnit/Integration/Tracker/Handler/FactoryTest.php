@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker\Handler;
+namespace Matomo\Tests\Integration\Tracker\Handler;
 
-use Piwik\Piwik;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker;
-use Piwik\Tracker\Handler;
-use Piwik\Tracker\Handler\Factory;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker;
+use Matomo\Tracker\Handler;
+use Matomo\Tracker\Handler\Factory;
 
 /**
  * @group Tracker
@@ -26,14 +26,14 @@ class FactoryTest extends IntegrationTestCase
     public function testMakeShouldCreateDefaultInstance()
     {
         $handler = Factory::make();
-        $this->assertInstanceOf('Piwik\\Tracker\\Handler', $handler);
+        $this->assertInstanceOf('Matomo\Tracker\Handler', $handler);
     }
 
     public function testMakeShouldTriggerEventOnce()
     {
         $called = 0;
         $self   = $this;
-        Piwik::addAction('Tracker.newHandler', function ($handler) use (&$called, $self) {
+        Matomo::addAction('Tracker.newHandler', function ($handler) use (&$called, $self) {
             $called++;
             $self->assertNull($handler);
         });
@@ -45,7 +45,7 @@ class FactoryTest extends IntegrationTestCase
     public function testMakeShouldPreferManuallyCreatedHandlerInstanceInEventOverDefaultHandler()
     {
         $handlerToUse = new Handler();
-        Piwik::addAction('Tracker.newHandler', function (&$handler) use ($handlerToUse) {
+        Matomo::addAction('Tracker.newHandler', function (&$handler) use ($handlerToUse) {
             $handler = $handlerToUse;
         });
 
@@ -58,7 +58,7 @@ class FactoryTest extends IntegrationTestCase
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage('The Handler object set in the plugin');
 
-        Piwik::addAction('Tracker.newHandler', function (&$handler) {
+        Matomo::addAction('Tracker.newHandler', function (&$handler) {
             $handler = new Tracker();
         });
 

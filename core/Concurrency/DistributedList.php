@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Concurrency;
+namespace Matomo\Concurrency;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Option;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Option;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Manages a simple distributed list stored in an Option. No locking occurs, so the list

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices\Widgets;
+namespace Matomo\Plugins\ProfessionalServices\Widgets;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\ProfessionalServices\Promo;
-use Piwik\ProfessionalServices\Advertising;
-use Piwik\View;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\ProfessionalServices\Promo;
+use Matomo\ProfessionalServices\Advertising;
+use Matomo\View;
+use Matomo\Widget\WidgetConfig;
 
-class PromoServices extends \Piwik\Widget\Widget
+class PromoServices extends \Matomo\Widget\Widget
 {
     private Advertising $advertising;
 
@@ -32,7 +32,7 @@ class PromoServices extends \Piwik\Widget\Widget
         $config->setCategoryId('About Matomo');
         $config->setName('ProfessionalServices_WidgetPremiumServicesForPiwik');
 
-        $advertising = StaticContainer::get('Piwik\ProfessionalServices\Advertising');
+        $advertising = StaticContainer::get('Matomo\ProfessionalServices\Advertising');
         $config->setIsEnabled($advertising->areAdsForProfessionalServicesEnabled());
     }
 

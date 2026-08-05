@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest\Reports;
+namespace Matomo\Plugins\VisitorInterest\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Cloud;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\VisitorInterest\Columns\VisitDuration;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Cloud;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\VisitorInterest\Columns\VisitDuration;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetNumberOfVisitsPerVisitDuration extends Base
 {
@@ -26,9 +26,9 @@ class GetNumberOfVisitsPerVisitDuration extends Base
     {
         parent::init();
         $this->dimension     = new VisitDuration();
-        $this->name          = Piwik::translate('VisitorInterest_WidgetLengths');
-        $this->documentation = Piwik::translate('VisitorInterest_WidgetLengthsDocumentation')
-                             . '<br />' . Piwik::translate('General_ChangeTagCloudView');
+        $this->name          = Matomo::translate('VisitorInterest_WidgetLengths');
+        $this->documentation = Matomo::translate('VisitorInterest_WidgetLengthsDocumentation')
+                             . '<br />' . Matomo::translate('General_ChangeTagCloudView');
         $this->metrics       = array('nb_visits');
         $this->processedMetrics = [];
         $this->constantRowsCount = true;

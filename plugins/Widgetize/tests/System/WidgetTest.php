@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Widgetize\tests\System;
+namespace Matomo\Plugins\Widgetize\tests\System;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Http\ControllerResolver;
-use Piwik\Piwik;
-use Piwik\Plugins\API;
-use Piwik\Plugins\Widgetize\tests\Fixtures\WidgetizeFixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Widget\WidgetsList;
+use Matomo\Container\StaticContainer;
+use Matomo\Http\ControllerResolver;
+use Matomo\Matomo;
+use Matomo\Plugins\API;
+use Matomo\Plugins\Widgetize\tests\Fixtures\WidgetizeFixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Widget\WidgetsList;
 
 /**
  * @group Widgetize
@@ -61,7 +61,7 @@ class WidgetTest extends SystemTestCase
             return $widget['uniqueId'];
         }, $this->getWidgetsThatAreAPICurrently());
 
-        Piwik::postEvent('Platform.initialized'); // userCountryMap defines it's Widgets via this event currently
+        Matomo::postEvent('Platform.initialized'); // userCountryMap defines it's Widgets via this event currently
 
         $widgets = API\API::getInstance()->getWidgetMetadata($_GET['idSite']);
 
@@ -87,7 +87,7 @@ class WidgetTest extends SystemTestCase
         $parameters = array();
 
         /** @var ControllerResolver $resolver */
-        $resolver   = StaticContainer::get('Piwik\Http\ControllerResolver');
+        $resolver   = StaticContainer::get('Matomo\Http\ControllerResolver');
         $controller = $resolver->getController($params['module'], $params['action'], $parameters);
 
         $this->assertNotEmpty($controller, $widget['name'] . ' is not renderable with following params: ' . json_encode($params) . '. This breaks the API, please make sure to keep the URL working');

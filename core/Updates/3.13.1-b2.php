@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Plugins\GeoIp2\GeoIP2AutoUpdater;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Common;
+use Matomo\Plugins\GeoIp2\GeoIP2AutoUpdater;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Update for version 3.13.1-b2.

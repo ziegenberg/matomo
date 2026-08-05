@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
 
 /**
  * @group Core

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\ProfileSummary;
+namespace Matomo\Plugins\Live\ProfileSummary;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\View;
 
 /**
  * Class Summary
@@ -26,7 +26,7 @@ class Summary extends ProfileSummaryAbstract
      */
     public function getName()
     {
-        return Piwik::translate('General_Summary');
+        return Matomo::translate('General_Summary');
     }
 
     /**

@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Columns;
+namespace Matomo\Tests\Integration\Columns;
 
 // there is a test that requires the class to be defined in a plugin
 
-use Piwik\Columns\Dimension;
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Plugin\Segment;
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Manager;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Plugin\Segment;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\Manager;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class CustomDimensionTest extends Dimension
 {
@@ -31,7 +31,7 @@ class CustomDimensionTest extends Dimension
 
     public function getId()
     {
-        return $this->generateIdFromClass('Piwik\Plugins\Test\Columns\DimensionTest');
+        return $this->generateIdFromClass('Matomo\Plugins\Test\Columns\DimensionTest');
     }
 
     public function hasImplementedEvent($method)
@@ -39,7 +39,7 @@ class CustomDimensionTest extends Dimension
         $method = new \ReflectionMethod($this, $method);
         $declaringClass = $method->getDeclaringClass();
 
-        return 0 === strpos($declaringClass->name, 'Piwik\Tests');
+        return 0 === strpos($declaringClass->name, 'Matomo\Tests');
     }
 
     public function set($param, $value)
@@ -154,7 +154,7 @@ class ColumnDimensionTest extends IntegrationTestCase
                 $this->fail('Unexpected dimension class found');
             }
 
-            if (get_class($dimension) === 'Piwik\Plugins\CustomVariables\CustomDimension') {
+            if (get_class($dimension) === 'Matomo\Plugins\CustomVariables\CustomDimension') {
                 continue;
             }
 
@@ -218,8 +218,8 @@ class ColumnDimensionTest extends IntegrationTestCase
         $segments = $this->dimension->getSegments();
 
         $this->assertCount(2, $segments);
-        $this->assertInstanceOf('\Piwik\Plugin\Segment', $segments[0]);
-        $this->assertInstanceOf('\Piwik\Plugin\Segment', $segments[1]);
+        $this->assertInstanceOf('\Matomo\Plugin\Segment', $segments[0]);
+        $this->assertInstanceOf('\Matomo\Plugin\Segment', $segments[1]);
     }
 
     /**
@@ -308,85 +308,85 @@ class ColumnDimensionTest extends IntegrationTestCase
     }
 
     protected static $availableColumnDimensions = [
-        'Piwik\Plugins\Actions\Columns\EntryPageTitle',
-        'Piwik\Plugins\Actions\Columns\EntryPageUrl',
-        'Piwik\Plugins\Actions\Columns\ExitPageTitle',
-        'Piwik\Plugins\Actions\Columns\ExitPageUrl',
-        'Piwik\Plugins\Actions\Columns\IdPageview',
-        'Piwik\Plugins\Actions\Columns\PageTitle',
-        'Piwik\Plugins\Actions\Columns\PageUrl',
-        'Piwik\Plugins\Actions\Columns\SearchCategory',
-        'Piwik\Plugins\Actions\Columns\SearchCount',
-        'Piwik\Plugins\Actions\Columns\TimeSpentRefAction',
-        'Piwik\Plugins\Actions\Columns\VisitTotalActions',
-        'Piwik\Plugins\Actions\Columns\VisitTotalInteractions',
-        'Piwik\Plugins\Actions\Columns\VisitTotalSearches',
-        'Piwik\Plugins\AIAgents\Columns\AIAgentName',
-        'Piwik\Plugins\Bandwidth\Columns\Bandwidth',
-        'Piwik\Plugins\Contents\Columns\ContentInteraction',
-        'Piwik\Plugins\Contents\Columns\ContentName',
-        'Piwik\Plugins\Contents\Columns\ContentPiece',
-        'Piwik\Plugins\Contents\Columns\ContentTarget',
-        'Piwik\Plugins\CoreHome\Columns\Profilable',
-        'Piwik\Plugins\CoreHome\Columns\ServerTime',
-        'Piwik\Plugins\CoreHome\Columns\UserId',
-        'Piwik\Plugins\CoreHome\Columns\VisitFirstActionTime',
-        'Piwik\Plugins\CoreHome\Columns\VisitGoalBuyer',
-        'Piwik\Plugins\CoreHome\Columns\VisitGoalConverted',
-        'Piwik\Plugins\CoreHome\Columns\VisitTotalTime',
-        'Piwik\Plugins\CoreHome\Columns\VisitorReturning',
-        'Piwik\Plugins\CoreHome\Columns\VisitorSecondsSinceFirst',
-        'Piwik\Plugins\CoreHome\Columns\VisitorSecondsSinceOrder',
-        'Piwik\Plugins\CoreHome\Columns\VisitsCount',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginCookie',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginFlash',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginJava',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginPdf',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginQuickTime',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginRealPlayer',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginSilverlight',
-        'Piwik\Plugins\DevicePlugins\Columns\PluginWindowsMedia',
-        'Piwik\Plugins\DevicesDetection\Columns\BrowserEngine',
-        'Piwik\Plugins\DevicesDetection\Columns\BrowserName',
-        'Piwik\Plugins\DevicesDetection\Columns\BrowserVersion',
-        'Piwik\Plugins\DevicesDetection\Columns\ClientType',
-        'Piwik\Plugins\DevicesDetection\Columns\DeviceBrand',
-        'Piwik\Plugins\DevicesDetection\Columns\DeviceModel',
-        'Piwik\Plugins\DevicesDetection\Columns\DeviceType',
-        'Piwik\Plugins\DevicesDetection\Columns\Os',
-        'Piwik\Plugins\DevicesDetection\Columns\OsVersion',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewCategory',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewCategory2',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewCategory3',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewCategory4',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewCategory5',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewName',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewPrice',
-        'Piwik\Plugins\Ecommerce\Columns\ProductViewSku',
-        'Piwik\Plugins\Ecommerce\Columns\Revenue',
-        'Piwik\Plugins\Events\Columns\EventAction',
-        'Piwik\Plugins\Events\Columns\EventCategory',
-        'Piwik\Plugins\Events\Columns\TotalEvents',
-        'Piwik\Plugins\Goals\Columns\PageviewsBefore',
-        'Piwik\Plugins\PagePerformance\Columns\TimeDomCompletion',
-        'Piwik\Plugins\PagePerformance\Columns\TimeDomProcessing',
-        'Piwik\Plugins\PagePerformance\Columns\TimeNetwork',
-        'Piwik\Plugins\PagePerformance\Columns\TimeOnLoad',
-        'Piwik\Plugins\PagePerformance\Columns\TimeServer',
-        'Piwik\Plugins\PagePerformance\Columns\TimeTransfer',
-        'Piwik\Plugins\Referrers\Columns\Keyword',
-        'Piwik\Plugins\Referrers\Columns\ReferrerName',
-        'Piwik\Plugins\Referrers\Columns\ReferrerType',
-        'Piwik\Plugins\Referrers\Columns\ReferrerUrl',
-        'Piwik\Plugins\Resolution\Columns\Resolution',
-        'Piwik\Plugins\UserCountry\Columns\City',
-        'Piwik\Plugins\UserCountry\Columns\Country',
-        'Piwik\Plugins\UserCountry\Columns\Latitude',
-        'Piwik\Plugins\UserCountry\Columns\Longitude',
-        'Piwik\Plugins\UserCountry\Columns\Region',
-        'Piwik\Plugins\UserLanguage\Columns\Language',
-        'Piwik\Plugins\VisitTime\Columns\LocalTime',
-        'Piwik\Plugins\VisitorInterest\Columns\VisitorSecondsSinceLast',
+        'Matomo\Plugins\Actions\Columns\EntryPageTitle',
+        'Matomo\Plugins\Actions\Columns\EntryPageUrl',
+        'Matomo\Plugins\Actions\Columns\ExitPageTitle',
+        'Matomo\Plugins\Actions\Columns\ExitPageUrl',
+        'Matomo\Plugins\Actions\Columns\IdPageview',
+        'Matomo\Plugins\Actions\Columns\PageTitle',
+        'Matomo\Plugins\Actions\Columns\PageUrl',
+        'Matomo\Plugins\Actions\Columns\SearchCategory',
+        'Matomo\Plugins\Actions\Columns\SearchCount',
+        'Matomo\Plugins\Actions\Columns\TimeSpentRefAction',
+        'Matomo\Plugins\Actions\Columns\VisitTotalActions',
+        'Matomo\Plugins\Actions\Columns\VisitTotalInteractions',
+        'Matomo\Plugins\Actions\Columns\VisitTotalSearches',
+        'Matomo\Plugins\AIAgents\Columns\AIAgentName',
+        'Matomo\Plugins\Bandwidth\Columns\Bandwidth',
+        'Matomo\Plugins\Contents\Columns\ContentInteraction',
+        'Matomo\Plugins\Contents\Columns\ContentName',
+        'Matomo\Plugins\Contents\Columns\ContentPiece',
+        'Matomo\Plugins\Contents\Columns\ContentTarget',
+        'Matomo\Plugins\CoreHome\Columns\Profilable',
+        'Matomo\Plugins\CoreHome\Columns\ServerTime',
+        'Matomo\Plugins\CoreHome\Columns\UserId',
+        'Matomo\Plugins\CoreHome\Columns\VisitFirstActionTime',
+        'Matomo\Plugins\CoreHome\Columns\VisitGoalBuyer',
+        'Matomo\Plugins\CoreHome\Columns\VisitGoalConverted',
+        'Matomo\Plugins\CoreHome\Columns\VisitTotalTime',
+        'Matomo\Plugins\CoreHome\Columns\VisitorReturning',
+        'Matomo\Plugins\CoreHome\Columns\VisitorSecondsSinceFirst',
+        'Matomo\Plugins\CoreHome\Columns\VisitorSecondsSinceOrder',
+        'Matomo\Plugins\CoreHome\Columns\VisitsCount',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginCookie',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginFlash',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginJava',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginPdf',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginQuickTime',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginRealPlayer',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginSilverlight',
+        'Matomo\Plugins\DevicePlugins\Columns\PluginWindowsMedia',
+        'Matomo\Plugins\DevicesDetection\Columns\BrowserEngine',
+        'Matomo\Plugins\DevicesDetection\Columns\BrowserName',
+        'Matomo\Plugins\DevicesDetection\Columns\BrowserVersion',
+        'Matomo\Plugins\DevicesDetection\Columns\ClientType',
+        'Matomo\Plugins\DevicesDetection\Columns\DeviceBrand',
+        'Matomo\Plugins\DevicesDetection\Columns\DeviceModel',
+        'Matomo\Plugins\DevicesDetection\Columns\DeviceType',
+        'Matomo\Plugins\DevicesDetection\Columns\Os',
+        'Matomo\Plugins\DevicesDetection\Columns\OsVersion',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewCategory',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewCategory2',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewCategory3',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewCategory4',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewCategory5',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewName',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewPrice',
+        'Matomo\Plugins\Ecommerce\Columns\ProductViewSku',
+        'Matomo\Plugins\Ecommerce\Columns\Revenue',
+        'Matomo\Plugins\Events\Columns\EventAction',
+        'Matomo\Plugins\Events\Columns\EventCategory',
+        'Matomo\Plugins\Events\Columns\TotalEvents',
+        'Matomo\Plugins\Goals\Columns\PageviewsBefore',
+        'Matomo\Plugins\PagePerformance\Columns\TimeDomCompletion',
+        'Matomo\Plugins\PagePerformance\Columns\TimeDomProcessing',
+        'Matomo\Plugins\PagePerformance\Columns\TimeNetwork',
+        'Matomo\Plugins\PagePerformance\Columns\TimeOnLoad',
+        'Matomo\Plugins\PagePerformance\Columns\TimeServer',
+        'Matomo\Plugins\PagePerformance\Columns\TimeTransfer',
+        'Matomo\Plugins\Referrers\Columns\Keyword',
+        'Matomo\Plugins\Referrers\Columns\ReferrerName',
+        'Matomo\Plugins\Referrers\Columns\ReferrerType',
+        'Matomo\Plugins\Referrers\Columns\ReferrerUrl',
+        'Matomo\Plugins\Resolution\Columns\Resolution',
+        'Matomo\Plugins\UserCountry\Columns\City',
+        'Matomo\Plugins\UserCountry\Columns\Country',
+        'Matomo\Plugins\UserCountry\Columns\Latitude',
+        'Matomo\Plugins\UserCountry\Columns\Longitude',
+        'Matomo\Plugins\UserCountry\Columns\Region',
+        'Matomo\Plugins\UserLanguage\Columns\Language',
+        'Matomo\Plugins\VisitTime\Columns\LocalTime',
+        'Matomo\Plugins\VisitorInterest\Columns\VisitorSecondsSinceLast',
     ];
 
     /**

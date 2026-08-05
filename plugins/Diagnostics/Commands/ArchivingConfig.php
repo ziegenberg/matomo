@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Config;
-use Piwik\Config\DatabaseConfig;
-use Piwik\Config\GeneralConfig;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Config;
+use Matomo\Config\DatabaseConfig;
+use Matomo\Config\GeneralConfig;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * Diagnostic command that returns current configuration settings for archiving

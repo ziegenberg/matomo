@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics;
+namespace Matomo\Plugins\Goals\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Tracker\GoalManager;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Tracker\GoalManager;
 
 /**
  * The conversion rate for ecommerce orders. Calculated as:
@@ -32,7 +32,7 @@ class ProductConversionRate extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ProductConversionRate');
+        return Matomo::translate('General_ProductConversionRate');
     }
 
     public function format($value, Formatter $formatter)
@@ -46,7 +46,7 @@ class ProductConversionRate extends ProcessedMetric
         $abandonedCarts = $this->getMetric($row, 'abandoned_carts');
         $visits = $this->getMetric($row, 'nb_visits');
 
-        return Piwik::getQuotientSafe($orders === false ? $abandonedCarts : $orders, $visits, GoalManager::REVENUE_PRECISION + 2);
+        return Matomo::getQuotientSafe($orders === false ? $abandonedCarts : $orders, $visits, GoalManager::REVENUE_PRECISION + 2);
     }
 
     public function getDependentMetrics()

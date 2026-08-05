@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Version;
+use Matomo\Container\StaticContainer;
+use Matomo\Version;
 
-class View extends \Piwik\View
+class View extends \Matomo\View
 {
     public function __construct($subtemplatePath, $installationSteps, $currentStepName)
     {
         parent::__construct($subtemplatePath);
 
-        $this->javascriptTranslations = StaticContainer::get('Piwik\Translation\Translator')->getJavascriptTranslations();
+        $this->javascriptTranslations = StaticContainer::get('Matomo\Translation\Translator')->getJavascriptTranslations();
         $this->steps = array_keys($installationSteps);
         $this->allStepsTitle = array_values($installationSteps);
         $this->currentStepName = $currentStepName;

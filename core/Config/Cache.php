@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Config;
+namespace Matomo\Config;
 
 use Matomo\Cache\Backend\File;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Url;
 
 /**
  * File cache backend for tracker config data, keyed by the current (trusted) hostname since the
@@ -85,7 +85,7 @@ class Cache extends File
                 $this->directory = $dir;
                 $success = parent::doDelete($id);
                 if ($success) {
-                    Piwik::postEvent('Core.configFileDeleted', [$this->getFilename($id)]);
+                    Matomo::postEvent('Core.configFileDeleted', [$this->getFilename($id)]);
                 }
             }
         }

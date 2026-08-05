@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountryMap\Widgets;
+namespace Matomo\Plugins\UserCountryMap\Widgets;
 
-use Piwik\Plugins\Live\Live;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Plugins\Live\Live;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Plugin\Manager as PluginManager;
 
-class GetRealtimeMap extends \Piwik\Widget\Widget
+class GetRealtimeMap extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

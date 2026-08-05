@@ -7,10 +7,10 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\TokenNotifications;
+namespace Matomo\Plugins\UsersManager\TokenNotifications;
 
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\Model as UserModel;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\Model as UserModel;
 
 abstract class TokenNotificationProvider implements TokenNotificationProviderInterface
 {

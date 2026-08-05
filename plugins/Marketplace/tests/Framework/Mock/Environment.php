@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Framework\Mock;
+namespace Matomo\Plugins\Marketplace\tests\Framework\Mock;
 
-class Environment extends \Piwik\Plugins\Marketplace\Environment
+class Environment extends \Matomo\Plugins\Marketplace\Environment
 {
     public function __construct()
     {

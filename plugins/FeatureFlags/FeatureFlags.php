@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Plugins\FeatureFlags;
+namespace Matomo\Plugins\FeatureFlags;
 
-use Piwik\Plugin;
+use Matomo\Plugin;
 
 class FeatureFlags extends Plugin
 {

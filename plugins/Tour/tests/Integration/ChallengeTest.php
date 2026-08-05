@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\tests\Integration;
+namespace Matomo\Plugins\Tour\tests\Integration;
 
-use Piwik\Plugins\Tour\Engagement\Challenge;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Tour\Engagement\Challenge;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class CustomTestChallenge extends Challenge
 {

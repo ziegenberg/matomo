@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
-use Piwik\Request\AuthenticationToken;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Log\LoggerInterface;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\UsersManager\Sql\SiteAccessFilter;
-use Piwik\Plugins\UsersManager\Sql\UserTableFilter;
-use Piwik\Session\SessionFingerprint;
-use Piwik\Settings\Storage\Backend\PluginSettingsTable;
-use Piwik\SettingsPiwik;
-use Piwik\Validators\BaseValidator;
-use Piwik\Validators\CharacterLength;
-use Piwik\Validators\NotEmpty;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Log\LoggerInterface;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\UsersManager\Sql\SiteAccessFilter;
+use Matomo\Plugins\UsersManager\Sql\UserTableFilter;
+use Matomo\Session\SessionFingerprint;
+use Matomo\Settings\Storage\Backend\PluginSettingsTable;
+use Matomo\SettingsPiwik;
+use Matomo\Validators\BaseValidator;
+use Matomo\Validators\CharacterLength;
+use Matomo\Validators\NotEmpty;
 
 /**
  * Persists and reads users, their auth tokens and their site access from the database backend.
@@ -357,7 +357,7 @@ class Model
      * @param bool  $secureOnly     True if this token can only be used in a secure way (e.g. POST requests), default false
      *
      * @return int                  Primary key of the new token auth
-     * @throws \Piwik\Tracker\Db\DbException
+     * @throws \Matomo\Tracker\Db\DbException
      */
     public function addTokenAuth(
         $login,
@@ -856,7 +856,7 @@ class Model
          * @param string $userLogin The login handle of the deleted user.
          */
         try {
-            Piwik::postEvent('UsersManager.deleteUser', array($userLogin));
+            Matomo::postEvent('UsersManager.deleteUser', array($userLogin));
         } catch (\Throwable $e) {
             StaticContainer::get(LoggerInterface::class)->error(
                 'Error while processing event UsersManager.deleteUser',
@@ -996,7 +996,7 @@ class Model
         $loginSql = 'SELECT DISTINCT ia.login FROM `' . Common::prefixTable('access') . '` ia WHERE ia.idsite IN ('
           . implode(',', $idSites) . ')';
 
-        $logins = \Piwik\Db::fetchAll($loginSql);
+        $logins = \Matomo\Db::fetchAll($loginSql);
         $logins = array_column($logins, 'login');
         return $logins;
     }

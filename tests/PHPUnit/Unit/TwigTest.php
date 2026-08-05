@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\Twig;
+use Matomo\Twig;
 
 require_once(PIWIK_INCLUDE_PATH . '/core/Twig.php');
 
@@ -23,7 +23,7 @@ class TwigTest extends \PHPUnit\Framework\TestCase
      */
     public function testPiwikFilterTruncate($in, $size, $out)
     {
-        $truncated = \Piwik\piwik_filter_truncate($in, $size);
+        $truncated = \Matomo\piwik_filter_truncate($in, $size);
         $this->assertEquals($out, $truncated);
     }
 

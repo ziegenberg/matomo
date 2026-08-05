@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Reports;
+namespace Matomo\Plugins\Goals\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ConversionRate;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ConversionRate;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetMetrics extends Get
 {
@@ -20,7 +20,7 @@ class GetMetrics extends Get
     {
         parent::init();
 
-        $this->name = Piwik::translate('Goals_Goals');
+        $this->name = Matomo::translate('Goals_Goals');
         $this->processedMetrics = array(new ConversionRate());
         $this->documentation = ''; // TODO
         $this->order = 1;

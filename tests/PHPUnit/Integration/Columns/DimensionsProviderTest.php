@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Columns;
+namespace Matomo\Tests\Integration\Columns;
 
-use Piwik\Columns\DimensionsProvider;
-use Piwik\Plugin\Manager;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Columns\DimensionsProvider;
+use Matomo\Plugin\Manager;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -33,6 +33,6 @@ class DimensionsProviderTest extends IntegrationTestCase
     {
         Manager::getInstance()->loadPlugins(array('ExampleTracker'));
         $dimension = $this->provider->factory("ExampleTracker.ExampleDimension");
-        $this->assertInstanceOf('Piwik\Plugins\ExampleTracker\Columns\ExampleDimension', $dimension);
+        $this->assertInstanceOf('Matomo\Plugins\ExampleTracker\Columns\ExampleDimension', $dimension);
     }
 }

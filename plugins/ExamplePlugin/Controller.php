@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin;
+namespace Matomo\Plugins\ExamplePlugin;
 
 /**
  * A controller lets you for example create a page that can be added to a menu. For more information read our guide
@@ -15,7 +15,7 @@ namespace Piwik\Plugins\ExamplePlugin;
  * https://developer.matomo.org/api-reference/Piwik/Plugin/Controller and
  * https://developer.matomo.org/api-reference/Piwik/View
  */
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function index()
     {

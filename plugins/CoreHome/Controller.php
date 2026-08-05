@@ -7,38 +7,38 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome;
+namespace Matomo\Plugins\CoreHome;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Category\CategoryList;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Http\JsonResponse;
-use Piwik\Date;
-use Piwik\FrontController;
-use Piwik\Log\LoggerInterface;
-use Piwik\Notification\Manager as NotificationManager;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
-use Piwik\Plugins\FeatureFlags\FeatureFlags\Example;
-use Piwik\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage;
-use Piwik\Plugins\Marketplace\Marketplace;
-use Piwik\SettingsPiwik;
-use Piwik\Widget\Widget;
-use Piwik\Plugins\CoreHome\DataTableRowAction\MultiRowEvolution;
-use Piwik\Plugins\CoreHome\DataTableRowAction\RowEvolution;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Translation\Translator;
-use Piwik\UpdateCheck;
-use Piwik\Url;
-use Piwik\View;
-use Piwik\ViewDataTable\Manager as ViewDataTableManager;
-use Piwik\Widget\WidgetConfig;
+use Matomo\API\Request;
+use Matomo\Category\CategoryList;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Http\JsonResponse;
+use Matomo\Date;
+use Matomo\FrontController;
+use Matomo\Log\LoggerInterface;
+use Matomo\Notification\Manager as NotificationManager;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Plugins\FeatureFlags\FeatureFlags\Example;
+use Matomo\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage;
+use Matomo\Plugins\Marketplace\Marketplace;
+use Matomo\SettingsPiwik;
+use Matomo\Widget\Widget;
+use Matomo\Plugins\CoreHome\DataTableRowAction\MultiRowEvolution;
+use Matomo\Plugins\CoreHome\DataTableRowAction\RowEvolution;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Translation\Translator;
+use Matomo\UpdateCheck;
+use Matomo\Url;
+use Matomo\View;
+use Matomo\ViewDataTable\Manager as ViewDataTableManager;
+use Matomo\Widget\WidgetConfig;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     private Translator $translator;
 
@@ -63,7 +63,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function renderReportWidget(Report $report)
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         $this->checkSitePermission();
 
         $report->checkIsEnabled();
@@ -78,7 +78,7 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public function renderWidgetContainer()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         $this->checkSitePermission();
 
         $view = new View('@CoreHome/widgetContainer');
@@ -95,7 +95,7 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public function renderWidget($widget)
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $config = new WidgetConfig();
         $widget::configure($config);
@@ -135,7 +135,7 @@ class Controller extends \Piwik\Plugin\Controller
     {
         $defaultReport = API::getInstance()->getUserPreference(
             API::PREFERENCE_DEFAULT_REPORT,
-            Piwik::getCurrentUserLogin()
+            Matomo::getCurrentUserLogin()
         );
         $module = 'CoreHome';
         $action = 'index';
@@ -143,13 +143,13 @@ class Controller extends \Piwik\Plugin\Controller
         // User preference: default report to load is the All Websites dashboard
         if (
             $defaultReport == 'MultiSites'
-            && \Piwik\Plugin\Manager::getInstance()->isPluginActivated('MultiSites')
+            && \Matomo\Plugin\Manager::getInstance()->isPluginActivated('MultiSites')
         ) {
             $module = 'MultiSites';
         }
 
-        if ($defaultReport == Piwik::getLoginPluginName()) {
-            $module = Piwik::getLoginPluginName();
+        if ($defaultReport == Matomo::getLoginPluginName()) {
+            $module = Matomo::getLoginPluginName();
         }
 
         parent::redirectToIndex($module, $action, $this->idSite);
@@ -175,7 +175,7 @@ class Controller extends \Piwik\Plugin\Controller
     #[JsonResponse]
     public function markNotificationAsRead(): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         $this->checkTokenInUrl();
 
         $notificationId = Common::getRequestVar('notificationId');
@@ -216,7 +216,7 @@ class Controller extends \Piwik\Plugin\Controller
             $todayLocalTimezone        = Date::factory('now', $this->site->getTimezone())->toString('Y-m-d');
 
             if ($creationDateLocalTimezone == $todayLocalTimezone) {
-                Piwik::redirectToModule(
+                Matomo::redirectToModule(
                     'CoreHome',
                     'index',
                     array('date'   => 'today',
@@ -288,7 +288,7 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public function checkForUpdates()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         $this->checkTokenInUrl();
 
         // perform check (but only once every 10s)
@@ -338,12 +338,12 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function saveViewDataTableParameters()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
         $this->checkTokenInUrl();
 
         $reportId   = Common::getRequestVar('report_id', null, 'string');
         $parameters = (array) Common::getRequestVar('parameters', null, 'json');
-        $login      = Piwik::getCurrentUserLogin();
+        $login      = Matomo::getCurrentUserLogin();
         $containerId = Common::getRequestVar('containerId', '', 'string');
 
         ViewDataTableManager::saveViewDataTableParameters($login, $reportId, $parameters, $containerId);

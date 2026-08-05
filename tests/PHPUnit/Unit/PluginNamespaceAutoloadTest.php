@@ -4,21 +4,21 @@
  * Matomo - free/libre analytics platform
  *
  * @link    https://matomo.org
- * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
+ * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3.0 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
 /**
- * Verifies the dual plugin-namespace autoload roots introduced for the
- * `Piwik\` -> `Matomo\` root-namespace migration.
+ * Verifies the dual plugin-namespace autoload roots and the eager alias layer
+ * introduced for the `Piwik\` -> `Matomo\` root-namespace migration.
  *
- * Through the 6.x release line both `Piwik\Plugins\` and `Matomo\Plugins\` map to the
- * plugin directories so plugins keep loading natively while they are renamed
- * batch by batch. These tests assert the external autoload behaviour only: a
- * renamed plugin class resolves natively under `Matomo\Plugins\`, an un-renamed
- * class still resolves under `Piwik\Plugins\`, and a class installed in a custom
- * configured plugin directory resolves under either prefix.
+ * Through the 6.x release line both `Piwik\Plugins\` and `Matomo\Plugins\` map to
+ * the plugin directories so plugins keep loading natively while they are renamed
+ * batch by batch. The eager alias layer additionally `class_alias`es each loaded
+ * `Matomo\Plugins\` class to its `Piwik\Plugins\` counterpart (and vice versa) at
+ * load time, so type checks against either namespace name resolve to the same
+ * class entry.
  *
  * @group Core
  * @group PluginNamespaceAutoload
@@ -27,14 +27,13 @@ class PluginNamespaceAutoloadTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * A renamed plugin class (declared in `Matomo\Plugins\`) under the standard
-     * plugins/ folder must autoload natively via the `Matomo\Plugins\` PSR-4 root,
-     * not via the `Piwik\` alias layer.
+     * plugins/ folder must autoload natively via the `Matomo\Plugins\` PSR-4 root.
      *
-     * The signal that the load was native is that no `Piwik\` counterpart alias is
-     * created: when composer's `Matomo\Plugins\` root finds the file directly the
-     * alias autoloader never runs. Without that root the alias autoloader resolves
-     * the class by swapping to `Piwik\` and creates the alias, so this assertion
-     * fails - which makes this a red/green guard for the composer root itself.
+     * The eager alias layer then creates the `Piwik\` counterpart alias at load
+     * time, so both names resolve to the same class entry. The "alias absent
+     * before the load" assertion proves the alias is created by this load
+     * (eagerly), not pre-existing; the "alias present after" assertion proves the
+     * eager alias fired.
      */
     public function testRenamedPluginClassAutoloadsNativelyUnderMatomoNamespace()
     {
@@ -47,22 +46,41 @@ class PluginNamespaceAutoloadTest extends \PHPUnit\Framework\TestCase
         $instance = new $matomoClass();
 
         $this->assertInstanceOf($matomoClass, $instance);
-        $this->assertFalse(
+        $this->assertTrue(
             class_exists($piwikAlias, false),
-            'Matomo\Plugins\ class must load natively and must not create a Piwik\ alias'
+            'Matomo\Plugins\ load must eagerly create the Piwik\ alias'
+        );
+        $this->assertTrue(
+            new $piwikAlias() instanceof $matomoClass,
+            'Piwik\ alias must resolve to the same class entry as the Matomo\ class'
         );
     }
 
     /**
      * An un-renamed plugin class (still in `Piwik\Plugins\`) under the standard
      * plugins/ folder must keep autoloading natively - no regression from adding
-     * the `Matomo\Plugins\` root.
+     * the `Matomo\Plugins\` root - and the eager alias layer must create the
+     * `Matomo\` counterpart alias at load time.
      */
     public function testUnrenamedPluginClassStillAutoloadsUnderPiwikNamespace()
     {
-        $piwikClass = \Piwik\Plugins\ExamplePlugin\ExamplePlugin::class;
+        $piwikClass = \Piwik\Plugins\ExamplePlugin\AutoloadFixture\PiwikNamespacedClass::class;
+        $matomoAlias = 'Matomo\Plugins\ExamplePlugin\AutoloadFixture\PiwikNamespacedClass';
 
-        $this->assertTrue(class_exists($piwikClass), 'Piwik\Plugins\ class must still autoload');
+        $this->assertFalse(class_exists($piwikClass, false), 'fixture class must not be preloaded');
+        $this->assertFalse(class_exists($matomoAlias, false), 'no Matomo\ alias should exist before the load');
+
+        $instance = new $piwikClass();
+
+        $this->assertInstanceOf($piwikClass, $instance);
+        $this->assertTrue(
+            class_exists($matomoAlias, false),
+            'Piwik\Plugins\ load must eagerly create the Matomo\ alias'
+        );
+        $this->assertTrue(
+            new $matomoAlias() instanceof $piwikClass,
+            'Matomo\ alias must resolve to the same class entry as the Piwik\ class'
+        );
     }
 
     /**

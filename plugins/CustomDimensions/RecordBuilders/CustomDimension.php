@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\RecordBuilders;
+namespace Matomo\Plugins\CustomDimensions\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\Actions\Metrics as ActionsMetrics;
-use Piwik\Plugins\CustomDimensions\Archiver;
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
-use Piwik\Plugins\CustomDimensions\FeatureFlags\CustomDimensionReportWithRollUp;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
-use Piwik\RankingQuery;
-use Piwik\Tracker;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\Actions\Metrics as ActionsMetrics;
+use Matomo\Plugins\CustomDimensions\Archiver;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugins\CustomDimensions\FeatureFlags\CustomDimensionReportWithRollUp;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\RankingQuery;
+use Matomo\Tracker;
 
 class CustomDimension extends RecordBuilder
 {

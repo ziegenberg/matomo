@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
 use Matomo\Network\IPUtils;
-use Piwik\Config\GeneralConfig;
+use Matomo\Config\GeneralConfig;
 
 /**
  * Provides URL related helper methods.
@@ -70,7 +70,7 @@ class Url
      * Returns the current URL without the query string.
      *
      * @param bool $checkTrustedHost Whether to do trusted host check. Should ALWAYS be true,
-     *                               except in {@link Piwik\Plugin\Controller}.
+     *                               except in {@link Matomo\Plugin\Controller}.
      * @return string eg, `"https://example.org/dir1/dir2/index.php"` if the current URL is
      *                `"https://example.org/dir1/dir2/index.php?param1=value1&param2=value2"`.
      * @api
@@ -311,7 +311,7 @@ class Url
     protected static function saveHostsnameInConfig($host, $domain, $key)
     {
         if (
-            Piwik::hasUserSuperUserAccess()
+            Matomo::hasUserSuperUserAccess()
             && file_exists(Config::getLocalConfigPath())
         ) {
             $config = Config::getInstance()->$domain;
@@ -951,8 +951,8 @@ class Url
 
         // Build parameters
         if ($medium === null) {
-            $module = Piwik::getModule();
-            $action = Piwik::getAction();
+            $module = Matomo::getModule();
+            $action = Matomo::getAction();
             if (empty($module) || empty($action)) {
                 return $url; // Ignore if no module or action
             }
@@ -960,7 +960,7 @@ class Url
         }
         $newParams = [
             'mtm_campaign' => $campaign ?? 'Matomo_App',
-            'mtm_source' => $source ?? 'Matomo_App_' . (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('Cloud') ? 'Cloud' : 'OnPremise'),
+            'mtm_source' => $source ?? 'Matomo_App_' . (\Matomo\Plugin\Manager::getInstance()->isPluginActivated('Cloud') ? 'Cloud' : 'OnPremise'),
             'mtm_medium' => $medium,
             ];
 

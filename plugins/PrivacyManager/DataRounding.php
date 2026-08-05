@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Plugin\Metric;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\PrivacyManager\Settings\DataRoundingEnabled;
-use Piwik\Request;
-use Piwik\Site;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Plugin\Metric;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\PrivacyManager\Settings\DataRoundingEnabled;
+use Matomo\Request;
+use Matomo\Site;
 use Throwable;
 
 class DataRounding

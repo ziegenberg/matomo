@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Segment;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Version;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Segment;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Version;
 
 /**
  * @group Core

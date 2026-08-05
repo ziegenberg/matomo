@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\RecordBuilders;
+namespace Matomo\Plugins\Actions\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\Metrics as PiwikMetrics;
-use Piwik\Plugins\Actions\Archiver;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\Metrics as PiwikMetrics;
+use Matomo\Plugins\Actions\Archiver;
 
 class Hits extends ArchiveProcessor\RecordBuilder
 {

@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Http\JsonResponse;
-use Piwik\DataTable\Filter\AddColumnsProcessedMetricsGoal;
-use Piwik\FrontController;
-use Piwik\Metrics\Formatter;
-use Piwik\NumberFormatter;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\Live\Live;
-use Piwik\Plugins\Referrers\API as APIReferrers;
-use Piwik\Site;
-use Piwik\Translation\Translator;
-use Piwik\View;
-use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Http\JsonResponse;
+use Matomo\DataTable\Filter\AddColumnsProcessedMetricsGoal;
+use Matomo\FrontController;
+use Matomo\Metrics\Formatter;
+use Matomo\NumberFormatter;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\Live\Live;
+use Matomo\Plugins\Referrers\API as APIReferrers;
+use Matomo\Site;
+use Matomo\Translation\Translator;
+use Matomo\View;
+use Matomo\ViewDataTable\Factory as ViewDataTableFactory;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     /**
      * Number of "Your top converting keywords/etc are" to display in the per Goal overview page
@@ -75,7 +75,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function manage()
     {
-        Piwik::checkUserHasWriteAccess($this->idSite);
+        Matomo::checkUserHasWriteAccess($this->idSite);
 
         $view = new View('@Goals/manageGoals');
         $this->setGeneralVariablesView($view);
@@ -150,7 +150,7 @@ class Controller extends \Piwik\Plugin\Controller
             if ($view->goals) {
                 foreach ($view->goals as $goal) {
                     $str = '';
-                    Piwik::postEvent('Template.beforeGoalListActionsBody', [&$str, $goal]);
+                    Matomo::postEvent('Template.beforeGoalListActionsBody', [&$str, $goal]);
 
                     $beforeGoalListActionsBody[$goal['idgoal']] = $str;
                 }
@@ -159,13 +159,13 @@ class Controller extends \Piwik\Plugin\Controller
             $view->beforeGoalListActionsBodyEventResult = $beforeGoalListActionsBody;
 
             $str = '';
-            Piwik::postEvent('Template.beforeGoalListActionsHead', [&$str]);
+            Matomo::postEvent('Template.beforeGoalListActionsHead', [&$str]);
             $view->beforeGoalListActionsHead = $str;
         }
 
         if (!empty($view->userCanEditGoals)) {
             $str = '';
-            Piwik::postEvent('Template.endGoalEditTable', [&$str]);
+            Matomo::postEvent('Template.endGoalEditTable', [&$str]);
 
             $view->endEditTable = $str;
         }
@@ -180,7 +180,7 @@ class Controller extends \Piwik\Plugin\Controller
         $period = Common::getRequestVar('period', null, 'string');
         $date   = Common::getRequestVar('date', null, 'string');
 
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
         $conversions = new Conversions();
 
@@ -194,7 +194,7 @@ class Controller extends \Piwik\Plugin\Controller
         if (empty($columns)) {
             $columns = Common::getRequestVar('columns', false);
             if (false !== $columns) {
-                $columns = Piwik::getArrayFromApiParameter($columns);
+                $columns = Matomo::getArrayFromApiParameter($columns);
             }
         }
 
@@ -210,9 +210,9 @@ class Controller extends \Piwik\Plugin\Controller
         $view->requestConfig->request_parameters_to_modify['showAllGoalSpecificMetrics'] = 1;
 
         $nameToLabel = $this->goalColumnNameToLabel;
-        if ($idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+        if ($idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
             $nameToLabel['nb_conversions'] = 'General_EcommerceOrders';
-        } elseif ($idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+        } elseif ($idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
             $nameToLabel['nb_conversions'] = 'General_AbandonedCarts';
             $nameToLabel['conversion_rate'] = $this->translator->translate('Goals_ConversionRate', $this->translator->translate('Goals_AbandonedCart'));
             $nameToLabel['revenue'] = $this->translator->translate('Goals_LeftInCart', $this->translator->translate('General_ColumnRevenue'));
@@ -272,7 +272,7 @@ class Controller extends \Piwik\Plugin\Controller
                 'only_summary' => 1,
             ];
 
-            \Piwik\Context::executeWithQueryParameters($params, function () use (&$content, $goal) {
+            \Matomo\Context::executeWithQueryParameters($params, function () use (&$content, $goal) {
                 //load Visualisations Sparkline
                 $view = ViewDataTableFactory::build(Sparklines::ID, 'Goals.getMetrics', 'Goals.' . __METHOD__, true);
                 $view->config->show_title = true;
@@ -312,14 +312,14 @@ class Controller extends \Piwik\Plugin\Controller
     {
         $topDimensionsToLoad = array();
 
-        if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('UserCountry')) {
+        if (\Matomo\Plugin\Manager::getInstance()->isPluginActivated('UserCountry')) {
             $topDimensionsToLoad += array(
                 'country' => 'UserCountry.getCountry',
             );
         }
 
         $keywordNotDefinedString = '';
-        if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('Referrers')) {
+        if (\Matomo\Plugin\Manager::getInstance()->isPluginActivated('Referrers')) {
             $keywordNotDefinedString = APIReferrers::getKeywordNotDefinedString();
             $topDimensionsToLoad += array(
                 'keyword' => 'Referrers.getKeywords',
@@ -421,7 +421,7 @@ class Controller extends \Piwik\Plugin\Controller
             'urlSparklineConversionRate' => $this->getUrlSparkline('getEvolutionGraph', array('columns' => array('conversion_rate'), 'idGoal' => $idGoal)),
             'urlSparklineRevenue'        => $this->getUrlSparkline('getEvolutionGraph', array('columns' => array('revenue'), 'idGoal' => $idGoal)),
         );
-        if ($idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+        if ($idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
             $items = $dataRow->getColumn('items');
             $aov = $dataRow->getColumn('avg_order_revenue');
             $return = array_merge($return, array(
@@ -461,35 +461,35 @@ class Controller extends \Piwik\Plugin\Controller
 
     private function setGoalOptions(View $view)
     {
-        $view->userCanEditGoals = Piwik::isUserHasWriteAccess($this->idSite);
+        $view->userCanEditGoals = Matomo::isUserHasWriteAccess($this->idSite);
         $view->goalTriggerTypeOptions = array(
-            'visitors' => Piwik::translate('Goals_WhenVisitors'),
-            'manually' => Piwik::translate('Goals_Manually'),
+            'visitors' => Matomo::translate('Goals_WhenVisitors'),
+            'manually' => Matomo::translate('Goals_Manually'),
         );
         $view->goalMatchAttributeOptions = array(
-            array('key' => 'url', 'value' => Piwik::translate('Goals_VisitUrl')),
-            array('key' => 'title', 'value' => Piwik::translate('Goals_VisitPageTitle')),
-            array('key' => 'event', 'value' => Piwik::translate('Goals_SendEvent')),
-            array('key' => 'file', 'value' => Piwik::translate('Goals_Download')),
-            array('key' => 'external_website', 'value' => Piwik::translate('Goals_ClickOutlink')),
-            ['key' => 'visit_duration', 'value' => Piwik::translate('Goals_VisitDurationMatchAttr')],
+            array('key' => 'url', 'value' => Matomo::translate('Goals_VisitUrl')),
+            array('key' => 'title', 'value' => Matomo::translate('Goals_VisitPageTitle')),
+            array('key' => 'event', 'value' => Matomo::translate('Goals_SendEvent')),
+            array('key' => 'file', 'value' => Matomo::translate('Goals_Download')),
+            array('key' => 'external_website', 'value' => Matomo::translate('Goals_ClickOutlink')),
+            ['key' => 'visit_duration', 'value' => Matomo::translate('Goals_VisitDurationMatchAttr')],
         );
         $view->allowMultipleOptions = array(
-            array('key' => '0', 'value' => Piwik::translate('Goals_DefaultGoalConvertedOncePerVisit')),
-            array('key' => '1', 'value' => Piwik::translate('Goals_AllowGoalConvertedMoreThanOncePerVisit')),
+            array('key' => '0', 'value' => Matomo::translate('Goals_DefaultGoalConvertedOncePerVisit')),
+            array('key' => '1', 'value' => Matomo::translate('Goals_AllowGoalConvertedMoreThanOncePerVisit')),
         );
         $view->eventTypeOptions = array(
-            array('key' => 'event_category', 'value' => Piwik::translate('Events_EventCategory')),
-            array('key' => 'event_action', 'value' => Piwik::translate('Events_EventAction')),
-            array('key' => 'event_name', 'value' => Piwik::translate('Events_EventName')),
+            array('key' => 'event_category', 'value' => Matomo::translate('Events_EventCategory')),
+            array('key' => 'event_action', 'value' => Matomo::translate('Events_EventAction')),
+            array('key' => 'event_name', 'value' => Matomo::translate('Events_EventName')),
         );
         $view->patternTypeOptions = array(
-            array('key' => 'contains', 'value' => Piwik::translate('Goals_Contains', '')),
-            array('key' => 'exact', 'value' => Piwik::translate('Goals_IsExactly', '')),
-            array('key' => 'regex', 'value' => Piwik::translate('Goals_MatchesExpression', '')),
+            array('key' => 'contains', 'value' => Matomo::translate('Goals_Contains', '')),
+            array('key' => 'exact', 'value' => Matomo::translate('Goals_IsExactly', '')),
+            array('key' => 'regex', 'value' => Matomo::translate('Goals_MatchesExpression', '')),
         );
         $view->numericComparisonTypeOptions = [
-            ['key' => 'greater_than', 'value' => Piwik::translate('General_OperationGreaterThan')],
+            ['key' => 'greater_than', 'value' => Matomo::translate('General_OperationGreaterThan')],
         ];
     }
 
@@ -500,7 +500,7 @@ class Controller extends \Piwik\Plugin\Controller
     {
         $idGoal = Common::getRequestVar('idGoal', '', 'string');
 
-        if ($idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+        if ($idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
             $_GET['containerId'] = 'EcommerceOverview';
         } elseif (!empty($idGoal)) {
             $_GET['containerId'] = 'Goal_' . (int) $idGoal;

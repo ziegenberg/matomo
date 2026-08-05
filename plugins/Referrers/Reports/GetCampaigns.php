@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\EventDispatcher;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Referrers\Columns\Campaign;
-use Piwik\Url;
+use Matomo\EventDispatcher;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Referrers\Columns\Campaign;
+use Matomo\Url;
 
 class GetCampaigns extends Base
 {
@@ -21,8 +21,8 @@ class GetCampaigns extends Base
     {
         parent::init();
         $this->dimension     = new Campaign();
-        $this->name          = Piwik::translate('Referrers_Campaigns');
-        $this->documentation = Piwik::translate('Referrers_CampaignsReportDocumentation');
+        $this->name          = Matomo::translate('Referrers_Campaigns');
+        $this->documentation = Matomo::translate('Referrers_CampaignsReportDocumentation');
         $this->onlineGuideUrl = Url::addCampaignParametersToMatomoLink('https://matomo.org/docs/tracking-campaigns/');
         $this->actionToLoadSubTables = 'getKeywordsFromCampaignId';
         $this->hasGoalMetrics = true;

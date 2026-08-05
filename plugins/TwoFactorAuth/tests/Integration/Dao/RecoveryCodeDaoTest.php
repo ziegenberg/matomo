@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\Integration\Dao;
+namespace Matomo\Plugins\TwoFactorAuth\tests\Integration\Dao;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DbHelper;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\DbHelper;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group TwoFactorAuth

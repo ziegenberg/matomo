@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Fixtures;
+namespace Matomo\Plugins\UsersManager\tests\Fixtures;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Model as UsersManagerModel;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Model as UsersManagerModel;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates auth tokens for token notification tests

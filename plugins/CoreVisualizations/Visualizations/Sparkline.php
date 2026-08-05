@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Period;
-use Piwik\Plugin\ViewDataTable;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Period;
+use Matomo\Plugin\ViewDataTable;
 
 /**
  * Reads the requested DataTable from the API and prepare data for the Sparkline view.
@@ -55,7 +55,7 @@ class Sparkline extends ViewDataTable
 
         $columnToPlot = $this->getColumnToPlot();
 
-        $graph = new \Piwik\Visualization\Sparkline();
+        $graph = new \Matomo\Visualization\Sparkline();
 
         if ($this->isComparing()) {
             $otherSeries = [];

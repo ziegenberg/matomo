@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Common;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Db;
-use Piwik\LogDeleter;
-use Piwik\Tests\Framework\Mock\Plugin\LogTablesProvider;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tests\Framework\TestDataHelper\LogHelper;
+use Matomo\Common;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Db;
+use Matomo\LogDeleter;
+use Matomo\Tests\Framework\Mock\Plugin\LogTablesProvider;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestDataHelper\LogHelper;
 
 /**
  * @group Core

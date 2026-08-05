@@ -7,8 +7,8 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleVisualization;
+namespace Matomo\Plugins\ExampleVisualization;
 
-class ExampleVisualization extends \Piwik\Plugin
+class ExampleVisualization extends \Matomo\Plugin
 {
 }

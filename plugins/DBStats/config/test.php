@@ -2,6 +2,6 @@
 
 return array(
 
-    'Piwik\Plugins\DBStats\MySQLMetadataDataAccess' => \Piwik\DI::create('Piwik\Plugins\DBStats\tests\Mocks\MockDataAccess'),
+    'Matomo\Plugins\DBStats\MySQLMetadataDataAccess' => \Matomo\DI::create('Matomo\Plugins\DBStats\tests\Mocks\MockDataAccess'),
 
 );

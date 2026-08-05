@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\System;
+namespace Matomo\Plugins\PrivacyManager\tests\System;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\PrivacyManager\tests\Fixtures\RandomizedConfigIdVisitsFixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\PrivacyManager\tests\Fixtures\RandomizedConfigIdVisitsFixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group PrivacyManager

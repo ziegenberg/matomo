@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Visualization;
+namespace Matomo\Tests\Unit\Visualization;
 
-use Piwik\Visualization\Sparkline;
+use Matomo\Visualization\Sparkline;
 
 require_once PIWIK_INCLUDE_PATH . '/core/Visualization/Sparkline.php';
 require_once PIWIK_INCLUDE_PATH . '/plugins/CoreHome/tests/resources/sparkline/SparklineDouble.php';
@@ -47,7 +47,7 @@ class SparklineTest extends \PHPUnit\Framework\TestCase
         ]);
 
         $sparkline = new Sparkline();
-        $double = new \Piwik\Plugins\CoreHome\tests\resources\sparkline\SparklineDouble();
+        $double = new \Matomo\Plugins\CoreHome\tests\resources\sparkline\SparklineDouble();
 
         $method = new \ReflectionMethod(Sparkline::class, 'setSparklineColors');
         $method->setAccessible(true);

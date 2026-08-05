@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Request;
+namespace Matomo\Tests\Unit\Request;
 
-use Piwik\Cache;
+use Matomo\Cache;
 
 class AuthenticationToken extends \PHPUnit\Framework\TestCase
 {
@@ -31,7 +31,7 @@ class AuthenticationToken extends \PHPUnit\Framework\TestCase
         $_POST = $postParams;
         $_SERVER['HTTP_AUTHORIZATION'] = $authorizationHeader;
 
-        $token = new \Piwik\Request\AuthenticationToken();
+        $token = new \Matomo\Request\AuthenticationToken();
         self::assertEquals($expectedToken, $token->getAuthToken($requestParams));
         self::assertEquals($isSecure, $token->wasTokenAuthProvidedSecurely());
         self::assertEquals($isSessionToken, $token->isSessionToken());
@@ -206,14 +206,14 @@ class AuthenticationToken extends \PHPUnit\Framework\TestCase
      */
     public function testGetAuthenticationTokenThrowsOnConflictingAuthParameters(array $getParams, array $postParams, ?string $authorizationHeader)
     {
-        $this->expectException(\Piwik\Http\BadRequestException::class);
+        $this->expectException(\Matomo\Http\BadRequestException::class);
         $this->expectExceptionCode(400);
 
         $_GET = $getParams;
         $_POST = $postParams;
         $_SERVER['HTTP_AUTHORIZATION'] = $authorizationHeader;
 
-        $token = new \Piwik\Request\AuthenticationToken();
+        $token = new \Matomo\Request\AuthenticationToken();
         $token->getAuthToken();
     }
 
@@ -272,7 +272,7 @@ class AuthenticationToken extends \PHPUnit\Framework\TestCase
         $_POST = $postParams;
         $_SERVER['HTTP_AUTHORIZATION'] = $authorizationHeader;
 
-        $token = new \Piwik\Request\AuthenticationToken();
+        $token = new \Matomo\Request\AuthenticationToken();
         self::assertEquals($expectedToken, $token->getAuthToken());
         self::assertSame($expectedSessionToken, $token->isSessionToken());
     }
@@ -316,7 +316,7 @@ class AuthenticationToken extends \PHPUnit\Framework\TestCase
         $_POST = [];
         $_SERVER['HTTP_AUTHORIZATION'] = null;
 
-        $token = new \Piwik\Request\AuthenticationToken();
+        $token = new \Matomo\Request\AuthenticationToken();
 
         self::assertSame('', $token->getAuthToken());
         self::assertFalse($token->wasTokenAuthProvidedSecurely());
@@ -351,7 +351,7 @@ class AuthenticationToken extends \PHPUnit\Framework\TestCase
         $_POST = ['token_auth' => 'differentPostToken'];
         $_SERVER['HTTP_AUTHORIZATION'] = null;
 
-        $token = new \Piwik\Request\AuthenticationToken();
+        $token = new \Matomo\Request\AuthenticationToken();
 
         self::assertSame('differentPostToken', $token->getAuthToken());
     }
@@ -370,7 +370,7 @@ class AuthenticationToken extends \PHPUnit\Framework\TestCase
         $_POST = [];
         $_SERVER['HTTP_AUTHORIZATION'] = null;
 
-        $token = new \Piwik\Request\AuthenticationToken();
+        $token = new \Matomo\Request\AuthenticationToken();
 
         self::assertSame('someAccessToken', $token->getAuthToken());
         self::assertFalse($token->wasTokenAuthProvidedSecurely());
@@ -378,13 +378,13 @@ class AuthenticationToken extends \PHPUnit\Framework\TestCase
 
     private function setNestedApiInvocationCount(int $count): void
     {
-        $reflectionClass = new \ReflectionClass(\Piwik\API\Request::class);
+        $reflectionClass = new \ReflectionClass(\Matomo\API\Request::class);
         $reflectionProperty = $reflectionClass->getProperty('nestedApiInvocationCount');
         $reflectionProperty->setAccessible(true);
         $reflectionProperty->setValue(null, $count);
 
         if ($count > 0) {
-            \Piwik\API\Request::setIsRootRequestApiRequest('API.getPiwikVersion');
+            \Matomo\API\Request::setIsRootRequestApiRequest('API.getPiwikVersion');
         } else {
             Cache::getTransientCache()->delete('API.setIsRootRequestApiRequest');
         }

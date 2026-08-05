@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\BotTracking\Columns\Metrics\AvgResponseSize;
-use Piwik\Plugins\BotTracking\Columns\Metrics\AvgServerTime;
-use Piwik\Plugins\BotTracking\Columns\Metrics\PageNotFound404Requests;
-use Piwik\Plugins\BotTracking\Columns\Metrics\Requests;
-use Piwik\Plugins\BotTracking\Columns\Metrics\ServerError5xxRequests;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\BotTracking\Columns\Metrics\AvgResponseSize;
+use Matomo\Plugins\BotTracking\Columns\Metrics\AvgServerTime;
+use Matomo\Plugins\BotTracking\Columns\Metrics\PageNotFound404Requests;
+use Matomo\Plugins\BotTracking\Columns\Metrics\Requests;
+use Matomo\Plugins\BotTracking\Columns\Metrics\ServerError5xxRequests;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 /**
  * Base class for the Pages and Documents content-URL reports.
@@ -105,7 +105,7 @@ abstract class AbstractAIChatbotContentUrlReport extends Report
         $docs = parent::getMetricsDocumentation();
 
         // Scope the "Requests" tooltip to this report's action type (page URLs or document URLs).
-        $docs[Metrics::COLUMN_REQUESTS] = Piwik::translate($this->getRequestsDocumentationKey());
+        $docs[Metrics::COLUMN_REQUESTS] = Matomo::translate($this->getRequestsDocumentationKey());
 
         return $docs;
     }

@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking;
+namespace Matomo\Plugins\BotTracking;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Http\JsonResponse;
-use Piwik\Piwik;
-use Piwik\Plugins\BotTracking\BotTrackingMethod\BotTrackingMethodAbstract;
-use Piwik\Plugins\BotTracking\Reports\SegmentNotSupportedMessageHelper;
-use Piwik\Plugin\Menu;
-use Piwik\Plugin\Manager;
-use Piwik\Request;
-use Piwik\SiteContentDetector;
-use Piwik\Url;
+use Matomo\Container\StaticContainer;
+use Matomo\Http\JsonResponse;
+use Matomo\Matomo;
+use Matomo\Plugins\BotTracking\BotTrackingMethod\BotTrackingMethodAbstract;
+use Matomo\Plugins\BotTracking\Reports\SegmentNotSupportedMessageHelper;
+use Matomo\Plugin\Menu;
+use Matomo\Plugin\Manager;
+use Matomo\Request;
+use Matomo\SiteContentDetector;
+use Matomo\Url;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function siteWithoutData(): string
     {
@@ -114,10 +114,10 @@ class Controller extends \Piwik\Plugin\Controller
 
         $columnsFromRequest = Request::fromRequest()->getParameter('columns', '');
         if (!empty($columnsFromRequest) && (is_array($columnsFromRequest) || is_string($columnsFromRequest))) {
-            $columns = Piwik::getArrayFromApiParameter($columnsFromRequest);
+            $columns = Matomo::getArrayFromApiParameter($columnsFromRequest);
         }
 
-        $documentation = Piwik::translate('BotTracking_ChatbotsOverTimeReportDocumentation') . '<br /><br />';
+        $documentation = Matomo::translate('BotTracking_ChatbotsOverTimeReportDocumentation') . '<br /><br />';
         $translations  = Metrics::getMetricTranslations();
         $docs          = Metrics::getMetricDocumentation();
         foreach (Metrics::getSparklineMetricOrder() as $metric) {

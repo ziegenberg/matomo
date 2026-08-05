@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * The average number of actions per visit. Calculated as:
@@ -33,12 +33,12 @@ class ActionsPerVisit extends ProcessedMetric
         $actions = $this->getMetric($row, 'nb_actions');
         $visits = $this->getMetric($row, 'nb_visits');
 
-        return Piwik::getQuotientSafe($actions, $visits, $precision = 1);
+        return Matomo::getQuotientSafe($actions, $visits, $precision = 1);
     }
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnActionsPerVisit');
+        return Matomo::translate('General_ColumnActionsPerVisit');
     }
 
     public function getDependentMetrics()

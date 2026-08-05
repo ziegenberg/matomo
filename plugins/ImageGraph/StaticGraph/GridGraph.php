@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ImageGraph\StaticGraph;
+namespace Matomo\Plugins\ImageGraph\StaticGraph;
 
-use Piwik\Exception\InvalidDimensionException;
-use Piwik\Plugins\ImageGraph\StaticGraph;
+use Matomo\Exception\InvalidDimensionException;
+use Matomo\Plugins\ImageGraph\StaticGraph;
 
 abstract class GridGraph extends StaticGraph
 {

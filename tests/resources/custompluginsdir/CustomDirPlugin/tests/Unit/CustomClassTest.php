@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDirPlugin\tests\Unit;
+namespace Matomo\Plugins\CustomDirPlugin\tests\Unit;
 
-use Piwik\Plugins\CustomDirPlugin\CustomClass;
+use Matomo\Plugins\CustomDirPlugin\CustomClass;
 
 /**
  * @group CustomDirPlugin

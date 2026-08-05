@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Integration;
+namespace Matomo\Plugins\CustomDimensions\tests\Integration;
 
-use Piwik\Plugins\CustomDimensions\API;
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
-use Piwik\Plugins\CustomDimensions\tests\Integration\Dao\ConfigurationTest;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\CustomDimensions\API;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Plugins\CustomDimensions\tests\Integration\Dao\ConfigurationTest;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 use Exception;
 
 /**
@@ -276,7 +276,7 @@ class ApiTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable;
+namespace Matomo\DataTable;
 
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 /**
  * A filter is set of logic that manipulates a DataTable. Existing filters do things like,
@@ -21,9 +21,9 @@ use Piwik\DataTable;
  * - etc.
  *
  * Filters are called with a DataTable instance and extra parameters that are specified
- * in {@link Piwik\DataTable::filter()} and {@link Piwik\DataTable::queueFilter()}.
+ * in {@link Matomo\DataTable::filter()} and {@link Matomo\DataTable::queueFilter()}.
  *
- * To see examples of Filters look at the existing ones in the Piwik\DataTable\BaseFilter
+ * To see examples of Filters look at the existing ones in the Matomo\DataTable\BaseFilter
  * namespace.
  *
  * @api

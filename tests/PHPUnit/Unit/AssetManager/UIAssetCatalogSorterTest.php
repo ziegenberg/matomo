@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\AssetManager;
+namespace Matomo\Tests\Unit\AssetManager;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\AssetManager\UIAsset\OnDiskUIAsset;
-use Piwik\AssetManager\UIAssetCatalog;
-use Piwik\AssetManager\UIAssetCatalogSorter;
+use Matomo\AssetManager\UIAsset\OnDiskUIAsset;
+use Matomo\AssetManager\UIAssetCatalog;
+use Matomo\AssetManager\UIAssetCatalogSorter;
 
 class UIAssetCatalogSorterTest extends TestCase
 {

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Categories;
+namespace Matomo\Plugins\PagePerformance\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class PerformanceSubcategory extends Subcategory
 {
@@ -20,7 +20,7 @@ class PerformanceSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('PagePerformance_PerformanceSubcategoryHelp1') . '</p>'
-            . '<p>' . Piwik::translate('PagePerformance_PerformanceSubcategoryHelp2') . '</p>';
+        return '<p>' . Matomo::translate('PagePerformance_PerformanceSubcategoryHelp1') . '</p>'
+            . '<p>' . Matomo::translate('PagePerformance_PerformanceSubcategoryHelp2') . '</p>';
     }
 }

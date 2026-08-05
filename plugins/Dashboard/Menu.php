@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Dashboard;
+namespace Matomo\Plugins\Dashboard;
 
-use Piwik\Category\Category;
-use Piwik\Common;
-use Piwik\Menu\MenuTop;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Site;
+use Matomo\Category\Category;
+use Matomo\Common;
+use Matomo\Menu\MenuTop;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Site;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureTopMenu(MenuTop $menu)
     {
@@ -24,7 +24,7 @@ class Menu extends \Piwik\Plugin\Menu
         $idSite = $userPreferences->getDefaultWebsiteId();
         $idSite = Common::getRequestVar('idSite', $idSite, 'int');
 
-        $tooltip = Piwik::translate('Dashboard_TopLinkTooltip', Site::getNameFor($idSite));
+        $tooltip = Matomo::translate('Dashboard_TopLinkTooltip', Site::getNameFor($idSite));
 
         $params = $this->urlForModuleActionWithDefaultUserParams('CoreHome', 'index', ['idSite' => $idSite]);
         if (empty($params)) {

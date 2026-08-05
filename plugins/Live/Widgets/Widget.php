@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\Widgets;
+namespace Matomo\Plugins\Live\Widgets;
 
-use Piwik\Common;
-use Piwik\Plugins\Live\Live;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Common;
+use Matomo\Plugins\Live\Live;
+use Matomo\Widget\WidgetConfig;
 
-class Widget extends \Piwik\Widget\Widget
+class Widget extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

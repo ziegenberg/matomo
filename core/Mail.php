@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use PHPMailer\PHPMailer\Exception;
-use Piwik\Exception\DI\NotFoundException;
-use Piwik\Exception\DI\DependencyException;
-use Piwik\Container\StaticContainer;
-use Piwik\Email\ContentGenerator;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Translation\Translator;
-use Piwik\Log\LoggerInterface;
+use Matomo\Exception\DI\NotFoundException;
+use Matomo\Exception\DI\DependencyException;
+use Matomo\Container\StaticContainer;
+use Matomo\Email\ContentGenerator;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\Translation\Translator;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Class for sending mails
@@ -62,7 +62,7 @@ class Mail
         $customLogo = new CustomLogo();
 
         /** @var Translator $translator */
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
 
         $fromEmailName = Config::getInstance()->General['noreply_email_name'];
 
@@ -292,9 +292,9 @@ class Mail
          *
          * @param Mail $mail The Mail instance that is about to be sent.
          */
-        Piwik::postEvent('Mail.send', [$mail]);
+        Matomo::postEvent('Mail.send', [$mail]);
 
-        return StaticContainer::get('Piwik\Mail\Transport')->send($mail);
+        return StaticContainer::get('Matomo\Mail\Transport')->send($mail);
     }
 
     /**
@@ -404,7 +404,7 @@ class Mail
          * @param bool &$shouldSendMail Whether to send this email or not. Set to false to skip sending.
          * @param Mail $mail The Mail instance that will be sent.
          */
-        Piwik::postEvent('Mail.shouldSend', [&$shouldSendMail, $mail]);
+        Matomo::postEvent('Mail.shouldSend', [&$shouldSendMail, $mail]);
 
         return $shouldSendMail;
     }

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\TrackingCode;
+namespace Matomo\Plugins\CustomJsTracker\TrackingCode;
 
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\CustomJsTracker\File;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\CustomJsTracker\File;
 
 class PluginTrackerFiles
 {
@@ -84,7 +84,7 @@ class PluginTrackerFiles
          * @param bool &$shouldAddFile Decides whether the tracker file belonging to the given plugin should be added or not.
          * @param string $pluginName The name of the plugin this file belongs to
          */
-        Piwik::postEvent('CustomJsTracker.shouldAddTrackerFile', array(&$shouldAddFile, $pluginName));
+        Matomo::postEvent('CustomJsTracker.shouldAddTrackerFile', array(&$shouldAddFile, $pluginName));
 
         return $shouldAddFile;
     }

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Plugins\SitesManager\SiteContentDetection\Cloudflare;
-use Piwik\Plugins\SitesManager\SiteContentDetection\Osano;
-use Piwik\Plugins\SitesManager\SiteContentDetection\ReactJs;
-use Piwik\Plugins\SitesManager\SiteContentDetection\WordPress;
-use Piwik\SiteContentDetector;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SitesManager\SiteContentDetection\Cloudflare;
+use Matomo\Plugins\SitesManager\SiteContentDetection\Osano;
+use Matomo\Plugins\SitesManager\SiteContentDetection\ReactJs;
+use Matomo\Plugins\SitesManager\SiteContentDetection\WordPress;
+use Matomo\SiteContentDetector;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

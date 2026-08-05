@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Model;
+namespace Matomo\Plugins\CoreAdminHome\Model;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\TableMetadata;
-use Piwik\Db;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\TableMetadata;
+use Matomo\Db;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Provides methods to find duplicate actions and fix duplicate action references in tables

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Db\Adapter;
-use Piwik\Db\TransactionalDatabaseInterface;
-use Piwik\Db\TransactionalDatabaseStaticTrait;
-use Piwik\Piwik;
-use Piwik\Timer;
-use Piwik\Tracker\Db\DbException;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Db\Adapter;
+use Matomo\Db\TransactionalDatabaseInterface;
+use Matomo\Db\TransactionalDatabaseStaticTrait;
+use Matomo\Matomo;
+use Matomo\Timer;
+use Matomo\Tracker\Db\DbException;
 
 /**
  * Simple database wrapper.
@@ -125,7 +125,7 @@ abstract class Db implements TransactionalDatabaseInterface
     /**
      * Connects to the DB
      *
-     * @throws \Piwik\Tracker\Db\DbException if there was an error connecting the DB
+     * @throws \Matomo\Tracker\Db\DbException if there was an error connecting the DB
      */
     abstract public function connect();
 
@@ -143,7 +143,7 @@ abstract class Db implements TransactionalDatabaseInterface
      * @param string $query Query
      * @param array $parameters Parameters to bind
      * @see query()
-     * @throws \Piwik\Tracker\Db\DbException if an exception occurred
+     * @throws \Matomo\Tracker\Db\DbException if an exception occurred
      */
     abstract public function fetchAll($query, $parameters = array());
 
@@ -239,7 +239,7 @@ abstract class Db implements TransactionalDatabaseInterface
      *
      * @param array $configDb Database configuration
      * @throws Exception
-     * @return \Piwik\Tracker\Db\Mysqli|\Piwik\Tracker\Db\Pdo\Mysql
+     * @return \Matomo\Tracker\Db\Mysqli|\Matomo\Tracker\Db\Pdo\Mysql
      */
     public static function factory($configDb)
     {
@@ -261,9 +261,9 @@ abstract class Db implements TransactionalDatabaseInterface
          *                       - **adapter**: either `'PDO\MYSQL'` or `'MYSQLI'`
          *                       - **type**: The MySQL engine to use, for instance 'InnoDB'
          */
-        Piwik::postEvent('Tracker.getDatabaseConfig', array(&$configDb));
+        Matomo::postEvent('Tracker.getDatabaseConfig', array(&$configDb));
 
-        $className = 'Piwik\Tracker\Db\\' . str_replace(' ', '\\', ucwords(str_replace(array('_', '\\'), ' ', strtolower($configDb['adapter']))));
+        $className = 'Matomo\Tracker\Db\\' . str_replace(' ', '\\', ucwords(str_replace(array('_', '\\'), ' ', strtolower($configDb['adapter']))));
 
         if (!class_exists($className)) {
             throw new Exception('Unsupported database adapter ' . $configDb['adapter']);

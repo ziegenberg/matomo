@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Db\Adapter;
+namespace Matomo\Db\Adapter;
 
 use Exception;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Db\AdapterInterface;
-use Piwik\Db\Schema;
-use Piwik\Piwik;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Db\AdapterInterface;
+use Matomo\Db\Schema;
+use Matomo\Matomo;
 use Zend_Config;
 use Zend_Db_Adapter_Mysqli;
 
@@ -92,7 +92,7 @@ class Mysqli extends Zend_Db_Adapter_Mysqli implements AdapterInterface
         $databaseType      = Schema::getServerTypeFromVersion($serverVersion);
 
         if (version_compare($comparableVersion, $requiredVersion) === -1) {
-            throw new Exception(Piwik::translate('General_ExceptionDatabaseVersion', array($databaseType, $comparableVersion, $requiredVersion)));
+            throw new Exception(Matomo::translate('General_ExceptionDatabaseVersion', array($databaseType, $comparableVersion, $requiredVersion)));
         }
     }
 
@@ -129,7 +129,7 @@ class Mysqli extends Zend_Db_Adapter_Mysqli implements AdapterInterface
             version_compare($serverVersion, '5.0.3') >= 0
             && version_compare($clientVersion, '5.0.3') < 0
         ) {
-            throw new Exception(Piwik::translate('General_ExceptionIncompatibleClientServerVersions', array('MySQL', $clientVersion, $serverVersion)));
+            throw new Exception(Matomo::translate('General_ExceptionIncompatibleClientServerVersions', array('MySQL', $clientVersion, $serverVersion)));
         }
     }
 

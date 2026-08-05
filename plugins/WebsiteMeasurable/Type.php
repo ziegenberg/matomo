@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\WebsiteMeasurable;
+namespace Matomo\Plugins\WebsiteMeasurable;
 
-class Type extends \Piwik\Measurable\Type
+class Type extends \Matomo\Measurable\Type
 {
     public const ID = 'website';
     protected $name = 'Referrers_ColumnWebsite'; // we will use new key of WebsiteType_ once we have them

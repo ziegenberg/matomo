@@ -9,22 +9,22 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataTableFactory;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Log\LoggerInterface;
-use Piwik\Period;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\CoreVisualizations\Metrics\Formatter\Numeric;
-use Piwik\Segment;
-use Piwik\Site;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Log\LoggerInterface;
+use Matomo\Period;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\CoreVisualizations\Metrics\Formatter\Numeric;
+use Matomo\Segment;
+use Matomo\Site;
 
 /**
  * Fetches the additional historical data {@see ForecastBuilder} consumes for seasonal
@@ -465,9 +465,9 @@ class ForecastSubPeriodFetcher
 
     /**
      * Bring the inner samples onto the same scale the outer evolution chart plots in. The
-     * outer is rendered by {@see \Piwik\Plugins\CoreVisualizations\Visualizations\Graph},
+     * outer is rendered by {@see \Matomo\Plugins\CoreVisualizations\Visualizations\Graph},
      * which formats with the {@see Numeric} formatter (format-as-number, not as string):
-     * {@see \Piwik\Plugin\ProcessedMetric} columns are rewritten in place -- bandwidth
+     * {@see \Matomo\Plugin\ProcessedMetric} columns are rewritten in place -- bandwidth
      * bytes divided by 1024^3 onto the chart's fixed 'G' axis, percent quotients scaled
      * to whole percent, etc. The inner request is pinned to raw numeric units, so without this
      * pass the forecast would sum analog bytes-per-day against an outer current value already in
@@ -631,7 +631,7 @@ class ForecastSubPeriodFetcher
      *    the risk -- the column-scoped API.get path stays correct, just slower.
      *
      * The column -> module mapping is read from the report metadata exactly as
-     * {@see \Piwik\Plugins\API\API::get()} reads it, keyed on the outer request's period/date so it
+     * {@see \Matomo\Plugins\API\API::get()} reads it, keyed on the outer request's period/date so it
      * reuses the catalog the displayed graph already built (a transient-cache hit). Any failure
      * falls back to the single API.get group, matching this class's defensive degradation.
      *
@@ -708,7 +708,7 @@ class ForecastSubPeriodFetcher
 
     /**
      * Report-metadata catalog used to resolve each plotted column to its owning `Module.get`
-     * report, read exactly as {@see \Piwik\Plugins\API\API::get()} reads it.
+     * report, read exactly as {@see \Matomo\Plugins\API\API::get()} reads it.
      *
      * This is a soft optimization: it reuses getReportMetadata's transient cache only when the
      * outer request already built the catalog under the same (idSite, period, date) key -- the
@@ -721,7 +721,7 @@ class ForecastSubPeriodFetcher
      */
     protected function fetchReportMetadataCatalog(int $idSite, string $period, string $date): array
     {
-        return \Piwik\Plugins\API\API::getInstance()->getReportMetadata($idSite, $period, $date);
+        return \Matomo\Plugins\API\API::getInstance()->getReportMetadata($idSite, $period, $date);
     }
 
     /**
@@ -774,14 +774,14 @@ class ForecastSubPeriodFetcher
     }
 
     /**
-     * Resolve the {@see \Piwik\Plugin\Report} the formatter consults to discover which
-     * columns carry a {@see \Piwik\Plugin\ProcessedMetric} (and therefore need format()
+     * Resolve the {@see \Matomo\Plugin\Report} the formatter consults to discover which
+     * columns carry a {@see \Matomo\Plugin\ProcessedMetric} (and therefore need format()
      * applied). API methods without a registered report (custom dimensions, plugin-defined
      * report-less endpoints) yield null; {@see Numeric::formatMetrics()} then only acts on
      * processed metrics carried in the table's own EXTRA_PROCESSED_METRICS_METADATA_NAME,
      * which is the same surface the outer formatter sees.
      */
-    private function resolveReportForFormatting(string $apiMethod): ?\Piwik\Plugin\Report
+    private function resolveReportForFormatting(string $apiMethod): ?\Matomo\Plugin\Report
     {
         $parts = explode('.', $apiMethod, 2);
         if (count($parts) !== 2) {
@@ -795,11 +795,11 @@ class ForecastSubPeriodFetcher
      * Object-declared ProcessedMetrics from the `Module.getMetrics` report a `Module.get`
      * report delegates its metric computation to. These carry the format() logic (e.g. the
      * percent-quotient scaling) that the `Module.get` report exposes only as a string name and
-     * therefore hides from {@see \Piwik\Plugin\Report::getProcessedMetricsById()}. Returns an
+     * therefore hides from {@see \Matomo\Plugin\Report::getProcessedMetricsById()}. Returns an
      * empty array for non-`get` methods or modules without a `getMetrics` sibling, so reports
      * that already declare their metrics as objects (e.g. Bandwidth) are unaffected.
      *
-     * @return array<string, \Piwik\Plugin\ProcessedMetric>
+     * @return array<string, \Matomo\Plugin\ProcessedMetric>
      */
     private function resolveDelegatedProcessedMetrics(string $apiMethod): array
     {

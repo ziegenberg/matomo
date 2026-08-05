@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\IntranetMeasurable;
+namespace Matomo\Plugins\IntranetMeasurable;
 
-class IntranetMeasurable extends \Piwik\Plugin
+class IntranetMeasurable extends \Matomo\Plugin
 {
     public function isTrackerPlugin()
     {

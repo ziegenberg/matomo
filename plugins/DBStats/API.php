@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats;
+namespace Matomo\Plugins\DBStats;
 
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Matomo;
 
 /**
  * DBStats API is used to request the overall status of the Mysql tables in use by Matomo.
  * @hideExceptForSuperUser
- * @method static \Piwik\Plugins\DBStats\API getInstance()
+ * @method static \Matomo\Plugins\DBStats\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private MySQLMetadataProvider $metadataProvider;
 
@@ -35,7 +35,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getGeneralInformation(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         // calculate total size
         $totalSpaceUsed = 0;
         foreach ($this->metadataProvider->getAllTablesStatus() as $status) {
@@ -60,7 +60,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getDBStatus(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return $this->metadataProvider->getDBStatus();
     }
 
@@ -74,7 +74,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getDatabaseUsageSummary(): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $emptyRow = array('data_size' => 0, 'index_size' => 0, 'row_count' => 0);
         $rows = array(
@@ -110,7 +110,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getTrackerDataSummary(): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return $this->getTablesSummary($this->metadataProvider->getAllLogTableStatus());
     }
 
@@ -122,7 +122,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMetricDataSummary(): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return $this->getTablesSummary($this->metadataProvider->getAllNumericArchiveStatus());
     }
 
@@ -134,7 +134,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMetricDataSummaryByYear(): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $dataTable = $this->getMetricDataSummary();
 
@@ -156,7 +156,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getReportDataSummary(): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return $this->getTablesSummary($this->metadataProvider->getAllBlobArchiveStatus());
     }
 
@@ -168,7 +168,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getReportDataSummaryByYear(): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $dataTable = $this->getReportDataSummary();
 
@@ -192,7 +192,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAdminDataSummary(): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return $this->getTablesSummary($this->metadataProvider->getAllAdminTableStatus());
     }
 
@@ -207,7 +207,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getIndividualReportsSummary(bool $forceCache = false): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return $this->metadataProvider->getRowCountsAndSizeByBlobName($forceCache);
     }
 
@@ -222,7 +222,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getIndividualMetricsSummary(bool $forceCache = false): DataTable
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return $this->metadataProvider->getRowCountsAndSizeByMetricName($forceCache);
     }
 

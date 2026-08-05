@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Updates;
+namespace Matomo\Tests\Integration\Updates;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Updater;
-use Piwik\Updater\Migration;
-use Piwik\Updater\Migration\Config\Factory as ConfigFactory;
-use Piwik\Updater\Migration\Db\Factory as DbFactory;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updater\Migration\Plugin\Factory as PluginFactory;
-use Piwik\Updates\Updates_5_9_0_b2;
+use Matomo\Updater;
+use Matomo\Updater\Migration;
+use Matomo\Updater\Migration\Config\Factory as ConfigFactory;
+use Matomo\Updater\Migration\Db\Factory as DbFactory;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updater\Migration\Plugin\Factory as PluginFactory;
+use Matomo\Updates\Updates_5_9_0_b2;
 
 require_once __DIR__ . '/../../../../core/Updates/5.9.0-b2.php';
 

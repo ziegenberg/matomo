@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Metrics\Formatter;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Metrics\Formatter;
 
 /**
  * Data Access class for querying numeric & blob archive tables.

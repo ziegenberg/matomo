@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner\Commands;
+namespace Matomo\Plugins\TestRunner\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Development;
-use Piwik\Filesystem;
-use Piwik\Http;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Development;
+use Matomo\Filesystem;
+use Matomo\Http;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Downloads the UI tests screenshots from artifacts server into the local repository.

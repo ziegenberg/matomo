@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\RecordBuilders;
+namespace Matomo\Plugins\Goals\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Plugin\Manager;
-use Piwik\Site;
-use Piwik\Tracker\GoalManager;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Plugin\Manager;
+use Matomo\Site;
+use Matomo\Tracker\GoalManager;
 
 abstract class Base extends RecordBuilder
 {

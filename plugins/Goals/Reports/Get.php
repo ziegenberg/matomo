@@ -7,31 +7,31 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Reports;
+namespace Matomo\Plugins\Goals\Reports;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\CalculateEvolutionFilter;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter as MetricFormatter;
-use Piwik\NumberFormatter;
-use Piwik\Period\Month;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Plugin;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ConversionRate;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\Goals\Goals;
-use Piwik\Plugins\Goals\Pages;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Site;
-use Piwik\Tracker\GoalManager;
-use Piwik\Url;
-use Piwik\Widget\WidgetsList;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\CalculateEvolutionFilter;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter as MetricFormatter;
+use Matomo\NumberFormatter;
+use Matomo\Period\Month;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Plugin;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ConversionRate;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\Goals\Goals;
+use Matomo\Plugins\Goals\Pages;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Site;
+use Matomo\Tracker\GoalManager;
+use Matomo\Url;
+use Matomo\Widget\WidgetsList;
 
 class Get extends Base
 {
@@ -39,9 +39,9 @@ class Get extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('Goals_Goals');
+        $this->name = Matomo::translate('Goals_Goals');
         $this->processedMetrics = [new ConversionRate()];
-        $this->documentation = Piwik::translate('Goals_OverviewReportDocumentation');
+        $this->documentation = Matomo::translate('Goals_OverviewReportDocumentation');
         $this->order = 1;
         $this->orderGoal = 50;
         $this->metrics = ['nb_conversions', 'nb_visits_converted', 'revenue'];
@@ -141,18 +141,18 @@ class Get extends Base
                 // in Goals overview summary we show proper title for a goal
                 $goal = $this->getGoal($idGoal);
                 if (!empty($goal['name'])) {
-                    $view->config->title = Piwik::translate('Goals_GoalX', "'" . $goal['name'] . "'");
+                    $view->config->title = Matomo::translate('Goals_GoalX', "'" . $goal['name'] . "'");
                 }
             } else {
                 $view->config->title = '';
             }
 
             $view->config->addTranslations([
-                'nb_visits' => Piwik::translate('VisitsSummary_NbVisitsDescription'),
-                'nb_conversions' => Piwik::translate('Goals_ConversionsDescription'),
-                'nb_visits_converted' => Piwik::translate('General_NVisits'),
-                'conversion_rate' => Piwik::translate('Goals_OverallConversionRate'),
-                'revenue' => Piwik::translate('Goals_OverallRevenue'),
+                'nb_visits' => Matomo::translate('VisitsSummary_NbVisitsDescription'),
+                'nb_conversions' => Matomo::translate('Goals_ConversionsDescription'),
+                'nb_visits_converted' => Matomo::translate('General_NVisits'),
+                'conversion_rate' => Matomo::translate('Goals_OverallConversionRate'),
+                'revenue' => Matomo::translate('Goals_OverallRevenue'),
             ]);
 
             // Adding conversion rate as extra processed metrics ensures it will be formatted
@@ -189,7 +189,7 @@ class Get extends Base
             } else {
                 if ($onlySummary) {
                     // in Goals Overview we list an overview for each goal....
-                    $view->config->addTranslation('conversion_rate', Piwik::translate('Goals_ConversionRate'));
+                    $view->config->addTranslation('conversion_rate', Matomo::translate('Goals_ConversionRate'));
                 }
 
                 if ($isEcommerceEnabled || $this->hasGoalRevenue($idGoal)) {
@@ -210,10 +210,10 @@ class Get extends Base
                     );
                     $previousDataRow = $previousData->getFirstRow();
 
-                    $currentPeriod     = PeriodFactory::build(Piwik::getPeriod(), Common::getRequestVar('date'));
+                    $currentPeriod     = PeriodFactory::build(Matomo::getPeriod(), Common::getRequestVar('date'));
                     $currentPrettyDate = ($currentPeriod instanceof Month ? $currentPeriod->getLocalizedLongString(
                     ) : $currentPeriod->getPrettyString());
-                    $lastPeriod        = PeriodFactory::build(Piwik::getPeriod(), $lastPeriodDate);
+                    $lastPeriod        = PeriodFactory::build(Matomo::getPeriod(), $lastPeriodDate);
                     $lastPrettyDate    = ($currentPeriod instanceof Month ? $lastPeriod->getLocalizedLongString(
                     ) : $lastPeriod->getPrettyString());
                     $metricTranslations = $view->config->translations;
@@ -274,7 +274,7 @@ class Get extends Base
                             'currentValue' => $value,
                             'pastValue'    => $pastValue,
                             'isLowerValueBetter' => Metrics::isLowerValueBetter($columnName),
-                            'tooltip'      => Piwik::translate('General_EvolutionSummaryGeneric', [
+                            'tooltip'      => Matomo::translate('General_EvolutionSummaryGeneric', [
                                 $currentValueFormatted . ' ' . $columnTranslation,
                                 $currentPrettyDate,
                                 $pastValueFormatted . ' ' . $columnTranslation,
@@ -288,7 +288,7 @@ class Get extends Base
         } elseif ($view->isViewDataTableId(Evolution::ID)) {
             // $idGoal may be a non-numeric ecommerce identifier (e.g. 'ecommerceOrder'); cast to int so those
             // are not treated as editable goals. On PHP 8 "ecommerceOrder" > 0 would otherwise evaluate to true.
-            if (!empty($idSite) && Piwik::isUserHasWriteAccess($idSite) && (int) $idGoal > GoalManager::IDGOAL_ORDER) {
+            if (!empty($idSite) && Matomo::isUserHasWriteAccess($idSite) && (int) $idGoal > GoalManager::IDGOAL_ORDER) {
                 $view->config->title_edit_entity_url = 'index.php' . Url::getCurrentQueryStringWithParametersModified([
                     'module' => 'Goals',
                     'action' => 'manage',
@@ -302,12 +302,12 @@ class Get extends Base
 
             $goal = $this->getGoal($idGoal);
             if (!empty($goal['name'])) {
-                $view->config->title = Piwik::translate('Goals_GoalX', "'" . $goal['name'] . "'");
+                $view->config->title = Matomo::translate('Goals_GoalX', "'" . $goal['name'] . "'");
                 if (!empty($goal['description'])) {
                     $view->config->description = $goal['description'];
                 }
             } else {
-                $view->config->title = Piwik::translate('General_EvolutionOverPeriod');
+                $view->config->title = Matomo::translate('General_EvolutionOverPeriod');
             }
 
             if (empty($view->config->columns_to_display)) {
@@ -325,7 +325,7 @@ class Get extends Base
         parent::configureReportMetadata($availableReports, $infos);
 
         $this->addReportMetadataForEachGoal($availableReports, $infos, function ($goal) {
-            return Piwik::translate('Goals_GoalX', $goal['name']);
+            return Matomo::translate('Goals_GoalX', $goal['name']);
         }, $isSummary = true);
     }
 }

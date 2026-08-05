@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Application\Kernel;
+namespace Matomo\Tests\Integration\Application\Kernel;
 
-use Piwik\Application\Kernel\PluginList;
-use Piwik\Container\StaticContainer;
+use Matomo\Application\Kernel\PluginList;
+use Matomo\Container\StaticContainer;
 
 /**
  * @group PluginListTest
@@ -103,7 +103,7 @@ class PluginListTest extends \PHPUnit\Framework\TestCase
 
     private function makePluginList()
     {
-        $globalSettingsProvider = StaticContainer::get('Piwik\Application\Kernel\GlobalSettingsProvider');
+        $globalSettingsProvider = StaticContainer::get('Matomo\Application\Kernel\GlobalSettingsProvider');
         $section = $globalSettingsProvider->getSection('Plugins');
        // $section['Plugins'] = $pluginsToLoad;
         $globalSettingsProvider->setSection('Plugins', $section);

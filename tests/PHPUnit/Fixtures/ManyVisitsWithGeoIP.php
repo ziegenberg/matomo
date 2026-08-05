@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Cache;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugins\Goals\API;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Cache;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugins\Goals\API;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tests\Framework\Fixture;
 use Exception;
-use Piwik\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
-use Piwik\Tracker\Visit;
+use Matomo\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
+use Matomo\Tracker\Visit;
 
 require_once PIWIK_INCLUDE_PATH . '/tests/PHPUnit/Framework/Mock/LocationProvider.php';
 

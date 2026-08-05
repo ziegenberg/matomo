@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\System\Api;
+namespace Matomo\Plugins\Marketplace\tests\System\Api;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\Plugins\Marketplace\Api\Service;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\Plugins\Marketplace\Api\Service;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Plugins
@@ -92,7 +92,7 @@ class ServiceTest extends SystemTestCase
 
     public function testFetchShouldThrowExceptionWhenNotBeingAuthenticated()
     {
-        $this->expectException(\Piwik\Plugins\Marketplace\Api\Service\Exception::class);
+        $this->expectException(\Matomo\Plugins\Marketplace\Api\Service\Exception::class);
         $this->expectExceptionCode(101);
         $this->expectExceptionMessage('Not authenticated');
 
@@ -102,7 +102,7 @@ class ServiceTest extends SystemTestCase
 
     public function testFetchShouldThrowExceptionWhenBeingAuthenticatedWithInvalidTokens()
     {
-        $this->expectException(\Piwik\Plugins\Marketplace\Api\Service\Exception::class);
+        $this->expectException(\Matomo\Plugins\Marketplace\Api\Service\Exception::class);
         $this->expectExceptionCode(101);
         $this->expectExceptionMessage('Not authenticated');
 

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Emails;
+namespace Matomo\Plugins\CoreAdminHome\Emails;
 
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\Emails\SecurityNotificationEmail;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\Emails\SecurityNotificationEmail;
 
 class SettingsChangedEmail extends SecurityNotificationEmail
 {
@@ -35,9 +35,9 @@ class SettingsChangedEmail extends SecurityNotificationEmail
     protected function getBody()
     {
         if ($this->superuser) {
-            return Piwik::translate('CoreAdminHome_SecurityNotificationSettingsChangedByOtherSuperUserBody', [$this->superuser, $this->pluginNames]);
+            return Matomo::translate('CoreAdminHome_SecurityNotificationSettingsChangedByOtherSuperUserBody', [$this->superuser, $this->pluginNames]);
         }
 
-        return Piwik::translate('CoreAdminHome_SecurityNotificationSettingsChangedByUserBody', [$this->pluginNames]) . ' ' . Piwik::translate('UsersManager_IfThisWasYouPasswordChange');
+        return Matomo::translate('CoreAdminHome_SecurityNotificationSettingsChangedByUserBody', [$this->pluginNames]) . ' ' . Matomo::translate('UsersManager_IfThisWasYouPasswordChange');
     }
 }

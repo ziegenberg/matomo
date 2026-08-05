@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\tests\Fixtures;
+namespace Matomo\Plugins\Live\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\Goals\API as GoalsApi;
-use Piwik\Plugins\CustomDimensions\API as CustomDimensionsApi;
+use Matomo\Date;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\Goals\API as GoalsApi;
+use Matomo\Plugins\CustomDimensions\API as CustomDimensionsApi;
 
 /**
  * Generates many visits for the same visitor

@@ -7,30 +7,30 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Archive\DataTableFactory;
-use Piwik\ArchiveProcessor\BlobTableAggregator;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable\Manager;
-use Piwik\DataTable\Map;
-use Piwik\DataTable\Row;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Log\LoggerInterface;
+use Matomo\Archive\DataTableFactory;
+use Matomo\ArchiveProcessor\BlobTableAggregator;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable\Manager;
+use Matomo\DataTable\Map;
+use Matomo\DataTable\Row;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Log\LoggerInterface;
 
 /**
- * Used by {@link Piwik\Plugin\Archiver} instances to insert and aggregate archive data.
+ * Used by {@link Matomo\Plugin\Archiver} instances to insert and aggregate archive data.
  *
  * ### See also
  *
- * - **{@link Piwik\Plugin\Archiver}** - to learn how plugins should implement their own analytics
+ * - **{@link Matomo\Plugin\Archiver}** - to learn how plugins should implement their own analytics
  *                                       aggregation logic.
- * - **{@link Piwik\DataAccess\LogAggregator}** - to learn how plugins can perform data aggregation
+ * - **{@link Matomo\DataAccess\LogAggregator}** - to learn how plugins can perform data aggregation
  *                                                across Piwik's log tables.
  *
  * ### Examples
@@ -90,7 +90,7 @@ class ArchiveProcessor
     private LogAggregator $logAggregator;
 
     /**
-     * @var \Piwik\Archive\ArchiveQuery|null
+     * @var \Matomo\Archive\ArchiveQuery|null
      */
     public $archive = null;
 
@@ -122,7 +122,7 @@ class ArchiveProcessor
             /**
              * @internal
              */
-            Piwik::postEvent('ArchiveProcessor.getArchive', [$this->archive]);
+            Matomo::postEvent('ArchiveProcessor.getArchive', [$this->archive]);
         }
 
         return $this->archive;
@@ -147,7 +147,7 @@ class ArchiveProcessor
     }
 
     /**
-     * Returns a `{@link Piwik\DataAccess\LogAggregator}` instance for the site, period and segment this
+     * Returns a `{@link Matomo\DataAccess\LogAggregator}` instance for the site, period and segment this
      * ArchiveProcessor will insert archive data for.
      *
      * @return LogAggregator
@@ -545,7 +545,7 @@ class ArchiveProcessor
          * @param Period $period The period that is being requested to be archived.
          * @param Segment $segment The segment that is request to be archived.
          */
-        Piwik::postEvent('ArchiveProcessor.ComputeNbUniques.getIdSites', array(&$sites, $params->getPeriod(), $params->getSegment()));
+        Matomo::postEvent('ArchiveProcessor.ComputeNbUniques.getIdSites', array(&$sites, $params->getPeriod(), $params->getSegment()));
 
         return $sites;
     }
@@ -731,7 +731,7 @@ class ArchiveProcessor
 
         self::$isRootArchivingRequest = false;
         try {
-            $invalidator = StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+            $invalidator = StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
 
             // Ensure to always invalidate VisitsSummary before any other plugin archive.
             // Otherwise those archives might get build with outdated VisitsSummary data

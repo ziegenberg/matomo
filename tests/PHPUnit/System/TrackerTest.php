@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Log\Logger;
-use Piwik\Log\LoggerInterface;
-use Piwik\Option;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Scheduler\Schedule\Schedule;
-use Piwik\Scheduler\Task;
-use Piwik\Scheduler\Timetable;
-use Piwik\SettingsPiwik;
-use Piwik\Access;
-use Piwik\Container\StaticContainer;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Log\Logger;
+use Matomo\Log\LoggerInterface;
+use Matomo\Option;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Scheduler\Schedule\Schedule;
+use Matomo\Scheduler\Task;
+use Matomo\Scheduler\Timetable;
+use Matomo\SettingsPiwik;
+use Matomo\Access;
+use Matomo\Container\StaticContainer;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -40,7 +40,7 @@ class TrackerTest extends IntegrationTestCase
 
         Fixture::createWebsite('2014-02-04');
 
-        $testingEnvironment = new \Piwik\Tests\Framework\TestingEnvironmentVariables();
+        $testingEnvironment = new \Matomo\Tests\Framework\TestingEnvironmentVariables();
         $testingEnvironment->testCaseClass = null;
         $testingEnvironment->addFailingScheduledTask = false;
         $testingEnvironment->addScheduledTask = false;
@@ -75,17 +75,17 @@ class TrackerTest extends IntegrationTestCase
     public function testTrackingApiWithBulkRequestsViaCurlWithCorrectTokenAuth()
     {
         $token_auth = Fixture::getTokenAuth();
-        \Piwik\Filesystem::deleteAllCacheOnUpdate();
+        \Matomo\Filesystem::deleteAllCacheOnUpdate();
         // both requests should be tracked, as the token doesn't allow tracking custom ip
         $this->issueBulkTrackingRequest($token_auth, true, 2, 0);
     }
 
     public function testTrackingApiWithBulkRequestsViaCurlWithSecureTokenAuth()
     {
-        \Piwik\Filesystem::deleteAllCacheOnUpdate();
+        \Matomo\Filesystem::deleteAllCacheOnUpdate();
 
         // a token is created from an unauthenticated request by providing the credentials
-        $auth = StaticContainer::get('Piwik\Auth');
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setLogin('anonymous');
         $auth->setTokenAuth('anonymous');
         $auth->setPasswordHash(null);
@@ -372,8 +372,8 @@ class TrackerTest extends IntegrationTestCase
 
     private function setScheduledTasksToRunInTracker()
     {
-        $testingEnvironment = new \Piwik\Tests\Framework\TestingEnvironmentVariables();
-        $testingEnvironment->testCaseClass = 'Piwik\Tests\System\TrackerTest';
+        $testingEnvironment = new \Matomo\Tests\Framework\TestingEnvironmentVariables();
+        $testingEnvironment->testCaseClass = 'Matomo\Tests\System\TrackerTest';
         $testingEnvironment->addScheduledTask = true;
         $testingEnvironment->overrideConfig('Tracker', array('scheduled_tasks_min_interval' => 1, 'debug_on_demand' => 1));
         $testingEnvironment->overrideConfig('log', array());
@@ -384,7 +384,7 @@ class TrackerTest extends IntegrationTestCase
 
     private function addFailingScheduledTaskToTracker($doFatalError)
     {
-        $testingEnvironment = new \Piwik\Tests\Framework\TestingEnvironmentVariables();
+        $testingEnvironment = new \Matomo\Tests\Framework\TestingEnvironmentVariables();
         $testingEnvironment->addFailingScheduledTask = true;
         $testingEnvironment->scheduledTaskFailureShouldBeFatal = $doFatalError;
         $testingEnvironment->save();
@@ -396,7 +396,7 @@ class TrackerTest extends IntegrationTestCase
             define('DEBUG_FORCE_SCHEDULED_TASKS', 1);
         }
 
-        $testingEnvironment = new \Piwik\Tests\Framework\TestingEnvironmentVariables();
+        $testingEnvironment = new \Matomo\Tests\Framework\TestingEnvironmentVariables();
 
         $tasksToAdd = array();
 
@@ -417,9 +417,9 @@ class TrackerTest extends IntegrationTestCase
             $initialTask = new Task($this, 'markCustomTaskExecuted', null, Schedule::factory('hourly'));
             $tasksToAdd = array_merge(array($initialTask), $tasksToAdd);
 
-            $mockTaskLoader = $this->createPartialMock('Piwik\Scheduler\TaskLoader', array('loadTasks'));
+            $mockTaskLoader = $this->createPartialMock('Matomo\Scheduler\TaskLoader', array('loadTasks'));
             $mockTaskLoader->expects($this->any())->method('loadTasks')->will($this->returnValue($tasksToAdd));
-            $result['Piwik\Scheduler\TaskLoader'] = $mockTaskLoader;
+            $result['Matomo\Scheduler\TaskLoader'] = $mockTaskLoader;
         }
         return $result;
     }
@@ -469,7 +469,7 @@ class TrackerTest extends IntegrationTestCase
     public static function provideContainerConfigBeforeClass()
     {
         return array(
-            LoggerInterface::class => \Piwik\DI::get(Logger::class),
+            LoggerInterface::class => \Matomo\DI::get(Logger::class),
             'Tests.log.allowAllHandlers' => true,
         );
     }

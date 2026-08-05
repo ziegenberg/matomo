@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker;
+namespace Matomo\Plugins\CustomJsTracker;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Log;
-use Piwik\Plugin;
+use Matomo\Container\StaticContainer;
+use Matomo\Log;
+use Matomo\Plugin;
 
 class CustomJsTracker extends Plugin
 {
@@ -33,7 +33,7 @@ class CustomJsTracker extends Plugin
     {
         try {
             if (Plugin\Manager::getInstance()->isPluginActivated('CustomJsTracker')) {
-                $trackerUpdater = StaticContainer::get('Piwik\Plugins\CustomJsTracker\TrackerUpdater');
+                $trackerUpdater = StaticContainer::get('Matomo\Plugins\CustomJsTracker\TrackerUpdater');
                 $trackerUpdater->update();
             }
         } catch (\Exception $e) {

@@ -9,9 +9,9 @@
 
 namespace PHPUnit\Integration\Tracker\Db;
 
-use Piwik\Config;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker;
+use Matomo\Config;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker;
 
 /**
  * Tracker DB test

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI\Reports;
+namespace Matomo\Plugins\ExampleUI\Reports;
 
-use Piwik\Plugin\Report;
+use Matomo\Plugin\Report;
 
 abstract class Base extends Report
 {

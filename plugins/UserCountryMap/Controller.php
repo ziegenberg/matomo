@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountryMap;
+namespace Matomo\Plugins\UserCountryMap;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Site;
-use Piwik\Translation\Translator;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Site;
+use Matomo\Translation\Translator;
+use Matomo\View;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     // By default plot up to the last 3 days of visitors on the map, for low traffic sites
     public const REAL_TIME_WINDOW = 'last3';
@@ -40,7 +40,7 @@ class Controller extends \Piwik\Plugin\Controller
         $this->checkUserCountryPluginEnabled();
 
         $this->checkSitePermission();
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
         $period = Common::getRequestVar('period');
         $date = Common::getRequestVar('date');
@@ -54,7 +54,7 @@ class Controller extends \Piwik\Plugin\Controller
             }
         }
 
-        $token_auth = Piwik::getCurrentUserTokenAuth();
+        $token_auth = Matomo::getCurrentUserTokenAuth();
 
         $view = new View('@UserCountryMap/visitorMap');
 
@@ -158,22 +158,22 @@ class Controller extends \Piwik\Plugin\Controller
         $view->noData = empty($config['visitsSummary']['nb_visits']);
 
         $countriesByIso = [];
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
         $countries = array_keys($regionDataProvider->getCountryList());
 
         foreach ($countries as $country) {
-            $countriesByIso[strtoupper($country)] = Piwik::translate('Intl_Country_' . strtoupper($country));
+            $countriesByIso[strtoupper($country)] = Matomo::translate('Intl_Country_' . strtoupper($country));
         }
 
         $view->countriesByIso = $countriesByIso;
 
         $view->continents = [
-            'AF' => \Piwik\Plugins\UserCountry\continentTranslate('afr'),
-            'AS' => \Piwik\Plugins\UserCountry\continentTranslate('asi'),
-            'EU' => \Piwik\Plugins\UserCountry\continentTranslate('eur'),
-            'NA' => \Piwik\Plugins\UserCountry\continentTranslate('amn'),
-            'OC' => \Piwik\Plugins\UserCountry\continentTranslate('oce'),
-            'SA' => \Piwik\Plugins\UserCountry\continentTranslate('ams'),
+            'AF' => \Matomo\Plugins\UserCountry\continentTranslate('afr'),
+            'AS' => \Matomo\Plugins\UserCountry\continentTranslate('asi'),
+            'EU' => \Matomo\Plugins\UserCountry\continentTranslate('eur'),
+            'NA' => \Matomo\Plugins\UserCountry\continentTranslate('amn'),
+            'OC' => \Matomo\Plugins\UserCountry\continentTranslate('oce'),
+            'SA' => \Matomo\Plugins\UserCountry\continentTranslate('ams'),
         ];
 
         return $view->render();
@@ -199,9 +199,9 @@ class Controller extends \Piwik\Plugin\Controller
         $this->checkUserCountryPluginEnabled();
 
         $this->checkSitePermission();
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
-        $token_auth = Piwik::getCurrentUserTokenAuth();
+        $token_auth = Matomo::getCurrentUserTokenAuth();
         $view = new View('@UserCountryMap/realtimeMap');
 
         $view->mapIsStandaloneNotWidget = !(bool) Common::getRequestVar('widget', $standalone, 'int');
@@ -293,7 +293,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     private function checkUserCountryPluginEnabled()
     {
-        if (!\Piwik\Plugin\Manager::getInstance()->isPluginActivated('UserCountry')) {
+        if (!\Matomo\Plugin\Manager::getInstance()->isPluginActivated('UserCountry')) {
             throw new Exception($this->translator->translate('General_Required', 'Plugin UserCountry'));
         }
     }

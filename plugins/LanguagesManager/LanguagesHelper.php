@@ -7,12 +7,12 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager;
+namespace Matomo\Plugins\LanguagesManager;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\LanguagesManager\Model as LangModel;
-use Piwik\Plugins\UsersManager\UserLoginHelper;
-use Piwik\Translation\Translator;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\LanguagesManager\Model as LangModel;
+use Matomo\Plugins\UsersManager\UserLoginHelper;
+use Matomo\Translation\Translator;
 
 /**
  * Helper class allowing to run a callback function with the given user's preferred language

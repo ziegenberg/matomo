@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ViewDataTable;
+namespace Matomo\ViewDataTable;
 
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Cloud;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
-use Piwik\Plugins\Goals\Visualizations\Goals;
-use Piwik\Plugins\Insights\Visualizations\Insight;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Cloud;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Bar;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Pie;
+use Matomo\Plugins\Goals\Visualizations\Goals;
+use Matomo\Plugins\Insights\Visualizations\Insight;
+use Matomo\Plugin\Manager as PluginManager;
 
 /**
  * ViewDataTable Manager.
@@ -32,7 +32,7 @@ class Manager
     /**
      * Returns the viewDataTable IDs of a visualization's class lineage.
      *
-     * @see \Piwik\Common::getClassLineage
+     * @see \Matomo\Common::getClassLineage
      *
      * @param string $klass The visualization class.
      *
@@ -74,7 +74,7 @@ class Manager
             return $dataTables;
         }
 
-        $klassToExtend = '\\Piwik\\Plugin\\ViewDataTable';
+        $klassToExtend = '\Matomo\Plugin\ViewDataTable';
 
         $visualizations = PluginManager::getInstance()->findMultipleComponents('Visualizations', $klassToExtend);
 
@@ -114,7 +114,7 @@ class Manager
          * @param array &$visualizations An array of all available visualizations indexed by visualization ID.
          * @since Piwik 3.0.0
          */
-        Piwik::postEvent('ViewDataTable.filterViewDataTable', array(&$result));
+        Matomo::postEvent('ViewDataTable.filterViewDataTable', array(&$result));
 
         $cache->save($cacheId, $result);
 
@@ -132,8 +132,8 @@ class Manager
 
         foreach (static::getAvailableViewDataTables() as $vizId => $vizClass) {
             if (
-                false === strpos($vizClass, 'Piwik\\Plugins\\CoreVisualizations')
-                && false === strpos($vizClass, 'Piwik\\Plugins\\Goals\\Visualizations\\Goals')
+                false === strpos($vizClass, 'Matomo\Plugins\CoreVisualizations')
+                && false === strpos($vizClass, 'Matomo\Plugins\Goals\Visualizations\Goals')
             ) {
                 $result[$vizId] = $vizClass;
             }
@@ -231,7 +231,7 @@ class Manager
 
         return array(
             'id'    => $klass::getViewDataTableId(),
-            'title' => Piwik::translate($klass::FOOTER_ICON_TITLE),
+            'title' => Matomo::translate($klass::FOOTER_ICON_TITLE),
             'icon'  => $klass::FOOTER_ICON,
         );
     }
@@ -389,16 +389,16 @@ class Manager
         if ($view->config->show_ecommerce) {
             $normalViewIcons['buttons'][] = array(
                 'id' => 'ecommerceOrder',
-                'title' => Piwik::translate('General_EcommerceOrders'),
+                'title' => Matomo::translate('General_EcommerceOrders'),
                 'icon' => 'icon-ecommerce-order',
-                'text' => Piwik::translate('General_EcommerceOrders'),
+                'text' => Matomo::translate('General_EcommerceOrders'),
             );
 
             $normalViewIcons['buttons'][] = array(
                 'id' => 'ecommerceAbandonedCart',
-                'title' => Piwik::translate('General_AbandonedCarts'),
+                'title' => Matomo::translate('General_AbandonedCarts'),
                 'icon' => 'icon-ecommerce-abandoned-cart',
-                'text' => Piwik::translate('General_AbandonedCarts'),
+                'text' => Matomo::translate('General_AbandonedCarts'),
             );
         }
 

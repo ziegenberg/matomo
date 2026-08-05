@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Plugin;
+namespace Matomo\Tests\Integration\Plugin;
 
-use Piwik\Category\Category;
-use Piwik\Category\Subcategory;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Categories;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Category\Category;
+use Matomo\Category\Subcategory;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Categories;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Categories
@@ -36,7 +36,7 @@ class CategoriesTest extends IntegrationTestCase
             Fixture::createWebsite('2015-01-01 00:00:00');
         }
 
-        $this->categories = new Categories(StaticContainer::get('Piwik\Plugin\Manager'));
+        $this->categories = new Categories(StaticContainer::get('Matomo\Plugin\Manager'));
     }
 
     public function tearDown(): void

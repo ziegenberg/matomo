@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Unit;
+namespace Matomo\Plugins\Diagnostics\tests\Unit;
 
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Plugins\Diagnostics\DiagnosticService;
-use Piwik\Plugins\Diagnostics\tests\Mock\DiagnosticWithError;
-use Piwik\Plugins\Diagnostics\tests\Mock\DiagnosticWithSuccess;
-use Piwik\Plugins\Diagnostics\tests\Mock\DiagnosticWithWarning;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\Diagnostics\DiagnosticService;
+use Matomo\Plugins\Diagnostics\tests\Mock\DiagnosticWithError;
+use Matomo\Plugins\Diagnostics\tests\Mock\DiagnosticWithSuccess;
+use Matomo\Plugins\Diagnostics\tests\Mock\DiagnosticWithWarning;
 
 class DiagnosticServiceTest extends \PHPUnit\Framework\TestCase
 {

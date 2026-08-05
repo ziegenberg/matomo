@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * The percent of visits that result in a conversion. Calculated as:
@@ -31,7 +31,7 @@ class ConversionRate extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnConversionRate');
+        return Matomo::translate('General_ColumnConversionRate');
     }
 
     public function getDependentMetrics()
@@ -55,7 +55,7 @@ class ConversionRate extends ProcessedMetric
     {
         $nbVisitsConverted = $this->getMetric($row, 'nb_visits_converted');
         $nbVisits = $this->getMetric($row, 'nb_visits');
-        return Piwik::getQuotientSafe($nbVisitsConverted, $nbVisits, $precision = 4);
+        return Matomo::getQuotientSafe($nbVisitsConverted, $nbVisits, $precision = 4);
     }
 
     public function getSemanticType(): ?string

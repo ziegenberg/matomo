@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth;
+namespace Matomo\Plugins\TwoFactorAuth;
 
-use Piwik\Piwik;
-use Piwik\QuickForm2;
+use Matomo\Matomo;
+use Matomo\QuickForm2;
 
 class FormTwoFactorAuthCode extends QuickForm2
 {
@@ -24,7 +24,7 @@ class FormTwoFactorAuthCode extends QuickForm2
         $this->addElement('text', 'form_authcode')
             ->addRule(
                 'required',
-                Piwik::translate('General_Required', 'Authentication code')
+                Matomo::translate('General_Required', 'Authentication code')
             );
 
         $this->addElement('hidden', 'form_nonce');

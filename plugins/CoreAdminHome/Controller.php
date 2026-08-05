@@ -7,37 +7,37 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome;
+namespace Matomo\Plugins\CoreAdminHome;
 
 use Exception;
-use Piwik\API\ResponseBuilder;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Http\JsonResponse;
-use Piwik\Mail;
-use Piwik\Menu\MenuTop;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugin\ControllerAdmin;
-use Piwik\Changes\UserChanges;
-use Piwik\Plugins\CorePluginsAdmin\CorePluginsAdmin;
-use Piwik\Plugins\Marketplace\Marketplace;
-use Piwik\Plugins\CustomVariables\CustomVariables;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Request;
-use Piwik\Site;
-use Piwik\Translation\Translator;
-use Piwik\Url;
-use Piwik\UrlHelper;
-use Piwik\View;
-use Piwik\Widget\WidgetsList;
-use Piwik\SettingsPiwik;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\Plugins\UsersManager\UserPreferences;
+use Matomo\API\ResponseBuilder;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Http\JsonResponse;
+use Matomo\Mail;
+use Matomo\Menu\MenuTop;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugin\ControllerAdmin;
+use Matomo\Changes\UserChanges;
+use Matomo\Plugins\CorePluginsAdmin\CorePluginsAdmin;
+use Matomo\Plugins\Marketplace\Marketplace;
+use Matomo\Plugins\CustomVariables\CustomVariables;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Request;
+use Matomo\Site;
+use Matomo\Translation\Translator;
+use Matomo\Url;
+use Matomo\UrlHelper;
+use Matomo\View;
+use Matomo\Widget\WidgetsList;
+use Matomo\SettingsPiwik;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Plugins\UsersManager\UserPreferences;
 
 class Controller extends ControllerAdmin
 {
@@ -100,14 +100,14 @@ class Controller extends ControllerAdmin
 
     public function trackingFailures()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         return $this->renderTemplate('trackingFailures');
     }
 
     public function generalSettings()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $view = new View('@CoreAdminHome/generalSettings');
         $this->handleGeneralSettingsAdmin($view);
@@ -147,7 +147,7 @@ class Controller extends ControllerAdmin
 
     public function setMailSettings()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!self::isGeneralSettingsAdminEnabled()) {
             // General settings + Beta channel + SMTP settings is disabled
@@ -165,14 +165,14 @@ class Controller extends ControllerAdmin
             $request = Request::fromPost();
 
             // require password re-authentication before applying any changes
-            $login = Piwik::getCurrentUserLogin();
-            if (Piwik::doesUserRequirePasswordConfirmation($login)) {
+            $login = Matomo::getCurrentUserLogin();
+            if (Matomo::doesUserRequirePasswordConfirmation($login)) {
                 $passwordConfirmation = $request->getStringParameter('passwordConfirmation', '');
                 if (
                     $passwordConfirmation === ''
                     || !$this->passwordVerify->isPasswordCorrect($login, $passwordConfirmation)
                 ) {
-                    throw new Exception(Piwik::translate('UsersManager_CurrentPasswordNotCorrect'));
+                    throw new Exception(Matomo::translate('UsersManager_CurrentPasswordNotCorrect'));
                 }
             }
 
@@ -201,8 +201,8 @@ class Controller extends ControllerAdmin
             if (empty($mailFrom)) {
                 $mailFrom = 'noreply@{DOMAIN}';
             }
-            if (!Piwik::isValidEmailString($mailFrom) && !Common::stringEndsWith($mailFrom, '@{DOMAIN}')) {
-                throw new Exception(Piwik::translate('CoreAdminHome_ErrorEmailFromAddressNotValid'));
+            if (!Matomo::isValidEmailString($mailFrom) && !Common::stringEndsWith($mailFrom, '@{DOMAIN}')) {
+                throw new Exception(Matomo::translate('CoreAdminHome_ErrorEmailFromAddressNotValid'));
             }
             $general['noreply_email_address'] = $mailFrom;
             Config::getInstance()->General = $general;
@@ -223,7 +223,7 @@ class Controller extends ControllerAdmin
      */
     public function trackingCodeGenerator()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $view = new View('@CoreAdminHome/trackingCodeGenerator');
         $this->setBasicVariablesView($view);
@@ -297,7 +297,7 @@ class Controller extends ControllerAdmin
     #[JsonResponse]
     public function uploadCustomLogo(): string
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->checkTokenInUrl();
 
         $logo = new CustomLogo();
@@ -364,11 +364,11 @@ class Controller extends ControllerAdmin
      */
     public function whatIsNew()
     {
-        Piwik::checkUserHasSomeViewAccess();
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
 
         $model = new UsersModel();
-        $user = $model->getUser(Piwik::getCurrentUserLogin());
+        $user = $model->getUser(Matomo::getCurrentUserLogin());
         if (!empty($user)) {
             $userChanges = new UserChanges($user);
             $changes = $this->enrichChangesForWhatIsNew($userChanges->getChanges());

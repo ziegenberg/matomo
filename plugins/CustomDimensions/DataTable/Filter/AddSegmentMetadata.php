@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\DataTable\Filter;
+namespace Matomo\Plugins\CustomDimensions\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Plugins\CustomDimensions\Archiver;
-use Piwik\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Plugins\CustomDimensions\Archiver;
+use Matomo\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
 
 class AddSegmentMetadata extends BaseFilter
 {
@@ -45,7 +45,7 @@ class AddSegmentMetadata extends BaseFilter
 
             $subTable = $row->getSubtable();
             if ($subTable) {
-                $subTable->filter('Piwik\Plugins\CustomDimensions\DataTable\Filter\AddSubtableSegmentMetadata', array($this->idDimension, $label));
+                $subTable->filter('Matomo\Plugins\CustomDimensions\DataTable\Filter\AddSubtableSegmentMetadata', array($this->idDimension, $label));
             }
         }
     }

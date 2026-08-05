@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugins\Live\Exception\MaxExecutionTimeExceededException;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Updater\Migration\Db as DbMigration;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\Exception\MaxExecutionTimeExceededException;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Updater\Migration\Db as DbMigration;
 
 class Model
 {
@@ -226,7 +226,7 @@ class Model
     }
 
     /**
-     * @param \Piwik\Tracker\Db|\Piwik\Db\AdapterInterface|\Piwik\Db $readerDb
+     * @param \Matomo\Tracker\Db|\Matomo\Db\AdapterInterface|\Matomo\Db $readerDb
      * @param Exception $e
      * @param $segment
      * @param $dateStart
@@ -254,23 +254,23 @@ class Model
         $message = '';
 
         if (self::isLookingAtMoreThanOneDay($dateStart, $dateEnd, $minTimestamp)) {
-            $message .= ' ' . Piwik::translate('Live_QueryMaxExecutionTimeExceededReasonDateRange');
+            $message .= ' ' . Matomo::translate('Live_QueryMaxExecutionTimeExceededReasonDateRange');
         }
 
         if (!empty($segment)) {
-            $message .= ' ' . Piwik::translate('Live_QueryMaxExecutionTimeExceededReasonSegment');
+            $message .= ' ' . Matomo::translate('Live_QueryMaxExecutionTimeExceededReasonSegment');
         }
 
         $limitThatCannotBeSelectedInUiButOnlyApi = 550;
         if ($limit > $limitThatCannotBeSelectedInUiButOnlyApi) {
-            $message .= ' ' . Piwik::translate('Live_QueryMaxExecutionTimeExceededLimit');
+            $message .= ' ' . Matomo::translate('Live_QueryMaxExecutionTimeExceededLimit');
         }
 
         if (empty($message)) {
-            $message .= ' ' . Piwik::translate('Live_QueryMaxExecutionTimeExceededReasonUnknown');
+            $message .= ' ' . Matomo::translate('Live_QueryMaxExecutionTimeExceededReasonUnknown');
         }
 
-        $message = Piwik::translate('Live_QueryMaxExecutionTimeExceeded') . ' ' . $message;
+        $message = Matomo::translate('Live_QueryMaxExecutionTimeExceeded') . ' ' . $message;
 
         $params = array_merge($parameters, [
             'segment' => $segment, 'limit' => $limit,
@@ -280,7 +280,7 @@ class Model
          * @ignore
          * @internal
          */
-        Piwik::postEvent('Live.queryMaxExecutionTimeExceeded', array($params));
+        Matomo::postEvent('Live.queryMaxExecutionTimeExceeded', array($params));
         throw new MaxExecutionTimeExceededException($message);
     }
 
@@ -554,7 +554,7 @@ class Model
             $idSites = array($idSite);
         }
 
-        Piwik::postEvent('Live.API.getIdSitesString', array(&$idSites));
+        Matomo::postEvent('Live.API.getIdSitesString', array(&$idSites));
 
         $idSitesBind = Common::getSqlStringFieldsArray($idSites);
         $whereClause = $table . ".idsite in ($idSitesBind) ";

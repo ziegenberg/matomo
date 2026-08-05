@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountryMap;
+namespace Matomo\Plugins\UserCountryMap;
 
-use Piwik\FrontController;
-use Piwik\Piwik;
+use Matomo\FrontController;
+use Matomo\Matomo;
 
-class UserCountryMap extends \Piwik\Plugin
+class UserCountryMap extends \Matomo\Plugin
 {
     public function postLoad()
     {
-        Piwik::addAction('Template.leftColumnUserCountry', array('Piwik\Plugins\UserCountryMap\UserCountryMap', 'insertMapInLocationReport'));
+        Matomo::addAction('Template.leftColumnUserCountry', array('Matomo\Plugins\UserCountryMap\UserCountryMap', 'insertMapInLocationReport'));
     }
 
     public static function insertMapInLocationReport(&$out)
     {
-        $out = '<h2>' . Piwik::translate('UserCountryMap_VisitorMap') . '</h2>';
+        $out = '<h2>' . Matomo::translate('UserCountryMap_VisitorMap') . '</h2>';
         $out .= FrontController::getInstance()->fetchDispatch('UserCountryMap', 'visitorMap');
     }
 

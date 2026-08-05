@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Integration\Dimension;
+namespace Matomo\Plugins\CustomDimensions\tests\Integration\Dimension;
 
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
-use Piwik\Plugins\CustomDimensions\Dimension\Index;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Plugins\CustomDimensions\Dimension\Index;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CustomDimensions

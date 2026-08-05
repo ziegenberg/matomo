@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
 use Exception;
 use Matomo\Ini\IniReader;
 use PHPUnit\Framework\TestCase;
-use Piwik\AssetManager\UIAssetFetcher;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\Plugin\Manager;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tracker;
-use Piwik\Version;
+use Matomo\AssetManager\UIAssetFetcher;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\Plugin\Manager;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tracker;
+use Matomo\Version;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
@@ -307,7 +307,7 @@ class ReleaseCheckListTest extends \PHPUnit\Framework\TestCase
     public function testProfilingDisabledInProduction()
     {
         require_once 'Tracker/Db.php';
-        $this->assertTrue(\Piwik\Tracker\Db::isProfilingEnabled() === false, 'SQL profiler should be disabled in production! See Db::$profiling');
+        $this->assertTrue(\Matomo\Tracker\Db::isProfilingEnabled() === false, 'SQL profiler should be disabled in production! See Db::$profiling');
     }
 
     public function testPiwikTrackerDebugIsOff()
@@ -437,7 +437,7 @@ class ReleaseCheckListTest extends \PHPUnit\Framework\TestCase
             $manager = Manager::getInstance();
             $isGitSubmodule = $manager->isPluginOfficialAndNotBundledWithCore($pluginName);
 
-            $pluginList = StaticContainer::get('Piwik\Application\Kernel\PluginList');
+            $pluginList = StaticContainer::get('Matomo\Application\Kernel\PluginList');
 
             $disabled = in_array($pluginName, $pluginList->getCorePluginsDisabledByDefault())  || $isGitSubmodule;
 
@@ -445,8 +445,7 @@ class ReleaseCheckListTest extends \PHPUnit\Framework\TestCase
 
             $this->assertTrue(
                 $enabled + $disabled === 1,
-                "Plugin $pluginName should be either enabled (in global.ini.php) or disabled (in Piwik\\Application\\Kernel\\PluginList).
-                It is currently (enabled=" . (int)$enabled . ", disabled=" . (int)$disabled . ")"
+                "Plugin {$pluginName} should be either enabled (in global.ini.php) or disabled (in Matomo\\Application\\Kernel\\PluginList).\n                It is currently (enabled=" . (int)$enabled . ", disabled=" . (int)$disabled . ")"
             );
             $count++;
         }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
 use Monolog\Level;
 use Monolog\LogRecord;
 use Monolog\Processor\PsrLogMessageProcessor;
 use Psr\Log\AbstractLogger;
-use Piwik\Log\LoggerInterface;
+use Matomo\Log\LoggerInterface;
 
 class FakeLogger extends AbstractLogger implements LoggerInterface
 {

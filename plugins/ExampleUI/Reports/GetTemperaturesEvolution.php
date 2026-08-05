@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI\Reports;
+namespace Matomo\Plugins\ExampleUI\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 /**
  * This class defines a new report.
@@ -28,7 +28,7 @@ class GetTemperaturesEvolution extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('ExampleUI_GetTemperaturesEvolution');
+        $this->name = Matomo::translate('ExampleUI_GetTemperaturesEvolution');
         $this->documentation = 'This is an example evolution report';
         $this->order = 111;
     }
@@ -70,7 +70,7 @@ class GetTemperaturesEvolution extends Base
 
             $columns = Common::getRequestVar('columns', false);
             if (!empty($columns)) {
-                $columns = Piwik::getArrayFromApiParameter($columns);
+                $columns = Matomo::getArrayFromApiParameter($columns);
             }
 
             $columns = array_merge($columns ? $columns : array(), $selectableColumns);

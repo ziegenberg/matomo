@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\Reports;
+namespace Matomo\Plugins\Live\Reports;
 
-use Piwik\Plugins\Live\Live;
-use Piwik\Plugins\Live\Visualizations\VisitorLog;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Plugins\Live\Live;
+use Matomo\Plugins\Live\Visualizations\VisitorLog;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetLastVisitsDetails extends Base
 {

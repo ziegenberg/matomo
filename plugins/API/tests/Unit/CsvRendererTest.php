@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\test\Unit;
+namespace Matomo\Plugins\API\test\Unit;
 
-use Piwik\DataTable;
-use Piwik\Plugins\API\Renderer\Csv;
+use Matomo\DataTable;
+use Matomo\Plugins\API\Renderer\Csv;
 
 /**
  * @group Plugin

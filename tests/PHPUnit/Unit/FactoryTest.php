@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\BaseFactory;
+use Matomo\BaseFactory;
 
 /**
  * @group Core
@@ -18,10 +18,10 @@ class FactoryTest extends \PHPUnit\Framework\TestCase
 {
     public function testCreatingExistingClassSucceeds()
     {
-        $instance = BaseFactory::factory('Piwik\Timer');
+        $instance = BaseFactory::factory('Matomo\Timer');
 
         $this->assertNotNull($instance);
-        $this->assertInstanceOf('Piwik\Timer', $instance);
+        $this->assertInstanceOf('Matomo\Timer', $instance);
     }
 
     public function testCreatingInvalidClassThrows()

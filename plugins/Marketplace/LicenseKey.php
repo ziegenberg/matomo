@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
-use Piwik\Option;
+use Matomo\Option;
 
 class LicenseKey
 {

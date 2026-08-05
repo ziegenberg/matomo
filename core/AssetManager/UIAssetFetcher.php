@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager;
+namespace Matomo\AssetManager;
 
-use Piwik\AssetManager\UIAsset\OnDiskUIAsset;
-use Piwik\Plugin\Manager;
-use Piwik\Theme;
+use Matomo\AssetManager\UIAsset\OnDiskUIAsset;
+use Matomo\Plugin\Manager;
+use Matomo\Theme;
 
 abstract class UIAssetFetcher
 {

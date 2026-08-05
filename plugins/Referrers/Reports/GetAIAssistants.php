@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\Goals\Visualizations\Goals;
-use Piwik\Plugins\Referrers\Columns\AIAssistant;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Request;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\Goals\Visualizations\Goals;
+use Matomo\Plugins\Referrers\Columns\AIAssistant;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Request;
+use Matomo\Widget\WidgetsList;
 
 class GetAIAssistants extends Base
 {
@@ -26,8 +26,8 @@ class GetAIAssistants extends Base
     {
         parent::init();
         $this->dimension = new AIAssistant();
-        $this->name = Piwik::translate('Referrers_AIAssistants');
-        $this->documentation = Piwik::translate('Referrers_AIAssistantsReportDocumentation', '<br />');
+        $this->name = Matomo::translate('Referrers_AIAssistants');
+        $this->documentation = Matomo::translate('Referrers_AIAssistantsReportDocumentation', '<br />');
         $this->hasGoalMetrics = true;
         $this->order = 13;
         $this->subcategoryId = 'Referrers_AIAssistants';
@@ -62,8 +62,8 @@ class GetAIAssistants extends Base
 
             if (!$view->isViewDataTableId(Goals::ID)) {
                 $secondaryDimensions = [
-                    'entryPageUrl'   => Piwik::translate('Actions_ColumnEntryPageURL'),
-                    'entryPageTitle' => Piwik::translate('Actions_ColumnEntryPageTitle'),
+                    'entryPageUrl'   => Matomo::translate('Actions_ColumnEntryPageURL'),
+                    'entryPageTitle' => Matomo::translate('Actions_ColumnEntryPageTitle'),
                 ];
                 $view->config->setSecondaryDimensions($secondaryDimensions, 'entryPageUrl');
             }

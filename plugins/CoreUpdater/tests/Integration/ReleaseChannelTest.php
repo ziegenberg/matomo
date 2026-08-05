@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\tests\ReleaseChannel;
+namespace Matomo\Plugins\CoreUpdater\tests\ReleaseChannel;
 
-use Piwik\Db;
-use Piwik\Plugins\CoreUpdater\ReleaseChannel;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Url;
-use Piwik\Version;
+use Matomo\Db;
+use Matomo\Plugins\CoreUpdater\ReleaseChannel;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Url;
+use Matomo\Version;
 
 class MyReleaseChannel extends ReleaseChannel
 {

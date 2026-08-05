@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\Access;
-use Piwik\Http\HttpCodeException;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Context;
-use Piwik\DataTable;
-use Piwik\Exception\PluginDeactivatedException;
-use Piwik\IP;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugins\CoreHome\LoginAllowlist;
-use Piwik\SettingsServer;
-use Piwik\Url;
-use Piwik\UrlHelper;
-use Piwik\Log\LoggerInterface;
+use Matomo\Access;
+use Matomo\Http\HttpCodeException;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Context;
+use Matomo\DataTable;
+use Matomo\Exception\PluginDeactivatedException;
+use Matomo\IP;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugins\CoreHome\LoginAllowlist;
+use Matomo\SettingsServer;
+use Matomo\Url;
+use Matomo\UrlHelper;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Dispatches API requests to the appropriate API method.
@@ -38,7 +38,7 @@ use Piwik\Log\LoggerInterface;
  * and handling the **flat** and **label** query parameters.
  *
  * Additionally, the Request class will **forward current query parameters** to the request
- * which is more convenient than calling {@link Piwik\Common::getRequestVar()} many times over.
+ * which is more convenient than calling {@link Matomo\Common::getRequestVar()} many times over.
  *
  * In most cases, using a Request object to query the API is the correct approach.
  *
@@ -176,7 +176,7 @@ class Request
          * @param $module string
          * @param $action string
          */
-        Piwik::postEvent('Request.getRenamedModuleAndAction', array(&$module, &$action));
+        Matomo::postEvent('Request.getRenamedModuleAndAction', array(&$module, &$action));
 
         return array($module, $action);
     }
@@ -338,11 +338,11 @@ class Request
      * Returns the name of a plugin's API class by plugin name.
      *
      * @param string $plugin The plugin name, eg, `'Referrers'`.
-     * @return string The fully qualified API class name, eg, `'\Piwik\Plugins\Referrers\API'`.
+     * @return string The fully qualified API class name, eg, `'\Matomo\Plugins\Referrers\API'`.
      */
     public static function getClassNameAPI($plugin)
     {
-        return sprintf('\Piwik\Plugins\%s\API', $plugin);
+        return sprintf('\Matomo\Plugins\%s\API', $plugin);
     }
 
     /**
@@ -460,18 +460,18 @@ class Request
          * query parameter is found in the request.
          *
          * Plugins that provide authentication capabilities should subscribe to this event
-         * and make sure the global authentication object (the object returned by `StaticContainer::get('Piwik\Auth')`)
+         * and make sure the global authentication object (the object returned by `StaticContainer::get('Matomo\Auth')`)
          * is setup to use `$token_auth` when its `authenticate()` method is executed.
          *
          * @param string $token_auth The value of the **token_auth** query parameter.
          */
-        Piwik::postEvent('API.Request.authenticate', array($tokenAuth));
+        Matomo::postEvent('API.Request.authenticate', array($tokenAuth));
         if (!Access::getInstance()->reloadAccess() && $tokenAuth && $tokenAuth !== 'anonymous') {
             /**
              * @ignore
              * @internal
              */
-            Piwik::postEvent('API.Request.authenticate.failed');
+            Matomo::postEvent('API.Request.authenticate.failed');
         }
         SettingsServer::raiseMemoryLimitIfNecessary();
     }
@@ -496,7 +496,7 @@ class Request
         }
 
         if (Access::getInstance()->hasSuperUserAccess()) {
-            $ex = new \Piwik\Exception\Exception(Piwik::translate(
+            $ex = new \Matomo\Exception\Exception(Matomo::translate(
                 'Widgetize_TooHighAccessLevel',
                 [Url::getExternalLinkTag('https://matomo.org/faq/troubleshooting/faq_147/'), '</a>']
             ));
@@ -514,7 +514,7 @@ class Request
         $allowWriteAdminModuleAction = in_array($module . '.' . $action, $allowWriteAdminModuleActionConfig, true);
 
         if (
-            Piwik::isUserHasSomeWriteAccess()
+            Matomo::isUserHasSomeWriteAccess()
             && !$allowWriteAdmin
             && !$allowWriteAdminModuleAction
         ) {
@@ -526,7 +526,7 @@ class Request
             // NOTE: this does not apply if the [General] enable_framed_allow_write_admin_token_auth INI
             // option is set, or if the current module/action is allowlisted in the
             // token_auth.write_admin_allowed_module_actions DI entry.
-            $ex = new \Piwik\Exception\Exception(Piwik::translate(
+            $ex = new \Matomo\Exception\Exception(Matomo::translate(
                 'Widgetize_ViewAccessRequired',
                 [Url::getExternalLinkTag('https://matomo.org/faq/troubleshooting/faq_147/') . 'https://matomo.org/faq/troubleshooting/faq_147/</a>']
             ));
@@ -739,7 +739,7 @@ class Request
          * @param bool &$shouldDisable Set this to true to disable datatable post processing for a request.
          * @param array $request The request parameters.
          */
-        Piwik::postEvent('Request.shouldDisablePostProcessing', [&$shouldDisable, $this->request]);
+        Matomo::postEvent('Request.shouldDisablePostProcessing', [&$shouldDisable, $this->request]);
 
         if (!$shouldDisable) {
             $shouldDisable = self::isCurrentApiRequestTheRootApiRequest() &&

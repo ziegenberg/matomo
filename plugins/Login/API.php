@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
 
 /**
  * Provides API methods for login-related administration tasks.
  *
- * @method static \Piwik\Plugins\Login\API getInstance()
+ * @method static \Matomo\Plugins\Login\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private BruteForceDetection $bruteForceDetection;
 
@@ -33,7 +33,7 @@ class API extends \Piwik\Plugin\API
      */
     public function unblockBruteForceIPs()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $ips = $this->bruteForceDetection->getCurrentlyBlockedIps();
         if (!empty($ips)) {

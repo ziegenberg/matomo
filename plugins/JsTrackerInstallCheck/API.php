@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\JsTrackerInstallCheck;
+namespace Matomo\Plugins\JsTrackerInstallCheck;
 
-use Piwik\Piwik;
-use Piwik\Site;
-use Piwik\UrlHelper;
+use Matomo\Matomo;
+use Matomo\Site;
+use Matomo\UrlHelper;
 
 /**
  * @internal
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @var JsTrackerInstallCheck
@@ -43,7 +43,7 @@ class API extends \Piwik\Plugin\API
      */
     public function wasJsTrackerInstallTestSuccessful(int $idSite, string $nonce = ''): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         if (!empty($nonce) && !\preg_match('/^[a-f0-9]{32}$/i', $nonce)) {
             throw new \Exception('The provided nonce is invalid.');
@@ -65,10 +65,10 @@ class API extends \Piwik\Plugin\API
      */
     public function initiateJsTrackerInstallTest(int $idSite, string $url = ''): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         if (!empty($url) && !UrlHelper::isLookLikeUrl($url)) {
-            throw new \Exception(Piwik::translate('SitesManager_ExceptionInvalidUrl', $url));
+            throw new \Exception(Matomo::translate('SitesManager_ExceptionInvalidUrl', $url));
         }
 
         return $this->jsTrackerInstallCheck->initiateJsTrackerInstallTest($idSite, $url);

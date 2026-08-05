@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Archive\ArchivePurger;
-use Piwik\Archive\Chunk;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\VisitsOverSeveralDays;
+use Matomo\Archive\ArchivePurger;
+use Matomo\Archive\Chunk;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\VisitsOverSeveralDays;
 
 /**
  * Tests some API using range periods & makes sure the correct amount of blob/numeric
@@ -164,7 +164,7 @@ class OneVisitorOneWebsiteSeveralDaysDateRangeArchivingTest extends SystemTestCa
                 continue;
             }
 
-            $sql = "SELECT count(*) FROM " . Common::prefixTable($table) . " WHERE period = " . Piwik::$idPeriods['range'];
+            $sql = "SELECT count(*) FROM " . Common::prefixTable($table) . " WHERE period = " . Matomo::$idPeriods['range'];
             $countBlobs = Db::get()->fetchOne($sql);
 
             if ($expectedRows != $countBlobs) {
@@ -196,7 +196,7 @@ class OneVisitorOneWebsiteSeveralDaysDateRangeArchivingTest extends SystemTestCa
         $chunkName = $chunk->getRecordNameForTableId('Actions_actions_url', 0);
 
         foreach ($tests as $table => $expectedNumSubtables) {
-            $sql = "SELECT value FROM " . Common::prefixTable($table) . " WHERE period = " . Piwik::$idPeriods['range'] . " and `name` ='$chunkName'";
+            $sql = "SELECT value FROM " . Common::prefixTable($table) . " WHERE period = " . Matomo::$idPeriods['range'] . " and `name` ='$chunkName'";
             $blob = Db::get()->fetchOne($sql);
             $blob = gzuncompress($blob);
             $blob = unserialize($blob);
@@ -211,7 +211,7 @@ class OneVisitorOneWebsiteSeveralDaysDateRangeArchivingTest extends SystemTestCa
      */
     protected function printDebugWhenTestFails($table)
     {
-        $data = Db::get()->fetchAll("SELECT * FROM " . Common::prefixTable($table) . " WHERE period = " . Piwik::$idPeriods['range'] . " ORDER BY idarchive ASC");
+        $data = Db::get()->fetchAll("SELECT * FROM " . Common::prefixTable($table) . " WHERE period = " . Matomo::$idPeriods['range'] . " ORDER BY idarchive ASC");
         if (strpos($table, 'blob') !== false) {
             $data = array_map(function ($r) {
                 unset($r['value']);

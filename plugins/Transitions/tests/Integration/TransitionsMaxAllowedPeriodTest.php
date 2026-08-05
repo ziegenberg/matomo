@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Transitions\tests\Integration;
+namespace Matomo\Plugins\Transitions\tests\Integration;
 
-use Piwik\Plugins\Transitions\Transitions;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Config;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\Transitions\API;
+use Matomo\Plugins\Transitions\Transitions;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\Transitions\API;
 
 /**
  * Tests the transitions plugin max_period_allowed setting

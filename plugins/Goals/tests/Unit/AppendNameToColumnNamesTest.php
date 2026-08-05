@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\tests\Unit;
+namespace Matomo\Plugins\Goals\tests\Unit;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * @group AppendNameToColumnNamesTest
@@ -20,7 +20,7 @@ use Piwik\DataTable\Row;
  */
 class AppendNameToColumnNamesTest extends \PHPUnit\Framework\TestCase
 {
-    private $filter = 'Piwik\Plugins\Goals\DataTable\Filter\AppendNameToColumnNames';
+    private $filter = 'Matomo\Plugins\Goals\DataTable\Filter\AppendNameToColumnNames';
 
     /**
      * @var DataTable

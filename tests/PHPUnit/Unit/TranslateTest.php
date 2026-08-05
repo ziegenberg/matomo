@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * @group Translation
@@ -43,6 +43,6 @@ class TranslateTest extends \PHPUnit\Framework\TestCase
      */
     public function testClean($data, $expected)
     {
-        $this->assertEquals($expected, StaticContainer::get('Piwik\Translation\Translator')->clean($data));
+        $this->assertEquals($expected, StaticContainer::get('Matomo\Translation\Translator')->clean($data));
     }
 }

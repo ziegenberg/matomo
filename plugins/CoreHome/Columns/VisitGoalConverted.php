@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Columns\Dimension;
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Piwik;
-use Piwik\Plugin\ComputedMetric;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ComputedMetric;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class VisitGoalConverted extends VisitDimension
 {
@@ -30,13 +30,13 @@ class VisitGoalConverted extends VisitDimension
 
     public function configureMetrics(MetricsList $metricsList, DimensionMetricFactory $dimensionMetricFactory)
     {
-        $metric1 = $dimensionMetricFactory->createCustomMetric('nb_visits_converted', Piwik::translate('General_ColumnVisitsWithConversions'), 'sum(case %s when 1 then 1 else 0 end)');
+        $metric1 = $dimensionMetricFactory->createCustomMetric('nb_visits_converted', Matomo::translate('General_ColumnVisitsWithConversions'), 'sum(case %s when 1 then 1 else 0 end)');
         $metric1->setType(Dimension::TYPE_NUMBER);
         $metricsList->addMetric($metric1);
 
         $metric = $dimensionMetricFactory->createComputedMetric($metric1->getName(), 'nb_visits', ComputedMetric::AGGREGATION_RATE);
-        $metric->setTranslatedName(Piwik::translate('General_ColumnConversionRate'));
-        $metric->setDocumentation(Piwik::translate('General_ColumnConversionRateDocumentation'));
+        $metric->setTranslatedName(Matomo::translate('General_ColumnConversionRate'));
+        $metric->setDocumentation(Matomo::translate('General_ColumnConversionRateDocumentation'));
         $metric->setName('visits_conversion_rate');
         $metricsList->addMetric($metric);
     }

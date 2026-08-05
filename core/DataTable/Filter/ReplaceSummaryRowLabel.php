@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Piwik;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Matomo;
 
 /**
  * Replaces the label of the summary row with a supplied label.
@@ -44,7 +44,7 @@ class ReplaceSummaryRowLabel extends BaseFilter
     {
         parent::__construct($table);
         if (is_null($newLabel)) {
-            $newLabel = Piwik::translate('General_Others');
+            $newLabel = Matomo::translate('General_Others');
         }
         $this->newLabel = $newLabel;
     }

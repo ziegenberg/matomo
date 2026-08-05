@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation\Loader;
+namespace Matomo\Tests\Unit\Translation\Loader;
 
-use Piwik\Validators\DateTime;
+use Matomo\Validators\DateTime;
 
 /**
  * @group Validator
@@ -41,7 +41,7 @@ class DateTimeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateFailInvalidFormat($date)
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('General_ValidatorErrorInvalidDateTimeFormat');
         $this->validate($date);
     }
@@ -63,7 +63,7 @@ class DateTimeTest extends \PHPUnit\Framework\TestCase
 
     public function testValidateInvalidDate()
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('General_ExceptionInvalidDateFormat');
         $this->validate('2014-15-26 90:43:32');
     }

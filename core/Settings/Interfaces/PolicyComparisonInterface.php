@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces;
+namespace Matomo\Settings\Interfaces;
 
-use Piwik\Policy\CompliancePolicy;
+use Matomo\Policy\CompliancePolicy;
 
 /**
  * @template T of mixed

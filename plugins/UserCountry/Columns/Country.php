@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Columns;
+namespace Matomo\Plugins\UserCountry\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\Segment;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Visit;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\Segment;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Visit;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
 
@@ -48,10 +48,10 @@ class Country extends Base
         $segment->setName('UserCountry_Country');
         $segment->setAcceptedValues('Germany, France, Spain, ...');
         $segment->setNeedsMostFrequentValues(false);
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
         $countryList = $regionDataProvider->getCountryList();
         array_walk($countryList, function (&$item, $key) {
-            $item = Piwik::translate('Intl_Country_' . strtoupper($key), [], 'en');
+            $item = Matomo::translate('Intl_Country_' . strtoupper($key), [], 'en');
         });
 
         $segment->setSqlFilterValue(function ($val) use ($countryList) {
@@ -74,7 +74,7 @@ class Country extends Base
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\UserCountry\countryTranslate($value);
+        return \Matomo\Plugins\UserCountry\countryTranslate($value);
     }
 
     /**

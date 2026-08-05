@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Matomo\Cache\Lazy;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
-use Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
+use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
 
 /**
  * This class provides detection functions for specific content on a site. It can be used to easily detect the

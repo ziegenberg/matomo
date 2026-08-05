@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\Commands;
+namespace Matomo\Plugins\CoreUpdater\Commands;
 
-use Piwik\Plugins\Installation\ServerFilesGenerator;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Plugins\Installation\ServerFilesGenerator;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * @package CoreUpdater

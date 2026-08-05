@@ -9,22 +9,22 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataTableFactory;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Log\LoggerInterface;
-use Piwik\Metrics\Formatter;
-use Piwik\Period\Factory;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSubPeriodFetcher;
-use Piwik\Site;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataTableFactory;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Log\LoggerInterface;
+use Matomo\Metrics\Formatter;
+use Matomo\Period\Factory;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSubPeriodFetcher;
+use Matomo\Site;
 
 /**
  * @group CoreVisualizations
@@ -981,7 +981,7 @@ class ForecastSubPeriodFetcherTest extends TestCase
 
     /**
      * Anonymous {@see ProcessedMetric} that mirrors the bandwidth-overall metric's format
-     * surface ({@see \Piwik\Metrics\Formatter::getPrettySizeFromBytes()}) without pulling in
+     * surface ({@see \Matomo\Metrics\Formatter::getPrettySizeFromBytes()}) without pulling in
      * a Bandwidth plugin dependency. Numeric pins the size unit at 'G', so the test asserts
      * the exact gigabyte value the production formatter would produce for the same bytes.
      */

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats;
+namespace Matomo\Plugins\DBStats;
 
 use Exception;
-use Piwik\Config;
-use Piwik\Db;
+use Matomo\Config;
+use Matomo\Db;
 
 /**
  * Data Access Object that serves MySQL stats.

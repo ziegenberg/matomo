@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration;
+namespace Matomo\Updater\Migration;
 
-use Piwik\Updater\Migration\Db\Factory as DbFactory;
-use Piwik\Updater\Migration\Plugin\Factory as PluginFactory;
-use Piwik\Updater\Migration\Config\Factory as ConfigFactory;
+use Matomo\Updater\Migration\Db\Factory as DbFactory;
+use Matomo\Updater\Migration\Plugin\Factory as PluginFactory;
+use Matomo\Updater\Migration\Config\Factory as ConfigFactory;
 
 /**
  * Migration factory to create various migrations that implement the Migration interface.

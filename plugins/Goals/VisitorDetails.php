@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\DbHelper;
-use Piwik\Plugins\Live\Model;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\DbHelper;
+use Matomo\Plugins\Live\Model;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
 
-use function Piwik\Plugins\Referrers\getReferrerTypeFromShortName;
+use function Matomo\Plugins\Referrers\getReferrerTypeFromShortName;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {

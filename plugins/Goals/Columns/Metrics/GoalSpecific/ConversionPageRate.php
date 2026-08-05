@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific;
+namespace Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
-use Piwik\Plugins\Goals\Goals;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
+use Matomo\Plugins\Goals\Goals;
 
 /**
  * The page conversion rate for a specific goal. Calculated as:
@@ -34,12 +34,12 @@ class ConversionPageRate extends GoalSpecificProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('Goals_ConversionRatePageViewedBefore', $this->getGoalName());
+        return Matomo::translate('Goals_ConversionRatePageViewedBefore', $this->getGoalName());
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('Goals_ColumnConversionRatePageViewedBeforeDocumentation', $this->getGoalNameForDocs());
+        return Matomo::translate('Goals_ColumnConversionRatePageViewedBeforeDocumentation', $this->getGoalNameForDocs());
     }
 
     public function getDependentMetrics()

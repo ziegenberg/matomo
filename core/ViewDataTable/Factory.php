@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ViewDataTable;
+namespace Matomo\ViewDataTable;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugin\ReportsProvider;
 
 /**
- * Provides a means of creating {@link Piwik\Plugin\ViewDataTable} instances by ID.
+ * Provides a means of creating {@link Matomo\Plugin\ViewDataTable} instances by ID.
  *
  * ### Examples
  *
@@ -70,10 +70,10 @@ class Factory
     private static $defaultViewTypes = null;
 
     /**
-     * Creates a {@link Piwik\Plugin\ViewDataTable} instance by ID. If the **viewDataTable** query parameter is set,
+     * Creates a {@link Matomo\Plugin\ViewDataTable} instance by ID. If the **viewDataTable** query parameter is set,
      * this parameter's value is used as the ID.
      *
-     * See {@link Piwik\Plugin\ViewDataTable} to read about the visualizations that are packaged with Piwik.
+     * See {@link Matomo\Plugin\ViewDataTable} to read about the visualizations that are packaged with Piwik.
      *
      * @param string|null $defaultType A ViewDataTable ID representing the default ViewDataTable type to use. If
      *                                 the **viewDataTable** query parameter is not found, this value is used as
@@ -93,7 +93,7 @@ class Factory
      * @param bool $loadViewDataTableParametersForUser Whether the per-user parameters for this user, this ViewDataTable and this Api action
      *                                          should be loaded from the user preferences and override the default params values.
      * @throws \Exception
-     * @return \Piwik\Plugin\ViewDataTable
+     * @return \Matomo\Plugin\ViewDataTable
      */
     public static function build($defaultType = null, $apiAction = false, $controllerAction = false, $forceDefault = false, $loadViewDataTableParametersForUser = null)
     {
@@ -114,7 +114,7 @@ class Factory
         }
 
         if ($loadViewDataTableParametersForUser) {
-            $login  = Piwik::getCurrentUserLogin();
+            $login  = Matomo::getCurrentUserLogin();
             $paramsKey = $controllerAction;
             if (!empty($report) && $controllerAction === $apiAction) {
                 $paramsKey = $report->getId();
@@ -223,7 +223,7 @@ class Factory
      * @param array $params
      *
      * @internal param string $viewDataTableId
-     * @return \Piwik\Plugin\ViewDataTable
+     * @return \Matomo\Plugin\ViewDataTable
      */
     private static function createViewDataTableInstance($klass, $controllerAction, $apiAction, $params)
     {
@@ -231,14 +231,14 @@ class Factory
             $params = array();
         }
 
-        if (!is_subclass_of($klass, 'Piwik\Plugin\Visualization')) {
+        if (!is_subclass_of($klass, 'Matomo\Plugin\Visualization')) {
             // for now we ignore those params in case it is not a visualization. We do not want to apply
             // any of those saved parameters to sparklines etc. Need to find a better solution here
             $params = array();
         }
 
-        if (!is_subclass_of($klass, 'Piwik\View\ViewInterface')) {
-            throw new \Exception("viewDataTable $klass must implement Piwik\View\ViewInterface interface.");
+        if (!is_subclass_of($klass, 'Matomo\View\ViewInterface')) {
+            throw new \Exception("viewDataTable {$klass} must implement Matomo\\View\\ViewInterface interface.");
         }
 
         return new $klass($controllerAction, $apiAction, $params);

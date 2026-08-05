@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration\Validators;
+namespace Matomo\Plugins\UsersManager\tests\Integration\Validators;
 
-use Piwik\Plugins\UsersManager\SystemSettings;
-use Piwik\Plugins\UsersManager\Validators\AllowedEmailDomain;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\UsersManager\SystemSettings;
+use Matomo\Plugins\UsersManager\Validators\AllowedEmailDomain;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Login

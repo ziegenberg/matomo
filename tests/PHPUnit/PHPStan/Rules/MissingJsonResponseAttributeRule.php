@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -54,7 +54,7 @@ class MissingJsonResponseAttributeRule implements Rule
         return [
             RuleErrorBuilder::message(sprintf(
                 'Controller action %s() calls Json::sendHeaderJSON() unconditionally; add the'
-                . ' #[\\Piwik\\Http\\JsonResponse] attribute to the method and remove the manual call so'
+                . ' #[\Matomo\Http\JsonResponse] attribute to the method and remove the manual call so'
                 . ' the JSON Content-Type cannot be overwritten by later output.',
                 $node->name->toString()
             ))

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\DataTableRowAction;
+namespace Matomo\Plugins\CoreHome\DataTableRowAction;
 
-use Piwik\Common;
-use Piwik\Context;
-use Piwik\Piwik;
-use Piwik\Request;
+use Matomo\Common;
+use Matomo\Context;
+use Matomo\Matomo;
+use Matomo\Request;
 
 /**
  * MULTI ROW EVOLUTION
@@ -41,7 +41,7 @@ class MultiRowEvolution extends RowEvolution
     /**
      * The constructor
      * @param int $idSite
-     * @param \Piwik\Date $date ($this->date from controller)
+     * @param \Matomo\Date $date ($this->date from controller)
      * @param string $graphType
      */
     public function __construct($idSite, $date, $graphType = 'graphEvolution')
@@ -67,8 +67,8 @@ class MultiRowEvolution extends RowEvolution
 
     /**
      * Render the popover
-     * @param \Piwik\Plugins\CoreHome\Controller $controller
-     * @param \Piwik\View $view the popover_rowevolution template
+     * @param \Matomo\Plugins\CoreHome\Controller $controller
+     * @param \Matomo\View $view the popover_rowevolution template
      * @return string
      */
     public function renderPopover($controller, $view)
@@ -78,12 +78,12 @@ class MultiRowEvolution extends RowEvolution
         $view->selectedMetric = $this->metric;
 
         $view->availableRecordsText = $this->dimension . ': '
-            . Piwik::translate('RowEvolution_ComparingRecords', array(count($this->availableMetrics)));
+            . Matomo::translate('RowEvolution_ComparingRecords', array(count($this->availableMetrics)));
 
         return parent::renderPopover($controller, $view);
     }
 
-    protected function getRowEvolutionGraphFromController(\Piwik\Plugins\CoreHome\Controller $controller)
+    protected function getRowEvolutionGraphFromController(\Matomo\Plugins\CoreHome\Controller $controller)
     {
         // the row evolution graphs should not compare serieses
         return Context::executeWithQueryParameters(['compareSegments' => [], 'comparePeriods' => [], 'compareDates' => []], function () use ($controller) {

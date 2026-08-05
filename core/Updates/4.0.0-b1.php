@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\DataAccess\TableMetadata;
-use Piwik\Updater\Migration\Custom as CustomMigration;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CoreAdminHome\Commands\MigrateTokenAuths;
-use Piwik\Plugins\CoreHome\Columns\Profilable;
-use Piwik\Plugins\CoreHome\Columns\VisitorSecondsSinceFirst;
-use Piwik\Plugins\CoreHome\Columns\VisitorSecondsSinceOrder;
-use Piwik\Plugins\Installation\ServerFilesGenerator;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomCompletion;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomProcessing;
-use Piwik\Plugins\PagePerformance\Columns\TimeNetwork;
-use Piwik\Plugins\PagePerformance\Columns\TimeOnLoad;
-use Piwik\Plugins\PagePerformance\Columns\TimeServer;
-use Piwik\Plugins\PagePerformance\Columns\TimeTransfer;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\VisitorInterest\Columns\VisitorSecondsSinceLast;
-use Piwik\SettingsPiwik;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\DataAccess\TableMetadata;
+use Matomo\Updater\Migration\Custom as CustomMigration;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CoreAdminHome\Commands\MigrateTokenAuths;
+use Matomo\Plugins\CoreHome\Columns\Profilable;
+use Matomo\Plugins\CoreHome\Columns\VisitorSecondsSinceFirst;
+use Matomo\Plugins\CoreHome\Columns\VisitorSecondsSinceOrder;
+use Matomo\Plugins\Installation\ServerFilesGenerator;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomCompletion;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomProcessing;
+use Matomo\Plugins\PagePerformance\Columns\TimeNetwork;
+use Matomo\Plugins\PagePerformance\Columns\TimeOnLoad;
+use Matomo\Plugins\PagePerformance\Columns\TimeServer;
+use Matomo\Plugins\PagePerformance\Columns\TimeTransfer;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\VisitorInterest\Columns\VisitorSecondsSinceLast;
+use Matomo\SettingsPiwik;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Update for version 4.0.0-b1.

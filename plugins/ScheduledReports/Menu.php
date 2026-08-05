@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports;
+namespace Matomo\Plugins\ScheduledReports;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
-        $tooltip = Piwik::translate(
-            \Piwik\Plugin\Manager::getInstance()->isPluginActivated('MobileMessaging')
+        $tooltip = Matomo::translate(
+            \Matomo\Plugin\Manager::getInstance()->isPluginActivated('MobileMessaging')
             ? 'MobileMessaging_TopLinkTooltip' : 'ScheduledReports_TopLinkTooltip'
         );
 

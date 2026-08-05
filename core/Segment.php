@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Cache as PiwikCache;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\LogQueryBuilder;
-use Piwik\Plugins\SegmentEditor\SegmentEditor;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Plugins\SegmentEditor\Model as SegmentEditorModel;
-use Piwik\Segment\SegmentsList;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Cache as PiwikCache;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\LogQueryBuilder;
+use Matomo\Plugins\SegmentEditor\SegmentEditor;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Plugins\SegmentEditor\Model as SegmentEditorModel;
+use Matomo\Segment\SegmentsList;
 
 /**
  * Limits the set of visits Piwik uses when aggregating analytics data.
@@ -124,7 +124,7 @@ class Segment
      */
     public function __construct($segmentCondition, $idSites, ?Date $startDate = null, ?Date $endDate = null)
     {
-        $this->segmentQueryBuilder = StaticContainer::get('Piwik\DataAccess\LogQueryBuilder');
+        $this->segmentQueryBuilder = StaticContainer::get('Matomo\DataAccess\LogQueryBuilder');
 
         $segmentCondition = trim($segmentCondition ?: '');
         if (
@@ -477,7 +477,7 @@ class Segment
                 $bind[] = $this->endDate->toString(Date::DATE_TIME_FORMAT);
             }
 
-            $logQueryBuilder = StaticContainer::get('Piwik\DataAccess\LogQueryBuilder');
+            $logQueryBuilder = StaticContainer::get('Matomo\DataAccess\LogQueryBuilder');
             $forceGroupByBackup = $logQueryBuilder->getForcedInnerGroupBySubselect();
             $logQueryBuilder->forceInnerGroupBySubselect(LogQueryBuilder::FORCE_INNER_GROUP_BY_NO_SUBSELECT);
             $query = $segmentObj->getSelectQuery($select, $from, implode(' AND ', $where), $bind);
@@ -721,7 +721,7 @@ class Segment
     {
         $segment = $this->getString();
         if (empty($segment)) {
-            return Piwik::translate('SegmentEditor_DefaultAllVisits');
+            return Matomo::translate('SegmentEditor_DefaultAllVisits');
         }
 
         $availableSegments = SegmentEditor::getAllSegmentsForSite($idSite);

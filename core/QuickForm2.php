@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use HTML_QuickForm2;
 use HTML_QuickForm2_Node;
@@ -16,7 +16,7 @@ use HTML_QuickForm2_Renderer;
 /**
  * Manages forms displayed in Twig
  *
- * For an example, @see \Piwik\Plugins\Login\FormLogin
+ * For an example, @see \Matomo\Plugins\Login\FormLogin
  *
  * @see                 HTML_QuickForm2, libs/HTML/QuickForm2.php
  * @link https://pear.php.net/package/HTML_QuickForm2/

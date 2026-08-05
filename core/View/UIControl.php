@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\View;
+namespace Matomo\View;
 
 use Exception;
-use Piwik\View;
+use Matomo\View;
 
 /**
  * Base type of UI controls.
@@ -19,7 +19,7 @@ use Piwik\View;
  *
  * @api
  */
-class UIControl extends \Piwik\View
+class UIControl extends \Matomo\View
 {
     /**
      * The Twig template file that generates the control's HTML.

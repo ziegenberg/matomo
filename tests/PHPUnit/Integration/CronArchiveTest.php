@@ -7,30 +7,30 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Period\Factory;
-use Piwik\Plugins\CoreAdminHome\tests\Framework\Mock\API;
-use Piwik\Plugins\SegmentEditor\Model;
-use Piwik\Segment;
-use Piwik\Sequence;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeLogger;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\SegmentEditor\API as SegmentAPI;
-use Piwik\Version;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Period\Factory;
+use Matomo\Plugins\CoreAdminHome\tests\Framework\Mock\API;
+use Matomo\Plugins\SegmentEditor\Model;
+use Matomo\Segment;
+use Matomo\Sequence;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeLogger;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SegmentEditor\API as SegmentAPI;
+use Matomo\Version;
 
 /**
  * @group Archiver
@@ -1020,7 +1020,7 @@ class CronArchiveTest extends IntegrationTestCase
         Fixture::createWebsite('2014-12-12 00:01:02');
         Fixture::createWebsite('2014-12-12 00:01:02');
 
-        $ar = StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+        $ar = StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
         $ar->rememberToInvalidateArchivedReportsLater(1, Date::factory('2014-04-05'));
         $ar->rememberToInvalidateArchivedReportsLater(2, Date::factory('2014-04-05'));
         $ar->rememberToInvalidateArchivedReportsLater(2, Date::factory('2014-04-06'));
@@ -1328,7 +1328,7 @@ class CronArchiveTest extends IntegrationTestCase
 
     public function testOutput()
     {
-        \Piwik\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
+        \Matomo\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
             '/method=API.get/' => json_encode(array(array('nb_visits' => 1))),
         );
 
@@ -1442,7 +1442,7 @@ LOG;
 
     public function testOutputWithSkipIdSites()
     {
-        \Piwik\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
+        \Matomo\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
             '/method=API.get/' => json_encode(array(array('nb_visits' => 1))),
         );
 
@@ -1564,7 +1564,7 @@ LOG;
 
     public function testShouldNotStopProcessingWhenOneSiteIsInvalid()
     {
-        \Piwik\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
+        \Matomo\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
             '/method=API.get/' => json_encode(array(array('nb_visits' => 1))),
         );
 
@@ -1596,7 +1596,7 @@ LOG;
 
     public function testShouldSkipYearPeriodWhenDisabled()
     {
-        \Piwik\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = [
+        \Matomo\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = [
             '/method=API.get/' => json_encode([['nb_visits' => 1]]),
         ];
 
@@ -1622,7 +1622,7 @@ LOG;
         Date::$now = strtotime('2020-02-03 04:05:06');
 
         return array(
-            'Piwik\CliMulti' => \Piwik\DI::create('Piwik\Tests\Framework\Mock\FakeCliMulti'),
+            'Matomo\CliMulti' => \Matomo\DI::create('Matomo\Tests\Framework\Mock\FakeCliMulti'),
         );
     }
 

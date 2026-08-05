@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\UpdateCheck\ReleaseChannel;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\UpdateCheck\ReleaseChannel;
 
 /**
  * Get release channels that are defined by plugins.
@@ -30,7 +30,7 @@ class ReleaseChannels
      */
     public function getAllReleaseChannels()
     {
-        $classNames = $this->pluginManager->findMultipleComponents('ReleaseChannel', 'Piwik\\UpdateCheck\\ReleaseChannel');
+        $classNames = $this->pluginManager->findMultipleComponents('ReleaseChannel', 'Matomo\UpdateCheck\ReleaseChannel');
         $channels = array();
 
         foreach ($classNames as $className) {

@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
 use Exception;
-use Piwik\Archive\Chunk;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\ArchiveProcessor;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Db\BatchInsert;
-use Piwik\Log\LoggerInterface;
-use Piwik\SettingsServer;
+use Matomo\Archive\Chunk;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\ArchiveProcessor;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Db\BatchInsert;
+use Matomo\Log\LoggerInterface;
+use Matomo\SettingsServer;
 
 /**
  * This class is used to create a new Archive.
@@ -101,12 +101,12 @@ class ArchiveWriter
     private $idSite;
 
     /**
-     * @var \Piwik\Segment
+     * @var \Matomo\Segment
      */
     private $segment;
 
     /**
-     * @var \Piwik\Period
+     * @var \Matomo\Period
      */
     private $period;
 

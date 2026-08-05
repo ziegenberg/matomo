@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Scheduler;
+namespace Matomo\Tests\Unit\Scheduler;
 
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Scheduler\Task;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Scheduler\Task;
 
 /**
  * @group Scheduler
@@ -20,7 +20,7 @@ class TaskTest extends \PHPUnit\Framework\TestCase
     public function testGetClassName()
     {
         $scheduledTask = new Task(new ScheduledReports(), null, null, null);
-        $this->assertEquals('Piwik\Plugins\ScheduledReports\ScheduledReports', $scheduledTask->getClassName());
+        $this->assertEquals('Matomo\Plugins\ScheduledReports\ScheduledReports', $scheduledTask->getClassName());
     }
 
     /**

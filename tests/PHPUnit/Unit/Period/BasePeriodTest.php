@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Period;
+namespace Matomo\Tests\Unit\Period;
 
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Fixture;
 
 abstract class BasePeriodTest extends \PHPUnit\Framework\TestCase
 {

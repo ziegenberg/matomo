@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\TestDataHelper;
+namespace Matomo\Tests\Framework\TestDataHelper;
 
-use Piwik\Common;
+use Matomo\Common;
 use Matomo\Network\IPUtils;
-use Piwik\Db;
+use Matomo\Db;
 
 /**
  * Test helper that inserts rows into log tables. Defines defaults for all non null columns so

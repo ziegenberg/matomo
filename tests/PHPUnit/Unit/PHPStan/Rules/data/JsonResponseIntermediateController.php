@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules\data;
+namespace Matomo\Tests\Unit\PHPStan\Rules\data;
 
 // overrides the attributed grandparent action without re-declaring -> must be flagged
 class JsonResponseIntermediateController extends JsonResponseGrandparentController

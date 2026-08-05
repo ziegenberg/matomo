@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions;
+namespace Matomo\Plugins\Actions;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\Site;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\PageUrl;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\Site;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\PageUrl;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {
@@ -206,35 +206,35 @@ class VisitorDetails extends VisitorDetailsAbstract
             case 'goal':
                 $action['icon'] = 'plugins/Morpheus/images/goal.png';
                 $action['iconSVG'] = 'plugins/Morpheus/images/goal.svg';
-                $action['title'] = Piwik::translate('Goals_GoalConversion');
+                $action['title'] = Matomo::translate('Goals_GoalConversion');
                 $action['subtitle'] = $action['goalName'];
                 if (!empty($action['revenue'])) {
-                    $action['subtitle'] .= ' (' . Piwik::translate('Goals_NRevenue', $formatter->getPrettyMoney($action['revenue'], $visitorDetails['idSite'])) . ')';
+                    $action['subtitle'] .= ' (' . Matomo::translate('Goals_NRevenue', $formatter->getPrettyMoney($action['revenue'], $visitorDetails['idSite'])) . ')';
                 }
                 break;
-            case Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER:
-            case Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART:
+            case Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER:
+            case Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART:
                 $action['icon'] = 'plugins/Morpheus/images/' . $actionType . '.png';
                 $action['iconSVG'] = 'plugins/Morpheus/images/' . $actionType . '.svg';
-                if ($actionType == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
-                    $action['title'] = Piwik::translate('CoreHome_VisitStatusOrdered') . ' (' . $action['orderId'] . ')';
+                if ($actionType == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+                    $action['title'] = Matomo::translate('CoreHome_VisitStatusOrdered') . ' (' . $action['orderId'] . ')';
                 } else {
-                    $action['title'] = Piwik::translate('Goals_AbandonedCart');
+                    $action['title'] = Matomo::translate('Goals_AbandonedCart');
                 }
 
                 $itemNames = implode(', ', array_column($action['itemDetails'], 'itemName'));
-                $action['subtitle'] = Piwik::translate('Goals_NRevenue', $formatter->getPrettyMoney($action['revenue'], $visitorDetails['idSite']));
-                $action['subtitle'] .= ' - ' .  Piwik::translate('Goals_NItems', $action['items']) . ': ' . $itemNames . ')';
+                $action['subtitle'] = Matomo::translate('Goals_NRevenue', $formatter->getPrettyMoney($action['revenue'], $visitorDetails['idSite']));
+                $action['subtitle'] .= ' - ' .  Matomo::translate('Goals_NItems', $action['items']) . ': ' . $itemNames . ')';
                 break;
             case Action::TYPE_CONTENT:
                 if (!empty($action['contentInteraction'])) {
                     $action['icon'] = 'plugins/Morpheus/images/contentinteraction.png';
                     $action['iconSVG'] = 'plugins/Morpheus/images/contentinteraction.svg';
-                    $action['title'] = Piwik::translate('Contents_ContentInteraction') . ' (' . $action['contentInteraction'] . ')';
+                    $action['title'] = Matomo::translate('Contents_ContentInteraction') . ' (' . $action['contentInteraction'] . ')';
                 } else {
                     $action['icon'] = 'plugins/Morpheus/images/contentimpression.png';
                     $action['iconSVG'] = 'plugins/Morpheus/images/contentimpression.svg';
-                    $action['title'] = Piwik::translate('Contents_ContentImpression');
+                    $action['title'] = Matomo::translate('Contents_ContentImpression');
                 }
 
                 $action['subtitle'] = $action['contentName'];
@@ -246,29 +246,29 @@ class VisitorDetails extends VisitorDetailsAbstract
                 $action['type'] = 'download';
                 $action['icon'] = 'plugins/Morpheus/images/download.png';
                 $action['iconSVG'] = 'plugins/Morpheus/images/download.svg';
-                $action['title'] = Piwik::translate('General_Download');
+                $action['title'] = Matomo::translate('General_Download');
                 $action['subtitle'] = $action['url'];
                 break;
             case Action::TYPE_OUTLINK:
                 $action['type'] = 'outlink';
                 $action['icon'] = 'plugins/Morpheus/images/link.png';
                 $action['iconSVG'] = 'plugins/Morpheus/images/link.svg';
-                $action['title'] = Piwik::translate('General_Outlink');
+                $action['title'] = Matomo::translate('General_Outlink');
                 $action['subtitle'] = $action['url'];
                 break;
             case Action::TYPE_SITE_SEARCH:
                 $action['type'] = 'search';
                 $action['icon'] = 'plugins/Morpheus/images/search.png';
                 $action['iconSVG'] = 'plugins/Morpheus/images/search.svg';
-                $action['title'] = Piwik::translate('Actions_SubmenuSitesearch');
+                $action['title'] = Matomo::translate('Actions_SubmenuSitesearch');
                 $action['subtitle'] = $action['siteSearchKeyword'];
 
                 if (!empty($action['siteSearchCategory'])) {
-                    $action['subtitle'] .= ' - ' . Piwik::translate('Actions_ColumnSearchCategory') . ': ' . $action['siteSearchCategory'];
+                    $action['subtitle'] .= ' - ' . Matomo::translate('Actions_ColumnSearchCategory') . ': ' . $action['siteSearchCategory'];
                 }
 
                 if (!empty($action['siteSearchCount'])) {
-                    $action['subtitle'] .= ' - ' . Piwik::translate('Actions_ColumnSearchResultsCount') . ': ' . $action['siteSearchCount'];
+                    $action['subtitle'] .= ' - ' . Matomo::translate('Actions_ColumnSearchResultsCount') . ': ' . $action['siteSearchCount'];
                 }
 
                 break;
@@ -305,7 +305,7 @@ class VisitorDetails extends VisitorDetailsAbstract
         $customFields = array();
         $customJoins  = array();
 
-        Piwik::postEvent('Actions.getCustomActionDimensionFieldsAndJoins', array(&$customFields, &$customJoins));
+        Matomo::postEvent('Actions.getCustomActionDimensionFieldsAndJoins', array(&$customFields, &$customJoins));
 
         $customFields = array_filter($customFields);
         array_unshift($customFields, ''); // add empty element at first

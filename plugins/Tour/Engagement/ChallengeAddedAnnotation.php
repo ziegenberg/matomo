@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class ChallengeAddedAnnotation extends Challenge
 {
     public function getName()
     {
-        return Piwik::translate('Tour_AddAnnotation');
+        return Matomo::translate('Tour_AddAnnotation');
     }
 
     public function getDescription()
     {
-        return Piwik::translate('Annotations_PluginDescription');
+        return Matomo::translate('Annotations_PluginDescription');
     }
 
     public function getId()

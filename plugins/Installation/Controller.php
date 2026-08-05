@@ -7,40 +7,40 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
 use Exception;
-use Piwik\Access;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\AssetManager;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Filesystem;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\ControllerAdmin;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CoreVue\CoreVue;
-use Piwik\Plugins\Diagnostics\DiagnosticReport;
-use Piwik\Plugins\Diagnostics\DiagnosticService;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Plugins\UsersManager\NewsletterSignup;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\ProxyHeaders;
-use Piwik\SettingsPiwik;
-use Piwik\Tracker\TrackerCodeGenerator;
-use Piwik\Translation\Translator;
-use Piwik\Updater;
-use Piwik\Url;
-use Piwik\Version;
+use Matomo\Access;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\AssetManager;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Filesystem;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\ControllerAdmin;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CoreVue\CoreVue;
+use Matomo\Plugins\Diagnostics\DiagnosticReport;
+use Matomo\Plugins\Diagnostics\DiagnosticService;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Plugins\UsersManager\NewsletterSignup;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\ProxyHeaders;
+use Matomo\SettingsPiwik;
+use Matomo\Tracker\TrackerCodeGenerator;
+use Matomo\Translation\Translator;
+use Matomo\Updater;
+use Matomo\Url;
+use Matomo\Version;
 use Zend_Db_Adapter_Exception;
 
 /**
@@ -122,7 +122,7 @@ class Controller extends ControllerAdmin
 
         // Do not use dependency injection because this service requires a lot of sub-services across plugins
         /** @var DiagnosticService $diagnosticService */
-        $diagnosticService = StaticContainer::get('Piwik\Plugins\Diagnostics\DiagnosticService');
+        $diagnosticService = StaticContainer::get('Matomo\Plugins\Diagnostics\DiagnosticService');
         $view->diagnosticReport = $diagnosticService->runDiagnostics();
         $view->isInstallation = true;
         $view->systemCheckInfo = $this->getSystemCheckTextareaValue($view->diagnosticReport);
@@ -400,7 +400,7 @@ class Controller extends ControllerAdmin
         );
 
         // Load the Tracking code and help text from the SitesManager
-        $viewTrackingHelp = new \Piwik\View('@SitesManager/_displayJavascriptCode');
+        $viewTrackingHelp = new \Matomo\View('@SitesManager/_displayJavascriptCode');
         $viewTrackingHelp->displaySiteName = $siteName;
         $viewTrackingHelp->jsTag = $jsTag;
         $viewTrackingHelp->emailBody = $emailBody;
@@ -436,20 +436,20 @@ class Controller extends ControllerAdmin
         /**
          * Triggered on initialization of the form to customize default Matomo settings (at the end of the installation process).
          *
-         * @param \Piwik\Plugins\Installation\FormDefaultSettings $form
+         * @param \Matomo\Plugins\Installation\FormDefaultSettings $form
          */
-        Piwik::postEvent('Installation.defaultSettingsForm.init', array($form));
+        Matomo::postEvent('Installation.defaultSettingsForm.init', array($form));
 
-        $form->addElement('submit', 'submit', array('value' => Piwik::translate('General_ContinueToPiwik') . ' »', 'class' => 'btn'));
+        $form->addElement('submit', 'submit', array('value' => Matomo::translate('General_ContinueToPiwik') . ' »', 'class' => 'btn'));
 
         if ($form->validate()) {
             try {
                 /**
                  * Triggered on submission of the form to customize default Matomo settings (at the end of the installation process).
                  *
-                 * @param \Piwik\Plugins\Installation\FormDefaultSettings $form
+                 * @param \Matomo\Plugins\Installation\FormDefaultSettings $form
                  */
-                Piwik::postEvent('Installation.defaultSettingsForm.submit', array($form));
+                Matomo::postEvent('Installation.defaultSettingsForm.submit', array($form));
 
                 $this->markInstallationAsCompleted();
 
@@ -487,7 +487,7 @@ class Controller extends ControllerAdmin
      */
     public function systemCheckPage()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $view = new View(
             '@Installation/systemCheckPage',
@@ -497,7 +497,7 @@ class Controller extends ControllerAdmin
         $this->setBasicVariablesView($view);
 
         /** @var DiagnosticService $diagnosticService */
-        $diagnosticService = StaticContainer::get('Piwik\Plugins\Diagnostics\DiagnosticService');
+        $diagnosticService = StaticContainer::get('Matomo\Plugins\Diagnostics\DiagnosticService');
         $view->diagnosticReport = $diagnosticService->runDiagnostics();
         $view->systemCheckInfo = $this->getSystemCheckTextareaValue($view->diagnosticReport);
         return $view->render();
@@ -605,7 +605,7 @@ class Controller extends ControllerAdmin
 
         if (
             !empty($protocol)
-            && !\Piwik\ProxyHttp::isHttps()
+            && !\Matomo\ProxyHttp::isHttps()
         ) {
             $config->General['assume_secure_protocol'] = '1';
         }
@@ -628,7 +628,7 @@ class Controller extends ControllerAdmin
     private function resetLanguageCookie()
     {
         /** @var Translator $translator */
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
         LanguagesManager::setLanguageForSession($translator->getCurrentLanguage());
     }
 
@@ -640,15 +640,15 @@ class Controller extends ControllerAdmin
 
         $possibleErrorMessage = $possibleErrorMessage ? sprintf('<br/><br/>Original error was "%s".<br/>', $possibleErrorMessage) : '';
 
-        \Piwik\Plugins\Login\Controller::clearSession();
-        $message = Piwik::translate(
+        \Matomo\Plugins\Login\Controller::clearSession();
+        $message = Matomo::translate(
             'Installation_InvalidStateError',
             array($possibleErrorMessage . '<br /><strong>',
                   // piwik-is-already-installed is checked against in checkPiwikServerWorking
                   '</strong><a id="piwik-is-already-installed" href=\'' . Common::sanitizeInputValue(Url::getCurrentUrlWithoutFileName()) . '\'>',
                   '</a>')
         );
-        Piwik::exitWithErrorMessage($message);
+        Matomo::exitWithErrorMessage($message);
     }
 
     /**
@@ -672,7 +672,7 @@ class Controller extends ControllerAdmin
     {
         $steps = array_keys($this->steps);
         $nextStep = $steps[1 + array_search($currentStep, $steps)];
-        Piwik::redirectToModule('Installation', $nextStep, $parameters);
+        Matomo::redirectToModule('Installation', $nextStep, $parameters);
     }
 
     /**
@@ -780,7 +780,7 @@ class Controller extends ControllerAdmin
 
     private function getSystemCheckTextareaValue(DiagnosticReport $diagnosticReport)
     {
-        $view = new \Piwik\View('@Installation/_systemCheckSection');
+        $view = new \Matomo\View('@Installation/_systemCheckSection');
         $view->diagnosticReport = $diagnosticReport;
         return $view->render();
     }
@@ -801,18 +801,18 @@ class Controller extends ControllerAdmin
         $threeDaysAgo = Date::getNowTimestamp() - (3 * 24 * 60 * 60);
 
         if ($firstAccess < $threeDaysAgo) {
-            Piwik::exitWithErrorMessage(
-                Piwik::translate('Installation_ErrorExpired1') .
+            Matomo::exitWithErrorMessage(
+                Matomo::translate('Installation_ErrorExpired1') .
                 "\n<br/>" .
-                Piwik::translate('Installation_ErrorExpired2') .
+                Matomo::translate('Installation_ErrorExpired2') .
                 "\n<ul>" .
-                "\n<li>" . Piwik::translate('Installation_ErrorExpired3', ['<strong>', '</strong>']) . '</li>' .
-                "\n<li>" . Piwik::translate('Installation_ErrorExpired4', ['<strong>', '</strong>']) . '</li>' .
-                "\n<li>" . Piwik::translate('Installation_ErrorExpired5') . '</li>' .
+                "\n<li>" . Matomo::translate('Installation_ErrorExpired3', ['<strong>', '</strong>']) . '</li>' .
+                "\n<li>" . Matomo::translate('Installation_ErrorExpired4', ['<strong>', '</strong>']) . '</li>' .
+                "\n<li>" . Matomo::translate('Installation_ErrorExpired5') . '</li>' .
                 "\n</ul>" .
-                Piwik::translate('Installation_ErrorExpired6') .
+                Matomo::translate('Installation_ErrorExpired6') .
                 "\n<br/>" .
-                Piwik::translate('Installation_ErrorExpired7', [
+                Matomo::translate('Installation_ErrorExpired7', [
                     Url::getExternalLinkTag('https://matomo.org/faq/how-to-install/manage-secure-access-to-the-matomo-installer/'),
                     '</a>',
                 ])

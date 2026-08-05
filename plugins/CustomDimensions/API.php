@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions;
+namespace Matomo\Plugins\CustomDimensions;
 
-use Piwik\Common;
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Filesystem;
-use Piwik\Piwik;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
-use Piwik\Plugins\CustomDimensions\Dimension\Active;
-use Piwik\Plugins\CustomDimensions\Dimension\CaseSensitive;
-use Piwik\Plugins\CustomDimensions\Dimension\Description;
-use Piwik\Plugins\CustomDimensions\Dimension\Dimension;
-use Piwik\Plugins\CustomDimensions\Dimension\Extraction;
-use Piwik\Plugins\CustomDimensions\Dimension\Extractions;
-use Piwik\Plugins\CustomDimensions\Dimension\Index;
-use Piwik\Plugins\CustomDimensions\Dimension\Name;
-use Piwik\Plugins\CustomDimensions\Dimension\Scope;
-use Piwik\Tracker\Cache;
+use Matomo\Common;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Filesystem;
+use Matomo\Matomo;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugins\CustomDimensions\Dimension\Active;
+use Matomo\Plugins\CustomDimensions\Dimension\CaseSensitive;
+use Matomo\Plugins\CustomDimensions\Dimension\Description;
+use Matomo\Plugins\CustomDimensions\Dimension\Dimension;
+use Matomo\Plugins\CustomDimensions\Dimension\Extraction;
+use Matomo\Plugins\CustomDimensions\Dimension\Extractions;
+use Matomo\Plugins\CustomDimensions\Dimension\Index;
+use Matomo\Plugins\CustomDimensions\Dimension\Name;
+use Matomo\Plugins\CustomDimensions\Dimension\Scope;
+use Matomo\Tracker\Cache;
 
 /**
  * The Custom Dimensions API lets you manage and access reports for your configured Custom Dimensions.
  *
  * @method static API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns the report for a configured custom dimension. Only reports for active dimensions can be fetched.
@@ -54,7 +54,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getCustomDimension(int $idDimension, int $idSite, string $period, string $date, $segment = false, bool $expanded = false, bool $flat = false, $idSubtable = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $dimension = new Dimension($idDimension, $idSite);
         $dimension->checkActive();
@@ -68,13 +68,13 @@ class API extends \Piwik\Plugin\API
             $row = $parentTable->getRowFromIdSubDataTable($idSubtable);
             if ($row) {
                 $parentValue = $row->getColumn('label');
-                $dataTable->filter('Piwik\Plugins\CustomDimensions\DataTable\Filter\AddSubtableSegmentMetadata', array($idDimension, $parentValue));
+                $dataTable->filter('Matomo\Plugins\CustomDimensions\DataTable\Filter\AddSubtableSegmentMetadata', array($idDimension, $parentValue));
             }
         } else {
-            $dataTable->filter('Piwik\Plugins\CustomDimensions\DataTable\Filter\AddSegmentMetadata', array($idDimension));
+            $dataTable->filter('Matomo\Plugins\CustomDimensions\DataTable\Filter\AddSegmentMetadata', array($idDimension));
         }
 
-        $dataTable->filter('Piwik\Plugins\CustomDimensions\DataTable\Filter\RemoveUserIfNeeded', array($idSite, $period, $date));
+        $dataTable->filter('Matomo\Plugins\CustomDimensions\DataTable\Filter\RemoveUserIfNeeded', array($idSite, $period, $date));
 
         return $dataTable;
     }
@@ -102,7 +102,7 @@ class API extends \Piwik\Plugin\API
      */
     public function configureNewCustomDimension(int $idSite, string $name, string $scope, $active, $extractions = [], $caseSensitive = true, string $description = '')
     {
-        Piwik::checkUserHasWriteAccess($idSite);
+        Matomo::checkUserHasWriteAccess($idSite);
 
         $this->checkCustomDimensionConfig($name, $active, $extractions, $caseSensitive, $description);
 
@@ -162,7 +162,7 @@ class API extends \Piwik\Plugin\API
      */
     public function configureExistingCustomDimension(int $idDimension, int $idSite, string $name, $active, $extractions = [], $caseSensitive = null, ?string $description = null): void
     {
-        Piwik::checkUserHasWriteAccess($idSite);
+        Matomo::checkUserHasWriteAccess($idSite);
 
         $dimension = new Dimension($idDimension, $idSite);
         $dimension->checkExists();
@@ -204,7 +204,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getConfiguredCustomDimensions(int $idSite)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         return $this->getConfiguration()->getCustomDimensionsForSite($idSite);
     }
@@ -264,7 +264,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAvailableScopes(int $idSite): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $scopes = [];
         foreach (CustomDimensions::getPublicScopes() as $scope) {
@@ -273,7 +273,7 @@ class API extends \Piwik\Plugin\API
 
             $scopes[] = [
                 'value' => $scope,
-                'name' => Piwik::translate('General_TrackingScope' . ucfirst($scope)),
+                'name' => Matomo::translate('General_TrackingScope' . ucfirst($scope)),
                 'numSlotsAvailable' => count($indexes),
                 'numSlotsUsed' => count($configs),
                 'numSlotsLeft' => count($indexes) - count($configs),
@@ -291,7 +291,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAvailableExtractionDimensions(): array
     {
-        Piwik::checkUserHasSomeWriteAccess();
+        Matomo::checkUserHasSomeWriteAccess();
 
         $supported = Extraction::getSupportedDimensions();
 

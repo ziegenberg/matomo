@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests\Integration;
+namespace Matomo\Plugins\ScheduledReports\tests\Integration;
 
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
-use Piwik\Plugins\ScheduledReports\GeneratedReport;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Plugins\ScheduledReports\Tasks;
-use Piwik\Plugins\ScheduledReports\WidgetReportMapper;
-use Piwik\Plugins\SegmentEditor\API as APISegmentEditor;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Plugins\Dashboard\Model as DashboardModel;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\NoAccessException;
-use Piwik\ReportRenderer;
-use Piwik\Scheduler\Schedule\Monthly;
-use Piwik\Scheduler\Schedule\Schedule;
-use Piwik\Scheduler\Task;
-use Piwik\Site;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Widget\WidgetsList;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\Plugins\ScheduledReports\GeneratedReport;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Plugins\ScheduledReports\Tasks;
+use Matomo\Plugins\ScheduledReports\WidgetReportMapper;
+use Matomo\Plugins\SegmentEditor\API as APISegmentEditor;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Plugins\Dashboard\Model as DashboardModel;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\NoAccessException;
+use Matomo\ReportRenderer;
+use Matomo\Scheduler\Schedule\Monthly;
+use Matomo\Scheduler\Schedule\Schedule;
+use Matomo\Scheduler\Task;
+use Matomo\Site;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Widget\WidgetsList;
 use Exception;
 use ReflectionMethod;
 
@@ -54,9 +54,9 @@ class ApiTest extends IntegrationTestCase
 
         // setup the access layer
         self::setSuperUser();
-        \Piwik\Plugin\Manager::getInstance()->loadPlugins(array('API', 'UserCountry', 'ScheduledReports',
+        \Matomo\Plugin\Manager::getInstance()->loadPlugins(array('API', 'UserCountry', 'ScheduledReports',
             'MobileMessaging', 'VisitsSummary', 'Referrers', 'Dashboard', 'Live', 'SegmentEditor'));
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
 
         APISitesManager::getInstance()->addSite("Test", array("http://piwik.net"));
 
@@ -72,21 +72,21 @@ class ApiTest extends IntegrationTestCase
             'DevicesDetection_getType',
         ];
 
-        Piwik::addAction(APIScheduledReports::GET_REPORT_TYPES_EVENT, function (&$reportTypes) {
+        Matomo::addAction(APIScheduledReports::GET_REPORT_TYPES_EVENT, function (&$reportTypes) {
             $reportTypes['dummyreporttype'] = 'dummyreporttype.png';
         });
 
-        Piwik::addAction(APIScheduledReports::GET_REPORT_FORMATS_EVENT, function (&$reportFormats) {
+        Matomo::addAction(APIScheduledReports::GET_REPORT_FORMATS_EVENT, function (&$reportFormats) {
             $reportFormats['dummyreportformat'] = 'dummyreportformat.png';
         });
 
-        Piwik::addAction(APIScheduledReports::GET_REPORT_METADATA_EVENT, function (&$availableReportData, $reportType, $idSite) {
+        Matomo::addAction(APIScheduledReports::GET_REPORT_METADATA_EVENT, function (&$availableReportData, $reportType, $idSite) {
             if ($reportType == 'dummyreporttype') {
-                $availableReportData = \Piwik\Plugins\API\API::getInstance()->getReportMetadata($idSite);
+                $availableReportData = \Matomo\Plugins\API\API::getInstance()->getReportMetadata($idSite);
             }
         });
 
-        Piwik::addAction(APIScheduledReports::GET_RENDERER_INSTANCE_EVENT, function (&$reportRenderer, $reportType, $outputType, $report) {
+        Matomo::addAction(APIScheduledReports::GET_RENDERER_INSTANCE_EVENT, function (&$reportRenderer, $reportType, $outputType, $report) {
             if ($reportType == 'dummyrepor') { // apparently this gets cut off
                 $reportRenderer = new class () extends ReportRenderer {
                     public function setLocale($locale)
@@ -133,7 +133,7 @@ class ApiTest extends IntegrationTestCase
         );
 
         $eventCalledWith = [];
-        Piwik::addAction(APIScheduledReports::SEND_REPORT_EVENT, function (
+        Matomo::addAction(APIScheduledReports::SEND_REPORT_EVENT, function (
             &$reportType,
             $report,
             $contents,
@@ -200,7 +200,7 @@ class ApiTest extends IntegrationTestCase
         ]);
 
         $dashboardModel = new DashboardModel();
-        $dashboardModel->updateLayoutForUser(Piwik::getCurrentUserLogin(), 1, $layout);
+        $dashboardModel->updateLayoutForUser(Matomo::getCurrentUserLogin(), 1, $layout);
 
         $result = APIScheduledReports::getInstance()->getWidgetReportMap(1, $this->idSite);
 
@@ -211,25 +211,25 @@ class ApiTest extends IntegrationTestCase
         $this->assertNotEmpty($result['unmappedWidgets']);
 
         $this->assertContains($unmappedWidgetName, $result['unmappedWidgets']);
-        $this->assertSame(Piwik::translate('Dashboard_DashboardOf', Piwik::getCurrentUserLogin()), $result['dashboardName']);
+        $this->assertSame(Matomo::translate('Dashboard_DashboardOf', Matomo::getCurrentUserLogin()), $result['dashboardName']);
     }
 
     public function testGetWidgetReportMapReturnsEmptyWhenLayoutIsEmpty()
     {
         $dashboardModel = new DashboardModel();
-        $dashboardModel->updateLayoutForUser(Piwik::getCurrentUserLogin(), 1, '[]');
+        $dashboardModel->updateLayoutForUser(Matomo::getCurrentUserLogin(), 1, '[]');
 
         $result = APIScheduledReports::getInstance()->getWidgetReportMap(1, $this->idSite);
 
         $this->assertSame([], $result['email']);
         $this->assertSame([], $result['unmappedWidgets']);
-        $this->assertSame(Piwik::translate('Dashboard_DashboardOf', Piwik::getCurrentUserLogin()), $result['dashboardName']);
+        $this->assertSame(Matomo::translate('Dashboard_DashboardOf', Matomo::getCurrentUserLogin()), $result['dashboardName']);
     }
 
     public function testGetWidgetReportMapUsesDefaultDashboardWhenDashboardOneIsMissing()
     {
         $dashboardModel = new DashboardModel();
-        $dashboardModel->deleteAllLayoutsForUser(Piwik::getCurrentUserLogin());
+        $dashboardModel->deleteAllLayoutsForUser(Matomo::getCurrentUserLogin());
 
         $result = APIScheduledReports::getInstance()->getWidgetReportMap(1, $this->idSite);
 
@@ -355,7 +355,7 @@ class ApiTest extends IntegrationTestCase
         ]);
 
         $dashboardModel = new DashboardModel();
-        $dashboardModel->updateLayoutForUser(Piwik::getCurrentUserLogin(), 1, $layout);
+        $dashboardModel->updateLayoutForUser(Matomo::getCurrentUserLogin(), 1, $layout);
     }
 
     /**
@@ -544,14 +544,14 @@ class ApiTest extends IntegrationTestCase
         $report6['period'] = Schedule::PERIOD_NEVER;
         $report6['deleted'] = 0;
 
-        $stubbedAPIScheduledReports = $this->getMockBuilder('\\Piwik\\Plugins\\ScheduledReports\\API')
+        $stubbedAPIScheduledReports = $this->getMockBuilder('\Matomo\Plugins\ScheduledReports\API')
                                            ->setMethods(array('getReports', 'getInstance'))
                                            ->disableOriginalConstructor()
                                            ->getMock();
         $stubbedAPIScheduledReports->expects($this->any())->method('getReports')->will($this->returnValue(
             array($report1, $report2, $report3, $report4, $report5, $report6)
         ));
-        \Piwik\Plugins\ScheduledReports\API::setSingletonInstance($stubbedAPIScheduledReports);
+        \Matomo\Plugins\ScheduledReports\API::setSingletonInstance($stubbedAPIScheduledReports);
 
         // initialize sites 1 and 2
         Site::setSites(array(
@@ -589,7 +589,7 @@ class ApiTest extends IntegrationTestCase
         $tasks = $pdfReportPlugin->getScheduledTasks();
         $this->assertEquals($expectedTasks, $tasks);
 
-        \Piwik\Plugins\ScheduledReports\API::unsetInstance();
+        \Matomo\Plugins\ScheduledReports\API::unsetInstance();
     }
 
     /**
@@ -612,7 +612,7 @@ class ApiTest extends IntegrationTestCase
     public function testGetReportSubjectAndReportTitle($expectedReportSubject, $expectedReportTitle, $websiteName, $reports)
     {
         $getReportSubjectAndReportTitle = new ReflectionMethod(
-            '\\Piwik\\Plugins\\ScheduledReports\\API',
+            '\Matomo\Plugins\ScheduledReports\API',
             'getReportSubjectAndReportTitle'
         );
 
@@ -625,22 +625,22 @@ class ApiTest extends IntegrationTestCase
     {
         $realProxy = new Proxy();
 
-        $mockProxy = $this->getMockBuilder('Piwik\API\Proxy')->setMethods(array('call'))->getMock();
+        $mockProxy = $this->getMockBuilder('Matomo\API\Proxy')->setMethods(array('call'))->getMock();
         $mockProxy->expects($this->any())->method('call')->willReturnCallback(function ($className, $methodName, $parametersRequest) use ($realProxy) {
             switch ($className) {
-                case '\Piwik\Plugins\VisitsSummary\API':
+                case '\Matomo\Plugins\VisitsSummary\API':
                     $result = new DataTable();
                     $result->addRowFromSimpleArray(array('label' => 'visits label', 'nb_visits' => 1));
                     return $result;
-                case '\Piwik\Plugins\UserCountry\API':
+                case '\Matomo\Plugins\UserCountry\API':
                     throw new \Exception("error");
-                case '\Piwik\Plugins\Referrers\API':
+                case '\Matomo\Plugins\Referrers\API':
                     $result = new DataTable();
                     $result->addRowFromSimpleArray(array('label' => 'referrers label', 'nb_visits' => 1));
                     return $result;
-                case '\Piwik\Plugins\API\API':
-                case '\Piwik\Plugins\Dashboard\API':
-                case '\Piwik\Plugins\LanguagesManager\API':
+                case '\Matomo\Plugins\API\API':
+                case '\Matomo\Plugins\Dashboard\API':
+                case '\Matomo\Plugins\LanguagesManager\API':
                     return $realProxy->call($className, $methodName, $parametersRequest);
                 default:
                     throw new \Exception("Unexpected method $className::$methodName.");
@@ -681,16 +681,16 @@ class ApiTest extends IntegrationTestCase
     {
         $realProxy = new Proxy();
 
-        $mockProxy = $this->getMockBuilder('Piwik\API\Proxy')->setMethods(array('call'))->getMock();
+        $mockProxy = $this->getMockBuilder('Matomo\API\Proxy')->setMethods(array('call'))->getMock();
         $mockProxy->expects($this->any())->method('call')->willReturnCallback(function ($className, $methodName, $parametersRequest) use ($realProxy) {
             switch ($className) {
-                case '\Piwik\Plugins\VisitsSummary\API':
+                case '\Matomo\Plugins\VisitsSummary\API':
                     $result = new DataTable();
                     $result->addRowFromSimpleArray(array('label' => 'visits label', 'nb_visits' => 1));
                     return $result;
-                case '\Piwik\Plugins\API\API':
-                case '\Piwik\Plugins\Dashboard\API':
-                case '\Piwik\Plugins\LanguagesManager\API':
+                case '\Matomo\Plugins\API\API':
+                case '\Matomo\Plugins\Dashboard\API':
+                case '\Matomo\Plugins\LanguagesManager\API':
                     return $realProxy->call($className, $methodName, $parametersRequest);
                 default:
                     throw new \Exception("Unexpected method $className::$methodName.");
@@ -698,17 +698,17 @@ class ApiTest extends IntegrationTestCase
         });
         StaticContainer::getContainer()->set(Proxy::class, $mockProxy);
 
-        Piwik::addAction(APIScheduledReports::GET_REPORT_TYPES_EVENT, function (&$reportTypes) {
+        Matomo::addAction(APIScheduledReports::GET_REPORT_TYPES_EVENT, function (&$reportTypes) {
             $reportTypes['dummyrepor'] = 'dummyrepor.png';
         });
 
-        Piwik::addAction(APIScheduledReports::GET_REPORT_FORMATS_EVENT, function (&$reportFormats, $reportType) {
+        Matomo::addAction(APIScheduledReports::GET_REPORT_FORMATS_EVENT, function (&$reportFormats, $reportType) {
             if ($reportType === 'dummyrepor') {
                 $reportFormats[ReportRenderer::HTML_FORMAT] = 'html.png';
             }
         });
 
-        Piwik::addAction(APIScheduledReports::GET_REPORT_PARAMETERS_EVENT, function (&$availableParameters, $reportType) {
+        Matomo::addAction(APIScheduledReports::GET_REPORT_PARAMETERS_EVENT, function (&$availableParameters, $reportType) {
             if ($reportType === 'dummyrepor') {
                 $availableParameters = [
                     ScheduledReports::DISPLAY_FORMAT_PARAMETER => false,
@@ -717,9 +717,9 @@ class ApiTest extends IntegrationTestCase
             }
         });
 
-        Piwik::addAction(APIScheduledReports::GET_REPORT_METADATA_EVENT, function (&$availableReportData, $reportType, $idSite) {
+        Matomo::addAction(APIScheduledReports::GET_REPORT_METADATA_EVENT, function (&$availableReportData, $reportType, $idSite) {
             if ($reportType === 'dummyrepor') {
-                $availableReportData = \Piwik\Plugins\API\API::getInstance()->getReportMetadata($idSite);
+                $availableReportData = \Matomo\Plugins\API\API::getInstance()->getReportMetadata($idSite);
             }
         });
 
@@ -727,7 +727,7 @@ class ApiTest extends IntegrationTestCase
             'filename' => null,
             'frontPageDescription' => null,
         ];
-        Piwik::addAction(APIScheduledReports::GET_RENDERER_INSTANCE_EVENT, function (&$reportRenderer, $reportType, $outputType, $report) use (&$renderedReport) {
+        Matomo::addAction(APIScheduledReports::GET_RENDERER_INSTANCE_EVENT, function (&$reportRenderer, $reportType, $outputType, $report) use (&$renderedReport) {
             // reportType column gets truncated to 10 chars in storage
             if ($reportType !== 'dummyrepor') {
                 return;
@@ -912,7 +912,7 @@ class ApiTest extends IntegrationTestCase
 
     public function testGenerateReportThrowsIfMultiplePeriodsRequested()
     {
-        $this->expectException(\Piwik\Http\BadRequestException::class);
+        $this->expectException(\Matomo\Http\BadRequestException::class);
         $this->expectExceptionMessage('This API method does not support multiple periods.');
 
         $idReport = APIScheduledReports::getInstance()->addReport(
@@ -1406,7 +1406,7 @@ class ApiTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

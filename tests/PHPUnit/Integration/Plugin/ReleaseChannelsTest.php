@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Plugin;
+namespace Matomo\Tests\Integration\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\UpdateCheck\ReleaseChannel;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\UpdateCheck\ReleaseChannel;
 
 /**
  * @group Plugin
@@ -35,7 +35,7 @@ class ReleaseChannelsTest extends IntegrationTestCase
             Fixture::createWebsite('2015-01-01 00:00:00');
         }
 
-        $this->channels = new Plugin\ReleaseChannels(StaticContainer::get('Piwik\Plugin\Manager'));
+        $this->channels = new Plugin\ReleaseChannels(StaticContainer::get('Matomo\Plugin\Manager'));
     }
 
     public function testGetAllReleaseChannelsShouldFindAllAvailableRelaseChannels()

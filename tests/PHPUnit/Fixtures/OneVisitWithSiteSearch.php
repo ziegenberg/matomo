@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Fixture;
 
 class OneVisitWithSiteSearch extends Fixture
 {

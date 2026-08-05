@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserId\tests\Fixtures;
+namespace Matomo\Plugins\UserId\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates visits with user IDs and creates the user IDs index for testing

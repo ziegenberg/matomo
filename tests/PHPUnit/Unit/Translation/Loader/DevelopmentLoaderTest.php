@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation\Loader;
+namespace Matomo\Tests\Unit\Translation\Loader;
 
-use Piwik\Translation\Loader\DevelopmentLoader;
+use Matomo\Translation\Loader\DevelopmentLoader;
 
 /**
  * @group Translation
@@ -42,7 +42,7 @@ class DevelopmentLoaderTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldReturnPseudoLocalizedTranslationsIfDevelopmentLanguage(): void
     {
-        $wrappedLoader = $this->getMockForAbstractClass('Piwik\Translation\Loader\LoaderInterface');
+        $wrappedLoader = $this->getMockForAbstractClass('Matomo\Translation\Loader\LoaderInterface');
         $loader = new DevelopmentLoader($wrappedLoader);
 
         $wrappedLoader->expects($this->once())
@@ -78,7 +78,7 @@ class DevelopmentLoaderTest extends \PHPUnit\Framework\TestCase
 
     public function testShouldUseDecoratedLoaderIfNotDevelopmentLanguage(): void
     {
-        $wrappedLoader = $this->getMockForAbstractClass('Piwik\Translation\Loader\LoaderInterface');
+        $wrappedLoader = $this->getMockForAbstractClass('Matomo\Translation\Loader\LoaderInterface');
         $loader = new DevelopmentLoader($wrappedLoader);
 
         $wrappedLoader->expects($this->once())

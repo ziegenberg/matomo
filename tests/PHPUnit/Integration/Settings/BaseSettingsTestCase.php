@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings;
+namespace Matomo\Tests\Integration\Settings;
 
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Setting;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Setting;
 
 /**
  * @group PluginSettings
@@ -94,7 +94,7 @@ class BaseSettingsTestCase extends IntegrationTestCase
     {
         $settings = null;
 
-        Piwik::addAction($this->updateEventName, function ($instance) use (&$settings) {
+        Matomo::addAction($this->updateEventName, function ($instance) use (&$settings) {
             $settings = $instance;
         });
 

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Handler;
+namespace Matomo\Plugins\Monolog\Handler;
 
 use Monolog\Handler\StreamHandler;
 use Monolog\LogRecord;
-use Piwik\Exception\MissingFilePermissionException;
-use Piwik\Filechecks;
+use Matomo\Exception\MissingFilePermissionException;
+use Matomo\Filechecks;
 
 /**
  * Writes log to file.

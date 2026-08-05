@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Plugins\Login\SystemSettings;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Login\SystemSettings;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Login

@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\tests\System;
+namespace Matomo\Plugins\Actions\tests\System;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Archive;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\Db;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugins\Actions\Archiver;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Archive;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\Db;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugins\Actions\Archiver;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Actions
@@ -392,14 +392,14 @@ class MixedArchivingAggregationTest extends IntegrationTestCase
         $childSiteB = Fixture::createWebsite('2026-03-01 00:00:00');
         $multiSite = Fixture::createWebsite('2026-03-01 00:00:00');
 
-        Piwik::addAction('ArchiveProcessor.Parameters.getIdSites', function (&$idSites) use ($multiSite, $childSiteA, $childSiteB) {
+        Matomo::addAction('ArchiveProcessor.Parameters.getIdSites', function (&$idSites) use ($multiSite, $childSiteA, $childSiteB) {
             if (reset($idSites) == $multiSite) {
                 $idSites = [$childSiteA, $childSiteB];
             }
         });
 
         // the multi-site has no visits of its own, so archiving needs to be forced for it
-        Piwik::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) use ($multiSite) {
+        Matomo::addAction('Archiving.getIdSitesToArchiveWhenNoVisits', function (&$idSites) use ($multiSite) {
             $idSites[] = $multiSite;
         });
 

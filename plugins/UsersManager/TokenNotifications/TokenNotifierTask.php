@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\TokenNotifications;
+namespace Matomo\Plugins\UsersManager\TokenNotifications;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Log\LoggerInterface;
-use Piwik\Option;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Scheduler\Schedule\Daily;
-use Piwik\Scheduler\Task;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Log\LoggerInterface;
+use Matomo\Option;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Scheduler\Schedule\Daily;
+use Matomo\Scheduler\Task;
 
 /**
  * Send token notifications for each provider

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Archive;
+namespace Matomo\Tests\Unit\Archive;
 
-use Piwik\Archive\DataCollection;
-use Piwik\Archive\DataTableFactory;
-use Piwik\Period;
-use Piwik\Segment;
+use Matomo\Archive\DataCollection;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Period;
+use Matomo\Segment;
 
 /**
  * @group DataCollectionTest

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
-use Piwik\DataAccess\LogQueryBuilder;
-use Piwik\Plugin\LogTablesProvider;
-use Piwik\Plugins\SegmentEditor\Services\StoredSegmentService;
-use Piwik\Segment\SegmentExpression;
-use Piwik\SettingsServer;
+use Matomo\DataAccess\LogQueryBuilder;
+use Matomo\Plugin\LogTablesProvider;
+use Matomo\Plugins\SegmentEditor\Services\StoredSegmentService;
+use Matomo\Segment\SegmentExpression;
+use Matomo\SettingsServer;
 
 /**
  * Decorates segment sub-queries in archiving queries w/ the idSegment of the segment, if

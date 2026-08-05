@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\EntryPageUrl;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\EntryPageUrl;
 
 class GetEntryPageUrlsForAIAssistant extends Base
 {
@@ -21,7 +21,7 @@ class GetEntryPageUrlsForAIAssistant extends Base
     {
         parent::init();
         $this->dimension = new EntryPageUrl();
-        $this->name = Piwik::translate('Referrers_AIAssistants');
+        $this->name = Matomo::translate('Referrers_AIAssistants');
         $this->isSubtableReport = true;
     }
 

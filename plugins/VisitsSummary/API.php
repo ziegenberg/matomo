@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitsSummary;
+namespace Matomo\Plugins\VisitsSummary;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\VisitsSummary\Reports\Get;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\VisitsSummary\Reports\Get;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
 
 /**
  * VisitsSummary API lets you access the core web analytics metrics (visits, unique visitors,
  * count of actions (page views & downloads & clicks on outlinks), time on site, bounces and converted visits.
  *
- * @method static \Piwik\Plugins\VisitsSummary\API getInstance()
+ * @method static \Matomo\Plugins\VisitsSummary\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns the VisitsSummary overview report for the requested period.
@@ -46,10 +46,10 @@ class API extends \Piwik\Plugin\API
      */
     public function get($idSite, string $period, string $date, $segment = false, $columns = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
 
-        $requestedColumns = Piwik::getArrayFromApiParameter($columns);
+        $requestedColumns = Matomo::getArrayFromApiParameter($columns);
 
         /** @var Get $report */
         $report = ReportsProvider::factory('VisitsSummary', 'get');
@@ -92,7 +92,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getNumeric($idSite, string $period, string $date, $segment, $toFetch)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         return $archive->getDataTableFromNumeric($toFetch);
     }

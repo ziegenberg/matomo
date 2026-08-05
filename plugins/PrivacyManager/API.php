@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Config as PiwikConfig;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CustomJsTracker\File;
-use Piwik\Plugins\Live\Live;
-use Piwik\Plugins\PrivacyManager\Model\DataSubjects;
-use Piwik\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
-use Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations;
-use Piwik\Plugins\PrivacyManager\Validators\VisitsDataSubject;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Policy\CompliancePolicy;
-use Piwik\Policy\PolicyManager;
-use Piwik\Site;
-use Piwik\Tracker\TrackerCodeGenerator;
-use Piwik\Validators\BaseValidator;
+use Matomo\API\Request;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Config as PiwikConfig;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CustomJsTracker\File;
+use Matomo\Plugins\Live\Live;
+use Matomo\Plugins\PrivacyManager\Model\DataSubjects;
+use Matomo\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
+use Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations;
+use Matomo\Plugins\PrivacyManager\Validators\VisitsDataSubject;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Policy\CompliancePolicy;
+use Matomo\Policy\PolicyManager;
+use Matomo\Site;
+use Matomo\Tracker\TrackerCodeGenerator;
+use Matomo\Validators\BaseValidator;
 
 /**
  * The PrivacyManager API lets you manage GDPR workflows, anonymization settings, and privacy compliance controls.
@@ -35,9 +35,9 @@ use Piwik\Validators\BaseValidator;
  * @phpstan-type VisitDescriptor array{idsite: int, idvisit: int}
  * @phpstan-type AnonymizableColumn array{column_name: string, default_value: mixed}
  *
- * @method static \Piwik\Plugins\PrivacyManager\API getInstance()
+ * @method static \Matomo\Plugins\PrivacyManager\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private DataSubjects $gdpr;
 
@@ -66,7 +66,7 @@ class API extends \Piwik\Plugin\API
         foreach ($visits as $visit) {
             $idSites[] = $visit['idsite'];
         }
-        Piwik::checkUserHasAdminAccess($idSites);
+        Matomo::checkUserHasAdminAccess($idSites);
     }
 
     /**
@@ -78,7 +78,7 @@ class API extends \Piwik\Plugin\API
      */
     public function deleteDataSubjects(array $visits): array
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $this->checkDataSubjectVisits($visits);
 
@@ -95,7 +95,7 @@ class API extends \Piwik\Plugin\API
      */
     public function exportDataSubjects(array $visits): array
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         $this->checkDataSubjectVisits($visits);
 
@@ -116,7 +116,7 @@ class API extends \Piwik\Plugin\API
      */
     public function findDataSubjects($idSite, string $segment)
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         if (!Manager::getInstance()->isPluginActivated('Live')) {
             return [];
@@ -131,7 +131,7 @@ class API extends \Piwik\Plugin\API
          * are disabled.
          */
         foreach ($siteIds as $siteId) {
-            if (!Piwik::isUserHasViewAccess($siteId)) {
+            if (!Matomo::isUserHasViewAccess($siteId)) {
                 continue;
             }
 
@@ -217,7 +217,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         string $passwordConfirmation = ''
     ): void {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->confirmCurrentUserPassword($passwordConfirmation);
 
@@ -226,7 +226,7 @@ class API extends \Piwik\Plugin\API
         } else {
             $idSites = Site::getIdSitesFromIdSitesString($idSites, false, true);
         }
-        $requester = Piwik::getCurrentUserLogin();
+        $requester = Matomo::getCurrentUserLogin();
         $this->logDataAnonymizations->scheduleEntry(
             $requester,
             $idSites,
@@ -246,7 +246,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAvailableVisitColumnsToAnonymize(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $columns = $this->logDataAnonymizer->getAvailableVisitColumnsToAnonymize();
 
@@ -260,7 +260,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAvailableLinkVisitActionColumnsToAnonymize(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $columns = $this->logDataAnonymizer->getAvailableLinkVisitActionColumnsToAnonymize();
 
@@ -292,13 +292,13 @@ class API extends \Piwik\Plugin\API
      */
     private function getTrackerFileDetails(): array
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $jsCodeGenerator = new TrackerCodeGenerator();
             $file = new File(PIWIK_DOCUMENT_ROOT . '/' . $jsCodeGenerator->getJsTrackerEndpoint());
             $filename = $jsCodeGenerator->getJsTrackerEndpoint();
 
             if (Manager::getInstance()->isPluginActivated('CustomJsTracker')) {
-                $file = StaticContainer::get('Piwik\Plugins\CustomJsTracker\TrackerUpdater')->getToFile();
+                $file = StaticContainer::get('Matomo\Plugins\CustomJsTracker\TrackerUpdater')->getToFile();
                 $filename = $file->getName();
             }
 
@@ -321,10 +321,10 @@ class API extends \Piwik\Plugin\API
     {
         if (is_numeric($idSiteSpecific)) {
             $idSite = intval($idSiteSpecific);
-            Piwik::checkUserHasAdminAccess($idSiteSpecific);
+            Matomo::checkUserHasAdminAccess($idSiteSpecific);
         } else {
             $idSite = null;
-            Piwik::checkUserHasSuperUserAccess();
+            Matomo::checkUserHasSuperUserAccess();
         }
 
         $privacyConfig = new Config($idSite);
@@ -401,10 +401,10 @@ class API extends \Piwik\Plugin\API
     ): bool {
         if (null !== $idSiteSpecific) {
             $idSite = $idSiteSpecific;
-            Piwik::checkUserHasAdminAccess($idSiteSpecific);
+            Matomo::checkUserHasAdminAccess($idSiteSpecific);
         } else {
             $idSite = null;
-            Piwik::checkUserHasSuperUserAccess();
+            Matomo::checkUserHasSuperUserAccess();
         }
 
         // if we receive a specific site ID, and it's set not to use custom site settings, we need to remove them
@@ -447,7 +447,7 @@ class API extends \Piwik\Plugin\API
             $privacyConfig->forceCookielessTracking = $forceCookielessTracking;
 
             // update tracker files
-            Piwik::postEvent('CustomJsTracker.updateTracker');
+            Matomo::postEvent('CustomJsTracker.updateTracker');
         }
 
         return true;
@@ -462,7 +462,7 @@ class API extends \Piwik\Plugin\API
      */
     public function deactivateDoNotTrack(): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $dntChecker = new DoNotTrackHeaderChecker();
         $dntChecker->deactivate();
@@ -479,7 +479,7 @@ class API extends \Piwik\Plugin\API
      */
     public function activateDoNotTrack(): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $dntChecker = new DoNotTrackHeaderChecker();
         $dntChecker->activate();
@@ -501,7 +501,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         string $passwordConfirmation = ''
     ): bool {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->confirmCurrentUserPassword($passwordConfirmation);
 
         return $this->savePurgeDataSettings([
@@ -525,7 +525,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         string $passwordConfirmation = ''
     ): bool {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->confirmCurrentUserPassword($passwordConfirmation);
 
         $deleteLogsOlderThan = (int) $deleteLogsOlderThan;
@@ -570,7 +570,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         string $passwordConfirmation = ''
     ): bool {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->confirmCurrentUserPassword($passwordConfirmation);
 
         $settings = [];
@@ -609,14 +609,14 @@ class API extends \Piwik\Plugin\API
         string $passwordConfirmation
     ): void {
         $this->confirmCurrentUserPassword($passwordConfirmation);
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->checkDataPurgeAdminSettingsIsEnabled();
 
         $settings = PrivacyManager::getPurgeDataSettings();
         if ($settings['delete_logs_enable']) {
             /** @var LogDataPurger $logDataPurger */
-            $logDataPurger = StaticContainer::get('Piwik\Plugins\PrivacyManager\LogDataPurger');
+            $logDataPurger = StaticContainer::get('Matomo\Plugins\PrivacyManager\LogDataPurger');
             $logDataPurger->purgeData($settings['delete_logs_older_than'], true);
         }
         if ($settings['delete_reports_enable']) {
@@ -655,7 +655,7 @@ class API extends \Piwik\Plugin\API
             $idSite = intval($idSite);
         }
 
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $policy = PolicyManager::getPolicyByName($complianceType);
 
@@ -702,7 +702,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ): bool {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (StaticContainer::get(AuthenticationToken::class)->isSessionToken()) {
             $this->confirmCurrentUserPassword($passwordConfirmation);
@@ -730,7 +730,7 @@ class API extends \Piwik\Plugin\API
      */
     private function savePurgeDataSettings(array $settings): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->checkDataPurgeAdminSettingsIsEnabled();
 

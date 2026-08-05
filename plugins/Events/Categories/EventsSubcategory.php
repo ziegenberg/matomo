@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Categories;
+namespace Matomo\Plugins\Events\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class EventsSubcategory extends Subcategory
 {
@@ -21,8 +21,8 @@ class EventsSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Events_EventsSubcategoryHelp1') . '</p>'
+        return '<p>' . Matomo::translate('Events_EventsSubcategoryHelp1') . '</p>'
             . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/event-tracking/', null, null, 'App.Events.getCategory')
-            . Piwik::translate('Events_EventsSubcategoryHelp2') . '</a></p>';
+            . Matomo::translate('Events_EventsSubcategoryHelp2') . '</a></p>';
     }
 }

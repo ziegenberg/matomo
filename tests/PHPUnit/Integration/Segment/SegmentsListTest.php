@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Plugin\Segment;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugin\Segment;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group SegmentsListTest

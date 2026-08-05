@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserId\RecordBuilders;
+namespace Matomo\Plugins\UserId\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\UserId\Archiver;
-use Piwik\RankingQuery;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\UserId\Archiver;
+use Matomo\RankingQuery;
 
 class Users extends RecordBuilder
 {

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Scheduler;
+namespace Matomo\Scheduler;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager as PluginManager;
 
 /**
  * Loads scheduled tasks.
@@ -24,7 +24,7 @@ class TaskLoader
     {
         $tasks = array();
 
-        $pluginTasks = PluginManager::getInstance()->findComponents('Tasks', 'Piwik\Plugin\Tasks');
+        $pluginTasks = PluginManager::getInstance()->findComponents('Tasks', 'Matomo\Plugin\Tasks');
 
         foreach ($pluginTasks as $pluginTask) {
             $pluginTask = StaticContainer::get($pluginTask);

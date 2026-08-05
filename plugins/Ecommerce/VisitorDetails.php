@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce;
+namespace Matomo\Plugins\Ecommerce;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\Date;
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugins\Ecommerce\Columns\ProductCategory;
-use Piwik\Plugins\Live\Model;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\Site;
-use Piwik\Tracker\GoalManager;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\Date;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugins\Ecommerce\Columns\ProductCategory;
+use Matomo\Plugins\Live\Model;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\Site;
+use Matomo\Tracker\GoalManager;
+use Matomo\View;
 
-use function Piwik\Plugins\Referrers\getReferrerTypeFromShortName;
+use function Matomo\Plugins\Referrers\getReferrerTypeFromShortName;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {
@@ -102,7 +102,7 @@ class VisitorDetails extends VisitorDetailsAbstract
 
             unset($ecommerceDetail['idvisit']);
 
-            if ($ecommerceDetail['type'] == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+            if ($ecommerceDetail['type'] == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
                 unset($ecommerceDetail['orderId']);
                 unset($ecommerceDetail['revenueSubTotal']);
                 unset($ecommerceDetail['revenueTax']);
@@ -205,8 +205,8 @@ class VisitorDetails extends VisitorDetailsAbstract
         $sql = "SELECT
 						log_conversion.idvisit,
 						case idgoal when " . GoalManager::IDGOAL_CART
-            . " then '" . Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART
-            . "' else '" . Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER . "' end as type,
+            . " then '" . Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART
+            . "' else '" . Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER . "' end as type,
 						idorder as orderId,
 						" . LogAggregator::getSqlRevenue('revenue') . " as revenue,
 						" . LogAggregator::getSqlRevenue('revenue_subtotal') . " as revenueSubTotal,

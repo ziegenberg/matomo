@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\SegmentEditor\tests\Fixtures;
+namespace Matomo\Plugins\SegmentEditor\tests\Fixtures;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Option;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorAPI;
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Option;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorAPI;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
 
 class SegmentManagementPageFixture extends OneVisitorTwoVisits
 {

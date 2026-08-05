@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\DataTable\Filter;
+namespace Matomo\Plugins\CustomDimensions\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\CoreHome\Columns\UserId;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\CoreHome\Columns\UserId;
 
 class RemoveUserIfNeeded extends BaseFilter
 {

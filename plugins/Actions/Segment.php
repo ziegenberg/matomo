@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions;
+namespace Matomo\Plugins\Actions;
 
 /**
  * Actions segment base class
  */
-class Segment extends \Piwik\Plugin\Segment
+class Segment extends \Matomo\Plugin\Segment
 {
     protected function init()
     {
         $this->setCategory('General_Actions');
-        $this->setSqlFilter('\\Piwik\\Tracker\\TableLogAction::getIdActionFromSegment');
+        $this->setSqlFilter('\Matomo\Tracker\TableLogAction::getIdActionFromSegment');
     }
 }

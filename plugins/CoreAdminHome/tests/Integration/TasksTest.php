@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration;
 
-use Piwik\Archive\ArchivePurger;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Mail;
-use Piwik\Plugins\CoreAdminHome\Emails\JsTrackingCodeMissingEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\TrackingFailuresEmail;
-use Piwik\Plugins\CoreAdminHome\Tasks;
-use Piwik\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
-use Piwik\Scheduler\Task;
-use Piwik\Tests\Fixtures\RawArchiveDataWithTempAndInvalidated;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Failures;
-use Piwik\Tracker\Request;
-use Piwik\Log\NullLogger;
+use Matomo\Archive\ArchivePurger;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Mail;
+use Matomo\Plugins\CoreAdminHome\Emails\JsTrackingCodeMissingEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\TrackingFailuresEmail;
+use Matomo\Plugins\CoreAdminHome\Tasks;
+use Matomo\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
+use Matomo\Scheduler\Task;
+use Matomo\Tests\Fixtures\RawArchiveDataWithTempAndInvalidated;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Failures;
+use Matomo\Tracker\Request;
+use Matomo\Log\NullLogger;
 
 /**
  * @group Core
@@ -240,8 +240,8 @@ class TasksTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'observers.global' => \Piwik\DI::add([
-                ['Mail.send', \Piwik\DI::value(function (Mail $mail) {
+            'observers.global' => \Matomo\DI::add([
+                ['Mail.send', \Matomo\DI::value(function (Mail $mail) {
                     $this->mail = $mail;
                 })],
             ]),

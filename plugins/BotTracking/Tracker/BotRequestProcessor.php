@@ -9,21 +9,21 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Tracker;
+namespace Matomo\Plugins\BotTracking\Tracker;
 
-use Piwik\Date;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\PageUrl;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Date;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\PageUrl;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TableLogAction;
 
 /**
  * Handles bot tracking requests
  */
-class BotRequestProcessor extends \Piwik\Tracker\BotRequestProcessor
+class BotRequestProcessor extends \Matomo\Tracker\BotRequestProcessor
 {
     private BotRequestsDao $dao;
 
@@ -58,7 +58,7 @@ class BotRequestProcessor extends \Piwik\Tracker\BotRequestProcessor
 
             $idActionUrl = $this->getActionId($request);
 
-            $rawParams = new \Piwik\Request($request->getRawParams());
+            $rawParams = new \Matomo\Request($request->getRawParams());
 
             $httpStatusCode = $rawParams->getIntegerParameter('http_status', -1);
             if ($httpStatusCode < 0) {

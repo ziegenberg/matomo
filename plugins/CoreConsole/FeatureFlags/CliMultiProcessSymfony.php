@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreConsole\FeatureFlags;
+namespace Matomo\Plugins\CoreConsole\FeatureFlags;
 
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
 
 class CliMultiProcessSymfony implements FeatureFlagInterface
 {

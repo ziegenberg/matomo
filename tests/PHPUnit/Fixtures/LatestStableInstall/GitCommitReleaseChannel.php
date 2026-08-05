@@ -1,10 +1,10 @@
 <?php
 
-namespace Piwik\Plugins\CoreUpdater\ReleaseChannel;
+namespace Matomo\Plugins\CoreUpdater\ReleaseChannel;
 
-use Piwik\UpdateCheck\ReleaseChannel;
-use Piwik\Url;
-use Piwik\Version;
+use Matomo\UpdateCheck\ReleaseChannel;
+use Matomo\Url;
+use Matomo\Version;
 
 class GitCommitReleaseChannel extends ReleaseChannel
 {

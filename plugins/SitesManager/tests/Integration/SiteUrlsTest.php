@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\Integration;
+namespace Matomo\Plugins\SitesManager\tests\Integration;
 
-use Piwik\Cache;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Plugins\SitesManager\SiteUrls;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Cache;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Plugins\SitesManager\SiteUrls;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group SitesManager

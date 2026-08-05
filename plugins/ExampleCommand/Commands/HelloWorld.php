@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleCommand\Commands;
+namespace Matomo\Plugins\ExampleCommand\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * This class lets you define a new command. To read more about commands have a look at our Matomo Console guide on

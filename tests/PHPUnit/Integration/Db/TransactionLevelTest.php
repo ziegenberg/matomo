@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Db;
+namespace Matomo\Tests\Integration\Db;
 
-use Piwik\Db;
-use Piwik\Db\Schema;
-use Piwik\Db\TransactionLevel;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Db;
+use Matomo\Db\Schema;
+use Matomo\Db\TransactionLevel;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group TransactionLevelTest
@@ -27,7 +27,7 @@ class TransactionLevelTest extends IntegrationTestCase
     private $level;
 
     /**
-     * @var \Piwik\Tracker\Db|\Piwik\Db\AdapterInterface|\Piwik\Db $db
+     * @var \Matomo\Tracker\Db|\Matomo\Db\AdapterInterface|\Matomo\Db $db
      */
     private $db;
 

@@ -9,22 +9,22 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Integration;
+namespace Matomo\Plugins\BotTracking\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\API\API as MetadataApi;
-use Piwik\Plugins\BotTracking\API;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\TableLogAction;
-use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\API\API as MetadataApi;
+use Matomo\Plugins\BotTracking\API;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\TableLogAction;
+use Matomo\ViewDataTable\Factory as ViewDataTableFactory;
 
 /**
  * @group BotTracking
@@ -139,33 +139,33 @@ class RealTimeApiTest extends IntegrationTestCase
     {
         $glossaryItems = [
             'metrics' => [
-                'title'   => Piwik::translate('General_Metrics'),
+                'title'   => Matomo::translate('General_Metrics'),
                 'entries' => [],
             ],
             'reports' => [
-                'title'   => Piwik::translate('General_Reports'),
+                'title'   => Matomo::translate('General_Reports'),
                 'entries' => [],
             ],
         ];
 
-        Piwik::postEvent('API.addGlossaryItems', array(&$glossaryItems));
+        Matomo::postEvent('API.addGlossaryItems', array(&$glossaryItems));
         $reportNames = array_column($glossaryItems['reports']['entries'], 'name');
-        $category = Piwik::translate('General_AIAssistants');
+        $category = Matomo::translate('General_AIAssistants');
 
         self::assertContains(
-            sprintf('%s (%s)', Piwik::translate('BotTracking_AIChatbotsLast30MinutesTitle'), $category),
+            sprintf('%s (%s)', Matomo::translate('BotTracking_AIChatbotsLast30MinutesTitle'), $category),
             $reportNames
         );
         self::assertContains(
-            sprintf('%s (%s)', Piwik::translate('BotTracking_AIChatbotsLast8HoursTitle'), $category),
+            sprintf('%s (%s)', Matomo::translate('BotTracking_AIChatbotsLast8HoursTitle'), $category),
             $reportNames
         );
         self::assertContains(
-            sprintf('%s (%s)', Piwik::translate('BotTracking_TopPageUrlsLast30MinutesTitle'), $category),
+            sprintf('%s (%s)', Matomo::translate('BotTracking_TopPageUrlsLast30MinutesTitle'), $category),
             $reportNames
         );
         self::assertContains(
-            sprintf('%s (%s)', Piwik::translate('BotTracking_TopPageUrlsLast8HoursTitle'), $category),
+            sprintf('%s (%s)', Matomo::translate('BotTracking_TopPageUrlsLast8HoursTitle'), $category),
             $reportNames
         );
     }
@@ -176,9 +176,9 @@ class RealTimeApiTest extends IntegrationTestCase
         $metric = $this->findMetric($metrics, Metrics::COLUMN_REQUESTS);
 
         self::assertNotNull($metric);
-        self::assertSame(Piwik::translate('BotTracking_ColumnRequests'), $metric['name']);
+        self::assertSame(Matomo::translate('BotTracking_ColumnRequests'), $metric['name']);
         self::assertSame(
-            Piwik::translate('BotTracking_ColumnRequestsDocumentation'),
+            Matomo::translate('BotTracking_ColumnRequestsDocumentation'),
             $metric['documentation']
         );
     }

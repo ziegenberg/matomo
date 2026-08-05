@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
 use Exception;
-use Piwik\Access;
-use Piwik\Auth\Password;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\IP;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\Emails\PasswordResetEmail;
-use Piwik\Plugins\Login\Emails\PasswordResetCancelEmail;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserLoginHelper;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
+use Matomo\Access;
+use Matomo\Auth\Password;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\IP;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\Emails\PasswordResetEmail;
+use Matomo\Plugins\Login\Emails\PasswordResetCancelEmail;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserLoginHelper;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
 
 /**
  * Contains the logic for different parts of the password reset process.
@@ -138,7 +138,7 @@ class PasswordResetter
         }
         $this->usersManagerApi = $usersManagerApi;
 
-        $this->confirmPasswordModule = Piwik::getLoginPluginName();
+        $this->confirmPasswordModule = Matomo::getLoginPluginName();
         if (!empty($confirmPasswordModule)) {
             $this->confirmPasswordModule = $confirmPasswordModule;
         }
@@ -184,12 +184,12 @@ class PasswordResetter
          *
          * @param string $userLogin The user's login.
          */
-        Piwik::postEvent('Login.resetPassword.cancelled', [$user['login']]);
+        Matomo::postEvent('Login.resetPassword.cancelled', [$user['login']]);
 
         try {
             $this->sendEmailProcessCancelled($user);
         } catch (Exception $ex) {
-            throw new Exception($ex->getMessage() . Piwik::translate('Login_ContactAdmin'));
+            throw new Exception($ex->getMessage() . Matomo::translate('Login_ContactAdmin'));
         }
     }
 
@@ -213,14 +213,14 @@ class PasswordResetter
 
         // 'anonymous' has no password and cannot be reset
         if (strtolower($loginOrEmail) === 'anonymous') {
-            throw new Exception(Piwik::translate('Login_InvalidUsernameEmail'));
+            throw new Exception(Matomo::translate('Login_InvalidUsernameEmail'));
         }
 
         // get the user's login
         $user = $this->getUserInformation($loginOrEmail);
         if ($user === null) {
             // throw a custom exception type so it can be handled/suppressed
-            throw new PasswordResetUserIsInvalidException(Piwik::translate('Login_InvalidUsernameEmail'));
+            throw new PasswordResetUserIsInvalidException(Matomo::translate('Login_InvalidUsernameEmail'));
         }
 
         $login = $user['login'];
@@ -235,7 +235,7 @@ class PasswordResetter
             // remove password reset info
             $this->removePasswordResetInfo($login);
 
-            throw new Exception($ex->getMessage() . Piwik::translate('Login_ContactAdmin'));
+            throw new Exception($ex->getMessage() . Matomo::translate('Login_ContactAdmin'));
         }
 
         /**
@@ -243,7 +243,7 @@ class PasswordResetter
          *
          * @param string $userLogin The user's login.
          */
-        Piwik::postEvent('Login.resetPassword.initiated', [$login]);
+        Matomo::postEvent('Login.resetPassword.initiated', [$login]);
     }
 
     public function checkValidConfirmPasswordToken($login, $resetToken)
@@ -251,7 +251,7 @@ class PasswordResetter
         // get password reset info & user info
         $user = self::getUserInformation($login);
         if ($user === null) {
-            throw new Exception(Piwik::translate('Login_InvalidUsernameEmail'));
+            throw new Exception(Matomo::translate('Login_InvalidUsernameEmail'));
         }
 
         // check that the reset token is valid
@@ -262,7 +262,7 @@ class PasswordResetter
             || empty($resetInfo['keySuffix'])
             || !$this->isTokenValid($resetToken, $user, $resetInfo['keySuffix'])
         ) {
-            throw new Exception(Piwik::translate('Login_InvalidOrExpiredToken'));
+            throw new Exception(Matomo::translate('Login_InvalidOrExpiredToken'));
         }
 
         // check that the stored password hash is valid (sanity check)
@@ -303,7 +303,7 @@ class PasswordResetter
          *
          * @param string $userLogin The user's login.
          */
-        Piwik::postEvent('Login.resetPassword.confirmed', [$login]);
+        Matomo::postEvent('Login.resetPassword.confirmed', [$login]);
     }
 
     /**
@@ -491,7 +491,7 @@ class PasswordResetter
         $hashInfo = $this->passwordHelper->info($passwordHash);
 
         if (!isset($hashInfo['algo']) || 0 >= $hashInfo['algo']) {
-            throw new Exception(Piwik::translate('Login_ExceptionPasswordMD5HashExpected'));
+            throw new Exception(Matomo::translate('Login_ExceptionPasswordMD5HashExpected'));
         }
     }
 
@@ -588,7 +588,7 @@ class PasswordResetter
                 $count = !empty($existingResetInfo['requests']) ? $existingResetInfo['requests'] : $count;
 
                 if (isset($existingResetInfo['requests']) && $existingResetInfo['requests'] > 2) {
-                    throw new Exception(Piwik::translate('Login_PasswordResetAlreadySent'));
+                    throw new Exception(Matomo::translate('Login_PasswordResetAlreadySent'));
                 }
             }
         }

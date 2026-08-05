@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
-use Piwik\Piwik;
-use Piwik\SiteContentDetector;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\SiteContentDetector;
+use Matomo\Url;
 
 class ReactJs extends SiteContentDetectionAbstract
 {
@@ -73,7 +73,7 @@ class ReactJs extends SiteContentDetectionAbstract
 
         return sprintf(
             '<p>%s</p>',
-            Piwik::translate(
+            Matomo::translate(
                 'SitesManager_SiteWithoutDataReactDescription',
                 [
                     Url::getExternalLinkTag('https://matomo.org/guide/tag-manager/'),

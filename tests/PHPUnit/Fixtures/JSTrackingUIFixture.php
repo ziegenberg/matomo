@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
-use Piwik\Plugins\PrivacyManager\IPAnonymizer;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
+use Matomo\Plugins\PrivacyManager\IPAnonymizer;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tests\Framework\Fixture;
 
 class JSTrackingUIFixture extends Fixture
 {
@@ -26,7 +26,7 @@ class JSTrackingUIFixture extends Fixture
         self::installAndActivatePlugins($this->getTestEnvironment());
         self::updateDatabase();
 
-        $trackerUpdater = StaticContainer::get('Piwik\Plugins\CustomJsTracker\TrackerUpdater');
+        $trackerUpdater = StaticContainer::get('Matomo\Plugins\CustomJsTracker\TrackerUpdater');
         $trackerUpdater->update();
 
         // for proper geolocation

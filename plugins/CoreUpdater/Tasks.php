@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater;
+namespace Matomo\Plugins\CoreUpdater;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\DbHelper;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\DbHelper;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     public function schedule()
     {
         $this->daily('sendNotificationIfUpdateAvailable', null, self::LOWEST_PRIORITY);
 
-        $dbSettings   = new \Piwik\Db\Settings();
-        $settings = StaticContainer::get('Piwik\Plugins\CoreUpdater\SystemSettings');
+        $dbSettings   = new \Matomo\Db\Settings();
+        $settings = StaticContainer::get('Matomo\Plugins\CoreUpdater\SystemSettings');
 
         if ($dbSettings->getUsedCharset() !== 'utf8mb4' && DbHelper::getDefaultCharset() === 'utf8mb4' && !empty($settings->updateToUtf8mb4) && $settings->updateToUtf8mb4->getValue()) {
             $this->daily('convertToUtf8mb4', null, self::HIGHEST_PRIORITY);
@@ -48,7 +48,7 @@ class Tasks extends \Piwik\Plugin\Tasks
         $config->database['charset'] = 'utf8mb4';
         $config->forceSave();
 
-        $settings = StaticContainer::get('Piwik\Plugins\CoreUpdater\SystemSettings');
+        $settings = StaticContainer::get('Matomo\Plugins\CoreUpdater\SystemSettings');
         $settings->updateToUtf8mb4->setValue(false);
     }
 }

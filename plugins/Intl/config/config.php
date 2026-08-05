@@ -1,5 +1,5 @@
 <?php
 
 return array(
-    'Piwik\Intl\Data\Provider\DateTimeFormatProvider' => Piwik\DI::autowire('Piwik\Plugins\Intl\DateTimeFormatProvider'),
+    'Matomo\Intl\Data\Provider\DateTimeFormatProvider' => Matomo\DI::autowire('Matomo\Plugins\Intl\DateTimeFormatProvider'),
 );

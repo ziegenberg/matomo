@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics;
+namespace Matomo\Plugins\Diagnostics;
 
-use Piwik\Config;
-use Piwik\Piwik;
-use Piwik\Plugin\SettingsProvider;
+use Matomo\Config;
+use Matomo\Matomo;
+use Matomo\Plugin\SettingsProvider;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     private ConfigReader $configReader;
 
@@ -25,9 +25,9 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function configfile()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
-        $settings = new SettingsProvider(\Piwik\Plugin\Manager::getInstance());
+        $settings = new SettingsProvider(\Matomo\Plugin\Manager::getInstance());
         $allSettings = $settings->getAllSystemSettings();
 
         $configValues = $this->configReader->getConfigValuesFromFiles();

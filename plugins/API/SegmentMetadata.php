@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
-use Piwik\Category\CategoryList;
-use Piwik\Piwik;
-use Piwik\Plugin\Segment;
-use Piwik\Segment\SegmentsList;
+use Matomo\Category\CategoryList;
+use Matomo\Matomo;
+use Matomo\Plugin\Segment;
+use Matomo\Segment\SegmentsList;
 
 class SegmentMetadata
 {
@@ -46,8 +46,8 @@ class SegmentMetadata
 
         foreach ($segments as &$segment) {
             $categoryId = $segment['category'];
-            $segment['name'] = Piwik::translate($segment['name']);
-            $segment['category'] = Piwik::translate($categoryId);
+            $segment['name'] = Matomo::translate($segment['name']);
+            $segment['category'] = Matomo::translate($categoryId);
 
             if (!isset($this->categoryOrder[$segment['category']])) {
                 $category = $categoryList->getCategory($categoryId);
@@ -85,7 +85,7 @@ class SegmentMetadata
 
     private function sortSegments($row1, $row2)
     {
-        $customVarCategory = Piwik::translate('CustomVariables_CustomVariables');
+        $customVarCategory = Matomo::translate('CustomVariables_CustomVariables');
 
         $columns = array('category', 'type', 'name', 'segment');
 

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\tests\Unit\TranslationWriter;
+namespace Matomo\Plugins\LanguagesManager\tests\Unit\TranslationWriter;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\ByBaseTranslations;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\ByParameterCount;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\CoreTranslations;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Writer;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\ByBaseTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\ByParameterCount;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\CoreTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Writer;
 
 /**
  * @group LanguagesManager

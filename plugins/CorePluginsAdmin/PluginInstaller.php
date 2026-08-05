@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin;
+namespace Matomo\Plugins\CorePluginsAdmin;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Filechecks;
-use Piwik\Filesystem;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugin\Dependency as PluginDependency;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Marketplace\Environment;
-use Piwik\Plugins\Marketplace\Marketplace;
-use Piwik\Unzip;
-use Piwik\Plugins\Marketplace\Api\Client;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Filechecks;
+use Matomo\Filesystem;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugin\Dependency as PluginDependency;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Marketplace\Environment;
+use Matomo\Plugins\Marketplace\Marketplace;
+use Matomo\Unzip;
+use Matomo\Plugins\Marketplace\Api\Client;
 
 class PluginInstaller
 {
@@ -44,7 +44,7 @@ class PluginInstaller
             $this->marketplaceClient = $client;
         } elseif (Marketplace::isMarketplaceEnabled()) {
             // we load it manually as marketplace might not be loaded
-            $this->marketplaceClient = StaticContainer::get('Piwik\Plugins\Marketplace\Api\Client');
+            $this->marketplaceClient = StaticContainer::get('Matomo\Plugins\Marketplace\Api\Client');
         }
     }
 
@@ -165,11 +165,11 @@ class PluginInstaller
         $this->removeFolderIfExists($pathExtracted);
 
         if (0 == ($pluginFiles = $archive->extract($pathExtracted))) {
-            throw new PluginInstallerException(Piwik::translate('CoreUpdater_ExceptionArchiveIncompatible', $archive->errorInfo()));
+            throw new PluginInstallerException(Matomo::translate('CoreUpdater_ExceptionArchiveIncompatible', $archive->errorInfo()));
         }
 
         if (0 == count($pluginFiles)) {
-            throw new PluginInstallerException(Piwik::translate('Plugin Zip File Is Empty'));
+            throw new PluginInstallerException(Matomo::translate('Plugin Zip File Is Empty'));
         }
     }
 
@@ -198,10 +198,10 @@ class PluginInstaller
             foreach ($missingDependencies as $dep) {
                 if (empty($dep['actualVersion'])) {
                     $params   = array(ucfirst($dep['requirement']), $dep['requiredVersion'], $metadata->name);
-                    $message .= Piwik::translate('CorePluginsAdmin_MissingRequirementsPleaseInstallNotice', $params);
+                    $message .= Matomo::translate('CorePluginsAdmin_MissingRequirementsPleaseInstallNotice', $params);
                 } else {
                     $params   = array(ucfirst($dep['requirement']), $dep['actualVersion'], $dep['requiredVersion']);
-                    $message .= Piwik::translate('CorePluginsAdmin_MissingRequirementsNotice', $params);
+                    $message .= Matomo::translate('CorePluginsAdmin_MissingRequirementsNotice', $params);
                 }
             }
 

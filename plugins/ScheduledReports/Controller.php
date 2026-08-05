@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports;
+namespace Matomo\Plugins\ScheduledReports;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Nonce;
-use Piwik\Period\PeriodValidator;
-use Piwik\Piwik;
-use Piwik\Plugins\ImageGraph\ImageGraph;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\SegmentEditor\SegmentEditor;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\View;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Nonce;
+use Matomo\Period\PeriodValidator;
+use Matomo\Matomo;
+use Matomo\Plugins\ImageGraph\ImageGraph;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\SegmentEditor\SegmentEditor;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public const DEFAULT_REPORT_TYPE = ScheduledReports::EMAIL_TYPE;
 
@@ -54,7 +54,7 @@ class Controller extends \Piwik\Plugin\Controller
                 continue;
             }
 
-            $view->paramPeriods[$label] = Piwik::translate('Intl_Period' . ucfirst($label));
+            $view->paramPeriods[$label] = Matomo::translate('Intl_Period' . ucfirst($label));
         }
 
         $reportsByCategoryByType = array();
@@ -85,7 +85,7 @@ class Controller extends \Piwik\Plugin\Controller
 
         $reports = array();
         $reportsById = array();
-        if (!Piwik::isUserIsAnonymous()) {
+        if (!Matomo::isUserIsAnonymous()) {
             $reports = Request::processRequest('ScheduledReports.getReports', array(
                 'idSite' => $this->idSite,
                 'ifSuperUserReturnOnlySuperUserReports' => true,
@@ -115,7 +115,7 @@ class Controller extends \Piwik\Plugin\Controller
         $view->segmentEditorActivated = false;
         if (API::isSegmentEditorActivated()) {
             $savedSegmentsById = array(
-                '' => Piwik::translate('SegmentEditor_DefaultAllVisits'),
+                '' => Matomo::translate('SegmentEditor_DefaultAllVisits'),
             );
             $allSegments = SegmentEditor::getAllSegmentsForSite($this->idSite);
             foreach ($allSegments as $savedSegment) {
@@ -132,12 +132,12 @@ class Controller extends \Piwik\Plugin\Controller
     {
         $view = new View('@ScheduledReports/unsubscribe');
         $this->setBasicVariablesView($view);
-        $view->linkTitle = Piwik::getRandomTitle();
+        $view->linkTitle = Matomo::getRandomTitle();
 
         $token = Common::getRequestVar('token', '', 'string');
 
         if (empty($token)) {
-            $view->error = Piwik::translate('ScheduledReports_NoTokenProvided');
+            $view->error = Matomo::translate('ScheduledReports_NoTokenProvided');
             return $view->render();
         }
 
@@ -145,7 +145,7 @@ class Controller extends \Piwik\Plugin\Controller
         $subscription      = $subscriptionModel->getSubscription($token);
 
         if (empty($subscription)) {
-            $view->error = Piwik::translate('ScheduledReports_NoSubscriptionFound');
+            $view->error = Matomo::translate('ScheduledReports_NoSubscriptionFound');
             return $view->render();
         }
 

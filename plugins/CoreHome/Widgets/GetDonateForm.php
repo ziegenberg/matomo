@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Widgets;
+namespace Matomo\Plugins\CoreHome\Widgets;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Translation\Translator;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Translation\Translator;
 
 class GetDonateForm extends Widget
 {
@@ -36,7 +36,7 @@ class GetDonateForm extends Widget
         $footerMessage = null;
         if (
             Common::getRequestVar('widget', false)
-            && Piwik::hasUserSuperUserAccess()
+            && Matomo::hasUserSuperUserAccess()
         ) {
             $footerMessage = $this->translator->translate('CoreHome_OnlyForSuperUserAccess');
         }

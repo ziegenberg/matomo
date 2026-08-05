@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices\Widgets;
+namespace Matomo\Plugins\ProfessionalServices\Widgets;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\Marketplace\SiteAwareLinks;
-use Piwik\Piwik;
-use Piwik\View;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\Marketplace\SiteAwareLinks;
+use Matomo\Matomo;
+use Matomo\View;
+use Matomo\Widget\WidgetConfig;
 
 class PromoSessionRecordings extends DismissibleWidget
 {
@@ -25,7 +25,7 @@ class PromoSessionRecordings extends DismissibleWidget
         $config->setSubcategoryId('ProfessionalServices_PromoManage');
         $config->setIsNotWidgetizable();
 
-        $promoWidgetApplicable = StaticContainer::get('Piwik\Plugins\ProfessionalServices\PromoWidgetApplicable');
+        $promoWidgetApplicable = StaticContainer::get('Matomo\Plugins\ProfessionalServices\PromoWidgetApplicable');
 
         $isEnabled = $promoWidgetApplicable->check(self::PROMO_PLUGIN_NAME, self::getDismissibleWidgetName());
         $config->setIsEnabled($isEnabled);
@@ -33,21 +33,21 @@ class PromoSessionRecordings extends DismissibleWidget
 
     public function render()
     {
-        $marketplacePlugins = StaticContainer::get('Piwik\Plugins\Marketplace\Plugins');
+        $marketplacePlugins = StaticContainer::get('Matomo\Plugins\Marketplace\Plugins');
         $pluginInfo = $marketplacePlugins->getPluginInfo(self::PROMO_PLUGIN_NAME);
 
         $view = new View('@ProfessionalServices/pluginAdvertising');
         $view->plugin = $pluginInfo;
         $view->widgetName = self::getDismissibleWidgetName();
-        $view->userCanDismiss = Piwik::isUserIsAnonymous() === false;
+        $view->userCanDismiss = Matomo::isUserIsAnonymous() === false;
         $view->marketplaceOverviewLink = (new SiteAwareLinks())->getOverviewUrl($pluginInfo['name']);
 
-        $view->title  = Piwik::translate('ProfessionalServices_PromoUnlockPowerOf', 'Session Recordings'); // custom title
+        $view->title  = Matomo::translate('ProfessionalServices_PromoUnlockPowerOf', 'Session Recordings'); // custom title
         $view->imageName = 'ad-sessionrecordings.png';
         $view->listOfFeatures = [
-            Piwik::translate('ProfessionalServices_SessionRecordingsFeature01'),
-            Piwik::translate('ProfessionalServices_SessionRecordingsFeature02'),
-            Piwik::translate('ProfessionalServices_SessionRecordingsFeature03'),
+            Matomo::translate('ProfessionalServices_SessionRecordingsFeature01'),
+            Matomo::translate('ProfessionalServices_SessionRecordingsFeature02'),
+            Matomo::translate('ProfessionalServices_SessionRecordingsFeature03'),
         ];
 
         return $view->render();

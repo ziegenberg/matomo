@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\LogDeleter;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Site;
-use Piwik\Timer;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\LogDeleter;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Site;
+use Matomo\Timer;
 
 /**
  * Command to selectively delete visits.
@@ -46,8 +46,8 @@ class DeleteLogsData extends ConsoleCommand
     {
         parent::__construct();
 
-        $this->logDeleter = $logDeleter ?: StaticContainer::get('Piwik\LogDeleter');
-        $this->rawLogDao = $rawLogDao ?: StaticContainer::get('Piwik\DataAccess\RawLogDao');
+        $this->logDeleter = $logDeleter ?: StaticContainer::get('Matomo\LogDeleter');
+        $this->rawLogDao = $rawLogDao ?: StaticContainer::get('Matomo\DataAccess\RawLogDao');
     }
 
     protected function configure()

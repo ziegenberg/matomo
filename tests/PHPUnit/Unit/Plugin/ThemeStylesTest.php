@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Core\Plugin;
+namespace Matomo\Tests\Core\Plugin;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Plugin\ThemeStyles;
+use Matomo\Plugin\ThemeStyles;
 
 /**
  * @group Core

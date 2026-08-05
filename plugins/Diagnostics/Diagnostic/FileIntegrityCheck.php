@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Development;
-use Piwik\FileIntegrity;
-use Piwik\Translation\Translator;
+use Matomo\Development;
+use Matomo\FileIntegrity;
+use Matomo\Translation\Translator;
 
 /**
  * Check the files integrity.

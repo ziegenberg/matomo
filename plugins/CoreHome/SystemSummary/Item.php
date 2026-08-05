@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\SystemSummary;
+namespace Matomo\Plugins\CoreHome\SystemSummary;
 
 /**
  * This class can be used to add a new entry / item to the system summary widget.

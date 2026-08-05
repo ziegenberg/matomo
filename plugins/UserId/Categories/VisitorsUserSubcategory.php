@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserId\Categories;
+namespace Matomo\Plugins\UserId\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class VisitorsUserSubcategory extends Subcategory
 {
@@ -22,8 +22,8 @@ class VisitorsUserSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('UserId_VisitorsUserSubcategoryHelp') . '</p>'
+        return '<p>' . Matomo::translate('UserId_VisitorsUserSubcategoryHelp') . '</p>'
             . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/user-id', null, null, 'App.UserId.getUsers')
-            . '<span class="icon-info"></span> ' . Piwik::translate('CoreAdminHome_LearnMore') . '</a></p>';
+            . '<span class="icon-info"></span> ' . Matomo::translate('CoreAdminHome_LearnMore') . '</a></p>';
     }
 }

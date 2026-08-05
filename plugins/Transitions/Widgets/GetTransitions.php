@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Transitions\Widgets;
+namespace Matomo\Plugins\Transitions\Widgets;
 
-use Piwik\Piwik;
-use Piwik\Request;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Matomo;
+use Matomo\Request;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 class GetTransitions extends Widget
 {
@@ -24,7 +24,7 @@ class GetTransitions extends Widget
         $config->setOrder(99);
         $config->setClientSideComponent('Transitions', 'TransitionsPage');
         $idSite = self::getIdSite();
-        if (!$idSite || !Piwik::isUserHasViewAccess($idSite)) {
+        if (!$idSite || !Matomo::isUserHasViewAccess($idSite)) {
             $config->disable();
         }
     }

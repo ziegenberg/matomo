@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Reports;
+namespace Matomo\Plugins\Events\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugins\Events\Columns\EventCategory;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugins\Events\Columns\EventCategory;
 
 class GetCategory extends Base
 {
@@ -19,8 +19,8 @@ class GetCategory extends Base
     {
         parent::init();
         $this->dimension     = new EventCategory();
-        $this->name          = Piwik::translate('Events_EventCategories');
-        $this->documentation = Piwik::translate('Events_EventCategoriesReportDocumentation');
+        $this->name          = Matomo::translate('Events_EventCategories');
+        $this->documentation = Matomo::translate('Events_EventCategoriesReportDocumentation');
         $this->metrics = ['nb_events', 'nb_visits', 'nb_uniq_visitors', 'sum_event_value', 'min_event_value', 'max_event_value', 'nb_events_with_value'];
         if (Common::getRequestVar('secondaryDimension', false) == 'eventName') {
             $this->actionToLoadSubTables = 'getNameFromCategoryId';

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Config;
+namespace Matomo\Tests\Unit\Config;
 
-use Piwik\Config;
-use Piwik\Config\Cache;
-use Piwik\Config\IniFileChain;
+use Matomo\Config;
+use Matomo\Config\Cache;
+use Matomo\Config\IniFileChain;
 
 class TestIniFileChain extends IniFileChain
 {

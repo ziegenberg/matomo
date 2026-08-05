@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Filter\DataComparisonFilter;
+namespace Matomo\Plugins\API\Filter\DataComparisonFilter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Simple;
-use Piwik\Period;
-use Piwik\Segment;
-use Piwik\Segment\SegmentExpression;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Simple;
+use Matomo\Period;
+use Matomo\Segment;
+use Matomo\Segment\SegmentExpression;
 
 class ComparisonRowGenerator
 {

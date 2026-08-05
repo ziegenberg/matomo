@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager\UIAssetMerger;
+namespace Matomo\AssetManager\UIAssetMerger;
 
 use Exception;
 use lessc;
-use Piwik\AssetManager\UIAsset;
-use Piwik\AssetManager\UIAssetMerger;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\StylesheetLessCompileException;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
+use Matomo\AssetManager\UIAsset;
+use Matomo\AssetManager\UIAssetMerger;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\StylesheetLessCompileException;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
 
 class StylesheetUIAssetMerger extends UIAssetMerger
 {
@@ -103,7 +103,7 @@ class StylesheetUIAssetMerger extends UIAssetMerger
          *
          * @param string $concatenatedContent The content of all concatenated less files.
          */
-        Piwik::postEvent('AssetManager.addStylesheets', array(&$concatenatedContent));
+        Matomo::postEvent('AssetManager.addStylesheets', array(&$concatenatedContent));
 
         $this->mergedContent = $concatenatedContent;
     }
@@ -143,7 +143,7 @@ class StylesheetUIAssetMerger extends UIAssetMerger
          *
          * @param string $mergedContent The merged and minified CSS.
          */
-        Piwik::postEvent('AssetManager.filterMergedStylesheets', array(&$mergedContent));
+        Matomo::postEvent('AssetManager.filterMergedStylesheets', array(&$mergedContent));
     }
 
     public function getFileSeparator()

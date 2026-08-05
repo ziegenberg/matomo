@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\API;
+namespace Matomo\Tests\Integration\API;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\AuthResult;
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\AuthResult;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 use ReflectionClass;
 
 /**
@@ -26,9 +26,9 @@ use ReflectionClass;
  */
 class RequestTest extends IntegrationTestCase
 {
-    /** @var \Piwik\Auth|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Matomo\Auth|\PHPUnit\Framework\MockObject\MockObject */
     private $auth;
-    /** @var \Piwik\Access|\PHPUnit\Framework\MockObject\MockObject */
+    /** @var \Matomo\Access|\PHPUnit\Framework\MockObject\MockObject */
     private $access;
 
     private $userAuthToken = 'token';
@@ -359,7 +359,7 @@ class RequestTest extends IntegrationTestCase
     public function testProcessThrowsIfForceApiSessionConflictsBetweenGetAndPost()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+        $this->expectExceptionMessage(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
 
         $_GET['force_api_session'] = 1;
         $_POST['force_api_session'] = 0;
@@ -376,7 +376,7 @@ class RequestTest extends IntegrationTestCase
     public function testProcessThrowsIfTokenAuthConflictsBetweenGetAndPost()
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+        $this->expectExceptionMessage(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
 
         $_GET['token_auth'] = 'tokenGet';
         $_POST['token_auth'] = 'tokenPost';
@@ -434,7 +434,7 @@ class RequestTest extends IntegrationTestCase
 
     private function createAuthMock()
     {
-        $authMock = $this->getMockBuilder('Piwik\Plugins\Login\Auth')
+        $authMock = $this->getMockBuilder('Matomo\Plugins\Login\Auth')
                          ->setMethods(array('authenticate', 'setTokenAuth', 'setLogin'))
                          ->getMock();
 
@@ -447,7 +447,7 @@ class RequestTest extends IntegrationTestCase
 
     private function createAccessMock($auth)
     {
-        $mock = $this->getMockBuilder('Piwik\Access')
+        $mock = $this->getMockBuilder('Matomo\Access')
                      ->onlyMethods(array('loadSitesIfNeeded', 'reloadAccess', 'getTokenAuth'))
                      ->enableProxyingToOriginalMethods()
                      ->getMock();
@@ -489,8 +489,8 @@ class RequestTest extends IntegrationTestCase
         $this->auth   = $this->createAuthMock();
         $this->access = $this->createAccessMock($this->auth);
         return array(
-            'Piwik\Auth'     => $this->auth,
-            'Piwik\Access' => $this->access,
+            'Matomo\Auth'     => $this->auth,
+            'Matomo\Access' => $this->access,
         );
     }
 }

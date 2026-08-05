@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats\Reports;
+namespace Matomo\Plugins\DBStats\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugin\ReportsProvider;
 
 /**
  * Shows a datatable that displays the amount of space each numeric archive table
@@ -21,7 +21,7 @@ class GetMetricDataSummaryByYear extends Base
 {
     protected function init()
     {
-        $this->name = Piwik::translate('DBStats_MetricDataByYear');
+        $this->name = Matomo::translate('DBStats_MetricDataByYear');
     }
 
     public function configureView(ViewDataTable $view)
@@ -30,7 +30,7 @@ class GetMetricDataSummaryByYear extends Base
         $this->addPresentationFilters($view);
 
         $view->config->title = $this->name;
-        $view->config->addTranslation('label', Piwik::translate('Intl_PeriodYear'));
+        $view->config->addTranslation('label', Matomo::translate('Intl_PeriodYear'));
     }
 
     public function getRelatedReports()

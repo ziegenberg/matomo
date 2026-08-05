@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDirPlugin\tests\System;
+namespace Matomo\Plugins\CustomDirPlugin\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Plugins\CustomDirPlugin\tests\Fixtures\SimpleFixtureTrackFewVisits;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\Plugins\CustomDirPlugin\tests\Fixtures\SimpleFixtureTrackFewVisits;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group CustomDirPlugin

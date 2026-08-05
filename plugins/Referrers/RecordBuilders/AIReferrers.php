@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\Referrers\RecordBuilders;
+namespace Matomo\Plugins\Referrers\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\Referrers\Archiver;
-use Piwik\RankingQuery;
-use Piwik\Tracker\PageUrl;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\Referrers\Archiver;
+use Matomo\RankingQuery;
+use Matomo\Tracker\PageUrl;
 
 class AIReferrers extends RecordBuilder
 {

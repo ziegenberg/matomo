@@ -7,37 +7,37 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome;
+namespace Matomo\Plugins\CoreAdminHome;
 
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Archive\ArchivePurger;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\Model as CoreModel;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Http;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\Emails\JsTrackingCodeMissingEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\TrackingFailuresEmail;
-use Piwik\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
-use Piwik\Plugins\SegmentEditor\Model;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Scheduler\Schedule\SpecificTime;
-use Piwik\Settings\Storage\Backend\MeasurableSettingsTable;
-use Piwik\Tracker\Failures;
-use Piwik\Site;
-use Piwik\Tracker\FingerprintSalt;
-use Piwik\Tracker\Visit\ReferrerSpamFilter;
-use Piwik\Log\LoggerInterface;
-use Piwik\Period\Month;
-use Piwik\SettingsPiwik;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Archive\ArchivePurger;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\Model as CoreModel;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Http;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\Emails\JsTrackingCodeMissingEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\TrackingFailuresEmail;
+use Matomo\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
+use Matomo\Plugins\SegmentEditor\Model;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Scheduler\Schedule\SpecificTime;
+use Matomo\Settings\Storage\Backend\MeasurableSettingsTable;
+use Matomo\Tracker\Failures;
+use Matomo\Site;
+use Matomo\Tracker\FingerprintSalt;
+use Matomo\Tracker\Visit\ReferrerSpamFilter;
+use Matomo\Log\LoggerInterface;
+use Matomo\Period\Month;
+use Matomo\SettingsPiwik;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     public const TRACKING_CODE_CHECK_FLAG = 'trackingCodeExistsCheck';
     private ArchivePurger $archivePurger;
@@ -193,7 +193,7 @@ class Tasks extends \Piwik\Plugin\Tasks
 
     /**
      * To test execute the following command:
-     * `./console core:run-scheduled-tasks "Piwik\Plugins\CoreAdminHome\Tasks.cleanupTrackingFailures"`
+     * `./console core:run-scheduled-tasks "Matomo\Plugins\CoreAdminHome\Tasks.cleanupTrackingFailures"`
      *
      * @throws \Exception
      */
@@ -205,7 +205,7 @@ class Tasks extends \Piwik\Plugin\Tasks
 
     /**
      * To test execute the following command:
-     * `./console core:run-scheduled-tasks "Piwik\Plugins\CoreAdminHome\Tasks.notifyTrackingFailures"`
+     * `./console core:run-scheduled-tasks "Matomo\Plugins\CoreAdminHome\Tasks.notifyTrackingFailures"`
      *
      * @throws \Exception
      */
@@ -215,7 +215,7 @@ class Tasks extends \Piwik\Plugin\Tasks
         $failures = $this->trackingFailures->getAllFailures();
         $general = Config::getInstance()->General;
         if (!empty($failures) && $general['enable_tracking_failures_notification']) {
-            $superUsers = Piwik::getAllSuperUserAccessEmailAddresses();
+            $superUsers = Matomo::getAllSuperUserAccessEmailAddresses();
             foreach ($superUsers as $login => $email) {
                 $email = new TrackingFailuresEmail($login, $email, count($failures));
                 $email->send();
@@ -370,7 +370,7 @@ class Tasks extends \Piwik\Plugin\Tasks
 
     /**
      * To test execute the following command:
-     * `./console core:run-scheduled-tasks "Piwik\Plugins\CoreAdminHome\Tasks.purgeOrphanedArchives"`
+     * `./console core:run-scheduled-tasks "Matomo\Plugins\CoreAdminHome\Tasks.purgeOrphanedArchives"`
      *
      * @throws \Exception
      */

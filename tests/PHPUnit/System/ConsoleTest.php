@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\CliMulti\CliPhp;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\CoreConsole\FeatureFlags\SystemSignals;
-use Piwik\Plugins\Monolog\Handler\FailureLogMessageDetector;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Log\LoggerInterface;
-use Piwik\Log\Logger;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\CliMulti\CliPhp;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\CoreConsole\FeatureFlags\SystemSignals;
+use Matomo\Plugins\Monolog\Handler\FailureLogMessageDetector;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Log\LoggerInterface;
+use Matomo\Log\Logger;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
 
 class TestCommandWithWarning extends ConsoleCommand
 {
@@ -67,11 +67,11 @@ class TestCommandWithFatalError extends ConsoleCommand
     public function doExecute(): int
     {
         try {
-            \Piwik\ErrorHandler::pushFatalErrorBreadcrumb(static::class);
+            \Matomo\ErrorHandler::pushFatalErrorBreadcrumb(static::class);
 
             $this->executeImpl();
         } finally {
-            \Piwik\ErrorHandler::popFatalErrorBreadcrumb();
+            \Matomo\ErrorHandler::popFatalErrorBreadcrumb();
         }
 
         return self::SUCCESS;
@@ -80,14 +80,14 @@ class TestCommandWithFatalError extends ConsoleCommand
     public function executeImpl()
     {
         try {
-            \Piwik\ErrorHandler::pushFatalErrorBreadcrumb(static::class, []);
+            \Matomo\ErrorHandler::pushFatalErrorBreadcrumb(static::class, []);
 
             $val = "";
             while (true) {
                 $val .= str_repeat("*", 1024 * 1024 * 1024);
             }
         } finally {
-            \Piwik\ErrorHandler::popFatalErrorBreadcrumb();
+            \Matomo\ErrorHandler::popFatalErrorBreadcrumb();
         }
     }
 }
@@ -189,20 +189,20 @@ class ConsoleTest extends ConsoleCommandTestCase
         $output = $this->normalizeOutput($output);
 
         $expected = <<<END
-
-Fatal error: Allowed memory size of X bytes exhausted (tried to allocate X bytes) in /tests/PHPUnit/System/ConsoleTest.php on line 87
-*** IN SAFEMODE ***
-Matomo encountered an error: Allowed memory size of X bytes exhausted (tried to allocate X bytes) (which lead to: Error: array (
-  'type' => 1,
-  'message' => 'Allowed memory size of X bytes exhausted (tried to allocate X bytes)',
-  'file' => '/tests/PHPUnit/System/ConsoleTest.php',
-  'line' => %d,
-  'backtrace' => ' on /tests/PHPUnit/System/ConsoleTest.php(%d)
-#0 /tests/PHPUnit/System/ConsoleTest.php(%d): Piwik\\\\Tests\\\\System\\\\TestCommandWithFatalError->executeImpl()
-#1 /core/Plugin/ConsoleCommand.php(%d): Piwik\\\\Tests\\\\System\\\\TestCommandWithFatalError->doExecute()
-',
-))
-END;
+        
+        Fatal error: Allowed memory size of X bytes exhausted (tried to allocate X bytes) in /tests/PHPUnit/System/ConsoleTest.php on line 87
+        *** IN SAFEMODE ***
+        Matomo encountered an error: Allowed memory size of X bytes exhausted (tried to allocate X bytes) (which lead to: Error: array (
+          'type' => 1,
+          'message' => 'Allowed memory size of X bytes exhausted (tried to allocate X bytes)',
+          'file' => '/tests/PHPUnit/System/ConsoleTest.php',
+          'line' => %d,
+          'backtrace' => ' on /tests/PHPUnit/System/ConsoleTest.php(%d)
+        #0 /tests/PHPUnit/System/ConsoleTest.php(%d): Matomo\\\\Tests\\\\System\\\\TestCommandWithFatalError->executeImpl()
+        #1 /core/Plugin/ConsoleCommand.php(%d): Matomo\\\\Tests\\\\System\\\\TestCommandWithFatalError->doExecute()
+        ',
+        ))
+        END;
 
         if (PHP_MAJOR_VERSION < 8) {
             $expected = "#!/usr/bin/env php\n" . $expected;
@@ -269,18 +269,18 @@ END;
     public static function provideContainerConfigBeforeClass()
     {
         return [
-            'log.handlers' => [\Piwik\DI::get(FailureLogMessageDetector::class)],
-            LoggerInterface::class => \Piwik\DI::create(Logger::class)
-                ->constructor('piwik', \Piwik\DI::get('log.handlers'), \Piwik\DI::get('log.processors')),
+            'log.handlers' => [\Matomo\DI::get(FailureLogMessageDetector::class)],
+            LoggerInterface::class => \Matomo\DI::create(Logger::class)
+                ->constructor('piwik', \Matomo\DI::get('log.handlers'), \Matomo\DI::get('log.processors')),
 
-            'observers.global' => \Piwik\DI::add([
-                ['Console.filterCommands', \Piwik\DI::value(function (&$commands) {
+            'observers.global' => \Matomo\DI::add([
+                ['Console.filterCommands', \Matomo\DI::value(function (&$commands) {
                     $commands[] = TestCommandWithFatalError::class;
                     $commands[] = TestCommandWithException::class;
                     $commands[] = TestCommandWithSubscribedSignals::class;
                 })],
 
-                ['Request.dispatch', \Piwik\DI::value(function ($module, $action) {
+                ['Request.dispatch', \Matomo\DI::value(function ($module, $action) {
                     if ($module === 'CorePluginsAdmin' && $action === 'safemode') {
                         print "*** IN SAFEMODE ***\n"; // will appear in output
                     }

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\System;
+namespace Matomo\Plugins\PrivacyManager\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\PrivacyManager\ReportsPurger;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\API\Request;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\PrivacyManager\ReportsPurger;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
 
 /**
  * @group PrivacyManager

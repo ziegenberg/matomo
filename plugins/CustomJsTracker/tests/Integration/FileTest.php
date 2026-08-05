@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\tests\Integration;
+namespace Matomo\Plugins\CustomJsTracker\tests\Integration;
 
-use Piwik\Plugins\CustomJsTracker\File;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\CustomJsTracker\File;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class CustomTestFile extends File
 {
@@ -157,7 +157,7 @@ class FileTest extends IntegrationTestCase
 
     public function testCheckReadableShouldThrowExceptionIfNotIsReadable()
     {
-        $this->expectException(\Piwik\Plugins\CustomJsTracker\Exception\AccessDeniedException::class);
+        $this->expectException(\Matomo\Plugins\CustomJsTracker\Exception\AccessDeniedException::class);
         $this->expectExceptionMessage('not readable');
 
         $this->makeNotReadableFile()->checkReadable();
@@ -165,7 +165,7 @@ class FileTest extends IntegrationTestCase
 
     public function testCheckWritableShouldThrowExceptionIfNotIsWritable()
     {
-        $this->expectException(\Piwik\Plugins\CustomJsTracker\Exception\AccessDeniedException::class);
+        $this->expectException(\Matomo\Plugins\CustomJsTracker\Exception\AccessDeniedException::class);
         $this->expectExceptionMessage('not writable');
 
         $this->makeNotReadableFileInNonWritableDirectory()->checkWritable();

@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter as MetricFormatter;
-use Piwik\Period\Factory;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\API\Filter\DataComparisonFilter;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter as MetricFormatter;
+use Matomo\Period\Factory;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\API\Filter\DataComparisonFilter;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\View;
 
 /**
  * Reads the requested DataTable from the API and prepares data for the Sparklines view. It can display any amount
@@ -351,7 +351,7 @@ class Sparklines extends ViewDataTable
                                     $metricFormatter,
                                     $idSite
                                 );
-                                $evolutions[$i]['tooltip'] = Piwik::translate('General_EvolutionSummaryGeneric', [
+                                $evolutions[$i]['tooltip'] = Matomo::translate('General_EvolutionSummaryGeneric', [
                                     $formattedValue . ' ' . $compareDescriptions[$i],
                                     $periodPretty,
                                     $formattedOriginalValue . ' ' . $compareDescriptions[$i],

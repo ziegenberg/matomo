@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
-use Piwik\Option;
-use Piwik\Plugins\CoreAdminHome\Commands\MigrateUserScopedSettings;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\Settings\Storage\Factory;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Option;
+use Matomo\Plugins\CoreAdminHome\Commands\MigrateUserScopedSettings;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Settings\Storage\Factory;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreAdminHome

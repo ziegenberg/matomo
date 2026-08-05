@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CliMulti;
-use Piwik\CronArchive;
-use Piwik\Metrics\Formatter;
-use Piwik\Option;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CliMulti;
+use Matomo\CronArchive;
+use Matomo\Metrics\Formatter;
+use Matomo\Option;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 /**
  * Check if cron archiving can run through CLI.

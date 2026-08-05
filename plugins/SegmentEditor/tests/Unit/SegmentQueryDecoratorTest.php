@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\Unit;
+namespace Matomo\Plugins\SegmentEditor\tests\Unit;
 
-use Piwik\Plugins\SegmentEditor\SegmentQueryDecorator;
-use Piwik\Plugins\SegmentEditor\Services\StoredSegmentService;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Tests\Framework\Mock\Plugin\LogTablesProvider;
+use Matomo\Plugins\SegmentEditor\SegmentQueryDecorator;
+use Matomo\Plugins\SegmentEditor\Services\StoredSegmentService;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Tests\Framework\Mock\Plugin\LogTablesProvider;
 
 /**
  * @group SegmentEditor
@@ -86,7 +86,7 @@ class SegmentQueryDecoratorTest extends \PHPUnit\Framework\TestCase
 
     private function getMockSegmentEditorService()
     {
-        $mock = $this->getMockBuilder('Piwik\Plugins\SegmentEditor\Services\StoredSegmentService')
+        $mock = $this->getMockBuilder('Matomo\Plugins\SegmentEditor\Services\StoredSegmentService')
             ->setMethods(['getAllSegmentsAndIgnoreVisibility'])
             ->setConstructorArgs([])
             ->disableOriginalConstructor()

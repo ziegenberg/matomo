@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Widgets;
+namespace Matomo\Plugins\Goals\Widgets;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Widget\WidgetConfig;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Widget\WidgetConfig;
 
-class AddNewGoal extends \Piwik\Widget\Widget
+class AddNewGoal extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

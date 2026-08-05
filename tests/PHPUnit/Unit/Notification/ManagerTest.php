@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Notification;
+namespace Matomo\Tests\Unit\Notification;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Notification;
-use Piwik\Notification\Manager;
+use Matomo\Notification;
+use Matomo\Notification\Manager;
 
 class ManagerTest extends TestCase
 {

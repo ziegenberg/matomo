@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Processor;
+namespace Matomo\Plugins\Monolog\Processor;
 
 use Monolog\LogRecord;
-use Piwik\Common;
-use Piwik\ErrorHandler;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\ExceptionHandler;
-use Piwik\Log;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\ErrorHandler;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\ExceptionHandler;
+use Matomo\Log;
+use Matomo\Url;
 
 /**
  * Process a log record containing an exception to generate a textual message.

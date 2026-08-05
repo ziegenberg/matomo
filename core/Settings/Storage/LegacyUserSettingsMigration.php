@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage;
+namespace Matomo\Settings\Storage;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
 
 class LegacyUserSettingsMigration
 {
@@ -270,7 +270,7 @@ class LegacyUserSettingsMigration
     private function isLikelyValidLogin(string $login): bool
     {
         try {
-            Piwik::checkValidLoginString($login);
+            Matomo::checkValidLoginString($login);
             return true;
         } catch (\Exception $exception) {
             return false;

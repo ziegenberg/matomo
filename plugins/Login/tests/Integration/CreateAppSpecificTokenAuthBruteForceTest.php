@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Container\StaticContainer;
-use Piwik\NoAccessException;
-use Piwik\Plugins\Login\Login as LoginPlugin;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
-use Piwik\Plugins\Login\SystemSettings;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Container\StaticContainer;
+use Matomo\NoAccessException;
+use Matomo\Plugins\Login\Login as LoginPlugin;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Plugins\Login\SystemSettings;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Login
@@ -137,7 +137,7 @@ class CreateAppSpecificTokenAuthBruteForceTest extends IntegrationTestCase
 
         $_POST['form_login'] = $this->userEmail;
         $_REQUEST['form_login'] = $this->userEmail;
-        StaticContainer::get(\Piwik\Auth::class)->setLogin('anonymous');
+        StaticContainer::get(\Matomo\Auth::class)->setLogin('anonymous');
 
         $this->expectException(NoAccessException::class);
         $this->expectExceptionCode(403);
@@ -188,7 +188,7 @@ class CreateAppSpecificTokenAuthBruteForceTest extends IntegrationTestCase
 
     private function setAnonymousUser(): void
     {
-        $auth = StaticContainer::get('Piwik\Auth');
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setLogin('anonymous');
         $auth->setTokenAuth('anonymous');
         $auth->setPasswordHash(null);

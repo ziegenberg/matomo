@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\Reports;
+namespace Matomo\Plugins\AIAgents\Reports;
 
-use Piwik\Plugin\Report;
-use Piwik\Plugins\AIAgents\Columns\Metrics\AIAgentMetric;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
-use Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
-use Piwik\Plugins\CoreHome\Columns\Metrics\BounceRate;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\AIAgents\API;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\AIAgents\Columns\Metrics\AIAgentMetric;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
+use Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
+use Matomo\Plugins\CoreHome\Columns\Metrics\BounceRate;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\AIAgents\API;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class Get extends Report
 {
@@ -30,7 +30,7 @@ class Get extends Report
     {
         parent::init();
 
-        $this->name          = Piwik::translate('AIAgents_AIAgentVisits');
+        $this->name          = Matomo::translate('AIAgents_AIAgentVisits');
         $this->categoryId    = 'General_AIAssistants';
         $this->subcategoryId = 'AIAgents_AIAgentsOverview';
         $this->order         = 10;
@@ -93,16 +93,16 @@ class Get extends Report
     private function getSparklineTranslations(): array
     {
         return [
-            'avg_time_on_site_ai_agent'     => Piwik::translate('AIAgents_SparklineAIAgentAverageVisitDuration'),
-            'avg_time_on_site_human'        => Piwik::translate('AIAgents_SparklineHumanAverageVisitDuration'),
-            'bounce_rate_ai_agent'          => Piwik::translate('AIAgents_SparklineAIAgentBounceRate'),
-            'bounce_rate_human'             => Piwik::translate('AIAgents_SparklineHumanBounceRate'),
-            'nb_actions_ai_agent'           => Piwik::translate('AIAgents_SparklineAIAgentActions'),
-            'nb_actions_human'              => Piwik::translate('AIAgents_SparklineHumanActions'),
-            'nb_actions_per_visit_ai_agent' => Piwik::translate('AIAgents_SparklineAIAgentAvgActionsPerVisit'),
-            'nb_actions_per_visit_human'    => Piwik::translate('AIAgents_SparklineHumanAvgActionsPerVisit'),
-            'nb_visits_ai_agent'            => Piwik::translate('AIAgents_SparklineAIAgentVisits'),
-            'nb_visits_human'               => Piwik::translate('AIAgents_SparklineHumanVisits'),
+            'avg_time_on_site_ai_agent'     => Matomo::translate('AIAgents_SparklineAIAgentAverageVisitDuration'),
+            'avg_time_on_site_human'        => Matomo::translate('AIAgents_SparklineHumanAverageVisitDuration'),
+            'bounce_rate_ai_agent'          => Matomo::translate('AIAgents_SparklineAIAgentBounceRate'),
+            'bounce_rate_human'             => Matomo::translate('AIAgents_SparklineHumanBounceRate'),
+            'nb_actions_ai_agent'           => Matomo::translate('AIAgents_SparklineAIAgentActions'),
+            'nb_actions_human'              => Matomo::translate('AIAgents_SparklineHumanActions'),
+            'nb_actions_per_visit_ai_agent' => Matomo::translate('AIAgents_SparklineAIAgentAvgActionsPerVisit'),
+            'nb_actions_per_visit_human'    => Matomo::translate('AIAgents_SparklineHumanAvgActionsPerVisit'),
+            'nb_visits_ai_agent'            => Matomo::translate('AIAgents_SparklineAIAgentVisits'),
+            'nb_visits_human'               => Matomo::translate('AIAgents_SparklineHumanVisits'),
         ];
     }
 

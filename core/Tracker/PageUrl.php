@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Tracker\Cache as TrackerCache;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\UrlHelper;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Tracker\Cache as TrackerCache;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\UrlHelper;
 
 class PageUrl
 {
@@ -94,12 +94,12 @@ class PageUrl
         );
 
         /**
-         * Triggered before setting the action url in Piwik\Tracker\Action so plugins can register
+         * Triggered before setting the action url in Matomo\Tracker\Action so plugins can register
          * parameters to be excluded from the tracking URL (e.g. campaign parameters).
          *
          * @param array &$parametersToExclude An array of parameters to exclude from the tracking url.
          */
-        Piwik::postEvent('Tracker.PageUrl.getQueryParametersToExclude', array(&$parametersToExclude));
+        Matomo::postEvent('Tracker.PageUrl.getQueryParametersToExclude', array(&$parametersToExclude));
 
         if (!empty($parametersToExclude)) {
             Common::printDebug('Excluding parameters "' . implode(',', $parametersToExclude) . '" from URL');

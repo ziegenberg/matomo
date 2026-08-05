@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Category\CategoryList;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Cache as PiwikCache;
-use Piwik\Site;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Category\CategoryList;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Cache as PiwikCache;
+use Matomo\Site;
 
 /**
  * Get reports that are defined by plugins.
@@ -29,7 +29,7 @@ class ReportsProvider
      * Get an instance of a specific report belonging to the given module and having the given action.
      * @param  string $module
      * @param  string $action
-     * @return null|\Piwik\Plugin\Report
+     * @return null|\Matomo\Plugin\Report
      * @api
      */
     public static function factory($module, $action)
@@ -111,7 +111,7 @@ class ReportsProvider
     /**
      * Returns a list of all available reports. Even not enabled reports will be returned. They will be already sorted
      * depending on the order and category of the report.
-     * @return \Piwik\Plugin\Report[]
+     * @return \Matomo\Plugin\Report[]
      * @api
      */
     public function getAllReports()
@@ -139,7 +139,7 @@ class ReportsProvider
              *
              * @param Report[] $reports An array of reports
              */
-            Piwik::postEvent('Report.addReports', array(&$instances));
+            Matomo::postEvent('Report.addReports', array(&$instances));
 
             foreach ($reports as $report) {
                 $instances[] = new $report();
@@ -161,7 +161,7 @@ class ReportsProvider
              *
              * @param Report[] $reports An array of reports
              */
-            Piwik::postEvent('Report.filterReports', array(&$instances));
+            Matomo::postEvent('Report.filterReports', array(&$instances));
 
             @usort($instances, array($this, 'sort'));
 
@@ -277,7 +277,7 @@ class ReportsProvider
      */
     public function getAllReportClasses()
     {
-        return Plugin\Manager::getInstance()->findMultipleComponents('Reports', '\\Piwik\\Plugin\\Report');
+        return Plugin\Manager::getInstance()->findMultipleComponents('Reports', '\Matomo\Plugin\Report');
     }
 
     //Added this to trigger reset of category list as the list never gets rest after setting up due to isset check and affects testcases

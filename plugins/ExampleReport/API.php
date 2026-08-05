@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleReport;
+namespace Matomo\Plugins\ExampleReport;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * API for plugin ExampleReport
  *
- * @method static \Piwik\Plugins\ExampleReport\API getInstance()
+ * @method static \Matomo\Plugins\ExampleReport\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Another example method that returns a data table.

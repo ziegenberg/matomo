@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * Base type for processed metrics. A processed metric is a metric that is computed using
@@ -26,7 +26,7 @@ abstract class ProcessedMetric extends Metric
     public const COMPONENT_SUBNAMESPACE = 'Columns\\Metrics';
 
     /**
-     * Computes the metric using the values in a {@link Piwik\DataTable\Row}.
+     * Computes the metric using the values in a {@link Matomo\DataTable\Row}.
      *
      * The computed value should be numerical and not formatted in any way. For example, for
      * a percent value, `0.14` should be returned instead of `"14%"`.

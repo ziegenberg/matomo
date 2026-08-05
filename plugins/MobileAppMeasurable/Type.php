@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileAppMeasurable;
+namespace Matomo\Plugins\MobileAppMeasurable;
 
-use Piwik\Url;
+use Matomo\Url;
 
-class Type extends \Piwik\Measurable\Type
+class Type extends \Matomo\Measurable\Type
 {
     public const ID = 'mobileapp';
     protected $name = 'MobileAppMeasurable_MobileApp';

@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitFrequency;
+namespace Matomo\Plugins\VisitFrequency;
 
-use Piwik\API\Request;
-use Piwik\DataTable;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\API\DataTable\MergeDataTables;
-use Piwik\Segment;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Site;
+use Matomo\API\Request;
+use Matomo\DataTable;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\API\DataTable\MergeDataTables;
+use Matomo\Segment;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Site;
 
 /**
  * VisitFrequency API lets you access a list of metrics related to Returning Visitors.
  *
- * @method static \Piwik\Plugins\VisitFrequency\API getInstance()
+ * @method static \Matomo\Plugins\VisitFrequency\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     // visitorType==returning,visitorType==returningCustomer
     public const RETURNING_VISITOR_SEGMENT = "visitorType%3D%3Dreturning%2CvisitorType%3D%3DreturningCustomer";
@@ -53,14 +53,14 @@ class API extends \Piwik\Plugin\API
      */
     public function get($idSite, string $period, string $date, ?string $segment = null, $columns = null): DataTable\DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $visitTypes = array(
             self::NEW_COLUMN_SUFFIX => self::NEW_VISITOR_SEGMENT,
             self::RETURNING_COLUMN_SUFFIX => self::RETURNING_VISITOR_SEGMENT,
         );
 
-        $columns = Piwik::getArrayFromApiParameter($columns);
+        $columns = Matomo::getArrayFromApiParameter($columns);
 
         if ($idSite === 'all' || count(Site::getIdSitesFromIdSitesString($idSite, false, true)) > 1) {
             $resultSet = new DataTable\Map();

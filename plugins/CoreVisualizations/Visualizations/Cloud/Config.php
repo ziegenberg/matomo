@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\Cloud;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\Cloud;
 
-use Piwik\ViewDataTable\Config as VisualizationConfig;
+use Matomo\ViewDataTable\Config as VisualizationConfig;
 
 /**
  * DataTable Visualization that derives from HtmlTable and sets show_extra_columns to true.

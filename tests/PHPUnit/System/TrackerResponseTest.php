@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Http;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Http;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group TrackerTest

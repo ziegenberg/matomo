@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Columns\Dimension;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
+use Matomo\Columns\Dimension;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
 
 /**
  * @group CoreVisualizations

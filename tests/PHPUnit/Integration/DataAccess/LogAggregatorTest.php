@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\DataAccess;
+namespace Matomo\Tests\Integration\DataAccess;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\Config;
-use Piwik\Config\DatabaseConfig;
-use Piwik\Common;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Db\Schema;
-use Piwik\Metrics;
-use Piwik\Period;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
-use Piwik\Tests\Framework\TestDataHelper\LogHelper;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
-use Piwik\Updater\Migration\Db as DbMigration;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\Config;
+use Matomo\Config\DatabaseConfig;
+use Matomo\Common;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Db\Schema;
+use Matomo\Metrics;
+use Matomo\Period;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\Tests\Framework\TestDataHelper\LogHelper;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
+use Matomo\Updater\Migration\Db as DbMigration;
 
 /**
  * @group Core

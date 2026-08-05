@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Scheduler\Schedule;
+namespace Matomo\Tests\Unit\Scheduler\Schedule;
 
 use Exception;
-use Piwik\Scheduler\Schedule\Hourly;
+use Matomo\Scheduler\Schedule\Hourly;
 
 /**
  * @group Scheduler
@@ -68,7 +68,7 @@ class HourlyTest extends \PHPUnit\Framework\TestCase
          * Expected :
          *  getRescheduledTime returns Friday January 1 1971 10:00:00 GMT
          */
-        $mock = $this->createPartialMock('Piwik\Scheduler\Schedule\Hourly', array('getTime'));
+        $mock = $this->createPartialMock('Matomo\Scheduler\Schedule\Hourly', array('getTime'));
         $mock->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue(self::$JANUARY_01_1971_09_00_00));
@@ -83,7 +83,7 @@ class HourlyTest extends \PHPUnit\Framework\TestCase
          * Expected :
          *  getRescheduledTime returns Friday January 1 1971 10:00:00 GMT
          */
-        $mock = $this->createPartialMock('Piwik\Scheduler\Schedule\Hourly', array('getTime'));
+        $mock = $this->createPartialMock('Matomo\Scheduler\Schedule\Hourly', array('getTime'));
         $mock->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue(self::$JANUARY_01_1971_09_10_00));

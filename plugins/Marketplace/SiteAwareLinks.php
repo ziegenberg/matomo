@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Request;
-use Piwik\Site;
-use Piwik\Url;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Request;
+use Matomo\Site;
+use Matomo\Url;
 
 class SiteAwareLinks
 {
@@ -81,7 +81,7 @@ class SiteAwareLinks
             return false;
         }
 
-        if (!Piwik::isUserHasViewAccess($idSite)) {
+        if (!Matomo::isUserHasViewAccess($idSite)) {
             return false;
         }
 

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\ProfessionalServices;
+namespace Matomo\Tests\Integration\ProfessionalServices;
 
-use Piwik\Config;
-use Piwik\ProfessionalServices\Advertising;
-use Piwik\Tests\Framework\Mock\FakeConfig;
-use Piwik\Tests\Framework\Mock\Plugin\Manager;
+use Matomo\Config;
+use Matomo\ProfessionalServices\Advertising;
+use Matomo\Tests\Framework\Mock\FakeConfig;
+use Matomo\Tests\Framework\Mock\Plugin\Manager;
 
 /**
  * @group ProfessionalServices

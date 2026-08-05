@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\EventDispatcher;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\Referrers\Columns\Keyword;
+use Matomo\EventDispatcher;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\Referrers\Columns\Keyword;
 
 class GetKeywords extends Base
 {
@@ -21,9 +21,9 @@ class GetKeywords extends Base
     {
         parent::init();
         $this->dimension     = new Keyword();
-        $this->name          = Piwik::translate('Referrers_Keywords');
-        $this->documentation = Piwik::translate('Referrers_KeywordsReportDocumentation', '<br /><br />') .
-                               '<br /><br />' . Piwik::translate('Referrers_KeywordsReportDocumentationNote');
+        $this->name          = Matomo::translate('Referrers_Keywords');
+        $this->documentation = Matomo::translate('Referrers_KeywordsReportDocumentation', '<br /><br />') .
+                               '<br /><br />' . Matomo::translate('Referrers_KeywordsReportDocumentationNote');
         $this->actionToLoadSubTables = 'getSearchEnginesFromKeywordId';
         $this->hasGoalMetrics = true;
         $this->order = 3;
@@ -33,7 +33,7 @@ class GetKeywords extends Base
     public function configureView(ViewDataTable $view)
     {
         $view->config->show_exclude_low_population = false;
-        $view->config->addTranslation('label', Piwik::translate('General_ColumnKeyword'));
+        $view->config->addTranslation('label', Matomo::translate('General_ColumnKeyword'));
 
         $view->requestConfig->filter_limit = 25;
 

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\tests\Fixtures;
+namespace Matomo\Plugins\MultiSites\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\Goals\API as GoalsAPI;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API as GoalsAPI;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates tracker testing data for our ControllerTest

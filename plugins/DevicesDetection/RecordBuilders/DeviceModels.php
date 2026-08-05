@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\RecordBuilders;
+namespace Matomo\Plugins\DevicesDetection\RecordBuilders;
 
-use Piwik\Plugins\DevicesDetection\Archiver;
+use Matomo\Plugins\DevicesDetection\Archiver;
 
 class DeviceModels extends Base
 {

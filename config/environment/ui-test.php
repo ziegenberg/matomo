@@ -1,14 +1,14 @@
 <?php
 
-use Piwik\Container\Container;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Plugin\Visualization;
-use Piwik\Plugins\Diagnostics\Diagnostic\FileIntegrityCheck;
-use Piwik\Plugins\Diagnostics\Diagnostic\PhpVersionCheck;
-use Piwik\Plugins\Diagnostics\Diagnostic\RequiredPrivateDirectories;
-use Piwik\SiteContentDetector;
-use Piwik\Tests\Framework\Mock\FakeSiteContentDetector;
+use Matomo\Container\Container;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Plugin\Visualization;
+use Matomo\Plugins\Diagnostics\Diagnostic\FileIntegrityCheck;
+use Matomo\Plugins\Diagnostics\Diagnostic\PhpVersionCheck;
+use Matomo\Plugins\Diagnostics\Diagnostic\RequiredPrivateDirectories;
+use Matomo\SiteContentDetector;
+use Matomo\Tests\Framework\Mock\FakeSiteContentDetector;
 
 return [
 
@@ -19,11 +19,11 @@ return [
     'tests.ui.url_normalizer_blacklist.controller' => [],
 
     // disable check for plugin updates during UI tests, allow for override
-    'dev.forced_plugin_update_result' => Piwik\DI::decorate(function ($previous, Container $c) {
+    'dev.forced_plugin_update_result' => Matomo\DI::decorate(function ($previous, Container $c) {
         return $c->get('test.vars.forceEnablePluginUpdateChecks') ? null : [];
     }),
 
-    'twig.cache' => function (\Piwik\Container\Container $container) {
+    'twig.cache' => function (\Matomo\Container\Container $container) {
         $templatesPath = $container->get('path.tmp.templates');
         return new class ($templatesPath) extends \Twig\Cache\FilesystemCache {
             public function write(string $key, string $content): void
@@ -48,7 +48,7 @@ return [
         };
     },
 
-    'Piwik\Config' => \Piwik\DI::decorate(function (\Piwik\Config $config, Container $c) {
+    'Matomo\Config' => \Matomo\DI::decorate(function (\Matomo\Config $config, Container $c) {
         $config->General['cors_domains'][] = '*';
         $config->General['trusted_hosts'][] = '127.0.0.1';
         $config->General['trusted_hosts'][] = $config->tests['http_host'];
@@ -65,18 +65,18 @@ return [
     }),
 
     // avoid any site content detection checks
-    SiteContentDetector::class  => \Piwik\DI::decorate(function ($previous, Container $c) {
+    SiteContentDetector::class  => \Matomo\DI::decorate(function ($previous, Container $c) {
         $detectedContentDetections = $c->get('test.vars.detectedContentDetections') ?: [];
         $connectedConsentManagers = $c->get('test.vars.connectedConsentManagers') ?: [];
 
         return new FakeSiteContentDetector($detectedContentDetections, $connectedConsentManagers);
     }),
 
-    'observers.global' => \Piwik\DI::add([
+    'observers.global' => \Matomo\DI::add([
 
         // removes port from all URLs to the test Piwik server so UI tests will pass no matter
         // what port is used
-        ['Request.dispatch.end', Piwik\DI::value(function (&$result) {
+        ['Request.dispatch.end', Matomo\DI::value(function (&$result) {
             $request = $_GET + $_POST;
 
             $apiblacklist = StaticContainer::get('tests.ui.url_normalizer_blacklist.api');
@@ -94,7 +94,7 @@ return [
                 }
             }
 
-            $config = \Piwik\Config::getInstance();
+            $config = \Matomo\Config::getInstance();
             $host = $config->tests['http_host'];
             $port = $config->tests['port'];
 
@@ -109,11 +109,11 @@ return [
             $result = str_replace([$path, $pathInJson], '', $result ?? '');
         })],
 
-        ['Controller.RssWidget.rssPiwik.end', Piwik\DI::value(function (&$result, $parameters) {
+        ['Controller.RssWidget.rssPiwik.end', Matomo\DI::value(function (&$result, $parameters) {
             $result = '';
         })],
 
-        ['Visualization.beforeRender', Piwik\DI::value(function (Visualization $visualization) {
+        ['Visualization.beforeRender', Matomo\DI::value(function (Visualization $visualization) {
             $dataStates = StaticContainer::get('test.vars.forceDataStates');
 
             if (!is_array($dataStates) || [] === $dataStates) {
@@ -138,13 +138,13 @@ return [
             }
         })],
 
-        \Piwik\Tests\Framework\XssTesting::getJavaScriptAddEvent(),
+        \Matomo\Tests\Framework\XssTesting::getJavaScriptAddEvent(),
     ]),
 
     // disable some diagnostics for UI tests
-    'diagnostics.disabled'  => \Piwik\DI::add([
-        \Piwik\DI::get(FileIntegrityCheck::class),
-        \Piwik\DI::get(RequiredPrivateDirectories::class),
-        \Piwik\DI::get(PhpVersionCheck::class),
+    'diagnostics.disabled'  => \Matomo\DI::add([
+        \Matomo\DI::get(FileIntegrityCheck::class),
+        \Matomo\DI::get(RequiredPrivateDirectories::class),
+        \Matomo\DI::get(PhpVersionCheck::class),
     ]),
 ];

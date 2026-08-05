@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\DataTable\Filter;
+namespace Matomo\Tests\Unit\DataTable\Filter;
 
-use Piwik\DataTable\Filter\Sort;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable\Filter\Sort;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * @group DataTableTest

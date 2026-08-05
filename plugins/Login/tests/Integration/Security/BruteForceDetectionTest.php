@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration\Security;
+namespace Matomo\Plugins\Login\tests\Integration\Security;
 
-use Piwik\Date;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\Emails\SuspiciousLoginAttemptsInLastHourEmail;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
-use Piwik\Plugins\Login\SystemSettings;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Date;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\Emails\SuspiciousLoginAttemptsInLastHourEmail;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Plugins\Login\SystemSettings;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class CustomBruteForceDetection extends BruteForceDetection
 {
@@ -70,7 +70,7 @@ class BruteForceDetectionTest extends IntegrationTestCase
         $this->settings->maxFailedLoginsPerMinutes->setValue(5);
         $this->settings->whitelisteBruteForceIps->setValue(array('10.99.99.99'));
         $this->settings->blacklistedBruteForceIps->setValue(array('10.55.55.55'));
-        $this->detection = new CustomBruteForceDetection($this->settings, new \Piwik\Plugins\Login\Model());
+        $this->detection = new CustomBruteForceDetection($this->settings, new \Matomo\Plugins\Login\Model());
     }
 
     public function testIsEnabledIsEnabledByDefault()
@@ -276,7 +276,7 @@ class BruteForceDetectionTest extends IntegrationTestCase
         $this->detection->setNow(Date::now());
 
         $sentMail = null;
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
             $sentMail = $mail;
         });
 
@@ -294,7 +294,7 @@ class BruteForceDetectionTest extends IntegrationTestCase
 
         /** @var SuspiciousLoginAttemptsInLastHourEmail $sentMail */
         $sentMail = null;
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
             $sentMail = $mail;
         });
 

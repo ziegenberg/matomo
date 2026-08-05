@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Columns;
+namespace Matomo\Plugins\BotTracking\Columns;
 
-use Piwik\Columns\Dimension;
+use Matomo\Columns\Dimension;
 
 /**
  * Neutral "URL" dimension used by the Broken Content report which mixes page and document URLs.

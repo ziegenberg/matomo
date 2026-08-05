@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\API\API as APIMetadata;
-use Piwik\Plugins\Live\Live;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\View\UIControl;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorAPI;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\API\API as APIMetadata;
+use Matomo\Plugins\Live\Live;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\View\UIControl;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorAPI;
 
 /**
  * Generates the HTML for the segment selector control (which includes the segment editor).
@@ -36,10 +36,10 @@ class SegmentSelectorControl extends UIControl
         $this->cssIdentifier = "segmentEditorPanel";
         $this->cssClass = "piwikTopControl borderedControl piwikSelector";
 
-        $idSiteFromRequest = \Piwik\Request::fromRequest()->getIntegerParameter('idSite', -1);
+        $idSiteFromRequest = \Matomo\Request::fromRequest()->getIntegerParameter('idSite', -1);
         $this->idSite = $idSiteFromRequest !== -1 ? $idSiteFromRequest : null;
 
-        $formatter = StaticContainer::get('Piwik\Plugins\SegmentEditor\SegmentFormatter');
+        $formatter = StaticContainer::get('Matomo\Plugins\SegmentEditor\SegmentFormatter');
         $this->segmentDescription = $formatter->getHumanReadable(Request::getRawSegmentFromRequest(), $this->idSite);
 
         $this->isAddingSegmentsForAllWebsitesEnabled = SegmentEditor::isAddingSegmentsForAllWebsitesEnabled();
@@ -47,13 +47,13 @@ class SegmentSelectorControl extends UIControl
 
         $segments = APIMetadata::getInstance()->getSegmentsMetadata($this->idSite);
 
-        $visitTitle = Piwik::translate('General_Visit');
+        $visitTitle = Matomo::translate('General_Visit');
         foreach ($segments as $segment) {
             if (
                 $segment['category'] == $visitTitle
                 && ($segment['type'] == 'metric' && $segment['segment'] != 'visitIp')
             ) {
-                $metricsLabel = mb_strtolower(Piwik::translate('General_Metrics'));
+                $metricsLabel = mb_strtolower(Matomo::translate('General_Metrics'));
                 $segment['category'] .= ' (' . $metricsLabel . ')';
             }
         }
@@ -62,7 +62,7 @@ class SegmentSelectorControl extends UIControl
         $this->nameOfCurrentSegment = '';
         $this->isSegmentNotAppliedBecauseBrowserArchivingIsDisabled = 0;
 
-        $this->selectedSegment = \Piwik\Request::fromRequest()->getStringParameter('segment', '');
+        $this->selectedSegment = \Matomo\Request::fromRequest()->getStringParameter('segment', '');
         $this->availableSegments = SegmentEditor::getAllSegmentsForSite($this->idSite);
         foreach ($this->availableSegments as &$savedSegment) {
             if (!empty($this->selectedSegment) && $this->selectedSegment == $savedSegment['definition']) {
@@ -79,12 +79,12 @@ class SegmentSelectorControl extends UIControl
             'subcategory' => 'CoreHome_Segments',
         ];
         $this->authorizedToCreateSegments = SegmentEditorAPI::getInstance()->isUserCanAddNewSegment($this->idSite);
-        $this->isUserAnonymous = Piwik::isUserIsAnonymous();
+        $this->isUserAnonymous = Matomo::isUserIsAnonymous();
         $this->segmentTranslations = $this->getTranslations();
         $this->segmentProcessedOnRequest = Rules::isBrowserArchivingAvailableForSegments();
         $this->hideSegmentDefinitionChangeMessage = UsersManagerAPI::getInstance()->getUserPreference(
             'hideSegmentDefinitionChangeMessage',
-            Piwik::getCurrentUserLogin()
+            Matomo::getCurrentUserLogin()
         );
         $this->isBrowserArchivingEnabled = Rules::isBrowserTriggerEnabled();
 
@@ -154,7 +154,7 @@ class SegmentSelectorControl extends UIControl
         );
         $translations = array();
         foreach ($translationKeys as $key) {
-            $translations[$key] = Piwik::translate($key);
+            $translations[$key] = Matomo::translate($key);
         }
         return $translations;
     }

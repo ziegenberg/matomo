@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
 use Matomo\Network\IPUtils;
-use Piwik\Config;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Policy\PolicyManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\TrackerConfig;
+use Matomo\Config;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Policy\PolicyManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\TrackerConfig;
 
 /**
  * @group RequestTest
@@ -300,7 +300,7 @@ class RequestTest extends IntegrationTestCase
 
     public function testGetIdSiteShouldNotThrowExceptionIfValueIsZero()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
         $this->expectExceptionMessage('Invalid idSite: \'0\'');
 
         $request = $this->buildRequest(array('idsite' => '0'));
@@ -309,7 +309,7 @@ class RequestTest extends IntegrationTestCase
 
     public function testGetIdSiteShouldThrowExceptionIfValueIsLowerThanZero()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
         $this->expectExceptionMessage('Invalid idSite: \'-1\'');
 
         $request = $this->buildRequest(array('idsite' => '-1'));
@@ -392,7 +392,7 @@ class RequestTest extends IntegrationTestCase
     public function testAuthenticateSuperUserOrAdminShouldPostAuthInitEventIfTokenIsGiven()
     {
         $called = 0;
-        Piwik::addAction('Request.initAuthenticationObject', function () use (&$called) {
+        Matomo::addAction('Request.initAuthenticationObject', function () use (&$called) {
             $called++;
         });
 
@@ -461,7 +461,7 @@ class RequestTest extends IntegrationTestCase
     public function testGetIdSiteShouldTriggerEventAndReturnThatIdSite()
     {
         $self = $this;
-        Piwik::addAction('Tracker.Request.getIdSite', function (&$idSite, $params) use ($self) {
+        Matomo::addAction('Tracker.Request.getIdSite', function (&$idSite, $params) use ($self) {
             $self->assertSame(14, $idSite);
             $self->assertEquals(array('idsite' => '14'), $params);
             $idSite = 12;
@@ -513,11 +513,11 @@ class RequestTest extends IntegrationTestCase
 
     public function testGetIdSiteShouldTriggerExceptionWhenSiteNotExists()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
         $this->expectExceptionMessage('An unexpected website was found in the request: website id was set to \'155\'');
 
         $self = $this;
-        Piwik::addAction('Tracker.Request.getIdSite', function (&$idSite, $params) use ($self) {
+        Matomo::addAction('Tracker.Request.getIdSite', function (&$idSite, $params) use ($self) {
             $self->assertSame(14, $idSite);
             $self->assertEquals(array('idsite' => '14'), $params);
             $idSite = 155;

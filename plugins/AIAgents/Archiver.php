@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents;
+namespace Matomo\Plugins\AIAgents;
 
-use Piwik\Plugin\Archiver as PluginArchiver;
+use Matomo\Plugin\Archiver as PluginArchiver;
 
 class Archiver extends PluginArchiver
 {

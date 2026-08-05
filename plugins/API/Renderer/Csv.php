@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Renderer;
+namespace Matomo\Plugins\API\Renderer;
 
-use Piwik\API\ApiRenderer;
-use Piwik\Common;
-use Piwik\ProxyHttp;
+use Matomo\API\ApiRenderer;
+use Matomo\Common;
+use Matomo\ProxyHttp;
 
 class Csv extends ApiRenderer
 {
@@ -41,7 +41,7 @@ class Csv extends ApiRenderer
             $idSite = 'all';
         }
 
-        /** @var \Piwik\DataTable\Renderer\Csv $tableRenderer */
+        /** @var \Matomo\DataTable\Renderer\Csv $tableRenderer */
         $tableRenderer = $this->buildDataTableRenderer($dataTable);
         $tableRenderer->setConvertToUnicode($convertToUnicode);
 

@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\VisitFrequency\API as VisitFrequencyApi;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Segment;
-use Piwik\Updater;
-use Piwik\Updates;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\VisitFrequency\API as VisitFrequencyApi;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Segment;
+use Matomo\Updater;
+use Matomo\Updates;
 
 class Updates_2_1_1_b11 extends Updates
 {

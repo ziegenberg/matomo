@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Plugins\ExampleLogTables\Columns;
+namespace Matomo\Plugins\ExampleLogTables\Columns;
 
-use Piwik\Columns\Dimension;
+use Matomo\Columns\Dimension;
 
 class UserAttributeGender extends Dimension
 {

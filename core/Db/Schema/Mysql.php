@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Db\Schema;
+namespace Matomo\Db\Schema;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Concurrency\Lock;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db\SchemaInterface;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Version;
+use Matomo\Common;
+use Matomo\Concurrency\Lock;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db\SchemaInterface;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Version;
 
 /**
  * MySQL schema
@@ -526,7 +526,7 @@ class Mysql implements SchemaInterface
              */
             if (count($allTables) && empty($GLOBALS['DISABLE_GET_TABLES_INSTALLED_EVENTS_FOR_TEST'])) {
                 Manager::getInstance()->loadPlugins(Manager::getAllPluginsNames());
-                Piwik::postEvent('Db.getTablesInstalled', [&$allMyTables]);
+                Matomo::postEvent('Db.getTablesInstalled', [&$allMyTables]);
                 Manager::getInstance()->unloadPlugins();
                 Manager::getInstance()->loadActivatedPlugins();
             }

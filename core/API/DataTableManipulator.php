@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\Archive\DataTableFactory;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable\Row;
-use Piwik\DataTable;
-use Piwik\Period\Range;
-use Piwik\Plugins\API\API;
-use Piwik\Url;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\Period\Range;
+use Matomo\Plugins\API\API;
+use Matomo\Url;
 
 /**
  * Base class for manipulating data tables.

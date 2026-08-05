@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\ClickedUrl;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\ClickedUrl;
 
 class GetOutlinks extends Base
 {
@@ -20,10 +20,10 @@ class GetOutlinks extends Base
         parent::init();
 
         $this->dimension     = new ClickedUrl();
-        $this->name          = Piwik::translate('General_Outlinks');
-        $this->documentation = Piwik::translate('Actions_OutlinksReportDocumentation') . ' '
-                             . Piwik::translate('Actions_OutlinkDocumentation') . '<br />'
-                             . Piwik::translate('General_UsePlusMinusIconsDocumentation');
+        $this->name          = Matomo::translate('General_Outlinks');
+        $this->documentation = Matomo::translate('Actions_OutlinksReportDocumentation') . ' '
+                             . Matomo::translate('Actions_OutlinkDocumentation') . '<br />'
+                             . Matomo::translate('General_UsePlusMinusIconsDocumentation');
 
         $this->metrics = array('nb_visits', 'nb_hits');
         $this->order   = 8;
@@ -36,16 +36,16 @@ class GetOutlinks extends Base
     public function getMetrics()
     {
         return array(
-            'nb_visits' => Piwik::translate('Actions_ColumnUniqueClicks'),
-            'nb_hits'   => Piwik::translate('Actions_ColumnClicks'),
+            'nb_visits' => Matomo::translate('Actions_ColumnUniqueClicks'),
+            'nb_hits'   => Matomo::translate('Actions_ColumnClicks'),
         );
     }
 
     protected function getMetricsDocumentation()
     {
         return array(
-            'nb_visits' => Piwik::translate('Actions_ColumnUniqueClicksDocumentation'),
-            'nb_hits'   => Piwik::translate('Actions_ColumnClicksDocumentation'),
+            'nb_visits' => Matomo::translate('Actions_ColumnUniqueClicksDocumentation'),
+            'nb_hits'   => Matomo::translate('Actions_ColumnClicksDocumentation'),
         );
     }
 

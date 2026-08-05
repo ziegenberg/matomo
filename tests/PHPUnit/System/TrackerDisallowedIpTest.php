@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -60,13 +60,13 @@ class TrackerDisallowedIpTest extends IntegrationTestCase
     public static function provideContainerConfigBeforeClass()
     {
         return [
-            'observers.global' => \Piwik\DI::add(array(
-                array('Environment.bootstrapped', \Piwik\DI::value(function () {
+            'observers.global' => \Matomo\DI::add(array(
+                array('Environment.bootstrapped', \Matomo\DI::value(function () {
                     // ensure tracking request uses an IP that is not local or on allow list
                     $_SERVER['REMOTE_ADDR'] = '3.3.3.3';
                 })),
             )),
-            Config::class => \Piwik\DI::decorate(function (Config $config) {
+            Config::class => \Matomo\DI::decorate(function (Config $config) {
                 $config->General['login_allowlist_ip'] = ['1.1.1.1'];
                 return $config;
             }),

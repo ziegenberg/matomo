@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\JsTrackerInstallCheck;
+namespace Matomo\Plugins\JsTrackerInstallCheck;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugins\JsTrackerInstallCheck\NonceOption\JsTrackerInstallCheckOption;
-use Piwik\Site;
-use Piwik\Tracker\Request;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugins\JsTrackerInstallCheck\NonceOption\JsTrackerInstallCheckOption;
+use Matomo\Site;
+use Matomo\Tracker\Request;
 
-class JsTrackerInstallCheck extends \Piwik\Plugin
+class JsTrackerInstallCheck extends \Matomo\Plugin
 {
     public const QUERY_PARAM_NAME = 'tracker_install_check';
 

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\ProfileSummary;
+namespace Matomo\Plugins\UserCountry\ProfileSummary;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugins\Live;
-use Piwik\Plugins\Live\ProfileSummary\ProfileSummaryAbstract;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugins\Live;
+use Matomo\Plugins\Live\ProfileSummary\ProfileSummaryAbstract;
+use Matomo\Url;
+use Matomo\View;
 
 /**
  * Class LocationSummary
@@ -26,7 +26,7 @@ class LocationSummary extends ProfileSummaryAbstract
      */
     public function getName()
     {
-        return Piwik::translate('UserCountry_Location');
+        return Matomo::translate('UserCountry_Location');
     }
 
     /**
@@ -44,7 +44,7 @@ class LocationSummary extends ProfileSummaryAbstract
         if (
             Common::getRequestVar('showMap', 1) == 1
             && !empty($view->visitorData['hasLatLong'])
-            && \Piwik\Plugin\Manager::getInstance()->isPluginLoaded('UserCountryMap')
+            && \Matomo\Plugin\Manager::getInstance()->isPluginLoaded('UserCountryMap')
         ) {
             $view->userCountryMapUrl = $this->getUserCountryMapUrlForVisitorProfile();
         }

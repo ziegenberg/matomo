@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration;
+namespace Matomo\Plugins\Marketplace\tests\Integration;
 
-use Piwik\Access;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\Marketplace\SiteAwareLinks;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\Marketplace\SiteAwareLinks;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Plugins
@@ -82,12 +82,12 @@ class SiteAwareLinksTest extends IntegrationTestCase
         // access check this would leak an inaccessible idSite into the generated link.
         $realAccess = Access::getInstance();
         $noAccessToSite2 = new FakeAccess($superUser = false, $idSitesAdmin = [], $idSitesView = [1], $identity = 'testUser');
-        StaticContainer::getContainer()->set('Piwik\Access', $noAccessToSite2);
+        StaticContainer::getContainer()->set('Matomo\Access', $noAccessToSite2);
 
         try {
             $result = $this->siteAwareLinks->getCurrentValidIdSiteOrDefault();
         } finally {
-            StaticContainer::getContainer()->set('Piwik\Access', $realAccess);
+            StaticContainer::getContainer()->set('Matomo\Access', $realAccess);
         }
 
         $this->assertSame(1, $result);

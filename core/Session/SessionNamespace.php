@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Session;
+namespace Matomo\Session;
 
-use Piwik\Common;
-use Piwik\Session;
+use Matomo\Common;
+use Matomo\Session;
 use Zend_Session_Namespace;
 
 /**

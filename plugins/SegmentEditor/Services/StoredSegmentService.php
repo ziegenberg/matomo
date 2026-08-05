@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\Services;
+namespace Matomo\Plugins\SegmentEditor\Services;
 
-use Piwik\Plugins\SegmentEditor\Model;
+use Matomo\Plugins\SegmentEditor\Model;
 use Matomo\Cache\Transient as TransientCache;
 
 /**

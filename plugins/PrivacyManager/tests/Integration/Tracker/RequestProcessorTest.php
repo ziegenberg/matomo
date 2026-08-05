@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration\Tracker;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration\Tracker;
 
-use Piwik\Common;
-use Piwik\Option;
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\PrivacyManager\ReferrerAnonymizer;
-use Piwik\Plugins\PrivacyManager\Tracker\RequestProcessor;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\Option;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\PrivacyManager\ReferrerAnonymizer;
+use Matomo\Plugins\PrivacyManager\Tracker\RequestProcessor;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * @group PrivacyManager

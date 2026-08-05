@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Access;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\ManySitesImportedLogs;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestSet;
+use Matomo\Access;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\ManySitesImportedLogs;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestSet;
 
 /**
  * Tests the log importer.
@@ -211,7 +211,7 @@ class ImportLogsTest extends SystemTestCase
 
         $testingEnvironment = new TestingEnvironmentVariables();
         if ($testingEnvironment->_triggerTrackerFailure) {
-            $observers[] = array('Tracker.newHandler', \Piwik\DI::value(function () {
+            $observers[] = array('Tracker.newHandler', \Matomo\DI::value(function () {
                 @http_response_code(500);
 
                 throw new \Exception("injected exception");
@@ -221,7 +221,7 @@ class ImportLogsTest extends SystemTestCase
         if ($testingEnvironment->_triggerInvalidRequests) {
             // we trigger an invalid request by checking for triggerInvalid=1 in a request, and if found replacing the
             // request w/ a request that has an nonexistent idsite
-            $observers[] = array('Tracker.initRequestSet', \Piwik\DI::value(function (RequestSet $requestSet) {
+            $observers[] = array('Tracker.initRequestSet', \Matomo\DI::value(function (RequestSet $requestSet) {
                 $requests = $requestSet->getRequests();
                 foreach ($requests as $index => $request) {
                     $url = $request->getParam('url');
@@ -237,7 +237,7 @@ class ImportLogsTest extends SystemTestCase
         }
 
         if (!empty($observers)) {
-            $result['observers.global'] = \Piwik\DI::add($observers);
+            $result['observers.global'] = \Matomo\DI::add($observers);
         }
 
         return $result;

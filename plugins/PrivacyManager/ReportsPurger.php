@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Matomo;
 
 /**
  * Purges archived reports and metrics that are considered old.
@@ -386,7 +386,7 @@ class ReportsPurger
     private static function getReportPeriodsToKeep($settings)
     {
         $keepReportPeriods = array();
-        foreach (Piwik::$idPeriods as $strPeriod => $intPeriod) {
+        foreach (Matomo::$idPeriods as $strPeriod => $intPeriod) {
             $optionName = "delete_reports_keep_{$strPeriod}_reports";
             if ($settings[$optionName] == 1) {
                 $keepReportPeriods[] = $intPeriod;

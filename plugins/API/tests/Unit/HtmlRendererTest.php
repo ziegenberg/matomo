@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\Unit;
+namespace Matomo\Plugins\API\tests\Unit;
 
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Plugins\API\Renderer\Html;
-use Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Plugins\API\Renderer\Html;
+use Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
 
 /**
  * @group Plugin
@@ -296,12 +296,12 @@ message', $response);
 		<td>6</td>
 		<td>\'processedRows\' =&gt; array (
   0 =&gt; 
-  ' . ($isPHP82orNewer ? '\\' : '') . 'Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite::__set_state(array(
+  ' . ($isPHP82orNewer ? '\\' : '') . 'Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite::__set_state(array(
   )),
   1 =&gt; 
   ' . $stdClass . '
   2 =&gt; 
-  ' . ($isPHP82orNewer ? '\\' : '') . 'Piwik\Date::__set_state(array(
+  ' . ($isPHP82orNewer ? '\\' : '') . 'Matomo\Date::__set_state(array(
      \'timestamp\' =&gt; 1451606400,
      \'timezone\' =&gt; \'UTC\',
   )),

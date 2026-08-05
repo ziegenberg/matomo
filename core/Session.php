@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\MissingFilePermissionException;
-use Piwik\Plugins\Overlay\Overlay;
-use Piwik\Session\SaveHandler\DbTable;
-use Piwik\Log\LoggerInterface;
-use Piwik\Session\SessionFingerprint;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\MissingFilePermissionException;
+use Matomo\Plugins\Overlay\Overlay;
+use Matomo\Session\SaveHandler\DbTable;
+use Matomo\Log\LoggerInterface;
+use Matomo\Session\SessionFingerprint;
 use Zend_Session;
 
 /**
@@ -132,7 +132,7 @@ class Session extends Zend_Session
 
             $message = sprintf(
                 "Error: %s %s\n<pre>Debug: the original error was \n%s</pre>",
-                Piwik::translate('General_ExceptionUnableToStartSession'),
+                Matomo::translate('General_ExceptionUnableToStartSession'),
                 $pathToSessions,
                 $e->getMessage()
             );
@@ -173,8 +173,8 @@ class Session extends Zend_Session
         $config = Config::getInstance();
         $general = $config->General;
 
-        $module = Piwik::getModule();
-        $action = Piwik::getAction();
+        $module = Matomo::getModule();
+        $action = Matomo::getAction();
         $method = Common::getRequestVar('method', '', 'string');
         $referer = Url::getReferrer();
 
@@ -199,7 +199,7 @@ class Session extends Zend_Session
          *     $shouldUseNoneForcefully = true;
          * });
          */
-        Piwik::postEvent('Session.shouldSendSameSiteCookieAsNoneForcefully', [&$shouldUseNoneForcefully]);
+        Matomo::postEvent('Session.shouldSendSameSiteCookieAsNoneForcefully', [&$shouldUseNoneForcefully]);
 
         if (($shouldUseNone || $shouldUseNoneForcefully) && ProxyHttp::isHttps()) {
             return 'None';

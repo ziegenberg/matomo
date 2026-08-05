@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\Integration;
+namespace Matomo\Plugins\TwoFactorAuth\tests\Integration;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugins\TwoFactorAuth\API;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication;
-use Piwik\Plugins\UsersManager\API as UsersAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugins\TwoFactorAuth\API;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication;
+use Matomo\Plugins\UsersManager\API as UsersAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group TwoFactorAuth
@@ -83,7 +83,7 @@ class APITest extends IntegrationTestCase
         $this->assertEquals([], $this->recoveryCodes->getAllRecoveryCodesForLogin('mylogin1'));
 
         //Reset without a password
-        Piwik::addAction('Login.userRequiresPasswordConfirmation', function (&$requiresPasswordConfirmation) {
+        Matomo::addAction('Login.userRequiresPasswordConfirmation', function (&$requiresPasswordConfirmation) {
             $requiresPasswordConfirmation = false;
         });
         $this->api->resetTwoFactorAuth('mylogin2');
@@ -101,7 +101,7 @@ class APITest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

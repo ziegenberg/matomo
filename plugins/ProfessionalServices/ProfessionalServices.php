@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices;
+namespace Matomo\Plugins\ProfessionalServices;
 
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\View;
-use Piwik\Plugin;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\View;
+use Matomo\Plugin;
 
-class ProfessionalServices extends \Piwik\Plugin
+class ProfessionalServices extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

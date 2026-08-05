@@ -1,15 +1,15 @@
 <?php
 
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
-use Piwik\Plugins\Marketplace\LicenseKey;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Consumer as MockConsumer;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\FixtureRepository;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Service as MockService;
-use Piwik\Container\Container;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Plugins\Marketplace\LicenseKey;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Consumer as MockConsumer;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\FixtureRepository;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Service as MockService;
+use Matomo\Container\Container;
 
 return array(
-    'observers.global' => \Piwik\DI::add(array(
-        array('Http.sendHttpRequest', \Piwik\DI::value(
+    'observers.global' => \Matomo\DI::add(array(
+        array('Http.sendHttpRequest', \Matomo\DI::value(
             function ($url, $params, &$response, &$status, &$headers) {
                 (new FixtureRepository())->respond($url, $params, $response, $status, $headers);
             }
@@ -22,13 +22,13 @@ return array(
         // to make sure system tests of marketplace are ran against plugins.piwik.org
         $domain = 'http://plugins.piwik.org';
 
-        if (\Piwik\Http::isUpdatingOverHttps()) {
+        if (\Matomo\Http::isUpdatingOverHttps()) {
             $domain = str_replace('http://', 'https://', $domain);
         }
 
         return $domain;
     },
-    'Piwik\Plugins\Marketplace\Consumer' => function (Container $c) {
+    'Matomo\Plugins\Marketplace\Consumer' => function (Container $c) {
         $consumerTest = $c->get('test.vars.consumer');
         $licenseKey = new LicenseKey();
 
@@ -48,38 +48,38 @@ return array(
 
         return $consumer;
     },
-    'Piwik\Plugins\Marketplace\Plugins' => Piwik\DI::decorate(function ($previous, Container $c) {
-        /** @var \Piwik\Plugins\Marketplace\Plugins $previous */
+    'Matomo\Plugins\Marketplace\Plugins' => Matomo\DI::decorate(function ($previous, Container $c) {
+        /** @var \Matomo\Plugins\Marketplace\Plugins $previous */
         $previous->setPluginsHavingUpdateCache(null);
 
         $pluginNames = $c->get('test.vars.mockMarketplaceAssumePluginNamesActivated');
 
         if (!empty($pluginNames)) {
-            /** @var \Piwik\Plugins\Marketplace\Plugins $previous */
+            /** @var \Matomo\Plugins\Marketplace\Plugins $previous */
             $previous->setActivatedPluginNames($pluginNames);
         }
 
         return $previous;
     }),
-    'Piwik\Plugins\Marketplace\Api\Client' => Piwik\DI::decorate(function ($previous) {
-        /** @var \Piwik\Plugins\Marketplace\Api\Client $previous */
+    'Matomo\Plugins\Marketplace\Api\Client' => Matomo\DI::decorate(function ($previous) {
+        /** @var \Matomo\Plugins\Marketplace\Api\Client $previous */
         $previous->clearAllCacheEntries();
 
         return $previous;
     }),
-    'Piwik\Plugins\Marketplace\Plugins\InvalidLicenses' => Piwik\DI::decorate(function ($previous, Container $c) {
+    'Matomo\Plugins\Marketplace\Plugins\InvalidLicenses' => Matomo\DI::decorate(function ($previous, Container $c) {
 
         $pluginNames = $c->get('test.vars.mockMarketplaceAssumePluginNamesActivated');
 
         if (!empty($pluginNames)) {
-            /** @var \Piwik\Plugins\Marketplace\Plugins\InvalidLicenses $previous */
+            /** @var \Matomo\Plugins\Marketplace\Plugins\InvalidLicenses $previous */
             $previous->setActivatedPluginNames($pluginNames);
             $previous->clearCache();
         }
 
         return $previous;
     }),
-    'Piwik\Plugins\Marketplace\Api\Service' => Piwik\DI::decorate(function ($previous, Container $c) {
+    'Matomo\Plugins\Marketplace\Api\Service' => Matomo\DI::decorate(function ($previous, Container $c) {
         if (!$c->get('test.vars.mockMarketplaceApiService')) {
             return $previous;
         }

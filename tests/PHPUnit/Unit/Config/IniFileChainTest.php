@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Config;
+namespace Matomo\Tests\Unit\Config;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Config\IniFileChain;
+use Matomo\Config\IniFileChain;
 
 /**
  * @group Core

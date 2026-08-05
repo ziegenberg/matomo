@@ -9,21 +9,21 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\PrivacyManager\Settings;
+namespace Matomo\Plugins\PrivacyManager\Settings;
 
-use Piwik\Piwik;
-use Piwik\Policy\CnilPolicy;
+use Matomo\Matomo;
+use Matomo\Policy\CnilPolicy;
 
 class DataRoundingEnabled extends CompliancePolicyEnforcedSetting
 {
     public static function getTitle(): string
     {
-        return Piwik::translate('PrivacyManager_SegmentedDataRoundingSettingTitle');
+        return Matomo::translate('PrivacyManager_SegmentedDataRoundingSettingTitle');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate('PrivacyManager_SegmentedDataRoundingSettingRequirementNote');
+        return Matomo::translate('PrivacyManager_SegmentedDataRoundingSettingRequirementNote');
     }
 
     public static function getPolicyRequirements(): array

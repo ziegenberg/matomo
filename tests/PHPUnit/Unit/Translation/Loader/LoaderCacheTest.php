@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation\Loader;
+namespace Matomo\Tests\Unit\Translation\Loader;
 
 use Matomo\Cache\Backend\ArrayCache;
 use Matomo\Cache\Lazy;
-use Piwik\Translation\Loader\LoaderCache;
+use Matomo\Translation\Loader\LoaderCache;
 
 /**
  * @group Translation
@@ -24,7 +24,7 @@ class LoaderCacheTest extends \PHPUnit\Framework\TestCase
         $cache->expects($this->any())
             ->method('fetch')
             ->willReturn(array('translations!'));
-        $wrappedLoader = $this->getMockForAbstractClass('Piwik\Translation\Loader\LoaderInterface');
+        $wrappedLoader = $this->getMockForAbstractClass('Matomo\Translation\Loader\LoaderInterface');
         $wrappedLoader->expects($this->never())
             ->method('load');
 
@@ -40,7 +40,7 @@ class LoaderCacheTest extends \PHPUnit\Framework\TestCase
         $cache->expects($this->any())
             ->method('fetch')
             ->willReturn(null);
-        $wrappedLoader = $this->getMockForAbstractClass('Piwik\Translation\Loader\LoaderInterface');
+        $wrappedLoader = $this->getMockForAbstractClass('Matomo\Translation\Loader\LoaderInterface');
         $wrappedLoader->expects($this->once())
             ->method('load')
             ->with('en', array('foo'))
@@ -56,7 +56,7 @@ class LoaderCacheTest extends \PHPUnit\Framework\TestCase
     {
         $cache = new Lazy(new ArrayCache());
 
-        $wrappedLoader = $this->getMockForAbstractClass('Piwik\Translation\Loader\LoaderInterface');
+        $wrappedLoader = $this->getMockForAbstractClass('Matomo\Translation\Loader\LoaderInterface');
         $wrappedLoader->expects($this->exactly(2))
             ->method('load')
             ->willReturn(array('translations!'));

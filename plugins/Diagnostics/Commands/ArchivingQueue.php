@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * Diagnostic command that returns a snapshot of the archive invalidation queue
@@ -33,7 +33,7 @@ class ArchivingQueue extends ConsoleCommand
         $input = $this->getInput();
         $output = $this->getOutput();
 
-        $archiveTableDao = StaticContainer::get('Piwik\DataAccess\ArchiveTableDao');
+        $archiveTableDao = StaticContainer::get('Matomo\DataAccess\ArchiveTableDao');
 
         if ($input->getOption('json')) {
             $queue = $archiveTableDao->getInvalidationQueueData();

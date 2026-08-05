@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\LogRecord;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Period\Day;
-use Piwik\Period\Month;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Period\Day;
+use Matomo\Period\Month;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
 
 /**
  * @group CoreAdminHome

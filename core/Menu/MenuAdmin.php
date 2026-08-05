@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Menu;
+namespace Matomo\Menu;
 
-use Piwik\Development;
+use Matomo\Development;
 
 /**
  * Contains menu entries for the Admin menu.
  * Plugins can implement the `configureAdminMenu()` method of the `Menu` plugin class to add, rename of remove
  * items. If your plugin does not have a `Menu` class yet you can create one using `./console generate:menu`.
  *
- * @method static \Piwik\Menu\MenuAdmin getInstance()
+ * @method static \Matomo\Menu\MenuAdmin getInstance()
  */
 class MenuAdmin extends MenuAbstract
 {

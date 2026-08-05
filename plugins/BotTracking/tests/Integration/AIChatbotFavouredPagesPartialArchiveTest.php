@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Integration;
+namespace Matomo\Plugins\BotTracking\tests\Integration;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\Period\Range;
-use Piwik\Plugins\BotTracking\API;
-use Piwik\Plugins\BotTracking\Archiver;
-use Piwik\Plugins\BotTracking\tests\Fixtures\BotTraffic;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\Period\Range;
+use Matomo\Plugins\BotTracking\API;
+use Matomo\Plugins\BotTracking\Archiver;
+use Matomo\Plugins\BotTracking\tests\Fixtures\BotTraffic;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Verifies that the Favoured Pages buildForNonDayPeriod override honours partial archiving: when only

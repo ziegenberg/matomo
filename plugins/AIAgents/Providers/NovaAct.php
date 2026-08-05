@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\Providers;
+namespace Matomo\Plugins\AIAgents\Providers;
 
-use Piwik\Tracker\Request;
+use Matomo\Tracker\Request;
 
 class NovaAct extends AgentAbstract
 {

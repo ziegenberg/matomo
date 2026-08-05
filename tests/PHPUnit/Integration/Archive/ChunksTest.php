@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Archive;
+namespace Matomo\Tests\Integration\Archive;
 
-use Piwik\Archive;
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Segment;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\Mock\Site;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Period\Factory as PeriodFactory;
+use Matomo\Archive;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Segment;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\Mock\Site;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Period\Factory as PeriodFactory;
 
 /**
  * @group ChunksTest
@@ -145,7 +145,7 @@ class ChunksTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

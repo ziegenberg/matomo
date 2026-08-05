@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations;
+namespace Matomo\Plugins\CoreVisualizations;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\Chart;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\Chart;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
 
 /**
  * Generates JSON data used to configure and populate JQPlot graphs.
@@ -25,7 +25,7 @@ use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
 class JqplotDataGenerator
 {
     /**
-     * View properties. @see \Piwik\ViewDataTable for more info.
+     * View properties. @see \Matomo\ViewDataTable for more info.
      *
      * @var array
      */

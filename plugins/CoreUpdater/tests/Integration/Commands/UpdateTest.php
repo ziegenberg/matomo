@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreUpdater\tests\Integration\Commands;
 
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
-use Piwik\Updates\Updates_2_10_0_b5;
-use Piwik\Version;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\Updates\Updates_2_10_0_b5;
+use Matomo\Version;
 
 require_once PIWIK_INCLUDE_PATH . '/core/Updates/2.10.0-b5.php';
 

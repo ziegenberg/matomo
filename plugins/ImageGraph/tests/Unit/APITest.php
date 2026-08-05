@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Plugins\ImageGraph\tests\Unit;
+namespace Matomo\Plugins\ImageGraph\tests\Unit;
 
-use Piwik\Plugins\ImageGraph\API;
+use Matomo\Plugins\ImageGraph\API;
 use ReflectionMethod;
 
 /**

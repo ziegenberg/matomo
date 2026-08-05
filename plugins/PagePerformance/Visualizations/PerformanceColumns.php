@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Visualizations;
+namespace Matomo\Plugins\PagePerformance\Visualizations;
 
-use Piwik\DataTable;
-use Piwik\DbHelper;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\PagePerformance\Metrics;
-use Piwik\Plugins\PagePerformance\PagePerformance;
+use Matomo\DataTable;
+use Matomo\DbHelper;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\PagePerformance\Metrics;
+use Matomo\Plugins\PagePerformance\PagePerformance;
 
 /**
  * DataTable Visualization that derives from HtmlTable and show performance columns.

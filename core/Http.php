@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Composer\CaBundle\CaBundle;
 use Exception;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
 
 /**
  * Contains HTTP client related helper methods that can retrieve content from remote servers
@@ -351,7 +351,7 @@ class Http
          * @param int &$status A plugin listening to this event should assign the HTTP status code it received to this variable, for example "200"
          * @param array &$headers A plugin listening to this event should assign the HTTP headers it received to this variable, eg array('Content-Length' => '5')
          */
-        Piwik::postEvent('Http.sendHttpRequest', array($aUrl, $httpEventParams, &$response, &$status, &$headers));
+        Matomo::postEvent('Http.sendHttpRequest', array($aUrl, $httpEventParams, &$response, &$status, &$headers));
 
         if ($response !== null || $status !== null || !empty($headers)) {
             // was handled by event above...
@@ -359,7 +359,7 @@ class Http
              * described below
              * @ignore
              */
-            Piwik::postEvent('Http.sendHttpRequest.end', array($aUrl, $httpEventParams, &$response, &$status, &$headers));
+            Matomo::postEvent('Http.sendHttpRequest.end', array($aUrl, $httpEventParams, &$response, &$status, &$headers));
 
             if ($destinationPath && file_exists($destinationPath)) {
                 return true;
@@ -843,7 +843,7 @@ class Http
          * @param int &$status The returned HTTP status code, for example "200"
          * @param array &$headers The returned headers, eg array('Content-Length' => '5')
          */
-        Piwik::postEvent('Http.sendHttpRequest.end', array($aUrl, $httpEventParams, &$response, &$status, &$headers));
+        Matomo::postEvent('Http.sendHttpRequest.end', array($aUrl, $httpEventParams, &$response, &$status, &$headers));
 
         if (!$getExtendedInfo) {
             return trim($response);
@@ -933,8 +933,8 @@ class Http
             && file_exists($outputPath)
         ) {
             throw new Exception(
-                Piwik::translate('General_DownloadFail_FileExists', "'" . $outputPath . "'")
-                . ' ' . Piwik::translate('General_DownloadPleaseRemoveExisting')
+                Matomo::translate('General_DownloadFail_FileExists', "'" . $outputPath . "'")
+                . ' ' . Matomo::translate('General_DownloadPleaseRemoveExisting')
             );
         }
 
@@ -960,7 +960,7 @@ class Http
 
             if ($expectedFileSize == 0) {
                 Log::info("HEAD request for '%s' failed, got following: %s", $url, print_r($expectedFileSizeResult, true));
-                throw new Exception(Piwik::translate('General_DownloadFail_HttpRequestFail'));
+                throw new Exception(Matomo::translate('General_DownloadFail_HttpRequestFail'));
             }
 
             Option::set($downloadOption, (string)$expectedFileSize);
@@ -977,8 +977,8 @@ class Http
         $existingSize = file_exists($outputPath) ? filesize($outputPath) : 0;
         if ($existingSize >= $expectedFileSize) {
             throw new Exception(
-                Piwik::translate('General_DownloadFail_FileExistsContinue', "'" . $outputPath . "'")
-                . ' ' . Piwik::translate('General_DownloadPleaseRemoveExisting')
+                Matomo::translate('General_DownloadFail_FileExistsContinue', "'" . $outputPath . "'")
+                . ' ' . Matomo::translate('General_DownloadPleaseRemoveExisting')
             );
         }
 
@@ -1007,7 +1007,7 @@ class Http
                 print_r($result, true)
             );
 
-            throw new Exception(Piwik::translate('General_DownloadFail_HttpRequestFail'));
+            throw new Exception(Matomo::translate('General_DownloadFail_HttpRequestFail'));
         }
 
         // write chunk to file

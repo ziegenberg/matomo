@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\tests\Unit;
+namespace Matomo\Plugins\Actions\tests\Unit;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics as PiwikMetrics;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Action;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics as PiwikMetrics;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Action;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/Actions/Actions.php';
 

@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration;
+namespace Matomo\Plugins\Marketplace\tests\Integration;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugins\Marketplace\API;
-use Piwik\Plugins\Marketplace\Emails\RequestTrialNotificationEmail;
-use Piwik\Plugins\Marketplace\LicenseKey;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Service;
-use Piwik\Plugins\UsersManager\SystemSettings;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\Marketplace\Api\Service\Exception as ServiceException;
+use Matomo\Container\StaticContainer;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugins\Marketplace\API;
+use Matomo\Plugins\Marketplace\Emails\RequestTrialNotificationEmail;
+use Matomo\Plugins\Marketplace\LicenseKey;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Service;
+use Matomo\Plugins\UsersManager\SystemSettings;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Marketplace\Api\Service\Exception as ServiceException;
 
 /**
  * @group Marketplace
@@ -259,7 +259,7 @@ class ApiTest extends IntegrationTestCase
 
     public function testRequestTrialSendsEmailToAllSuperUsers(): void
     {
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$sentMail) {
             $sentMail = $mail;
         });
 
@@ -478,8 +478,8 @@ class ApiTest extends IntegrationTestCase
         $this->service = new Service();
 
         return array(
-            'Piwik\Access' => new FakeAccess(),
-            'Piwik\Plugins\Marketplace\Api\Service' => $this->service,
+            'Matomo\Access' => new FakeAccess(),
+            'Matomo\Plugins\Marketplace\Api\Service' => $this->service,
         );
     }
 

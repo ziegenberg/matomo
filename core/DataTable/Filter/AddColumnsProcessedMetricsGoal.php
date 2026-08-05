@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugin\Metric;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\AverageOrderRevenue;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionRate;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionPageRate;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionEntryRate;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionsAttrib;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionsEntry;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\Conversions;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\ItemsCount;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\Revenue;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenuePerVisit as GoalSpecificRevenuePerVisit;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenuePerEntry as GoalSpecificRevenuePerEntry;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenueAttrib;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenueEntry;
-use Piwik\Plugins\Goals\Columns\Metrics\RevenuePerVisit;
+use Matomo\Archive\DataTableFactory;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugin\Metric;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\AverageOrderRevenue;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionRate;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionPageRate;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionEntryRate;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionsAttrib;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionsEntry;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\Conversions;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\ItemsCount;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\Revenue;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenuePerVisit as GoalSpecificRevenuePerVisit;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenuePerEntry as GoalSpecificRevenuePerEntry;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenueAttrib;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenueEntry;
+use Matomo\Plugins\Goals\Columns\Metrics\RevenuePerVisit;
 
 /**
  * Adds goal related metrics to a {@link DataTable} using metrics that already exist.
@@ -131,7 +131,7 @@ class AddColumnsProcessedMetricsGoal extends AddColumnsProcessedMetrics
     public function __construct($table, $enable, $processOnlyIdGoal, $goalsToProcess = null)
     {
         $this->processOnlyIdGoal = $processOnlyIdGoal;
-        $this->isEcommerce = $this->processOnlyIdGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $this->processOnlyIdGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART;
+        $this->isEcommerce = $this->processOnlyIdGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $this->processOnlyIdGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART;
         parent::__construct($table);
         // Ensure that all rows with no visit but conversions will be displayed
         $this->deleteRowsWithNoVisit = false;
@@ -234,13 +234,13 @@ class AddColumnsProcessedMetricsGoal extends AddColumnsProcessedMetrics
     {
         // Check if one of the pages display types should be used
         if (in_array($requestMethod, self::ACTIONS_PAGE_REPORTS_WITH_GOAL_METRICS)) {
-            if ($idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+            if ($idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
                 return self::GOALS_PAGES_ECOMMERCE;
             } else {
                 return self::GOALS_PAGES;
             }
         } elseif (in_array($requestMethod, self::ACTIONS_ENTRY_PAGE_REPORTS_WITH_GOAL_METRICS)) {
-            if ($idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+            if ($idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER || $idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
                 return self::GOALS_ENTRY_PAGES_ECOMMERCE;
             } else {
                 return self::GOALS_ENTRY_PAGES;

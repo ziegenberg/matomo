@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\EventDispatcher;
-use Piwik\Option;
-use Piwik\Plugin\ReleaseChannels;
-use Piwik\UpdateCheck;
-use Piwik\UpdateCheck\ReleaseChannel;
-use Piwik\Version;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\EventDispatcher;
+use Matomo\Option;
+use Matomo\Plugin\ReleaseChannels;
+use Matomo\UpdateCheck;
+use Matomo\UpdateCheck\ReleaseChannel;
+use Matomo\Version;
 use stdClass;
 
 /**
@@ -51,8 +51,8 @@ class UpdateCheckTest extends TestCase
     {
         parent::setUp();
 
-        $this->originalAutoUpdateConfig = Config::getInstance()->General['enable_auto_update'] ?? null;
-        $this->originalReleaseChannels  = StaticContainer::getContainer()->get('\Piwik\Plugin\ReleaseChannels');
+        $this->originalAutoUpdateConfig = \Matomo\Config::getInstance()->General['enable_auto_update'] ?? null;
+        $this->originalReleaseChannels  = \Matomo\Container\StaticContainer::getContainer()->get('\Matomo\Plugin\ReleaseChannels');
 
         Config::getInstance()->General['enable_auto_update'] = true;
 
@@ -76,13 +76,13 @@ class UpdateCheckTest extends TestCase
             ]
         );
 
-        StaticContainer::getContainer()->set('\Piwik\Plugin\ReleaseChannels', $releaseChannels);
+        \Matomo\Container\StaticContainer::getContainer()->set('\Matomo\Plugin\ReleaseChannels', $releaseChannels);
     }
 
     public function tearDown(): void
     {
-        Option::setSingletonInstance(null);
-        StaticContainer::getContainer()->set('\Piwik\Plugin\ReleaseChannels', $this->originalReleaseChannels);
+        \Matomo\Option::setSingletonInstance(null);
+        \Matomo\Container\StaticContainer::getContainer()->set('\Matomo\Plugin\ReleaseChannels', $this->originalReleaseChannels);
 
         Config::getInstance()->General['enable_auto_update'] = $this->originalAutoUpdateConfig;
 

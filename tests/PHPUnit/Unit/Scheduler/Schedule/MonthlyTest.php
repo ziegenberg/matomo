@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Scheduler\Schedule;
+namespace Matomo\Tests\Unit\Scheduler\Schedule;
 
-use Piwik\Scheduler\Schedule\Monthly;
+use Matomo\Scheduler\Schedule\Monthly;
 
 /**
  * @group Scheduler
@@ -286,7 +286,7 @@ class MonthlyTest extends \PHPUnit\Framework\TestCase
      */
     private function getMonthlyMock($currentTime)
     {
-        $mock = $this->createPartialMock('Piwik\Scheduler\Schedule\Monthly', array('getTime'));
+        $mock = $this->createPartialMock('Matomo\Scheduler\Schedule\Monthly', array('getTime'));
         $mock->expects($this->any())
              ->method('getTime')
              ->will($this->returnValue($currentTime));

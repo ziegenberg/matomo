@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Scheduler\Schedule;
+namespace Matomo\Tests\Unit\Scheduler\Schedule;
 
 use Exception;
-use Piwik\Scheduler\Schedule\Daily;
-use Piwik\Scheduler\Schedule\Schedule;
+use Matomo\Scheduler\Schedule\Daily;
+use Matomo\Scheduler\Schedule\Schedule;
 
 /**
  * @group Scheduler
@@ -158,7 +158,7 @@ class DailyTest extends \PHPUnit\Framework\TestCase
      */
     private function getDailyMock($currentTime)
     {
-        $mock = $this->createPartialMock('Piwik\Scheduler\Schedule\Daily', array('getTime'));
+        $mock = $this->createPartialMock('Matomo\Scheduler\Schedule\Daily', array('getTime'));
         $mock->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue($currentTime));

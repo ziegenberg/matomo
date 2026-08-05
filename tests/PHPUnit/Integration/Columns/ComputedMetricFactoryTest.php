@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Columns;
+namespace Matomo\Tests\Integration\Columns;
 
-use Piwik\Columns\ComputedMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Plugin\ComputedMetric;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Columns\ComputedMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Plugin\ComputedMetric;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Morpheus;
+namespace Matomo\Plugins\Morpheus;
 
-use Piwik\Development;
-use Piwik\Piwik;
+use Matomo\Development;
+use Matomo\Matomo;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function demo()
     {
-        if (! Development::isEnabled() || !Piwik::isUserHasSomeAdminAccess()) {
+        if (! Development::isEnabled() || !Matomo::isUserHasSomeAdminAccess()) {
             return;
         }
 

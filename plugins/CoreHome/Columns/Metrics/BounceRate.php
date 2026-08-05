@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * The percentage of visits that leave the site without visiting another page. Calculated
@@ -32,7 +32,7 @@ class BounceRate extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnBounceRate');
+        return Matomo::translate('General_ColumnBounceRate');
     }
 
     public function getDependentMetrics()
@@ -50,7 +50,7 @@ class BounceRate extends ProcessedMetric
         $bounceCount = $this->getMetric($row, 'bounce_count');
         $visits = $this->getMetric($row, 'nb_visits');
 
-        return Piwik::getQuotientSafe($bounceCount, $visits, $precision = 2);
+        return Matomo::getQuotientSafe($bounceCount, $visits, $precision = 2);
     }
 
     public function getSemanticType(): ?string

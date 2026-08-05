@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Tracker;
+namespace Matomo\Plugins\PrivacyManager\Tracker;
 
-use Piwik\Common;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\PrivacyManager\ReferrerAnonymizer;
-use Piwik\SettingsPiwik;
-use Piwik\Tracker\Request;
-use Piwik\Tracker;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\PrivacyManager\ReferrerAnonymizer;
+use Matomo\SettingsPiwik;
+use Matomo\Tracker\Request;
+use Matomo\Tracker;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\Tracker\Visit\VisitProperties;
 
 class RequestProcessor extends Tracker\RequestProcessor
 {

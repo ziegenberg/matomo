@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Categories;
+namespace Matomo\Plugins\UserCountry\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class LocationsSubcategory extends Subcategory
 {
@@ -20,6 +20,6 @@ class LocationsSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('UserCountry_LocationsSubcategoryHelp') . '</p>';
+        return '<p>' . Matomo::translate('UserCountry_LocationsSubcategoryHelp') . '</p>';
     }
 }

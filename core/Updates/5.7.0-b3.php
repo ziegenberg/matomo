@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Config;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Config;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_5_7_0_b3 extends Updates
 {

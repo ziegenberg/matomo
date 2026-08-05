@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
-use Piwik\Access;
-use Piwik\API\Request as ApiRequest;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\UsersManager\API as UsersAPI;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\UsersManager\API as UsersAPI;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager
@@ -73,7 +73,7 @@ class CreateAppSpecificTokenAuthTest extends IntegrationTestCase
 
     private function setAnonymousUser(): void
     {
-        $auth = StaticContainer::get('Piwik\Auth');
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setLogin('anonymous');
         $auth->setTokenAuth('anonymous');
         $auth->setPasswordHash(null);

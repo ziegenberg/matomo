@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\tests\Unit\Columns;
+namespace Matomo\Plugins\Ecommerce\tests\Unit\Columns;
 
-use Piwik\Plugins\Ecommerce\Columns\BaseConversion;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
-use Piwik\Tracker\GoalManager;
+use Matomo\Plugins\Ecommerce\Columns\BaseConversion;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Tracker\GoalManager;
 
 /**
  * @group Ecommerce

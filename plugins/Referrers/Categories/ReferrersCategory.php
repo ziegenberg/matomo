@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Categories;
+namespace Matomo\Plugins\Referrers\Categories;
 
-use Piwik\Category\Category;
-use Piwik\Piwik;
+use Matomo\Category\Category;
+use Matomo\Matomo;
 
 class ReferrersCategory extends Category
 {
@@ -20,6 +20,6 @@ class ReferrersCategory extends Category
 
     public function getDisplayName()
     {
-        return Piwik::translate('Referrers_Acquisition');
+        return Matomo::translate('Referrers_Acquisition');
     }
 }

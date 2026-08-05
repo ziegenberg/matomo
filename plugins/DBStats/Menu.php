@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats;
+namespace Matomo\Plugins\DBStats;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $menu->addDiagnosticItem(
                 'DBStats_DatabaseUsage',
                 $this->urlForAction('index'),

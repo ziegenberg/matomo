@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\ArchiveProcessor;
+namespace Matomo\Tests\Integration\ArchiveProcessor;
 
-use Piwik\ArchiveProcessor\LoaderLock;
-use Piwik\Common;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\ArchiveProcessor\LoaderLock;
+use Matomo\Common;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ArchiveProcessor

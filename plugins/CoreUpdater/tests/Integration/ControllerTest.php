@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\tests\Integration;
+namespace Matomo\Plugins\CoreUpdater\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Nonce;
-use Piwik\Plugins\CoreUpdater\ArchiveDownloadException;
-use Piwik\Plugins\CoreUpdater\Controller;
-use Piwik\Plugins\CoreUpdater\Updater;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Nonce;
+use Matomo\Plugins\CoreUpdater\ArchiveDownloadException;
+use Matomo\Plugins\CoreUpdater\Controller;
+use Matomo\Plugins\CoreUpdater\Updater;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Plugins
@@ -235,7 +235,7 @@ class ControllerTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

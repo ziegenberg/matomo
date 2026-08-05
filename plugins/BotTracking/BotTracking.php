@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking;
+namespace Matomo\Plugins\BotTracking;
 
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Plugins\BotTracking\Metrics as BotMetrics;
-use Piwik\Plugins\BotTracking\Reports\AIChatbotsRealTimeWidgets;
-use Piwik\Tracker\Request;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Plugins\BotTracking\Metrics as BotMetrics;
+use Matomo\Plugins\BotTracking\Reports\AIChatbotsRealTimeWidgets;
+use Matomo\Tracker\Request;
 
 /**
  * BotTracking Plugin
@@ -131,7 +131,7 @@ class BotTracking extends Plugin
         // documentation strings, leaving no single translation with a majority. Registering the
         // default here mirrors the documentation registration in addMetricDocumentationTranslations.
         if (!isset($translations[Metrics::COLUMN_REQUESTS])) {
-            $translations[Metrics::COLUMN_REQUESTS] = Piwik::translate('BotTracking_ColumnRequests');
+            $translations[Metrics::COLUMN_REQUESTS] = Matomo::translate('BotTracking_ColumnRequests');
         }
     }
 
@@ -149,7 +149,7 @@ class BotTracking extends Plugin
         // document-scoped), leaving no single value with a majority. Setting a default here
         // ensures the metric always appears in the glossary with the generic tooltip.
         if (!isset($translations[Metrics::COLUMN_REQUESTS])) {
-            $translations[Metrics::COLUMN_REQUESTS] = Piwik::translate('BotTracking_ColumnRequestsDocumentation');
+            $translations[Metrics::COLUMN_REQUESTS] = Matomo::translate('BotTracking_ColumnRequestsDocumentation');
         }
     }
 
@@ -166,14 +166,14 @@ class BotTracking extends Plugin
      */
     public function addGlossaryItems(array &$glossaryItems): void
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
-        $category = Piwik::translate('General_AIAssistants');
+        $category = Matomo::translate('General_AIAssistants');
 
         foreach (AIChatbotsRealTimeWidgets::getAllWidgets() as $widget) {
             $glossaryItems['reports']['entries'][] = [
-                'name'          => sprintf('%s (%s)', Piwik::translate($widget['name']), $category),
-                'documentation' => Piwik::translate($widget['documentation']),
+                'name'          => sprintf('%s (%s)', Matomo::translate($widget['name']), $category),
+                'documentation' => Matomo::translate($widget['documentation']),
             ];
         }
     }

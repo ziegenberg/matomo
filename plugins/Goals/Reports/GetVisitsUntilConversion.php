@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Reports;
+namespace Matomo\Plugins\Goals\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Goals\Archiver;
-use Piwik\Plugins\Goals\Columns\VisitsUntilConversion;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Goals\Archiver;
+use Matomo\Plugins\Goals\Columns\VisitsUntilConversion;
 
 class GetVisitsUntilConversion extends Base
 {
@@ -22,8 +22,8 @@ class GetVisitsUntilConversion extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('Goals_VisitsUntilConv');
-        $this->documentation = Piwik::translate('Goals_VisitsUntilConvReportDocumentation');
+        $this->name = Matomo::translate('Goals_VisitsUntilConv');
+        $this->documentation = Matomo::translate('Goals_VisitsUntilConvReportDocumentation');
         $this->dimension = new VisitsUntilConversion();
         $this->constantRowsCount = true;
         $this->processedMetrics = array();
@@ -36,7 +36,7 @@ class GetVisitsUntilConversion extends Base
     public function getMetricsDocumentation()
     {
         return [
-            'nb_conversions' => Piwik::translate('Goals_VisitsUntilConvColumnDocumentation'),
+            'nb_conversions' => Matomo::translate('Goals_VisitsUntilConvColumnDocumentation'),
         ];
     }
 

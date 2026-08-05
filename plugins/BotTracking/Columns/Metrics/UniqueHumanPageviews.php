@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Columns\Metrics;
+namespace Matomo\Plugins\BotTracking\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\AggregatedMetric;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\Columns\Dimension;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\AggregatedMetric;
+use Matomo\Plugins\BotTracking\Metrics;
 
 /**
  * Column metric for the human-side pageview count on the Human/AI-Favoured Pages reports.
  *
  * Extends AggregatedMetric purely to supply the column's name/translation/format/semantic-type
  * metadata. The value is materialised during archiving by
- * {@see \Piwik\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages} (human pageviews =
+ * {@see \Matomo\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages} (human pageviews =
  * distinct visits per page URL, matching the Actions Pages report's nb_visits). AggregatedMetric is
  * simply the closest base for "a plain column that isn't a processed metric".
  */
@@ -35,12 +35,12 @@ class UniqueHumanPageviews extends AggregatedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('BotTracking_ColumnUniqueHumanPageviews');
+        return Matomo::translate('BotTracking_ColumnUniqueHumanPageviews');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('BotTracking_ColumnUniqueHumanPageviewsDocumentation');
+        return Matomo::translate('BotTracking_ColumnUniqueHumanPageviewsDocumentation');
     }
 
     /**

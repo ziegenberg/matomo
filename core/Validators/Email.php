@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class Email extends BaseValidator
 {
@@ -19,8 +19,8 @@ class Email extends BaseValidator
             return;
         }
 
-        if (!Piwik::isValidEmailString($value)) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorNotEmailLike', array($value)));
+        if (!Matomo::isValidEmailString($value)) {
+            throw new Exception(Matomo::translate('General_ValidatorErrorNotEmailLike', array($value)));
         }
     }
 }

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Columns\Metrics;
+namespace Matomo\Plugins\Referrers\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 class VisitorsFromReferrerPercent extends ProcessedMetric
 {
@@ -48,7 +48,7 @@ class VisitorsFromReferrerPercent extends ProcessedMetric
         $columnValue = self::getMetric($row, $this->referrerSourceColumn);
         // Keep enough quotient precision so that very small non-zero shares (e.g. 0.4% -> 0.004)
         // survive until the formatter applies display rounding, instead of collapsing to 0%.
-        $result = Piwik::getQuotientSafe($columnValue, $this->totalVisits, $precision = 4);
+        $result = Matomo::getQuotientSafe($columnValue, $this->totalVisits, $precision = 4);
         return $result;
     }
 

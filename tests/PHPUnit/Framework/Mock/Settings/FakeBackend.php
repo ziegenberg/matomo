@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock\Settings;
+namespace Matomo\Tests\Framework\Mock\Settings;
 
-use Piwik\Settings\Storage\Backend\BackendInterface;
+use Matomo\Settings\Storage\Backend\BackendInterface;
 
 class FakeBackend implements BackendInterface
 {

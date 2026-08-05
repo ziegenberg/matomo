@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\Integration;
+namespace Matomo\Plugins\UserCountry\tests\Integration;
 
-use Piwik\Access;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Plugins\UserCountry\API;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\UserCountry\LocationProvider\DefaultProvider;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Plugins\UserCountry\API;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\UserCountry\LocationProvider\DefaultProvider;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UserCountry

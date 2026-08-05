@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Validator;
+namespace Matomo\Tests\Unit\Validator;
 
-use Piwik\Validators\IpRanges;
+use Matomo\Validators\IpRanges;
 
 /**
  * @group Validator
@@ -35,7 +35,7 @@ class IpRangesTest extends \PHPUnit\Framework\TestCase
 
     public function testValidateFailNotValidIpRange()
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('SitesManager_ExceptionInvalidIPFormat');
         $this->validate(array('127.0.0.1', 'foo'));
     }

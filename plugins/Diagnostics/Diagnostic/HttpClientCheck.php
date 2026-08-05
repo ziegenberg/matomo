@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Filechecks;
-use Piwik\Http;
-use Piwik\Translation\Translator;
+use Matomo\Filechecks;
+use Matomo\Http;
+use Matomo\Translation\Translator;
 
 /**
  * Check that Piwik's HTTP client can work correctly.

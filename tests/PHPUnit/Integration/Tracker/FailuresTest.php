@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Date;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Failures;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit;
+use Matomo\Date;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Failures;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit;
 
 /**
  * @group Failures

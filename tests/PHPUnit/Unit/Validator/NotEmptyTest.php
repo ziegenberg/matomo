@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation\Loader;
+namespace Matomo\Tests\Unit\Translation\Loader;
 
-use Piwik\Validators\NotEmpty;
+use Matomo\Validators\NotEmpty;
 
 /**
  * @group Validator
@@ -32,7 +32,7 @@ class NotEmptyTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateFailValueIsEmpty($value)
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('General_ValidatorErrorEmptyValue');
 
         $this->validate($value);

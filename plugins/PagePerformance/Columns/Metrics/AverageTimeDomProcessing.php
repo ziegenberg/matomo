@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * The average amount of time the browser spends until user can start interacting with the page. Calculated as
@@ -25,11 +25,11 @@ class AverageTimeDomProcessing extends AveragePerformanceMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeDomProcessing');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeDomProcessing');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeDomProcessingDocumentation');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeDomProcessingDocumentation');
     }
 }

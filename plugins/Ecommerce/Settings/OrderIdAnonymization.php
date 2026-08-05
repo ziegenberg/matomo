@@ -1,15 +1,15 @@
 <?php
 
-namespace Piwik\Plugins\Ecommerce\Settings;
+namespace Matomo\Plugins\Ecommerce\Settings;
 
-use Piwik\Piwik;
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Settings\Interfaces\CustomSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Matomo;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Settings\Interfaces\CustomSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
 
 /**
  * @implements CustomSettingInterface<bool>
@@ -51,12 +51,12 @@ class OrderIdAnonymization implements
 
     public static function getTitle(): string
     {
-        return Piwik::translate('Ecommerce_OrderIdAnonymizationSettingTitle');
+        return Matomo::translate('Ecommerce_OrderIdAnonymizationSettingTitle');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate('Ecommerce_OrderIdAnonymizationSettingRequirementNote');
+        return Matomo::translate('Ecommerce_OrderIdAnonymizationSettingRequirementNote');
     }
 
     public static function getInlineHelp(): string

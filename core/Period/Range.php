@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Period;
+namespace Matomo\Period;
 
 use Exception;
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Period;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Period;
 
 /**
  * Arbitrary date range representation.
@@ -66,7 +66,7 @@ class Range extends Period
 
         $this->today = $today;
 
-        $this->translator = StaticContainer::get('Piwik\Translation\Translator');
+        $this->translator = StaticContainer::get('Matomo\Translation\Translator');
     }
 
     public function __sleep()
@@ -82,7 +82,7 @@ class Range extends Period
 
     public function __wakeup()
     {
-        $this->translator = StaticContainer::get('Piwik\Translation\Translator');
+        $this->translator = StaticContainer::get('Matomo\Translation\Translator');
     }
 
     private function getCache()
@@ -534,7 +534,7 @@ class Range extends Period
      * @param int $lastN The number of periods of type `$period` that the result range should
      *                   span.
      * @param string $endDate The desired end date of the range.
-     * @param \Piwik\Site $site The site whose timezone should be used.
+     * @param \Matomo\Site $site The site whose timezone should be used.
      * @return string The date range string, eg, `'2012-01-02,2013-01-02'`.
      * @api
      */

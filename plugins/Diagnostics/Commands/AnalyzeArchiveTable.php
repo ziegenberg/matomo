@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Container\StaticContainer;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * Diagnostic command that analyzes a single archive table. Displays information like # of segment archives,
@@ -37,11 +37,11 @@ class AnalyzeArchiveTable extends ConsoleCommand
         $output->writeln("<comment>Statistics for the archive_numeric_$tableDate and archive_blob_$tableDate tables:</comment>");
         $output->writeln("");
 
-        $archiveTableDao = StaticContainer::get('Piwik\DataAccess\ArchiveTableDao');
+        $archiveTableDao = StaticContainer::get('Matomo\DataAccess\ArchiveTableDao');
         $rows = $archiveTableDao->getArchiveTableAnalysis($tableDate);
 
         // process labels
-        $periodIdsToLabels = array_flip(Piwik::$idPeriods);
+        $periodIdsToLabels = array_flip(Matomo::$idPeriods);
         foreach ($rows as $key => &$row) {
             list($idSite, $date1, $date2, $period) = explode('.', $key);
 

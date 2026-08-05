@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\tests\System;
+namespace Matomo\Plugins\Goals\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Tests\Fixtures\ThreeGoalsOnePageview;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Fixtures\TwoSitesEcommerceOrderWithItems;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Tests\Fixtures\ThreeGoalsOnePageview;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Fixtures\TwoSitesEcommerceOrderWithItems;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group GoalsEcommerceTestTest

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\tests\Unit;
+namespace Matomo\Plugins\BulkTracking\tests\Unit;
 
-use Piwik\Plugins\BulkTracking\Tracker\Response;
-use Piwik\Tests\Framework\Mock\Tracker;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Plugins\BulkTracking\Tracker\Response;
+use Matomo\Tests\Framework\Mock\Tracker;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
 use Exception;
 
 /**

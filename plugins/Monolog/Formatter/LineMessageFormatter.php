@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Formatter;
+namespace Matomo\Plugins\Monolog\Formatter;
 
 use Monolog\Formatter\FormatterInterface;
 use Monolog\LogRecord;

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker\Visit;
+namespace Matomo\Tracker\Visit;
 
-use Piwik\Piwik;
-use Piwik\Tracker\Visit;
-use Piwik\Tracker\VisitInterface;
+use Matomo\Matomo;
+use Matomo\Tracker\Visit;
+use Matomo\Tracker\VisitInterface;
 use Exception;
 
 class Factory
@@ -21,7 +21,7 @@ class Factory
      * This method can be overwritten to use a different Visit object
      *
      * @throws Exception
-     * @return \Piwik\Tracker\Visit
+     * @return \Matomo\Tracker\Visit
      */
     public static function make()
     {
@@ -30,13 +30,13 @@ class Factory
         /**
          * Triggered before a new **visit tracking object** is created. Subscribers to this
          * event can force the use of a custom visit tracking object that extends from
-         * {@link Piwik\Tracker\VisitInterface}.
+         * {@link Matomo\Tracker\VisitInterface}.
          *
-         * @param \Piwik\Tracker\VisitInterface &$visit Initialized to null, but can be set to
+         * @param \Matomo\Tracker\VisitInterface &$visit Initialized to null, but can be set to
          *                                              a new visit object. If it isn't modified
          *                                              Piwik uses the default class.
          */
-        Piwik::postEvent('Tracker.makeNewVisitObject', array(&$visit));
+        Matomo::postEvent('Tracker.makeNewVisitObject', array(&$visit));
 
         if (!isset($visit)) {
             $visit = new Visit();

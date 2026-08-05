@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Unit;
+namespace Matomo\Plugins\Marketplace\tests\Unit;
 
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Consumer;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Service;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Consumer as ConsumerBuilder;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Consumer;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Service;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Consumer as ConsumerBuilder;
 
 /**
  * @group Marketplace

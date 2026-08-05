@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\Emails;
+namespace Matomo\Plugins\Login\Emails;
 
-use Piwik\Config;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\View;
 
 class PasswordResetEmail extends Mail
 {
@@ -61,7 +61,7 @@ class PasswordResetEmail extends Mail
 
     protected function getDefaultSubject(): string
     {
-        return Piwik::translate('Login_PasswordResetEmailSubject');
+        return Matomo::translate('Login_PasswordResetEmailSubject');
     }
 
     protected function getDefaultBodyText(): string

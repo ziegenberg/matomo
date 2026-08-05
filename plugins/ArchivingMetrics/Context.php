@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics;
+namespace Matomo\Plugins\ArchivingMetrics;
 
-use Piwik\Period;
-use Piwik\Segment;
+use Matomo\Period;
+use Matomo\Segment;
 
 final class Context
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Contents\Categories;
+namespace Matomo\Plugins\Contents\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class ContentsSubcategory extends Subcategory
 {
@@ -21,8 +21,8 @@ class ContentsSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Contents_ContentsSubcategoryHelp1') . '</p>'
+        return '<p>' . Matomo::translate('Contents_ContentsSubcategoryHelp1') . '</p>'
             . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/content-tracking', null, null, 'App.Contents.getContentNames')
-            . Piwik::translate('Contents_ContentsSubcategoryHelp2') . '</a></p>';
+            . Matomo::translate('Contents_ContentsSubcategoryHelp2') . '</a></p>';
     }
 }

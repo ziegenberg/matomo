@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\Integration;
+namespace Matomo\Plugins\SegmentEditor\tests\Integration;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Container\StaticContainer;
-use Piwik\NoAccessException;
-use Piwik\Option;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Plugins\SegmentEditor\Controller;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Container\StaticContainer;
+use Matomo\NoAccessException;
+use Matomo\Option;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Plugins\SegmentEditor\Controller;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group SegmentEditor
@@ -238,15 +238,15 @@ class ControllerTest extends IntegrationTestCase
 
     public function testGetSegmentDataRequiresViewAccess(): void
     {
-        $originalAccess = StaticContainer::getContainer()->get('Piwik\Access');
+        $originalAccess = StaticContainer::getContainer()->get('Matomo\Access');
         $fakeAccess = new FakeAccess($superUser = false, $idSitesAdmin = [], $idSitesView = [], $identity = 'anonymous');
-        StaticContainer::getContainer()->set('Piwik\Access', $fakeAccess);
+        StaticContainer::getContainer()->set('Matomo\Access', $fakeAccess);
 
         try {
             $this->expectException(NoAccessException::class);
             API::getInstance()->getSegmentData(1, 'range', '2010-03-06,2010-03-08', '');
         } finally {
-            StaticContainer::getContainer()->set('Piwik\Access', $originalAccess);
+            StaticContainer::getContainer()->set('Matomo\Access', $originalAccess);
         }
     }
 

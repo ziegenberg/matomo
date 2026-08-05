@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Updater\Migration\Db;
+namespace Matomo\Tests\Integration\Updater\Migration\Db;
 
-use Piwik\Common;
-use Piwik\Db\Schema;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Updater\Migration\Db\AddColumn;
-use Piwik\Updater\Migration\Db\AddColumns;
-use Piwik\Updater\Migration\Db\AddIndex;
-use Piwik\Updater\Migration\Db\AddPrimaryKey;
-use Piwik\Updater\Migration\Db\AddUniqueKey;
-use Piwik\Updater\Migration\Db\BatchInsert;
-use Piwik\Updater\Migration\Db\BoundSql;
-use Piwik\Updater\Migration\Db\ChangeColumn;
-use Piwik\Updater\Migration\Db\ChangeColumnType;
-use Piwik\Updater\Migration\Db\ChangeColumnTypes;
-use Piwik\Updater\Migration\Db\CreateTable;
-use Piwik\Updater\Migration\Db\DropColumn;
-use Piwik\Updater\Migration\Db\DropIndex;
-use Piwik\Updater\Migration\Db\DropTable;
-use Piwik\Updater\Migration\Db\Factory;
-use Piwik\Updater\Migration\Db\Insert;
-use Piwik\Updater\Migration\Db\Sql;
+use Matomo\Common;
+use Matomo\Db\Schema;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Updater\Migration\Db\AddColumn;
+use Matomo\Updater\Migration\Db\AddColumns;
+use Matomo\Updater\Migration\Db\AddIndex;
+use Matomo\Updater\Migration\Db\AddPrimaryKey;
+use Matomo\Updater\Migration\Db\AddUniqueKey;
+use Matomo\Updater\Migration\Db\BatchInsert;
+use Matomo\Updater\Migration\Db\BoundSql;
+use Matomo\Updater\Migration\Db\ChangeColumn;
+use Matomo\Updater\Migration\Db\ChangeColumnType;
+use Matomo\Updater\Migration\Db\ChangeColumnTypes;
+use Matomo\Updater\Migration\Db\CreateTable;
+use Matomo\Updater\Migration\Db\DropColumn;
+use Matomo\Updater\Migration\Db\DropIndex;
+use Matomo\Updater\Migration\Db\DropTable;
+use Matomo\Updater\Migration\Db\Factory;
+use Matomo\Updater\Migration\Db\Insert;
+use Matomo\Updater\Migration\Db\Sql;
 
 /**
  * @group Core

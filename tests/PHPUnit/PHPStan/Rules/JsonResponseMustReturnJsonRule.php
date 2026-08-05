@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -47,7 +47,7 @@ class JsonResponseMustReturnJsonRule implements Rule
 
         foreach (JsonResponseRuleHelper::findNonJsonStringLiteralReturns($node) as $return) {
             $errors[] = RuleErrorBuilder::message(sprintf(
-                'Controller action %s() is marked #[\\Piwik\\Http\\JsonResponse] but returns a non-JSON'
+                'Controller action %s() is marked #[\Matomo\Http\JsonResponse] but returns a non-JSON'
                 . ' value on this path; such an action must return JSON on every path. Split it into'
                 . ' separate actions (or remove the attribute).',
                 $node->name->toString()

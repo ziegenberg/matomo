@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\Commands;
+namespace Matomo\Plugins\FeatureFlags\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\FeatureFlags\Commands\FeatureFlagFinder\FeatureFlagFinder;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
-use Piwik\Plugins\FeatureFlags\ForcedFeatureFlagStateInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\FeatureFlags\Commands\FeatureFlagFinder\FeatureFlagFinder;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Plugins\FeatureFlags\ForcedFeatureFlagStateInterface;
 
 class ListFeatureFlags extends ConsoleCommand
 {

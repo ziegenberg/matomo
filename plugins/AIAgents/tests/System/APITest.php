@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\tests\System;
+namespace Matomo\Plugins\AIAgents\tests\System;
 
-use Piwik\Date;
-use Piwik\Plugins\AIAgents\API;
-use Piwik\Plugins\AIAgents\tests\Fixtures\AIAgents;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Date;
+use Matomo\Plugins\AIAgents\API;
+use Matomo\Plugins\AIAgents\tests\Fixtures\AIAgents;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group AIAgents

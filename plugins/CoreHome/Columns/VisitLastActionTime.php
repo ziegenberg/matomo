@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Site;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Metrics\Formatter;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Site;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Metrics\Formatter;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/VisitTime/functions.php';
 
@@ -71,7 +71,7 @@ class VisitLastActionTime extends VisitDimension
     {
         $hourInTz = self::convertHourToHourInSiteTimezone($value, $idSite);
 
-        return \Piwik\Plugins\VisitTime\getTimeLabel($hourInTz);
+        return \Matomo\Plugins\VisitTime\getTimeLabel($hourInTz);
     }
 
     // we do not install or define column definition here as we need to create this column when installing as there is

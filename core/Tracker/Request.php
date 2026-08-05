@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 use Exception;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Cookie;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Http;
-use Piwik\IP;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Cookie;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Http;
+use Matomo\IP;
 use Matomo\Network\IPUtils;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\ProxyHttp;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Tracker;
-use Piwik\Cache as PiwikCache;
-use Piwik\Tracker\Cache as TrackerCache;
-use Piwik\Plugins\UserId\Settings\UserIdDisabled;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\ProxyHttp;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Tracker;
+use Matomo\Cache as PiwikCache;
+use Matomo\Tracker\Cache as TrackerCache;
+use Matomo\Plugins\UserId\Settings\UserIdDisabled;
 
 /**
  * The Request object holding the http parameters for this tracking request. Use getParam() to fetch a named parameter.
@@ -109,7 +109,7 @@ class Request
 
     protected function replaceUnsupportedUtf8Chars($value, $key = false)
     {
-        $dbSettings   = new \Piwik\Db\Settings();
+        $dbSettings   = new \Matomo\Db\Settings();
         $charset      = $dbSettings->getUsedCharset();
 
         if ('utf8mb4' === $charset) {
@@ -207,7 +207,7 @@ class Request
             } else {
                 if (preg_match('/^\w{28,36}$/', $tokenAuth) || empty($tokenAuth)) {
                     // only log a failure if the token auth looks partial valid or is completely missing
-                    StaticContainer::get('Piwik\Tracker\Failures')->logFailure(Failures::FAILURE_ID_NOT_AUTHENTICATED, $this);
+                    StaticContainer::get('Matomo\Tracker\Failures')->logFailure(Failures::FAILURE_ID_NOT_AUTHENTICATED, $this);
                 }
             }
         } else {
@@ -228,7 +228,7 @@ class Request
         // Now checking the list of admin token_auth cached in the Tracker config file
         if (!empty($idSite) && $idSite > 0) {
             $website = Cache::getCacheWebsiteAttributes($idSite);
-            $userModel = new \Piwik\Plugins\UsersManager\Model();
+            $userModel = new \Matomo\Plugins\UsersManager\Model();
             $tokenAuthHashed = $userModel->hashTokenAuth($tokenAuth);
             $hashedToken = UsersManager::hashTrackingToken((string) $tokenAuthHashed, $idSite);
 
@@ -240,10 +240,10 @@ class Request
             }
         }
 
-        Piwik::postEvent('Request.initAuthenticationObject');
+        Matomo::postEvent('Request.initAuthenticationObject');
 
-        /** @var \Piwik\Auth $auth */
-        $auth = StaticContainer::get('Piwik\Auth');
+        /** @var \Matomo\Auth $auth */
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setTokenAuth($tokenAuth);
         $auth->setLogin(null);
         $auth->setPassword(null);
@@ -260,7 +260,7 @@ class Request
          * @ignore
          * @internal
          */
-        Piwik::postEvent('Tracker.Request.authenticate.failed');
+        Matomo::postEvent('Tracker.Request.authenticate.failed');
 
         return false;
     }
@@ -612,7 +612,7 @@ class Request
          * @param array $params The entire array of request parameters in the current tracking
          *                      request.
          */
-        Piwik::postEvent('Tracker.Request.getIdSite', array(&$idSite, $this->params));
+        Matomo::postEvent('Tracker.Request.getIdSite', array(&$idSite, $this->params));
         return $idSite;
     }
 
@@ -703,7 +703,7 @@ class Request
             return;
         }
 
-        if (\Piwik\Tracker\IgnoreCookie::isIgnoreCookieFound()) {
+        if (\Matomo\Tracker\IgnoreCookie::isIgnoreCookieFound()) {
             return;
         }
 
@@ -794,7 +794,7 @@ class Request
             }
         }
 
-        $privacyConfig = new \Piwik\Plugins\PrivacyManager\Config();
+        $privacyConfig = new \Matomo\Plugins\PrivacyManager\Config();
 
         // Only check for cookie values if cookieless tracking is NOT forced
         if (!$privacyConfig->forceCookielessTracking) {

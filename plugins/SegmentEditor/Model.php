@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
 
 /**
  * The SegmentEditor Model lets you persist and read custom Segments from the backend without handling any logic.

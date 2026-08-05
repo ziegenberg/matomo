@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Widget;
+namespace Matomo\Tests\Unit\Widget;
 
-use Piwik\Widget\WidgetConfig;
-use Piwik\Widget\WidgetContainerConfig;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Widget\WidgetContainerConfig;
 
 /**
  * @group Widget

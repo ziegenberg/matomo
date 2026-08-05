@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Settings;
+namespace Matomo\Plugins\PrivacyManager\Settings;
 
-use Piwik\Piwik;
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Plugins\PrivacyManager\ReferrerAnonymizer;
-use Piwik\Settings\Interfaces\CustomSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Policy\CnilPolicy;
+use Matomo\Matomo;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Plugins\PrivacyManager\ReferrerAnonymizer;
+use Matomo\Settings\Interfaces\CustomSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Policy\CnilPolicy;
 
 /**
  * @implements CustomSettingInterface<string|null>
@@ -61,12 +61,12 @@ class ReferrerAnonymisation implements CustomSettingInterface, PolicyComparisonI
 
     public static function getTitle(): string
     {
-        return Piwik::translate('PrivacyManager_ReferrerAnonymizationSettingTitle');
+        return Matomo::translate('PrivacyManager_ReferrerAnonymizationSettingTitle');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate('PrivacyManager_ReferrerAnonymizationSettingRequirementNote');
+        return Matomo::translate('PrivacyManager_ReferrerAnonymizationSettingRequirementNote');
     }
 
     public static function getInlineHelp(): string

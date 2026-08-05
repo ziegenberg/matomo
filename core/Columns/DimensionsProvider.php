@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Columns;
+namespace Matomo\Columns;
 
-use Piwik\CacheId;
-use Piwik\Cache as PiwikCache;
+use Matomo\CacheId;
+use Matomo\Cache as PiwikCache;
 
 class DimensionsProvider
 {

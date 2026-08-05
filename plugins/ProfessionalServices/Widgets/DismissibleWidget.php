@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices\Widgets;
+namespace Matomo\Plugins\ProfessionalServices\Widgets;
 
-use Piwik\Widget\Widget;
+use Matomo\Widget\Widget;
 
 abstract class DismissibleWidget extends Widget
 {

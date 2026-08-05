@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Tour\Dao\DataFinder;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugins\Tour\Dao\DataFinder;
+use Matomo\Url;
 
 class ChallengeAddedWebsite extends Challenge
 {
@@ -29,12 +29,12 @@ class ChallengeAddedWebsite extends Challenge
 
     public function getName()
     {
-        return Piwik::translate('Tour_AddAnotherWebsite');
+        return Matomo::translate('Tour_AddAnotherWebsite');
     }
 
     public function getDescription()
     {
-        return Piwik::translate('SitesManager_PluginDescription');
+        return Matomo::translate('SitesManager_PluginDescription');
     }
 
     public function getId()

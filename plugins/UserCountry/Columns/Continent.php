@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Columns;
+namespace Matomo\Plugins\UserCountry\Columns;
 
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\Metrics\Formatter;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\Metrics\Formatter;
 
 class Continent extends Dimension
 {
@@ -23,7 +23,7 @@ class Continent extends Dimension
     protected $namePlural = 'UserCountry_Continents';
     protected $segmentName = 'continentCode';
     protected $acceptValues = 'eur, asi, amc, amn, ams, afr, ant, oce';
-    protected $sqlFilter = 'Piwik\Plugins\UserCountry\UserCountry::getCountriesForContinent';
+    protected $sqlFilter = 'Matomo\Plugins\UserCountry\UserCountry::getCountriesForContinent';
 
     public function groupValue($value, $idSite)
     {
@@ -32,6 +32,6 @@ class Continent extends Dimension
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\UserCountry\continentTranslate($value);
+        return \Matomo\Plugins\UserCountry\continentTranslate($value);
     }
 }

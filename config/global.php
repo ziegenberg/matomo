@@ -1,7 +1,7 @@
 <?php
 
 use Matomo\Cache\Eager;
-use Piwik\SettingsServer;
+use Matomo\SettingsServer;
 
 return [
 
@@ -9,7 +9,7 @@ return [
 
     'path.misc.user' => 'misc/user/',
 
-    'path.tmp' => function (\Piwik\Container\Container $c) {
+    'path.tmp' => function (\Matomo\Container\Container $c) {
         $root = PIWIK_USER_PATH;
 
         // TODO remove that special case and instead have plugins override 'path.tmp' to add the instance id
@@ -20,23 +20,23 @@ return [
             $instanceId = '';
         }
 
-        /** @var Piwik\Config\ $config */
-        $config = $c->get('Piwik\Config');
+        /** @var Matomo\Config\ $config */
+        $config = $c->get('Matomo\Config');
         $general = $config->General;
         $tmp = empty($general['tmp_path']) ? '/tmp' : $general['tmp_path'];
 
         return $root . $tmp . $instanceId;
     },
 
-    'path.tmp.templates' => Piwik\DI::string('{path.tmp}/templates_c'),
+    'path.tmp.templates' => Matomo\DI::string('{path.tmp}/templates_c'),
 
-    'path.cache' => Piwik\DI::string('{path.tmp}/cache/tracker/'),
+    'path.cache' => Matomo\DI::string('{path.tmp}/cache/tracker/'),
 
     'view.clearcompiledtemplates.enable' => true,
 
-    'twig.cache' => Piwik\DI::string('{path.tmp.templates}'),
+    'twig.cache' => Matomo\DI::string('{path.tmp.templates}'),
 
-    'Matomo\Cache\Eager' => function (\Piwik\Container\Container $c) {
+    'Matomo\Cache\Eager' => function (\Matomo\Container\Container $c) {
         $backend = $c->get('Matomo\Cache\Backend');
         $cacheId = $c->get('cache.eager.cache_id');
 
@@ -49,30 +49,30 @@ return [
         }
 
         $cache = new Eager($backend, $cacheId);
-        \Piwik\Piwik::addAction($eventToPersist, function () use ($cache) {
+        \Matomo\Matomo::addAction($eventToPersist, function () use ($cache) {
             $cache->persistCacheIfNeeded(43200);
         });
 
         return $cache;
     },
-    'Matomo\Cache\Backend' => function (\Piwik\Container\Container $c) {
+    'Matomo\Cache\Backend' => function (\Matomo\Container\Container $c) {
         // If Piwik is not installed yet, it's possible the tmp/ folder is not writable
         // we prevent failing with an unclear message eg. coming from doctrine-cache
         // by forcing to use a cache backend which always works ie. array
-        if (!\Piwik\SettingsPiwik::isMatomoInstalled()) {
+        if (!\Matomo\SettingsPiwik::isMatomoInstalled()) {
             $backend = 'array';
         } else {
             try {
                 $backend = $c->get('ini.Cache.backend');
-            } catch (\Piwik\Exception\DI\NotFoundException $ex) {
+            } catch (\Matomo\Exception\DI\NotFoundException $ex) {
                 $backend = 'chained'; // happens if global.ini.php is not available
             }
         }
 
-        return \Piwik\Cache::buildBackend($backend);
+        return \Matomo\Cache::buildBackend($backend);
     },
     'cache.eager.cache_id' => function () {
-        return 'eagercache-' . str_replace(['.', '-'], '', \Piwik\Version::VERSION) . '-';
+        return 'eagercache-' . str_replace(['.', '-'], '', \Matomo\Version::VERSION) . '-';
     },
 
     /**
@@ -82,7 +82,7 @@ return [
      * API requests, you should add the query parameters that represent the new entity's IDs
      * to this array.
      */
-    'entities.idNames' => Piwik\DI::add(['idGoal', 'idDimension']),
+    'entities.idNames' => Matomo\DI::add(['idGoal', 'idDimension']),
 
     /**
      * If your plugin uses custom query parameters in API requests (that is, query parameters not used
@@ -102,20 +102,20 @@ return [
      * Plugins can register actions in their `config/config.php`:
      *
      * return [
-     *     'token_auth.write_admin_allowed_module_actions' => \Piwik\DI::add(['MyPlugin.myAction']),
+     *     'token_auth.write_admin_allowed_module_actions' => \Matomo\DI::add(['MyPlugin.myAction']),
      * ];
      *
      * @internal
      */
     'token_auth.write_admin_allowed_module_actions' => [],
 
-    \Piwik\Log\Logger::class => Piwik\DI::create(\Piwik\Log\NullLogger::class),
-    \Piwik\Log\LoggerInterface::class => Piwik\DI::create(\Piwik\Log\NullLogger::class),
+    \Matomo\Log\Logger::class => Matomo\DI::create(\Matomo\Log\NullLogger::class),
+    \Matomo\Log\LoggerInterface::class => Matomo\DI::create(\Matomo\Log\NullLogger::class),
 
-    'Piwik\Translation\Loader\LoaderInterface' => Piwik\DI::autowire('Piwik\Translation\Loader\LoaderCache')
-        ->constructorParameter('loader', Piwik\DI::get('Piwik\Translation\Loader\JsonFileLoader')),
+    'Matomo\Translation\Loader\LoaderInterface' => Matomo\DI::autowire('Matomo\Translation\Loader\LoaderCache')
+        ->constructorParameter('loader', Matomo\DI::get('Matomo\Translation\Loader\JsonFileLoader')),
 
-    'DeviceDetector\Cache\Cache' => Piwik\DI::autowire('Piwik\DeviceDetector\DeviceDetectorCache')->constructor(86400),
+    'DeviceDetector\Cache\Cache' => Matomo\DI::autowire('Matomo\DeviceDetector\DeviceDetectorCache')->constructor(86400),
 
     // specify plugins to load on demand via DI config. mostly for tests.
     'plugins.shouldLoadOnDemand' => [],
@@ -138,7 +138,7 @@ return [
      */
     'EnableDbVersionCheck' => true,
 
-    'fileintegrity.ignore' => Piwik\DI::add([
+    'fileintegrity.ignore' => Matomo\DI::add([
         '*.htaccess',
         '*web.config',
         'bootstrap.php',
@@ -192,11 +192,11 @@ return [
         '*.travis.yml',
     ]),
 
-    'Piwik\EventDispatcher' => Piwik\DI::autowire()->constructorParameter('observers', Piwik\DI::get('observers.global')),
+    'Matomo\EventDispatcher' => Matomo\DI::autowire()->constructorParameter('observers', Matomo\DI::get('observers.global')),
 
-    'login.allowlist.ips' => function (\Piwik\Container\Container $c) {
-        /** @var Piwik\Config\ $config */
-        $config = $c->get('Piwik\Config');
+    'login.allowlist.ips' => function (\Matomo\Container\Container $c) {
+        /** @var Matomo\Config\ $config */
+        $config = $c->get('Matomo\Config');
         $general = $config->General;
 
         $ips = [];
@@ -214,7 +214,7 @@ return [
             if (filter_var($ip, FILTER_VALIDATE_IP) || \Matomo\Network\IPUtils::getIPRangeBounds($ip) !== null) {
                 $ipsResolved[] = $ip;
             } else {
-                $lazyCache = \Piwik\Cache::getLazyCache();
+                $lazyCache = \Matomo\Cache::getLazyCache();
                 $cacheKey = 'DNS.' . md5($ip);
 
                 $resolvedIps = $lazyCache->fetch($cacheKey);
@@ -256,25 +256,25 @@ return [
         '*.amazonaws.com',
     ],
 
-    'Piwik\Tracker\VisitorRecognizer' => Piwik\DI::autowire()
-        ->constructorParameter('trustCookiesOnly', Piwik\DI::get('ini.Tracker.trust_visitors_cookies'))
-        ->constructorParameter('visitStandardLength', Piwik\DI::get('ini.Tracker.visit_standard_length'))
-        ->constructorParameter('lookbackNSecondsCustom', Piwik\DI::get('ini.Tracker.window_look_back_for_visitor')),
+    'Matomo\Tracker\VisitorRecognizer' => Matomo\DI::autowire()
+        ->constructorParameter('trustCookiesOnly', Matomo\DI::get('ini.Tracker.trust_visitors_cookies'))
+        ->constructorParameter('visitStandardLength', Matomo\DI::get('ini.Tracker.visit_standard_length'))
+        ->constructorParameter('lookbackNSecondsCustom', Matomo\DI::get('ini.Tracker.window_look_back_for_visitor')),
 
-    'Piwik\Tracker\Settings' => Piwik\DI::autowire()
+    'Matomo\Tracker\Settings' => Matomo\DI::autowire()
         ->constructorParameter(
             'isSameFingerprintsAcrossWebsites',
-            Piwik\DI::get('ini.Tracker.enable_fingerprinting_across_websites')
+            Matomo\DI::get('ini.Tracker.enable_fingerprinting_across_websites')
         ),
 
     'archiving.performance.logger' => null,
 
-    \Piwik\CronArchive\Performance\Logger::class => Piwik\DI::autowire()
-        ->constructorParameter('logger', Piwik\DI::get('archiving.performance.logger')),
+    \Matomo\CronArchive\Performance\Logger::class => Matomo\DI::autowire()
+        ->constructorParameter('logger', Matomo\DI::get('archiving.performance.logger')),
 
-    \Piwik\Concurrency\LockBackend::class => \Piwik\DI::get(\Piwik\Concurrency\LockBackend\MySqlLockBackend::class),
+    \Matomo\Concurrency\LockBackend::class => \Matomo\DI::get(\Matomo\Concurrency\LockBackend\MySqlLockBackend::class),
 
-    \Piwik\Segment\SegmentsList::class => function () {
-        return \Piwik\Segment\SegmentsList::get();
+    \Matomo\Segment\SegmentsList::class => function () {
+        return \Matomo\Segment\SegmentsList::get();
     }
 ];

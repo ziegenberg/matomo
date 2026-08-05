@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Columns;
+namespace Matomo\Plugins\DevicesDetection\Columns;
 
 use DeviceDetector\Parser\Device\AbstractDeviceParser;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 class DeviceBrand extends Base
 {
@@ -28,7 +28,7 @@ class DeviceBrand extends Base
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\DevicesDetection\getDeviceBrandLabel($value);
+        return \Matomo\Plugins\DevicesDetection\getDeviceBrandLabel($value);
     }
 
     public function __construct()
@@ -39,7 +39,7 @@ class DeviceBrand extends Base
         $this->acceptValues = $brandList;
 
         $this->sqlFilter = function ($brand) use ($brandList, $brands) {
-            if ($brand == Piwik::translate('General_Unknown')) {
+            if ($brand == Matomo::translate('General_Unknown')) {
                 return '';
             }
             $index = array_search(trim(urldecode($brand)), $brands);

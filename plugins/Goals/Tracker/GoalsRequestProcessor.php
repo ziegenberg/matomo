@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Tracker;
+namespace Matomo\Plugins\Goals\Tracker;
 
-use Piwik\Common;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestProcessor;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestProcessor;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * Handles conversion detection and tracking for tracker requests.

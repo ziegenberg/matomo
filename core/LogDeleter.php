@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Plugin\LogTablesProvider;
-use Piwik\Plugins\PrivacyManager\Model\DataSubjects;
-use Piwik\Plugins\SitesManager\Model;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Plugin\LogTablesProvider;
+use Matomo\Plugins\PrivacyManager\Model\DataSubjects;
+use Matomo\Plugins\SitesManager\Model;
 
 /**
  * Service that deletes log entries. Methods in this class cascade, so deleting visits will delete visit actions,

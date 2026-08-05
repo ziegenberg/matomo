@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Dao;
+namespace Matomo\Plugins\CustomDimensions\Dao;
 
-use Piwik\Common;
-use Piwik\DataAccess\TableMetadata;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Common;
+use Matomo\DataAccess\TableMetadata;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
 use Exception;
 
 class LogTable

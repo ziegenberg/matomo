@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\ViewDataTable;
+namespace Matomo\Tests\Integration\ViewDataTable;
 
-use Piwik\Option;
-use Piwik\ViewDataTable\Manager as ViewDataTableManager;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Option;
+use Matomo\ViewDataTable\Manager as ViewDataTableManager;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

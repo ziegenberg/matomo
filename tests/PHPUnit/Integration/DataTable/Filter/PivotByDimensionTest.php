@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Core\DataTable\Filter;
+namespace Matomo\Tests\Core\DataTable\Filter;
 
-use Piwik\API\Proxy;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CustomVariables\CustomVariables;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Cache;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\PivotByDimension;
-use Piwik\DataTable\Row;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\API\Proxy;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CustomVariables\CustomVariables;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Cache;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\PivotByDimension;
+use Matomo\DataTable\Row;
+use Matomo\Plugin\Manager as PluginManager;
 use Exception;
 
 /**
@@ -49,7 +49,7 @@ class PivotByDimensionTest extends IntegrationTestCase
 
         Fixture::resetTranslations();
         Cache::clearCacheGeneral();
-        \Piwik\Cache::flushAll();
+        \Matomo\Cache::flushAll();
 
         $this->segmentTableCount = 0;
     }
@@ -418,7 +418,7 @@ class PivotByDimensionTest extends IntegrationTestCase
         $proxyMock = $this->getMockBuilder('stdClass')->addMethods(array('call'))->getMock();
         $proxyMock->expects($this->any())->method('call')->willReturnCallback(function ($className, $methodName, $parameters) {
             if (
-                $className == "\\Piwik\\Plugins\\UserCountry\\API"
+                $className == "\\Matomo\\Plugins\\UserCountry\\API"
                 && $methodName == 'getCity'
             ) {
                 $this->segmentUsedToGetIntersected[] = $parameters['segment'];

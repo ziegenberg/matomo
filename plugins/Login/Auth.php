@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
-use Piwik\AuthResult;
-use Piwik\Auth\Password;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UsersManager;
+use Matomo\AuthResult;
+use Matomo\Auth\Password;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UsersManager;
 
-class Auth implements \Piwik\Auth
+class Auth implements \Matomo\Auth
 {
     protected $login;
     protected $token_auth;
@@ -206,7 +206,7 @@ class Auth implements \Piwik\Auth
         }
 
         // check that the password hash is valid (sanity check)
-        UsersManager::checkPasswordHash($passwordHash, Piwik::translate('Login_ExceptionPasswordMD5HashExpected'));
+        UsersManager::checkPasswordHash($passwordHash, Matomo::translate('Login_ExceptionPasswordMD5HashExpected'));
 
         $this->hashedPassword = $passwordHash;
     }

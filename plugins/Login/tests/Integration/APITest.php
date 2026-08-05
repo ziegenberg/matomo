@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\Login\API;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\Login\API;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group API
@@ -50,7 +50,7 @@ class APITest extends IntegrationTestCase
 
     public function testUnblockBruteForceIPsRemovesBlockedIps()
     {
-        $bruteForce = StaticContainer::get('Piwik\Plugins\Login\Security\BruteForceDetection');
+        $bruteForce = StaticContainer::get('Matomo\Plugins\Login\Security\BruteForceDetection');
         $bruteForce->addFailedAttempt('127.2.3.4');
         for ($i = 0; $i < 22; $i++) {
             $bruteForce->addFailedAttempt('127.2.3.5');
@@ -63,7 +63,7 @@ class APITest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

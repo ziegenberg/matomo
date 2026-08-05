@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Feedback;
+namespace Matomo\Plugins\Feedback;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable\Renderer\Json;
-use Piwik\Date;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\SettingsServer;
-use Piwik\Url;
-use Piwik\Version;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable\Renderer\Json;
+use Matomo\Date;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\SettingsServer;
+use Matomo\Url;
+use Matomo\Version;
 
 /**
  * Provides API methods for submitting product feedback and managing feedback reminders.
  *
- * @method static \Piwik\Plugins\Feedback\API getInstance()
+ * @method static \Matomo\Plugins\Feedback\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Sends a survey response to the Matomo team or to the configured feedback email address.
@@ -39,11 +39,11 @@ class API extends \Piwik\Plugin\API
      */
     public function sendFeedbackForFeature(string $featureName, ?bool $like = null, ?string $choice = null, ?string $message = null)
     {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
 
         if (empty($message) || $message === 'undefined' ||  strlen($message) < 4) {
-            return Piwik::translate("Feedback_FormNotEnoughFeedbackText");
+            return Matomo::translate("Feedback_FormNotEnoughFeedbackText");
         }
 
         $featureName = $this->getEnglishTranslationForFeatureName($featureName);
@@ -92,11 +92,11 @@ class API extends \Piwik\Plugin\API
      */
     public function sendFeedbackForSurvey(string $question, $message = false): string
     {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
 
         if (empty($message) || strlen($message) < 10) {
-            return Piwik::translate("Feedback_MessageBodyValidationError");
+            return Matomo::translate("Feedback_MessageBodyValidationError");
         }
 
         $featureName = $this->getEnglishTranslationForFeatureName($question);
@@ -125,7 +125,7 @@ class API extends \Piwik\Plugin\API
      */
     public function updateFeedbackReminderDate(): string
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         //push reminder for 6 month
         $nextReminder = Date::now()->getStartOfDay()->addMonth(6)->toString('Y-m-d');
@@ -148,7 +148,7 @@ class API extends \Piwik\Plugin\API
 
         $mail = new Mail();
         $mail->setDefaultFromPiwik();
-        $mail->addReplyTo(Piwik::getCurrentUserEmail());
+        $mail->addReplyTo(Matomo::getCurrentUserEmail());
         $mail->addTo($feedbackEmailAddress, 'Matomo Team');
         $mail->setSubject($subject);
         $mail->setBodyText($body);
@@ -157,7 +157,7 @@ class API extends \Piwik\Plugin\API
 
     private function getEnglishTranslationForFeatureName(string $featureName): string
     {
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
 
         if ($translator->getCurrentLanguage() === 'en') {
             return $featureName;
@@ -165,6 +165,6 @@ class API extends \Piwik\Plugin\API
 
         $translationKeyForFeature = $translator->findTranslationKeyForTranslation($featureName);
 
-        return Piwik::translate($translationKeyForFeature ?? '', [], 'en');
+        return Matomo::translate($translationKeyForFeature ?? '', [], 'en');
     }
 }

@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour;
+namespace Matomo\Plugins\Tour;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparkline;
-use Piwik\Plugins\Tour\Engagement\Challenge;
-use Piwik\Plugins\Tour\Engagement\ChallengeAddedAnnotation;
-use Piwik\Plugins\Tour\Engagement\ChallengeInvitedUser;
-use Piwik\Plugins\Tour\Engagement\ChallengeBrowseMarketplace;
-use Piwik\Plugins\Tour\Engagement\ChallengeChangeVisualisation;
-use Piwik\Plugins\Tour\Engagement\ChallengeCreatedGoal;
-use Piwik\Plugins\Tour\Engagement\ChallengeFlattenActions;
-use Piwik\Plugins\Tour\Engagement\ChallengeSelectDateRange;
-use Piwik\Plugins\Tour\Engagement\ChallengeViewRowEvolution;
-use Piwik\Plugins\Tour\Engagement\ChallengeViewVisitorProfile;
-use Piwik\Plugins\Tour\Engagement\ChallengeViewVisitsLog;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparkline;
+use Matomo\Plugins\Tour\Engagement\Challenge;
+use Matomo\Plugins\Tour\Engagement\ChallengeAddedAnnotation;
+use Matomo\Plugins\Tour\Engagement\ChallengeInvitedUser;
+use Matomo\Plugins\Tour\Engagement\ChallengeBrowseMarketplace;
+use Matomo\Plugins\Tour\Engagement\ChallengeChangeVisualisation;
+use Matomo\Plugins\Tour\Engagement\ChallengeCreatedGoal;
+use Matomo\Plugins\Tour\Engagement\ChallengeFlattenActions;
+use Matomo\Plugins\Tour\Engagement\ChallengeSelectDateRange;
+use Matomo\Plugins\Tour\Engagement\ChallengeViewRowEvolution;
+use Matomo\Plugins\Tour\Engagement\ChallengeViewVisitorProfile;
+use Matomo\Plugins\Tour\Engagement\ChallengeViewVisitsLog;
 
-class Tour extends \Piwik\Plugin
+class Tour extends \Matomo\Plugin
 {
     public function registerEvents()
     {
@@ -57,7 +57,7 @@ class Tour extends \Piwik\Plugin
         }
 
         if (Common::getRequestVar('flat', '0', 'string') === '1') {
-            $module = Piwik::getModule();
+            $module = Matomo::getModule();
             if ($module === 'Actions' || $module === 'Contents' || $module === 'UsersFlow') {
                 $this->setSimpleChallengeCompleted(ChallengeFlattenActions::class);
             }
@@ -74,10 +74,10 @@ class Tour extends \Piwik\Plugin
 
     private function setSimpleChallengeCompleted($className)
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             /** @var Challenge $challenge */
             $challenge = StaticContainer::get($className);
-            $challenge->setCompleted(Piwik::getCurrentUserLogin());
+            $challenge->setCompleted(Matomo::getCurrentUserLogin());
         }
     }
 
@@ -98,31 +98,31 @@ class Tour extends \Piwik\Plugin
 
     public function onAnnotationAdded($response)
     {
-        if (Piwik::hasUserSuperUserAccess() && !empty($response)) {
+        if (Matomo::hasUserSuperUserAccess() && !empty($response)) {
             $annotation = new ChallengeAddedAnnotation();
-            $annotation->setCompleted(Piwik::getCurrentUserLogin());
+            $annotation->setCompleted(Matomo::getCurrentUserLogin());
         }
     }
 
     public function onGoalAdded($response)
     {
-        if (Piwik::hasUserSuperUserAccess() && !empty($response)) {
+        if (Matomo::hasUserSuperUserAccess() && !empty($response)) {
             $annotation = new ChallengeCreatedGoal();
-            $annotation->setCompleted(Piwik::getCurrentUserLogin());
+            $annotation->setCompleted(Matomo::getCurrentUserLogin());
         }
     }
 
     public function onUserInvited()
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $annotation = new ChallengeInvitedUser();
-            $annotation->setCompleted(Piwik::getCurrentUserLogin());
+            $annotation->setCompleted(Matomo::getCurrentUserLogin());
         }
     }
 
     public function changeDefaultDashboardLayout(&$defaultLayout)
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $defaultLayout = json_decode($defaultLayout, true);
             $engagementWidget = array('uniqueId' => 'widgetTourgetEngagement', 'parameters' => array('module' => 'Tour', 'action' => 'getEngagement'));
             if (is_array($defaultLayout) && isset($defaultLayout[2]) && is_array($defaultLayout[2])) {

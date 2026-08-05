@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags;
+namespace Matomo\Plugins\FeatureFlags;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
 
 class FeatureFlagManager
 {

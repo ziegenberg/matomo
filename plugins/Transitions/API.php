@@ -7,36 +7,36 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Transitions;
+namespace Matomo\Plugins\Transitions;
 
 use Exception;
-use Piwik\ArchiveProcessor;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataArray;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Db;
-use Piwik\Metrics;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\Live\Model;
-use Piwik\RankingQuery;
-use Piwik\Segment;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Site;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\PageUrl;
-use Piwik\Tracker\TableLogAction;
+use Matomo\ArchiveProcessor;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataArray;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Db;
+use Matomo\Metrics;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\Live\Model;
+use Matomo\RankingQuery;
+use Matomo\Segment;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Site;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\PageUrl;
+use Matomo\Tracker\TableLogAction;
 
 /**
  * Provides API methods for transition reports around a specific page action.
  *
- * @method static \Piwik\Plugins\Transitions\API getInstance()
+ * @method static \Matomo\Plugins\Transitions\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns transition data for the specified page title.
@@ -111,7 +111,7 @@ class API extends \Piwik\Plugin\API
         $limitBeforeGrouping = 0,
         $parts = 'all'
     ) {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         if (!$this->isPeriodAllowed($idSite, $period, $date)) {
             throw new Exception('PeriodNotAllowed');
@@ -439,7 +439,7 @@ class API extends \Piwik\Plugin\API
 
             foreach ($subData as &$row) {
                 if ($referrerType == Common::REFERRER_TYPE_SEARCH_ENGINE && empty($row['referrer_data'])) {
-                    $row['referrer_data'] = Piwik::translate('General_Unknown');
+                    $row['referrer_data'] = Matomo::translate('General_Unknown');
                 }
 
                 $referrerData[$referrerType][Metrics::INDEX_NB_VISITS] += $row[Metrics::INDEX_NB_VISITS];
@@ -650,7 +650,7 @@ class API extends \Piwik\Plugin\API
                 }
                 $report['referrers'][] = [
                     'label'     => $this->getReferrerLabel($referrerId),
-                    'shortName' => \Piwik\Plugins\Referrers\getReferrerTypeFromShortName($referrerId),
+                    'shortName' => \Matomo\Plugins\Referrers\getReferrerTypeFromShortName($referrerId),
                     'visits'    => $visits,
                     'details'   => $details,
                 ];
@@ -664,7 +664,7 @@ class API extends \Piwik\Plugin\API
         if (count($report['referrers']) == 0) {
             $report['referrers'][] = [
                 'label'     => $this->getReferrerLabel(Common::REFERRER_TYPE_DIRECT_ENTRY),
-                'shortName' => \Piwik\Plugins\Referrers\getReferrerTypeLabel(Common::REFERRER_TYPE_DIRECT_ENTRY),
+                'shortName' => \Matomo\Plugins\Referrers\getReferrerTypeLabel(Common::REFERRER_TYPE_DIRECT_ENTRY),
                 'visits'    => 0,
             ];
         }
@@ -689,7 +689,7 @@ class API extends \Piwik\Plugin\API
             case Common::REFERRER_TYPE_CAMPAIGN:
                 return Controller::getTranslation('fromCampaigns');
             default:
-                return Piwik::translate('General_Others');
+                return Matomo::translate('General_Others');
         }
     }
 

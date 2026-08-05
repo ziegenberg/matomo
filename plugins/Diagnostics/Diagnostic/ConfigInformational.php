@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Development;
-use Piwik\Plugin\Manager;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Development;
+use Matomo\Plugin\Manager;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
 
 /**
  * Informational about the Matomo configuration

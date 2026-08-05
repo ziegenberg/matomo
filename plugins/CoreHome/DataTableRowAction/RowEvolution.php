@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\DataTableRowAction;
+namespace Matomo\Plugins\CoreHome\DataTableRowAction;
 
 use Exception;
-use Piwik\API\DataTablePostProcessor;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Map;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\NumberFormatter;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\API\Filter\DataComparisonFilter;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph\Config as GraphConfig;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Config as JqplotGraphConfig;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionViz;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution\Config as EvolutionVizConfig;
-use Piwik\ViewDataTable\Factory;
-use Piwik\ViewDataTable\Manager as ViewDataTableManager;
+use Matomo\API\DataTablePostProcessor;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Map;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\NumberFormatter;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\API\Filter\DataComparisonFilter;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph\Config as GraphConfig;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Config as JqplotGraphConfig;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionViz;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution\Config as EvolutionVizConfig;
+use Matomo\ViewDataTable\Factory;
+use Matomo\ViewDataTable\Manager as ViewDataTableManager;
 
 /**
  * ROW EVOLUTION
@@ -148,7 +148,7 @@ class RowEvolution
         PeriodFactory::checkPeriodIsEnabled($this->period);
 
         if ($this->period != 'range' && !($date instanceof Date)) {
-            throw new Exception("Expected date to be an instance of \\Piwik\\Date");
+            throw new Exception("Expected date to be an instance of \\Matomo\\Date");
         }
 
         $this->idSite = $idSite;
@@ -158,22 +158,22 @@ class RowEvolution
             // handle day, week, month and year: display last X periods
             //handle cache if exist
             $cache = ViewDataTableManager::getViewDataTableParameters(
-                Piwik::getCurrentUserLogin(),
+                Matomo::getCurrentUserLogin(),
                 'CoreHome.getRowEvolutionGraph'
             );
             $lastDay = (isset($cache['evolution_' . $this->period . '_last_n']) ? $cache['evolution_' . $this->period . '_last_n'] : null);
             $end = $date->toString();
             [$this->date, $lastN] = EvolutionViz::getDateRangeAndLastN($this->period, $end, $lastDay);
         }
-        $this->segment = \Piwik\API\Request::getRawSegmentFromRequest();
+        $this->segment = \Matomo\API\Request::getRawSegmentFromRequest();
 
         $this->loadEvolutionReport();
     }
 
     /**
      * Render the popover
-     * @param \Piwik\Plugins\CoreHome\Controller $controller
-     * @param \Piwik\View $view the popover_rowevolution template
+     * @param \Matomo\Plugins\CoreHome\Controller $controller
+     * @param \Matomo\View $view the popover_rowevolution template
      * @return string
      */
     public function renderPopover($controller, $view)
@@ -187,12 +187,12 @@ class RowEvolution
         $view->metrics = $this->getMetricsToggles();
 
         // available metrics text
-        $metricsText = Piwik::translate('RowEvolution_AvailableMetrics');
+        $metricsText = Matomo::translate('RowEvolution_AvailableMetrics');
         $popoverTitle = '';
         if ($this->rowLabel) {
             $icon = $this->rowIcon ? '<img height="16px" src="' . $this->rowIcon . '" alt="">' : '';
             $rowLabel = str_replace('/', '<wbr>/', str_replace('&', '<wbr>&', $this->rowLabel));
-            $metricsText = sprintf(Piwik::translate('RowEvolution_MetricsFor'), $this->dimension . ': ' . $icon . ' ' . $rowLabel);
+            $metricsText = sprintf(Matomo::translate('RowEvolution_MetricsFor'), $this->dimension . ': ' . $icon . ' ' . $rowLabel);
             $popoverTitle = $icon . ' ' . $this->rowLabel;
         }
 
@@ -368,7 +368,7 @@ class RowEvolution
             [$first, $last] = $this->getFirstAndLastDataPointsForMetric($metric);
             $fractionDigits = max($this->getFractionDigits($first), $this->getFractionDigits($last));
 
-            $details = Piwik::translate('RowEvolution_MetricBetweenText', array(
+            $details = Matomo::translate('RowEvolution_MetricBetweenText', array(
                 NumberFormatter::getInstance()->format($first, $fractionDigits) . $unit,
                 NumberFormatter::getInstance()->format($last, $fractionDigits) . $unit,
             ));
@@ -390,13 +390,13 @@ class RowEvolution
                     . ($changeImage ? '<img src="plugins/MultiSites/images/' . $changeImage . '.png" /> ' : '')
                     . $change . '</span>';
 
-                $details .= ', ' . Piwik::translate('RowEvolution_MetricChangeText', $change);
+                $details .= ', ' . Matomo::translate('RowEvolution_MetricChangeText', $change);
             }
 
             // set metric min/max text (used as tooltip for details)
             $max = isset($metricData['max']) ? $metricData['max'] : 0;
             $min = isset($metricData['min']) ? $metricData['min'] : 0;
-            $minmax = Piwik::translate('RowEvolution_MetricMinMax', array(
+            $minmax = Matomo::translate('RowEvolution_MetricMinMax', array(
                 $metricData['name'],
                 NumberFormatter::getInstance()->formatNumber($min, $fractionDigits, $fractionDigits) . $unit,
                 NumberFormatter::getInstance()->formatNumber($max, $fractionDigits, $fractionDigits) . $unit,
@@ -498,7 +498,7 @@ class RowEvolution
         // By default, use the specified label
         $rowLabel = Common::sanitizeInputValue($report['label']);
 
-        /** @var \Piwik\DataTable\Map $dataTableMap */
+        /** @var \Matomo\DataTable\Map $dataTableMap */
         $dataTableMap = $report['reportData'];
 
         // If the dataTable specifies a label_html, use this instead
@@ -526,7 +526,7 @@ class RowEvolution
     /**
      * @return string|null
      */
-    protected function getRowEvolutionGraphFromController(\Piwik\Plugins\CoreHome\Controller $controller)
+    protected function getRowEvolutionGraphFromController(\Matomo\Plugins\CoreHome\Controller $controller)
     {
         return $controller->getRowEvolutionGraph($fetch = true, $rowEvolution = $this);
     }

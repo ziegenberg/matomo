@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns;
+namespace Matomo\Plugins\Actions\Columns;
 
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugins\Actions\Actions\ActionSiteSearch;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugins\Actions\Actions\ActionSiteSearch;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class SearchCount extends ActionDimension
 {

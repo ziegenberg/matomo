@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Categories;
+namespace Matomo\Plugins\Actions\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class SiteSearchSubcategory extends Subcategory
 {
@@ -21,9 +21,9 @@ class SiteSearchSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Actions_SiteSearchSubcategoryHelp1') . '</p>'
-            . '<p>' . Piwik::translate('Actions_SiteSearchSubcategoryHelp2') . '</p>'
+        return '<p>' . Matomo::translate('Actions_SiteSearchSubcategoryHelp1') . '</p>'
+            . '<p>' . Matomo::translate('Actions_SiteSearchSubcategoryHelp2') . '</p>'
             . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/site-search/', null, null, 'App.Actions.getSiteSearchCategories')
-            . Piwik::translate('Actions_SiteSearchSubcategoryHelp3') . '</a></p>';
+            . Matomo::translate('Actions_SiteSearchSubcategoryHelp3') . '</a></p>';
     }
 }

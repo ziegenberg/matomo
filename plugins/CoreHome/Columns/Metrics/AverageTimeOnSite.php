@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\Columns\Metrics;
 
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
 
 /**
  * The average number of seconds spent on the site per visit. Calculated as:
@@ -36,7 +36,7 @@ class AverageTimeOnSite extends ProcessedMetric
         $sumVisitLength = $this->getMetric($row, 'sum_visit_length');
         $nbVisits = $this->getMetric($row, 'nb_visits');
 
-        return Piwik::getQuotientSafe($sumVisitLength, $nbVisits, $precision = 0);
+        return Matomo::getQuotientSafe($sumVisitLength, $nbVisits, $precision = 0);
     }
 
     public function format($value, Formatter $formatter)
@@ -46,7 +46,7 @@ class AverageTimeOnSite extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnAvgTimeOnSite');
+        return Matomo::translate('General_ColumnAvgTimeOnSite');
     }
 
     public function getDependentMetrics()

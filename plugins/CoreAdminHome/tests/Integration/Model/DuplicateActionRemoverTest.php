@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Model;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Model;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\CoreAdminHome\Model\DuplicateActionRemover;
-use Piwik\Plugins\CoreAdminHome\tests\Fixture\DuplicateActions;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\CoreAdminHome\Model\DuplicateActionRemover;
+use Matomo\Plugins\CoreAdminHome\tests\Fixture\DuplicateActions;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

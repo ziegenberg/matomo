@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Cache;
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\DataTable;
-use Piwik\DataTable\Map;
-use Piwik\Metrics;
-use Piwik\Plugin;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugins\Live\Live;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Cache;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\DataTable;
+use Matomo\DataTable\Map;
+use Matomo\Metrics;
+use Matomo\Plugin;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugins\Live\Live;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 /**
  * UserId dimension.
@@ -116,7 +116,7 @@ class UserId extends VisitDimension
 
     private function isUsedInSite($idSite, $period, $date)
     {
-        $result = \Piwik\API\Request::processRequest('VisitsSummary.get', [
+        $result = \Matomo\API\Request::processRequest('VisitsSummary.get', [
             'columns' => 'nb_users',
             'idSite' => $idSite,
             'period' => $period,

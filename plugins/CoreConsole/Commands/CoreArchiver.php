@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\CronArchive;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Site;
+use Matomo\CronArchive;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Site;
 
 class CoreArchiver extends ConsoleCommand
 {

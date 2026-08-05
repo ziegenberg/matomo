@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\SiteContentDetector;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\SiteContentDetector;
+use Matomo\Url;
+use Matomo\View;
 
 class VueJs extends SiteContentDetectionAbstract
 {
@@ -66,7 +66,7 @@ class VueJs extends SiteContentDetectionAbstract
 
         return sprintf(
             '<p>%s</p>',
-            Piwik::translate(
+            Matomo::translate(
                 'SitesManager_SiteWithoutDataVueDescription',
                 [
                     Url::getExternalLinkTag('https://github.com/AmazingDreams/vue-matomo') . 'vue-matomo</a>',
@@ -79,11 +79,11 @@ class VueJs extends SiteContentDetectionAbstract
 
     private function getVueInitializeCode(int $vueVersion = 3): string
     {
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
         $piwikUrl = Url::getCurrentUrlWithoutFileName();
         $siteId = $request->getIntegerParameter('idSite', 1);
-        $configureComment = Piwik::translate('SitesManager_SiteWithoutDataVueFollowStep2ExampleCodeCommentConfigureMatomo');
-        $trackViewComment = Piwik::translate('SitesManager_SiteWithoutDataVueFollowStep2ExampleCodeCommentTrackPageView');
+        $configureComment = Matomo::translate('SitesManager_SiteWithoutDataVueFollowStep2ExampleCodeCommentConfigureMatomo');
+        $trackViewComment = Matomo::translate('SitesManager_SiteWithoutDataVueFollowStep2ExampleCodeCommentTrackPageView');
         if ($vueVersion === 2) {
             return <<<INST
 import { createApp } from 'vue'

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration\Column;
+namespace Matomo\Plugins\CoreHome\tests\Integration\Column;
 
-use Piwik\Cache;
-use Piwik\Metrics;
-use Piwik\Plugins\CoreHome\Columns\UserId;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\DataTable;
+use Matomo\Cache;
+use Matomo\Metrics;
+use Matomo\Plugins\CoreHome\Columns\UserId;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
 
 /**
  * @group CoreHome
@@ -266,7 +266,7 @@ class UserIdTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

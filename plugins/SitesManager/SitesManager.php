@@ -7,29 +7,29 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager;
+namespace Matomo\Plugins\SitesManager;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreHome\SystemSummary;
-use Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
-use Piwik\Settings\Storage\Backend\MeasurableSettingsTable;
-use Piwik\SettingsPiwik;
-use Piwik\SiteContentDetector;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\FingerprintSalt;
-use Piwik\Tracker\Model as TrackerModel;
-use Piwik\Session\SessionNamespace;
-use Piwik\Tracker\TrackerCodeGenerator;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreHome\SystemSummary;
+use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
+use Matomo\Settings\Storage\Backend\MeasurableSettingsTable;
+use Matomo\SettingsPiwik;
+use Matomo\SiteContentDetector;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\FingerprintSalt;
+use Matomo\Tracker\Model as TrackerModel;
+use Matomo\Session\SessionNamespace;
+use Matomo\Tracker\TrackerCodeGenerator;
+use Matomo\Url;
+use Matomo\View;
 
-class SitesManager extends \Piwik\Plugin
+class SitesManager extends \Matomo\Plugin
 {
     public const KEEP_URL_FRAGMENT_USE_DEFAULT = 0;
     public const KEEP_URL_FRAGMENT_YES = 1;
@@ -46,7 +46,7 @@ class SitesManager extends \Piwik\Plugin
     ];
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -67,7 +67,7 @@ class SitesManager extends \Piwik\Plugin
 
     public static function dieIfSitesAdminIsDisabled()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
         if (!self::isSitesAdminEnabled()) {
             throw new \Exception('Creating, updating, and deleting sites has been disabled.');
         }
@@ -80,7 +80,7 @@ class SitesManager extends \Piwik\Plugin
             $numWebsites = count($websites);
             $systemSummary[] = new SystemSummary\Item(
                 'websites',
-                Piwik::translate('CoreHome_SystemSummaryNWebsites', $numWebsites),
+                Matomo::translate('CoreHome_SystemSummaryNWebsites', $numWebsites),
                 null,
                 ['module' => 'SitesManager', 'action' => 'index'],
                 '',
@@ -146,7 +146,7 @@ class SitesManager extends \Piwik\Plugin
          *                                           check, false if otherwise.
          * @param int $siteId The ID of the site we would perform a check for.
          */
-        Piwik::postEvent('SitesManager.shouldPerformEmptySiteCheck', [&$shouldPerformEmptySiteCheck, $siteId]);
+        Matomo::postEvent('SitesManager.shouldPerformEmptySiteCheck', [&$shouldPerformEmptySiteCheck, $siteId]);
 
         return $shouldPerformEmptySiteCheck;
     }
@@ -156,7 +156,7 @@ class SitesManager extends \Piwik\Plugin
         // we do not delete logs here on purpose (you can run these queries on the log_ tables to delete all data)
         Cache::deleteCacheWebsiteAttributes($idSite);
 
-        $archiveInvalidator = StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
         $archiveInvalidator->forgetRememberedArchivedReportsToInvalidateForSite($idSite);
 
         MeasurableSettingsTable::removeAllSettingsForSite($idSite);
@@ -526,7 +526,7 @@ class SitesManager extends \Piwik\Plugin
         /**
          * @ignore
          */
-        Piwik::postEvent('SitesManager.showMatomoLinksInTrackingCodeEmail', [&$showMatomoLinks]);
+        Matomo::postEvent('SitesManager.showMatomoLinksInTrackingCodeEmail', [&$showMatomoLinks]);
 
         $trackerCodeGenerator = new TrackerCodeGenerator();
         $trackingUrl = trim(SettingsPiwik::getPiwikUrl(), '/') . '/' . $trackerCodeGenerator->getPhpTrackerEndpoint();

@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin;
-use Piwik\Plugins\Marketplace\PluginTrial\Service as PluginTrialService;
-use Piwik\Request;
-use Piwik\SettingsPiwik;
-use Piwik\Widget\WidgetsList;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin;
+use Matomo\Plugins\Marketplace\PluginTrial\Service as PluginTrialService;
+use Matomo\Request;
+use Matomo\SettingsPiwik;
+use Matomo\Widget\WidgetsList;
 
-class Marketplace extends \Piwik\Plugin
+class Marketplace extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -48,7 +48,7 @@ class Marketplace extends \Piwik\Plugin
 
     public function checkForUpdates()
     {
-        $marketplace = StaticContainer::get('Piwik\Plugins\Marketplace\Api\Client');
+        $marketplace = StaticContainer::get('Matomo\Plugins\Marketplace\Api\Client');
         $marketplace->clearAllCacheEntries();
     }
 

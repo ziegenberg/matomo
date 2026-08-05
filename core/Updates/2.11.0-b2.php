@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Updater;
-use Piwik\Updates;
-use Piwik\Plugins\Dashboard\Model as DashboardModel;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Updater;
+use Matomo\Updates;
+use Matomo\Plugins\Dashboard\Model as DashboardModel;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Update for version 2.11.0-b2.
@@ -36,12 +36,12 @@ class Updates_2_11_0_b2 extends Updates
         // update dashboard to use new ecommerce widgets, they were moved from goals plugin to ecommerce
         $oldWidgets = array(
             array('module' => 'Goals', 'action' => 'getEcommerceLog',  'params' => array()),
-            array('module' => 'Goals', 'action' => 'widgetGoalReport', 'params' => array('idGoal' => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER)),
+            array('module' => 'Goals', 'action' => 'widgetGoalReport', 'params' => array('idGoal' => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER)),
         );
 
         $newWidgets = array(
             array('module' => 'Ecommerce', 'action' => 'getEcommerceLog',  'params' => array()),
-            array('module' => 'Ecommerce', 'action' => 'widgetGoalReport', 'params' => array('idGoal' => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER)),
+            array('module' => 'Ecommerce', 'action' => 'widgetGoalReport', 'params' => array('idGoal' => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER)),
         );
 
         $allDashboards = Db::get()->fetchAll(sprintf("SELECT * FROM `%s`", Common::prefixTable('user_dashboard')));

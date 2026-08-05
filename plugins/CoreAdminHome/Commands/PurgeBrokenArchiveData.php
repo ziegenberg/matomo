@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Archive\ArchivePurger;
-use Piwik\Date;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Log\NullLogger;
-use Piwik\Period\Month;
+use Matomo\Archive\ArchivePurger;
+use Matomo\Date;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Log\NullLogger;
+use Matomo\Period\Month;
 
 /**
  * Command that allows users to force purge old or invalid archive data. In the event of a failure

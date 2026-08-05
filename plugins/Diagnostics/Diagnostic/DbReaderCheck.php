@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
 
 /**
  * Check if Piwik can use LOAD DATA INFILE.
@@ -46,7 +46,7 @@ class DbReaderCheck implements Diagnostic
         } catch (\Exception $e) {
         }
 
-        $comment = Piwik::translate('Installation_CannotConnectToDb');
+        $comment = Matomo::translate('Installation_CannotConnectToDb');
         return array(DiagnosticResult::singleResult($label, DiagnosticResult::STATUS_WARNING, $comment));
     }
 }

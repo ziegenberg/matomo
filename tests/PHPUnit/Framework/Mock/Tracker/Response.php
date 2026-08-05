@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock\Tracker;
+namespace Matomo\Tests\Framework\Mock\Tracker;
 
 use Exception;
-use Piwik\Tracker;
+use Matomo\Tracker;
 
-class Response extends \Piwik\Tracker\Response
+class Response extends \Matomo\Tracker\Response
 {
     public $statusCode = 200;
     public $exception;

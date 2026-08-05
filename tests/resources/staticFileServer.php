@@ -11,8 +11,8 @@
  * serverStaticFile.test.php has been created to avoid making too many modifications to /tests/core/Piwik.test.php
  */
 
-use Piwik\Common;
-use Piwik\ProxyHttp;
+use Matomo\Common;
+use Matomo\ProxyHttp;
 
 define('PIWIK_DOCUMENT_ROOT', dirname(__FILE__) . '/../../');
 if (file_exists(PIWIK_DOCUMENT_ROOT . '/bootstrap.php')) {
@@ -58,7 +58,7 @@ if ($staticFileServerMode === "") {
         SRV_MODE_REQUEST_VAR . " must be provided.");
 }
 
-$environment = new \Piwik\Application\Environment(null);
+$environment = new \Matomo\Application\Environment(null);
 $environment->init();
 
 switch ($staticFileServerMode) {

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Period;
+namespace Matomo\Tests\Integration\Period;
 
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Period\Day;
-use Piwik\Period\Month;
-use Piwik\Period\Range;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Period\Day;
+use Matomo\Period\Month;
+use Matomo\Period\Range;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
 
 class TestPeriod
 {
@@ -48,7 +48,7 @@ class TestPeriodFactory extends Period\Factory
     }
 }
 
-class MockPluginManager extends \Piwik\Plugin\Manager
+class MockPluginManager extends \Matomo\Plugin\Manager
 {
     public function findComponents($componentName, $expectedSubclass)
     {
@@ -169,7 +169,7 @@ class FactoryTest extends UnitTestCase
     public function provideContainerConfig()
     {
         return [
-            \Piwik\Plugin\Manager::class => \Piwik\DI::autowire(MockPluginManager::class),
+            \Matomo\Plugin\Manager::class => \Matomo\DI::autowire(MockPluginManager::class),
         ];
     }
 }

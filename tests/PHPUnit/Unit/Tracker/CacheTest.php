@@ -10,8 +10,8 @@
 namespace PHPUnit\Unit\Tracker;
 
 use Matomo\Cache\Lazy;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
-use Piwik\Tracker\Cache;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Tracker\Cache;
 
 class CacheTest extends UnitTestCase
 {

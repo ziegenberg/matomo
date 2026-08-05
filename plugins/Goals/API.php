@@ -7,33 +7,33 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Archive;
-use Piwik\CacheId;
-use Piwik\Cache as PiwikCache;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DbHelper;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\API\DataTable\MergeDataTables;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ConversionRate;
-use Piwik\Plugins\Goals\Columns\Metrics\AverageOrderRevenue;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalConversionRate;
-use Piwik\Plugins\Goals\Reports\GetMetrics;
-use Piwik\Segment;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Site;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\GoalManager;
-use Piwik\Plugins\VisitFrequency\API as VisitFrequencyAPI;
-use Piwik\Validators\Regex;
-use Piwik\Validators\WhitelistedValue;
+use Matomo\API\Request;
+use Matomo\Archive;
+use Matomo\CacheId;
+use Matomo\Cache as PiwikCache;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DbHelper;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\API\DataTable\MergeDataTables;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ConversionRate;
+use Matomo\Plugins\Goals\Columns\Metrics\AverageOrderRevenue;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalConversionRate;
+use Matomo\Plugins\Goals\Reports\GetMetrics;
+use Matomo\Segment;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Site;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\GoalManager;
+use Matomo\Plugins\VisitFrequency\API as VisitFrequencyAPI;
+use Matomo\Validators\Regex;
+use Matomo\Validators\WhitelistedValue;
 
 /**
  * Goals API lets you Manage existing goals, via "updateGoal" and "deleteGoal", create new Goals via "addGoal",
@@ -53,7 +53,7 @@ use Piwik\Validators\WhitelistedValue;
  *
  * See also the documentation about <a href='https://matomo.org/docs/tracking-goals-web-analytics/' rel='noreferrer' target='_blank'>Tracking Goals</a> in Matomo.
  *
- * @method static \Piwik\Plugins\Goals\API getInstance()
+ * @method static \Matomo\Plugins\Goals\API getInstance()
  *
  * @phpstan-import-type GoalStoredRecord from Model
  * @phpstan-type GoalMatchAttribute 'url'|'title'|'file'|'external_website'|'manually'|'visit_duration'|'visit_total_actions'|'visit_total_pageviews'|'event_action'|'event_category'|'event_name'
@@ -73,7 +73,7 @@ use Piwik\Validators\WhitelistedValue;
  *     deleted?: int|string
  * }
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const AVG_PRICE_VIEWED = 'avg_price_viewed';
 
@@ -87,7 +87,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getGoal(int $idSite, int $idGoal): ?array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $goal = $this->getModel()->getActiveGoal($idSite, $idGoal);
 
@@ -129,7 +129,7 @@ class API extends \Piwik\Plugin\API
                 return [];
             }
 
-            Piwik::checkUserHasViewAccess($idSite);
+            Matomo::checkUserHasViewAccess($idSite);
 
             $goals = $this->getModel()->getActiveGoals($idSite);
             $cleanedGoals = [];
@@ -216,7 +216,7 @@ class API extends \Piwik\Plugin\API
         string $description = '',
         $useEventValueAsRevenue = false
     ) {
-        Piwik::checkUserHasWriteAccess($idSite);
+        Matomo::checkUserHasWriteAccess($idSite);
 
         $patternType = Common::unsanitizeInputValue($patternType);
 
@@ -287,7 +287,7 @@ class API extends \Piwik\Plugin\API
         string $description = '',
         $useEventValueAsRevenue = false
     ): void {
-        Piwik::checkUserHasWriteAccess($idSite);
+        Matomo::checkUserHasWriteAccess($idSite);
 
         $patternType = Common::unsanitizeInputValue($patternType);
 
@@ -352,7 +352,7 @@ class API extends \Piwik\Plugin\API
             && substr($matchAttribute, 0, 6) != 'event_'
             && $matchAttribute != 'title'
         ) {
-            throw new Exception(Piwik::translate('Goals_ExceptionInvalidMatchingString', array("http:// or https://", "http://www.yourwebsite.com/newsletter/subscribed.html")));
+            throw new Exception(Matomo::translate('Goals_ExceptionInvalidMatchingString', array("http:// or https://", "http://www.yourwebsite.com/newsletter/subscribed.html")));
         }
 
         if ($patternType == 'regex') {
@@ -393,7 +393,7 @@ class API extends \Piwik\Plugin\API
     private function checkPattern($pattern, $matchAttribute): string
     {
         if ($matchAttribute !== 'manually' && $pattern === '') {
-            throw new \Exception(Piwik::translate('General_PleaseSpecifyValue', ['pattern']));
+            throw new \Exception(Matomo::translate('General_PleaseSpecifyValue', ['pattern']));
         }
 
         if (
@@ -417,7 +417,7 @@ class API extends \Piwik\Plugin\API
      */
     public function deleteGoal(int $idSite, $idGoal)
     {
-        Piwik::checkUserHasWriteAccess($idSite);
+        Matomo::checkUserHasWriteAccess($idSite);
 
         $this->getModel()->deleteGoal($idSite, $idGoal);
         $this->getModel()->deleteGoalConversions($idSite, $idGoal);
@@ -439,7 +439,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getItems(string $recordName, $idSite, string $period, string $date, $abandonedCarts, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $recordNameFinal = $recordName;
         if ($abandonedCarts) {
@@ -468,9 +468,9 @@ class API extends \Piwik\Plugin\API
         });
 
         $reportToNotDefinedString = array(
-            'Goals_ItemsSku' => Piwik::translate('General_NotDefined', Piwik::translate('Goals_ProductSKU')), // Note: this should never happen
-            'Goals_ItemsName' => Piwik::translate('General_NotDefined', Piwik::translate('Goals_ProductName')),
-            'Goals_ItemsCategory' => Piwik::translate('General_NotDefined', Piwik::translate('Goals_ProductCategory')),
+            'Goals_ItemsSku' => Matomo::translate('General_NotDefined', Matomo::translate('Goals_ProductSKU')), // Note: this should never happen
+            'Goals_ItemsName' => Matomo::translate('General_NotDefined', Matomo::translate('Goals_ProductName')),
+            'Goals_ItemsCategory' => Matomo::translate('General_NotDefined', Matomo::translate('Goals_ProductCategory')),
         );
         $notDefinedStringPretty = $reportToNotDefinedString[$recordName];
         $this->renameNotDefinedRow($dataTable, $notDefinedStringPretty);
@@ -520,7 +520,7 @@ class API extends \Piwik\Plugin\API
         }
 
         /** @var DataTable $ecommerceViews */
-        $ecommerceViews = \Piwik\Plugins\CustomVariables\API::getInstance()->getCustomVariablesValuesFromNameId($idSite, $period, $date, $idSubtable, $segment, $_leavePriceViewedColumn = true);
+        $ecommerceViews = \Matomo\Plugins\CustomVariables\API::getInstance()->getCustomVariablesValuesFromNameId($idSite, $period, $date, $idSubtable, $segment, $_leavePriceViewedColumn = true);
 
         // For Product names and SKU reports, and for Category report
         // Use the Price (tracked on page views)
@@ -633,9 +633,9 @@ class API extends \Piwik\Plugin\API
      */
     protected static function convertSpecialGoalIds($idGoal)
     {
-        if ($idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+        if ($idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
             return GoalManager::IDGOAL_ORDER;
-        } elseif ($idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+        } elseif ($idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
             return GoalManager::IDGOAL_CART;
         } else {
             return $idGoal;
@@ -669,7 +669,7 @@ class API extends \Piwik\Plugin\API
      */
     public function get($idSite, string $period, string $date, $segment = false, $idGoal = false, $columns = [], $showAllGoalSpecificMetrics = false, $compare = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $table = null;
 
@@ -680,7 +680,7 @@ class API extends \Piwik\Plugin\API
         );
 
         foreach ($segments as $appendToMetricName => $predefinedSegment) {
-            $startingArchiveDependent = \Piwik\Plugin\Archiver::$ARCHIVE_DEPENDENT;
+            $startingArchiveDependent = \Matomo\Plugin\Archiver::$ARCHIVE_DEPENDENT;
             try {
                 if (!empty($predefinedSegment)) {
                     // we are disabling the archiving of these segments as the archiver archives them already using
@@ -689,7 +689,7 @@ class API extends \Piwik\Plugin\API
                     // userid=5;visitorType%3D%3Dreturning%2CvisitorType%3D%3DreturningCustomer;visitorType%3D%3Dnew;
                     // it would also archive dependends for these segments that we already combined here and then combine
                     // segments again when archiving dependends
-                    \Piwik\Plugin\Archiver::$ARCHIVE_DEPENDENT = false;
+                    \Matomo\Plugin\Archiver::$ARCHIVE_DEPENDENT = false;
                 }
                 $segmentToUse = $this->appendSegment($segment, $predefinedSegment);
 
@@ -705,10 +705,10 @@ class API extends \Piwik\Plugin\API
                     'format_metrics' => !empty($compare) ? 0 : Common::getRequestVar('format_metrics', 'bc'),
                 ), $default = []);
             } finally {
-                \Piwik\Plugin\Archiver::$ARCHIVE_DEPENDENT = $startingArchiveDependent;
+                \Matomo\Plugin\Archiver::$ARCHIVE_DEPENDENT = $startingArchiveDependent;
             }
             $tableSegmented->filter(
-                'Piwik\Plugins\Goals\DataTable\Filter\AppendNameToColumnNames',
+                'Matomo\Plugins\Goals\DataTable\Filter\AppendNameToColumnNames',
                 array($appendToMetricName)
             );
 
@@ -726,7 +726,7 @@ class API extends \Piwik\Plugin\API
         // formatting via format_metrics=0 (e.g. the evolution chart, which then plots the raw numbers itself), we must not
         // format the comparison rows either — formatting them turns revenue into a currency string and the chart cannot plot
         // it as a number.
-        $formatMetricsRequest = \Piwik\Request::fromRequest()->getStringParameter('format_metrics', 'bc');
+        $formatMetricsRequest = \Matomo\Request::fromRequest()->getStringParameter('format_metrics', 'bc');
         if (!empty($compare) && $formatMetricsRequest !== '0') {
             $getMetricsReport = ReportsProvider::factory('Goals', 'getMetrics');
             $table->queueFilter(function (DataTable $t) use ($getMetricsReport) {
@@ -768,7 +768,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMetrics($idSite, string $period, string $date, $segment = false, $idGoal = false, $columns = [], $showAllGoalSpecificMetrics = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
 
         $showAllGoalSpecificMetrics = $showAllGoalSpecificMetrics && $idGoal === false;
@@ -788,7 +788,7 @@ class API extends \Piwik\Plugin\API
             $allMetrics[] = 'nb_visits';
         }
 
-        $columnsToShow = Piwik::getArrayFromApiParameter($columns);
+        $columnsToShow = Matomo::getArrayFromApiParameter($columns);
         $requestedColumns = $columnsToShow;
 
         $shouldAddAverageOrderRevenue = (in_array('avg_order_revenue', $requestedColumns) || empty($requestedColumns)) && $isEcommerceGoal;
@@ -894,7 +894,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getNumeric($idSite, string $period, string $date, $segment, $toFetch)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTableFromNumeric($toFetch);
         return $dataTable;
@@ -967,7 +967,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getGoalSpecificDataTable(string $recordName, $idSite, string $period, string $date, $segment, $idGoal)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $archive = Archive::build($idSite, $period, $date, $segment);
 
@@ -1013,7 +1013,7 @@ class API extends \Piwik\Plugin\API
         $dataTable->queueFilter('Sort', array('label', 'asc', true, false));
         $dataTable->queueFilter(
             'BeautifyRangeLabels',
-            array(Piwik::translate('Intl_OneDay'), Piwik::translate('Intl_NDays'))
+            array(Matomo::translate('Intl_OneDay'), Matomo::translate('Intl_NDays'))
         );
 
         return $dataTable;
@@ -1051,7 +1051,7 @@ class API extends \Piwik\Plugin\API
         $dataTable->queueFilter('Sort', array('label', 'asc', true, false));
         $dataTable->queueFilter(
             'BeautifyRangeLabels',
-            array(Piwik::translate('General_OneVisit'), Piwik::translate('General_NVisits'))
+            array(Matomo::translate('General_OneVisit'), Matomo::translate('General_NVisits'))
         );
 
         return $dataTable;
@@ -1074,7 +1074,7 @@ class API extends \Piwik\Plugin\API
         }
 
         // Enrich the datatable with Product/Categories views, and conversion rates
-        $customVariables = \Piwik\Plugins\CustomVariables\API::getInstance()->getCustomVariables(
+        $customVariables = \Matomo\Plugins\CustomVariables\API::getInstance()->getCustomVariables(
             $idSite,
             $period,
             $date,

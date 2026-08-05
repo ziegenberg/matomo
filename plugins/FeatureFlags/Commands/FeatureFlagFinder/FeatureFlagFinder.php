@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\Commands\FeatureFlagFinder;
+namespace Matomo\Plugins\FeatureFlags\Commands\FeatureFlagFinder;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
 
 class FeatureFlagFinder
 {

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Fixtures;
+namespace Matomo\Plugins\UsersManager\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates tracker testing data for our APITest

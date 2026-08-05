@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth;
+namespace Matomo\Plugins\TwoFactorAuth;
 
-use Piwik\Access;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\IP;
-use Piwik\Nonce;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Session\SessionFingerprint;
-use Piwik\Session\SessionNamespace;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Access;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\IP;
+use Matomo\Nonce;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Session\SessionFingerprint;
+use Matomo\Session\SessionNamespace;
+use Matomo\Url;
+use Matomo\View;
 use Exception;
-use Piwik\Plugins\CoreAdminHome\Emails\RecoveryCodesShowedEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\TwoFactorAuthEnabledEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\TwoFactorAuthDisabledEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\RecoveryCodesRegeneratedEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\RecoveryCodesShowedEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\TwoFactorAuthEnabledEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\TwoFactorAuthDisabledEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\RecoveryCodesRegeneratedEmail;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public const AUTH_CODE_NONCE = 'TwoFactorAuth.saveAuthCode';
     public const LOGIN_2FA_NONCE = 'TwoFactorAuth.loginAuthCode';
@@ -83,16 +83,16 @@ class Controller extends \Piwik\Plugin\Controller
                     $authCode = trim($authCode);
                 }
 
-                if ($this->twoFa->validateAuthCode(Piwik::getCurrentUserLogin(), $authCode)) {
+                if ($this->twoFa->validateAuthCode(Matomo::getCurrentUserLogin(), $authCode)) {
                     $sessionFingerprint = new SessionFingerprint();
-                    $sessionFingerprint->setTwoFactorAuthenticationVerified(Piwik::getCurrentUserLogin());
+                    $sessionFingerprint->setTwoFactorAuthenticationVerified(Matomo::getCurrentUserLogin());
                     Url::redirectToUrl(Url::getCurrentUrl());
                 } else {
-                    $messageNoAccess = Piwik::translate('TwoFactorAuth_InvalidAuthCode');
+                    $messageNoAccess = Matomo::translate('TwoFactorAuth_InvalidAuthCode');
                     try {
-                        $bruteForce = StaticContainer::get('Piwik\Plugins\Login\Security\BruteForceDetection');
+                        $bruteForce = StaticContainer::get('Matomo\Plugins\Login\Security\BruteForceDetection');
                         if ($bruteForce->isEnabled()) {
-                            $bruteForce->addFailedAttempt(IP::getIpFromHeader(), Piwik::getCurrentUserLogin());
+                            $bruteForce->addFailedAttempt(IP::getIpFromHeader(), Matomo::getCurrentUserLogin());
                         }
                     } catch (Exception $e) {
                         // ignore error eg if login plugin is disabled
@@ -100,8 +100,8 @@ class Controller extends \Piwik\Plugin\Controller
                 }
             }
         }
-        $view->contactEmail = implode(',', Piwik::getContactEmailAddresses());
-        $view->loginModule = Piwik::getLoginPluginName();
+        $view->contactEmail = implode(',', Matomo::getContactEmailAddresses());
+        $view->loginModule = Matomo::getLoginPluginName();
         $view->AccessErrorString = $messageNoAccess;
         $view->addForm($form);
         $this->setBasicVariablesView($view);
@@ -112,12 +112,12 @@ class Controller extends \Piwik\Plugin\Controller
 
     private function renderFreshLoginAfterResettingPendingTwoFactorSession()
     {
-        \Piwik\Plugins\Login\Controller::clearSession();
+        \Matomo\Plugins\Login\Controller::clearSession();
         Access::getInstance()->setSessionExpired(true);
 
-        return StaticContainer::get(\Piwik\Plugins\Login\Controller::class)->login(
+        return StaticContainer::get(\Matomo\Plugins\Login\Controller::class)->login(
             null,
-            Piwik::translate('General_YourSessionHasExpired')
+            Matomo::translate('General_YourSessionHasExpired')
         );
     }
 
@@ -126,7 +126,7 @@ class Controller extends \Piwik\Plugin\Controller
         $this->validator->checkCanUseTwoFa();
 
         return $this->renderTemplate('userSettings', array(
-            'isEnabled' => TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Piwik::getCurrentUserLogin()),
+            'isEnabled' => TwoFactorAuthentication::isUserUsingTwoFactorAuthentication(Matomo::getCurrentUserLogin()),
             'isForced' => $this->twoFa->isUserRequiredToHaveTwoFactorEnabled(),
             'disableNonce' => Nonce::getNonce(self::DISABLE_2FA_NONCE),
         ));
@@ -148,13 +148,13 @@ class Controller extends \Piwik\Plugin\Controller
         if ($this->passwordVerify->requirePasswordVerifiedRecently($params)) {
             Nonce::checkNonce(self::DISABLE_2FA_NONCE, $nonce);
 
-            $this->twoFa->disable2FAforUser(Piwik::getCurrentUserLogin());
+            $this->twoFa->disable2FAforUser(Matomo::getCurrentUserLogin());
             $this->passwordVerify->forgetVerifiedPassword();
 
             $container = StaticContainer::getContainer();
             $email = $container->make(TwoFactorAuthDisabledEmail::class, array(
-                'login' => Piwik::getCurrentUserLogin(),
-                'emailAddress' => Piwik::getCurrentUserEmail(),
+                'login' => Matomo::getCurrentUserLogin(),
+                'emailAddress' => Matomo::getCurrentUserEmail(),
             ));
             $email->safeSend();
 
@@ -219,7 +219,7 @@ class Controller extends \Piwik\Plugin\Controller
         $authCodeNonce = Common::getRequestVar('authCodeNonce', '', 'string');
         $hasSubmittedForm = !empty($authCodeNonce) || !empty($authCode);
         $accessErrorString = '';
-        $login = Piwik::getCurrentUserLogin();
+        $login = Matomo::getCurrentUserLogin();
 
         if (
             !empty($secret) && !empty($authCode)
@@ -232,12 +232,12 @@ class Controller extends \Piwik\Plugin\Controller
                 unset($session->secret);
                 $this->passwordVerify->forgetVerifiedPassword();
 
-                Piwik::postEvent('TwoFactorAuth.enabled', array($login));
+                Matomo::postEvent('TwoFactorAuth.enabled', array($login));
 
                 $container = StaticContainer::getContainer();
                 $email = $container->make(TwoFactorAuthEnabledEmail::class, array(
-                    'login' => Piwik::getCurrentUserLogin(),
-                    'emailAddress' => Piwik::getCurrentUserEmail(),
+                    'login' => Matomo::getCurrentUserLogin(),
+                    'emailAddress' => Matomo::getCurrentUserEmail(),
                 ));
                 $email->safeSend();
 
@@ -250,7 +250,7 @@ class Controller extends \Piwik\Plugin\Controller
                 $this->setGeneralVariablesView($view);
                 return $view->render();
             } else {
-                $accessErrorString = Piwik::translate('TwoFactorAuth_WrongAuthCodeTryAgain');
+                $accessErrorString = Matomo::translate('TwoFactorAuth_WrongAuthCodeTryAgain');
             }
         } elseif (!$standalone) {
             // the user has not posted the form... at least not with a valid nonce... we make sure the password verify
@@ -306,12 +306,12 @@ class Controller extends \Piwik\Plugin\Controller
 
         if ($postedValidNonce && $this->passwordVerify->hasBeenVerified()) {
             $this->passwordVerify->forgetVerifiedPassword();
-            $this->recoveryCodeDao->createRecoveryCodesForLogin(Piwik::getCurrentUserLogin());
+            $this->recoveryCodeDao->createRecoveryCodesForLogin(Matomo::getCurrentUserLogin());
             $regenerateSuccess = true;
 
             $email = $container->make(RecoveryCodesRegeneratedEmail::class, array(
-                'login' => Piwik::getCurrentUserLogin(),
-                'emailAddress' => Piwik::getCurrentUserEmail(),
+                'login' => Matomo::getCurrentUserLogin(),
+                'emailAddress' => Matomo::getCurrentUserEmail(),
             ));
             $email->safeSend();
             // no need to redirect as password was verified nonce
@@ -326,12 +326,12 @@ class Controller extends \Piwik\Plugin\Controller
             $regenerateError = true;
         }
 
-        $recoveryCodes = $this->recoveryCodeDao->getAllRecoveryCodesForLogin(Piwik::getCurrentUserLogin());
+        $recoveryCodes = $this->recoveryCodeDao->getAllRecoveryCodesForLogin(Matomo::getCurrentUserLogin());
 
         if (!$regenerateSuccess && !$regenerateError) {
             $email = $container->make(RecoveryCodesShowedEmail::class, array(
-                'login' => Piwik::getCurrentUserLogin(),
-                'emailAddress' => Piwik::getCurrentUserEmail(),
+                'login' => Matomo::getCurrentUserLogin(),
+                'emailAddress' => Matomo::getCurrentUserEmail(),
             ));
             $email->safeSend();
         }
@@ -349,7 +349,7 @@ class Controller extends \Piwik\Plugin\Controller
         $secret
     ) {
         $title = $this->settings->twoFactorAuthTitle->getValue();
-        $descr = Piwik::getCurrentUserLogin();
+        $descr = Matomo::getCurrentUserLogin();
 
         $url = 'otpauth://totp/' . urlencode($descr) . '?secret=' . $secret;
         if (isset($title)) {

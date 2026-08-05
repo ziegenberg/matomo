@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\DeviceDetector\DeviceDetectorFactory;
-use Piwik\Plugins\BulkTracking\Tracker\Requests;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\Tracker\BotRequest;
-use Piwik\Tracker\Db as TrackerDb;
-use Piwik\Tracker\Db\DbException;
-use Piwik\Tracker\Handler;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestSet;
-use Piwik\Tracker\TrackerConfig;
-use Piwik\Tracker\Visit;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\DeviceDetector\DeviceDetectorFactory;
+use Matomo\Plugins\BulkTracking\Tracker\Requests;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\Tracker\BotRequest;
+use Matomo\Tracker\Db as TrackerDb;
+use Matomo\Tracker\Db\DbException;
+use Matomo\Tracker\Handler;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestSet;
+use Matomo\Tracker\TrackerConfig;
+use Matomo\Tracker\Visit;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Class used by the logging script piwik.php called by the javascript tag.
@@ -132,7 +132,7 @@ class Tracker
             $handler->onException($this, $requestSet, $e);
         }
 
-        Piwik::postEvent('Tracker.end');
+        Matomo::postEvent('Tracker.end');
         $response = $handler->finish($this, $requestSet);
 
         $this->disconnectDatabase();
@@ -176,7 +176,7 @@ class Tracker
              * @param bool &$isBot Indicates if the request should be handled as Bot
              * @param Request $request current tracking request
              */
-            Piwik::postEvent('Tracker.isBotRequest', [&$isBot, $request]);
+            Matomo::postEvent('Tracker.isBotRequest', [&$isBot, $request]);
 
             $rawParams = $request->getRawParams();
 
@@ -356,9 +356,9 @@ class Tracker
             $privacyConfig = new PrivacyManagerConfig();
             $privacyConfig->ipAddressMaskLength = 2;
 
-            \Piwik\Plugins\PrivacyManager\IPAnonymizer::activate();
+            \Matomo\Plugins\PrivacyManager\IPAnonymizer::activate();
 
-            \Piwik\Tracker\Cache::deleteTrackerCache();
+            \Matomo\Tracker\Cache::deleteTrackerCache();
             Filesystem::clearPhpCaches();
         }
     }

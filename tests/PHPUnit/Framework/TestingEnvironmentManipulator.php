@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework;
+namespace Matomo\Tests\Framework;
 
-use Piwik\Container\Container;
-use Piwik\Application\EnvironmentManipulator;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Application\Kernel\PluginList;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Plugin;
-use Piwik\SettingsServer;
+use Matomo\Container\Container;
+use Matomo\Application\EnvironmentManipulator;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Application\Kernel\PluginList;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Plugin;
+use Matomo\SettingsServer;
 
 class FakePluginList extends PluginList
 {
@@ -112,11 +112,11 @@ class TestingEnvironmentManipulator implements EnvironmentManipulator
         }
 
         if ($this->vars->hostOverride) {
-            \Piwik\Url::setHost($this->vars->hostOverride);
+            \Matomo\Url::setHost($this->vars->hostOverride);
         }
 
         if ($this->vars->useXhprof) {
-            \Piwik\Profiler::setupProfilerXHProf($mainRun = false, $setupDuringTracking = true);
+            \Matomo\Profiler::setupProfilerXHProf($mainRun = false, $setupDuringTracking = true);
         }
 
         \Matomo\Cache\Backend\File::$invalidateOpCacheBeforeRead = true;
@@ -129,7 +129,7 @@ class TestingEnvironmentManipulator implements EnvironmentManipulator
             && !SettingsServer::isTrackerApiRequest()
         ) {
             try {
-                \Piwik\ViewDataTable\Manager::clearAllViewDataTableParameters();
+                \Matomo\ViewDataTable\Manager::clearAllViewDataTableParameters();
             } catch (\Exception $ex) {
                 // ignore (in case DB is not setup)
             }
@@ -145,8 +145,8 @@ class TestingEnvironmentManipulator implements EnvironmentManipulator
             }
         }
 
-        \Piwik\Plugins\CoreVisualizations\Visualizations\Cloud::$debugDisableShuffle = true;
-        \Piwik\Plugins\ExampleUI\API::$disableRandomness = true;
+        \Matomo\Plugins\CoreVisualizations\Visualizations\Cloud::$debugDisableShuffle = true;
+        \Matomo\Plugins\ExampleUI\API::$disableRandomness = true;
 
         if (
             $this->vars->deleteArchiveTables
@@ -194,11 +194,11 @@ class TestingEnvironmentManipulator implements EnvironmentManipulator
 
         $plugins = $this->getPluginsToLoadDuringTest();
         $diConfigs[] = array(
-            'observers.global' => \Piwik\DI::add($this->globalObservers),
+            'observers.global' => \Matomo\DI::add($this->globalObservers),
 
-            'Piwik\Config' => \Piwik\DI::decorate(function (Config $config, Container $c) use ($plugins) {
+            'Matomo\Config' => \Matomo\DI::decorate(function (Config $config, Container $c) use ($plugins) {
                 /** @var PluginList $pluginList */
-                $pluginList = $c->get('Piwik\Application\Kernel\PluginList');
+                $pluginList = $c->get('Matomo\Application\Kernel\PluginList');
                 $plugins = $pluginList->sortPlugins($plugins);
 
                 // set the plugins to load, has to be done to Config, since Config will reload files on construction.
@@ -211,10 +211,10 @@ class TestingEnvironmentManipulator implements EnvironmentManipulator
 
         if (!empty($this->vars->multiplicateTableResults)) {
             $diConfigs[] = [
-                'observers.global' => \Piwik\DI::add([
+                'observers.global' => \Matomo\DI::add([
                     [
                         'API.Request.dispatch.end',
-                        \Piwik\DI::value(function ($returnedValue) {
+                        \Matomo\DI::value(function ($returnedValue) {
                             if ($returnedValue instanceof DataTableInterface) {
                                 $returnedValue->filter(function (DataTable $dataTable) {
                                     foreach ($dataTable->getRows() as $row) {

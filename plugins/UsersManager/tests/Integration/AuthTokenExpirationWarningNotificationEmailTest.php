@@ -10,13 +10,13 @@
 namespace Integration;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\tests\Fixtures\ExpiringTokens as ExpiringTokensFixture;
-use Piwik\Plugins\UsersManager\TokenNotifications\TokenNotifierTask;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\tests\Fixtures\ExpiringTokens as ExpiringTokensFixture;
+use Matomo\Plugins\UsersManager\TokenNotifications\TokenNotifierTask;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager
@@ -175,9 +175,9 @@ class AuthTokenExpirationWarningNotificationEmailTest extends IntegrationTestCas
     public function provideContainerConfig(): array
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
-            'observers.global' => \Piwik\DI::add([
-                ['Test.Mail.send', \Piwik\DI::value(function (PHPMailer $mail) {
+            'Matomo\Access' => new FakeAccess(),
+            'observers.global' => \Matomo\DI::add([
+                ['Test.Mail.send', \Matomo\DI::value(function (PHPMailer $mail) {
                     $body = $mail->createBody();
                     $body = preg_replace("/=[\r\n]+/", '', $body);
 

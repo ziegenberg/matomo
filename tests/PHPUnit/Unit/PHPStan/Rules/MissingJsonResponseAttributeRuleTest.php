@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules;
+namespace Matomo\Tests\Unit\PHPStan\Rules;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
-use Piwik\Tests\PHPStan\Rules\MissingJsonResponseAttributeRule;
+use Matomo\Tests\PHPStan\Rules\MissingJsonResponseAttributeRule;
 
 /**
  * @group Core
@@ -29,7 +29,7 @@ class MissingJsonResponseAttributeRuleTest extends RuleTestCase
         $this->analyse([__DIR__ . '/data/JsonResponseController.php'], [
             [
                 'Controller action unconditionalManualCall() calls Json::sendHeaderJSON() unconditionally;'
-                . ' add the #[\Piwik\Http\JsonResponse] attribute to the method and remove the manual call'
+                . ' add the #[\Matomo\Http\JsonResponse] attribute to the method and remove the manual call'
                 . ' so the JSON Content-Type cannot be overwritten by later output.',
                 24,
             ],

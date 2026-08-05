@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Plugin;
+namespace Matomo\Settings\Plugin;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Settings\Setting;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Settings\Setting;
 
 /**
  * Describes a system wide setting. Only the Super User can change this type of setting by default and
  * the value of this setting will affect all users.
  *
- * See {@link \Piwik\Settings\Setting}.
+ * See {@link \Matomo\Settings\Setting}.
  *
  * @api
  */
@@ -34,7 +34,7 @@ class SystemSetting extends Setting
     {
         parent::__construct($name, $defaultValue, $type, $pluginName);
 
-        $factory = StaticContainer::get('Piwik\Settings\Storage\Factory');
+        $factory = StaticContainer::get('Matomo\Settings\Storage\Factory');
         $this->storage = $factory->getPluginStorage($this->pluginName, $userLogin = '');
     }
 
@@ -55,7 +55,7 @@ class SystemSetting extends Setting
         }
 
         // performance improvement, do not detect this in __construct otherwise likely rather "big" query to DB.
-        $this->hasWritePermission = Piwik::hasUserSuperUserAccess();
+        $this->hasWritePermission = Matomo::hasUserSuperUserAccess();
 
         return $this->hasWritePermission;
     }

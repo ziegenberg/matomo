@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\Goals\API;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Adds one site and tracks a couple conversions.

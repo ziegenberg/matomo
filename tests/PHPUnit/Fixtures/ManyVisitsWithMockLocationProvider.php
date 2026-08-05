@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\CustomDimensions;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
+use Matomo\Date;
+use Matomo\Plugins\CustomDimensions;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\LocationProvider as MockLocationProvider;
 
 require_once PIWIK_INCLUDE_PATH . '/tests/PHPUnit/Framework/Mock/LocationProvider.php';
 

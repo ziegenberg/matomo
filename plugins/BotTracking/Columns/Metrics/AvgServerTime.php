@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Columns\Metrics;
+namespace Matomo\Plugins\BotTracking\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugins\BotTracking\Metrics;
 
 class AvgServerTime extends ProcessedMetric
 {
@@ -27,12 +27,12 @@ class AvgServerTime extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('BotTracking_ColumnAvgServerTime');
+        return Matomo::translate('BotTracking_ColumnAvgServerTime');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('BotTracking_ColumnAvgServerTimeDocumentation');
+        return Matomo::translate('BotTracking_ColumnAvgServerTimeDocumentation');
     }
 
     public function compute(Row $row)

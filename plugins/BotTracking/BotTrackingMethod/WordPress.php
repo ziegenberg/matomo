@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\BotTrackingMethod;
+namespace Matomo\Plugins\BotTracking\BotTrackingMethod;
 
-use Piwik\Plugins\SitesManager\SiteContentDetection\WordPress as SitesManagerWordPress;
-use Piwik\View;
+use Matomo\Plugins\SitesManager\SiteContentDetection\WordPress as SitesManagerWordPress;
+use Matomo\View;
 
 class WordPress extends BotTrackingMethodAbstract
 {

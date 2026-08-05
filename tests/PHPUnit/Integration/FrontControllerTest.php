@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Access;
-use Piwik\Auth;
-use Piwik\Container\StaticContainer;
-use Piwik\FrontController;
-use Piwik\Http;
-use Piwik\Session;
-use Piwik\Session\SessionFingerprint;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Auth;
+use Matomo\Container\StaticContainer;
+use Matomo\FrontController;
+use Matomo\Http;
+use Matomo\Session;
+use Matomo\Session\SessionFingerprint;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class FrontControllerTest extends IntegrationTestCase
 {
@@ -49,12 +49,12 @@ FORMAT;
         $this->assertEquals('error', $response['result']);
 
         $expectedFormat = <<<FORMAT
-test message on /tests/resources/trigger-fatal-exception.php(23) #0 [internal function]: {closure}('CoreHome', 'index', Array) #1 /core/EventDispatcher.php(141): call_user_func_array(Object(Closure), Array) #2 /core/Piwik.php(845): Piwik\EventDispatcher-&gt;postEvent('Request.dispatc...', Array, false, Array) #3 /core/FrontController.php(606): Piwik\Piwik::postEvent('Request.dispatc...', Array) #4 /core/FrontController.php(168): Piwik\FrontController-&gt;doDispatch('CoreHome', 'index', Array) #5 /tests/resources/trigger-fatal-exception.php(31): Piwik\FrontController-&gt;dispatch('CoreHome', 'index') #6 {main}
+test message on /tests/resources/trigger-fatal-exception.php(23) #0 [internal function]: {closure}('CoreHome', 'index', Array) #1 /core/EventDispatcher.php(141): call_user_func_array(Object(Closure), Array) #2 /core/Matomo.php(845): Matomo\EventDispatcher-&gt;postEvent('Request.dispatc...', Array, false, Array) #3 /core/FrontController.php(606): Matomo\Matomo::postEvent('Request.dispatc...', Array) #4 /core/FrontController.php(168): Matomo\FrontController-&gt;doDispatch('CoreHome', 'index', Array) #5 /tests/resources/trigger-fatal-exception.php(31): Matomo\FrontController-&gt;dispatch('CoreHome', 'index') #6 {main}
 FORMAT;
 
         if (version_compare(PHP_VERSION, '8.4.0-dev', '>=')) {
             $expectedFormat = <<<FORMAT
-test message on /tests/resources/trigger-fatal-exception.php(23) #0 [internal function]: {closure:/tests/resources/trigger-fatal-exception.php:20}('...', '...', Array) #1 /core/EventDispatcher.php(147): call_user_func_array(Object(Closure), Array) #2 /core/Piwik.php(880): Piwik\EventDispatcher-&gt;postEvent('...', Array, false, Array) #3 /core/FrontController.php(625): Piwik\Piwik::postEvent('...', Array) #4 /core/FrontController.php(169): Piwik\FrontController-&gt;doDispatch('...', '...', Array) #5 /tests/resources/trigger-fatal-exception.php(31): Piwik\FrontController-&gt;dispatch('...', '...') #6 {main}
+test message on /tests/resources/trigger-fatal-exception.php(23) #0 [internal function]: {closure:/tests/resources/trigger-fatal-exception.php:20}('...', '...', Array) #1 /core/EventDispatcher.php(147): call_user_func_array(Object(Closure), Array) #2 /core/Matomo.php(880): Matomo\EventDispatcher-&gt;postEvent('...', Array, false, Array) #3 /core/FrontController.php(625): Matomo\Matomo::postEvent('...', Array) #4 /core/FrontController.php(169): Matomo\FrontController-&gt;doDispatch('...', '...', Array) #5 /tests/resources/trigger-fatal-exception.php(31): Matomo\FrontController-&gt;dispatch('...', '...') #6 {main}
 FORMAT;
         }
 
@@ -82,9 +82,9 @@ FORMAT;
 
         FrontController::getInstance()->init();
 
-        /** @var \Piwik\Plugins\Login\Auth $auth */
+        /** @var \Matomo\Plugins\Login\Auth $auth */
         $auth = StaticContainer::get(Auth::class);
-        $this->assertInstanceOf(\Piwik\Plugins\Login\Auth::class, $auth);
+        $this->assertInstanceOf(\Matomo\Plugins\Login\Auth::class, $auth);
 
         $this->assertEquals('superUserLogin', $auth->getLogin());
         $this->assertEquals(Fixture::getTokenAuth(), $auth->getTokenAuth());

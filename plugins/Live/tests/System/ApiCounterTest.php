@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\tests\System;
+namespace Matomo\Plugins\Live\tests\System;
 
-use Piwik\Date;
-use Piwik\Plugins\Goals\API as GoalsApi;
-use Piwik\Plugins\Live\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API as GoalsApi;
+use Matomo\Plugins\Live\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Live
@@ -204,7 +204,7 @@ class ApiCounterTest extends SystemTestCase
     public static function provideContainerConfigBeforeClass()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
             'Tests.now' => self::$testNow,
         );
     }

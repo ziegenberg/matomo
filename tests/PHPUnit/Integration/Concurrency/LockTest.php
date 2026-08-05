@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Concurrency;
+namespace Matomo\Tests\Integration\Concurrency;
 
-use Piwik\Common;
-use Piwik\Concurrency\Lock;
-use Piwik\Concurrency\LockBackend\MySqlLockBackend;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Concurrency\Lock;
+use Matomo\Concurrency\LockBackend\MySqlLockBackend;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

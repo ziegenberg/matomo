@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking;
+namespace Matomo\Plugins\BotTracking;
 
 /**
  * Detects AI chatbots and bots based on User-Agent patterns

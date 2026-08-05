@@ -7,13 +7,13 @@
  *
  */
 
-use Piwik\Application\Environment;
-use Piwik\DataTable\Manager;
-use Piwik\Option;
-use Piwik\Site;
-use Piwik\Tests\Framework\TestingEnvironmentManipulator;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
-use Piwik\Tracker;
+use Matomo\Application\Environment;
+use Matomo\DataTable\Manager;
+use Matomo\Option;
+use Matomo\Site;
+use Matomo\Tests\Framework\TestingEnvironmentManipulator;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Tracker;
 
 require realpath(dirname(__FILE__)) . "/includes.php";
 
@@ -23,7 +23,7 @@ ob_start();
 
 try {
     $globalObservers = array(
-        array('Environment.bootstrapped', \Piwik\DI::value(function () {
+        array('Environment.bootstrapped', \Matomo\DI::value(function () {
             Tracker::setTestEnvironment();
             Manager::getInstance()->deleteAll();
             Option::clearCache();
@@ -36,7 +36,7 @@ try {
     include PIWIK_INCLUDE_PATH . '/matomo.php';
 } catch (Exception $ex) {
     $stacktrace = '';
-    if (\Piwik\ExceptionHandler::shouldPrintBackTraceWithMessage()) {
+    if (\Matomo\ExceptionHandler::shouldPrintBackTraceWithMessage()) {
         $stacktrace = "\n" . $ex->getTraceAsString();
     }
     echo "Unexpected error during tracking: " . $ex->getMessage() . $stacktrace . "\n";

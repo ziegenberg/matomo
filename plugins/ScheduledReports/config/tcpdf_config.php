@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * Override settings in libs/tcpdf_config.php
@@ -54,7 +54,7 @@ if (!defined('K_TCPDF_EXTERNAL_CONFIG')) {
         // Automatic calculation for the following K_PATH_URL constant
         $k_path_url = K_PATH_MAIN; // default value for console mode
 
-        $host = \Piwik\Url::getHost(false);
+        $host = \Matomo\Url::getHost(false);
 
         if ($host) {
             if (isset($_SERVER['HTTPS']) and (!empty($_SERVER['HTTPS'])) and strtolower($_SERVER['HTTPS']) != 'off') {

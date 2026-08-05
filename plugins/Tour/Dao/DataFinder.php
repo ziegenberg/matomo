@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Dao;
+namespace Matomo\Plugins\Tour\Dao;
 
-use Piwik\Common;
+use Matomo\Common;
 
 class DataFinder
 {
@@ -17,7 +17,7 @@ class DataFinder
     {
         $sql = sprintf('SELECT idsite FROM `%s` LIMIT 1', Common::prefixTable('log_visit'));
 
-        $result = \Piwik\Db::fetchOne($sql, array());
+        $result = \Matomo\Db::fetchOne($sql, array());
 
         return !empty($result);
     }
@@ -26,7 +26,7 @@ class DataFinder
     {
         $sql = sprintf("SELECT count(*) as num_websites FROM `%s` WHERE idsite != 1 and creator_login = ? LIMIT 1", Common::prefixTable('site'));
 
-        $result = \Piwik\Db::fetchOne($sql, array($login));
+        $result = \Matomo\Db::fetchOne($sql, array($login));
 
         return $result > 0;
     }
@@ -35,7 +35,7 @@ class DataFinder
     {
         $sql = sprintf("SELECT count(*) as num_reports FROM `%s` WHERE login = ? LIMIT 1", Common::prefixTable('report'));
 
-        $result = \Piwik\Db::fetchOne($sql, array($login));
+        $result = \Matomo\Db::fetchOne($sql, array($login));
 
         return $result > 0;
     }
@@ -44,7 +44,7 @@ class DataFinder
     {
         $sql = sprintf("SELECT count(*) as num_dashboards FROM `%s` WHERE login = ? LIMIT 1", Common::prefixTable('user_dashboard'));
 
-        $result = \Piwik\Db::fetchOne($sql, array($login));
+        $result = \Matomo\Db::fetchOne($sql, array($login));
 
         return $result > 0;
     }
@@ -53,7 +53,7 @@ class DataFinder
     {
         $sql = sprintf("SELECT count(*) as num_segments FROM `%s` WHERE login = ? LIMIT 1", Common::prefixTable('segment'));
 
-        $result = \Piwik\Db::fetchOne($sql, array($login));
+        $result = \Matomo\Db::fetchOne($sql, array($login));
 
         return $result > 0;
     }

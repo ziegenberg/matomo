@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Access;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Access;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 class CookieTest extends SystemTestCase
 {

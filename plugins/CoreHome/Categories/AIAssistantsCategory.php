@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreHome\Categories;
+namespace Matomo\Plugins\CoreHome\Categories;
 
-use Piwik\Category\Category;
+use Matomo\Category\Category;
 
 class AIAssistantsCategory extends Category
 {

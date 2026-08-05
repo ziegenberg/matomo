@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Dao;
+namespace Matomo\Plugins\CustomDimensions\Dao;
 
-use Piwik\API\Request;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Plugins\CustomDimensions\Archiver;
+use Matomo\API\Request;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Plugins\CustomDimensions\Archiver;
 
 class AutoSuggest
 {

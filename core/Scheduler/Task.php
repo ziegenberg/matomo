@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Scheduler;
+namespace Matomo\Scheduler;
 
 use Exception;
-use Piwik\Scheduler\Schedule\Schedule;
+use Matomo\Scheduler\Schedule\Schedule;
 
 /**
  * Describes a task that should be executed on a given time.
@@ -173,7 +173,7 @@ class Task
      * Returns a {@link Schedule} instance that describes when the method should be executed
      * and how long before the next execution.
      *
-     * @return \Piwik\Scheduler\Schedule\Schedule
+     * @return \Matomo\Scheduler\Schedule\Schedule
      */
     public function getScheduledTime()
     {

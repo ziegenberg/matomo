@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific;
+namespace Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
-use Piwik\Plugins\Goals\Goals;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
+use Matomo\Plugins\Goals\Goals;
 
 /**
  * The number of ecommerce order items for conversions of a goal. Returns the 'items'
@@ -29,12 +29,12 @@ class ItemsCount extends GoalSpecificProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_PurchasedProducts');
+        return Matomo::translate('General_PurchasedProducts');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('Goals_ColumnPurchasedProductsDocumentation', $this->getGoalNameForDocs());
+        return Matomo::translate('Goals_ColumnPurchasedProductsDocumentation', $this->getGoalNameForDocs());
     }
 
     public function getDependentMetrics()

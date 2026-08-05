@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns;
+namespace Matomo\Plugins\Goals\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Plugin\Dimension\ConversionDimension;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Plugin\Dimension\ConversionDimension;
 
 class IdGoal extends ConversionDimension
 {

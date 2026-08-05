@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ImageGraph;
+namespace Matomo\Plugins\ImageGraph;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Archive\DataTableFactory;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\Map;
-use Piwik\Exception\InvalidDimensionException;
-use Piwik\Filesystem;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Request as PiwikRequest;
-use Piwik\SettingsServer;
+use Matomo\API\Request;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\Map;
+use Matomo\Exception\InvalidDimensionException;
+use Matomo\Filesystem;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Request as PiwikRequest;
+use Matomo\SettingsServer;
 
 /**
  * The ImageGraph.get API call lets you generate beautiful static PNG Graphs for any existing Matomo report.
@@ -34,9 +34,9 @@ use Piwik\SettingsServer;
  *
  * See also <a href='https://developer.matomo.org/api-reference/reporting-api-metadata#static-image-graphs'>How to embed static Image Graphs?</a> for more information.
  *
- * @method static \Piwik\Plugins\ImageGraph\API getInstance()
+ * @method static \Matomo\Plugins\ImageGraph\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const FILENAME_KEY = 'filename';
     public const TRUNCATE_KEY = 'truncate';
@@ -169,7 +169,7 @@ class API extends \Piwik\Plugin\API
         $segment = false,
         $idDimension = false
     ) {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         // Health check - should we also test for GD2 only?
         if (!SettingsServer::isGdExtensionEnabled()) {
@@ -180,7 +180,7 @@ class API extends \Piwik\Plugin\API
         $useUnicodeFont = [
             'am', 'ar', 'el', 'fa', 'fi', 'he', 'ja', 'ka', 'ko', 'te', 'th', 'zh-cn', 'zh-tw',
         ];
-        $languageLoaded = StaticContainer::get('Piwik\Translation\Translator')->getCurrentLanguage();
+        $languageLoaded = StaticContainer::get('Matomo\Translation\Translator')->getCurrentLanguage();
         $font = self::getFontPath(self::DEFAULT_FONT);
         if (in_array($languageLoaded, $useUnicodeFont)) {
             $unicodeFontPath = self::getFontPath(self::UNICODE_FONT);
@@ -249,7 +249,7 @@ class API extends \Piwik\Plugin\API
                 $availableGraphTypes = StaticGraph::getAvailableStaticGraphTypes();
                 if (!in_array($graphType, $availableGraphTypes)) {
                     throw new Exception(
-                        Piwik::translate(
+                        Matomo::translate(
                             'General_ExceptionInvalidStaticGraphType',
                             array($graphType, implode(', ', $availableGraphTypes))
                         )
@@ -285,7 +285,7 @@ class API extends \Piwik\Plugin\API
                     $ordinateColumns[] = key($metadata['metrics']);
                 } else {
                     throw new Exception(
-                        Piwik::translate(
+                        Matomo::translate(
                             'ImageGraph_ColumnOrdinateMissing',
                             array(self::DEFAULT_ORDINATE_METRIC, implode(',', array_keys($reportColumns)))
                         )
@@ -296,7 +296,7 @@ class API extends \Piwik\Plugin\API
                 foreach ($ordinateColumns as $column) {
                     if (empty($reportColumns[$column])) {
                         throw new Exception(
-                            Piwik::translate(
+                            Matomo::translate(
                                 'ImageGraph_ColumnOrdinateMissing',
                                 array($column, implode(',', array_keys($reportColumns)))
                             )
@@ -370,7 +370,7 @@ class API extends \Piwik\Plugin\API
 
                 //@review this test will need to be updated after evaluating the @review comment in API/API.php
                 if (!$processedReport) {
-                    throw new Exception(Piwik::translate('General_NoDataForGraph'));
+                    throw new Exception(Matomo::translate('General_NoDataForGraph'));
                 }
 
                 // restoring generic filter parameters
@@ -514,7 +514,7 @@ class API extends \Piwik\Plugin\API
             }
 
             if (!$hasData || !$hasNonZeroValue) {
-                throw new Exception(Piwik::translate('General_NoDataForGraph'));
+                throw new Exception(Matomo::translate('General_NoDataForGraph'));
             }
 
             /** @var StaticGraph $graph */
@@ -546,7 +546,7 @@ class API extends \Piwik\Plugin\API
         } catch (InvalidDimensionException $e) {
             throw $e;
         } catch (\Exception $e) {
-            $graph = new \Piwik\Plugins\ImageGraph\StaticGraph\Exception();
+            $graph = new \Matomo\Plugins\ImageGraph\StaticGraph\Exception();
             $graph->setWidth($width);
             $graph->setHeight($height);
             $graph->setFont($font);

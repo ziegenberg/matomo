@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI;
+namespace Matomo\Plugins\ExampleUI;
 
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Period\Range;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Period\Range;
 
 /**
  * ExampleUI API is also an example API useful if you are developing a Matomo plugin.
@@ -19,9 +19,9 @@ use Piwik\Period\Range;
  * The functions listed in this API are returning the data used in the Controller to draw graphs and
  * display tables. See also the ExampleAPI plugin for an introduction to Matomo APIs.
  *
- * @method static \Piwik\Plugins\ExampleUI\API getInstance()
+ * @method static \Matomo\Plugins\ExampleUI\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public static $disableRandomness = false;
 

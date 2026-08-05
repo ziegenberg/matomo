@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\CacheId;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin;
-use Piwik\Cache as PiwikCache;
-use Piwik\Settings\Measurable\MeasurableSettings;
-use Piwik\Settings\Plugin\UserSettings;
-use Piwik\Settings\Plugin\SystemSettings;
+use Matomo\CacheId;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin;
+use Matomo\Cache as PiwikCache;
+use Matomo\Settings\Measurable\MeasurableSettings;
+use Matomo\Settings\Plugin\UserSettings;
+use Matomo\Settings\Plugin\SystemSettings;
 
 /**
  * Base class of all plugin settings providers. Plugins that define their own configuration settings
@@ -24,7 +24,7 @@ use Piwik\Settings\Plugin\SystemSettings;
  * Descendants of this class should implement the {@link init()} method and call the
  * {@link addSetting()} method for each of the plugin's settings.
  *
- * For an example, see the {@link Piwik\Plugins\ExampleSettingsPlugin\ExampleSettingsPlugin} plugin.
+ * For an example, see the {@link Matomo\Plugins\ExampleSettingsPlugin\ExampleSettingsPlugin} plugin.
  */
 class SettingsProvider
 {
@@ -43,7 +43,7 @@ class SettingsProvider
         $plugin = $this->getLoadedAndActivated($pluginName);
 
         if ($plugin) {
-            $settings = $plugin->findComponent('SystemSettings', 'Piwik\\Settings\\Plugin\\SystemSettings');
+            $settings = $plugin->findComponent('SystemSettings', 'Matomo\Settings\Plugin\SystemSettings');
 
             if ($settings) {
                 return StaticContainer::get($settings);
@@ -61,7 +61,7 @@ class SettingsProvider
         $plugin = $this->getLoadedAndActivated($pluginName);
 
         if ($plugin) {
-            $settings = $plugin->findComponent('UserSettings', 'Piwik\\Settings\\Plugin\\UserSettings');
+            $settings = $plugin->findComponent('UserSettings', 'Matomo\Settings\Plugin\UserSettings');
 
             if ($settings) {
                 return StaticContainer::get($settings);
@@ -73,7 +73,7 @@ class SettingsProvider
 
     /**
      * Returns all available system settings. A plugin has to specify a file named `SystemSettings.php` containing a
-     * class named `SystemSettings` that extends `Piwik\Settings\Plugin\SystemSettings` in order to be considered as
+     * class named `SystemSettings` that extends `Matomo\Settings\Plugin\SystemSettings` in order to be considered as
      * a system setting. Otherwise the settings for a plugin won't be available.
      *
      * @return SystemSettings[]   An array containing array([pluginName] => [setting instance]).
@@ -103,7 +103,7 @@ class SettingsProvider
 
     /**
      * Returns all available user settings. A plugin has to specify a file named `UserSettings.php` containing a class
-     * named `UserSettings` that extends `Piwik\Settings\Plugin\UserSettings` in order to be considered as a plugin
+     * named `UserSettings` that extends `Matomo\Settings\Plugin\UserSettings` in order to be considered as a plugin
      * setting. Otherwise the settings for a plugin won't be available.
      *
      * @return UserSettings[]   An array containing array([pluginName] => [setting instance]).
@@ -150,7 +150,7 @@ class SettingsProvider
         $plugin = $this->getLoadedAndActivated($pluginName);
 
         if ($plugin) {
-            $component = $plugin->findComponent('MeasurableSettings', 'Piwik\\Settings\\Measurable\\MeasurableSettings');
+            $component = $plugin->findComponent('MeasurableSettings', 'Matomo\Settings\Measurable\MeasurableSettings');
 
             if ($component) {
                 return StaticContainer::getContainer()->make($component, [

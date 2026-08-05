@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Unit;
+namespace Matomo\Plugins\PrivacyManager\tests\Unit;
 
-use Piwik\Common;
-use Piwik\Plugins\PrivacyManager\ReferrerAnonymizer;
+use Matomo\Common;
+use Matomo\Plugins\PrivacyManager\ReferrerAnonymizer;
 
 class AnonymizeReferrerTest extends \PHPUnit\Framework\TestCase
 {

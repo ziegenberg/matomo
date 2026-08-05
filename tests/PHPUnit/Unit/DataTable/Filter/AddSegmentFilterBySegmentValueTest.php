@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Core\DataTable\Filter;
+namespace Matomo\Tests\Core\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugins\DevicePlugins\Reports\GetPlugin;
-use Piwik\Plugins\UserCountry\Reports\GetCity;
-use Piwik\Plugins\VisitsSummary\Reports\Get;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\DevicePlugins\Reports\GetPlugin;
+use Matomo\Plugins\UserCountry\Reports\GetCity;
+use Matomo\Plugins\VisitsSummary\Reports\Get;
 
 /**
  * @group AddSegmentBySegmentValueTest

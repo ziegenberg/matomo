@@ -7,33 +7,33 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
 use HTML_QuickForm2_DataSource_Array;
-use Piwik\Common;
-use Piwik\Config as PiwikConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Metrics;
-use Piwik\Option;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\Goals\Archiver;
-use Piwik\Plugins\Installation\FormDefaultSettings;
-use Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations;
-use Piwik\Plugins\PrivacyManager\Settings\IPAnonymisation;
-use Piwik\Request;
-use Piwik\Site;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\GoalManager;
-use Piwik\View;
-use Piwik\Plugins\PrivacyManager\Settings\ReportRetention as ReportRetentionSetting;
-use Piwik\Policy\PolicyManager;
+use Matomo\Common;
+use Matomo\Config as PiwikConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Metrics;
+use Matomo\Option;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\Goals\Archiver;
+use Matomo\Plugins\Installation\FormDefaultSettings;
+use Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations;
+use Matomo\Plugins\PrivacyManager\Settings\IPAnonymisation;
+use Matomo\Request;
+use Matomo\Site;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\GoalManager;
+use Matomo\View;
+use Matomo\Plugins\PrivacyManager\Settings\ReportRetention as ReportRetentionSetting;
+use Matomo\Policy\PolicyManager;
 
 /**
  * Specifically include this for Tracker API (which does not use autoloader)
@@ -84,12 +84,12 @@ class PrivacyManager extends Plugin
 
     public function install()
     {
-        StaticContainer::get('Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations')->install();
+        StaticContainer::get('Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations')->install();
     }
 
     public function uninstall()
     {
-        StaticContainer::get('Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations')->install();
+        StaticContainer::get('Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations')->install();
     }
 
     /**
@@ -172,7 +172,7 @@ class PrivacyManager extends Plugin
     }
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -218,7 +218,7 @@ class PrivacyManager extends Plugin
                 $view->config->show_footer_message .= '<br/>';
             }
 
-            $view->config->show_footer_message .= Piwik::translate('PrivacyManager_InfoCountsRoundedForPrivacy') . '<br/>';
+            $view->config->show_footer_message .= Matomo::translate('PrivacyManager_InfoCountsRoundedForPrivacy') . '<br/>';
         }
 
         if ($view->requestConfig->getApiModuleToRequest() === 'Referrers' && !$view->requestConfig->idSubtable) {
@@ -237,7 +237,7 @@ class PrivacyManager extends Plugin
             }
             $methods = ReferrerAnonymizer::getAvailableAnonymizationOptions();
             if (!empty($methods[$config->anonymizeReferrer])) {
-                $view->config->show_footer_message .= Piwik::translate('PrivacyManager_InfoSomeReferrerInfoMayBeAnonymized', $methods[$config->anonymizeReferrer]);
+                $view->config->show_footer_message .= Matomo::translate('PrivacyManager_InfoSomeReferrerInfoMayBeAnonymized', $methods[$config->anonymizeReferrer]);
             }
         }
     }
@@ -623,7 +623,7 @@ class PrivacyManager extends Plugin
             'anonymise_ip',
             null,
             [
-                'content' => '<div class="form-help">' . Piwik::translate('PrivacyManager_AnonymizeIpExtendedHelp', ['213.34.51.91', '213.34.0.0']) . '</div> &nbsp;&nbsp;' . IPAnonymisation::getInlineHelp(),
+                'content' => '<div class="form-help">' . Matomo::translate('PrivacyManager_AnonymizeIpExtendedHelp', ['213.34.51.91', '213.34.0.0']) . '</div> &nbsp;&nbsp;' . IPAnonymisation::getInlineHelp(),
             ]
         );
 
@@ -780,7 +780,7 @@ class PrivacyManager extends Plugin
 
         // execute the purge
         /** @var LogDataPurger $logDataPurger */
-        $logDataPurger = StaticContainer::get('Piwik\Plugins\PrivacyManager\LogDataPurger');
+        $logDataPurger = StaticContainer::get('Matomo\Plugins\PrivacyManager\LogDataPurger');
         $logDataPurger->purgeData($settings['delete_logs_older_than'], $shouldDeleteUnusedLogActions);
 
         return true;
@@ -807,7 +807,7 @@ class PrivacyManager extends Plugin
 
         if ($settings['delete_logs_enable']) {
             /** @var LogDataPurger $logDataPurger */
-            $logDataPurger = StaticContainer::get('Piwik\Plugins\PrivacyManager\LogDataPurger');
+            $logDataPurger = StaticContainer::get('Matomo\Plugins\PrivacyManager\LogDataPurger');
             $result = array_merge($result, $logDataPurger->getPurgeEstimate($settings['delete_logs_older_than']));
         }
 
@@ -1011,7 +1011,7 @@ class PrivacyManager extends Plugin
 
     private function shouldRenderFooterLinks(SystemSettings $settings)
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             return true;
         }
 
@@ -1044,22 +1044,22 @@ class PrivacyManager extends Plugin
         return [
             [
                 'key' => '1',
-                'value' => Piwik::translate('PrivacyManager_AnonymizeIpMaskLength', ["1","192.168.100.xxx"]),
+                'value' => Matomo::translate('PrivacyManager_AnonymizeIpMaskLength', ["1","192.168.100.xxx"]),
                 'description' => '',
             ],
             [
                 'key' => '2',
-                'value' => Piwik::translate('PrivacyManager_AnonymizeIpMaskLength', ["2","192.168.xxx.xxx"]),
-                'description' => Piwik::translate('General_Recommended'),
+                'value' => Matomo::translate('PrivacyManager_AnonymizeIpMaskLength', ["2","192.168.xxx.xxx"]),
+                'description' => Matomo::translate('General_Recommended'),
             ],
             [
                 'key' => '3',
-                'value' => Piwik::translate('PrivacyManager_AnonymizeIpMaskLength', ["3","192.xxx.xxx.xxx"]),
+                'value' => Matomo::translate('PrivacyManager_AnonymizeIpMaskLength', ["3","192.xxx.xxx.xxx"]),
                 'description' => '',
             ],
             [
                 'key' => '4',
-                'value' => Piwik::translate('PrivacyManager_AnonymizeIpMaskFully'),
+                'value' => Matomo::translate('PrivacyManager_AnonymizeIpMaskFully'),
                 'description' => '',
             ],
         ];
@@ -1070,15 +1070,15 @@ class PrivacyManager extends Plugin
         return [
             [
                 'key' => '1',
-                'value' => Piwik::translate('General_Yes'),
-                'description' => Piwik::translate(
+                'value' => Matomo::translate('General_Yes'),
+                'description' => Matomo::translate(
                     'PrivacyManager_UseAnonymizedIpForVisitEnrichmentYesDesc'
                 ),
             ],
             [
                 'key' => '0',
-                'value' => Piwik::translate('General_No'),
-                'description' => Piwik::translate(
+                'value' => Matomo::translate('General_No'),
+                'description' => Matomo::translate(
                     'PrivacyManager_UseAnonymizedIpForVisitEnrichmentNoDesc'
                 ),
             ],
@@ -1090,15 +1090,15 @@ class PrivacyManager extends Plugin
         return [
             [
                 'key' => '1',
-                'value' => Piwik::translate('Intl_PeriodDay'),
+                'value' => Matomo::translate('Intl_PeriodDay'),
             ],
             [
                 'key' => '7',
-                'value' => Piwik::translate('Intl_PeriodWeek'),
+                'value' => Matomo::translate('Intl_PeriodWeek'),
             ],
             [
                 'key' => '30',
-                'value' => Piwik::translate('Intl_PeriodMonth'),
+                'value' => Matomo::translate('Intl_PeriodMonth'),
             ],
         ];
     }

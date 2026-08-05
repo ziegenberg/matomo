@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Tracker;
+namespace Matomo\Tests\Unit\Tracker;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Response;
-use Piwik\Tests\Framework\Mock\Tracker;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Response;
+use Matomo\Tests\Framework\Mock\Tracker;
 use Exception;
 
 class TestResponse extends Response

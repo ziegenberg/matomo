@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleVisualization\Visualizations;
+namespace Matomo\Plugins\ExampleVisualization\Visualizations;
 
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugin\Visualization;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugin\Visualization;
 
 /**
  * SimpleTable Visualization.

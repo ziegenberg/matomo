@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites;
+namespace Matomo\Plugins\MultiSites;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugins\BotTracking\Metrics as BotTrackingMetrics;
-use Piwik\Plugins\Goals\API as GoalsAPI;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Plugin\Manager;
-use Piwik\Request;
-use Piwik\Translation\Translator;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugins\BotTracking\Metrics as BotTrackingMetrics;
+use Matomo\Plugins\Goals\API as GoalsAPI;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Plugin\Manager;
+use Matomo\Request;
+use Matomo\Translation\Translator;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     private Translator $translator;
 
@@ -43,14 +43,14 @@ class Controller extends \Piwik\Plugin\Controller
     }
 
     /**
-     * @throws \Piwik\NoAccessException
+     * @throws \Matomo\NoAccessException
      */
     protected function getSitesInfo(bool $isWidgetized = false): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
-        $date = Piwik::getDate('today');
-        $period = Piwik::getPeriod('day');
+        $date = Matomo::getDate('today');
+        $period = Matomo::getPeriod('day');
 
         $view = new View('@MultiSites/allWebsitesDashboard');
 

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -42,7 +42,7 @@ class RedundantJsonHeaderCallRule implements Rule
 
         foreach (JsonResponseRuleHelper::findAllJsonHeaderCalls($node, $scope) as $call) {
             $errors[] = RuleErrorBuilder::message(sprintf(
-                'Controller action %s() carries #[\\Piwik\\Http\\JsonResponse], which already sends the'
+                'Controller action %s() carries #[\Matomo\Http\JsonResponse], which already sends the'
                 . ' JSON header; the manual Json::sendHeaderJSON() call is redundant and should be removed.',
                 $node->name->toString()
             ))

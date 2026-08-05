@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker\Visit;
+namespace Matomo\Tests\Integration\Tracker\Visit;
 
-use Piwik\Cache;
-use Piwik\Option;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\ReferrerSpamFilter;
+use Matomo\Cache;
+use Matomo\Option;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\ReferrerSpamFilter;
 
 /**
  * @group Tracker

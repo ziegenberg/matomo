@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
 use XHProfRuns_Default;
@@ -116,7 +116,7 @@ class Profiler
     /**
      * Print profiling report for the tracker
      *
-     * @param \Piwik\Tracker\Db|null $db Tracker database object (or null)
+     * @param \Matomo\Tracker\Db|null $db Tracker database object (or null)
      */
     public static function displayDbTrackerProfile($db = null)
     {

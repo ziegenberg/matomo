@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Period;
+namespace Matomo\Period;
 
 use Exception;
-use Piwik\Date;
-use Piwik\Period;
+use Matomo\Date;
+use Matomo\Period;
 
 class Day extends Period
 {

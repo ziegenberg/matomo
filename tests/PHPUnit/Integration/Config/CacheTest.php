@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Config\Cache;
+namespace Matomo\Tests\Integration\Config\Cache;
 
-use Piwik\Config;
-use Piwik\Config\Cache;
-use Piwik\Config\IniFileChain;
-use Piwik\Tests\Integration\Settings\IntegrationTestCase;
-use Piwik\Url;
+use Matomo\Config;
+use Matomo\Config\Cache;
+use Matomo\Config\IniFileChain;
+use Matomo\Tests\Integration\Settings\IntegrationTestCase;
+use Matomo\Url;
 
 /**
  * @group Core

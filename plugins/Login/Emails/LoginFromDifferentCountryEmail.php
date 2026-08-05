@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\Emails;
+namespace Matomo\Plugins\Login\Emails;
 
-use Piwik\Date;
-use Piwik\Intl\Data\Provider\DateTimeFormatProvider;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Date;
+use Matomo\Intl\Data\Provider\DateTimeFormatProvider;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Url;
+use Matomo\View;
 
 class LoginFromDifferentCountryEmail extends Mail
 {
@@ -56,7 +56,7 @@ class LoginFromDifferentCountryEmail extends Mail
 
     protected function getDefaultSubject(): string
     {
-        return Piwik::translate('Login_LoginFromDifferentCountryEmailSubject');
+        return Matomo::translate('Login_LoginFromDifferentCountryEmailSubject');
     }
 
     protected function getDateAndTimeFormatted(): string
@@ -67,7 +67,7 @@ class LoginFromDifferentCountryEmail extends Mail
     protected function getPasswordResetLink(): string
     {
         return Url::getCurrentUrlWithoutQueryString()
-            . '?module=' . Piwik::getLoginPluginName()
+            . '?module=' . Matomo::getLoginPluginName()
             . '&showResetForm=1';
     }
 

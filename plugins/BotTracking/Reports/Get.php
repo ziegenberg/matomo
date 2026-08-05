@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\BotTracking\Columns\Metrics\ClickThroughRate;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\BotTracking\Columns\Metrics\ClickThroughRate;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class Get extends Report
 {
@@ -28,7 +28,7 @@ class Get extends Report
         parent::init();
         $this->categoryId       = 'General_AIAssistants';
         $this->subcategoryId    = 'BotTracking_AIChatbotsOverview';
-        $this->name             = Piwik::translate('BotTracking_ReportTitleChatbotsOverview');
+        $this->name             = Matomo::translate('BotTracking_ReportTitleChatbotsOverview');
         $this->documentation    = '';
         $this->metrics          = Metrics::getReportMetricColumns();
         $this->processedMetrics = [
@@ -36,7 +36,7 @@ class Get extends Report
         ];
         $this->order            = 10;
 
-        if (\Piwik\Request::fromRequest()->getStringParameter('period', '') !== 'day') {
+        if (\Matomo\Request::fromRequest()->getStringParameter('period', '') !== 'day') {
             $this->metrics = array_filter($this->metrics, function ($metric) {
                 return !in_array($metric, [Metrics::METRIC_AI_CHATBOTS_UNIQUE_DOCUMENT_URLS, Metrics::METRIC_AI_CHATBOTS_UNIQUE_PAGE_URLS]);
             });
@@ -68,14 +68,14 @@ class Get extends Report
         }
 
         /** @var Sparklines $view */
-        $view->config->title = Piwik::translate('BotTracking_ReportTitleChatbotsOverview');
+        $view->config->title = Matomo::translate('BotTracking_ReportTitleChatbotsOverview');
         $view->config->addTranslations(Metrics::getMetricTranslations());
         $view->config->metrics_documentation = Metrics::getMetricDocumentation();
 
         $order = 0;
         foreach (Metrics::getSparklineMetricOrder() as $metric) {
             if (
-                \Piwik\Request::fromRequest()->getStringParameter('period', '') !== 'day'
+                \Matomo\Request::fromRequest()->getStringParameter('period', '') !== 'day'
                 && in_array($metric, [Metrics::METRIC_AI_CHATBOTS_UNIQUE_DOCUMENT_URLS, Metrics::METRIC_AI_CHATBOTS_UNIQUE_PAGE_URLS])
             ) {
                 continue;

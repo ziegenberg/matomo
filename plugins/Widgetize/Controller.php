@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Widgetize;
+namespace Matomo\Plugins\Widgetize;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Config\GeneralConfig;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\FrontController;
-use Piwik\Piwik;
-use Piwik\Plugins\API\WidgetMetadata;
-use Piwik\Request;
-use Piwik\Url;
-use Piwik\View;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Widget\WidgetsList;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Config\GeneralConfig;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\FrontController;
+use Matomo\Matomo;
+use Matomo\Plugins\API\WidgetMetadata;
+use Matomo\Request;
+use Matomo\Url;
+use Matomo\View;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Widget\WidgetsList;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function index()
     {
@@ -83,7 +83,7 @@ class Controller extends \Piwik\Plugin\Controller
          * @param string $controllerName    The name of the controller that will be executed.
          * @param string $actionName        The name of the action within the controller that will be executed.
          */
-        Piwik::postEvent('Widgetize.shouldEmbedIframeEmpty', array(&$shouldEmbedEmpty, $controllerName, $actionName));
+        Matomo::postEvent('Widgetize.shouldEmbedIframeEmpty', array(&$shouldEmbedEmpty, $controllerName, $actionName));
 
         if ($shouldEmbedEmpty) {
             $view = new View('@Widgetize/iframe_empty');
@@ -121,12 +121,12 @@ class Controller extends \Piwik\Plugin\Controller
 
         // 'anonymous' is a valid token that intentionally authenticates as the anonymous user,
         // so an anonymous result is not a failure for it.
-        if ($tokenAuth === '' || $tokenAuth === 'anonymous' || !Piwik::isUserIsAnonymous()) {
+        if ($tokenAuth === '' || $tokenAuth === 'anonymous' || !Matomo::isUserIsAnonymous()) {
             return;
         }
 
         if (GeneralConfig::getBoolConfigValue('only_allow_secure_auth_tokens', false)) {
-            $message = Piwik::translate(
+            $message = Matomo::translate(
                 'Widgetize_ErrorTokenAuthFailedDisabledByPolicy',
                 [
                     '<a href="index.php?module=UsersManager" rel="noreferrer noopener" target="_blank">',
@@ -134,7 +134,7 @@ class Controller extends \Piwik\Plugin\Controller
                 ]
             );
         } else {
-            $message = Piwik::translate(
+            $message = Matomo::translate(
                 'Widgetize_ErrorTokenAuthFailed',
                 [
                     '<a href="index.php?module=UsersManager&action=userSecurity" rel="noreferrer noopener" target="_blank">',

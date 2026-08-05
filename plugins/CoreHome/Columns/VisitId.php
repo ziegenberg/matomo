@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Segment;
-use Piwik\Segment\SegmentsList;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\Segment;
+use Matomo\Segment\SegmentsList;
 
 /**
  * Dimension for the log_visit.idvisit column. This column is added in the CREATE TABLE
@@ -43,8 +43,8 @@ class VisitId extends VisitDimension
     public function configureMetrics(MetricsList $metricsList, DimensionMetricFactory $dimensionMetricFactory)
     {
         $metric = $dimensionMetricFactory->createMetric(ArchivedMetric::AGGREGATION_UNIQUE);
-        $metric->setTranslatedName(Piwik::translate('General_ColumnNbVisits'));
-        $metric->setDocumentation(Piwik::translate('General_ColumnNbVisitsDocumentation'));
+        $metric->setTranslatedName(Matomo::translate('General_ColumnNbVisits'));
+        $metric->setDocumentation(Matomo::translate('General_ColumnNbVisitsDocumentation'));
         $metric->setName('nb_visits');
         $metricsList->addMetric($metric);
     }

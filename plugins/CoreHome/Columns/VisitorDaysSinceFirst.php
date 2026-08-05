@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Segment;
-use Piwik\Segment\SegmentsList;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\Segment;
+use Matomo\Segment\SegmentsList;
 
 class VisitorDaysSinceFirst extends VisitDimension
 {

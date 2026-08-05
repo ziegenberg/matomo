@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\tests\Fixtures;
+namespace Matomo\Plugins\DevicesDetection\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\Goals\API;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Fixture that adds one site with one goal and tracks some page views from different devices with some goal conversions

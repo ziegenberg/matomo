@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserLanguage\Reports;
+namespace Matomo\Plugins\UserLanguage\Reports;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     protected function init()
     {

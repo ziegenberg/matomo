@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\CronArchive;
-use Piwik\Date;
-use Piwik\Version;
+use Matomo\CronArchive;
+use Matomo\Date;
+use Matomo\Version;
 use ReflectionClass;
 
 /**
@@ -22,79 +22,79 @@ class DeprecatedMethodsTest extends \PHPUnit\Framework\TestCase
 {
     public function testDeprecations()
     {
-        $this->assertDeprecatedMethodIsRemovedInPiwik3b1('Piwik\SettingsServer', 'isApache');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3b1('Matomo\SettingsServer', 'isApache');
 
         $validTill = '2015-03-10';
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Piwik\Period', 'factory', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Piwik\Config', 'getConfigSuperUserForBackwardCompatibility', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Piwik\Menu\MenuAdmin', 'addEntry', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Piwik\Menu\MenuAdmin', 'removeEntry', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Piwik\Menu\MenuTop', 'addEntry', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Piwik\Menu\MenuTop', 'removeEntry', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Matomo\Period', 'factory', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Matomo\Config', 'getConfigSuperUserForBackwardCompatibility', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Matomo\Menu\MenuAdmin', 'addEntry', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Matomo\Menu\MenuAdmin', 'removeEntry', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Matomo\Menu\MenuTop', 'addEntry', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('\Matomo\Menu\MenuTop', 'removeEntry', $validTill);
 
         $validTill = '2015-03-10';
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'sanitizeIp', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'sanitizeIpRange', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'P2N', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'N2P', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'prettyPrint', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'isIPv4', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'long2ip', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'isIPv6', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'isMappedIPv4', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'getIPv4FromMappedIPv6', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'getIpsForRange', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'isIpInRange', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\IP', 'getHostByAddr', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\SettingsPiwik', 'rewriteTmpPathWithInstanceId', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'sanitizeIp', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'sanitizeIpRange', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'P2N', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'N2P', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'prettyPrint', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'isIPv4', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'long2ip', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'isIPv6', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'isMappedIPv4', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'getIPv4FromMappedIPv6', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'getIpsForRange', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'isIpInRange', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\IP', 'getHostByAddr', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\SettingsPiwik', 'rewriteTmpPathWithInstanceId', $validTill);
 
         $validTill = '2015-05-01';
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getBrowserVersion', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getBrowser', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getOS', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getOSFamily', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getBrowserType', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getMobileVsDesktop', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getResolution', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getConfiguration', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getPlugin', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getLanguage', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\API', 'getLanguageCode', $validTill);
-        $this->assertDeprecatedMethodIsRemovedBeforeDate('Piwik\Plugins\UserSettings\UserSettings', 'renameDeprecatedModuleAndAction', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getBrowserVersion', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getBrowser', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getOS', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getOSFamily', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getBrowserType', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getMobileVsDesktop', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getResolution', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getConfiguration', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getPlugin', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getLanguage', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\API', 'getLanguageCode', $validTill);
+        $this->assertDeprecatedMethodIsRemovedBeforeDate('Matomo\Plugins\UserSettings\UserSettings', 'renameDeprecatedModuleAndAction', $validTill);
 
         // please be aware if re-adding a plugin called userSettings, and someone updates eg from Piwik 2.13 to that version,
         // the plugin will be possibly removed in an Update during 2.14.0
-        $this->assertDeprecatedClassIsRemoved('Piwik\Plugins\UserSettings\UserSettings', $validTill);
+        $this->assertDeprecatedClassIsRemoved('Matomo\Plugins\UserSettings\UserSettings', $validTill);
 
-        $this->assertDeprecatedMethodIsRemovedInPiwik3('\Piwik\Menu\MenuAbstract', 'add');
-        $this->assertDeprecatedMethodIsRemovedInPiwik3('\Piwik\Archive', 'getDataTableFromArchive');
-        $this->assertDeprecatedMethodIsRemovedInPiwik3('\Piwik\Plugins\API\API', 'getLastDate');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3('\Matomo\Menu\MenuAbstract', 'add');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3('\Matomo\Archive', 'getDataTableFromArchive');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3('\Matomo\Plugins\API\API', 'getLastDate');
 
-        $this->assertDeprecatedMethodIsRemovedInPiwik3('Piwik\Plugins\DevicesDetection\DevicesDetection', 'renameUserSettingsModuleAndAction');
-        $this->assertDeprecatedMethodIsRemovedInPiwik3('Piwik\Plugins\Resolution\Resolution', 'renameUserSettingsModuleAndAction');
-        $this->assertDeprecatedMethodIsRemovedInPiwik3('Piwik\Plugins\DevicePlugins\DevicePlugins', 'renameUserSettingsModuleAndAction');
-        $this->assertDeprecatedMethodIsRemovedInPiwik3('Piwik\Plugins\UserLanguage\UserLanguage', 'renameUserSettingsModuleAndAction');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3('Matomo\Plugins\DevicesDetection\DevicesDetection', 'renameUserSettingsModuleAndAction');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3('Matomo\Plugins\Resolution\Resolution', 'renameUserSettingsModuleAndAction');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3('Matomo\Plugins\DevicePlugins\DevicePlugins', 'renameUserSettingsModuleAndAction');
+        $this->assertDeprecatedMethodIsRemovedInPiwik3('Matomo\Plugins\UserLanguage\UserLanguage', 'renameUserSettingsModuleAndAction');
 
-        $this->assertDeprecatedMethodIsRemovedInMatomo4('\Piwik\Plugin', 'getListHooksRegistered');
-        $this->assertDeprecatedMethodIsRemovedInMatomo4('Piwik\Updates', 'getSql');
-        $this->assertDeprecatedMethodIsRemovedInMatomo4('Piwik\Updates', 'update');
-        $this->assertDeprecatedMethodIsRemovedInMatomo4('Piwik\Updates', 'getMigrationQueries');
-        $this->assertDeprecatedMethodIsRemovedInMatomo4('Piwik\Updater', 'executeMigrationQueries');
+        $this->assertDeprecatedMethodIsRemovedInMatomo4('\Matomo\Plugin', 'getListHooksRegistered');
+        $this->assertDeprecatedMethodIsRemovedInMatomo4('Matomo\Updates', 'getSql');
+        $this->assertDeprecatedMethodIsRemovedInMatomo4('Matomo\Updates', 'update');
+        $this->assertDeprecatedMethodIsRemovedInMatomo4('Matomo\Updates', 'getMigrationQueries');
+        $this->assertDeprecatedMethodIsRemovedInMatomo4('Matomo\Updater', 'executeMigrationQueries');
 
-        $this->assertDeprecatedMethodIsRemovedInMatomo4('Piwik\SettingsPiwik', 'isPiwikInstalled');
-        $this->assertDeprecatedMethodIsRemovedInMatomo4('Piwik\Piwik', 'doAsSuperUser');
+        $this->assertDeprecatedMethodIsRemovedInMatomo4('Matomo\SettingsPiwik', 'isPiwikInstalled');
+        $this->assertDeprecatedMethodIsRemovedInMatomo4('Matomo\Matomo', 'doAsSuperUser');
 
         $validTill = '2021-03-01';
         $this->assertDeprecatedMethodIsRemovedBeforeDate(CronArchive::class, 'checkNoDanglingInvalidations', $validTill);
 
-        $this->assertDeprecatedMethodIsRemovedInMatomo7('Piwik\Common', 'getRequestVar');
-        $this->assertDeprecatedMethodIsRemovedInMatomo6('Piwik\Plugins\Overlay\API', 'getExcludedQueryParameters');
-        $this->assertDeprecatedMethodIsRemovedInMatomo6('Piwik\Db', 'isOptimizeInnoDBSupported');
-        $this->assertDeprecatedMethodIsRemovedInMatomo6('Piwik\Db', 'optimizeTables');
-        $this->assertDeprecatedMethodIsRemovedInMatomo6('Piwik\Db\TransactionLevel', 'setUncommitted');
-        $this->assertDeprecatedMethodIsRemovedInMatomo6('Piwik\Plugins\SitesManager\API', 'setGlobalExcludedQueryParameters');
-        $this->assertDeprecatedMethodIsRemovedInMatomo6('Piwik\API\Request', 'isTokenAuthProvidedSecurely');
-        $this->assertDeprecatedMethodIsRemovedInMatomo7('Piwik\DataAccess\ArchiveTableCreator', 'triggerLegacyDefaultDeprecation');
+        $this->assertDeprecatedMethodIsRemovedInMatomo7('Matomo\Common', 'getRequestVar');
+        $this->assertDeprecatedMethodIsRemovedInMatomo6('Matomo\Plugins\Overlay\API', 'getExcludedQueryParameters');
+        $this->assertDeprecatedMethodIsRemovedInMatomo6('Matomo\Db', 'isOptimizeInnoDBSupported');
+        $this->assertDeprecatedMethodIsRemovedInMatomo6('Matomo\Db', 'optimizeTables');
+        $this->assertDeprecatedMethodIsRemovedInMatomo6('Matomo\Db\TransactionLevel', 'setUncommitted');
+        $this->assertDeprecatedMethodIsRemovedInMatomo6('Matomo\Plugins\SitesManager\API', 'setGlobalExcludedQueryParameters');
+        $this->assertDeprecatedMethodIsRemovedInMatomo6('Matomo\API\Request', 'isTokenAuthProvidedSecurely');
+        $this->assertDeprecatedMethodIsRemovedInMatomo7('Matomo\DataAccess\ArchiveTableCreator', 'triggerLegacyDefaultDeprecation');
     }
 
 

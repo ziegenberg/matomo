@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Model;
+namespace Matomo\Plugins\PrivacyManager\Model;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
-use Piwik\Site;
-use Piwik\Validators\BaseValidator;
-use Piwik\Validators\NotEmpty;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
+use Matomo\Site;
+use Matomo\Validators\BaseValidator;
+use Matomo\Validators\NotEmpty;
 
 class LogDataAnonymizations
 {

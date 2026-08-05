@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\Unit;
+namespace Matomo\Plugins\API\tests\Unit;
 
-use Piwik\Category\Category;
-use Piwik\Category\CategoryList;
-use Piwik\Category\Subcategory;
-use Piwik\Plugins\API\WidgetMetadata;
-use Piwik\Report\ReportWidgetConfig;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Widget\WidgetContainerConfig;
+use Matomo\Category\Category;
+use Matomo\Category\CategoryList;
+use Matomo\Category\Subcategory;
+use Matomo\Plugins\API\WidgetMetadata;
+use Matomo\Report\ReportWidgetConfig;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Widget\WidgetContainerConfig;
 
 /**
  * @group Widget

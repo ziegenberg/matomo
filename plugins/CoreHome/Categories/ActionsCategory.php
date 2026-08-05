@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Categories;
+namespace Matomo\Plugins\CoreHome\Categories;
 
-use Piwik\Category\Category;
-use Piwik\Piwik;
+use Matomo\Category\Category;
+use Matomo\Matomo;
 
 class ActionsCategory extends Category
 {
@@ -20,6 +20,6 @@ class ActionsCategory extends Category
 
     public function getDisplayName()
     {
-        return Piwik::translate('Actions_Behaviour');
+        return Matomo::translate('Actions_Behaviour');
     }
 }

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules;
+namespace Matomo\Tests\Unit\PHPStan\Rules;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
-use Piwik\Tests\PHPStan\Rules\JsonReturnRequiresAttributeRule;
+use Matomo\Tests\PHPStan\Rules\JsonReturnRequiresAttributeRule;
 
 /**
  * @group Core
@@ -27,7 +27,7 @@ class JsonReturnRequiresAttributeRuleTest extends RuleTestCase
     public function testRule(): void
     {
         $message = 'Controller action %s() returns a JSON response but is not marked'
-            . ' #[\Piwik\Http\JsonResponse]. Add the attribute so Matomo applies the JSON'
+            . ' #[\Matomo\Http\JsonResponse]. Add the attribute so Matomo applies the JSON'
             . ' Content-Type after the action; do not send the header manually.';
 
         $this->analyse([__DIR__ . '/data/JsonResponseController.php'], [

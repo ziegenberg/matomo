@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Reports;
+namespace Matomo\Plugins\Ecommerce\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Ecommerce\Columns\ProductName;
+use Matomo\Matomo;
+use Matomo\Plugins\Ecommerce\Columns\ProductName;
 
 class GetItemsName extends BaseItem
 {
@@ -18,7 +18,7 @@ class GetItemsName extends BaseItem
     {
         parent::init();
 
-        $this->name      = Piwik::translate('Goals_ProductName');
+        $this->name      = Matomo::translate('Goals_ProductName');
         $this->dimension = new ProductName();
         $this->order     = 30;
 

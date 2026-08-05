@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountryMap\Widgets;
+namespace Matomo\Plugins\UserCountryMap\Widgets;
 
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\WidgetConfig;
 
-class GetVisitorMap extends \Piwik\Widget\Widget
+class GetVisitorMap extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

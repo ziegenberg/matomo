@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Columns;
+namespace Matomo\Plugins\Referrers\Columns;
 
-use Piwik\Common;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugins\PrivacyManager\Settings\CampaignParameterValuesMasked;
-use Piwik\Plugins\Referrers\AIAssistant as AIAssistantDetection;
-use Piwik\Plugins\Referrers\SearchEngine as SearchEngineDetection;
-use Piwik\Plugins\Referrers\Social as SocialNetworkDetection;
-use Piwik\Plugins\SitesManager\SiteUrls;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\PageUrl;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\UrlHelper;
+use Matomo\Common;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugins\PrivacyManager\Settings\CampaignParameterValuesMasked;
+use Matomo\Plugins\Referrers\AIAssistant as AIAssistantDetection;
+use Matomo\Plugins\Referrers\SearchEngine as SearchEngineDetection;
+use Matomo\Plugins\Referrers\Social as SocialNetworkDetection;
+use Matomo\Plugins\SitesManager\SiteUrls;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\PageUrl;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\UrlHelper;
 
 abstract class Base extends VisitDimension
 {
@@ -292,7 +292,7 @@ abstract class Base extends VisitDimension
      */
     protected function detectReferrerSearchEngine()
     {
-        $cache    = \Piwik\Cache::getTransientCache();
+        $cache    = \Matomo\Cache::getTransientCache();
         $cacheKey = 'cachedReferrerSearchEngine';
 
         $cachedReferrerSearchEngine = [];
@@ -321,7 +321,7 @@ abstract class Base extends VisitDimension
              *                                        logic.
              * @param string referrerUrl The referrer URL from the tracking request.
              */
-            Piwik::postEvent('Tracker.detectReferrerSearchEngine', [&$searchEngineInformation, $this->referrerUrl]);
+            Matomo::postEvent('Tracker.detectReferrerSearchEngine', [&$searchEngineInformation, $this->referrerUrl]);
 
             $cachedReferrerSearchEngine[$this->referrerUrl] = $searchEngineInformation;
             $cache->save($cacheKey, $cachedReferrerSearchEngine);
@@ -343,7 +343,7 @@ abstract class Base extends VisitDimension
      */
     protected function detectReferrerSocialNetwork()
     {
-        $cache    = \Piwik\Cache::getTransientCache();
+        $cache    = \Matomo\Cache::getTransientCache();
         $cacheKey = 'cachedReferrerSocialNetworks';
 
         $cachedReferrerSocialNetworks = [];
@@ -372,7 +372,7 @@ abstract class Base extends VisitDimension
              *                                        logic.
              * @param string referrerUrl The referrer URL from the tracking request.
              */
-            Piwik::postEvent('Tracker.detectReferrerSocialNetwork', [&$socialNetworkName, $this->referrerUrl]);
+            Matomo::postEvent('Tracker.detectReferrerSocialNetwork', [&$socialNetworkName, $this->referrerUrl]);
 
             $cachedReferrerSocialNetworks[$this->referrerUrl] = $socialNetworkName;
             $cache->save($cacheKey, $cachedReferrerSocialNetworks);
@@ -393,7 +393,7 @@ abstract class Base extends VisitDimension
      */
     protected function detectReferrerAIAssistant(): bool
     {
-        $cache = \Piwik\Cache::getTransientCache();
+        $cache = \Matomo\Cache::getTransientCache();
         $cacheKey = 'cachedReferrerAIAssistants';
 
         $cachedReferrerAIAssistants = [];
@@ -423,7 +423,7 @@ abstract class Base extends VisitDimension
                  *                                        logic.
                  * @param string referrerUrl The referrer URL from the tracking request.
                  */
-                Piwik::postEvent('Tracker.detectReferrerAIAssistant', [&$aiAssistantName, $this->referrerUrl]);
+                Matomo::postEvent('Tracker.detectReferrerAIAssistant', [&$aiAssistantName, $this->referrerUrl]);
 
                 $cachedReferrerAIAssistants[$this->referrerUrl] = $aiAssistantName;
                 $cache->save($cacheKey, $cachedReferrerAIAssistants);

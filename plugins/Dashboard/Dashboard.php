@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Dashboard;
+namespace Matomo\Plugins\Dashboard;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Category\Subcategory;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Plugin;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Category\Subcategory;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Plugin;
 
-class Dashboard extends \Piwik\Plugin
+class Dashboard extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -55,7 +55,7 @@ class Dashboard extends \Piwik\Plugin
 
     public function addWidgetConfigs(&$widgets)
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             $this->addDefaultDashboard($widgets);
         } else {
             $dashboards = $this->getDashboards();
@@ -100,7 +100,7 @@ class Dashboard extends \Piwik\Plugin
 
     public function addSubcategories(&$subcategories)
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             $this->addDefaultSubcategory($subcategories);
         } else {
             $dashboards = $this->getDashboards();
@@ -164,7 +164,7 @@ class Dashboard extends \Piwik\Plugin
             $pluginManager = Plugin\Manager::getInstance();
 
             $advertisingWidget = '';
-            $advertising = StaticContainer::get('Piwik\ProfessionalServices\Advertising');
+            $advertising = StaticContainer::get('Matomo\ProfessionalServices\Advertising');
             if ($advertising->areAdsForProfessionalServicesEnabled() && $pluginManager->isPluginActivated('ProfessionalServices')) {
                 $advertisingWidget = '{"uniqueId":"widgetProfessionalServicespromoServices","parameters":{"module":"ProfessionalServices","action":"promoServices"}},';
             }
@@ -202,7 +202,7 @@ class Dashboard extends \Piwik\Plugin
          *                               * **uniqueId**: The widget's unique ID.
          *                               * **parameters**: The array of query parameters that should be used to get this widget's report.
          */
-        Piwik::postEvent("Dashboard.changeDefaultDashboardLayout", array(&$defaultLayout));
+        Matomo::postEvent("Dashboard.changeDefaultDashboardLayout", array(&$defaultLayout));
 
         $defaultLayout = $this->removeDisabledPluginFromLayout($defaultLayout);
 
@@ -216,7 +216,7 @@ class Dashboard extends \Piwik\Plugin
         $nameless = 1;
         foreach ($dashboards as &$dashboard) {
             if (empty($dashboard['name'])) {
-                $dashboard['name'] = Piwik::translate('Dashboard_DashboardOf', $login);
+                $dashboard['name'] = Matomo::translate('Dashboard_DashboardOf', $login);
                 if ($nameless > 1) {
                     $dashboard['name'] .= " ($nameless)";
                 }
@@ -287,7 +287,7 @@ class Dashboard extends \Piwik\Plugin
     /**
      * Restricts every widget unique id in a decoded layout to a plain-identifier character set.
      *
-     * Widget unique ids are produced server side by {@see \Piwik\Widget\WidgetsList::getWidgetUniqueId()}
+     * Widget unique ids are produced server side by {@see \Matomo\Widget\WidgetsList::getWidgetUniqueId()}
      * and consist of identifier characters, so legitimate widgets are left untouched. Any value that was
      * stored in a layout is reduced to that same set before consumers rely on it as a plain identifier.
      *

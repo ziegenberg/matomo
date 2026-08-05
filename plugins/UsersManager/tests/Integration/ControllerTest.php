@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\UsersManager\Controller;
-use Piwik\Nonce;
-use Piwik\Auth\PasswordStrength;
-use Piwik\Date;
-use Piwik\Plugin\ThemeStyles;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Translation\Loader\DevelopmentLoader;
-use Piwik\Translation\Loader\JsonFileLoader;
-use Piwik\Translation\Translator;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\Container\StaticContainer;
+use Matomo\Config;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\UsersManager\Controller;
+use Matomo\Nonce;
+use Matomo\Auth\PasswordStrength;
+use Matomo\Date;
+use Matomo\Plugin\ThemeStyles;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Translation\Loader\DevelopmentLoader;
+use Matomo\Translation\Loader\JsonFileLoader;
+use Matomo\Translation\Translator;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Container\StaticContainer;
 
 /**
  * @group UsersManager
@@ -211,7 +211,7 @@ class ControllerTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 }

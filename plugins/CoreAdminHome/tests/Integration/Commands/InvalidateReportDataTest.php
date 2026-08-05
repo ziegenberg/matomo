@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\LogRecord;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\API as CustomDimensionsAPI;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\API as CustomDimensionsAPI;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
 
 /**
  * @group CoreAdminHome

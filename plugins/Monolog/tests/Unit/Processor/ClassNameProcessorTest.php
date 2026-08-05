@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\tests\Unit\Processor;
+namespace Matomo\Plugins\Monolog\tests\Unit\Processor;
 
 use DateTimeImmutable;
 use Monolog\Level;
 use Monolog\LogRecord;
-use Piwik\Plugins\Monolog\Processor\ClassNameProcessor;
+use Matomo\Plugins\Monolog\Processor\ClassNameProcessor;
 
 /**
  * @group Log
- * @covers \Piwik\Plugins\Monolog\Processor\ClassNameProcessor
+ * @covers \Matomo\Plugins\Monolog\Processor\ClassNameProcessor
  */
 class ClassNameProcessorTest extends \PHPUnit\Framework\TestCase
 {

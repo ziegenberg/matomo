@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\LocationProvider;
+namespace Matomo\Plugins\GeoIp2\LocationProvider;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\UserCountry\LocationProvider;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\UserCountry\LocationProvider;
 
 /**
  * Base type for all GeoIP 2 LocationProviders.
@@ -71,7 +71,7 @@ abstract class GeoIp2 extends LocationProvider
 
             if (!$isResultCorrect) {
                 $bind = array($testIp);
-                return Piwik::translate('UserCountry_TestIPLocatorFailed', $bind);
+                return Matomo::translate('UserCountry_TestIPLocatorFailed', $bind);
             }
 
             return true;
@@ -166,7 +166,7 @@ abstract class GeoIp2 extends LocationProvider
         if (isset($regionNames[$countryCode][$regionCode]['name'])) {
             return $regionNames[$countryCode][$regionCode]['name'];
         } else {
-            return Piwik::translate('General_Unknown');
+            return Matomo::translate('General_Unknown');
         }
     }
 

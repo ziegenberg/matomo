@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Matomo;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
 
 class Get extends Base
 {
@@ -18,8 +18,8 @@ class Get extends Base
     {
         parent::init();
 
-        $this->name          = Piwik::translate('General_Actions') . ' - ' . Piwik::translate('General_MainMetrics');
-        $this->documentation = Piwik::translate('Actions_MainMetricsReportDocumentation');
+        $this->name          = Matomo::translate('General_Actions') . ' - ' . Matomo::translate('General_MainMetrics');
+        $this->documentation = Matomo::translate('Actions_MainMetricsReportDocumentation');
         $this->order = 1;
         $this->processedMetrics = array(
             new AveragePageGenerationTime(),

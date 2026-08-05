@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive;
-use Piwik\Date;
-use Piwik\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
-use Piwik\Plugins\PrivacyManager\Model\DataSubjects;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorAPI;
-use Piwik\Plugins\VisitFrequency\API as VisitFrequencyAPI;
-use Piwik\Plugins\VisitsSummary\API as VisitsSummaryAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive;
+use Matomo\Date;
+use Matomo\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
+use Matomo\Plugins\PrivacyManager\Model\DataSubjects;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorAPI;
+use Matomo\Plugins\VisitFrequency\API as VisitFrequencyAPI;
+use Matomo\Plugins\VisitsSummary\API as VisitsSummaryAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreAdminHome

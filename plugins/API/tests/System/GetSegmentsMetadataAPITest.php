@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\System;
+namespace Matomo\Plugins\API\tests\System;
 
-use Piwik\Cache;
-use Piwik\API\Request;
-use Piwik\Plugins\Live\SystemSettings;
-use Piwik\Plugins\CoreHome\Columns\VisitorId;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Cache;
+use Matomo\API\Request;
+use Matomo\Plugins\Live\SystemSettings;
+use Matomo\Plugins\CoreHome\Columns\VisitorId;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 class GetSegmentsMetadataAPITest extends SystemTestCase
 {

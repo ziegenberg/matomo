@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Unit;
+namespace Matomo\Plugins\Referrers\tests\Unit;
 
-use Piwik\Plugins\Referrers\SearchEngine;
+use Matomo\Plugins\Referrers\SearchEngine;
 use Spyc;
 
 /**

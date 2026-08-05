@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\ReleaseChannel;
+namespace Matomo\Plugins\CoreUpdater\ReleaseChannel;
 
-use Piwik\Plugins\CoreUpdater\ReleaseChannel;
+use Matomo\Plugins\CoreUpdater\ReleaseChannel;
 
 class LatestPreview extends ReleaseChannel
 {

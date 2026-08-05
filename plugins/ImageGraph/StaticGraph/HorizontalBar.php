@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ImageGraph\StaticGraph;
+namespace Matomo\Plugins\ImageGraph\StaticGraph;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class HorizontalBar extends GridGraph
 {
@@ -78,7 +78,7 @@ class HorizontalBar extends GridGraph
                 $truncatedOrdinateSeries[$column][] = $sumOfOthers[$column];
             }
 
-            $truncatedAbscissaSeries[] = Piwik::translate('General_Others');
+            $truncatedAbscissaSeries[] = Matomo::translate('General_Others');
             $this->abscissaSeries = $truncatedAbscissaSeries;
             $this->ordinateSeries = $truncatedOrdinateSeries;
             $this->abscissaLogos = $truncatedAbscissaLogos;

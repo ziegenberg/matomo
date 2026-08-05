@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Matomo;
 
 /**
  * Class that logs the time the current user is accessing the current resource (which is 'now')
@@ -60,13 +60,13 @@ class LastSeenTimeLogger
     public static function logCurrentUserLastSeenTime()
     {
         $module = Common::getRequestVar('module', '');
-        $currentUserLogin = Piwik::getCurrentUserLogin();
+        $currentUserLogin = Matomo::getCurrentUserLogin();
 
         // only log time for non-anonymous visits to the reporting UI
         if (
             $module == 'API'
             || $module == 'Proxy'
-            || Piwik::isUserIsAnonymous()
+            || Matomo::isUserIsAnonymous()
         ) {
             return;
         }

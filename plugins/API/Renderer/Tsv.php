@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Renderer;
+namespace Matomo\Plugins\API\Renderer;
 
-use Piwik\Common;
+use Matomo\Common;
 
 class Tsv extends Csv
 {

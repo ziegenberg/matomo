@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Cache;
-use Piwik\Config;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\ManyVisitsWithMockLocationProvider;
+use Matomo\Cache;
+use Matomo\Config;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\ManyVisitsWithMockLocationProvider;
 
 /**
  * Test Piwik's report limiting code. Make sure the datatable_archiving_maximum_rows_...

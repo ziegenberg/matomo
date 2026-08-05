@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions;
+namespace Matomo\Plugins\CustomDimensions;
 
 /**
  * Archives reports for each active Custom Dimension of a website.
  */
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const LABEL_CUSTOM_VALUE_NOT_DEFINED = "Value not defined";
 

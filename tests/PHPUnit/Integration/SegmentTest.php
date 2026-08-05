@@ -7,29 +7,29 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
 use Exception;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Columns\Dimension;
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Segment;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\LogTable;
-use Piwik\Tracker\TableLogAction;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorApi;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Segment;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\LogTable;
+use Matomo\Tracker\TableLogAction;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorApi;
 
 /**
  * @group Core
@@ -2429,7 +2429,7 @@ SQL;
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 
@@ -2582,10 +2582,10 @@ SQL;
     {
         return [
             'observers.global' => [
-                ['Segment.addSegments', \Piwik\DI::value(function (Segment\SegmentsList $list) {
-                    $segment = new \Piwik\Plugin\Segment();
+                ['Segment.addSegments', \Matomo\DI::value(function (Segment\SegmentsList $list) {
+                    $segment = new \Matomo\Plugin\Segment();
                     $segment->setSegment('customSegment');
-                    $segment->setType(\Piwik\Plugin\Segment::TYPE_DIMENSION);
+                    $segment->setType(\Matomo\Plugin\Segment::TYPE_DIMENSION);
                     $segment->setName('Custom Segment');
                     $segment->setSqlSegment('(UNIX_TIMESTAMP(log_visit.visit_first_action_time) - log_visit.visitor_seconds_since_first)');
                     $list->addSegment($segment);
@@ -2671,7 +2671,7 @@ SQL;
             }
         };
 
-        Piwik::addAction('LogTables.addLogTables', function (&$logTables) use ($logThings, $logThingEvents) {
+        Matomo::addAction('LogTables.addLogTables', function (&$logTables) use ($logThings, $logThingEvents) {
             $logTables[] = $logThings;
             $logTables[] = $logThingEvents;
         });
@@ -2757,7 +2757,7 @@ SQL;
             }
         };
 
-        Piwik::addAction('Dimension.addDimensions', function (&$dimensions) use ($thingEventIdDimension, $thingValueDimension, $thingNameDimension, $thingCategoryDimension) {
+        Matomo::addAction('Dimension.addDimensions', function (&$dimensions) use ($thingEventIdDimension, $thingValueDimension, $thingNameDimension, $thingCategoryDimension) {
             $dimensions[] = $thingEventIdDimension;
             $dimensions[] = $thingValueDimension;
             $dimensions[] = $thingNameDimension;
@@ -2767,13 +2767,13 @@ SQL;
 
     public function testJoinExposesNoAdditionalKeyColumnsByDefault()
     {
-        $join = new \Piwik\Columns\Join('goal', 'idgoal', 'name');
+        $join = new \Matomo\Columns\Join('goal', 'idgoal', 'name');
         $this->assertSame([], $join->getAdditionalKeyColumns());
     }
 
     public function testGoalNameJoinIsScopedBySite()
     {
-        $join = new \Piwik\Columns\Join\GoalNameJoin();
+        $join = new \Matomo\Columns\Join\GoalNameJoin();
         $this->assertSame(['idsite'], $join->getAdditionalKeyColumns());
     }
 

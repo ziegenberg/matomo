@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
 /**
  * Aggregates per-series records into a {@see ForecastSeriesState}. Owns the six parallel

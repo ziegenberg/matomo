@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\Integration;
+namespace Matomo\Plugins\SegmentEditor\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\SegmentEditor\Model;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\SegmentEditor\Model;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class ModelTest extends IntegrationTestCase
 {

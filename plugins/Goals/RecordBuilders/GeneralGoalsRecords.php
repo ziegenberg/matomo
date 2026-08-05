@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\RecordBuilders;
+namespace Matomo\Plugins\Goals\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Goals\API;
-use Piwik\Plugins\Goals\Archiver;
-use Piwik\Plugins\Goals\Goals;
-use Piwik\Tracker\GoalManager;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Goals\API;
+use Matomo\Plugins\Goals\Archiver;
+use Matomo\Plugins\Goals\Goals;
+use Matomo\Tracker\GoalManager;
 
 class GeneralGoalsRecords extends Base
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Transitions\Categories;
+namespace Matomo\Plugins\Transitions\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class TransitionsSubcategory extends Subcategory
 {
@@ -21,8 +21,8 @@ class TransitionsSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Transitions_TransitionsSubcategoryHelp1') . '</p>'
+        return '<p>' . Matomo::translate('Transitions_TransitionsSubcategoryHelp1') . '</p>'
             . '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/transitions/', null, null, 'App.Transitions.getTransitions')
-            . Piwik::translate('Transitions_TransitionsSubcategoryHelp2') . '</a></p>';
+            . Matomo::translate('Transitions_TransitionsSubcategoryHelp2') . '</a></p>';
     }
 }

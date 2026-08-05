@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics;
+namespace Matomo\Plugins\Goals\Columns\Metrics;
 
-use Piwik\API\Request;
-use Piwik\DataTable\Row;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Tracker\GoalManager;
+use Matomo\API\Request;
+use Matomo\DataTable\Row;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Tracker\GoalManager;
 
 /**
  * Base class for processed metrics that are calculated using metrics that are
@@ -55,12 +55,12 @@ abstract class GoalSpecificProcessedMetric extends ProcessedMetric
             $alternateKey = 'idgoal=' . $this->idGoal;
             if (isset($allGoalMetrics[$alternateKey])) {
                 return $allGoalMetrics[$alternateKey];
-            } elseif ($this->idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+            } elseif ($this->idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
                 $alternateKey = GoalManager::IDGOAL_ORDER;
                 if (isset($allGoalMetrics[$alternateKey])) {
                     return $allGoalMetrics[$alternateKey];
                 }
-            } elseif ($this->idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+            } elseif ($this->idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
                 $alternateKey = GoalManager::IDGOAL_CART;
                 if (isset($allGoalMetrics[$alternateKey])) {
                     return $allGoalMetrics[$alternateKey];
@@ -75,10 +75,10 @@ abstract class GoalSpecificProcessedMetric extends ProcessedMetric
 
     protected function getGoalName(): string
     {
-        if ($this->idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
-            return Piwik::translate('Goals_EcommerceOrder');
-        } elseif ($this->idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
-            return Piwik::translate('Goals_AbandonedCart');
+        if ($this->idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+            return Matomo::translate('Goals_EcommerceOrder');
+        } elseif ($this->idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART) {
+            return Matomo::translate('Goals_AbandonedCart');
         }
 
         if (isset($this->idSite)) {
@@ -98,7 +98,7 @@ abstract class GoalSpecificProcessedMetric extends ProcessedMetric
     protected function getGoalNameForDocs(): string
     {
         $goalName = $this->getGoalName();
-        if ($goalName == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+        if ($goalName == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
             $goalName = '"' . $goalName . '"';
         }
         return $goalName;

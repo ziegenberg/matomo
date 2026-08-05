@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\Fixtures;
+namespace Matomo\Plugins\UserCountry\tests\Fixtures;
 
-use Piwik\Tests\Fixtures\ManyVisitsWithGeoIP;
+use Matomo\Tests\Fixtures\ManyVisitsWithGeoIP;
 
 class ManySitesManyVisitsWithGeoIp extends ManyVisitsWithGeoIP
 {

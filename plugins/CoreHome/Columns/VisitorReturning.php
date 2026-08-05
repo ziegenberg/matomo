@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class VisitorReturning extends VisitDimension
 {
@@ -33,7 +33,7 @@ class VisitorReturning extends VisitDimension
     public function __construct()
     {
         $this->acceptValues  = 'new, returning, returningCustomer. ';
-        $this->acceptValues .= Piwik::translate('General_VisitTypeExample', '"&segment=visitorType==returning,visitorType==returningCustomer"');
+        $this->acceptValues .= Matomo::translate('General_VisitTypeExample', '"&segment=visitorType==returning,visitorType==returningCustomer"');
         $this->sqlFilterValue = function ($type) {
             if (is_numeric($type)) {
                 return $type;
@@ -45,11 +45,11 @@ class VisitorReturning extends VisitDimension
     public function formatValue($value, $idSite, Formatter $formatter)
     {
         if ($value === 1 || $value === '1' || $value === 'returning') {
-            return Piwik::translate('CoreHome_VisitTypeReturning');
+            return Matomo::translate('CoreHome_VisitTypeReturning');
         } elseif ($value === 2 || $value === '2' || $value === 'returningCustomer') {
-            return Piwik::translate('CoreHome_VisitTypeReturningCustomer');
+            return Matomo::translate('CoreHome_VisitTypeReturningCustomer');
         } elseif ($value === 0 || $value === '0' || $value === 'new') {
-            return Piwik::translate('General_New');
+            return Matomo::translate('General_New');
         }
 
         return $value;

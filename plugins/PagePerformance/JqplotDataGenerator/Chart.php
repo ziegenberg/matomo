@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\JqplotDataGenerator;
+namespace Matomo\Plugins\PagePerformance\JqplotDataGenerator;
 
-use Piwik\ProxyHttp;
+use Matomo\ProxyHttp;
 
-class Chart extends \Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\Chart
+class Chart extends \Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\Chart
 {
     // the data kept here conforms to the jqplot data layout
     // @see https://www.jqplot.com/docs/files/jqPlotOptions-txt.html

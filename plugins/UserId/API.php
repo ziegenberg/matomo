@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserId;
+namespace Matomo\Plugins\UserId;
 
-use Piwik\Archive;
-use Piwik\Piwik;
-use Piwik\DataTable;
+use Matomo\Archive;
+use Matomo\Matomo;
+use Matomo\DataTable;
 
 /**
  * Provides API methods for User ID reports.
  *
- * @method static \Piwik\Plugins\UserId\API getInstance()
+ * @method static \Matomo\Plugins\UserId\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns the User ID report for the requested site and period.
@@ -39,7 +39,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUsers($idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable(Archiver::USERID_ARCHIVE_RECORD);
 

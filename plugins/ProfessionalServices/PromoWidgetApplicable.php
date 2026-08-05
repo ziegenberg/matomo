@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices;
+namespace Matomo\Plugins\ProfessionalServices;
 
-use Piwik\Config;
-use Piwik\Plugin\Manager;
-use Piwik\ProfessionalServices\Advertising;
+use Matomo\Config;
+use Matomo\Plugin\Manager;
+use Matomo\ProfessionalServices\Advertising;
 
 class PromoWidgetApplicable
 {

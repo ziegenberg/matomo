@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Heartbeat\Tracker;
+namespace Matomo\Plugins\Heartbeat\Tracker;
 
-use Piwik\Common;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestProcessor;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestProcessor;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * Handles ping tracker requests.

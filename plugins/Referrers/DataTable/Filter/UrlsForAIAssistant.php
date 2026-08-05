@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\Referrers\DataTable\Filter;
+namespace Matomo\Plugins\Referrers\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Tracker\Action;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Tracker\Action;
 
 class UrlsForAIAssistant extends BaseFilter
 {
@@ -27,7 +27,7 @@ class UrlsForAIAssistant extends BaseFilter
         $table->filter('ColumnCallbackAddMetadata', array('label', 'url'));
 
         // prettify the DataTable
-        $table->filter('ColumnCallbackReplace', array('label', 'Piwik\Plugins\Referrers\removeUrlProtocol'));
+        $table->filter('ColumnCallbackReplace', array('label', 'Matomo\Plugins\Referrers\removeUrlProtocol'));
         $table->filter(function (DataTable $table) {
             $emptyUrlRRow = $table->getRowFromLabel('');
 

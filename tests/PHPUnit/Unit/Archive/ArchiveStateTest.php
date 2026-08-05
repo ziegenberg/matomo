@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tests\Unit\Archive;
+namespace Matomo\Tests\Unit\Archive;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataCollection;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataTable;
-use Piwik\Period;
-use Piwik\Segment;
-use Piwik\Site;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataCollection;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataTable;
+use Matomo\Period;
+use Matomo\Segment;
+use Matomo\Site;
 
 /**
  * @group Archive

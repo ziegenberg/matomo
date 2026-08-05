@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\Unit\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\tests\Unit\SiteContentDetection;
 
-use Piwik\Plugins\SitesManager\SiteContentDetection\GoogleAnalytics4;
+use Matomo\Plugins\SitesManager\SiteContentDetection\GoogleAnalytics4;
 
 /**
  * @group SitesManager

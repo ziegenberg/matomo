@@ -1,17 +1,17 @@
 <?php
 
-namespace Piwik\Plugins\Live\Settings;
+namespace Matomo\Plugins\Live\Settings;
 
-use Piwik\Piwik;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Settings\Interfaces\MeasurableSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SystemSettingInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
-use Piwik\Settings\Interfaces\Traits\Getters\SystemGetterTrait;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Interfaces\SettingValueInterface;
+use Matomo\Matomo;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Settings\Interfaces\MeasurableSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SystemSettingInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
+use Matomo\Settings\Interfaces\Traits\Getters\SystemGetterTrait;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Interfaces\SettingValueInterface;
 
 /**
  * @implements MeasurableSettingInterface<bool>
@@ -80,18 +80,18 @@ class VisitorLogDisabled implements MeasurableSettingInterface, PolicyComparison
 
     public static function getTitle(): string
     {
-        return Piwik::translate('Live_DisableVisitsLogAndProfile');
+        return Matomo::translate('Live_DisableVisitsLogAndProfile');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
         // TODO add dynamic messaging
-        return Piwik::translate('Live_VisitorLogPolicySettingRequirementNote');
+        return Matomo::translate('Live_VisitorLogPolicySettingRequirementNote');
     }
 
     public static function getInlineHelp(): string
     {
-        return Piwik::translate('Live_DisableVisitsLogAndProfileDescription');
+        return Matomo::translate('Live_DisableVisitsLogAndProfileDescription');
     }
 
     public static function getPolicyRequirements(): array

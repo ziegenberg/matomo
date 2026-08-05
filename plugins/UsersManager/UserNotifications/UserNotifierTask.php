@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\UserNotifications;
+namespace Matomo\Plugins\UsersManager\UserNotifications;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Log\LoggerInterface;
-use Piwik\Option;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Scheduler\Schedule\Monthly;
-use Piwik\Scheduler\Task;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Log\LoggerInterface;
+use Matomo\Option;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Scheduler\Schedule\Monthly;
+use Matomo\Scheduler\Task;
 
 /**
  * Send user notifications for each provider

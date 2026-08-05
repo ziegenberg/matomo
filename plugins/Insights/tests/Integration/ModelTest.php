@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\tests\Integration;
+namespace Matomo\Plugins\Insights\tests\Integration;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Plugins\Insights\Model;
-use Piwik\Plugins\Insights\tests\Fixtures\SomeVisitsDifferentPathsOnTwoDays;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Plugins\Insights\Model;
+use Matomo\Plugins\Insights\tests\Fixtures\SomeVisitsDifferentPathsOnTwoDays;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Insights
@@ -36,7 +36,7 @@ class ModelTest extends SystemTestCase
     {
         parent::setUp();
 
-        $this->model = StaticContainer::getContainer()->make('Piwik\Plugins\Insights\Model');
+        $this->model = StaticContainer::getContainer()->make('Matomo\Plugins\Insights\Model');
     }
 
     public function testRequestReportShouldReturnTheDataTableOfTheReportAndContainReportTotals()

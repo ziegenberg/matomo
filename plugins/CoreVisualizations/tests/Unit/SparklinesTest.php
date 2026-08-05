@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Unit;
+namespace Matomo\Plugins\CoreVisualizations\tests\Unit;
 
-use Piwik\DataTable\Row;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
 
 /**
  * @group CoreVisualizations

@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\Common;
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UserPreferences;
+use Matomo\Common;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\UserPreferences;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
         $userPreferences = new UserPreferences();
         $idSite = $this->getIdSite($userPreferences->getDefaultWebsiteId());
 
-        if (Piwik::isUserHasWriteAccess($idSite)) {
+        if (Matomo::isUserHasWriteAccess($idSite)) {
             $menu->addMeasurableItem('Goals_Goals', $this->urlForAction('manage', array('idSite' => $idSite)), 15);
         }
     }

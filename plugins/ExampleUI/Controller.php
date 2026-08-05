@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI;
+namespace Matomo\Plugins\ExampleUI;
 
-use Piwik\Notification;
-use Piwik\View;
+use Matomo\Notification;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function notifications()
     {

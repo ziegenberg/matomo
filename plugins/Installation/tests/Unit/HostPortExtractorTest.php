@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Plugins\Installation\tests\Unit;
+namespace Matomo\Plugins\Installation\tests\Unit;
 
-use Piwik\Plugins\Installation\HostPortExtractor;
+use Matomo\Plugins\Installation\HostPortExtractor;
 
 class HostPortExtractorTest extends \PHPUnit\Framework\TestCase
 {

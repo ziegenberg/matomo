@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
 use DateTimeZone;
 use HTML_QuickForm2_DataSource_Array;
 use HTML_QuickForm2_Factory;
 use HTML_QuickForm2_Rule;
 use NumberFormatter;
-use Piwik\Access;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\QuickForm2;
+use Matomo\Access;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\QuickForm2;
 
 /**
  * phpcs:ignoreFile PSR1.Classes.ClassDeclaration.MultipleClasses
@@ -32,13 +32,13 @@ class FormFirstWebsiteSetup extends QuickForm2
 
     function init()
     {
-        HTML_QuickForm2_Factory::registerRule('checkTimezone', 'Piwik\Plugins\Installation\RuleIsValidTimezone');
+        HTML_QuickForm2_Factory::registerRule('checkTimezone', 'Matomo\Plugins\Installation\RuleIsValidTimezone');
 
         $urlExample = 'https://example.org';
         $javascriptOnClickUrlExample = "javascript:if (this.value=='$urlExample'){this.value='https://';} this.style.color='black';";
 
         $timezones = API::getInstance()->getTimezonesList();
-        $timezones = array_merge(array('No timezone' => Piwik::translate('SitesManager_SelectACity')), $timezones);
+        $timezones = array_merge(array('No timezone' => Matomo::translate('SitesManager_SelectACity')), $timezones);
 
         // Use server timezone as default, unless a default timezone has already
         // been defined from outside the installation wizard.
@@ -50,29 +50,29 @@ class FormFirstWebsiteSetup extends QuickForm2
         }
 
         $this->addElement('text', 'siteName')
-            ->setLabel(Piwik::translate('Installation_SetupWebSiteName'))
-            ->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_SetupWebSiteName')));
+            ->setLabel(Matomo::translate('Installation_SetupWebSiteName'))
+            ->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_SetupWebSiteName')));
 
         $url = $this->addElement('text', 'url')
-            ->setLabel(Piwik::translate('Installation_SetupWebSiteURL'));
+            ->setLabel(Matomo::translate('Installation_SetupWebSiteURL'));
         $url->setAttribute('style', 'color:rgb(153, 153, 153);');
         $url->setAttribute('onfocus', $javascriptOnClickUrlExample);
         $url->setAttribute('onclick', $javascriptOnClickUrlExample);
-        $url->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_SetupWebSiteURL')));
+        $url->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_SetupWebSiteURL')));
 
         $tz = $this->addElement('select', 'timezone')
-            ->setLabel(Piwik::translate('Installation_Timezone'))
+            ->setLabel(Matomo::translate('Installation_Timezone'))
             ->loadOptions($timezones);
-        $tz->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_Timezone')));
-        $tz->addRule('checkTimezone', Piwik::translate('General_NotValid', Piwik::translate('Installation_Timezone')));
+        $tz->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_Timezone')));
+        $tz->addRule('checkTimezone', Matomo::translate('General_NotValid', Matomo::translate('Installation_Timezone')));
         $tz = $this->addElement('select', 'ecommerce')
-            ->setLabel(Piwik::translate('Goals_Ecommerce'))
+            ->setLabel(Matomo::translate('Goals_Ecommerce'))
             ->loadOptions(array(
-                               0 => Piwik::translate('SitesManager_NotAnEcommerceSite'),
-                               1 => Piwik::translate('SitesManager_EnableEcommerce'),
+                               0 => Matomo::translate('SitesManager_NotAnEcommerceSite'),
+                               1 => Matomo::translate('SitesManager_EnableEcommerce'),
                           ));
 
-        $this->addElement('submit', 'submit', array('value' => Piwik::translate('General_Next') . ' »', 'class' => 'btn'));
+        $this->addElement('submit', 'submit', array('value' => Matomo::translate('General_Next') . ' »', 'class' => 'btn'));
 
         // default values
         $this->addDataSource(new HTML_QuickForm2_DataSource_Array(array(

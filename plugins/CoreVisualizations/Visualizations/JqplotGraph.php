@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations;
 
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
 /**
  * DataTable visualization that displays DataTable data in a JQPlot graph.

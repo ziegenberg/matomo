@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleUI\Reports;
+namespace Matomo\Plugins\ExampleUI\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Cloud;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Cloud;
 
 /**
  * This class defines a new report.
@@ -24,7 +24,7 @@ class GetPlanetRatiosWithLogos extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('Advanced tag cloud: with logos and links');
+        $this->name = Matomo::translate('Advanced tag cloud: with logos and links');
         $this->documentation = 'This report shows a sample tab cloud.';
         $this->subcategoryId = 'Tag clouds';
         $this->order = 113;

@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging;
+namespace Matomo\Plugins\MobileMessaging;
 
-use Piwik\Common;
-use Piwik\Http\JsonResponse;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
-use Piwik\IP;
-use Piwik\Piwik;
-use Piwik\Plugin\ControllerAdmin;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\MobileMessaging\SMSProvider;
-use Piwik\Translation\Translator;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Http\JsonResponse;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
+use Matomo\IP;
+use Matomo\Matomo;
+use Matomo\Plugin\ControllerAdmin;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\MobileMessaging\SMSProvider;
+use Matomo\Translation\Translator;
+use Matomo\View;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
 
@@ -45,7 +45,7 @@ class Controller extends ControllerAdmin
      */
     public function index()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $view = new View('@MobileMessaging/index');
         $this->setManageVariables($view);
@@ -55,7 +55,7 @@ class Controller extends ControllerAdmin
 
     private function setManageVariables(View $view)
     {
-        $view->isSuperUser = Piwik::hasUserSuperUserAccess();
+        $view->isSuperUser = Matomo::hasUserSuperUserAccess();
 
         $mobileMessagingAPI = API::getInstance();
         $model = new Model();
@@ -80,12 +80,12 @@ class Controller extends ControllerAdmin
 
         $view->delegateManagementOptions = array(
             array('key' => '0',
-                  'value' => Piwik::translate('General_No'),
-                  'description' => Piwik::translate('General_Default') . '. ' .
-                                   Piwik::translate('MobileMessaging_Settings_LetUsersManageAPICredential_No_Help')),
+                  'value' => Matomo::translate('General_No'),
+                  'description' => Matomo::translate('General_Default') . '. ' .
+                                   Matomo::translate('MobileMessaging_Settings_LetUsersManageAPICredential_No_Help')),
             array('key' => '1',
-                  'value' => Piwik::translate('General_Yes'),
-                  'description' => Piwik::translate('MobileMessaging_Settings_LetUsersManageAPICredential_Yes_Help')),
+                  'value' => Matomo::translate('General_Yes'),
+                  'description' => Matomo::translate('MobileMessaging_Settings_LetUsersManageAPICredential_Yes_Help')),
         );
 
         $providers = array();
@@ -120,7 +120,7 @@ class Controller extends ControllerAdmin
 
                 $countries[] = array(
                     'key' => CountryCallingCodes::$countryCallingCodes[$countryCode],
-                    'value' => \Piwik\Plugins\UserCountry\countryTranslate($countryCode),
+                    'value' => \Matomo\Plugins\UserCountry\countryTranslate($countryCode),
                 );
             }
         }

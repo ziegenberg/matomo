@@ -7,9 +7,9 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\TokenNotifications;
+namespace Matomo\Plugins\UsersManager\TokenNotifications;
 
-use Piwik\Plugins\UsersManager\Emails\AuthTokenRotationNotificationEmail;
+use Matomo\Plugins\UsersManager\Emails\AuthTokenRotationNotificationEmail;
 
 final class AuthTokenRotationEmailNotification extends TokenEmailNotification
 {

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner\Commands;
+namespace Matomo\Plugins\TestRunner\Commands;
 
-use Piwik\Application\Environment;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Tests\Framework\TestingEnvironmentManipulator;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
-use Piwik\Url;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Application\Environment;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Tests\Framework\TestingEnvironmentManipulator;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Url;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Console commands that sets up a fixture either in a local MySQL database or a remote one.
@@ -53,7 +53,7 @@ class TestsSetupFixture extends ConsoleCommand
         $this->addRequiredArgument(
             'fixture',
             "The class name of the fixture to apply. Doesn't need to have a namespace if it exists in the " .
-            "Piwik\\Tests\\Fixtures namespace."
+            "Matomo\\Tests\\Fixtures namespace."
         );
 
         $this->addRequiredValueOption(
@@ -263,8 +263,8 @@ class TestsSetupFixture extends ConsoleCommand
     {
         $input = $this->getInput();
         $fixtureClass = $input->getArgument('fixture');
-        if (class_exists("Piwik\\Tests\\Fixtures\\" . $fixtureClass)) {
-            $fixtureClass = "Piwik\\Tests\\Fixtures\\" . $fixtureClass;
+        if (class_exists("Matomo\\Tests\\Fixtures\\" . $fixtureClass)) {
+            $fixtureClass = "Matomo\\Tests\\Fixtures\\" . $fixtureClass;
         }
 
         if (!class_exists($fixtureClass)) {

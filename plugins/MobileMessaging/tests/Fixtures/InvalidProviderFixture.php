@@ -1,9 +1,9 @@
 <?php
 
-namespace Piwik\Plugins\MobileMessaging\tests\Fixtures;
+namespace Matomo\Plugins\MobileMessaging\tests\Fixtures;
 
-use Piwik\Settings\Storage\Factory;
-use Piwik\Tests\Fixtures\EmptySite;
+use Matomo\Settings\Storage\Factory;
+use Matomo\Tests\Fixtures\EmptySite;
 
 class InvalidProviderFixture extends EmptySite
 {

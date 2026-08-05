@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin\tests\Integration;
+namespace Matomo\Plugins\CorePluginsAdmin\tests\Integration;
 
-use Piwik\Access;
-use Piwik\Auth;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CorePluginsAdmin\SettingsMetadata;
-use Piwik\Plugins\CorePluginsAdmin\tests\Fixtures\PluginUpdatesFixture;
-use Piwik\Plugins\CoreUpdater\SystemSettings;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Auth;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CorePluginsAdmin\SettingsMetadata;
+use Matomo\Plugins\CorePluginsAdmin\tests\Fixtures\PluginUpdatesFixture;
+use Matomo\Plugins\CoreUpdater\SystemSettings;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class ApiTest extends IntegrationTestCase
 {
@@ -66,7 +66,7 @@ class ApiTest extends IntegrationTestCase
         $this->expectExceptionMessage('UsersManager_ConfirmWithReAuthentication');
 
         $settingValues = $this->testSystemSettingsPayload;
-        \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues);
+        \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues);
     }
 
     public function testSetSystemSettingsThrowsIfPasswordConfirmationWrong()
@@ -75,13 +75,13 @@ class ApiTest extends IntegrationTestCase
         $this->expectExceptionMessage('UsersManager_CurrentPasswordNotCorrect');
 
         $settingValues = $this->testSystemSettingsPayload;
-        \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, 'blahblah');
+        \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, 'blahblah');
     }
 
     public function testSetSystemSettingsCorrectlySetsSettings()
     {
         $settingValues = $this->testSystemSettingsPayload;
-        \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
+        \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
 
         $coreUpdaterSettings = StaticContainer::get(SystemSettings::class);
         $value = $coreUpdaterSettings->releaseChannel->getValue();
@@ -90,7 +90,7 @@ class ApiTest extends IntegrationTestCase
 
     public function testGetSystemSettingsRedactsPasswordValues()
     {
-        $pluginSettings = StaticContainer::get(\Piwik\Plugins\ExampleSettingsPlugin\SystemSettings::class);
+        $pluginSettings = StaticContainer::get(\Matomo\Plugins\ExampleSettingsPlugin\SystemSettings::class);
         $settings = $this->getPluginSettings('ExampleSettingsPlugin', 'password');
 
         self::assertEquals('password', $settings['name']);
@@ -102,7 +102,7 @@ class ApiTest extends IntegrationTestCase
                 ['name' => 'password', 'value' => 'newPassword'],
             ],
         ];
-        \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
+        \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
 
         $newSettings = $this->getPluginSettings('ExampleSettingsPlugin', 'password');
 
@@ -116,7 +116,7 @@ class ApiTest extends IntegrationTestCase
                 ['name' => 'password', 'value' => SettingsMetadata::PASSWORD_PLACEHOLDER],
             ],
         ];
-        \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
+        \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
 
         $newSettings = $this->getPluginSettings('ExampleSettingsPlugin', 'password');
 
@@ -127,7 +127,7 @@ class ApiTest extends IntegrationTestCase
 
     public function testSetSystemSettingsCorrectlySetsEmptyValue()
     {
-        $pluginSettings = StaticContainer::get(\Piwik\Plugins\ExampleSettingsPlugin\SystemSettings::class);
+        $pluginSettings = StaticContainer::get(\Matomo\Plugins\ExampleSettingsPlugin\SystemSettings::class);
         $settings = $this->getPluginSettings('ExampleSettingsPlugin', 'browsers');
         $defaultValue = ['firefox', 'chromium', 'safari'];
 
@@ -136,7 +136,7 @@ class ApiTest extends IntegrationTestCase
         self::assertEquals($defaultValue, $pluginSettings->getSetting('browsers')->getValue());
 
         $settingValues = $this->testSystemSettingsEmptyValuePayload;
-        \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
+        \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->setSystemSettings($settingValues, self::TEST_PASSWORD);
 
         $newSettings = $this->getPluginSettings('ExampleSettingsPlugin', 'browsers');
 
@@ -147,13 +147,13 @@ class ApiTest extends IntegrationTestCase
 
     public function testGetNumberOfPluginUpdates()
     {
-        $updates = \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->getNumberOfPluginUpdates();
+        $updates = \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->getNumberOfPluginUpdates();
         self::assertEquals(2, $updates);
     }
 
     private function getPluginSettings(string $pluginName, string $settingName): array
     {
-        $settings = \Piwik\Plugins\CorePluginsAdmin\API::getInstance()->getSystemSettings();
+        $settings = \Matomo\Plugins\CorePluginsAdmin\API::getInstance()->getSystemSettings();
 
         foreach ($settings as $pluginSettings) {
             if ($pluginSettings['pluginName'] === $pluginName) {

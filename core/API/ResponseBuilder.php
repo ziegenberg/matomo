@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Filter\ColumnDelete;
-use Piwik\DataTable\Filter\Pattern;
-use Piwik\DataTable\Renderer;
-use Piwik\ExceptionHandler;
-use Piwik\Http\HttpCodeException;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\Monolog\Processor\ExceptionToTextProcessor;
-use Piwik\Plugins\PrivacyManager\DataRounding;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Filter\ColumnDelete;
+use Matomo\DataTable\Filter\Pattern;
+use Matomo\DataTable\Renderer;
+use Matomo\ExceptionHandler;
+use Matomo\Http\HttpCodeException;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\Monolog\Processor\ExceptionToTextProcessor;
+use Matomo\Plugins\PrivacyManager\DataRounding;
 
 class ResponseBuilder
 {
@@ -180,7 +180,7 @@ class ResponseBuilder
     {
         $message = ExceptionToTextProcessor::getMessageAndWholeBacktrace($exception, $this->shouldPrintBacktrace);
 
-        if ($exception instanceof \Piwik\Exception\Exception && $exception->isHtmlMessage() && Request::isRootRequestApiRequest()) {
+        if ($exception instanceof \Matomo\Exception\Exception && $exception->isHtmlMessage() && Request::isRootRequestApiRequest()) {
             $message = strip_tags(str_replace('<br />', PHP_EOL, $message));
         }
 

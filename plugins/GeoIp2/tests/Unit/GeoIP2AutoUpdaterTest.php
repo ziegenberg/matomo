@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\tests\Unit;
+namespace Matomo\Plugins\GeoIp2\tests\Unit;
 
-use Piwik\Config;
-use Piwik\Plugins\GeoIp2\GeoIP2AutoUpdater;
+use Matomo\Config;
+use Matomo\Plugins\GeoIp2\GeoIP2AutoUpdater;
 
 class PublicGeoIP2AutoUpdater extends GeoIP2AutoUpdater
 {

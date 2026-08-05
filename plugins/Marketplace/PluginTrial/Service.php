@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\PluginTrial;
+namespace Matomo\Plugins\Marketplace\PluginTrial;
 
 use Exception;
-use Piwik\Config\GeneralConfig;
-use Piwik\Piwik;
-use Piwik\Session;
+use Matomo\Config\GeneralConfig;
+use Matomo\Matomo;
+use Matomo\Session;
 
 final class Service
 {
@@ -58,7 +58,7 @@ final class Service
             return;
         }
 
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return; // only super users can see and dismiss those notifications
         }
 
@@ -80,7 +80,7 @@ final class Service
             return;
         }
 
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return; // only super users can see and dismiss those notifications
         }
 
@@ -97,7 +97,7 @@ final class Service
         $userLogin = $notificationParts[2];
         $pluginName = $notificationParts[3];
 
-        if ($userLogin !== md5(Piwik::getCurrentUserLogin())) {
+        if ($userLogin !== md5(Matomo::getCurrentUserLogin())) {
             return; // Don't allow to unset notifications for other users
         }
 
@@ -115,7 +115,7 @@ final class Service
         $request = new Request($pluginName, new Storage($pluginName));
         $request->cancel();
 
-        if (Piwik::hasUserSuperUserAccess() && Session::isStarted()) {
+        if (Matomo::hasUserSuperUserAccess() && Session::isStarted()) {
             $notification = new Notification($pluginName, new Storage($pluginName));
             $notification->removeFromSession();
         }

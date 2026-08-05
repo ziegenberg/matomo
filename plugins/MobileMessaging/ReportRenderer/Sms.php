@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging\ReportRenderer;
+namespace Matomo\Plugins\MobileMessaging\ReportRenderer;
 
-use Piwik\Common;
-use Piwik\Plugins\MultiSites\API;
-use Piwik\ReportRenderer;
-use Piwik\Site;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Plugins\MultiSites\API;
+use Matomo\ReportRenderer;
+use Matomo\Site;
+use Matomo\View;
 
 class Sms extends ReportRenderer
 {

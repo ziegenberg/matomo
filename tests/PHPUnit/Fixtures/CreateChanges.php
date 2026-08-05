@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Changes\Model as ChangesModel;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Changes\Model as ChangesModel;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Tests\Framework\Fixture;
 
 class CreateChanges extends Fixture
 {

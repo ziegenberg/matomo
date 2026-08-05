@@ -7,9 +7,9 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\UserNotifications;
+namespace Matomo\Plugins\UsersManager\UserNotifications;
 
-use Piwik\Plugins\UsersManager\Model as UserModel;
+use Matomo\Plugins\UsersManager\Model as UserModel;
 
 abstract class UserNotificationProvider implements UserNotificationProviderInterface
 {

@@ -7,37 +7,37 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports;
+namespace Matomo\Plugins\ScheduledReports;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Context;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Development;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Filesystem;
-use Piwik\Http;
-use Piwik\Log;
-use Piwik\NoAccessException;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\Dashboard\Dashboard;
-use Piwik\Plugins\ImageGraph\ImageGraph;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\SegmentEditor\API as APISegmentEditor;
-use Piwik\Plugins\SitesManager\API as SitesManagerApi;
-use Piwik\ReportRenderer;
-use Piwik\Scheduler\RetryableException;
-use Piwik\Scheduler\Schedule\Schedule;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Translation\Translator;
-use Piwik\Log\LoggerInterface;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Context;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Development;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Filesystem;
+use Matomo\Http;
+use Matomo\Log;
+use Matomo\NoAccessException;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\Dashboard\Dashboard;
+use Matomo\Plugins\ImageGraph\ImageGraph;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\SegmentEditor\API as APISegmentEditor;
+use Matomo\Plugins\SitesManager\API as SitesManagerApi;
+use Matomo\ReportRenderer;
+use Matomo\Scheduler\RetryableException;
+use Matomo\Scheduler\Schedule\Schedule;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Translation\Translator;
+use Matomo\Log\LoggerInterface;
 
 /**
  * The ScheduledReports API lets you manage Scheduled Email reports, as well as generate, download or email any existing report.
@@ -69,12 +69,12 @@ use Piwik\Log\LoggerInterface;
  *     evolution_graph_period_n: int|string
  * }
  * @phpstan-type OutputMode self::OUTPUT_DOWNLOAD|self::OUTPUT_SAVE_ON_DISK|self::OUTPUT_INLINE|self::OUTPUT_RETURN
- * @phpstan-import-type StoredSegment from \Piwik\Plugins\SegmentEditor\API
- * @phpstan-import-type ProcessedReportData from \Piwik\Plugins\API\ProcessedReport
+ * @phpstan-import-type StoredSegment from \Matomo\Plugins\SegmentEditor\API
+ * @phpstan-import-type ProcessedReportData from \Matomo\Plugins\API\ProcessedReport
  *
- * @method static \Piwik\Plugins\ScheduledReports\API getInstance()
+ * @method static \Matomo\Plugins\ScheduledReports\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const ENFORCE_ORDER_PARAMETER = ScheduledReports::ENFORCE_ORDER_PARAMETER;
 
@@ -146,10 +146,10 @@ class API extends \Piwik\Plugin\API
         $evolutionPeriodN = null,
         ?string $periodParam = null
     ) {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasViewAccess($idSite);
 
-        $currentUser = Piwik::getCurrentUserLogin();
+        $currentUser = Matomo::getCurrentUserLogin();
         self::ensureLanguageSetForUser($currentUser);
 
         self::validateCommonReportAttributes($period, $hour, $description, $idSegment, $reportType, $reportFormat, $evolutionPeriodFor, $evolutionPeriodN);
@@ -237,15 +237,15 @@ class API extends \Piwik\Plugin\API
         $evolutionPeriodN = null,
         ?string $periodParam = null
     ): void {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasViewAccess($idSite);
 
         $scheduledReports = $this->getReports($idSite, $periodSearch = false, $idReport);
         $report   = reset($scheduledReports);
         /** @phpstan-var ScheduledReport $report */
         $idReport = $report['idreport'];
 
-        $currentUser = Piwik::getCurrentUserLogin();
+        $currentUser = Matomo::getCurrentUserLogin();
         self::ensureLanguageSetForUser($currentUser);
 
         self::validateCommonReportAttributes($period, $hour, $description, $idSegment, $reportType, $reportFormat, $evolutionPeriodFor, $evolutionPeriodN);
@@ -288,7 +288,7 @@ class API extends \Piwik\Plugin\API
         $APIScheduledReports = $this->getReports($idSite = false, $periodSearch = false, $idReport);
         $report = reset($APIScheduledReports);
         /** @phpstan-var ScheduledReport $report */
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($report['login']);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($report['login']);
 
         $this->getModel()->updateReport($idReport, [
             'deleted' => 1,
@@ -315,7 +315,7 @@ class API extends \Piwik\Plugin\API
         $idSite = $this->validatePositiveIntegerParameter($idSite, 'idSite');
         $segment = trim($segment);
 
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $idSegment = $this->findIdSegmentForDefinition($segment, $idSite);
 
         $dashboardInfo = $this->getDashboardNameAndLayout($dashId);
@@ -364,12 +364,12 @@ class API extends \Piwik\Plugin\API
      */
     private function getDashboardNameAndLayout(int $dashId): ?array
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             return null;
         }
 
         $dashboard = new Dashboard();
-        $login = Piwik::getCurrentUserLogin();
+        $login = Matomo::getCurrentUserLogin();
         $allDashboards = $dashboard->getAllDashboards($login);
         $name = $layout = '';
         $dashboardFound = false;
@@ -383,7 +383,7 @@ class API extends \Piwik\Plugin\API
         }
         if ($dashId === 1 && !$dashboardFound) {
             $layout = $dashboard->decodeLayout($dashboard->getDefaultLayout());
-            $name = Piwik::translate('Dashboard_Dashboard');
+            $name = Matomo::translate('Dashboard_Dashboard');
         }
         return ['name' => $name, 'layout' => $layout];
     }
@@ -431,7 +431,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getReports($idSite = false, $period = false, $idReport = false, $ifSuperUserReturnOnlySuperUserReports = false, $idSegment = false): array
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $cacheKey = (int)$idSite . '.' . (string)$period . '.' . (int)$idReport . '.' . (int)$ifSuperUserReturnOnlySuperUserReports;
         if (isset(self::$cache[$cacheKey])) {
@@ -443,11 +443,11 @@ class API extends \Piwik\Plugin\API
 
         // Super user gets all reports back, other users only their own
         if (
-            !Piwik::hasUserSuperUserAccess()
+            !Matomo::hasUserSuperUserAccess()
             || $ifSuperUserReturnOnlySuperUserReports
         ) {
             $sqlWhere .= "AND login = ?";
-            $bind[] = Piwik::getCurrentUserLogin();
+            $bind[] = Matomo::getCurrentUserLogin();
         }
 
         if (!empty($period)) {
@@ -456,7 +456,7 @@ class API extends \Piwik\Plugin\API
             $bind[] = $period;
         }
         if (!empty($idSite)) {
-            Piwik::checkUserHasViewAccess($idSite);
+            Matomo::checkUserHasViewAccess($idSite);
             $sqlWhere .= " AND " . Common::prefixTable('site') . ".idsite = ?";
             $bind[] = $idSite;
         }
@@ -552,14 +552,14 @@ class API extends \Piwik\Plugin\API
         $reportFormat = false,
         $parameters = false
     ) {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         if (!$this->enableSaveReportOnDisk && $outputType == self::OUTPUT_SAVE_ON_DISK) {
             $outputType = self::OUTPUT_DOWNLOAD;
         }
 
         /** @var Translator $translator */
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
 
         // load specified language
         if (empty($language)) {
@@ -616,7 +616,7 @@ class API extends \Piwik\Plugin\API
             Config::setSetting('General', 'graphs_default_evolution_graph_last_days_amount', $report['evolution_graph_period_n']);
 
             // available reports
-            $availableReportMetadata = \Piwik\Plugins\API\API::getInstance()->getReportMetadata($idSite);
+            $availableReportMetadata = \Matomo\Plugins\API\API::getInstance()->getReportMetadata($idSite);
 
             $reportMetadata = [];
             if ($enforceCustomOrder) {
@@ -687,7 +687,7 @@ class API extends \Piwik\Plugin\API
                         $userLogin = $report['login'];
                         if (
                             !empty($userLogin)
-                            && !Piwik::hasTheUserSuperUserAccess($userLogin)
+                            && !Matomo::hasTheUserSuperUserAccess($userLogin)
                         ) {
                             $params['_restrictSitesToLogin'] = $userLogin;
                         }
@@ -751,7 +751,7 @@ class API extends \Piwik\Plugin\API
          * @param array $report An array describing the scheduled report that is being generated.
          *                      See the `ScheduledReport` type on {@see API} for the structure.
          */
-        Piwik::postEvent(
+        Matomo::postEvent(
             self::PROCESS_REPORTS_EVENT,
             [&$processedReports, $reportType, $outputType, $report]
         );
@@ -766,7 +766,7 @@ class API extends \Piwik\Plugin\API
          * handle their new report formats.
          *
          * @param ReportRenderer &$reportRenderer This variable should be set to an instance that
-         *                                        extends {@link \Piwik\ReportRenderer} by one of the event
+         *                                        extends {@link \Matomo\ReportRenderer} by one of the event
          *                                        subscribers.
          * @param string $reportType A string ID describing how the report is sent, e.g.
          *                           `'sms'` or `'email'`.
@@ -776,7 +776,7 @@ class API extends \Piwik\Plugin\API
          * @param array $report An array describing the scheduled report that is being generated.
          *                      See the `ScheduledReport` type on {@see API} for the structure.
          */
-        Piwik::postEvent(
+        Matomo::postEvent(
             self::GET_RENDERER_INSTANCE_EVENT,
             [&$reportRenderer, $reportType, $outputType, $report]
         );
@@ -849,7 +849,7 @@ class API extends \Piwik\Plugin\API
      */
     public function sendReport($idReport, $period = false, $date = false, $force = false): void
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $reports = $this->getReports($idSite = false, false, $idReport);
         $report = reset($reports);
@@ -866,7 +866,7 @@ class API extends \Piwik\Plugin\API
 
         Context::changeIdSite($report['idsite'], function () use ($report, $idReport, $date, $force) {
 
-            $language = \Piwik\Plugins\LanguagesManager\API::getInstance()->getLanguageForUser($report['login']);
+            $language = \Matomo\Plugins\LanguagesManager\API::getInstance()->getLanguageForUser($report['login']);
 
             // generate report
             $this->enableSaveReportOnDisk = true;
@@ -928,7 +928,7 @@ class API extends \Piwik\Plugin\API
                  * @param bool $force A report can only be sent once per period. Setting this to true
                  *                    will force to send the report even if it has already been sent.
                  */
-                Piwik::postEvent(
+                Matomo::postEvent(
                     self::SEND_REPORT_EVENT,
                     [
                         &$reportType,
@@ -939,7 +939,7 @@ class API extends \Piwik\Plugin\API
                         $reportSubject,
                         $reportTitle,
                         $additionalFiles,
-                        \Piwik\Period\Factory::build($report['period_param'] ?? $report['period'], $date),
+                        \Matomo\Period\Factory::build($report['period_param'] ?? $report['period'], $date),
                         $force,
                     ]
                 );
@@ -974,7 +974,7 @@ class API extends \Piwik\Plugin\API
             count($reports) == 1
             && $reports[0] == 'MultiSites_getAll'
         ) {
-            $reportSubject = Piwik::translate('General_MultiSitesSummary');
+            $reportSubject = Matomo::translate('General_MultiSitesSummary');
             $reportTitle = $reportSubject;
         }
 
@@ -1001,7 +1001,7 @@ class API extends \Piwik\Plugin\API
          * @param string $reportType A string ID describing how the report is sent, eg,
          *                           `'sms'` or `'email'`.
          */
-        Piwik::postEvent(self::GET_REPORT_PARAMETERS_EVENT, [&$availableParameters, $reportType]);
+        Matomo::postEvent(self::GET_REPORT_PARAMETERS_EVENT, [&$availableParameters, $reportType]);
 
         // unset invalid parameters
         $availableParameterKeys = array_keys($availableParameters);
@@ -1028,7 +1028,7 @@ class API extends \Piwik\Plugin\API
          * @param string $reportType A string ID describing how the report is sent, eg,
          *                           `'sms'` or `'email'`.
          */
-        Piwik::postEvent(self::VALIDATE_PARAMETERS_EVENT, [&$parameters, $reportType]);
+        Matomo::postEvent(self::VALIDATE_PARAMETERS_EVENT, [&$parameters, $reportType]);
 
         return (string)json_encode($parameters);
     }
@@ -1155,7 +1155,7 @@ class API extends \Piwik\Plugin\API
 
         if (!in_array($reportFormat, $reportFormats)) {
             throw new Exception(
-                Piwik::translate(
+                Matomo::translate(
                     'General_ExceptionInvalidReportRendererFormat',
                     [$reportFormat, implode(', ', $reportFormats)]
                 )
@@ -1208,7 +1208,7 @@ class API extends \Piwik\Plugin\API
          *                           `'sms'` or `'email'`.
          * @param int $idSite The ID of the site we're getting available reports for.
          */
-        Piwik::postEvent(
+        Matomo::postEvent(
             self::GET_REPORT_METADATA_EVENT,
             [&$availableReportMetadata, $reportType, $idSite]
         );
@@ -1238,7 +1238,7 @@ class API extends \Piwik\Plugin\API
          * @param string $reportType A string ID describing how the report is sent, eg,
          *                           `'sms'` or `'email'`.
          */
-        Piwik::postEvent(
+        Matomo::postEvent(
             self::ALLOW_MULTIPLE_REPORTS_EVENT,
             [&$allowMultipleReports, $reportType]
         );
@@ -1262,7 +1262,7 @@ class API extends \Piwik\Plugin\API
          * @param array &$reportTypes An array mapping transport medium IDs with the paths to those
          *                            mediums' icons. Add your new backend's ID to this array.
          */
-        Piwik::postEvent(self::GET_REPORT_TYPES_EVENT, [&$reportTypes]);
+        Matomo::postEvent(self::GET_REPORT_TYPES_EVENT, [&$reportTypes]);
 
         return $reportTypes;
     }
@@ -1288,7 +1288,7 @@ class API extends \Piwik\Plugin\API
          * @param string $reportType A string ID describing how the report is sent, eg,
          *                           `'sms'` or `'email'`.
          */
-        Piwik::postEvent(
+        Matomo::postEvent(
             self::GET_REPORT_FORMATS_EVENT,
             [&$reportFormats, $reportType]
         );
@@ -1321,7 +1321,7 @@ class API extends \Piwik\Plugin\API
          * @param array $report An array describing the scheduled report that is being
          *                      generated.
          */
-        Piwik::postEvent(self::GET_REPORT_RECIPIENTS_EVENT, [&$recipients, $report['type'], $report]);
+        Matomo::postEvent(self::GET_REPORT_RECIPIENTS_EVENT, [&$recipients, $report['type'], $report]);
 
         return $recipients;
     }
@@ -1352,7 +1352,7 @@ class API extends \Piwik\Plugin\API
      */
     public static function isSegmentEditorActivated(): bool
     {
-        return \Piwik\Plugin\Manager::getInstance()->isPluginActivated('SegmentEditor');
+        return \Matomo\Plugin\Manager::getInstance()->isPluginActivated('SegmentEditor');
     }
 
     /**
@@ -1381,7 +1381,7 @@ class API extends \Piwik\Plugin\API
             empty($idSitesUserHasAccess)
             || !in_array($idSite, $idSitesUserHasAccess)
         ) {
-            throw new NoAccessException(Piwik::translate('General_ExceptionPrivilege', ["'view'"]));
+            throw new NoAccessException(Matomo::translate('General_ExceptionPrivilege', ["'view'"]));
         }
     }
 

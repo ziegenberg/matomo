@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * The average amount of time needed to connect to the server. Calculated as
@@ -25,11 +25,11 @@ class AverageTimeNetwork extends AveragePerformanceMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeNetwork');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeNetwork');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeNetworkDocumentation');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeNetworkDocumentation');
     }
 }

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\JsTrackerInstallCheck\tests\Unit;
+namespace Matomo\Plugins\JsTrackerInstallCheck\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugins\JsTrackerInstallCheck\NonceOption\JsTrackerInstallCheckOption;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugins\JsTrackerInstallCheck\NonceOption\JsTrackerInstallCheckOption;
 
 class JsTrackerInstallCheckOptionTest extends TestCase
 {

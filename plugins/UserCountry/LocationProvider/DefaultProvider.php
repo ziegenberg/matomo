@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\LocationProvider;
+namespace Matomo\Plugins\UserCountry\LocationProvider;
 
 use Matomo\Network\IP;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\Plugins\Provider\Provider as ProviderProvider;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tracker\TrackerConfig;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\Plugins\Provider\Provider as ProviderProvider;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tracker\TrackerConfig;
+use Matomo\Url;
 
 /**
  * The default LocationProvider, this LocationProvider guesses a visitor's country
@@ -62,7 +62,7 @@ class DefaultProvider extends LocationProvider
     {
         if (
             !Manager::getInstance()->isPluginInstalled('Provider')
-            || !class_exists('Piwik\Plugins\Provider\Provider')
+            || !class_exists('Matomo\Plugins\Provider\Provider')
             || Common::getRequestVar('dp', 0, 'int') === 1
         ) {
             return false;
@@ -84,7 +84,7 @@ class DefaultProvider extends LocationProvider
         }
 
         /** @var RegionDataProvider $regionDataProvider */
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         if (array_key_exists($hostnameDomain, $regionDataProvider->getCountryList())) {
             return $hostnameDomain;
@@ -175,21 +175,21 @@ class DefaultProvider extends LocationProvider
      */
     public function getInfo()
     {
-        $desc = '<p>' . Piwik::translate('UserCountry_DefaultLocationProviderDesc1') . ' '
-            . Piwik::translate(
+        $desc = '<p>' . Matomo::translate('UserCountry_DefaultLocationProviderDesc1') . ' '
+            . Matomo::translate(
                 'UserCountry_DefaultLocationProviderDesc2',
                 ['<strong>', '', '', '</strong>']
             )
             . '</p><p>' . Url::getExternalLinkTag('https://matomo.org/faq/how-to/faq_163')
-            . Piwik::translate('UserCountry_HowToInstallGeoIPDatabases')
+            . Matomo::translate('UserCountry_HowToInstallGeoIPDatabases')
             . '</a></p>';
         return ['id' => self::ID, 'title' => self::TITLE, 'description' => $desc, 'order' => 1];
     }
 
     public function getUsageWarning(): ?string
     {
-        $comment = Piwik::translate('UserCountry_DefaultLocationProviderDesc1') . ' ';
-        $comment .= Piwik::translate('UserCountry_DefaultLocationProviderDesc2', [
+        $comment = Matomo::translate('UserCountry_DefaultLocationProviderDesc1') . ' ';
+        $comment .= Matomo::translate('UserCountry_DefaultLocationProviderDesc2', [
             Url::getExternalLinkTag('https://matomo.org/docs/geo-locate/'), '', '', '</a>',
         ]);
 

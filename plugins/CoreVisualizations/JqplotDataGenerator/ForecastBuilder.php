@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataTableFactory;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Period\Month;
-use Piwik\Site;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataTableFactory;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Period\Month;
+use Matomo\Site;
 
 /**
  * Computes per-tick forecast values for incomplete-period data points on evolution-style series.

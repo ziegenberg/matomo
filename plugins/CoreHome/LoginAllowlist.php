@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome;
+namespace Matomo\Plugins\CoreHome;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
 use Matomo\Network\IP as NetworkIp;
-use Piwik\NoAccessException;
-use Piwik\Piwik;
-use Piwik\SettingsServer;
+use Matomo\NoAccessException;
+use Matomo\Matomo;
+use Matomo\SettingsServer;
 
 /**
  * This class is in CoreHome since some alternative Login plugins disable the Login plugin and we want to ensure the
@@ -38,7 +38,7 @@ class LoginAllowlist
         // ignore whitelist checks for opt out iframe or opt out JS
         if (
             !SettingsServer::isTrackerApiRequest()
-            && (('CoreAdminHome' === Piwik::getModule() && ('optOut' === Piwik::getAction() || 'optOutJS' === Piwik::getAction())))
+            && (('CoreAdminHome' === Matomo::getModule() && ('optOut' === Matomo::getAction() || 'optOutJS' === Matomo::getAction())))
         ) {
             return false;
         }
@@ -50,7 +50,7 @@ class LoginAllowlist
     public function checkIsAllowed($ipString)
     {
         if (!$this->isIpAllowed($ipString)) {
-            throw new NoAccessException(Piwik::translate('CoreHome_ExceptionNotAllowlistedIP', $ipString));
+            throw new NoAccessException(Matomo::translate('CoreHome_ExceptionNotAllowlistedIP', $ipString));
         }
     }
 

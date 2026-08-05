@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Columns;
+namespace Matomo\Columns;
 
-use Piwik\Common;
-use Piwik\Db\Schema;
-use Piwik\DbHelper;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Plugin\Manager;
-use Piwik\Updater as PiwikUpdater;
-use Piwik\Filesystem;
-use Piwik\Cache as PiwikCache;
-use Piwik\Updater\Migration;
+use Matomo\Common;
+use Matomo\Db\Schema;
+use Matomo\DbHelper;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Plugin\Manager;
+use Matomo\Updater as PiwikUpdater;
+use Matomo\Filesystem;
+use Matomo\Cache as PiwikCache;
+use Matomo\Updater\Migration;
 
 /**
  * Class that handles dimension updates
  */
-class Updater extends \Piwik\Updates
+class Updater extends \Matomo\Updates
 {
     private static $cacheId = 'AllDimensionModifyTime';
 

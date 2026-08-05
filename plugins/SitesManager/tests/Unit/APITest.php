@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\Unit;
+namespace Matomo\Plugins\SitesManager\tests\Unit;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Measurable\Type\TypeManager;
-use Piwik\Plugin\SettingsProvider;
-use Piwik\Plugins\CorePluginsAdmin\SettingsMetadata;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
-use Piwik\SettingsServer;
-use Piwik\SiteContentDetector;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Translation\Translator;
+use Matomo\Container\StaticContainer;
+use Matomo\Measurable\Type\TypeManager;
+use Matomo\Plugin\SettingsProvider;
+use Matomo\Plugins\CorePluginsAdmin\SettingsMetadata;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
+use Matomo\SettingsServer;
+use Matomo\SiteContentDetector;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Translation\Translator;
 
 /**
  * @group SitesManaager
@@ -43,7 +43,7 @@ class APITest extends \PHPUnit\Framework\TestCase
 
         $access = new FakeAccess();
         $access->setSuperUserAccess();
-        StaticContainer::getContainer()->set('Piwik\Access', $access);
+        StaticContainer::getContainer()->set('Matomo\Access', $access);
 
         Fixture::loadAllTranslations();
 
@@ -78,7 +78,7 @@ class APITest extends \PHPUnit\Framework\TestCase
      */
     public function testGetTimezoneName($timezone, $language, $expected)
     {
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
         $translator->setCurrentLanguage($language);
 
         $name = $this->api->getTimezoneName($timezone);

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Piwik;
-use Piwik\Site;
-use Piwik\Db as PiwikDb;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Matomo;
+use Matomo\Site;
+use Matomo\Db as PiwikDb;
+use Matomo\Url;
 
 class Failures
 {
@@ -162,7 +162,7 @@ class Failures
             try {
                 $failure['site_name'] = Site::getNameFor($failure['idsite']);
             } catch (UnexpectedWebsiteFoundException $e) {
-                $failure['site_name'] = Piwik::translate('General_Unknown');
+                $failure['site_name'] = Matomo::translate('General_Unknown');
             }
             $failure['pretty_date_first_occurred'] = Date::factory($failure['date_first_occurred'])->getLocalized(Date::DATETIME_FORMAT_SHORT);
             parse_str($failure['request_url'], $params);
@@ -177,13 +177,13 @@ class Failures
 
             switch ($failure['idfailure']) {
                 case self::FAILURE_ID_INVALID_SITE:
-                    $failure['problem'] = Piwik::translate('CoreAdminHome_TrackingFailureInvalidSiteProblem');
-                    $failure['solution'] = Piwik::translate('CoreAdminHome_TrackingFailureInvalidSiteSolution');
+                    $failure['problem'] = Matomo::translate('CoreAdminHome_TrackingFailureInvalidSiteProblem');
+                    $failure['solution'] = Matomo::translate('CoreAdminHome_TrackingFailureInvalidSiteSolution');
                     $failure['solution_url'] = Url::addCampaignParametersToMatomoLink('https://matomo.org/faq/how-to/faq_30838/');
                     break;
                 case self::FAILURE_ID_NOT_AUTHENTICATED:
-                    $failure['problem'] = Piwik::translate('CoreAdminHome_TrackingFailureAuthenticationProblem');
-                    $failure['solution'] = Piwik::translate('CoreAdminHome_TrackingFailureAuthenticationSolution');
+                    $failure['problem'] = Matomo::translate('CoreAdminHome_TrackingFailureAuthenticationProblem');
+                    $failure['solution'] = Matomo::translate('CoreAdminHome_TrackingFailureAuthenticationSolution');
                     $failure['solution_url'] = Url::addCampaignParametersToMatomoLink('https://matomo.org/faq/how-to/faq_30835/');
                     break;
             }
@@ -193,7 +193,7 @@ class Failures
          * @ignore
          * internal use only
          */
-        Piwik::postEvent('Tracking.makeFailuresHumanReadable', array(&$failures));
+        Matomo::postEvent('Tracking.makeFailuresHumanReadable', array(&$failures));
 
         return $failures;
     }

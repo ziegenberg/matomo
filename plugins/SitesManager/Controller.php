@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager;
+namespace Matomo\Plugins\SitesManager;
 
 use Exception;
-use Piwik\API\ResponseBuilder;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Http\JsonResponse;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\SitesManager\SiteContentDetection\Matomo;
-use Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
-use Piwik\Plugins\SitesManager\SiteContentDetection\WordPress;
-use Piwik\SiteContentDetector;
-use Piwik\Session;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\API\ResponseBuilder;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Http\JsonResponse;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\SitesManager\SiteContentDetection\Matomo;
+use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
+use Matomo\Plugins\SitesManager\SiteContentDetection\WordPress;
+use Matomo\SiteContentDetector;
+use Matomo\Session;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     private SiteContentDetector $siteContentDetector;
 
@@ -41,7 +41,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
      */
     public function index()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         SitesManager::dieIfSitesAdminIsDisabled();
 
         $pluginManager = Manager::getInstance();
@@ -58,7 +58,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function globalSettings()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         return $this->renderTemplate(
             'globalSettings',
@@ -70,7 +70,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function getGlobalSettings()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $response = new ResponseBuilder(Common::getRequestVar('format'));
 
@@ -134,7 +134,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
      */
     public function ignoreNoDataMessage()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $this->markNoDataMessageIgnored();
 
@@ -148,7 +148,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     #[JsonResponse]
     public function dismissNoDataMessage(): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $this->markNoDataMessageIgnored();
 
@@ -209,14 +209,14 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                  * @param string $tabContent  Content of the tab
                  * @param SiteContentDetector $detector  Instance of SiteContentDetector, holding current detection results
                  */
-                Piwik::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.content', [&$tabContent, $this->siteContentDetector]);
+                Matomo::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.content', [&$tabContent, $this->siteContentDetector]);
                 /**
                  * Event that can be used to manipulate the content of a record on the others tab on the no data page
                  *
                  * @param string $othersInstruction  Content of the record
                  * @param SiteContentDetector $detector  Instance of SiteContentDetector, holding current detection results
                  */
-                Piwik::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.others', [&$othersInstruction, $this->siteContentDetector]);
+                Matomo::postEvent('Template.siteWithoutDataTab.' . $obj::getId() . '.others', [&$othersInstruction, $this->siteContentDetector]);
 
                 if (!empty($tabContent)) {
                     $trackingMethods[] = [
@@ -273,7 +273,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         // add integration and others tab
         $trackingMethods[] = [
             'id'                   => 'Integrations',
-            'name'                 => Piwik::translate('SitesManager_Integrations'),
+            'name'                 => Matomo::translate('SitesManager_Integrations'),
             'type'                 => SiteContentDetectionAbstract::TYPE_OTHER,
             'content'              => $this->renderIntegrationsTab($instructionUrls),
             'icon'                 => './plugins/SitesManager/images/integrations.svg',
@@ -286,7 +286,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         ];
         $trackingMethods[] = [
             'id'                   => 'Other',
-            'name'                 => Piwik::translate('SitesManager_SiteWithoutDataOtherWays'),
+            'name'                 => Matomo::translate('SitesManager_SiteWithoutDataOtherWays'),
             'type'                 => SiteContentDetectionAbstract::TYPE_OTHER,
             'content'              => $this->renderOthersTab($othersInstructions),
             'icon'                 => './plugins/SitesManager/images/others.svg',
@@ -343,9 +343,9 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         if (!Manager::getInstance()->isPluginLoaded('GoogleAnalyticsImporter')) {
             $googleAnalyticsImporterInstruction = [
                 'id'                => 'GoogleAnalyticsImporter',
-                'name'              => Piwik::translate('CoreAdminHome_ImportFromGoogleAnalytics'),
+                'name'              => Matomo::translate('CoreAdminHome_ImportFromGoogleAnalytics'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Piwik::translate(
+                'othersInstruction' => Matomo::translate(
                     'CoreAdminHome_ImportFromGoogleAnalyticsDescription',
                     [Url::getExternalLinkTag('https://plugins.matomo.org/GoogleAnalyticsImporter'), '</a>']
                 ),
@@ -355,7 +355,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         /**
          * @ignore
          */
-        Piwik::postEvent('SitesManager.siteWithoutData.customizeImporterMessage', [&$googleAnalyticsImporterInstruction]);
+        Matomo::postEvent('SitesManager.siteWithoutData.customizeImporterMessage', [&$googleAnalyticsImporterInstruction]);
 
         return $googleAnalyticsImporterInstruction;
     }
@@ -377,36 +377,36 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             $othersInstructions,
             [
                 'id'                => 'ImageTracking',
-                'name'              => Piwik::translate('CoreAdminHome_ImageTracking'),
+                'name'              => Matomo::translate('CoreAdminHome_ImageTracking'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Piwik::translate(
+                'othersInstruction' => Matomo::translate(
                     'SitesManager_ImageTrackingDescription',
                     [Url::getExternalLinkTag('https://matomo.org/docs/tracking-api/reference/'), '</a>']
                 ),
             ],
             [
                 'id'                => 'LogAnalytics',
-                'name'              => Piwik::translate('SitesManager_LogAnalytics'),
+                'name'              => Matomo::translate('SitesManager_LogAnalytics'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Piwik::translate(
+                'othersInstruction' => Matomo::translate(
                     'SitesManager_LogAnalyticsDescription',
                     [Url::getExternalLinkTag('https://matomo.org/log-analytics/'), '</a>']
                 ),
             ],
             [
                 'id'                => 'MobileAppsAndSDKs',
-                'name'              => Piwik::translate('SitesManager_MobileAppsAndSDKs'),
+                'name'              => Matomo::translate('SitesManager_MobileAppsAndSDKs'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Piwik::translate(
+                'othersInstruction' => Matomo::translate(
                     'SitesManager_MobileAppsAndSDKsDescription',
                     [Url::getExternalLinkTag('https://matomo.org/integrate/#programming-language-platforms-and-frameworks'), '</a>']
                 ),
             ],
             [
                 'id'                => 'HttpTrackingApi',
-                'name'              => Piwik::translate('CoreAdminHome_HttpTrackingApi'),
+                'name'              => Matomo::translate('CoreAdminHome_HttpTrackingApi'),
                 'type'              => SiteContentDetectionAbstract::TYPE_OTHER,
-                'othersInstruction' => Piwik::translate(
+                'othersInstruction' => Matomo::translate(
                     'CoreAdminHome_HttpTrackingApiDescription',
                     [Url::getExternalLinkTag('https://developer.matomo.org/api-reference/tracking-api'), '</a>']
                 ),
@@ -451,7 +451,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             return '';
         }
 
-        return Piwik::translate(
+        return Matomo::translate(
             'SitesManager_SiteWithoutDataDetectedSite',
             [
                 $detectedCms::getName(),
@@ -463,9 +463,9 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     private function getInviteUserLink()
     {
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
         $idSite = $request->getIntegerParameter('idSite', 0);
-        if (!$idSite || !Piwik::isUserHasAdminAccess($idSite)) {
+        if (!$idSite || !Matomo::isUserHasAdminAccess($idSite)) {
             return Url::addCampaignParametersToMatomoLink('https://matomo.org/faq/general/manage-users/#imanadmin-creating-users');
         }
 

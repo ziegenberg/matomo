@@ -1,9 +1,9 @@
 <?php
 
-namespace Piwik\Tests\Unit\DataTable;
+namespace Matomo\Tests\Unit\DataTable;
 
-use Piwik\DataTable\Manager;
-use Piwik\DataTable;
+use Matomo\DataTable\Manager;
+use Matomo\DataTable;
 
 /**
  * @group DataTable
@@ -30,7 +30,7 @@ class ManagerTest extends \PHPUnit\Framework\TestCase
 
     public function testGetTableShouldThrowExceptionIfTableIdDoesNotExist()
     {
-        $this->expectException(\Piwik\DataTable\TableNotFoundException::class);
+        $this->expectException(\Matomo\DataTable\TableNotFoundException::class);
         $this->expectExceptionMessage('table id 1 not found in memory');
 
         $this->manager->getTable(1);

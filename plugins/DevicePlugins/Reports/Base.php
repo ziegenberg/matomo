@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicePlugins\Reports;
+namespace Matomo\Plugins\DevicePlugins\Reports;
 
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     protected function init()
     {

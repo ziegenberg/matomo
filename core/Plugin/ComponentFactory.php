@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Log;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Log;
+use Matomo\Plugin\Manager as PluginManager;
 use Exception;
 
 /**
@@ -30,7 +30,7 @@ class ComponentFactory
      * @param string $componentClassSimpleName The component's class name w/o namespace, eg,
      *                                         `"GetKeywords"`.
      * @param string $componentTypeClass The fully qualified class name of the component type, eg,
-     *                                   `"Piwik\Plugin\Report"`.
+     *                                   `"Matomo\Plugin\Report"`.
      *
      * @template T of object
      * @phpstan-param class-string<T> $componentTypeClass
@@ -59,7 +59,7 @@ class ComponentFactory
         }
 
         $subnamespace = $componentTypeClass::COMPONENT_SUBNAMESPACE;
-        $desiredComponentClass = 'Piwik\\Plugins\\' . $pluginName . '\\' . $subnamespace . '\\' . $componentClassSimpleName;
+        $desiredComponentClass = 'Matomo\Plugins\\' . $pluginName . '\\' . $subnamespace . '\\' . $componentClassSimpleName;
 
         $components = $plugin->findMultipleComponents($subnamespace, $componentTypeClass);
         foreach ($components as $class) {
@@ -83,7 +83,7 @@ class ComponentFactory
      * Finds a component instance that satisfies a given predicate.
      *
      * @param string $componentTypeClass The fully qualified class name of the component type, eg,
-     *                                   `"Piwik\Plugin\Report"`.
+     *                                   `"Matomo\Plugin\Report"`.
      * @param string|false $pluginName The name of the plugin the component is expected to belong to,
      *                                 eg, `'DevicesDetection'`.
      * @param callable $predicate
@@ -133,7 +133,7 @@ class ComponentFactory
     /**
      * @param string $function
      * @param string $pluginName
-     * @return null|\Piwik\Plugin
+     * @return null|\Matomo\Plugin
      */
     private static function getActivatedPlugin($function, $pluginName)
     {

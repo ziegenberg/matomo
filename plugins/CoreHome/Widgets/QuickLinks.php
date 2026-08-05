@@ -1,12 +1,12 @@
 <?php
 
-namespace Piwik\Plugins\CoreHome\Widgets;
+namespace Matomo\Plugins\CoreHome\Widgets;
 
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 class QuickLinks extends Widget
 {
@@ -15,7 +15,7 @@ class QuickLinks extends Widget
         $config->setCategoryId('About Matomo');
         $config->setName('CoreHome_QuickLinks');
         $config->setOrder(16);
-        $config->setIsEnabled(Piwik::hasUserSuperUserAccess());
+        $config->setIsEnabled(Matomo::hasUserSuperUserAccess());
     }
 
     public function render()

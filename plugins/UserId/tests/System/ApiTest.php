@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserId\tests\System;
+namespace Matomo\Plugins\UserId\tests\System;
 
-use Piwik\Plugins\UserId\tests\Fixtures\TrackFewVisitsAndCreateUsers;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\UserId\tests\Fixtures\TrackFewVisitsAndCreateUsers;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * Run system tests against the UserId.getUsers API method

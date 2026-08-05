@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking;
+namespace Matomo\Plugins\BotTracking;
 
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const AI_CHATBOTS_PAGES_RECORD = 'BotTracking_AIChatbotsPages';
     public const AI_CHATBOTS_DOCUMENTS_RECORD = 'BotTracking_AIChatbotsDocuments';

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Integration;
+namespace Matomo\Plugins\Referrers\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 
 /**
  * @group Referrers

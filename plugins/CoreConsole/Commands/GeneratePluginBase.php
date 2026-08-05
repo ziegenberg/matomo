@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Common;
-use Piwik\Development;
-use Piwik\Filesystem;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugin\Dependency;
-use Piwik\Plugin\Manager;
-use Piwik\Version;
-use Piwik\SettingsPiwik;
-use Piwik\Exception\NotGitInstalledException;
+use Matomo\Common;
+use Matomo\Development;
+use Matomo\Filesystem;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugin\Dependency;
+use Matomo\Plugin\Manager;
+use Matomo\Version;
+use Matomo\SettingsPiwik;
+use Matomo\Exception\NotGitInstalledException;
 
 abstract class GeneratePluginBase extends ConsoleCommand
 {

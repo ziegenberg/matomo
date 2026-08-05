@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\tests\Integration;
+namespace Matomo\Plugins\CustomJsTracker\tests\Integration;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use Piwik\Piwik;
-use Piwik\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Matomo;
+use Matomo\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CustomJsTracker
@@ -49,7 +49,7 @@ class PluginTrackerFilesTest extends IntegrationTestCase
         $foundFiles = $trackerFiles->find();
         $this->assertCount(1, $foundFiles);
 
-        Piwik::addAction('CustomJsTracker.shouldAddTrackerFile', function (&$shouldAdd, $pluginName) {
+        Matomo::addAction('CustomJsTracker.shouldAddTrackerFile', function (&$shouldAdd, $pluginName) {
             if ($pluginName === 'CustomJsTracker') {
                 $shouldAdd = false;
             }

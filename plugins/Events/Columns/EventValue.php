@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Columns;
+namespace Matomo\Plugins\Events\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\MetricsList;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\ComputedMetric;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Tracker\Action;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\MetricsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\ComputedMetric;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Tracker\Action;
 
 class EventValue extends ActionDimension
 {
@@ -37,22 +37,22 @@ class EventValue extends ActionDimension
         $metricsList->addMetric($metric1);
 
         $metric2 = $dimensionMetricFactory->createMetric(ArchivedMetric::AGGREGATION_MAX);
-        $metric2->setDocumentation(Piwik::translate('Events_MaxValueDocumentation'));
+        $metric2->setDocumentation(Matomo::translate('Events_MaxValueDocumentation'));
         $metricsList->addMetric($metric2);
 
         $metric4 = $dimensionMetricFactory->createMetric(ArchivedMetric::AGGREGATION_MIN);
-        $metric4->setDocumentation(Piwik::translate('Events_MinValueDocumentation'));
+        $metric4->setDocumentation(Matomo::translate('Events_MinValueDocumentation'));
         $metricsList->addMetric($metric4);
 
         $metric3 = $dimensionMetricFactory->createMetric(ArchivedMetric::AGGREGATION_COUNT_WITH_NUMERIC_VALUE);
         $metric3->setName('events_with_event_value');
-        $metric3->setTranslatedName(Piwik::translate('Events_EventsWithValue'));
-        $metric3->setDocumentation(Piwik::translate('Events_EventsWithValueDocumentation'));
+        $metric3->setTranslatedName(Matomo::translate('Events_EventsWithValue'));
+        $metric3->setDocumentation(Matomo::translate('Events_EventsWithValueDocumentation'));
         $metricsList->addMetric($metric3);
 
         $metric = $dimensionMetricFactory->createComputedMetric($metric1->getName(), $metric3->getName(), ComputedMetric::AGGREGATION_AVG);
         $metric->setName('avg_event_value');
-        $metric->setTranslatedName(Piwik::translate('Events_AvgValue'));
+        $metric->setTranslatedName(Matomo::translate('Events_AvgValue'));
         $metricsList->addMetric($metric);
     }
 }

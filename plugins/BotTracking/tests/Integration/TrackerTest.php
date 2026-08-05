@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Integration;
+namespace Matomo\Plugins\BotTracking\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group BotTracking
@@ -217,7 +217,7 @@ class TrackerTest extends IntegrationTestCase
 
         $count = Db::fetchOne("SELECT COUNT(*) FROM `{$actionTable}` WHERE name = ? AND type = ?", [
             'matomo.org/faq/123?keep=1',
-            \Piwik\Tracker\Action::TYPE_PAGE_URL,
+            \Matomo\Tracker\Action::TYPE_PAGE_URL,
         ]);
         self::assertEquals(1, $count);
     }

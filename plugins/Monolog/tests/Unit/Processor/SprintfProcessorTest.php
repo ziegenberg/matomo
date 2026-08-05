@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\tests\Unit\Processor;
+namespace Matomo\Plugins\Monolog\tests\Unit\Processor;
 
 use DateTimeImmutable;
 use Monolog\Level;
 use Monolog\LogRecord;
-use Piwik\Plugins\Monolog\Processor\SprintfProcessor;
+use Matomo\Plugins\Monolog\Processor\SprintfProcessor;
 
 /**
  * @group Log
- * @covers \Piwik\Plugins\Monolog\Processor\SprintfProcessor
+ * @covers \Matomo\Plugins\Monolog\Processor\SprintfProcessor
  */
 class SprintfProcessorTest extends \PHPUnit\Framework\TestCase
 {

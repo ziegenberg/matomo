@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\System;
+namespace Matomo\Plugins\Referrers\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\Tests\Fixtures\TwoSitesManyVisitsOverSeveralDaysWithSearchEngineReferrers;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\Tests\Fixtures\TwoSitesManyVisitsOverSeveralDaysWithSearchEngineReferrers;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Referrers
@@ -434,7 +434,7 @@ class ApiTest extends SystemTestCase
     public static function provideContainerConfigBeforeClass()
     {
         return [
-            Config::class => \Piwik\DI::decorate(function (Config $config) {
+            Config::class => \Matomo\DI::decorate(function (Config $config) {
                 $config->Tracker['create_new_visit_when_website_referrer_changes'] = 1;
                 return $config;
             }),

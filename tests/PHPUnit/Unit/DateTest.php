@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\SettingsServer;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\SettingsServer;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * @group Core
@@ -434,8 +434,8 @@ class DateTest extends \PHPUnit\Framework\TestCase
     public function testGetLocalizedTimeFormats($language, $use12HourClock, $time, $shouldBe)
     {
         Fixture::loadAllTranslations();
-        StaticContainer::get('Piwik\Translation\Translator')->setCurrentLanguage($language);
-        StaticContainer::get('Piwik\Intl\Data\Provider\DateTimeFormatProvider')->forceTimeFormat($use12HourClock);
+        StaticContainer::get('Matomo\Translation\Translator')->setCurrentLanguage($language);
+        StaticContainer::get('Matomo\Intl\Data\Provider\DateTimeFormatProvider')->forceTimeFormat($use12HourClock);
 
         $date = Date::factory($time);
 

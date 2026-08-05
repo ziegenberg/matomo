@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\API\Proxy;
-use Piwik\Archive;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\API\Proxy;
+use Matomo\Archive;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
 use Exception;
 
 /**
@@ -238,7 +238,7 @@ class OneVisitorTwoVisitsTest extends SystemTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Config' => \Piwik\DI::decorate(function ($previous) {
+            'Matomo\Config' => \Matomo\DI::decorate(function ($previous) {
                 $general = $previous->General;
                 $general['action_title_category_delimiter'] = "/";
                 $previous->General = $general;

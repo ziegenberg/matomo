@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Validators;
+namespace Matomo\Plugins\PrivacyManager\Validators;
 
-use Piwik\Validators\BaseValidator;
-use Piwik\Validators\Exception;
+use Matomo\Validators\BaseValidator;
+use Matomo\Validators\Exception;
 
 class VisitsDataSubject extends BaseValidator
 {

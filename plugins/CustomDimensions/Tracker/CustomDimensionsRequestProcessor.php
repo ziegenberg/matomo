@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Tracker;
+namespace Matomo\Plugins\CustomDimensions\Tracker;
 
-use Piwik\Common;
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao;
-use Piwik\Plugins\CustomDimensions\Dimension\Extraction;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Model;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestProcessor;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao;
+use Matomo\Plugins\CustomDimensions\Dimension\Extraction;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Model;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestProcessor;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * Handles tracking of custom dimensions
@@ -208,7 +208,7 @@ class CustomDimensionsRequestProcessor extends RequestProcessor
      * Get Cached Custom Dimensions during tracking. Returns only active custom dimensions.
      *
      * @return array
-     * @throws \Piwik\Exception\UnexpectedWebsiteFoundException
+     * @throws \Matomo\Exception\UnexpectedWebsiteFoundException
      */
     public static function getCachedCustomDimensions(Request $request)
     {

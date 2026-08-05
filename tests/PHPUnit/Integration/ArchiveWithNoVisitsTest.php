@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\ArchiveProcessor\PluginsArchiver;
-use Piwik\Cache;
-use Piwik\EventDispatcher;
-use Piwik\Plugin\Archiver;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\VisitsSummary\API as VisitsSummaryAPI;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\ArchiveProcessor\PluginsArchiver;
+use Matomo\Cache;
+use Matomo\EventDispatcher;
+use Matomo\Plugin\Archiver;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\VisitsSummary\API as VisitsSummaryAPI;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class ArchiveWithNoVisitsTestMockArchiver extends Archiver
 {
@@ -52,7 +52,7 @@ class ArchiveWithNoVisitsTest extends IntegrationTestCase
 
     public function testsArchivingNotTriggeredWhenNoVisits()
     {
-        PluginsArchiver::$archivers['VisitsSummary'] = 'Piwik\Tests\Integration\ArchiveWithNoVisitsTestMockArchiver';
+        PluginsArchiver::$archivers['VisitsSummary'] = 'Matomo\Tests\Integration\ArchiveWithNoVisitsTestMockArchiver';
 
         // initiate archiving w/o adding the event and make sure no methods are called
         VisitsSummaryAPI::getInstance()->get($idSite = 1, 'week', '2012-01-01');
@@ -65,7 +65,7 @@ class ArchiveWithNoVisitsTest extends IntegrationTestCase
         // add our mock archiver instance
         // TODO: should use a dummy plugin that is activated for this test explicitly, but that can be tricky, especially in the future
 
-        PluginsArchiver::$archivers['VisitsSummary'] = 'Piwik\Tests\Integration\ArchiveWithNoVisitsTestMockArchiver';
+        PluginsArchiver::$archivers['VisitsSummary'] = 'Matomo\Tests\Integration\ArchiveWithNoVisitsTestMockArchiver';
 
         // mark our only site as should archive when no visits
         $eventDispatcher = $this->getEventDispatcher();
@@ -93,7 +93,7 @@ class ArchiveWithNoVisitsTest extends IntegrationTestCase
 
     public function testPluginArchiverDoesNotTriggerArchivingEvenIfSiteHasNoVisits()
     {
-        PluginsArchiver::$archivers['VisitsSummary'] = 'Piwik\Tests\Integration\ArchiveWithNoVisitsTestMockArchiver';
+        PluginsArchiver::$archivers['VisitsSummary'] = 'Matomo\Tests\Integration\ArchiveWithNoVisitsTestMockArchiver';
 
         ArchiveWithNoVisitsTestMockArchiver::$runWithoutVisits = true;
 
@@ -109,6 +109,6 @@ class ArchiveWithNoVisitsTest extends IntegrationTestCase
      */
     private function getEventDispatcher()
     {
-        return self::$fixture->piwikEnvironment->getContainer()->get('Piwik\EventDispatcher');
+        return self::$fixture->piwikEnvironment->getContainer()->get('Matomo\EventDispatcher');
     }
 }

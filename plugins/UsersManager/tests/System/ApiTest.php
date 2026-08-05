@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\System;
+namespace Matomo\Plugins\UsersManager\tests\System;
 
-use Piwik\Access;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\API\Request;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\tests\Fixtures\ManyUsers;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Access;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\API\Request;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\tests\Fixtures\ManyUsers;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group UsersManager
@@ -53,7 +53,7 @@ class ApiTest extends SystemTestCase
 
     private function setAnonymousUser(): void
     {
-        $auth = StaticContainer::get('Piwik\Auth');
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setLogin('anonymous');
         $auth->setTokenAuth('anonymous');
         $auth->setPasswordHash(null);
@@ -113,7 +113,7 @@ class ApiTest extends SystemTestCase
     public function testGetUserPreferenceLoginCanBeSet()
     {
         $response = Request::processRequest('UsersManager.getUserPreference', array(
-            'userLogin' => Piwik::getCurrentUserLogin(),
+            'userLogin' => Matomo::getCurrentUserLogin(),
             'preferenceName' => API::PREFERENCE_DEFAULT_REPORT_DATE,
         ));
         $this->assertEquals('yesterday', $response);

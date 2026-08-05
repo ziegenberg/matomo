@@ -1,11 +1,11 @@
 <?php
 
-namespace Piwik\Plugins\JsTrackerInstallCheck\NonceOption;
+namespace Matomo\Plugins\JsTrackerInstallCheck\NonceOption;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\SettingsPiwik;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\SettingsPiwik;
 
 class JsTrackerInstallCheckOption
 {

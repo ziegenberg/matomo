@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\IntranetMeasurable\tests\Integration\Tracker;
+namespace Matomo\Plugins\IntranetMeasurable\tests\Integration\Tracker;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\IntranetMeasurable\Tracker\RequestProcessor;
-use Piwik\Plugins\IntranetMeasurable\Type;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\IntranetMeasurable\Tracker\RequestProcessor;
+use Matomo\Plugins\IntranetMeasurable\Type;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
 
 /**
  * @group IntranetMeasurable

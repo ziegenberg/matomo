@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\Dimension\VisitDimension;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\Dimension\VisitDimension;
 
 /**
  * Dimension for the log_visit.config_id column. This column is added in the CREATE TABLE
@@ -27,17 +27,17 @@ class VisitorFingerprint extends VisitDimension
     protected $namePlural = 'General_Visitors';
     protected $segmentName = 'fingerprint';
     protected $allowAnonymous = false;
-    protected $sqlFilterValue = array('Piwik\Common', 'convertVisitorIdToBin');
+    protected $sqlFilterValue = array('Matomo\Common', 'convertVisitorIdToBin');
 
     public function getAcceptValues()
     {
-        return Piwik::translate('General_VisitorFingerprintSegmentHelp', ['1eceaa833348b187', 'API.getLastVisitsDetails']);
+        return Matomo::translate('General_VisitorFingerprintSegmentHelp', ['1eceaa833348b187', 'API.getLastVisitsDetails']);
     }
 
     public function configureMetrics(MetricsList $metricsList, DimensionMetricFactory $dimensionMetricFactory)
     {
         $metric = $dimensionMetricFactory->createMetric(ArchivedMetric::AGGREGATION_UNIQUE);
-        $metric->setTranslatedName(Piwik::translate('General_VisitorFingerprint'));
+        $metric->setTranslatedName(Matomo::translate('General_VisitorFingerprint'));
         $metricsList->addMetric($metric);
     }
 }

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\DataTable\Filter;
+namespace Matomo\Plugins\Referrers\DataTable\Filter;
 
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 class GroupDifferentSocialWritings extends DataTable\BaseFilter
 {

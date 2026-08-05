@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class GetTopPageUrlsRealTime extends AbstractAIChatbotsRealTimeTopPageUrlsReport
 {
@@ -19,8 +19,8 @@ class GetTopPageUrlsRealTime extends AbstractAIChatbotsRealTimeTopPageUrlsReport
     {
         parent::init();
 
-        $this->name          = Piwik::translate('BotTracking_TopPageUrlsLast30MinutesTitle');
-        $this->documentation = Piwik::translate('BotTracking_TopPageUrlsLast30MinutesDocumentation');
+        $this->name          = Matomo::translate('BotTracking_TopPageUrlsLast30MinutesTitle');
+        $this->documentation = Matomo::translate('BotTracking_TopPageUrlsLast30MinutesDocumentation');
         $this->order         = 30;
     }
 

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Db\Adapter\Pdo;
+namespace Matomo\Tests\Integration\Db\Adapter\Pdo;
 
-use Piwik\Db\Adapter\Pdo\Mysql;
+use Matomo\Db\Adapter\Pdo\Mysql;
 use Exception;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class MysqlTest extends IntegrationTestCase
 {

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Dimension;
+namespace Matomo\Plugins\CustomDimensions\Dimension;
 
 use Exception;
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class Description
 {
@@ -29,11 +29,11 @@ class Description
         $maxLen = 1000;
 
         if (mb_strlen($this->description) > $maxLen) {
-            throw new Exception(Piwik::translate('CustomDimensions_DescriptionIsTooLong', $maxLen));
+            throw new Exception(Matomo::translate('CustomDimensions_DescriptionIsTooLong', $maxLen));
         }
 
         if (strip_tags($this->description) !== $this->description) {
-            throw new Exception(Piwik::translate('CustomDimensions_DescriptionAllowedCharacters'));
+            throw new Exception(Matomo::translate('CustomDimensions_DescriptionAllowedCharacters'));
         }
     }
 }

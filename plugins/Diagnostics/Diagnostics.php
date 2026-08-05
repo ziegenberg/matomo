@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics;
+namespace Matomo\Plugins\Diagnostics;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Notification;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\Diagnostics\Diagnostic\CronArchivingLastRunCheck;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Notification;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\Diagnostics\Diagnostic\CronArchivingLastRunCheck;
+use Matomo\Url;
+use Matomo\View;
 
 class Diagnostics extends Plugin
 {
     public const NO_DATA_ARCHIVING_NOT_RUN_NOTIFICATION_ID = 'DiagnosticsNoDataArchivingNotRun';
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -48,7 +48,7 @@ class Diagnostics extends Plugin
 
     public function onNoData(View $dataTableView)
     {
-        if (!Piwik::isUserHasSomeAdminAccess()) {
+        if (!Matomo::isUserHasSomeAdminAccess()) {
             return;
         }
 
@@ -58,7 +58,7 @@ class Diagnostics extends Plugin
 
         $lastSuccessfulRun = CronArchivingLastRunCheck::getTimeSinceLastSuccessfulRun();
         if ($lastSuccessfulRun > CronArchivingLastRunCheck::SECONDS_IN_DAY) {
-            $content = Piwik::translate('Diagnostics_NoDataForReportArchivingNotRun', [
+            $content = Matomo::translate('Diagnostics_NoDataForReportArchivingNotRun', [
                 Url::getExternalLinkTag('https://matomo.org/docs/setup-auto-archiving/'),
                 '</a>',
             ]);

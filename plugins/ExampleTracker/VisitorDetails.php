@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleTracker;
+namespace Matomo\Plugins\ExampleTracker;
 
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\View;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\View;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Dimension;
+namespace Matomo\Plugins\CustomDimensions\Dimension;
 
-use Piwik\Common;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Action;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Action;
+use Matomo\Matomo;
 use Exception;
-use Piwik\Validators\Regex;
+use Matomo\Validators\Regex;
 
 class Extraction
 {
@@ -62,9 +62,9 @@ class Extraction
     public static function getSupportedDimensions()
     {
         return array(
-            'url' => Piwik::translate('Actions_ColumnPageURL'),
-            'urlparam' => Piwik::translate('CustomDimensions_PageUrlParam'),
-            'action_name' => Piwik::translate('Goals_PageTitle'),
+            'url' => Matomo::translate('Actions_ColumnPageURL'),
+            'urlparam' => Matomo::translate('CustomDimensions_PageUrlParam'),
+            'action_name' => Matomo::translate('Goals_PageTitle'),
         );
     }
 

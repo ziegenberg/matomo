@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\DataAccess;
+namespace Matomo\Tests\Integration\DataAccess;
 
-use Piwik\Archive\Chunk;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveSelector;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\Model;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Period\Factory;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive\Chunk;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveSelector;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\Model;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Period\Factory;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -331,7 +331,7 @@ class ArchiveSelectorTest extends IntegrationTestCase
 
         $this->insertArchiveData($archiveRows);
 
-        $params = new \Piwik\ArchiveProcessor\Parameters(new Site(1), Factory::build($period, $date), new Segment($segment, [1]));
+        $params = new \Matomo\ArchiveProcessor\Parameters(new Site(1), Factory::build($period, $date), new Segment($segment, [1]));
         $result = ArchiveSelector::getArchiveIdAndVisits($params, $minDateProcessed, $includeInvalidated);
 
         if ($result['tsArchived'] !== false) {
@@ -587,7 +587,7 @@ class ArchiveSelectorTest extends IntegrationTestCase
 
         $this->insertArchiveData($archiveRows);
 
-        $params = new \Piwik\ArchiveProcessor\Parameters(new Site(1), Factory::build('range', '2020-03-04,2020-03-08'), new Segment('', [1]));
+        $params = new \Matomo\ArchiveProcessor\Parameters(new Site(1), Factory::build('range', '2020-03-04,2020-03-08'), new Segment('', [1]));
         $params->setRequestedPlugin('TestPlugin');
         $params->setArchiveOnlyReport($requestedReports);
 

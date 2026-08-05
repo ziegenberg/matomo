@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\DataAccess;
+namespace Matomo\Tests\Integration\DataAccess;
 
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveTableDao;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Segment;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveTableDao;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Segment;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -34,7 +34,7 @@ class ArchiveTableDaoTest extends IntegrationTestCase
         parent::setUp();
 
         $this->archiveTableDao = self::$fixture->piwikEnvironment->getContainer()->get(
-            'Piwik\DataAccess\ArchiveTableDao'
+            'Matomo\DataAccess\ArchiveTableDao'
         );
 
         ArchiveTableCreator::getBlobTable(Date::factory('2015-01-01'), true);
@@ -294,7 +294,7 @@ class ArchiveTableDaoTest extends IntegrationTestCase
 
         $sql = "INSERT INTO $table (idarchive, name, idsite, date1, date2, period, ts_archived, value)
                             VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        $bind = array($idArchive, $name, $idSite, $date1, $date2, Piwik::$idPeriods[$period], date('Y-m-d'), $value);
+        $bind = array($idArchive, $name, $idSite, $date1, $date2, Matomo::$idPeriods[$period], date('Y-m-d'), $value);
 
         Db::query($sql, $bind);
     }

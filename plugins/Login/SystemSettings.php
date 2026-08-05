@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
 use Matomo\Network\IP;
-use Piwik\Piwik;
-use Piwik\Settings\Setting;
-use Piwik\Settings\FieldConfig;
-use Piwik\Validators\IpRanges;
-use Piwik\Auth\PasswordStrength;
+use Matomo\Matomo;
+use Matomo\Settings\Setting;
+use Matomo\Settings\FieldConfig;
+use Matomo\Validators\IpRanges;
+use Matomo\Auth\PasswordStrength;
 
 /**
  * Defines Settings for Login.
  */
-class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
+class SystemSettings extends \Matomo\Settings\Plugin\SystemSettings
 {
     /** @var Setting */
     public $enableBruteForceDetection;
@@ -52,9 +52,9 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     private function createEnablePasswordStrengthCheck(): Setting
     {
         return $this->makeSetting('enablePasswordStrengthCheck', $default = false, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Login_SettingPasswordStrengthCheck');
+            $field->title = Matomo::translate('Login_SettingPasswordStrengthCheck');
             $PasswordStrengthChecker = new PasswordStrength($featureEnabled = true);
-            $field->inlineHelp = Piwik::translate('Login_SettingPasswordStrengthCheckHelp', [$PasswordStrengthChecker->getRulesAsHtmlList()]);
+            $field->inlineHelp = Matomo::translate('Login_SettingPasswordStrengthCheckHelp', [$PasswordStrengthChecker->getRulesAsHtmlList()]);
             $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
         });
     }
@@ -62,8 +62,8 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     private function createEnableBruteForceDetection()
     {
         return $this->makeSetting('enableBruteForceDetection', $default = true, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Login_SettingBruteForceEnable');
-            $field->description = Piwik::translate('Login_SettingBruteForceEnableHelp');
+            $field->title = Matomo::translate('Login_SettingBruteForceEnable');
+            $field->description = Matomo::translate('Login_SettingBruteForceEnableHelp');
             $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
         });
     }
@@ -71,9 +71,9 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     private function createWhitelisteBruteForceIps()
     {
         return $this->makeSetting('whitelisteBruteForceIps', array(), FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Login_SettingBruteForceWhitelistIp');
+            $field->title = Matomo::translate('Login_SettingBruteForceWhitelistIp');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
-            $field->description = Piwik::translate('Login_HelpIpRange', array('1.2.3.4/24', '1.2.3.*', '1.2.*.*')) . ' ' . Piwik::translate('Login_NotAllowListTakesPrecendence');
+            $field->description = Matomo::translate('Login_HelpIpRange', array('1.2.3.4/24', '1.2.3.*', '1.2.*.*')) . ' ' . Matomo::translate('Login_NotAllowListTakesPrecendence');
             $field->validators[] = new IpRanges();
             $field->transform = function ($value) {
                 if (empty($value)) {
@@ -91,9 +91,9 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     private function createBlacklistedBruteForceIps()
     {
         return $this->makeSetting('blacklistedBruteForceIps', array(), FieldConfig::TYPE_ARRAY, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Login_SettingBruteForceBlacklistIp');
+            $field->title = Matomo::translate('Login_SettingBruteForceBlacklistIp');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
-            $field->description = Piwik::translate('Login_HelpIpRange', array('1.2.3.4/24', '1.2.3.*', '1.2.*.*')) . ' ' . Piwik::translate('Login_NotAllowListTakesPrecendence');
+            $field->description = Matomo::translate('Login_HelpIpRange', array('1.2.3.4/24', '1.2.3.*', '1.2.*.*')) . ' ' . Matomo::translate('Login_NotAllowListTakesPrecendence');
             $field->validators[] = new IpRanges();
             $field->transform = function ($value) {
                 if (empty($value)) {
@@ -111,17 +111,17 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     private function createMaxFailedLoginsPerMinutes()
     {
         return $this->makeSetting('maxAllowedRetries', 20, FieldConfig::TYPE_INT, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Login_SettingBruteForceMaxFailedLogins');
+            $field->title = Matomo::translate('Login_SettingBruteForceMaxFailedLogins');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = Piwik::translate('Login_SettingBruteForceMaxFailedLoginsHelp');
+            $field->description = Matomo::translate('Login_SettingBruteForceMaxFailedLoginsHelp');
         });
     }
 
     private function createLoginAttemptsTimeRange()
     {
         return $this->makeSetting('allowedRetriesTimeRange', 60, FieldConfig::TYPE_INT, function (FieldConfig $field) {
-            $field->title = Piwik::translate('Login_SettingBruteForceTimeRange');
-            $field->description = Piwik::translate('Login_SettingBruteForceTimeRangeHelp');
+            $field->title = Matomo::translate('Login_SettingBruteForceTimeRange');
+            $field->description = Matomo::translate('Login_SettingBruteForceTimeRangeHelp');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
         });
     }

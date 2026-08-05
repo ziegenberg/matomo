@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Fixtures;
+namespace Matomo\Plugins\PrivacyManager\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Cache;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Cache;
 
 class RandomizedConfigIdVisitsFixture extends Fixture
 {

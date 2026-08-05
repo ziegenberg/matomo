@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
+namespace Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
 
 use GeoIp2\Database\Reader;
 use GeoIp2\Exception\AddressNotFoundException;
 use MaxMind\Db\Reader\InvalidDatabaseException;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Log;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\GeoIp2\GeoIP2AutoUpdater;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Log;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\GeoIp2\GeoIP2AutoUpdater;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
+use Matomo\View;
 
 /**
  * A LocationProvider that uses the PHP implementation of GeoIP 2.
@@ -431,17 +431,17 @@ class Php extends GeoIp2
      */
     public function getInfo()
     {
-        $desc = Piwik::translate('GeoIp2_LocationProviderDesc_Php') . '<br/><br/>';
+        $desc = Matomo::translate('GeoIp2_LocationProviderDesc_Php') . '<br/><br/>';
 
         if (extension_loaded('maxminddb')) {
-            $desc .= Piwik::translate(
+            $desc .= Matomo::translate(
                 'GeoIp2_LocationProviderDesc_Php_WithExtension',
                 array('<strong>', '</strong>')
             );
         }
 
         $installDocs = Url::getExternalLinkTag('https://matomo.org/faq/how-to/faq_163')
-            . Piwik::translate('UserCountry_HowToInstallGeoIPDatabases')
+            . Matomo::translate('UserCountry_HowToInstallGeoIPDatabases')
             . '</a>';
 
         $availableInfo = $this->getSupportedLocationInfo();
@@ -449,24 +449,24 @@ class Php extends GeoIp2
         $availableDatabaseTypes = array();
 
         if (isset($availableInfo[self::CITY_NAME_KEY]) && $availableInfo[self::CITY_NAME_KEY]) {
-            $availableDatabaseTypes[] = Piwik::translate('UserCountry_City');
+            $availableDatabaseTypes[] = Matomo::translate('UserCountry_City');
         }
 
         if (isset($availableInfo[self::COUNTRY_NAME_KEY]) && $availableInfo[self::COUNTRY_NAME_KEY]) {
-            $availableDatabaseTypes[] = Piwik::translate('UserCountry_Country');
+            $availableDatabaseTypes[] = Matomo::translate('UserCountry_Country');
         }
 
         if (isset($availableInfo[self::ISP_KEY]) && $availableInfo[self::ISP_KEY]) {
-            $availableDatabaseTypes[] = Piwik::translate('GeoIp2_ISPDatabase');
+            $availableDatabaseTypes[] = Matomo::translate('GeoIp2_ISPDatabase');
         }
 
         if (!empty($availableDatabaseTypes)) {
-            $extraMessage = '<strong>' . Piwik::translate('General_Note') . '</strong>:&nbsp;'
-                . Piwik::translate('GeoIp2_GeoIPImplHasAccessTo') . ':&nbsp;<strong>'
+            $extraMessage = '<strong>' . Matomo::translate('General_Note') . '</strong>:&nbsp;'
+                . Matomo::translate('GeoIp2_GeoIPImplHasAccessTo') . ':&nbsp;<strong>'
                 . implode(', ', $availableDatabaseTypes) . '</strong>.';
         } else {
-            $extraMessage = '<strong>' . Piwik::translate('General_Note') . '</strong>:&nbsp;'
-                . Piwik::translate('GeoIp2_GeoIPNoDatabaseFound');
+            $extraMessage = '<strong>' . Matomo::translate('General_Note') . '</strong>:&nbsp;'
+                . Matomo::translate('GeoIp2_GeoIPNoDatabaseFound');
         }
 
         return array('id'            => self::ID,
@@ -494,8 +494,8 @@ class Php extends GeoIp2
 
         $view->geoIPDatabasesInstalled = $geoIPDatabasesInstalled;
         $view->updatePeriodOptions = [
-            'month' => Piwik::translate('Intl_PeriodMonth'),
-            'week' => Piwik::translate('Intl_PeriodWeek'),
+            'month' => Matomo::translate('Intl_PeriodMonth'),
+            'week' => Matomo::translate('Intl_PeriodWeek'),
         ];
 
 

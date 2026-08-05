@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration;
+namespace Matomo\Plugins\CoreHome\tests\Integration;
 
-use Piwik\Piwik;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreHome
@@ -23,7 +23,7 @@ class CoreHomeTest extends IntegrationTestCase
     {
         $content = 'var x = 5;';
         $expectedContent = $content;
-        Piwik::postEvent('AssetManager.filterMergedJavaScripts', array(&$content));
+        Matomo::postEvent('AssetManager.filterMergedJavaScripts', array(&$content));
 
         $this->assertEquals($expectedContent, $content);
     }
@@ -31,7 +31,7 @@ class CoreHomeTest extends IntegrationTestCase
     public function testCoreHomePluginShouldListenToFilterJavaScriptEventAndRemoveSourceMapDefinition()
     {
         $content = '//# sourceMappingURL=55.map';
-        Piwik::postEvent('AssetManager.filterMergedJavaScripts', array(&$content));
+        Matomo::postEvent('AssetManager.filterMergedJavaScripts', array(&$content));
 
         $this->assertEquals('//# ', $content);
     }

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific;
+namespace Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
-use Piwik\Plugins\Goals\Goals;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecificProcessedMetric;
+use Matomo\Plugins\Goals\Goals;
 
 /**
  * The conversions for a specific goal. Returns the conversions for a single goal which
@@ -29,12 +29,12 @@ class ConversionsEntry extends GoalSpecificProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('Goals_Conversions', $this->getGoalName());
+        return Matomo::translate('Goals_Conversions', $this->getGoalName());
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('Goals_ColumnConversionsEntryDocumentation', $this->getGoalNameForDocs());
+        return Matomo::translate('Goals_ColumnConversionsEntryDocumentation', $this->getGoalNameForDocs());
     }
 
     public function getDependentMetrics()

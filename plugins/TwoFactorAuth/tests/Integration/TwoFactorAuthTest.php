@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\Integration;
+namespace Matomo\Plugins\TwoFactorAuth\tests\Integration;
 
-use Piwik\Access;
-use Piwik\API\Request;
-use Piwik\Auth;
-use Piwik\AuthResult;
-use Piwik\Nonce;
-use Piwik\Session\SessionFingerprint;
-use Piwik\Session\SessionNamespace;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
-use Piwik\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
-use Piwik\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
-use Piwik\Plugins\TwoFactorAuth\SystemSettings;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication;
-use Piwik\Plugins\TwoFactorAuth\Controller;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuth;
-use Piwik\Plugins\TwoFactorAuth\Validator;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\API\Request;
+use Matomo\Auth;
+use Matomo\AuthResult;
+use Matomo\Nonce;
+use Matomo\Session\SessionFingerprint;
+use Matomo\Session\SessionNamespace;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Plugins\TwoFactorAuth\Dao\RecoveryCodeDao;
+use Matomo\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
+use Matomo\Plugins\TwoFactorAuth\SystemSettings;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication;
+use Matomo\Plugins\TwoFactorAuth\Controller;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuth;
+use Matomo\Plugins\TwoFactorAuth\Validator;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group TwoFactorAuth
@@ -267,7 +267,7 @@ class TwoFactorAuthTest extends IntegrationTestCase
         $plugin = new TwoFactorAuth();
         $plugin->onRequestDispatch($module, $action, $parameters);
 
-        $this->assertSame(\Piwik\Piwik::getLoginPluginName(), $module);
+        $this->assertSame(\Matomo\Matomo::getLoginPluginName(), $module);
         $this->assertSame('login', $action);
         $this->assertNull($sessionFingerprint->getUser());
         $this->assertTrue(Access::getInstance()->wasSessionExpired());

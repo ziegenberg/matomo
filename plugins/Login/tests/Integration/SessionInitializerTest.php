@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Auth;
-use Piwik\AuthResult;
-use Piwik\Container\StaticContainer;
-use Piwik\Cookie;
-use Piwik\Plugins\Login\SessionInitializer;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Auth;
+use Matomo\AuthResult;
+use Matomo\Container\StaticContainer;
+use Matomo\Cookie;
+use Matomo\Plugins\Login\SessionInitializer;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Since the original SessionInitializer is still in use, it needs to

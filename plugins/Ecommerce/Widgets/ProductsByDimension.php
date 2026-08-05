@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Widgets;
+namespace Matomo\Plugins\Ecommerce\Widgets;
 
-use Piwik\Common;
-use Piwik\Plugins\CoreHome\CoreHome;
-use Piwik\Widget\WidgetContainerConfig;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\Plugins\CoreHome\CoreHome;
+use Matomo\Widget\WidgetContainerConfig;
+use Matomo\Site;
 
 class ProductsByDimension extends WidgetContainerConfig
 {

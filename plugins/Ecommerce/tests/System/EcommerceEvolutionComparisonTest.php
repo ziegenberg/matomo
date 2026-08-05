@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\tests\System;
+namespace Matomo\Plugins\Ecommerce\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Tests\Fixtures\TwoSitesEcommerceOrderWithItems;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Tests\Fixtures\TwoSitesEcommerceOrderWithItems;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * Reproducer for DEV-20289: Ecommerce > Overview "Evolution over the period"

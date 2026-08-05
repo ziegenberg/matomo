@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\CronArchive;
+namespace Matomo\Tests\Integration\CronArchive;
 
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

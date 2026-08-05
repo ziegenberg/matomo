@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicePlugins;
+namespace Matomo\Plugins\DevicePlugins;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 function getPluginsLogo($label)
 {
-    if ($label == Piwik::translate('General_Others')) {
+    if ($label == Matomo::translate('General_Others')) {
         return false;
     }
     $icon = 'plugins/Morpheus/icons/dist/plugins/' . $label . '.png';

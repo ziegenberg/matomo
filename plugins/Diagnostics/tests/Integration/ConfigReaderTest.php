@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Integration\Commands;
+namespace Matomo\Plugins\Diagnostics\tests\Integration\Commands;
 
-use Piwik\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
 use Matomo\Ini\IniReader;
-use Piwik\Plugins\Diagnostics\ConfigReader;
-use Piwik\Plugins\ExampleSettingsPlugin\SystemSettings;
-use Piwik\Settings\FieldConfig;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Diagnostics\ConfigReader;
+use Matomo\Plugins\ExampleSettingsPlugin\SystemSettings;
+use Matomo\Settings\FieldConfig;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Diagnostics
@@ -261,7 +261,7 @@ Another line',
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

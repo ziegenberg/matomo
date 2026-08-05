@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Request;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Request;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
@@ -31,7 +31,7 @@ class Menu extends \Piwik\Plugin\Menu
                     'subcategory' => 'CoreHome_Segments',
                 ]),
                 19,
-                Piwik::translate('SegmentEditor_ManageSegments'),
+                Matomo::translate('SegmentEditor_ManageSegments'),
                 'icon-outlink'
             );
         }

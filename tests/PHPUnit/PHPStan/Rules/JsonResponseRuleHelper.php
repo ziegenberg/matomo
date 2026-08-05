@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr\BinaryOp\Coalesce;
@@ -33,19 +33,19 @@ use PHPStan\Analyser\Scope;
  */
 final class JsonResponseRuleHelper
 {
-    public const ATTRIBUTE_CLASS = 'Piwik\\Http\\JsonResponse';
-    public const CONTROLLER_CLASS = 'Piwik\\Plugin\\Controller';
+    public const ATTRIBUTE_CLASS = 'Matomo\Http\JsonResponse';
+    public const CONTROLLER_CLASS = 'Matomo\Plugin\Controller';
 
-    private const JSON_RENDERER_CLASS = 'Piwik\\DataTable\\Renderer\\Json';
+    private const JSON_RENDERER_CLASS = 'Matomo\DataTable\Renderer\Json';
     private const JSON_HEADER_METHOD = 'sendheaderjson';
-    private const COMMON_CLASS = 'Piwik\\Common';
+    private const COMMON_CLASS = 'Matomo\Common';
     private const SEND_HEADER_METHOD = 'sendheader';
     private const OUTPUT_FUNCTIONS = [
         'flush', 'ob_flush', 'ob_end_flush', 'printf', 'vprintf', 'readfile', 'fpassthru', 'passthru',
     ];
 
     /**
-     * Whether the analysed method lives in a Piwik\Plugin\Controller subclass.
+     * Whether the analysed method lives in a Matomo\Plugin\Controller subclass.
      */
     public static function isControllerScope(Scope $scope): bool
     {
@@ -62,7 +62,7 @@ final class JsonResponseRuleHelper
 
     /**
      * Whether the method is a dispatchable controller action, i.e. a public method of a
-     * Piwik\Plugin\Controller subclass. Only such methods can carry (and be dispatched with) the
+     * Matomo\Plugin\Controller subclass. Only such methods can carry (and be dispatched with) the
      * attribute, so the "you must declare the action" rules only apply to them.
      */
     public static function isPublicControllerAction(ClassMethod $method, Scope $scope): bool

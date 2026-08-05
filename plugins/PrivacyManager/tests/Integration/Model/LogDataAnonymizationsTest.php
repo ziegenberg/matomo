@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration\Model;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration\Model;
 
-use Piwik\DbHelper;
-use Piwik\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
-use Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DbHelper;
+use Matomo\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
+use Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Class LogDataAnonymizationsTest

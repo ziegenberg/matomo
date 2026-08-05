@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\System;
+namespace Matomo\Plugins\SegmentEditor\tests\System;
 
 use Exception;
-use Piwik\Config;
-use Piwik\Http;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorApi;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Config;
+use Matomo\Http;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorApi;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 class ApiTest extends SystemTestCase
 {

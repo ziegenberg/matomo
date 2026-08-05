@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\Api;
+namespace Matomo\Plugins\Marketplace\Api;
 
 use Exception as PhpException;
 use Matomo\Cache\Lazy;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\Http;
-use Piwik\Plugin;
-use Piwik\Plugins\Marketplace\Environment;
-use Piwik\SettingsServer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\Http;
+use Matomo\Plugin;
+use Matomo\Plugins\Marketplace\Environment;
+use Matomo\SettingsServer;
+use Matomo\Log\LoggerInterface;
 
 class Client
 {
@@ -151,7 +151,7 @@ class Client
     }
 
     /**
-     * @param \Piwik\Plugin[] $plugins
+     * @param \Matomo\Plugin[] $plugins
      * @return array|mixed
      */
     public function checkUpdates($plugins)
@@ -183,7 +183,7 @@ class Client
     }
 
     /**
-     * @param \Piwik\Plugin[] $plugins
+     * @param \Matomo\Plugin[] $plugins
      * @return array (pluginName => pluginDetails)
      */
     public function getInfoOfPluginsHavingUpdate($plugins): array

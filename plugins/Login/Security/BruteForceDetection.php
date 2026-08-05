@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\Security;
+namespace Matomo\Plugins\Login\Security;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\Login\Emails\SuspiciousLoginAttemptsInLastHourEmail;
-use Piwik\Plugins\Login\Model;
-use Piwik\Plugins\Login\SystemSettings;
-use Piwik\Updater;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\Login\Emails\SuspiciousLoginAttemptsInLastHourEmail;
+use Matomo\Plugins\Login\Model;
+use Matomo\Plugins\Login\SystemSettings;
+use Matomo\Updater;
+use Matomo\Log\LoggerInterface;
 
 class BruteForceDetection
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Container\StaticContainer;
-use Piwik\NumberFormatter;
-use Piwik\Translation\Translator;
+use Matomo\Container\StaticContainer;
+use Matomo\NumberFormatter;
+use Matomo\Translation\Translator;
 
 /**
  * @group Core
@@ -26,9 +26,9 @@ class NumberFormatterTest extends \PHPUnit\Framework\TestCase
 
     public function setUp(): void
     {
-        \Piwik\Plugin\Manager::getInstance()->loadPluginTranslations();
+        \Matomo\Plugin\Manager::getInstance()->loadPluginTranslations();
 
-        $this->translator = StaticContainer::get('Piwik\Translation\Translator');
+        $this->translator = StaticContainer::get('Matomo\Translation\Translator');
     }
 
     public function tearDown(): void

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\tests\System;
+namespace Matomo\Plugins\Goals\tests\System;
 
-use Piwik\Plugins\Goals\API;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\SomeVisitsAllConversions;
+use Matomo\Plugins\Goals\API;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\SomeVisitsAllConversions;
 
 /**
  * Tests API methods with goals that do and don't allow multiple

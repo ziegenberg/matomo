@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Application\Kernel;
+namespace Matomo\Application\Kernel;
 
-use Piwik\Config;
-use Piwik\Config\IniFileChain;
+use Matomo\Config;
+use Matomo\Config\IniFileChain;
 
 /**
  * Provides global settings. Global settings are organized in sections where

@@ -1,17 +1,17 @@
 <?php
 
-namespace Piwik\Plugins\PrivacyManager\Settings;
+namespace Matomo\Plugins\PrivacyManager\Settings;
 
-use Piwik\Piwik;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Interfaces\MeasurableSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Site;
-use Piwik\Tracker\Cache as TrackerCache;
+use Matomo\Matomo;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Interfaces\MeasurableSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Site;
+use Matomo\Tracker\Cache as TrackerCache;
 
 /**
  * @implements PolicyComparisonInterface<bool>
@@ -60,7 +60,7 @@ class CampaignParameterValuesMasked implements
 
     public static function getTitle(): string
     {
-        return Piwik::translate('PrivacyManager_CampaignParameterValuesMaskedSettingTitle');
+        return Matomo::translate('PrivacyManager_CampaignParameterValuesMaskedSettingTitle');
     }
 
     public static function getInstance(?int $idSite = null): self
@@ -116,7 +116,7 @@ class CampaignParameterValuesMasked implements
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate('PrivacyManager_CampaignParameterValuesMaskedSettingRequirementNote');
+        return Matomo::translate('PrivacyManager_CampaignParameterValuesMaskedSettingRequirementNote');
     }
 
     public static function isEnabled(?int $idSite = null): bool
@@ -149,7 +149,7 @@ class CampaignParameterValuesMasked implements
     public static function formatValue($value)
     {
         if (self::isPlaceholderValue($value)) {
-            return Piwik::translate('PrivacyManager_CampaignParameterDiscarded');
+            return Matomo::translate('PrivacyManager_CampaignParameterDiscarded');
         }
 
         return $value;

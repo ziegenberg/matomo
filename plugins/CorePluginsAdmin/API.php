@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin;
+namespace Matomo\Plugins\CorePluginsAdmin;
 
-use Piwik\Cache;
-use Piwik\Piwik;
-use Piwik\Plugin\SettingsProvider;
+use Matomo\Cache;
+use Matomo\Matomo;
+use Matomo\Plugin\SettingsProvider;
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CoreAdminHome\Emails\SettingsChangedEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\SecurityNotificationEmail;
-use Piwik\Plugins\Marketplace\Marketplace;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CoreAdminHome\Emails\SettingsChangedEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\SecurityNotificationEmail;
+use Matomo\Plugins\Marketplace\Marketplace;
 
 /**
  * Provides API methods for reading and updating plugin settings.
  *
- * @method static \Piwik\Plugins\CorePluginsAdmin\API getInstance()
+ * @method static \Matomo\Plugins\CorePluginsAdmin\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private SettingsMetadata $settingsMetadata;
 
@@ -45,7 +45,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         $passwordConfirmation = false
     ): void {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->confirmCurrentUserPassword($passwordConfirmation);
 
@@ -67,7 +67,7 @@ class API extends \Piwik\Plugin\API
                 }
             }
         } catch (Exception $e) {
-            throw new Exception(Piwik::translate('CoreAdminHome_PluginSettingsSaveFailed'));
+            throw new Exception(Matomo::translate('CoreAdminHome_PluginSettingsSaveFailed'));
         }
 
         if (count($sendSettingsChangedNotificationEmailPlugins) > 0) {
@@ -81,7 +81,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setUserSettings($settingValues): void
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $pluginsSettings = $this->settingsProvider->getAllUserSettings();
 
@@ -94,7 +94,7 @@ class API extends \Piwik\Plugin\API
                 }
             }
         } catch (Exception $e) {
-            throw new Exception(Piwik::translate('CoreAdminHome_PluginSettingsSaveFailed'));
+            throw new Exception(Matomo::translate('CoreAdminHome_PluginSettingsSaveFailed'));
         }
     }
 
@@ -104,7 +104,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSystemSettings()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $systemSettings = $this->settingsProvider->getAllSystemSettings();
 
@@ -117,7 +117,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUserSettings()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $userSettings = $this->settingsProvider->getAllUserSettings();
 
@@ -130,7 +130,7 @@ class API extends \Piwik\Plugin\API
     public function getNumberOfPluginUpdates(): int
     {
         try {
-            Piwik::checkUserHasSuperUserAccess();
+            Matomo::checkUserHasSuperUserAccess();
 
             if (!Marketplace::isMarketplaceEnabled()) {
                 return 0;
@@ -143,7 +143,7 @@ class API extends \Piwik\Plugin\API
                 return $cache->fetch($cacheKey);
             }
 
-            $marketplacePlugins = StaticContainer::get('Piwik\Plugins\Marketplace\Plugins');
+            $marketplacePlugins = StaticContainer::get('Matomo\Plugins\Marketplace\Plugins');
             $updatesCount = count($marketplacePlugins->getPluginsHavingUpdate());
             $cache->save($cacheKey, $updatesCount, 300);
 
@@ -160,29 +160,29 @@ class API extends \Piwik\Plugin\API
     {
         $pluginNames = [];
         foreach ($sendSettingsChangedNotificationEmailPlugins as $plugin) {
-            $pluginNames[] = Piwik::translate(SettingsChangedEmail::$notifyPluginList[$plugin]);
+            $pluginNames[] = Matomo::translate(SettingsChangedEmail::$notifyPluginList[$plugin]);
         }
         $pluginNames = implode(', ', $pluginNames);
 
         $container = StaticContainer::getContainer();
 
         $email = $container->make(SettingsChangedEmail::class, array(
-            'login' => Piwik::getCurrentUserLogin(),
-            'emailAddress' => Piwik::getCurrentUserEmail(),
+            'login' => Matomo::getCurrentUserLogin(),
+            'emailAddress' => Matomo::getCurrentUserEmail(),
             'pluginNames' => $pluginNames,
         ));
         $email->safeSend();
 
-        $superuserEmailAddresses = Piwik::getAllSuperUserAccessEmailAddresses();
-        unset($superuserEmailAddresses[Piwik::getCurrentUserLogin()]);
+        $superuserEmailAddresses = Matomo::getAllSuperUserAccessEmailAddresses();
+        unset($superuserEmailAddresses[Matomo::getCurrentUserLogin()]);
         $superUserEmail = false;
 
         foreach ($superuserEmailAddresses as $address) {
             $superUserEmail = $superUserEmail ?: $container->make(SettingsChangedEmail::class, array(
-                'login' => Piwik::translate('Installation_SuperUser'),
+                'login' => Matomo::translate('Installation_SuperUser'),
                 'emailAddress' => $address,
                 'pluginNames' => $pluginNames,
-                'superuser' => Piwik::getCurrentUserLogin(),
+                'superuser' => Matomo::getCurrentUserLogin(),
             ));
             $superUserEmail->addTo($address);
         }

@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\BotTracking\Columns\PageUrl;
+use Matomo\Matomo;
+use Matomo\Plugins\BotTracking\Columns\PageUrl;
 
 class GetAIChatbotContentPages extends AbstractAIChatbotContentUrlReport
 {
@@ -20,8 +20,8 @@ class GetAIChatbotContentPages extends AbstractAIChatbotContentUrlReport
     {
         parent::init();
 
-        $this->name          = Piwik::translate('BotTracking_AIChatbotsContentPagesTitle');
-        $this->documentation = Piwik::translate('BotTracking_AIChatbotsContentPagesDocumentation');
+        $this->name          = Matomo::translate('BotTracking_AIChatbotsContentPagesTitle');
+        $this->documentation = Matomo::translate('BotTracking_AIChatbotsContentPagesDocumentation');
         $this->dimension     = new PageUrl();
         $this->order         = 10;
     }

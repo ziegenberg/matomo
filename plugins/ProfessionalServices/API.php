@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices;
+namespace Matomo\Plugins\ProfessionalServices;
 
-use Piwik\Piwik;
-use Piwik\Plugins\ProfessionalServices\Widgets\DismissibleWidget;
-use Piwik\Request;
+use Matomo\Matomo;
+use Matomo\Plugins\ProfessionalServices\Widgets\DismissibleWidget;
+use Matomo\Request;
 
 /**
  * Provides API methods for Professional Services widgets and prompts.
  *
- * @method static \Piwik\Plugins\ProfessionalServices\API getInstance()
+ * @method static \Matomo\Plugins\ProfessionalServices\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private PromoWidgetDismissal $promoWidgetDismissal;
 
@@ -35,7 +35,7 @@ class API extends \Piwik\Plugin\API
      */
     public function dismissWidget(): bool
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $widgetName = Request::fromRequest()->getStringParameter('widgetName');
 

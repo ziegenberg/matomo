@@ -9,20 +9,20 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Columns\Metrics;
+namespace Matomo\Plugins\BotTracking\Columns\Metrics;
 
 use InvalidArgumentException;
-use Piwik\Columns\Dimension;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\AggregatedMetric;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\Columns\Dimension;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\AggregatedMetric;
+use Matomo\Plugins\BotTracking\Metrics;
 
 /**
  * Column metadata (name / translation / per-variant documentation / formatting) for the bounded
  * 0–100 Discrepancy Score on the Human/AI-Favoured Pages reports. The value is materialised during
- * archiving by {@see \Piwik\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages} (via
- * {@see \Piwik\Plugins\BotTracking\DataTable\FavouredPagesScorer}). AggregatedMetric is the closest
+ * archiving by {@see \Matomo\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages} (via
+ * {@see \Matomo\Plugins\BotTracking\DataTable\FavouredPagesScorer}). AggregatedMetric is the closest
  * base for "a plain column that isn't a processed metric" (as for the two source-metric columns).
  */
 class DiscrepancyScore extends AggregatedMetric
@@ -50,7 +50,7 @@ class DiscrepancyScore extends AggregatedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('BotTracking_ColumnDiscrepancyScore');
+        return Matomo::translate('BotTracking_ColumnDiscrepancyScore');
     }
 
     public function getDocumentation()
@@ -59,7 +59,7 @@ class DiscrepancyScore extends AggregatedMetric
             ? 'BotTracking_ColumnDiscrepancyScoreHumanFavouredDocumentation'
             : 'BotTracking_ColumnDiscrepancyScoreAIFavouredDocumentation';
 
-        return Piwik::translate($key);
+        return Matomo::translate($key);
     }
 
     /**

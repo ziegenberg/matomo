@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\tests\Integration\Dao;
+namespace Matomo\Plugins\TwoFactorAuth\tests\Integration\Dao;
 
-use Piwik\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\TwoFactorAuth\Dao\TwoFaSecretRandomGenerator;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group TwoFactorAuth

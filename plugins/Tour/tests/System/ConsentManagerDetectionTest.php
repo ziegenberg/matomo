@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\tests\System;
+namespace Matomo\Plugins\Tour\tests\System;
 
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\SiteContentDetection\Osano;
-use Piwik\Plugins\Tour\Engagement\ChallengeSetupConsentManager;
-use Piwik\SiteContentDetector;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\SiteContentDetection\Osano;
+use Matomo\Plugins\Tour\Engagement\ChallengeSetupConsentManager;
+use Matomo\SiteContentDetector;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group ConsentManagerDetectionTest
@@ -39,7 +39,7 @@ class ConsentManagerDetectionTest extends SystemTestCase
         $siteData = $this->makeSiteResponse('<html><head><script src="https://osano.com/uhs9879874hthg.js"></script></head><body>A site</body></html>');
         $challenge = new ChallengeSetupConsentManager(new SiteContentDetector(), $siteData);
         $this->assertFalse($challenge->isDisabled());
-        $this->assertFalse($challenge->isCompleted(Piwik::getCurrentUserLogin()));
+        $this->assertFalse($challenge->isCompleted(Matomo::getCurrentUserLogin()));
         $this->assertEquals(Osano::getId(), $challenge->getConsentManagerId());
     }
 
@@ -48,7 +48,7 @@ class ConsentManagerDetectionTest extends SystemTestCase
         $siteData = $this->makeSiteResponse("<html><head><script src='https://osano.com/uhs9879874hthg.js'></script><script>Osano.cm.addEventListener('osano-cm-consent-changed', (change) => { console.log('cm-change'); consentSet(change); });</script></head><body>A site</body></html>");
         $challenge = new ChallengeSetupConsentManager(new SiteContentDetector(), $siteData);
         $this->assertFalse($challenge->isDisabled());
-        $this->assertTrue($challenge->isCompleted(Piwik::getCurrentUserLogin()));
+        $this->assertTrue($challenge->isCompleted(Matomo::getCurrentUserLogin()));
         $this->assertEquals(Osano::getId(), $challenge->getConsentManagerId());
     }
 

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2\Commands;
+namespace Matomo\Plugins\GeoIp2\Commands;
 
-use Piwik\Development;
-use Piwik\Http;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
-use Piwik\Plugins\UserCountry\LocationProvider;
+use Matomo\Development;
+use Matomo\Http;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
+use Matomo\Plugins\UserCountry\LocationProvider;
 
 /**
  * This command can be used to update the list of regions and their names that Matomo knows about.

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * The average amount of time browser needs to execute javascript waiting for window.load event. Calculated as
@@ -25,11 +25,11 @@ class AverageTimeOnLoad extends AveragePerformanceMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeOnLoad');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeOnLoad');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeOnLoadDocumentation');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeOnLoadDocumentation');
     }
 }

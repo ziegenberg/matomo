@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\AuthResult;
-use Piwik\Date;
-use Piwik\DbHelper;
-use Piwik\Plugins\Login\Auth;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\AuthResult;
+use Matomo\Date;
+use Matomo\DbHelper;
+use Matomo\Plugins\Login\Auth;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Plugins
@@ -351,7 +351,7 @@ class LoginTest extends IntegrationTestCase
 
         API::getInstance()->addUser($user['login'], $user['password'], $user['email']);
 
-        $model = new \Piwik\Plugins\UsersManager\Model();
+        $model = new \Matomo\Plugins\UsersManager\Model();
         $tokenAuth = $model->generateRandomTokenAuth();
         $model->addTokenAuth($user['login'], $tokenAuth, 'many users test', Date::now()->getDatetime());
 
@@ -396,7 +396,7 @@ class LoginTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-          'Piwik\Access' => new FakeAccess(),
+          'Matomo\Access' => new FakeAccess(),
         );
     }
 }

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
 use Exception;
-use Piwik\Access;
-use Piwik\AuthResult;
-use Piwik\NoAccessException;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Version;
+use Matomo\Access;
+use Matomo\AuthResult;
+use Matomo\NoAccessException;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Version;
 
 class TestCustomCap extends Access\Capability
 {
@@ -65,10 +65,10 @@ class AccessTest extends IntegrationTestCase
 
     public function testLoadSitesIfNeededAutomaticallyAssignsCapabilityWhenIncludedInRole()
     {
-        Piwik::addAction('Access.Capability.addCapabilities', function (&$cap) {
+        Matomo::addAction('Access.Capability.addCapabilities', function (&$cap) {
             $cap[] = new TestCustomCap();
         });
-        \Piwik\Cache::flushAll();
+        \Matomo\Cache::flushAll();
 
         $idSite = Fixture::createWebsite('2010-01-03 00:00:00');
         UsersManagerAPI::getInstance()->addUser('testuser', 'testpass', 'testuser@email.com');
@@ -86,7 +86,7 @@ class AccessTest extends IntegrationTestCase
     {
         self::expectException(NoAccessException::class);
 
-        Piwik::addAction('Access.Capability.addCapabilities', function (&$cap) {
+        Matomo::addAction('Access.Capability.addCapabilities', function (&$cap) {
             $cap[] = new TestCustomCap();
         });
 
@@ -169,7 +169,7 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasSuperUserAccessWithEmptyAccess()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $access = $this->getAccess();
         $access->checkUserHasSuperUserAccess();
     }
@@ -185,7 +185,7 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasSomeAdminAccessWithEmptyAccess()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $access = $this->getAccess();
         $access->checkUserHasSomeAdminAccess();
     }
@@ -215,28 +215,28 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasSomeAdminAccessWithSomeAccessFailsIfUserHasPermissionsToSitesButIsNotAuthenticated()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $mock = $this->createAccessMockWithAccessToSitesButUnauthenticated(array(2, 9));
         $mock->checkUserHasSomeAdminAccess();
     }
 
     public function testCheckUserHasAdminAccessFailsIfUserHasPermissionsToSitesButIsNotAuthenticated()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $mock = $this->createAccessMockWithAccessToSitesButUnauthenticated(array(2, 9));
         $mock->checkUserHasAdminAccess('2');
     }
 
     public function testCheckUserHasSomeViewAccessFailsIfUserHasPermissionsToSitesButIsNotAuthenticated()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $mock = $this->createAccessMockWithAccessToSitesButUnauthenticated(array(2, 9));
         $mock->checkUserHasSomeViewAccess();
     }
 
     public function testCheckUserHasViewAccessFailsIfUserHasPermissionsToSitesButIsNotAuthenticated()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $mock = $this->createAccessMockWithAccessToSitesButUnauthenticated(array(2, 9));
         $mock->checkUserHasViewAccess('2');
     }
@@ -254,7 +254,7 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasSomeViewAccessWithEmptyAccess()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $access = $this->getAccess();
         $access->checkUserHasSomeViewAccess();
     }
@@ -292,7 +292,7 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasSomeWriteAccessWithSomeAccessDoesNotHaveAccess()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $mock = $this->createAccessMockWithAuthenticatedUser(array('getRawSitesWithSomeViewAccess'));
 
         $mock->expects($this->once())
@@ -304,7 +304,7 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasViewAccessWithEmptyAccessNoSiteIdsGiven()
     {
-        $this->expectException(\Piwik\Http\BadRequestException::class);
+        $this->expectException(\Matomo\Http\BadRequestException::class);
         $access = $this->getAccess();
         $access->checkUserHasViewAccess(array());
     }
@@ -344,8 +344,8 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasViewAccessWithSomeAccessFailure()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
-        $mock = $this->getMockBuilder('Piwik\Access')->onlyMethods(array('getSitesIdWithAtLeastViewAccess'))->getMock();
+        $this->expectException(\Matomo\NoAccessException::class);
+        $mock = $this->getMockBuilder('Matomo\Access')->onlyMethods(array('getSitesIdWithAtLeastViewAccess'))->getMock();
 
         $mock->expects($this->once())
             ->method('getSitesIdWithAtLeastViewAccess')
@@ -356,7 +356,7 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasWriteAccessWithEmptyAccessNoSiteIdsGiven()
     {
-        $this->expectException(\Piwik\Http\BadRequestException::class);
+        $this->expectException(\Matomo\Http\BadRequestException::class);
         $access = $this->getAccess();
         $access->checkUserHasWriteAccess(array());
     }
@@ -372,8 +372,8 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasWriteAccessWithSomeAccessFailure()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
-        $mock = $this->getMockBuilder('Piwik\Access')->onlyMethods(array('getSitesIdWithAtLeastWriteAccess'))->getMock();
+        $this->expectException(\Matomo\NoAccessException::class);
+        $mock = $this->getMockBuilder('Matomo\Access')->onlyMethods(array('getSitesIdWithAtLeastWriteAccess'))->getMock();
 
         $mock->expects($this->once())
             ->method('getSitesIdWithAtLeastWriteAccess')
@@ -393,7 +393,7 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasAdminAccessWithEmptyAccessNoSiteIdsGiven()
     {
-        $this->expectException(\Piwik\Http\BadRequestException::class);
+        $this->expectException(\Matomo\Http\BadRequestException::class);
         $access = $this->getAccess();
         $access->checkUserHasViewAccess(array());
     }
@@ -401,7 +401,7 @@ class AccessTest extends IntegrationTestCase
     public function testCheckUserHasAdminAccessWithSomeAccessSuccessIdSitesAsString()
     {
         $mock = $this->createPartialMock(
-            'Piwik\Access',
+            'Matomo\Access',
             array('getSitesIdWithAdminAccess')
         );
 
@@ -417,7 +417,7 @@ class AccessTest extends IntegrationTestCase
         self::expectNotToPerformAssertions();
 
         $mock = $this->createPartialMock(
-            'Piwik\Access',
+            'Matomo\Access',
             array('getSitesIdWithAdminAccess', 'getSitesIdWithAtLeastViewAccess')
         );
 
@@ -434,9 +434,9 @@ class AccessTest extends IntegrationTestCase
 
     public function testCheckUserHasAdminAccessWithSomeAccessFailure()
     {
-        $this->expectException(\Piwik\NoAccessException::class);
+        $this->expectException(\Matomo\NoAccessException::class);
         $mock = $this->createPartialMock(
-            'Piwik\Access',
+            'Matomo\Access',
             array('getSitesIdWithAdminAccess')
         );
 
@@ -718,7 +718,7 @@ class AccessTest extends IntegrationTestCase
 
     private function createPiwikAuthMockInstance()
     {
-        return $this->getMockBuilder('Piwik\\Auth')
+        return $this->getMockBuilder('Matomo\Auth')
                     ->onlyMethods(array('authenticate', 'getName', 'getTokenAuthSecret', 'getLogin', 'setTokenAuth', 'setLogin',
             'setPassword', 'setPasswordHash'))
                     ->getMock();
@@ -726,7 +726,7 @@ class AccessTest extends IntegrationTestCase
 
     private function createAccessMockWithAccessToSitesButUnauthenticated($idSites)
     {
-        $mock = $this->getMockBuilder('Piwik\Access')
+        $mock = $this->getMockBuilder('Matomo\Access')
                      ->onlyMethods(array('getRawSitesWithSomeViewAccess', 'loadSitesIfNeeded'))
                      ->getMock();
 
@@ -752,7 +752,7 @@ class AccessTest extends IntegrationTestCase
             ->method('authenticate')
             ->will($this->returnValue(new AuthResult(AuthResult::SUCCESS, 'login', 'token')));
 
-        $mock = $this->getMockBuilder('Piwik\Access')->onlyMethods($methods)->getMock();
+        $mock = $this->getMockBuilder('Matomo\Access')->onlyMethods($methods)->getMock();
         $mock->reloadAccess($authMock);
 
         return $mock;

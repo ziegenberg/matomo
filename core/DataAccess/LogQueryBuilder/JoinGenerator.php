@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess\LogQueryBuilder;
+namespace Matomo\DataAccess\LogQueryBuilder;
 
 use Exception;
-use Piwik\Common;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\Tracker\LogTable;
+use Matomo\Common;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\Tracker\LogTable;
 
 class JoinGenerator
 {

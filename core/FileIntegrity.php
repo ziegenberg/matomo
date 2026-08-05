@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CustomJsTracker\Exception\AccessDeniedException;
-use Piwik\Plugins\CustomJsTracker\TrackerUpdater;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CustomJsTracker\Exception\AccessDeniedException;
+use Matomo\Plugins\CustomJsTracker\TrackerUpdater;
 
 class FileIntegrity
 {
@@ -26,10 +26,10 @@ class FileIntegrity
 
         self::loadManifest();
 
-        if (!class_exists('Piwik\\Manifest')) {
-            $messages[] = Piwik::translate('General_WarningFileIntegrityNoManifest')
+        if (!class_exists('Matomo\Manifest')) {
+            $messages[] = Matomo::translate('General_WarningFileIntegrityNoManifest')
                 . '<br/>'
-                . Piwik::translate('General_WarningFileIntegrityNoManifestDeployingFromGit');
+                . Matomo::translate('General_WarningFileIntegrityNoManifestDeployingFromGit');
 
             return array(
                 $success = false,
@@ -85,7 +85,7 @@ class FileIntegrity
         if (count($directoriesFoundButNotExpected) > 0) {
             $messageDirectoriesToDelete = '';
             foreach ($directoriesFoundButNotExpected as $directoryFoundNotExpected) {
-                $messageDirectoriesToDelete .= Piwik::translate('General_ExceptionDirectoryToDelete', htmlspecialchars($directoryFoundNotExpected)) . '<br/>';
+                $messageDirectoriesToDelete .= Matomo::translate('General_ExceptionDirectoryToDelete', htmlspecialchars($directoryFoundNotExpected)) . '<br/>';
             }
 
             $directories = array();
@@ -106,13 +106,13 @@ class FileIntegrity
                 $deleteAllAtOnce[] = sprintf('%s %s', $command, implode(' ', $directories));
             }
 
-            $messages[] = Piwik::translate('General_ExceptionUnexpectedDirectory')
+            $messages[] = Matomo::translate('General_ExceptionUnexpectedDirectory')
                 . '<br/>'
-                . '--> ' . Piwik::translate('General_ExceptionUnexpectedDirectoryPleaseDelete') . ' <--'
+                . '--> ' . Matomo::translate('General_ExceptionUnexpectedDirectoryPleaseDelete') . ' <--'
                 . '<br/><br/>'
                 . $messageDirectoriesToDelete
                 . '<br/><br/>'
-                . Piwik::translate('General_ToDeleteAllDirectoriesRunThisCommand')
+                . Matomo::translate('General_ToDeleteAllDirectoriesRunThisCommand')
                 . '<br/>'
                 . implode('<br />', $deleteAllAtOnce)
                 . '<br/><br/>';
@@ -131,7 +131,7 @@ class FileIntegrity
         if (count($filesFoundButNotExpected) > 0) {
             $messageFilesToDelete = '';
             foreach ($filesFoundButNotExpected as $fileFoundNotExpected) {
-                $messageFilesToDelete .= Piwik::translate('General_ExceptionFileToDelete', htmlspecialchars($fileFoundNotExpected)) . '<br/>';
+                $messageFilesToDelete .= Matomo::translate('General_ExceptionFileToDelete', htmlspecialchars($fileFoundNotExpected)) . '<br/>';
             }
 
             $files = array();
@@ -152,13 +152,13 @@ class FileIntegrity
                 $deleteAllAtOnce[] = sprintf('%s %s', $command, implode(' ', $files));
             }
 
-            $messages[] = Piwik::translate('General_ExceptionUnexpectedFile')
+            $messages[] = Matomo::translate('General_ExceptionUnexpectedFile')
                 . '<br/>'
-                . '--> ' . Piwik::translate('General_ExceptionUnexpectedFilePleaseDelete') . ' <--'
+                . '--> ' . Matomo::translate('General_ExceptionUnexpectedFilePleaseDelete') . ' <--'
                 . '<br/><br/>'
                 . $messageFilesToDelete
                 . '<br/><br/>'
-                . Piwik::translate('General_ToDeleteAllFilesRunThisCommand')
+                . Matomo::translate('General_ToDeleteAllFilesRunThisCommand')
                 . '<br/>'
                 . implode('<br />', $deleteAllAtOnce)
                 . '<br/><br/>';
@@ -215,7 +215,7 @@ class FileIntegrity
      */
     protected static function getFilesFoundButNotExpected()
     {
-        $files = \Piwik\Manifest::$files;
+        $files = \Matomo\Manifest::$files;
         $pluginsInManifest = self::getPluginsFoundInManifest();
 
         $filesFoundButNotExpected = array();
@@ -260,7 +260,7 @@ class FileIntegrity
 
     protected static function getDirectoriesFoundInManifest()
     {
-        $files = \Piwik\Manifest::$files;
+        $files = \Matomo\Manifest::$files;
 
         $directories = array();
         foreach ($files as $file => $manifestIntegrityInfo) {
@@ -277,7 +277,7 @@ class FileIntegrity
 
     protected static function getPluginsFoundInManifest()
     {
-        $files = \Piwik\Manifest::$files;
+        $files = \Matomo\Manifest::$files;
 
         $pluginsInManifest = array();
         foreach ($files as $file => $manifestIntegrityInfo) {
@@ -331,12 +331,12 @@ class FileIntegrity
     {
         $messagesMismatch = array();
         $hasHashFile = function_exists('hash_file');
-        $files = \Piwik\Manifest::$files;
+        $files = \Matomo\Manifest::$files;
         foreach ($files as $path => $props) {
             $file = PIWIK_INCLUDE_PATH . '/' . $path;
 
             if (!file_exists($file) || !is_readable($file)) {
-                $messagesMismatch[] = Piwik::translate('General_ExceptionMissingFile', $file);
+                $messagesMismatch[] = Matomo::translate('General_ExceptionMissingFile', $file);
             } elseif (filesize($file) != $props[0]) {
                 if (self::isModifiedPathValid($path)) {
                     continue;
@@ -344,7 +344,7 @@ class FileIntegrity
 
                 if (in_array(substr($path, -4), array('.gif', '.ico', '.jpg', '.png', '.swf'))) {
                     // files that contain binary data (e.g., images) must match the file size
-                    $messagesMismatch[] = Piwik::translate('General_ExceptionFilesizeMismatch', array($file, $props[0], filesize($file)));
+                    $messagesMismatch[] = Matomo::translate('General_ExceptionFilesizeMismatch', array($file, $props[0], filesize($file)));
                 } else {
                     // convert end-of-line characters and re-test text files
                     $content = @file_get_contents($file);
@@ -353,7 +353,7 @@ class FileIntegrity
                         (strlen($content) != $props[0])
                         || (@hash('sha256', $content) !== $props[1])
                     ) {
-                        $messagesMismatch[] = Piwik::translate('General_ExceptionFilesizeMismatch', array($file, $props[0], filesize($file)));
+                        $messagesMismatch[] = Matomo::translate('General_ExceptionFilesizeMismatch', array($file, $props[0], filesize($file)));
                     }
                 }
             } elseif ($hasHashFile && (@hash_file('sha256', $file) !== $props[1])) {
@@ -361,17 +361,17 @@ class FileIntegrity
                     continue;
                 }
 
-                $messagesMismatch[] = Piwik::translate('General_ExceptionFileIntegrity', $file);
+                $messagesMismatch[] = Matomo::translate('General_ExceptionFileIntegrity', $file);
             }
         }
 
         if (!$hasHashFile) {
-            $messages[] = Piwik::translate('General_WarningFileIntegrityNoHashFile');
+            $messages[] = Matomo::translate('General_WarningFileIntegrityNoHashFile');
         }
 
         if (!empty($messagesMismatch)) {
-            $messages[] = Piwik::translate('General_FileIntegrityWarningReupload');
-            $messages[] = '--> ' . Piwik::translate('General_FileIntegrityWarningReuploadBis') . ' <--<br/>';
+            $messages[] = Matomo::translate('General_FileIntegrityWarningReupload');
+            $messages[] = '--> ' . Matomo::translate('General_FileIntegrityWarningReuploadBis') . ' <--<br/>';
             $messages = array_merge($messages, $messagesMismatch);
         }
 

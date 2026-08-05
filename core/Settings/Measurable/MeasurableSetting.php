@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Measurable;
+namespace Matomo\Settings\Measurable;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
 
 /**
  * Describes a Measurable setting for a measurable type such as a website, a mobile app, ...
  *
- * See {@link \Piwik\Settings\Setting}.
+ * See {@link \Matomo\Settings\Setting}.
  */
-class MeasurableSetting extends \Piwik\Settings\Setting
+class MeasurableSetting extends \Matomo\Settings\Setting
 {
     /**
      * @var int
@@ -37,7 +37,7 @@ class MeasurableSetting extends \Piwik\Settings\Setting
 
         $this->idSite = $idSite;
 
-        $storageFactory = StaticContainer::get('Piwik\Settings\Storage\Factory');
+        $storageFactory = StaticContainer::get('Matomo\Settings\Storage\Factory');
         $this->storage = $storageFactory->getMeasurableSettingsStorage($idSite, $this->pluginName);
     }
 
@@ -54,9 +54,9 @@ class MeasurableSetting extends \Piwik\Settings\Setting
 
         // performance improvement, do not detect this in __construct otherwise likely rather "big" query to DB.
         if ($this->hasSiteBeenCreated()) {
-            $this->hasWritePermission = Piwik::isUserHasAdminAccess($this->idSite);
+            $this->hasWritePermission = Matomo::isUserHasAdminAccess($this->idSite);
         } else {
-            $this->hasWritePermission = Piwik::hasUserSuperUserAccess();
+            $this->hasWritePermission = Matomo::hasUserSuperUserAccess();
         }
 
         return $this->hasWritePermission;

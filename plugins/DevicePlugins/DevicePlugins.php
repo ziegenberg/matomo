@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicePlugins;
+namespace Matomo\Plugins\DevicePlugins;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Columns\Dimension;
-use Piwik\Piwik;
-use Piwik\Plugin;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Columns\Dimension;
+use Matomo\Matomo;
+use Matomo\Plugin;
 
-class DevicePlugins extends \Piwik\Plugin
+class DevicePlugins extends \Matomo\Plugin
 {
     /**
      * @see Plugin::registerEvents
@@ -30,7 +30,7 @@ class DevicePlugins extends \Piwik\Plugin
     public function addMetricTranslations(&$translations)
     {
         $metrics = array(
-            'nb_visits_percentage' => Piwik::translate('General_ColumnPercentageVisits'),
+            'nb_visits_percentage' => Matomo::translate('General_ColumnPercentageVisits'),
         );
 
         $translations = array_merge($translations, $metrics);
@@ -72,6 +72,6 @@ class DevicePlugins extends \Piwik\Plugin
      */
     protected static function getAllDevicePluginsColumnClasses()
     {
-        return Plugin\Manager::getInstance()->findMultipleComponents('Columns', 'Piwik\Plugins\DevicePlugins\Columns\DevicePluginColumn');
+        return Plugin\Manager::getInstance()->findMultipleComponents('Columns', 'Matomo\Plugins\DevicePlugins\Columns\DevicePluginColumn');
     }
 }

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices\tests\Unit;
+namespace Matomo\Plugins\ProfessionalServices\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Config;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\ProfessionalServices\PromoWidgetApplicable;
-use Piwik\Plugins\ProfessionalServices\PromoWidgetDismissal;
+use Matomo\Config;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\ProfessionalServices\PromoWidgetApplicable;
+use Matomo\Plugins\ProfessionalServices\PromoWidgetDismissal;
 
 class PromoWidgetApplicableTest extends TestCase
 {

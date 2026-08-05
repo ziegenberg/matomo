@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Widgets;
+namespace Matomo\Plugins\CoreVisualizations\Widgets;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Metrics;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Metrics;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Plugin\Manager as PluginManager;
 
-class SingleMetricView extends \Piwik\Widget\Widget
+class SingleMetricView extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

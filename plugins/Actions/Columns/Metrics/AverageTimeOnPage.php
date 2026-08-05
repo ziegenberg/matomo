@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns\Metrics;
+namespace Matomo\Plugins\Actions\Columns\Metrics;
 
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
 
 /**
  * The average amount of time spent on a page. Calculated as:
@@ -31,7 +31,7 @@ class AverageTimeOnPage extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnAverageTimeOnPage');
+        return Matomo::translate('General_ColumnAverageTimeOnPage');
     }
 
     public function compute(Row $row)
@@ -39,7 +39,7 @@ class AverageTimeOnPage extends ProcessedMetric
         $sumTimeSpent = $this->getMetric($row, 'sum_time_spent');
         $visits = $this->getMetric($row, 'nb_hits');
 
-        return Piwik::getQuotientSafe($sumTimeSpent, $visits, $precision = 0);
+        return Matomo::getQuotientSafe($sumTimeSpent, $visits, $precision = 0);
     }
 
     public function format($value, Formatter $formatter)

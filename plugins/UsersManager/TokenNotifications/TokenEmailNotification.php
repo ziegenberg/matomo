@@ -7,10 +7,10 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\TokenNotifications;
+namespace Matomo\Plugins\UsersManager\TokenNotifications;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\LanguagesManager\LanguagesHelper;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\LanguagesManager\LanguagesHelper;
 
 abstract class TokenEmailNotification extends TokenNotification
 {

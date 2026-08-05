@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events\Columns;
+namespace Matomo\Plugins\Events\Columns;
 
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\Join\ActionNameJoin;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\Join\ActionNameJoin;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\TableLogAction;
 
 class EventUrl extends ActionDimension
 {
@@ -28,7 +28,7 @@ class EventUrl extends ActionDimension
 
     public function getAcceptValues()
     {
-        return Piwik::translate('Events_EventUrlSegmentHelp', 'http%3A%2F%2Fexample.com%2Fpath%2Fpage%3Fquery');
+        return Matomo::translate('Events_EventUrlSegmentHelp', 'http%3A%2F%2Fexample.com%2Fpath%2Fpage%3Fquery');
     }
 
     public function getDbColumnJoin()

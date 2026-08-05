@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserLanguage\RecordBuilders;
+namespace Matomo\Plugins\UserLanguage\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Common;
-use Piwik\Config as PiwikConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
-use Piwik\Metrics;
-use Piwik\Plugins\UserLanguage\Archiver;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Common;
+use Matomo\Config as PiwikConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Metrics;
+use Matomo\Plugins\UserLanguage\Archiver;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserLanguage/functions.php';
 
@@ -42,7 +42,7 @@ class Languages extends RecordBuilder
     protected function aggregate(ArchiveProcessor $archiveProcessor): array
     {
         /** @var RegionDataProvider $regionDataProvider */
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         $query = $archiveProcessor->getLogAggregator()->queryVisitsByDimension(["label" => Archiver::LANGUAGE_DIMENSION]);
         $countryCodes = $regionDataProvider->getCountryList($includeInternalCodes = true);

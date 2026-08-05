@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics;
+namespace Matomo\Plugins\Goals\Columns\Metrics;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Tracker\GoalManager;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Tracker\GoalManager;
 
 /**
  * The average price for each ecommerce order or abandoned cart. Calculated as:
@@ -36,7 +36,7 @@ class AveragePrice extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_AveragePrice');
+        return Matomo::translate('General_AveragePrice');
     }
 
     public function compute(Row $row)
@@ -45,7 +45,7 @@ class AveragePrice extends ProcessedMetric
         $orders = $this->getMetric($row, 'orders');
         $abandonedCarts = $this->getMetric($row, 'abandoned_carts');
 
-        return Piwik::getQuotientSafe($price, $orders === false ? $abandonedCarts : $orders, GoalManager::REVENUE_PRECISION);
+        return Matomo::getQuotientSafe($price, $orders === false ? $abandonedCarts : $orders, GoalManager::REVENUE_PRECISION);
     }
 
     public function getDependentMetrics()

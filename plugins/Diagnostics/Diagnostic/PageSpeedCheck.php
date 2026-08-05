@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Http;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
-use Piwik\Url;
-use Piwik\Log\LoggerInterface;
+use Matomo\Http;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
+use Matomo\Url;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Check that mod_pagespeed is not enabled.

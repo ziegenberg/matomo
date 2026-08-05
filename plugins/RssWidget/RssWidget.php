@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\RssWidget;
+namespace Matomo\Plugins\RssWidget;
 
-use Piwik\Plugins\RssWidget\Widgets\RssChangelog;
-use Piwik\Plugins\RssWidget\Widgets\RssPiwik;
-use Piwik\SettingsPiwik;
-use Piwik\Widget\WidgetsList;
+use Matomo\Plugins\RssWidget\Widgets\RssChangelog;
+use Matomo\Plugins\RssWidget\Widgets\RssPiwik;
+use Matomo\SettingsPiwik;
+use Matomo\Widget\WidgetsList;
 
-class RssWidget extends \Piwik\Plugin
+class RssWidget extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

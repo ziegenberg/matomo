@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests;
+namespace Matomo\Plugins\ScheduledReports\tests;
 
-use Piwik\Piwik;
-use Piwik\Plugins\ScheduledReports\API;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Matomo;
+use Matomo\Plugins\ScheduledReports\API;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ScheduledReports
@@ -93,7 +93,7 @@ class ScheduledReportsTest extends IntegrationTestCase
 
     public function testScheduledReportsShouldRemoveOnlyReportsForGivenSitesAndLoginIfEventIsTriggered()
     {
-        Piwik::postEvent('UsersManager.removeSiteAccess', array('userLogin', array(1, 2)));
+        Matomo::postEvent('UsersManager.removeSiteAccess', array('userLogin', array(1, 2)));
 
         $this->assertHasNotReport('userlogin', 1);
         $this->assertHasNotReport('userlogin', 2);
@@ -163,7 +163,7 @@ class ScheduledReportsTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

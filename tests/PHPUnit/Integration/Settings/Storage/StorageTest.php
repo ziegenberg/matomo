@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings\Storage;
+namespace Matomo\Tests\Integration\Settings\Storage;
 
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Storage\Backend\BackendInterface;
-use Piwik\Settings\Storage\Storage;
-use Piwik\Tests\Framework\Mock\Settings\FakeBackend;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Cache as TrackerCache;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Storage\Backend\BackendInterface;
+use Matomo\Settings\Storage\Storage;
+use Matomo\Tests\Framework\Mock\Settings\FakeBackend;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Cache as TrackerCache;
 
 /**
  * @group PluginSettings

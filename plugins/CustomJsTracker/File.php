@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker;
+namespace Matomo\Plugins\CustomJsTracker;
 
-use Piwik\Plugins\CustomJsTracker\Exception\AccessDeniedException;
+use Matomo\Plugins\CustomJsTracker\Exception\AccessDeniedException;
 
 class File
 {

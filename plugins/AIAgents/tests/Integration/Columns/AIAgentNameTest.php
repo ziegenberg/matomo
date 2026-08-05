@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\tests\Integration\Columns;
+namespace Matomo\Plugins\AIAgents\tests\Integration\Columns;
 
-use Piwik\Plugins\AIAgents\Columns\AIAgentName;
-use Piwik\Plugins\AIAgents\Providers\ChatGPT;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Tracker\Visitor;
+use Matomo\Plugins\AIAgents\Columns\AIAgentName;
+use Matomo\Plugins\AIAgents\Providers\ChatGPT;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Tracker\Visitor;
 
 /**
  * @group AIAgents

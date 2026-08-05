@@ -1,11 +1,11 @@
 <?php
 
-namespace Piwik\Plugins\ExampleLogTables\tests\System;
+namespace Matomo\Plugins\ExampleLogTables\tests\System;
 
-use Piwik\Plugins\ExampleLogTables\tests\Fixtures\VisitsWithUserIdAndCustomData;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Framework\TestRequest\ApiTestConfig;
-use Piwik\Tests\Framework\TestRequest\Response;
+use Matomo\Plugins\ExampleLogTables\tests\Fixtures\VisitsWithUserIdAndCustomData;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Framework\TestRequest\ApiTestConfig;
+use Matomo\Tests\Framework\TestRequest\Response;
 
 /**
  * Testing Custom Log Tables

@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance;
+namespace Matomo\Plugins\PagePerformance;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AveragePageLoadTime;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomCompletion;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomProcessing;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeNetwork;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeServer;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeOnLoad;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeTransfer;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AveragePageLoadTime;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomCompletion;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomProcessing;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeNetwork;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeServer;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeOnLoad;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeTransfer;
 
 /**
  * Provides reporting API methods for aggregated page performance metrics.
  *
- * @method static \Piwik\Plugins\PagePerformance\API getInstance()
+ * @method static \Matomo\Plugins\PagePerformance\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns aggregated page performance metrics for the requested site and period.
@@ -47,7 +47,7 @@ class API extends \Piwik\Plugin\API
      */
     public function get($idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $archive = Archive::build($idSite, $period, $date, $segment);
 

@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry;
+namespace Matomo\Plugins\UserCountry;
 
 use Exception;
-use Piwik\Archive;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\IP;
-use Piwik\Option;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\GeoIp2\Commands\ConvertRegionCodesToIso;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Tracker\Visit;
+use Matomo\Archive;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\IP;
+use Matomo\Option;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\GeoIp2\Commands\ConvertRegionCodesToIso;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Tracker\Visit;
 
 /**
  * @see plugins/UserCountry/functions.php
@@ -29,9 +29,9 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
 
 /**
  * The UserCountry API lets you access reports about your visitors' Countries and Continents.
- * @method static \Piwik\Plugins\UserCountry\API getInstance()
+ * @method static \Matomo\Plugins\UserCountry\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns visit information grouped by country.
@@ -106,7 +106,7 @@ class API extends \Piwik\Plugin\API
     {
         $dataTable = $this->getDataTable(Archiver::COUNTRY_RECORD_NAME, $idSite, $period, $date, $segment);
 
-        $getContinent = array('Piwik\Common', 'getContinent');
+        $getContinent = array('Matomo\Common', 'getContinent');
         $dataTable->filter('GroupBy', array('label', $getContinent));
 
         $dataTable->filter('ColumnCallbackReplace', array('label', __NAMESPACE__ . '\continentTranslate'));
@@ -293,7 +293,7 @@ class API extends \Piwik\Plugin\API
 
         // split the label and put the elements into the 'city_name', 'region', 'country',
         // 'lat' & 'long' metadata fields
-        $strUnknown = Piwik::translate('General_Unknown');
+        $strUnknown = Matomo::translate('General_Unknown');
         $dataTable->filter(
             'ColumnCallbackAddMetadata',
             array('label', 'city_name', __NAMESPACE__ . '\getElementFromStringArray',
@@ -334,7 +334,7 @@ class API extends \Piwik\Plugin\API
             array('country', 'country_name', __NAMESPACE__ . '\countryTranslate', $applyToSummaryRow = false)
         );
 
-        $getRegionName = '\\Piwik\\Plugins\\UserCountry\\getRegionNameFromCodes';
+        $getRegionName = '\Matomo\Plugins\UserCountry\getRegionNameFromCodes';
         $dataTable->filter('MetadataCallbackAddMetadata', array(
                                                                array('country', 'region'), 'region_name', $getRegionName, $applyToSummaryRow = false));
 
@@ -404,12 +404,12 @@ class API extends \Piwik\Plugin\API
      */
     public function getCountryCodeMapping(): array
     {
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         $countryCodeList = $regionDataProvider->getCountryList();
 
         array_walk($countryCodeList, function (&$item, $key) {
-            $item = Piwik::translate('Intl_Country_' . strtoupper($key));
+            $item = Matomo::translate('Intl_Country_' . strtoupper($key));
         });
 
         return $countryCodeList;
@@ -427,7 +427,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getLocationFromIP($ip = false, $provider = false): array
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         if (empty($ip)) {
             $ip = IP::getIpFromHeader();
@@ -459,7 +459,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setLocationProvider($providerId)
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!UserCountry::isGeoLocationAdminEnabled()) {
             throw new \Exception('Setting geo location has been disabled in config.');
@@ -475,7 +475,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable($name);
         $dataTable->queueFilter('ReplaceColumnNames');
@@ -501,7 +501,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getNumberOfDistinctCountries($idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         return $archive->getDataTableFromNumeric(Archiver::DISTINCT_COUNTRIES_METRIC);
     }

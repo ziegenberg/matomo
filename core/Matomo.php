@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Period\Day;
-use Piwik\Period\Month;
-use Piwik\Period\Range;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Translation\Translator;
+use Matomo\Container\StaticContainer;
+use Matomo\Period\Day;
+use Matomo\Period\Month;
+use Matomo\Period\Range;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Translation\Translator;
 
 /**
  * Main piwik helper class.
@@ -26,7 +26,7 @@ use Piwik\Translation\Translator;
  * Contains helper methods for a variety of common tasks. Plugin developers are
  * encouraged to reuse these methods as much as possible.
  */
-class Piwik
+class Matomo
 {
     /**
      * Piwik periods
@@ -181,14 +181,14 @@ class Piwik
      */
     public static function getCurrentUserEmail()
     {
-        $user = APIUsersManager::getInstance()->getUser(Piwik::getCurrentUserLogin());
+        $user = APIUsersManager::getInstance()->getUser(Matomo::getCurrentUserLogin());
         return $user['email'] ?? '';
     }
 
 
     public static function getCurrentUserCreationDate()
     {
-        $user = APIUsersManager::getInstance()->getUser(Piwik::getCurrentUserLogin());
+        $user = APIUsersManager::getInstance()->getUser(Matomo::getCurrentUserLogin());
         return $user['date_registered'] ?? '';
     }
 
@@ -200,7 +200,7 @@ class Piwik
      */
     public static function getCurrentUserLastSeen()
     {
-        $user = APIUsersManager::getInstance()->getUser(Piwik::getCurrentUserLogin());
+        $user = APIUsersManager::getInstance()->getUser(Matomo::getCurrentUserLogin());
         return $user['last_seen'] ?? '';
     }
 
@@ -308,7 +308,7 @@ class Piwik
          * @param bool $requiresPasswordConfirmation Indicates if the password should be checked or not
          * @param string $login Login of a user the password should be confirmed for
          */
-        Piwik::postEvent('Login.userRequiresPasswordConfirmation', [&$requiresPasswordConfirmation, $login]);
+        Matomo::postEvent('Login.userRequiresPasswordConfirmation', [&$requiresPasswordConfirmation, $login]);
 
         return $requiresPasswordConfirmation;
     }
@@ -323,12 +323,12 @@ class Piwik
     public static function checkUserHasSuperUserAccessOrIsTheUser($theUser)
     {
         try {
-            if (Piwik::getCurrentUserLogin() !== $theUser) {
+            if (Matomo::getCurrentUserLogin() !== $theUser) {
                 // or to the Super User
-                Piwik::checkUserHasSuperUserAccess();
+                Matomo::checkUserHasSuperUserAccess();
             }
         } catch (NoAccessException $e) {
-            throw new NoAccessException(Piwik::translate('General_ExceptionCheckUserHasSuperUserAccessOrIsTheUser', array($theUser)));
+            throw new NoAccessException(Matomo::translate('General_ExceptionCheckUserHasSuperUserAccessOrIsTheUser', array($theUser)));
         }
     }
 
@@ -390,7 +390,7 @@ class Piwik
             return false;
         }
 
-        if (Piwik::getCurrentUserLogin() === $theUser && Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::getCurrentUserLogin() === $theUser && Matomo::hasUserSuperUserAccess()) {
             return true;
         }
 
@@ -434,7 +434,7 @@ class Piwik
      */
     public static function isUserIsAnonymous()
     {
-        $currentUserLogin = Piwik::getCurrentUserLogin();
+        $currentUserLogin = Matomo::getCurrentUserLogin();
         $isSuperUser = self::hasUserSuperUserAccess();
         return !$isSuperUser && $currentUserLogin && strtolower($currentUserLogin) == 'anonymous';
     }
@@ -659,7 +659,7 @@ class Piwik
      */
     public static function getLoginPluginName()
     {
-        return StaticContainer::get('Piwik\Auth')->getName();
+        return StaticContainer::get('Matomo\Auth')->getName();
     }
 
     /**
@@ -669,7 +669,7 @@ class Piwik
      */
     public static function getCurrentPlugin()
     {
-        return \Piwik\Plugin\Manager::getInstance()->getLoadedPlugin(Piwik::getModule());
+        return \Matomo\Plugin\Manager::getInstance()->getLoadedPlugin(Matomo::getModule());
     }
 
     /**
@@ -774,7 +774,7 @@ class Piwik
             && $l <= $loginMaximumLength
             && (preg_match('/^[A-Za-zÄäÖöÜüß0-9_.@+-]*$/D', $userLogin) > 0))
         ) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionInvalidLoginFormat', array($loginMinimumLength, $loginMaximumLength)));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionInvalidLoginFormat', array($loginMinimumLength, $loginMaximumLength)));
         }
     }
 
@@ -900,7 +900,7 @@ class Piwik
     public static function postTestEvent($eventName, $params = array(), $pending = false, $plugins = null)
     {
         if (defined('PIWIK_TEST_MODE')) {
-            Piwik::postEvent($eventName, $params, $pending, $plugins);
+            Matomo::postEvent($eventName, $params, $pending, $plugins);
         }
     }
 
@@ -918,7 +918,7 @@ class Piwik
     public static function translate($translationId, $args = array(), $language = null)
     {
         /** @var Translator $translator */
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
 
         return $translator->translate($translationId, $args, $language);
     }
@@ -980,7 +980,7 @@ class Piwik
      * Given the fully qualified name of a class located within a Matomo plugin,
      * returns the name of the plugin.
      *
-     * Uses the fact that Matomo plugins have namespaces like Piwik\Plugins\MyPlugin.
+     * Uses the fact that Matomo plugins have namespaces like Matomo\Plugins\MyPlugin.
      *
      * @param string $className the name of a class located within a Matomo plugin
      * @return string the plugin name

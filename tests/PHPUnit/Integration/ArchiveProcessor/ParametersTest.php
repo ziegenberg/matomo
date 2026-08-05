@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\ArchiveProcessor;
+namespace Matomo\Tests\Integration\ArchiveProcessor;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Period;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Period;
 
 /**
  * @group ArchiveProcessor

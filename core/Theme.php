@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Plugin\Manager;
+use Matomo\Plugin\Manager;
 
 /**
  * This class contains logic to make Themes work beautifully.
@@ -20,7 +20,7 @@ class Theme
     /** @var string  */
     private $themeName;
 
-    /** @var \Piwik\Plugin  */
+    /** @var \Matomo\Plugin  */
     private $theme;
 
     /**
@@ -42,7 +42,7 @@ class Theme
 
     public function getStylesheet()
     {
-        if ($this->themeName == \Piwik\Plugin\Manager::DEFAULT_THEME) {
+        if ($this->themeName == \Matomo\Plugin\Manager::DEFAULT_THEME) {
             return false;
         }
 
@@ -56,7 +56,7 @@ class Theme
 
     public function getJavaScriptFiles()
     {
-        if ($this->themeName == \Piwik\Plugin\Manager::DEFAULT_THEME) {
+        if ($this->themeName == \Matomo\Plugin\Manager::DEFAULT_THEME) {
             return false;
         }
 
@@ -77,7 +77,7 @@ class Theme
     public function rewriteAssetsPathToTheme($output)
     {
         if (
-            $this->themeName == \Piwik\Plugin\Manager::DEFAULT_THEME
+            $this->themeName == \Matomo\Plugin\Manager::DEFAULT_THEME
             && !Manager::getAlternativeWebRootDirectories()
         ) {
             return $output;

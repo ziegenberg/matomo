@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance;
+namespace Matomo\Plugins\PagePerformance;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\Controller as PluginController;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionViz;
-use Piwik\Plugins\PagePerformance\Visualizations\JqplotGraph\StackedBarEvolution;
-use Piwik\View;
-use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\Controller as PluginController;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as EvolutionViz;
+use Matomo\Plugins\PagePerformance\Visualizations\JqplotGraph\StackedBarEvolution;
+use Matomo\View;
+use Matomo\ViewDataTable\Factory as ViewDataTableFactory;
 
 class Controller extends PluginController
 {
@@ -63,7 +63,7 @@ class Controller extends PluginController
     {
         // Note: Using unsanitized request parameters here, as they will be passed through to an API method,
         // which should handle sanitizing if needed
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
         $apiMethod = $request->getStringParameter('apiMethod');
         $period    = $request->getStringParameter('period');
         $date      = $request->getStringParameter('date');
@@ -97,7 +97,7 @@ class Controller extends PluginController
     {
         $this->checkSitePermission();
 
-        $apiMethod = \Piwik\Request::fromRequest()->getStringParameter('apiMethod');
+        $apiMethod = \Matomo\Request::fromRequest()->getStringParameter('apiMethod');
 
         $this->validateApiMethod($apiMethod);
 
@@ -134,7 +134,7 @@ class Controller extends PluginController
 
         $columns = Common::getRequestVar('columns', false);
         if (false !== $columns) {
-            $columns = Piwik::getArrayFromApiParameter($columns);
+            $columns = Matomo::getArrayFromApiParameter($columns);
         }
         $view = ViewDataTableFactory::build(
             StackedBarEvolution::ID,
@@ -154,7 +154,7 @@ class Controller extends PluginController
             $view->config->columns_to_display = $performanceMetrics;
         }
 
-        $view->config->documentation = Piwik::translate('PagePerformance_EvolutionOverPeriod') . '<br /><br />';
+        $view->config->documentation = Matomo::translate('PagePerformance_EvolutionOverPeriod') . '<br /><br />';
 
         $metrics = Metrics::getPagePerformanceMetrics();
 

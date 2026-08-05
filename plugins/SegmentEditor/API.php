@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
 use Exception;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Access;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\DataTable\Filter\CalculateEvolutionFilter;
-use Piwik\Date;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Config;
-use Piwik\Segment;
-use Piwik\Plugins\VisitsSummary;
-use Piwik\Cache;
-use Piwik\Url;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Access;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\DataTable\Filter\CalculateEvolutionFilter;
+use Matomo\Date;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Config;
+use Matomo\Segment;
+use Matomo\Plugins\VisitsSummary;
+use Matomo\Cache;
+use Matomo\Url;
 
 /**
  * The SegmentEditor API lets you add, update, delete custom Segments, and list saved segments.
@@ -44,9 +44,9 @@ use Piwik\Url;
  *     starred_by: string|null
  * }
  *
- * @method static \Piwik\Plugins\SegmentEditor\API getInstance()
+ * @method static \Matomo\Plugins\SegmentEditor\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private Model $model;
 
@@ -95,7 +95,7 @@ class API extends \Piwik\Plugin\API
     {
         if (
             $enabledAllUsers
-            && !Piwik::hasUserSuperUserAccess()
+            && !Matomo::hasUserSuperUserAccess()
         ) {
             throw new Exception("enabledAllUsers=1 requires Super User access");
         }
@@ -105,11 +105,11 @@ class API extends \Piwik\Plugin\API
     protected function checkIdSite(?int $idSite): void
     {
         if (empty($idSite)) {
-            if (!Piwik::hasUserSuperUserAccess()) {
+            if (!Matomo::hasUserSuperUserAccess()) {
                 throw new Exception($this->getMessageCannotEditSegmentCreatedBySuperUser());
             }
         } else {
-            Piwik::checkUserHasViewAccess($idSite);
+            Matomo::checkUserHasViewAccess($idSite);
         }
     }
 
@@ -126,19 +126,19 @@ class API extends \Piwik\Plugin\API
         } else {
             // Segment 'All websites' and pre-processed requires Super User
             if ($idSite === null) {
-                if (!Piwik::hasUserSuperUserAccess()) {
+                if (!Matomo::hasUserSuperUserAccess()) {
                     throw new Exception(
                         "Please contact Support to make these changes on your behalf. " .
                         " To modify a pre-processed segment for all websites, a user must have super user access. "
                     );
                 }
             } else {
-                Piwik::checkUserHasViewAccess($idSite);
+                Matomo::checkUserHasViewAccess($idSite);
             }
 
             if (Rules::isBrowserTriggerEnabled()) {
                 $message = "Pre-processed segments can only be created if browser triggered archiving is disabled.";
-                if (Piwik::hasUserSuperUserAccess()) {
+                if (Matomo::hasUserSuperUserAccess()) {
                     $message .= " To disable browser archiving follow the instructions here: " . Url::addCampaignParametersToMatomoLink('https://matomo.org/docs/setup-auto-archiving/');
                 }
                 throw new Exception($message);
@@ -153,7 +153,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getSegmentOrFail(int $idSegment): array
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $segment = $this->getModel()->getSegment($idSegment);
 
@@ -176,11 +176,11 @@ class API extends \Piwik\Plugin\API
             null === $idSite
             && !SegmentEditor::isAddingSegmentsForAllWebsitesEnabled()
         ) {
-            throw new Exception(Piwik::translate('SegmentEditor_AddingSegmentForAllWebsitesDisabled'));
+            throw new Exception(Matomo::translate('SegmentEditor_AddingSegmentForAllWebsitesDisabled'));
         }
 
         if (!$this->isUserCanAddNewSegment($idSite)) {
-            throw new Exception(Piwik::translate('SegmentEditor_YouDontHaveAccessToCreateSegments'));
+            throw new Exception(Matomo::translate('SegmentEditor_YouDontHaveAccessToCreateSegments'));
         }
     }
 
@@ -192,11 +192,11 @@ class API extends \Piwik\Plugin\API
      */
     public function isUserCanAddNewSegment(?int $idSite): bool
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             return false;
         }
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             return true; // super user can always edit
         }
 
@@ -207,9 +207,9 @@ class API extends \Piwik\Plugin\API
         $requiredAccess = Config\GeneralConfig::getConfigValue('adding_segment_requires_access', $idSite);
 
         $authorized =
-            ($requiredAccess == 'view' && Piwik::isUserHasViewAccess($idSite)) ||
-            ($requiredAccess == 'admin' && Piwik::isUserHasAdminAccess($idSite)) ||
-            ($requiredAccess == 'write' && Piwik::isUserHasWriteAccess($idSite))
+            ($requiredAccess == 'view' && Matomo::isUserHasViewAccess($idSite)) ||
+            ($requiredAccess == 'admin' && Matomo::isUserHasAdminAccess($idSite)) ||
+            ($requiredAccess == 'write' && Matomo::isUserHasWriteAccess($idSite))
         ;
 
         return $authorized;
@@ -220,18 +220,18 @@ class API extends \Piwik\Plugin\API
      */
     protected function checkUserCanEditOrDeleteSegment(array $segment): void
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
-        if ($segment['login'] !== Piwik::getCurrentUserLogin()) {
+        if ($segment['login'] !== Matomo::getCurrentUserLogin()) {
             throw new Exception($this->getMessageCannotEditSegmentCreatedBySuperUser());
         }
 
         if ((int) $segment['enable_only_idsite'] === 0) {
-            throw new Exception(Piwik::translate('SegmentEditor_UpdatingAllSitesSegmentPermittedToSuperUser'));
+            throw new Exception(Matomo::translate('SegmentEditor_UpdatingAllSitesSegmentPermittedToSuperUser'));
         }
     }
 
@@ -253,7 +253,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param int $idSegment The ID of the segment being deleted.
          */
-        Piwik::postEvent('SegmentEditor.deactivate', [$idSegment]);
+        Matomo::postEvent('SegmentEditor.deactivate', [$idSegment]);
 
         $this->getModel()->deleteSegment($idSegment);
 
@@ -295,7 +295,7 @@ class API extends \Piwik\Plugin\API
         // only check param if value is changed
         // this ensure that a segment from a user with lower permission can still be changed by them
         // if a superuser updated the segment to be available for all users
-        if ((int) $segment['enable_all_users'] !== (int) $enabledAllUsers && !Piwik::hasUserSuperUserAccess()) {
+        if ((int) $segment['enable_all_users'] !== (int) $enabledAllUsers && !Matomo::hasUserSuperUserAccess()) {
             throw new Exception('Changing value for enabledAllUsers is permitted to super users only.');
         }
 
@@ -322,7 +322,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param int $idSegment The ID of the segment which visibility is reduced.
          */
-        Piwik::postEvent('SegmentEditor.update', [$idSegment, $bind]);
+        Matomo::postEvent('SegmentEditor.update', [$idSegment, $bind]);
 
         $this->getModel()->updateSegment($idSegment, $bind);
 
@@ -365,7 +365,7 @@ class API extends \Piwik\Plugin\API
         $bind = [
             'name'               => $name,
             'definition'         => $definition,
-            'login'              => Piwik::getCurrentUserLogin(),
+            'login'              => Matomo::getCurrentUserLogin(),
             'enable_all_users'   => (int) $enabledAllUsers,
             'enable_only_idsite' => (int) $idSite,
             'auto_archive'       => (int) $autoArchive,
@@ -401,7 +401,7 @@ class API extends \Piwik\Plugin\API
     {
         $segment = $this->getSegmentOrFail($idSegment);
         $this->checkUserCanEditOrDeleteSegment($segment);
-        $login = Piwik::getCurrentUserLogin();
+        $login = Matomo::getCurrentUserLogin();
         $bind = [
             'starred' => 1,
             'starred_by' => $login,
@@ -447,7 +447,7 @@ class API extends \Piwik\Plugin\API
      */
     public function get(int $idSegment): ?array
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $segment = $this->getModel()->getSegment($idSegment);
 
@@ -458,7 +458,7 @@ class API extends \Piwik\Plugin\API
 
         try {
             if (!$segment['enable_all_users']) {
-                Piwik::checkUserHasSuperUserAccessOrIsTheUser($segment['login']);
+                Matomo::checkUserHasSuperUserAccessOrIsTheUser($segment['login']);
             }
         } catch (Exception $e) {
             throw new Exception($this->getMessageCannotEditSegmentCreatedBySuperUser());
@@ -480,15 +480,15 @@ class API extends \Piwik\Plugin\API
     public function getAll(?int $idSite = null): array
     {
         if (!empty($idSite)) {
-            Piwik::checkUserHasViewAccess($idSite);
+            Matomo::checkUserHasViewAccess($idSite);
         } else {
-            Piwik::checkUserHasSomeViewAccess();
+            Matomo::checkUserHasSomeViewAccess();
         }
 
-        $userLogin = Piwik::getCurrentUserLogin();
+        $userLogin = Matomo::getCurrentUserLogin();
 
         $model = $this->getModel();
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $segments = $model->getAllSegmentsForAllUsers($idSite);
         } else {
             if (empty($idSite)) {
@@ -532,7 +532,7 @@ class API extends \Piwik\Plugin\API
      */
     private function filterSegmentsWithoutSiteAccess(array $segments): array
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             return $segments;
         }
 
@@ -553,13 +553,13 @@ class API extends \Piwik\Plugin\API
      */
     private function checkUserHasViewAccessToSegmentSite(array $segment): void
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
         $segmentSiteId = (int) $segment['enable_only_idsite'];
         if ($segmentSiteId !== 0) {
-            Piwik::checkUserHasViewAccess($segmentSiteId);
+            Matomo::checkUserHasViewAccess($segmentSiteId);
         }
     }
 
@@ -577,7 +577,7 @@ class API extends \Piwik\Plugin\API
     {
         $orderedSegments = [];
         foreach ($segments as $id => &$segment) {
-            if ($segment['login'] == Piwik::getCurrentUserLogin()) {
+            if ($segment['login'] == Matomo::getCurrentUserLogin()) {
                 $orderedSegments[] = $segment;
                 unset($segments[$id]);
             }
@@ -596,7 +596,7 @@ class API extends \Piwik\Plugin\API
 
     private function getMessageCannotEditSegmentCreatedBySuperUser(): string
     {
-        return Piwik::translate('SegmentEditor_UpdatingForeignSegmentPermittedToSuperUser');
+        return Matomo::translate('SegmentEditor_UpdatingForeignSegmentPermittedToSuperUser');
     }
 
     /**
@@ -690,7 +690,7 @@ class API extends \Piwik\Plugin\API
         }
 
         if (empty((int)($segment['auto_archive'] ?? 0))) {
-            throw new Exception(Piwik::translate('SegmentEditor_ManageSegmentsRealtimeNoDataTooltip'));
+            throw new Exception(Matomo::translate('SegmentEditor_ManageSegmentsRealtimeNoDataTooltip'));
         }
     }
 }

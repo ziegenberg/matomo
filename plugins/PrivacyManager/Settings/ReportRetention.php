@@ -1,16 +1,16 @@
 <?php
 
-namespace Piwik\Plugins\PrivacyManager\Settings;
+namespace Matomo\Plugins\PrivacyManager\Settings;
 
-use Piwik\Piwik;
-use Piwik\Settings\Interfaces\ConfigSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Settings\Interfaces\OptionSettingInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\OptionGetterTrait;
+use Matomo\Matomo;
+use Matomo\Settings\Interfaces\ConfigSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Settings\Interfaces\Traits\Getters\ConfigGetterTrait;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Settings\Interfaces\OptionSettingInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\OptionGetterTrait;
 
 /**
  * @implements ConfigSettingInterface<int|null>
@@ -64,13 +64,13 @@ class ReportRetention implements
 
     public static function getTitle(): string
     {
-        return Piwik::translate('PrivacyManager_RetentionPeriodPolicySettingTitle');
+        return Matomo::translate('PrivacyManager_RetentionPeriodPolicySettingTitle');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
         $currentValue = self::getInstance($idSite)->getValue();
-        return Piwik::translate('PrivacyManager_RetentionPeriodPolicySettingRequirementNote', $currentValue);
+        return Matomo::translate('PrivacyManager_RetentionPeriodPolicySettingRequirementNote', $currentValue);
     }
 
     public static function getInlineHelp(): string

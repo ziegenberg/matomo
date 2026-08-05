@@ -7,8 +7,8 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner;
+namespace Matomo\Plugins\TestRunner;
 
-class TestRunner extends \Piwik\Plugin
+class TestRunner extends \Matomo\Plugin
 {
 }

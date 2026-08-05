@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
-use Piwik\Cache;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Site;
-use Piwik\Plugins\Live\Settings\VisitorLogDisabled as VisitorLogDisabledSetting;
+use Matomo\Cache;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Site;
+use Matomo\Plugins\Live\Settings\VisitorLogDisabled as VisitorLogDisabledSetting;
 
-class Live extends \Piwik\Plugin
+class Live extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

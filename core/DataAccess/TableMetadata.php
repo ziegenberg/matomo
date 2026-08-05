@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
-use Piwik\Db;
+use Matomo\Db;
 
 /**
  * Data Access Object that can be used to get metadata information about

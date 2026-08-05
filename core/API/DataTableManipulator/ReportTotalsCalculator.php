@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API\DataTableManipulator;
+namespace Matomo\API\DataTableManipulator;
 
-use Piwik\API\DataTableManipulator;
-use Piwik\API\DataTablePostProcessor;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\API\DataTableManipulator;
+use Matomo\API\DataTablePostProcessor;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ReportsProvider;
 
 /**
  * This class is responsible for setting the metadata property 'totals' on each dataTable if the report
@@ -44,7 +44,7 @@ class ReportTotalsCalculator extends DataTableManipulator
 
     /**
      * @param  DataTable $table
-     * @return \Piwik\DataTable|\Piwik\DataTable\Map
+     * @return \Matomo\DataTable|\Matomo\DataTable\Map
      */
     public function calculate($table)
     {
@@ -162,7 +162,7 @@ class ReportTotalsCalculator extends DataTableManipulator
             }
 
             if (1 === Common::getRequestVar('keep_totals_row', 0, 'integer', $this->request)) {
-                $totalLabel = Common::getRequestVar('keep_totals_row_label', Piwik::translate('General_Totals'), 'string', $this->request);
+                $totalLabel = Common::getRequestVar('keep_totals_row_label', Matomo::translate('General_Totals'), 'string', $this->request);
 
                 $totalRow->deleteMetadata(false);
                 $totalRow->setColumn('label', $totalLabel);
@@ -192,8 +192,7 @@ class ReportTotalsCalculator extends DataTableManipulator
 
         $request = $this->request;
         unset($request['idSubtable']); // to make sure we work on first level table
-
-        /** @var \Piwik\Period|false $period */
+        /** @var \Matomo\Period|false $period */
         $period = $table->getMetadata('period');
 
         if (!empty($period)) {

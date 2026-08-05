@@ -7,31 +7,31 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\GeoIp2;
+namespace Matomo\Plugins\GeoIp2;
 
 use Exception;
 use GeoIp2\Database\Reader;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Filesystem;
-use Piwik\Http;
-use Piwik\Log;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2 as LocationProviderGeoIp2;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Scheduler\Schedule\Hourly;
-use Piwik\Scheduler\Scheduler;
-use Piwik\Scheduler\Task;
-use Piwik\Scheduler\Timetable;
-use Piwik\Scheduler\Schedule\Monthly;
-use Piwik\Scheduler\Schedule\Weekly;
-use Piwik\SettingsPiwik;
-use Piwik\Unzip;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Filesystem;
+use Matomo\Http;
+use Matomo\Log;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2 as LocationProviderGeoIp2;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Scheduler\Schedule\Hourly;
+use Matomo\Scheduler\Scheduler;
+use Matomo\Scheduler\Task;
+use Matomo\Scheduler\Timetable;
+use Matomo\Scheduler\Schedule\Monthly;
+use Matomo\Scheduler\Schedule\Weekly;
+use Matomo\SettingsPiwik;
+use Matomo\Unzip;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Used to automatically update installed GeoIP 2 databases, and manages the updater's
@@ -123,7 +123,7 @@ class GeoIP2AutoUpdater extends Task
             Option::delete(self::AUTO_SETUP_OPTION_NAME);
             LocationProvider::setCurrentProvider(Php::ID);
             /** @var Scheduler $scheduler */
-            $scheduler = StaticContainer::getContainer()->get('Piwik\Scheduler\Scheduler');
+            $scheduler = StaticContainer::getContainer()->get('Matomo\Scheduler\Scheduler');
             // reschedule to ensure it's not run again in an hour
             $scheduler->rescheduleTask(new GeoIP2AutoUpdater());
         }
@@ -194,7 +194,7 @@ class GeoIP2AutoUpdater extends Task
 
     public static function getTemporaryFolder($file, $isDownload = false)
     {
-        $folder = \Piwik\Container\StaticContainer::get('path.tmp') . '/latest/';
+        $folder = \Matomo\Container\StaticContainer::get('path.tmp') . '/latest/';
         if (!is_dir($folder)) {
             Filesystem::mkdir($folder);
         }
@@ -230,7 +230,7 @@ class GeoIP2AutoUpdater extends Task
             $content = $unzip->listContent();
 
             if (empty($content)) {
-                throw new Exception(Piwik::translate(
+                throw new Exception(Matomo::translate(
                     'GeoIp2_CannotListContent',
                     array("'$path'", $unzip->errorInfo())
                 ));
@@ -250,7 +250,7 @@ class GeoIP2AutoUpdater extends Task
             }
 
             if ($fileToExtract === null) {
-                throw new Exception(Piwik::translate(
+                throw new Exception(Matomo::translate(
                     'GeoIp2_CannotFindGeoIPDatabaseInArchive',
                     array("'$path'")
                 ));
@@ -260,7 +260,7 @@ class GeoIP2AutoUpdater extends Task
             $unzipped = $unzip->extractInString($fileToExtract);
 
             if (empty($unzipped)) {
-                throw new Exception(Piwik::translate(
+                throw new Exception(Matomo::translate(
                     'GeoIp2_CannotUnzipGeoIPFile',
                     array("'$path'", $unzip->errorInfo())
                 ));
@@ -291,7 +291,7 @@ class GeoIP2AutoUpdater extends Task
 
             $success = $unzip->extract($outputPath);
             if ($success !== true) {
-                throw new Exception(Piwik::translate(
+                throw new Exception(Matomo::translate(
                     'General_CannotUnzipFile',
                     array("'$path'", $unzip->errorInfo())
                 ));
@@ -305,7 +305,7 @@ class GeoIP2AutoUpdater extends Task
         } else {
             $parts = explode(basename($filename), '.', 2);
             $ext = end($parts);
-            throw new Exception(Piwik::translate('GeoIp2_UnsupportedArchiveType', "'$ext'"));
+            throw new Exception(Matomo::translate('GeoIp2_UnsupportedArchiveType', "'$ext'"));
         }
 
         try {
@@ -329,11 +329,11 @@ class GeoIP2AutoUpdater extends Task
                 Log::info("GeoIP2AutoUpdater: Encountered exception when testing newly downloaded" .
                     " GeoIP 2 database: %s", $e->getMessage());
 
-                throw new Exception(Piwik::translate('GeoIp2_ThisUrlIsNotAValidGeoIPDB'));
+                throw new Exception(Matomo::translate('GeoIp2_ThisUrlIsNotAValidGeoIPDB'));
             }
 
             if (empty($location)) {
-                throw new Exception(Piwik::translate('GeoIp2_ThisUrlIsNotAValidGeoIPDB'));
+                throw new Exception(Matomo::translate('GeoIp2_ThisUrlIsNotAValidGeoIPDB'));
             }
 
             // ensure the cached location providers do no longer block any files on windows
@@ -455,7 +455,7 @@ class GeoIP2AutoUpdater extends Task
                 $period != self::SCHEDULE_PERIOD_MONTHLY
                 && $period != self::SCHEDULE_PERIOD_WEEKLY
             ) {
-                throw new Exception(Piwik::translate(
+                throw new Exception(Matomo::translate(
                     'GeoIp2_InvalidGeoIPUpdatePeriod',
                     array("'$period'", "'" . self::SCHEDULE_PERIOD_MONTHLY . "', '" . self::SCHEDULE_PERIOD_WEEKLY . "'")
                 ));
@@ -464,7 +464,7 @@ class GeoIP2AutoUpdater extends Task
             Option::set(self::SCHEDULE_PERIOD_OPTION_NAME, $period);
 
             /** @var Scheduler $scheduler */
-            $scheduler = StaticContainer::getContainer()->get('Piwik\Scheduler\Scheduler');
+            $scheduler = StaticContainer::getContainer()->get('Matomo\Scheduler\Scheduler');
 
             $scheduler->rescheduleTaskAndRunTomorrow(new GeoIP2AutoUpdater());
         }
@@ -481,7 +481,7 @@ class GeoIP2AutoUpdater extends Task
         $host = $parsedUrl['host'] ?? '';
 
         if (empty($schema) || empty($host) || !in_array(mb_strtolower($schema), ['http', 'https'])) {
-            throw new Exception(Piwik::translate('GeoIp2_MalFormedUpdateUrl', '<i>' . Common::sanitizeInputValue($url) . '</i>'));
+            throw new Exception(Matomo::translate('GeoIp2_MalFormedUpdateUrl', '<i>' . Common::sanitizeInputValue($url) . '</i>'));
         }
 
         $validHosts = Config::getInstance()->General['geolocation_download_from_trusted_hosts'];
@@ -495,7 +495,7 @@ class GeoIP2AutoUpdater extends Task
         }
 
         if (true !== $isValidHost) {
-            throw new Exception(Piwik::translate('GeoIp2_InvalidGeoIPUpdateHost', [
+            throw new Exception(Matomo::translate('GeoIp2_InvalidGeoIPUpdateHost', [
                 '<i>' . $url . '</i>', '<i>' . implode(', ', $validHosts) . '</i>', '<i>geolocation_download_from_trusted_hosts</i>',
             ]));
         }
@@ -643,7 +643,7 @@ class GeoIP2AutoUpdater extends Task
             && $ext != 'gz'
             && $ext != 'mmdb.gz'
         ) {
-            throw new \Exception(Piwik::translate('GeoIp2_UnsupportedArchiveType', "'$ext'"));
+            throw new \Exception(Matomo::translate('GeoIp2_UnsupportedArchiveType', "'$ext'"));
         }
     }
 
@@ -768,7 +768,7 @@ class GeoIP2AutoUpdater extends Task
     }
 
     /**
-     * See {@link \Piwik\Scheduler\Schedule\Schedule::getRescheduledTime()}.
+     * See {@link \Matomo\Scheduler\Schedule\Schedule::getRescheduledTime()}.
      */
     public function getRescheduledTime()
     {

@@ -1,6 +1,6 @@
 <?php
 
-use Piwik\Container\Container;
+use Matomo\Container\Container;
 
 function isTrackerDebugEnabled(Container $c)
 {
@@ -10,10 +10,10 @@ function isTrackerDebugEnabled(Container $c)
 
 return array(
 
-    'ini.log.log_writers' => Piwik\DI::decorate(function ($previous, Container $c) {
+    'ini.log.log_writers' => Matomo\DI::decorate(function ($previous, Container $c) {
         if (
             isTrackerDebugEnabled($c)
-            && \Piwik\Common::isPhpCliMode()
+            && \Matomo\Common::isPhpCliMode()
         ) {
             $previous[] = 'screen';
             $previous = array_unique($previous);
@@ -21,12 +21,12 @@ return array(
         return $previous;
     }),
 
-    'log.handler.classes' => Piwik\DI::decorate(function ($previous, Container $c) {
+    'log.handler.classes' => Matomo\DI::decorate(function ($previous, Container $c) {
         if (
             isset($previous['screen'])
             && isTrackerDebugEnabled($c)
         ) {
-            $previous['screen'] = 'Piwik\Plugins\Monolog\Handler\EchoHandler';
+            $previous['screen'] = 'Matomo\Plugins\Monolog\Handler\EchoHandler';
         } else {
             unset($previous['screen']);
         }
@@ -34,9 +34,9 @@ return array(
         return $previous;
     }),
 
-    'log.level' => Piwik\DI::decorate(function ($previous, Container $c) {
+    'log.level' => Matomo\DI::decorate(function ($previous, Container $c) {
         if (isTrackerDebugEnabled($c)) {
-            return \Piwik\Log\Logger::DEBUG;
+            return \Matomo\Log\Logger::DEBUG;
         }
 
         return $previous;

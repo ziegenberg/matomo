@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration\Api;
+namespace Matomo\Plugins\Marketplace\tests\Integration\Api;
 
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Service as TestService;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Service as TestService;
 
 /**
  * @group Plugins
@@ -34,7 +34,7 @@ class ServiceTest extends IntegrationTestCase
 
     public function testFetchThrowsApiErrorWhenMarketplaceReturnsAnError()
     {
-        $this->expectException(\Piwik\Plugins\Marketplace\Api\Service\Exception::class);
+        $this->expectException(\Matomo\Plugins\Marketplace\Api\Service\Exception::class);
         $this->expectExceptionCode(101);
         $this->expectExceptionMessage('Requested plugin does not exist.');
 
@@ -44,7 +44,7 @@ class ServiceTest extends IntegrationTestCase
 
     public function testFetchThrowsHttpErrorWhenMarketplaceReturnsNoResultWhichMeansHttpError()
     {
-        $this->expectException(\Piwik\Plugins\Marketplace\Api\Service\Exception::class);
+        $this->expectException(\Matomo\Plugins\Marketplace\Api\Service\Exception::class);
         $this->expectExceptionCode(100);
         $this->expectExceptionMessage('There was an error reading the response from the Marketplace');
 

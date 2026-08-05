@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\DataTable\Filter;
+namespace Matomo\Plugins\Actions\DataTable\Filter;
 
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\PageUrl;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\PageUrl;
 
 class Actions extends BaseFilter
 {

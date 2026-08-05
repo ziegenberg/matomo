@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
-        if (Piwik::isUserHasSomeAdminAccess()) {
+        if (Matomo::isUserHasSomeAdminAccess()) {
             $category = 'PrivacyManager_MenuPrivacySettings';
             $menu->registerMenuIcon($category, 'icon-locked');
             $menu->addItem($category, null, [], 3);
 
-            if (Piwik::hasUserSuperUserAccess()) {
+            if (Matomo::hasUserSuperUserAccess()) {
                 $menu->addItem($category, 'PrivacyManager_Compliance', $this->urlForAction('compliance'), 0);
                 $menu->addItem($category, 'PrivacyManager_AnonymizeData', $this->urlForAction('privacySettings'), 5);
             }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Piwik\tests\Unit\Policy;
+namespace Matomo\tests\Unit\Policy;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Policy\CompliancePolicy;
-use Piwik\Policy\PolicyManager;
-use Piwik\Tests\Framework\Mock\Settings\FakePolicySetting;
-use Piwik\Tests\Framework\Mock\Policy\PolicyManager as MockPolicyManager;
-use Piwik\Tests\Framework\Mock\Policy\TestPolicy;
+use Matomo\Policy\CompliancePolicy;
+use Matomo\Policy\PolicyManager;
+use Matomo\Tests\Framework\Mock\Settings\FakePolicySetting;
+use Matomo\Tests\Framework\Mock\Policy\PolicyManager as MockPolicyManager;
+use Matomo\Tests\Framework\Mock\Policy\TestPolicy;
 
 class PolicyManagerTest extends TestCase
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\UrlHelper;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\UrlHelper;
 
 /**
  * Returns path component from a URL
@@ -66,7 +66,7 @@ function getReferrerTypeLabel($label)
             $indexTranslation = 'General_Others';
             break;
     }
-    return Piwik::translate($indexTranslation);
+    return Matomo::translate($indexTranslation);
 }
 
 /**

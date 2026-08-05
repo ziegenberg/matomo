@@ -7,29 +7,29 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration;
 
-use Piwik\Archive;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\LogDeleter;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Plugins\Goals\API as APIGoals;
-use Piwik\Plugins\Goals\Archiver;
-use Piwik\Plugin\Dimension\DimensionMetadataProvider;
-use Piwik\Plugins\PrivacyManager\LogDataPurger;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\PrivacyManager\ReportsPurger;
-use Piwik\Plugins\VisitorInterest\API as APIVisitorInterest;
-use Piwik\Tests\Framework\Mock\Plugin\LogTablesProvider;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\GoalManager;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Archive;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\LogDeleter;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Plugins\Goals\API as APIGoals;
+use Matomo\Plugins\Goals\Archiver;
+use Matomo\Plugin\Dimension\DimensionMetadataProvider;
+use Matomo\Plugins\PrivacyManager\LogDataPurger;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\PrivacyManager\ReportsPurger;
+use Matomo\Plugins\VisitorInterest\API as APIVisitorInterest;
+use Matomo\Tests\Framework\Mock\Plugin\LogTablesProvider;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\GoalManager;
+use Matomo\Tests\Framework\Fixture;
 
 class DataPurgingTestRawLogDao extends RawLogDao
 {

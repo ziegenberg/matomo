@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\SiteContentDetection;
 
 // Note: tarte au citron pro is configured server side so we cannot tell if it has been connected by
 // crawling the website, however setup of Matomo with the pro version is automatic, so displaying the guide
 // link for pro isn't necessary. Only the open source version is detected by this definition.
-use Piwik\Url;
+use Matomo\Url;
 
 class TarteAuCitron extends ConsentManagerDetectionAbstract
 {

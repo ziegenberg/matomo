@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor;
+namespace Matomo\Plugins\SegmentEditor;
 
 use Exception;
-use Piwik\Piwik;
-use Piwik\Segment;
-use Piwik\Segment\SegmentExpression;
+use Matomo\Matomo;
+use Matomo\Segment;
+use Matomo\Segment\SegmentExpression;
 
 class SegmentFormatter
 {
@@ -50,7 +50,7 @@ class SegmentFormatter
     public function getHumanReadable($segmentString, $idSite)
     {
         if (empty($segmentString)) {
-            return Piwik::translate('SegmentEditor_DefaultAllVisits');
+            return Matomo::translate('SegmentEditor_DefaultAllVisits');
         }
 
         try {
@@ -73,7 +73,7 @@ class SegmentFormatter
                     throw new Exception(sprintf("The segment '%s' does not exist.", $name));
                 }
 
-                $readable .= Piwik::translate($segment->getName()) . ' ';
+                $readable .= Matomo::translate($segment->getName()) . ' ';
                 $readable .= $this->getTranslationForComparison($operand, $segment->getType()) . ' ';
                 $readable .= $this->getFormattedValue($operand);
 
@@ -99,18 +99,18 @@ class SegmentFormatter
         $translation = $operator;
 
         if ($operator === SegmentExpression::MATCH_IS_NULL_OR_EMPTY) {
-            return Piwik::translate('SegmentEditor_SegmentOperatorIsNullOrEmpty');
+            return Matomo::translate('SegmentEditor_SegmentOperatorIsNullOrEmpty');
         }
 
         if ($operator === SegmentExpression::MATCH_IS_NOT_NULL_NOR_EMPTY) {
-            return Piwik::translate('SegmentEditor_SegmentOperatorIsNotNullNorEmpty');
+            return Matomo::translate('SegmentEditor_SegmentOperatorIsNotNullNorEmpty');
         }
 
         if ($segmentType === 'dimension' && !empty($this->matchesDimension[$operator])) {
-            $translation = Piwik::translate($this->matchesDimension[$operator]);
+            $translation = Matomo::translate($this->matchesDimension[$operator]);
         }
         if ($segmentType === 'metric' && !empty($this->matchesMetric[$operator])) {
-            $translation = Piwik::translate($this->matchesMetric[$operator]);
+            $translation = Matomo::translate($this->matchesMetric[$operator]);
         }
 
         return mb_strtolower($translation);
@@ -141,7 +141,7 @@ class SegmentFormatter
         $translation = '';
 
         if (!empty($this->operators[$operator])) {
-            $translation = Piwik::translate($this->operators[$operator]);
+            $translation = Matomo::translate($this->operators[$operator]);
         } elseif (!empty($operator)) {
             $translation = $operator;
         }

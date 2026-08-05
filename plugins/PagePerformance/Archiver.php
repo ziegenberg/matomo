@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance;
+namespace Matomo\Plugins\PagePerformance;
 
 /**
  * Class Archiver
  */
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const PAGEPERFORMANCE_TOTAL_NETWORK_TIME = 'PagePerformance_network_time';
     public const PAGEPERFORMANCE_TOTAL_NETWORK_HITS = 'PagePerformance_network_hits';

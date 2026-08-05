@@ -9,7 +9,7 @@
  * file that was distributed with it's source code.
  */
 
-namespace Piwik\View;
+namespace Matomo\View;
 
 use Twig\Compiler;
 use Twig\Node\Expression\AbstractExpression;

@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Model;
+namespace Matomo\Plugins\PrivacyManager\Model;
 
-use Piwik\Columns\Dimension;
-use Piwik\Columns\Join\ActionNameJoin;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\LogTablesProvider;
-use Piwik\Site;
-use Piwik\Tracker\LogTable;
-use Piwik\Tracker\PageUrl;
-use Piwik\Log\LoggerInterface;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\Join\ActionNameJoin;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\LogTablesProvider;
+use Matomo\Site;
+use Matomo\Tracker\LogTable;
+use Matomo\Tracker\PageUrl;
+use Matomo\Log\LoggerInterface;
 
 class DataSubjects
 {
@@ -98,7 +98,7 @@ class DataSubjects
          *
          * @param array &$results An array storing the result of how much data was deleted for.
          */
-        Piwik::postEvent('PrivacyManager.deleteDataSubjectsForDeletedSites', [&$results]);
+        Matomo::postEvent('PrivacyManager.deleteDataSubjectsForDeletedSites', [&$results]);
 
         krsort($results); // make sure test results are always in same order
         return $results;
@@ -130,7 +130,7 @@ class DataSubjects
          * @param array $visits An array with multiple visit entries containing an idvisit and idsite each. The data
          *                       for these visits is requested to be deleted.
          */
-        Piwik::postEvent('PrivacyManager.deleteDataSubjects', [&$results, $visits]);
+        Matomo::postEvent('PrivacyManager.deleteDataSubjects', [&$results, $visits]);
 
         $datesToInvalidateByIdSite = $this->getDatesToInvalidate($visits);
 
@@ -145,11 +145,11 @@ class DataSubjects
 
     private function invalidateArchives($datesToInvalidateByIdSite)
     {
-        $invalidator = StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+        $invalidator = StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
 
         foreach ($datesToInvalidateByIdSite as $idSite => $visitDates) {
             $idSites = [$idSite];
-            Piwik::postEvent('Archiving.getIdSitesToMarkArchivesAsInvalidated', array(&$idSites, $visitDates, null, null, null, $isPrivacyDeleteData = true));
+            Matomo::postEvent('Archiving.getIdSitesToMarkArchivesAsInvalidated', array(&$idSites, $visitDates, null, null, null, $isPrivacyDeleteData = true));
             foreach ($visitDates as $dateStr) {
                 $visitDate = Date::factory($dateStr);
                 foreach ($idSites as $siteId) {
@@ -469,7 +469,7 @@ class DataSubjects
          * @param array $visits An array with multiple visit entries containing an idvisit and idsite each. The data
          *                       for these visits is requested to be exported.
          */
-        Piwik::postEvent('PrivacyManager.exportDataSubjects', [&$results, $visits]);
+        Matomo::postEvent('PrivacyManager.exportDataSubjects', [&$results, $visits]);
 
         krsort($results); // make sure test results are always in same order
 

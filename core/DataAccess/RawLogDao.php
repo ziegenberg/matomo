@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
-use Piwik\Common;
-use Piwik\Config as PiwikConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\Plugin\Dimension\DimensionMetadataProvider;
-use Piwik\Plugin\LogTablesProvider;
+use Matomo\Common;
+use Matomo\Config as PiwikConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\Plugin\Dimension\DimensionMetadataProvider;
+use Matomo\Plugin\LogTablesProvider;
 
 /**
  * DAO that queries log tables.
@@ -35,8 +35,8 @@ class RawLogDao
 
     public function __construct(?DimensionMetadataProvider $provider = null, ?LogTablesProvider $logTablesProvider = null)
     {
-        $this->dimensionMetadataProvider = $provider ?: StaticContainer::get('Piwik\Plugin\Dimension\DimensionMetadataProvider');
-        $this->logTablesProvider = $logTablesProvider ?: StaticContainer::get('Piwik\Plugin\LogTablesProvider');
+        $this->dimensionMetadataProvider = $provider ?: StaticContainer::get('Matomo\Plugin\Dimension\DimensionMetadataProvider');
+        $this->logTablesProvider = $logTablesProvider ?: StaticContainer::get('Matomo\Plugin\LogTablesProvider');
     }
 
     /**

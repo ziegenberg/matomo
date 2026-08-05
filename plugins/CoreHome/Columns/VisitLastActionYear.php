@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Metrics\Formatter;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Metrics\Formatter;
 
 class VisitLastActionYear extends VisitDimension
 {

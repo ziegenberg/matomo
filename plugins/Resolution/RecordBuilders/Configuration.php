@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution\RecordBuilders;
+namespace Matomo\Plugins\Resolution\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Config as PiwikConfig;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\Resolution\Archiver;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Config as PiwikConfig;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\Resolution\Archiver;
 
 class Configuration extends RecordBuilder
 {

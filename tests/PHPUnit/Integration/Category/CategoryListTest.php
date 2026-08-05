@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Category;
+namespace Matomo\Tests\Integration\Category;
 
-use Piwik\Category\Category;
-use Piwik\Category\CategoryList;
-use Piwik\Category\Subcategory;
-use Piwik\Container\StaticContainer;
-use Piwik\Tests\Framework\Mock\Category\Categories;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Category\Category;
+use Matomo\Category\CategoryList;
+use Matomo\Category\Subcategory;
+use Matomo\Container\StaticContainer;
+use Matomo\Tests\Framework\Mock\Category\Categories;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 require_once PIWIK_INCLUDE_PATH . '/tests/PHPUnit/Framework/Mock/Category/Categeories.php';
 
@@ -138,10 +138,10 @@ class CategoryListTest extends IntegrationTestCase
 
     public function provideContainerConfig()
     {
-        $this->categories = new Categories(StaticContainer::get('Piwik\Plugin\Manager'));
+        $this->categories = new Categories(StaticContainer::get('Matomo\Plugin\Manager'));
 
         return array(
-            'Piwik\Plugin\Categories' => $this->categories,
+            'Matomo\Plugin\Categories' => $this->categories,
         );
     }
 }

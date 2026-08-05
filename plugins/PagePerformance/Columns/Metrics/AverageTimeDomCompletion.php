@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * The average amount of time the browser needs to load media any Javascript listening for the DOMContentLoaded event.
@@ -26,11 +26,11 @@ class AverageTimeDomCompletion extends AveragePerformanceMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeDomCompletion');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeDomCompletion');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeDomCompletionDocumentation');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeDomCompletionDocumentation');
     }
 }

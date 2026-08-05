@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\tests\System;
+namespace Matomo\Plugins\CustomJsTracker\tests\System;
 
-use Piwik\Plugins\CustomJsTracker\TrackerUpdater;
-use Piwik\Plugins\CustomJsTracker\TrackingCode\PiwikJsManipulator;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\CustomJsTracker\TrackerUpdater;
+use Matomo\Plugins\CustomJsTracker\TrackingCode\PiwikJsManipulator;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group CustomJsTracker

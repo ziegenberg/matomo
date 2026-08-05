@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\Date;
-use Piwik\Period\Day;
-use Piwik\Period;
-use Piwik\Period\Month;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
+use Matomo\Date;
+use Matomo\Period\Day;
+use Matomo\Period;
+use Matomo\Period\Month;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
 
 /**
  * @group Core

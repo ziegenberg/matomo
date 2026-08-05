@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Categories;
+namespace Matomo\Plugins\Referrers\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class SearchEnginesSubcategory extends Subcategory
 {
@@ -21,8 +21,8 @@ class SearchEnginesSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Referrers_SearchEnginesSubcategoryHelp1') . '</p>'
-            . '<p>' . Piwik::translate(
+        return '<p>' . Matomo::translate('Referrers_SearchEnginesSubcategoryHelp1') . '</p>'
+            . '<p>' . Matomo::translate(
                 'Referrers_SearchEnginesSubcategoryHelp2',
                 [
                     Url::getExternalLinkTag('https://matomo.org/matomo-cloud/', null, null, 'App.Referrers.getSearchEngines'),

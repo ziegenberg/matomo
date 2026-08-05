@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner\Commands;
+namespace Matomo\Plugins\TestRunner\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Plugin\ConsoleCommand;
 
 class TestsRunVue extends ConsoleCommand
 {

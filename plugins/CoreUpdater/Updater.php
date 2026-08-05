@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater;
+namespace Matomo\Plugins\CoreUpdater;
 
 use Exception;
-use Piwik\CliMulti;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Filechecks;
-use Piwik\Filesystem;
-use Piwik\Http;
-use Piwik\Option;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugin\ReleaseChannels;
-use Piwik\Plugins\CorePluginsAdmin\PluginInstaller;
-use Piwik\Plugins\Marketplace\API as MarketplaceApi;
-use Piwik\Plugins\Marketplace\Marketplace;
-use Piwik\SettingsServer;
-use Piwik\Translation\Translator;
-use Piwik\Unzip;
-use Piwik\Version;
+use Matomo\CliMulti;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Filechecks;
+use Matomo\Filesystem;
+use Matomo\Http;
+use Matomo\Option;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugin\ReleaseChannels;
+use Matomo\Plugins\CorePluginsAdmin\PluginInstaller;
+use Matomo\Plugins\Marketplace\API as MarketplaceApi;
+use Matomo\Plugins\Marketplace\Marketplace;
+use Matomo\SettingsServer;
+use Matomo\Translation\Translator;
+use Matomo\Unzip;
+use Matomo\Version;
 
 class Updater
 {
@@ -160,10 +160,10 @@ class Updater
 
             // we also need to make sure to create a new instance here as otherwise we would change the "global"
             // environment, but we only want to change piwik version temporarily for this task here
-            $environment = StaticContainer::getContainer()->make('Piwik\Plugins\Marketplace\Environment');
+            $environment = StaticContainer::getContainer()->make('Matomo\Plugins\Marketplace\Environment');
             $environment->setPiwikVersion($newVersion);
-            /** @var \Piwik\Plugins\Marketplace\Api\Client $marketplaceClient */
-            $marketplaceClient = StaticContainer::getContainer()->make('Piwik\Plugins\Marketplace\Api\Client', [
+            /** @var \Matomo\Plugins\Marketplace\Api\Client $marketplaceClient */
+            $marketplaceClient = StaticContainer::getContainer()->make('Matomo\Plugins\Marketplace\Api\Client', [
                 'environment' => $environment,
             ]);
 
@@ -300,7 +300,7 @@ class Updater
         $someExpectedFiles = array(
             '/config/global.ini.php',
             '/index.php',
-            '/core/Piwik.php',
+            '/core/Matomo.php',
             '/piwik.php',
             '/matomo.php',
             '/plugins/API/API.php',

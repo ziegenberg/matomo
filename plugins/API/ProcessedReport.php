@@ -7,31 +7,31 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Archive\DataTableFactory;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CacheId;
-use Piwik\Cache as PiwikCache;
-use Piwik\Category\CategoryList;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Filter\AddColumnsProcessedMetricsGoal;
-use Piwik\DataTable\Row;
-use Piwik\DataTable\Simple;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Timer;
+use Matomo\API\Request;
+use Matomo\Archive\DataTableFactory;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CacheId;
+use Matomo\Cache as PiwikCache;
+use Matomo\Category\CategoryList;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Filter\AddColumnsProcessedMetricsGoal;
+use Matomo\DataTable\Row;
+use Matomo\DataTable\Simple;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Timer;
 
 /**
  * @phpstan-type ProcessedReportData array{
@@ -88,7 +88,7 @@ class ProcessedReport
                 continue; // idGoal and idDimension is passed directly but for other entities we need to "workaround" and
                 // check for eg idFoo from GET/POST because we cannot add parameters to API dynamically
             }
-            $idEntity = \Piwik\Request::fromRequest()->getIntegerParameter($entityName, 0);
+            $idEntity = \Matomo\Request::fromRequest()->getIntegerParameter($entityName, 0);
             if ($idEntity > 0) {
                 $apiParameters[$entityName] = $idEntity;
             }
@@ -217,7 +217,7 @@ class ProcessedReport
      */
     public function getReportMetadata($idSite, $period = false, $date = false, $hideMetricsDoc = false, $showSubtableReports = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         // as they cache key contains a lot of information there would be an even better cache result by caching parts of
         // this huge method separately but that makes it also more complicated. leaving it like this for now.
@@ -263,7 +263,7 @@ class ProcessedReport
          *                          - **date**: A string date within the period or a date range, eg,
          *                                      `'2013-01-01'` or `'2012-01-01,2013-01-01'`.
          */
-        Piwik::postEvent('API.getReportMetadata.end', array(&$availableReports, $parameters));
+        Matomo::postEvent('API.getReportMetadata.end', array(&$availableReports, $parameters));
 
         // Sort results to ensure consistent order
         usort($availableReports, array($this, 'sortReports'));
@@ -279,10 +279,10 @@ class ProcessedReport
             if ($categoryObj) {
                 $availableReport['category'] = $categoryObj->getDisplayName();
             } else {
-                $availableReport['category']    = Piwik::translate($categoryId);
+                $availableReport['category']    = Matomo::translate($categoryId);
             }
 
-            $availableReport['subcategory'] = Piwik::translate($availableReport['subcategory']);
+            $availableReport['subcategory'] = Matomo::translate($availableReport['subcategory']);
 
             // Ensure all metrics have a translation
             $metrics = $availableReport['metrics'];
@@ -325,7 +325,7 @@ class ProcessedReport
             // (but only if filter_update_columns_when_show_all_goals is not in the request, if it is then we assume
             // the caller wants this information)
             // TODO we should remove this once we remove the getReportMetadata event, leaving it here for backwards compatibility
-            $requestingGoalMetrics = \Piwik\Request::fromRequest()->getBoolParameter('filter_update_columns_when_show_all_goals', false);
+            $requestingGoalMetrics = \Matomo\Request::fromRequest()->getBoolParameter('filter_update_columns_when_show_all_goals', false);
             if (
                 isset($availableReport['metricsGoal'])
                 && !$requestingGoalMetrics
@@ -475,7 +475,7 @@ class ProcessedReport
         if (
             !empty($reportMetadata['processedMetrics'])
             && !empty($reportMetadata['metrics']['nb_visits'])
-            && @$reportMetadata['category'] != Piwik::translate('Goals_Ecommerce')
+            && @$reportMetadata['category'] != Matomo::translate('Goals_Ecommerce')
             && $apiModule !== 'MultiSites'
         ) {
             $deleteRowsWithNoVisits = empty($reportMetadata['constantRowsCount']) ? '1' : '0';
@@ -497,7 +497,7 @@ class ProcessedReport
          * @param array &$parameters The request parameters used to fetch report
          *                           data.
          */
-        Piwik::postEvent('API.getProcessedReport.inner.before', [&$parameters]);
+        Matomo::postEvent('API.getProcessedReport.inner.before', [&$parameters]);
 
         $request = new Request($parameters);
         try {
@@ -518,7 +518,7 @@ class ProcessedReport
          *                           data.
          * @param DataTableInterface $dataTable
          */
-        Piwik::postEvent('API.getProcessedReport.inner.after', [$parameters, $dataTable]);
+        Matomo::postEvent('API.getProcessedReport.inner.after', [$parameters, $dataTable]);
 
         [$newReport, $columns, $rowsMetadata, $totals] = $this->handleTableReport($idSite, $dataTable, $reportMetadata, $showRawMetrics, $formatMetrics);
 
@@ -951,7 +951,7 @@ class ProcessedReport
         }
 
         $key .= $idSite . 'x' . ($period === false ? 0 : $period) . 'x' . ($date === false ? 0 : $date);
-        $key .= (int)$hideMetricsDoc . (int)$showSubtableReports . Piwik::getCurrentUserLogin();
+        $key .= (int)$hideMetricsDoc . (int)$showSubtableReports . Matomo::getCurrentUserLogin();
         return 'reportMetadata' . md5($key);
     }
 
@@ -1015,14 +1015,14 @@ class ProcessedReport
     {
         $result = $metadataColumns;
         foreach ($metadataColumns as $columnName => $columnTranslation) {
-            $result[$columnName . '_change'] = Piwik::translate('General_ChangeInX', lcfirst($columnName));
+            $result[$columnName . '_change'] = Matomo::translate('General_ChangeInX', lcfirst($columnName));
         }
         return $result;
     }
 
     private function getIdGoalToUseForActionsReports($idGoal, string $requestMethod)
     {
-        if (\Piwik\Request::fromRequest()->getStringParameter('filter_show_goal_columns_process_goals', '')) {
+        if (\Matomo\Request::fromRequest()->getStringParameter('filter_show_goal_columns_process_goals', '')) {
             return AddColumnsProcessedMetricsGoal::getProcessOnlyIdGoalToUseForReport($idGoal, $requestMethod);
         }
         return $idGoal;

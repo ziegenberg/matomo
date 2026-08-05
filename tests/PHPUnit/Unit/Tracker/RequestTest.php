@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Tracker;
+namespace Matomo\Tests\Unit\Tracker;
 
-use Piwik\Cookie;
-use Piwik\Exception\InvalidRequestParameterException;
+use Matomo\Cookie;
+use Matomo\Exception\InvalidRequestParameterException;
 use Matomo\Network\IPUtils;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TrackerConfig;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TrackerConfig;
 
 /**
  * @group RequestSetTest

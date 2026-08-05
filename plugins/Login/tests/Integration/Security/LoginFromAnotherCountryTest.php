@@ -10,15 +10,15 @@
 namespace Integration\Security;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\Container\StaticContainer;
-use Piwik\DI;
-use Piwik\Piwik;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\UsersManager\Model as UsersManagerModel;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\DI;
+use Matomo\Matomo;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\UsersManager\Model as UsersManagerModel;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group LoginFromAnotherCountryTest
@@ -70,7 +70,7 @@ class LoginFromAnotherCountryTest extends IntegrationTestCase
     {
         // start in France
         $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
     }
 
@@ -78,12 +78,12 @@ class LoginFromAnotherCountryTest extends IntegrationTestCase
     {
         // start in USA
         $_SERVER['REMOTE_ADDR'] = self::IP_USA;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
 
         // continue in USA
         $_SERVER['REMOTE_ADDR'] = self::IP_USA;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
     }
 
@@ -91,31 +91,31 @@ class LoginFromAnotherCountryTest extends IntegrationTestCase
     {
         // start in France
         $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
 
         // continue in USA
         $_SERVER['REMOTE_ADDR'] = self::IP_USA;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
-        $this->assertEquals(Piwik::translate('Intl_Country_US'), $this->loginCountry);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        $this->assertEquals(Matomo::translate('Intl_Country_US'), $this->loginCountry);
     }
 
     public function testEmailIsSentWhenLoggingInFromAnUnknownCountry()
     {
         // start in France
         $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
 
         // continue in an unknown country
         $_SERVER['REMOTE_ADDR'] = self::IP_UNKNOWN;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
-        $this->assertEquals(Piwik::translate('General_Unknown'), $this->loginCountry);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        $this->assertEquals(Matomo::translate('General_Unknown'), $this->loginCountry);
 
         // continue in the USA again
         $_SERVER['REMOTE_ADDR'] = self::IP_USA;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
-        $this->assertEquals(Piwik::translate('Intl_Country_US'), $this->loginCountry);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        $this->assertEquals(Matomo::translate('Intl_Country_US'), $this->loginCountry);
     }
 
     public function testEmailIsNotSentWhenGeoIpNotAvailable()
@@ -124,12 +124,12 @@ class LoginFromAnotherCountryTest extends IntegrationTestCase
 
         // start in France
         $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
 
         // continue in USA
         $_SERVER['REMOTE_ADDR'] = self::IP_USA;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
     }
 
@@ -139,12 +139,12 @@ class LoginFromAnotherCountryTest extends IntegrationTestCase
 
         // start in France
         $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
 
         // continue in USA
         $_SERVER['REMOTE_ADDR'] = self::IP_USA;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
     }
 
@@ -154,22 +154,22 @@ class LoginFromAnotherCountryTest extends IntegrationTestCase
 
         // start in France
         $_SERVER['REMOTE_ADDR'] = self::IP_FRANCE;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
 
         // continue in USA
         $_SERVER['REMOTE_ADDR'] = self::IP_USA;
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', [self::LOGIN]);
         $this->assertEmpty($this->loginCountry);
     }
 
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
             'observers.global' => DI::add([
                 ['Test.Mail.send', DI::value(function (PHPMailer $mail) {
-                    $subjectNotification = Piwik::translate('Login_LoginFromDifferentCountryEmailSubject');
+                    $subjectNotification = Matomo::translate('Login_LoginFromDifferentCountryEmailSubject');
 
                     if ($subjectNotification === $mail->Subject) {
                         $body = $mail->createBody();

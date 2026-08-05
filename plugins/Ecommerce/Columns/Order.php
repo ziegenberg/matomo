@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Columns;
+namespace Matomo\Plugins\Ecommerce\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\MetricsList;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Tracker\GoalManager;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\MetricsList;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Tracker\GoalManager;
 
 class Order extends BaseConversion
 {

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\tests\System;
+namespace Matomo\Plugins\Live\tests\System;
 
-use Piwik\Plugins\Live\tests\Fixtures\TwoSitesWithBorderTimezones;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\Live\tests\Fixtures\TwoSitesWithBorderTimezones;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Live

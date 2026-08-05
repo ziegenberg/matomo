@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\Plugins\VisitFrequency\API as VisitFrequencyAPI;
+use Matomo\Plugins\VisitFrequency\API as VisitFrequencyAPI;
 
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const VISITS_UNTIL_RECORD_NAME = 'visits_until_conv';
     public const DAYS_UNTIL_CONV_RECORD_NAME = 'days_until_conv';

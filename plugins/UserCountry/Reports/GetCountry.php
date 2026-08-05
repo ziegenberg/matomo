@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Reports;
+namespace Matomo\Plugins\UserCountry\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\UserCountry\Columns\Country;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\UserCountry\Columns\Country;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Url;
 
 class GetCountry extends Base
 {
@@ -21,8 +21,8 @@ class GetCountry extends Base
     {
         parent::init();
         $this->dimension      = new Country();
-        $this->name           = Piwik::translate('UserCountry_Country');
-        $this->documentation  = Piwik::translate('UserCountry_getCountryDocumentation');
+        $this->name           = Matomo::translate('UserCountry_Country');
+        $this->documentation  = Matomo::translate('UserCountry_getCountryDocumentation');
         $this->order = 5;
     }
 
@@ -37,8 +37,8 @@ class GetCountry extends Base
 
         if (LocationProvider::getCurrentProviderId() == LocationProvider\DefaultProvider::ID) {
             // if we're using the default location provider, add a note explaining how it works
-            $footerMessage = Piwik::translate("General_Note") . ': '
-                . Piwik::translate(
+            $footerMessage = Matomo::translate("General_Note") . ': '
+                . Matomo::translate(
                     'UserCountry_DefaultLocationProviderExplanation',
                     [Url::getExternalLinkTag('https://matomo.org/docs/geo-locate/'), '</a>']
                 );

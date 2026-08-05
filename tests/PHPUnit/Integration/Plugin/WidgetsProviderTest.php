@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Plugin;
+namespace Matomo\Tests\Integration\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\WidgetsProvider;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Widget\WidgetContainerConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\WidgetsProvider;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Widget\WidgetContainerConfig;
 
 /**
  * @group WidgetsProvider
@@ -36,7 +36,7 @@ class WidgetsProviderTest extends IntegrationTestCase
             Fixture::createWebsite('2015-01-01 00:00:00');
         }
 
-        $this->widgets = new WidgetsProvider(StaticContainer::get('Piwik\Plugin\Manager'));
+        $this->widgets = new WidgetsProvider(StaticContainer::get('Matomo\Plugin\Manager'));
     }
 
     public function tearDown(): void

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation\Exception;
+namespace Matomo\Plugins\Installation\Exception;
 
-use Piwik\Exception\Exception;
+use Matomo\Exception\Exception;
 
 class DatabaseConnectionFailedException extends Exception
 {

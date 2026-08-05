@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitsSummary;
+namespace Matomo\Plugins\VisitsSummary;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\FrontController;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\FrontController;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     private Translator $translator;
 
@@ -57,7 +57,7 @@ class Controller extends \Piwik\Plugin\Controller
         $this->checkSitePermission();
         $columns = Common::getRequestVar('columns', false);
         if (false !== $columns) {
-            $columns = Piwik::getArrayFromApiParameter($columns);
+            $columns = Matomo::getArrayFromApiParameter($columns);
         }
 
         $documentation = $this->translator->translate('VisitsSummary_VisitsSummaryDocumentation') . '<br />'

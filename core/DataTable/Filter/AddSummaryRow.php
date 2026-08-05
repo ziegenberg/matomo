@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\DataTable\Row\DataTableSummaryRow;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\DataTable\Row\DataTableSummaryRow;
 
 /**
  * Adds a summary row to {@link DataTable}s that contains the sum of all other table rows.

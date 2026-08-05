@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Settings;
+namespace Matomo\Plugins\Ecommerce\Settings;
 
-use Piwik\Piwik;
-use Piwik\Plugins\PrivacyManager\Settings\CompliancePolicyEnforcedSetting;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Site;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugins\PrivacyManager\Settings\CompliancePolicyEnforcedSetting;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Site;
+use Matomo\Url;
 
 class EcommerceRestricted extends CompliancePolicyEnforcedSetting
 {
     public static function getTitle(): string
     {
-        return Piwik::translate('Ecommerce_EcommercePolicySettingTitle');
+        return Matomo::translate('Ecommerce_EcommercePolicySettingTitle');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
@@ -31,12 +31,12 @@ class EcommerceRestricted extends CompliancePolicyEnforcedSetting
         }
 
         if (self::getInstance($idSite)->getValue() === false) {
-            return Piwik::translate('Ecommerce_EcommercePolicySettingNonCompliantNote');
+            return Matomo::translate('Ecommerce_EcommercePolicySettingNonCompliantNote');
         }
 
         $manageUrl = 'index.php' . Url::getCurrentQueryStringWithParametersModified(self::getManageParams($idSite));
 
-        return Piwik::translate('Ecommerce_EcommercePolicySettingRequirementNote', ['<a href="' . $manageUrl . '">', '</a>']);
+        return Matomo::translate('Ecommerce_EcommercePolicySettingRequirementNote', ['<a href="' . $manageUrl . '">', '</a>']);
     }
 
     private static function getManageParams(?int $idSite): array
@@ -99,9 +99,9 @@ class EcommerceRestricted extends CompliancePolicyEnforcedSetting
     private static function getCompliantMessage(?int $idSite, array $idSites): string
     {
         if ($idSite !== null && count($idSites) === 1) {
-            return Piwik::translate('Ecommerce_EcommercePolicySettingCompliantSingle');
+            return Matomo::translate('Ecommerce_EcommercePolicySettingCompliantSingle');
         }
 
-        return Piwik::translate('Ecommerce_EcommercePolicySettingCompliantAll');
+        return Matomo::translate('Ecommerce_EcommercePolicySettingCompliantAll');
     }
 }

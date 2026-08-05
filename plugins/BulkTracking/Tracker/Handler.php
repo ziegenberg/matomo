@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\Tracker;
+namespace Matomo\Plugins\BulkTracking\Tracker;
 
-use Piwik\AuthResult;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Piwik;
-use Piwik\Tracker;
-use Piwik\Tracker\RequestSet;
-use Piwik\Tracker\TrackerConfig;
+use Matomo\AuthResult;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Matomo;
+use Matomo\Tracker;
+use Matomo\Tracker\RequestSet;
+use Matomo\Tracker\TrackerConfig;
 use Exception;
 
 class Handler extends Tracker\Handler
@@ -124,10 +124,10 @@ class Handler extends Tracker\Handler
             return false;
         }
 
-        Piwik::postEvent('Request.initAuthenticationObject');
+        Matomo::postEvent('Request.initAuthenticationObject');
 
-        /** @var \Piwik\Auth $auth */
-        $auth = StaticContainer::get('Piwik\Auth');
+        /** @var \Matomo\Auth $auth */
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setTokenAuth($tokenAuth);
         $auth->setLogin(null);
         $auth->setPassword(null);

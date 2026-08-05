@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin;
+namespace Matomo\Plugins\CorePluginsAdmin;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\CoreHome\SystemSummary;
-use Piwik\Plugins\CorePluginsAdmin\Model\TagManagerTeaser;
-use Piwik\Changes\Model as ChangesModel;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\CoreHome\SystemSummary;
+use Matomo\Plugins\CorePluginsAdmin\Model\TagManagerTeaser;
+use Matomo\Changes\Model as ChangesModel;
 
 class CorePluginsAdmin extends Plugin
 {
@@ -60,14 +60,14 @@ class CorePluginsAdmin extends Plugin
      */
     private function getChangesModel(): ChangesModel
     {
-        return StaticContainer::get(\Piwik\Changes\Model::class);
+        return StaticContainer::get(\Matomo\Changes\Model::class);
     }
 
     public function onPluginActivated($pluginName)
     {
         if ($pluginName === 'TagManager') {
             // make sure once activated once, it won't appear when disabling Tag Manager later
-            $tagManagerTeaser = new TagManagerTeaser(Piwik::getCurrentUserLogin());
+            $tagManagerTeaser = new TagManagerTeaser(Matomo::getCurrentUserLogin());
             $tagManagerTeaser->disableGlobally();
         }
 
@@ -77,7 +77,7 @@ class CorePluginsAdmin extends Plugin
     public function addSystemSummaryItems(&$systemSummary)
     {
         $numPlugins = Plugin\Manager::getInstance()->getNumberOfActivatedPluginsExcludingAlwaysActivated();
-        $systemSummary[] = new SystemSummary\Item($key = 'plugins', Piwik::translate('CoreHome_SystemSummaryNActivatedPlugins', $numPlugins), $value = null, $url = array('module' => 'CorePluginsAdmin', 'action' => 'plugins'), $icon = '', $order = 11);
+        $systemSummary[] = new SystemSummary\Item($key = 'plugins', Matomo::translate('CoreHome_SystemSummaryNActivatedPlugins', $numPlugins), $value = null, $url = array('module' => 'CorePluginsAdmin', 'action' => 'plugins'), $icon = '', $order = 11);
     }
 
     public function getStylesheetFiles(&$stylesheets)

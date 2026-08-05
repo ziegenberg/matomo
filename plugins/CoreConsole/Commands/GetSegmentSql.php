@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\Development;
-use Piwik\Metrics;
-use Piwik\Period\Factory;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\SitesManager\Model;
-use Piwik\Segment;
-use Piwik\Site;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\Development;
+use Matomo\Metrics;
+use Matomo\Period\Factory;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\SitesManager\Model;
+use Matomo\Segment;
+use Matomo\Site;
 
 class GetSegmentSql extends ConsoleCommand
 {

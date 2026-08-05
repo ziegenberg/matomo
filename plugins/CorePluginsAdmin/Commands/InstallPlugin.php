@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin\Commands;
+namespace Matomo\Plugins\CorePluginsAdmin\Commands;
 
-use Piwik\Config as PiwikConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CorePluginsAdmin\PluginInstaller;
-use Piwik\Plugins\Marketplace\Marketplace;
+use Matomo\Config as PiwikConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CorePluginsAdmin\PluginInstaller;
+use Matomo\Plugins\Marketplace\Marketplace;
 
 /**
  * plugin:install console command.
@@ -47,7 +47,7 @@ class InstallPlugin extends ConsoleCommand
             try {
                 $this->installPlugin($pluginName);
                 $output->writeln(sprintf("Installed or updated plugin <info>%s</info>", $pluginName));
-            } catch (\Piwik\Plugins\CorePluginsAdmin\PluginInstallerException $e) {
+            } catch (\Matomo\Plugins\CorePluginsAdmin\PluginInstallerException $e) {
                 $output->writeln(sprintf("<error>Unable to install or update plugin %s. %s</error>", $pluginName, $e->getMessage()));
                 continue;
             }

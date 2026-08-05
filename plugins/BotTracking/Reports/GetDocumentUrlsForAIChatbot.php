@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\BotTracking\Columns\DocumentUrl;
-use Piwik\Plugins\BotTracking\Columns\Metrics\Requests;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\BotTracking\Columns\DocumentUrl;
+use Matomo\Plugins\BotTracking\Columns\Metrics\Requests;
 
 class GetDocumentUrlsForAIChatbot extends Report
 {
@@ -22,7 +22,7 @@ class GetDocumentUrlsForAIChatbot extends Report
     {
         parent::init();
 
-        $this->name             = Piwik::translate('BotTracking_AIChatbotsReportTitle');
+        $this->name             = Matomo::translate('BotTracking_AIChatbotsReportTitle');
         $this->categoryId       = 'General_AIAssistants';
         $this->metrics          = [new Requests()];
         $this->processedMetrics = [];

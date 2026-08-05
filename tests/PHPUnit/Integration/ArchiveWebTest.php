@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Log\Logger;
-use Piwik\Log\LoggerInterface;
-use Piwik\Option;
-use Piwik\Http;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Log\Logger;
+use Matomo\Log\LoggerInterface;
+use Matomo\Option;
+use Matomo\Http;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Tests to call the archive.php script via web and check there is no error.
@@ -66,15 +66,15 @@ class ArchiveWebTest extends SystemTestCase
     public static function provideContainerConfigBeforeClass()
     {
         return array(
-            LoggerInterface::class => \Piwik\DI::get(Logger::class),
+            LoggerInterface::class => \Matomo\DI::get(Logger::class),
             'Tests.log.allowAllHandlers' => true,
             'observers.global' => [
-                ['API.Request.intercept', \Piwik\DI::value(function (&$returnedValue, $finalParameters, $pluginName, $methodName, $parametersRequest) {
+                ['API.Request.intercept', \Matomo\DI::value(function (&$returnedValue, $finalParameters, $pluginName, $methodName, $parametersRequest) {
                     if ($pluginName == 'CoreAdminHome' && $methodName == 'runCronArchiving') {
                         $returnedValue = 'mock output';
                     }
                 })],
-                ['Console.doRun', \Piwik\DI::value(function (&$exitCode, $input, $output) {
+                ['Console.doRun', \Matomo\DI::value(function (&$exitCode, $input, $output) {
                     if ($input->getFirstArgument() == 'core:archive') {
                         $output->writeln('mock output');
                         $exitCode = 0;

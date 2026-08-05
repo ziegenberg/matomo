@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Plugin;
+namespace Matomo\Tests\Integration\Plugin;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\PluginDeactivatedException;
-use Piwik\Exception\PluginNotFoundException;
-use Piwik\Http\ControllerResolver;
-use Piwik\Plugin;
-use Piwik\Cache as PiwikCache;
-use Piwik\Tests\Integration\Settings\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\PluginDeactivatedException;
+use Matomo\Exception\PluginNotFoundException;
+use Matomo\Http\ControllerResolver;
+use Matomo\Plugin;
+use Matomo\Cache as PiwikCache;
+use Matomo\Tests\Integration\Settings\IntegrationTestCase;
 
 /**
  * @group Plugin

@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Fixtures\RunScheduledTasksProcessSignal;
+namespace Matomo\Plugins\CoreAdminHome\tests\Fixtures\RunScheduledTasksProcessSignal;
 
-use Piwik\Option;
+use Matomo\Option;
 use RuntimeException;
 
 class StepControl

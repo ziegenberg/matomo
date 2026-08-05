@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces\Traits\Getters;
+namespace Matomo\Settings\Interfaces\Traits\Getters;
 
-use Piwik\Config;
-use Piwik\Settings\Interfaces\ConfigSettingInterface;
+use Matomo\Config;
+use Matomo\Settings\Interfaces\ConfigSettingInterface;
 
 /**
  * @template T of mixed

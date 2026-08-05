@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings\Plugin;
+namespace Matomo\Tests\Integration\Settings\Plugin;
 
-use Piwik\Db;
-use Piwik\Plugins\WebsiteMeasurable\Type;
-use Piwik\Settings\Measurable\MeasurableSetting;
-use Piwik\Settings\Measurable\MeasurableSettings;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\Settings\FakeMeasurableSettings;
-use Piwik\Tests\Integration\Settings\BaseSettingsTestCase;
+use Matomo\Db;
+use Matomo\Plugins\WebsiteMeasurable\Type;
+use Matomo\Settings\Measurable\MeasurableSetting;
+use Matomo\Settings\Measurable\MeasurableSettings;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\Settings\FakeMeasurableSettings;
+use Matomo\Tests\Integration\Settings\BaseSettingsTestCase;
 
 /**
  * @group PluginSettings
@@ -43,7 +43,7 @@ class MeasurableSettingsTest extends BaseSettingsTestCase
     {
         $this->assertSame('ExampleSettingsPlugin', $this->settings->getPluginName());
 
-        $settings = new \Piwik\Plugins\ExampleSettingsPlugin\MeasurableSettings($idSite = 1);
+        $settings = new \Matomo\Plugins\ExampleSettingsPlugin\MeasurableSettings($idSite = 1);
         $this->assertSame('ExampleSettingsPlugin', $settings->getPluginName());
     }
 

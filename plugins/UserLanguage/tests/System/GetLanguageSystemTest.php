@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserLanguage\tests\System;
+namespace Matomo\Plugins\UserLanguage\tests\System;
 
-use Piwik\Plugins\UserLanguage\tests\Fixtures\LanguageFixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\UserLanguage\tests\Fixtures\LanguageFixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group GetLanguageSystemTest

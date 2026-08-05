@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Mock;
+namespace Matomo\Plugins\Diagnostics\tests\Mock;
 
-use Piwik\Plugins\Diagnostics\Diagnostic\Diagnostic;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\Diagnostics\Diagnostic\Diagnostic;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
 
 class DiagnosticWithError implements Diagnostic
 {

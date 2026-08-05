@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin;
+namespace Matomo\Plugins\ExamplePlugin;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuTop;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Menu\MenuTop;
 
 /**
  * This class allows you to add, remove or rename menu items.
  * To configure a menu (such as Admin Menu, Top Menu, User Menu...) simply call the corresponding methods as
  * described in the API-Reference https://developer.matomo.org/api-reference/Piwik/Menu/MenuAbstract
  */
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureTopMenu(MenuTop $menu)
     {

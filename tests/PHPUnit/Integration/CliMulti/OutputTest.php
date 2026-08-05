@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\CliMulti;
+namespace Matomo\Tests\Integration\CliMulti;
 
-use Piwik\CliMulti\Output;
-use Piwik\CliMulti\OutputInterface;
-use Piwik\CliMulti\StaticOutput;
-use Piwik\Tests\Framework\Mock\File;
-use Piwik\Url;
+use Matomo\CliMulti\Output;
+use Matomo\CliMulti\OutputInterface;
+use Matomo\CliMulti\StaticOutput;
+use Matomo\Tests\Framework\Mock\File;
+use Matomo\Url;
 
 /**
  * @group CliMulti

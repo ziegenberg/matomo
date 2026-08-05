@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Categories;
+namespace Matomo\Plugins\CoreHome\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class SoftwareSubcategory extends Subcategory
 {
@@ -20,6 +20,6 @@ class SoftwareSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('CoreHome_SoftwareSubcategoryHelp') . '</p>';
+        return '<p>' . Matomo::translate('CoreHome_SoftwareSubcategoryHelp') . '</p>';
     }
 }

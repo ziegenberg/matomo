@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Development;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\SettingsPiwik;
+use Matomo\Development;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\SettingsPiwik;
 
 class GitCommit extends ConsoleCommand
 {

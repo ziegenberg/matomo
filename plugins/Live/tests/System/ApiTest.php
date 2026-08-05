@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\tests\System;
+namespace Matomo\Plugins\Live\tests\System;
 
-use Piwik\Cache;
-use Piwik\Config;
-use Piwik\Plugins\API\API;
-use Piwik\Plugins\Live\MeasurableSettings;
-use Piwik\Plugins\Live\SystemSettings;
-use Piwik\Plugins\Live\tests\Fixtures\ManyVisitsOfSameVisitor;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Cache;
+use Matomo\Config;
+use Matomo\Plugins\API\API;
+use Matomo\Plugins\Live\MeasurableSettings;
+use Matomo\Plugins\Live\SystemSettings;
+use Matomo\Plugins\Live\tests\Fixtures\ManyVisitsOfSameVisitor;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Live
@@ -173,7 +173,7 @@ class ApiTest extends SystemTestCase
 
     public function testApiWithHttpsHost()
     {
-        \Piwik\Plugins\SitesManager\API::getInstance()->updateSite(1, 'Piwik test', ['http://piwik.net', 'https://example.org', 'http://example.org']);
+        \Matomo\Plugins\SitesManager\API::getInstance()->updateSite(1, 'Piwik test', ['http://piwik.net', 'https://example.org', 'http://example.org']);
         Cache::getTransientCache()->flushAll();
 
         $this->runApiTests('Live.getLastVisitsDetails', [

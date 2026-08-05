@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\tests\Fixtures;
+namespace Matomo\Plugins\Live\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates many visits for the same visitor
@@ -53,14 +53,14 @@ class ManyVisitsOfSameVisitor extends Fixture
 
     private function setSiteVisitorLogsDisabled($idSite)
     {
-        $settings = new \Piwik\Plugins\Live\MeasurableSettings($idSite);
+        $settings = new \Matomo\Plugins\Live\MeasurableSettings($idSite);
         $settings->disableVisitorLog->setValue(true);
         $settings->save();
     }
 
     private function setSiteVisitorProfilesDisabled($idSite)
     {
-        $settings = new \Piwik\Plugins\Live\MeasurableSettings($idSite);
+        $settings = new \Matomo\Plugins\Live\MeasurableSettings($idSite);
         $settings->disableVisitorProfile->setValue(true);
         $settings->save();
     }

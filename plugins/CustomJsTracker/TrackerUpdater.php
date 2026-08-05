@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker;
+namespace Matomo\Plugins\CustomJsTracker;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CustomJsTracker\TrackingCode\PiwikJsManipulator;
-use Piwik\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CustomJsTracker\TrackingCode\PiwikJsManipulator;
+use Matomo\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles;
+use Matomo\Matomo;
 
 /**
  * Updates the Piwik JavaScript Tracker "piwik.js" in case plugins extend the tracker.
  *
  * Usage:
- * StaticContainer::get('Piwik\Plugins\CustomJsTracker\TrackerUpdater')->update();
+ * StaticContainer::get('Matomo\Plugins\CustomJsTracker\TrackerUpdater')->update();
  */
 class TrackerUpdater
 {
@@ -55,7 +55,7 @@ class TrackerUpdater
 
         $this->setFromFile($fromFile);
         $this->setToFile($toFile);
-        $this->trackerFiles = StaticContainer::get('Piwik\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles');
+        $this->trackerFiles = StaticContainer::get('Matomo\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles');
     }
 
     public function setFromFile($fromFile)
@@ -140,7 +140,7 @@ class TrackerUpdater
                  *
                  * @param string $absolutePath The path to the new piwik.js file.
                  */
-                Piwik::postEvent('CustomJsTracker.trackerJsChanged', [$savedFile]);
+                Matomo::postEvent('CustomJsTracker.trackerJsChanged', [$savedFile]);
             }
         }
 
@@ -157,7 +157,7 @@ class TrackerUpdater
             if ($file->hasWriteAccess() && !$file->isFileContentSame($newContent)) {
                 $savedFiles = $file->save($newContent);
                 foreach ($savedFiles as $savedFile) {
-                    Piwik::postEvent('CustomJsTracker.trackerJsChanged', [$savedFile]);
+                    Matomo::postEvent('CustomJsTracker.trackerJsChanged', [$savedFile]);
                 }
             }
         }

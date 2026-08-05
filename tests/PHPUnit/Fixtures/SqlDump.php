@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Access;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Access;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Tests\Framework\Fixture;
 use Exception;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 
 /**
  * Reusable fixture. Loads a SQL dump into the DB.

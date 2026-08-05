@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * @group Core
@@ -18,13 +18,13 @@ class EmailValidatorTest extends \PHPUnit\Framework\TestCase
 {
     protected function isValid($email)
     {
-        return Piwik::isValidEmailString($email);
+        return Matomo::isValidEmailString($email);
     }
 
     private function getAllTlds()
     {
         /** @var array $response */
-        $response = \Piwik\Http::sendHttpRequest("http://data.iana.org/TLD/tlds-alpha-by-domain.txt", 60, null, null, null, null, null, true);
+        $response = \Matomo\Http::sendHttpRequest("http://data.iana.org/TLD/tlds-alpha-by-domain.txt", 60, null, null, null, null, null, true);
 
         $this->assertEquals("200", $response['status']);
 

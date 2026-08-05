@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner\Commands;
+namespace Matomo\Plugins\TestRunner\Commands;
 
-use Piwik\Db;
-use Piwik\Plugin;
-use Piwik\Profiler;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Db;
+use Matomo\Plugin;
+use Matomo\Profiler;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * Executes PHP tests.

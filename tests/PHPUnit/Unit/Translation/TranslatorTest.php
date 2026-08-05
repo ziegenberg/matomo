@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation;
+namespace Matomo\Tests\Unit\Translation;
 
-use Piwik\Translation\Loader\JsonFileLoader;
-use Piwik\Translation\Translator;
+use Matomo\Translation\Loader\JsonFileLoader;
+use Matomo\Translation\Translator;
 
 /**
  * @group Translation
@@ -147,7 +147,7 @@ class TranslatorTest extends \PHPUnit\Framework\TestCase
 
     private function createLoader(array $translations = array())
     {
-        $loader = $this->getMockForAbstractClass('Piwik\Translation\Loader\LoaderInterface');
+        $loader = $this->getMockForAbstractClass('Matomo\Translation\Loader\LoaderInterface');
         $loader->expects($this->any())
             ->method('load')
             ->willReturn($translations);

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\IntranetMeasurable\tests\Fixtures;
+namespace Matomo\Plugins\IntranetMeasurable\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\IntranetMeasurable\Type;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\IntranetMeasurable\Type;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates tracker testing data for our TrackingTest

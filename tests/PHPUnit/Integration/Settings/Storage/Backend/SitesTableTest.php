@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings\Storage\Backend;
+namespace Matomo\Tests\Integration\Settings\Storage\Backend;
 
-use Piwik\Settings\Storage\Backend\SitesTable;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Settings\Storage\Backend\SitesTable;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Settings
@@ -62,7 +62,7 @@ class SitesTableTest extends IntegrationTestCase
 
     public function testLoadShouldThrowExceptionIfSiteDoesNotExist()
     {
-        $this->expectException(\Piwik\Exception\UnexpectedWebsiteFoundException::class);
+        $this->expectException(\Matomo\Exception\UnexpectedWebsiteFoundException::class);
 
         $this->createSettings($idSite = 999)->load();
     }

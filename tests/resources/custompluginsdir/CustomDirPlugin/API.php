@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDirPlugin;
+namespace Matomo\Plugins\CustomDirPlugin;
 
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public function getCustomAnswerToLive($truth = true)
     {

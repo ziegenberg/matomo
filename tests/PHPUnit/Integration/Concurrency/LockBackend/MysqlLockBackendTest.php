@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Concurrency\LockBackend;
+namespace Matomo\Tests\Integration\Concurrency\LockBackend;
 
-use Piwik\Concurrency\LockBackend\MySqlLockBackend;
-use Piwik\Db;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Concurrency\LockBackend\MySqlLockBackend;
+use Matomo\Db;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class MysqlLockBackendTest extends IntegrationTestCase
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
 
 class MailTest extends UnitTestCase
 {
@@ -57,7 +57,7 @@ class MailTest extends UnitTestCase
         $this->assertTrue($result);
         $this->assertCount(1, $this->sentMails);
 
-        Piwik::addAction('Mail.shouldSend', function (&$shouldSend, $mail) {
+        Matomo::addAction('Mail.shouldSend', function (&$shouldSend, $mail) {
             $shouldSend = false;
         });
 

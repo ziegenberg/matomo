@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration\PluginTrial;
+namespace Matomo\Plugins\Marketplace\tests\Integration\PluginTrial;
 
-use Piwik\Config\GeneralConfig;
-use Piwik\Option;
-use Piwik\Plugins\Marketplace\PluginTrial\Storage;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config\GeneralConfig;
+use Matomo\Option;
+use Matomo\Plugins\Marketplace\PluginTrial\Storage;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Marketplace

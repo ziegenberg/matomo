@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Commands;
+namespace Matomo\Plugins\Diagnostics\Commands;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Db;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Db;
 
 /**
  * Diagnostic command that returns instance statistics related to archiving

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager\UIAssetMerger;
+namespace Matomo\AssetManager\UIAssetMerger;
 
-use Piwik\AssetManager\UIAsset;
-use Piwik\AssetManager\UIAssetCacheBuster;
-use Piwik\AssetManager\UIAssetFetcher\JScriptUIAssetFetcher;
-use Piwik\AssetManager\UIAssetMerger;
-use Piwik\AssetManager\UIAssetMinifier;
-use Piwik\Piwik;
+use Matomo\AssetManager\UIAsset;
+use Matomo\AssetManager\UIAssetCacheBuster;
+use Matomo\AssetManager\UIAssetFetcher\JScriptUIAssetFetcher;
+use Matomo\AssetManager\UIAssetMerger;
+use Matomo\AssetManager\UIAssetMinifier;
+use Matomo\Matomo;
 
 class JScriptUIAssetMerger extends UIAssetMerger
 {
@@ -66,7 +66,7 @@ class JScriptUIAssetMerger extends UIAssetMerger
              *
              * @param string $mergedContent The minified and merged JavaScript.
              */
-            Piwik::postEvent('AssetManager.filterMergedJavaScripts', array(&$mergedContent), null, $plugins);
+            Matomo::postEvent('AssetManager.filterMergedJavaScripts', array(&$mergedContent), null, $plugins);
         }
     }
 

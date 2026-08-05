@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Fixtures;
+namespace Matomo\Plugins\CustomDimensions\tests\Fixtures;
 
-use Piwik\Context;
-use Piwik\Date;
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
-use Piwik\Plugins\CustomDimensions\Dimension\Extraction;
-use Piwik\Plugins\Goals;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\ReportRenderer;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Cache;
+use Matomo\Context;
+use Matomo\Date;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Plugins\CustomDimensions\Dimension\Extraction;
+use Matomo\Plugins\Goals;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\ReportRenderer;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Cache;
 
 /**
  * Generates tracker testing data for our ApiTest

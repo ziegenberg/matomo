@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging;
+namespace Matomo\Plugins\MobileMessaging;
 
-use Piwik\Option;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\API\API as APIPlugins;
-use Piwik\Plugins\MobileMessaging\ReportRenderer\ReportRendererException;
-use Piwik\Plugins\MobileMessaging\ReportRenderer\Sms;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
-use Piwik\View;
+use Matomo\Option;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\API\API as APIPlugins;
+use Matomo\Plugins\MobileMessaging\ReportRenderer\ReportRendererException;
+use Matomo\Plugins\MobileMessaging\ReportRenderer\Sms;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\View;
 
-class MobileMessaging extends \Piwik\Plugin
+class MobileMessaging extends \Matomo\Plugin
 {
     public const DELEGATED_MANAGEMENT_OPTION = 'MobileMessaging_DelegatedManagement';
     public const PROVIDER_OPTION = 'Provider';
@@ -57,7 +57,7 @@ class MobileMessaging extends \Piwik\Plugin
     );
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -134,7 +134,7 @@ class MobileMessaging extends \Piwik\Plugin
     {
         if (self::manageEvent($reportType)) {
             // phone number validation
-            $availablePhoneNumbers = $this->getModel()->getActivatedPhoneNumbers(Piwik::getCurrentUserLogin());
+            $availablePhoneNumbers = $this->getModel()->getActivatedPhoneNumbers(Matomo::getCurrentUserLogin());
 
             $phoneNumbers = $parameters[self::PHONE_NUMBERS_PARAMETER];
             foreach ($phoneNumbers as $key => $phoneNumber) {
@@ -189,11 +189,11 @@ class MobileMessaging extends \Piwik\Plugin
     public function getRendererInstance(&$reportRenderer, $reportType, $outputType, $report)
     {
         if (self::manageEvent($reportType)) {
-            if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('MultiSites')) {
+            if (\Matomo\Plugin\Manager::getInstance()->isPluginActivated('MultiSites')) {
                 $reportRenderer = new Sms();
             } else {
                 $reportRenderer = new ReportRendererException(
-                    Piwik::translate('MobileMessaging_MultiSites_Must_Be_Activated')
+                    Matomo::translate('MobileMessaging_MultiSites_Must_Be_Activated')
                 );
             }
         }
@@ -242,8 +242,8 @@ class MobileMessaging extends \Piwik\Plugin
             $phoneNumbers = $parameters[self::PHONE_NUMBERS_PARAMETER];
 
             // 'All Websites' is one character above the limit, use 'Reports' instead
-            if ($reportSubject == Piwik::translate('General_MultiSitesSummary')) {
-                $reportSubject = Piwik::translate('General_Reports');
+            if ($reportSubject == Matomo::translate('General_MultiSitesSummary')) {
+                $reportSubject = Matomo::translate('General_Reports');
             }
 
             $model = $this->getModel();
@@ -259,14 +259,14 @@ class MobileMessaging extends \Piwik\Plugin
 
     public function templateReportParametersScheduledReports(&$out, $context = '')
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             return;
         }
 
         $view = new View('@MobileMessaging/reportParametersScheduledReports');
         $view->reportType = self::MOBILE_TYPE;
         $view->context = $context;
-        $numbers = $this->getModel()->getActivatedPhoneNumbers(Piwik::getCurrentUserLogin());
+        $numbers = $this->getModel()->getActivatedPhoneNumbers(Matomo::getCurrentUserLogin());
 
         $phoneNumbers = array();
         if (!empty($numbers)) {

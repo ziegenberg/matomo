@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\DataTable\Filter;
+namespace Matomo\Plugins\Goals\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
 
 class RemoveUnusedGoalRevenueColumns extends BaseFilter
 {

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Proxy;
+namespace Matomo\Plugins\Proxy;
 
 /**
  * Proxy services for the UI
  *
  */
-class Proxy extends \Piwik\Plugin
+class Proxy extends \Matomo\Plugin
 {
 }

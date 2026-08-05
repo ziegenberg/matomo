@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Columns\Dimension;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Columns\Dimension;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugin\ReportsProvider;
 
 class GenerateReport extends GeneratePluginBase
 {
@@ -50,14 +50,14 @@ class GenerateReport extends GeneratePluginBase
                                 'ExampleReportDocumentation' => $documentation,
                                 '999'               => $order,
                                 'new ExitPageUrl()' => $dimension,
-                                'use Piwik\Plugins\Actions\Columns\ExitPageUrl;' => $dimensionClass,
+                                'use Matomo\Plugins\Actions\Columns\ExitPageUrl;' => $dimensionClass,
                                 'ExampleReport'     => $pluginName,
         );
 
         $whitelistFiles = array('/Reports', '/Reports/Base.php', '/Reports/GetExampleReport.php');
 
         if (file_exists($this->getPluginPath($pluginName) . '/API.php')) {
-            $this->copyTemplateMethodToExisitingClass('Piwik\Plugins\ExampleReport\API', 'getExampleReport', $replace);
+            $this->copyTemplateMethodToExisitingClass('Matomo\Plugins\ExampleReport\API', 'getExampleReport', $replace);
         } else {
             $whitelistFiles[] = '/API.php';
         }
@@ -197,7 +197,7 @@ class GenerateReport extends GeneratePluginBase
         $categories = array();
         foreach ($reports->getAllReports() as $report) {
             if ($report->getCategoryId()) {
-                $categories[] = Piwik::translate($report->getCategoryId());
+                $categories[] = Matomo::translate($report->getCategoryId());
             }
         }
         $categories = array_values(array_unique($categories));
@@ -213,7 +213,7 @@ class GenerateReport extends GeneratePluginBase
             $validate($category);
         }
 
-        $translationKey = StaticContainer::get('Piwik\Translation\Translator')->findTranslationKeyForTranslation($category);
+        $translationKey = StaticContainer::get('Matomo\Translation\Translator')->findTranslationKeyForTranslation($category);
         if (!empty($translationKey)) {
             return $translationKey;
         }

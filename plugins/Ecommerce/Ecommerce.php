@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce;
+namespace Matomo\Plugins\Ecommerce;
 
-use Piwik\Columns\ComputedMetricFactory;
-use Piwik\Columns\MetricsList;
-use Piwik\Common;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\ComputedMetric;
-use Piwik\Plugins\Ecommerce\Columns\ProductCategory;
-use Piwik\Plugins\SegmentEditor\Settings\LimitSegments;
-use Piwik\Segment\SegmentsList;
+use Matomo\Columns\ComputedMetricFactory;
+use Matomo\Columns\MetricsList;
+use Matomo\Common;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\ComputedMetric;
+use Matomo\Plugins\Ecommerce\Columns\ProductCategory;
+use Matomo\Plugins\SegmentEditor\Settings\LimitSegments;
+use Matomo\Segment\SegmentsList;
 
-class Ecommerce extends \Piwik\Plugin
+class Ecommerce extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {

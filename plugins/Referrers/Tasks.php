@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-use Piwik\Config;
-use Piwik\Http;
-use Piwik\Option;
-use Piwik\SettingsPiwik;
+use Matomo\Config;
+use Matomo\Http;
+use Matomo\Option;
+use Matomo\SettingsPiwik;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     public function schedule()
     {

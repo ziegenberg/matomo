@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\BotTrackingMethod;
+namespace Matomo\Plugins\BotTracking\BotTrackingMethod;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class MissingOneContactUs extends BotTrackingMethodAbstract
 {
     public static function getName(): string
     {
-        return Piwik::translate('BotTracking_NoDataMissingOneContactUs');
+        return Matomo::translate('BotTracking_NoDataMissingOneContactUs');
     }
 
     public static function getSiteContentDetectionId(): ?string

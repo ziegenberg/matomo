@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Renderer;
+namespace Matomo\Plugins\API\Renderer;
 
-use Piwik\API\ApiRenderer;
-use Piwik\Common;
+use Matomo\API\ApiRenderer;
+use Matomo\Common;
 
 class Xml extends ApiRenderer
 {

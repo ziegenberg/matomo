@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
 
-use Piwik\Common;
-use Piwik\Config as PiwikConfig;
-use Piwik\Metrics;
-use Piwik\ViewDataTable\RequestConfig as VisualizationRequestConfig;
+use Matomo\Common;
+use Matomo\Config as PiwikConfig;
+use Matomo\Metrics;
+use Matomo\ViewDataTable\RequestConfig as VisualizationRequestConfig;
 
 /**
  * DataTable Visualization that derives from HtmlTable and sets show_extra_columns to true.

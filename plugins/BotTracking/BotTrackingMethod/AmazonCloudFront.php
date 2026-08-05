@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\BotTrackingMethod;
+namespace Matomo\Plugins\BotTracking\BotTrackingMethod;
 
-use Piwik\Plugins\SitesManager\SiteContentDetection\AmazonCloudFront as SitesManagerAmazonCloudFront;
-use Piwik\View;
+use Matomo\Plugins\SitesManager\SiteContentDetection\AmazonCloudFront as SitesManagerAmazonCloudFront;
+use Matomo\View;
 
 class AmazonCloudFront extends BotTrackingMethodAbstract
 {

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Session;
+namespace Matomo\Tests\Unit\Session;
 
-use Piwik\Auth;
-use Piwik\AuthResult;
-use Piwik\Session\SessionFingerprint;
-use Piwik\Session\SessionInitializer;
+use Matomo\Auth;
+use Matomo\AuthResult;
+use Matomo\Session\SessionFingerprint;
+use Matomo\Session\SessionInitializer;
 
 class SessionInitializerTest extends \PHPUnit\Framework\TestCase
 {

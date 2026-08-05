@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\PluginTrial;
+namespace Matomo\Plugins\Marketplace\PluginTrial;
 
 use Exception;
-use Piwik\Config\GeneralConfig;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
+use Matomo\Config\GeneralConfig;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
 
 class Storage
 {
@@ -42,7 +42,7 @@ class Storage
             'requestTime' => time(),
             'displayName' => $pluginDisplayName,
             'dismissed' => [],
-            'requestedBy' => Piwik::getCurrentUserLogin(),
+            'requestedBy' => Matomo::getCurrentUserLogin(),
         ];
         $this->saveStorage();
     }
@@ -71,7 +71,7 @@ class Storage
      */
     public function setNotificationDismissed(): void
     {
-        $this->storage['dismissed'][] = Piwik::getCurrentUserLogin();
+        $this->storage['dismissed'][] = Matomo::getCurrentUserLogin();
         $this->saveStorage();
     }
 
@@ -88,7 +88,7 @@ class Storage
      */
     public function isNotificationDismissed(): bool
     {
-        return !empty($this->storage['dismissed']) && in_array(Piwik::getCurrentUserLogin(), $this->storage['dismissed']);
+        return !empty($this->storage['dismissed']) && in_array(Matomo::getCurrentUserLogin(), $this->storage['dismissed']);
     }
 
     /**

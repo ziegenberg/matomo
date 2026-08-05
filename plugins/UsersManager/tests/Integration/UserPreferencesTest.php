@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager
@@ -63,7 +63,7 @@ class UserPreferencesTest extends IntegrationTestCase
         self::expectExceptionMessage('Not supported preference name');
 
         APIUsersManager::getInstance()->setUserPreference(
-            Piwik::getCurrentUserLogin(),
+            Matomo::getCurrentUserLogin(),
             'foo',
             '1'
         );
@@ -194,7 +194,7 @@ class UserPreferencesTest extends IntegrationTestCase
     private function setDefaultReport($defaultReport)
     {
         APIUsersManager::getInstance()->setUserPreference(
-            Piwik::getCurrentUserLogin(),
+            Matomo::getCurrentUserLogin(),
             APIUsersManager::PREFERENCE_DEFAULT_REPORT,
             $defaultReport
         );
@@ -203,7 +203,7 @@ class UserPreferencesTest extends IntegrationTestCase
     private function setDefaultDate($date)
     {
         APIUsersManager::getInstance()->setUserPreference(
-            Piwik::getCurrentUserLogin(),
+            Matomo::getCurrentUserLogin(),
             APIUsersManager::PREFERENCE_DEFAULT_REPORT_DATE,
             $date
         );
@@ -212,7 +212,7 @@ class UserPreferencesTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

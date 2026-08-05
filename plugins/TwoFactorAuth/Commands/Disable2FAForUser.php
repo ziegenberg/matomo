@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth\Commands;
+namespace Matomo\Plugins\TwoFactorAuth\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication;
 
 class Disable2FAForUser extends ConsoleCommand
 {

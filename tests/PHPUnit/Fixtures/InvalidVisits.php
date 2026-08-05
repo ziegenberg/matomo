@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Http;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Http;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Tests\Framework\Fixture;
 use Exception;
-use Piwik\Tracker\Cache;
+use Matomo\Tracker\Cache;
 
 /**
  * Adds one site and sends several invalid tracking requests. The result should be

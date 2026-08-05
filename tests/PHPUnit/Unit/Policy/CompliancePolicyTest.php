@@ -1,9 +1,9 @@
 <?php
 
-namespace Piwik\Tests\Unit\Policy;
+namespace Matomo\Tests\Unit\Policy;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Tests\Framework\Mock\Policy\TestPolicy;
+use Matomo\Tests\Framework\Mock\Policy\TestPolicy;
 
 class CompliancePolicyTest extends TestCase
 {

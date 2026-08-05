@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging\ReportRenderer;
+namespace Matomo\Plugins\MobileMessaging\ReportRenderer;
 
-use Piwik\ReportRenderer;
+use Matomo\ReportRenderer;
 
 class ReportRendererException extends ReportRenderer
 {

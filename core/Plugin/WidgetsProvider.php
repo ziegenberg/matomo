@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Widget\WidgetContainerConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Widget\WidgetContainerConfig;
 
 /**
  * Get widgets that are defined by plugins.
@@ -57,7 +57,7 @@ class WidgetsProvider
          *
          * @param array &$configs An array containing a list of widget config entries.
          */
-        Piwik::postEvent('Widget.addWidgetConfigs', array(&$configs));
+        Matomo::postEvent('Widget.addWidgetConfigs', array(&$configs));
 
         foreach ($widgetClasses as $widgetClass) {
             $configs[] = $this->getWidgetConfigForClassName($widgetClass);
@@ -107,7 +107,7 @@ class WidgetsProvider
             return null;
         }
 
-        $widgets = $plugin->findMultipleComponents('Widgets', 'Piwik\\Widget\\Widget');
+        $widgets = $plugin->findMultipleComponents('Widgets', 'Matomo\Widget\Widget');
 
         foreach ($widgets as $widgetClass) {
             $config = $this->getWidgetConfigForClassName($widgetClass);
@@ -136,7 +136,7 @@ class WidgetsProvider
      */
     private function getAllWidgetClassNames()
     {
-        return $this->pluginManager->findMultipleComponents('Widgets', 'Piwik\\Widget\\Widget');
+        return $this->pluginManager->findMultipleComponents('Widgets', 'Matomo\Widget\Widget');
     }
 
     private function getModuleFromWidgetClassName($widgetClass)
@@ -162,6 +162,6 @@ class WidgetsProvider
      */
     private function getAllWidgetContainerConfigClassNames()
     {
-        return $this->pluginManager->findMultipleComponents('Widgets', 'Piwik\\Widget\\WidgetContainerConfig');
+        return $this->pluginManager->findMultipleComponents('Widgets', 'Matomo\Widget\WidgetContainerConfig');
     }
 }

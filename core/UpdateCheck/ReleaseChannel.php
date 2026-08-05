@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\UpdateCheck;
+namespace Matomo\UpdateCheck;
 
 /**
  * Base class to define a custom release channel. Plugins can add their own custom release channels by extending this

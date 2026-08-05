@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration\Dao;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration\Dao;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Plugins\PrivacyManager\API;
-use Piwik\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\PrivacyManager\tests\Fixtures\MultipleSitesMultipleVisitsFixture;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Cache;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Plugins\PrivacyManager\API;
+use Matomo\Plugins\PrivacyManager\Dao\LogDataAnonymizer;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\PrivacyManager\tests\Fixtures\MultipleSitesMultipleVisitsFixture;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Cache;
 
 /**
  * Class LogDataAnonymizationsTest
@@ -261,7 +261,7 @@ class LogDataAnonymizerTest extends IntegrationTestCase
         $result = json_encode($export, JSON_PRETTY_PRINT);
         $fileExpected = PIWIK_DOCUMENT_ROOT . '/plugins/PrivacyManager/tests/System/expected/anonymizeVisitInformation_' . $fileName . '.json';
         $fileProcessed = str_replace('/expected/', '/processed/', $fileExpected);
-        \Piwik\Filesystem::mkdir(dirname($fileProcessed));
+        \Matomo\Filesystem::mkdir(dirname($fileProcessed));
         file_put_contents($fileProcessed, $result);
 
         $this->assertJsonStringEqualsJsonFile($fileExpected, $result);

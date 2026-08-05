@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitFrequency\Columns\Metrics;
+namespace Matomo\Plugins\VisitFrequency\Columns\Metrics;
 
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * Processed metric for VisitFrequency.get API method which just copies VisitsSummary.get
@@ -51,7 +51,7 @@ class ReturningMetric extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate(self::$translations[$this->getName()]);
+        return Matomo::translate(self::$translations[$this->getName()]);
     }
 
     public function format($value, Formatter $formatter)

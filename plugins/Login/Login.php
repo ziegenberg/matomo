@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\FrontController;
-use Piwik\IP;
-use Piwik\NoAccessException;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
-use Piwik\Plugins\Login\Security\LoginFromDifferentCountryDetection;
-use Piwik\Plugins\UsersManager\UserLoginHelper;
-use Piwik\Session;
-use Piwik\SettingsServer;
+use Matomo\API\Request;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\FrontController;
+use Matomo\IP;
+use Matomo\NoAccessException;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Plugins\Login\Security\LoginFromDifferentCountryDetection;
+use Matomo\Plugins\UsersManager\UserLoginHelper;
+use Matomo\Session;
+use Matomo\SettingsServer;
 
-class Login extends \Piwik\Plugin
+class Login extends \Matomo\Plugin
 {
     private bool $hasAddedFailedAttempt = false;
 
@@ -34,7 +34,7 @@ class Login extends \Piwik\Plugin
     private bool $hasPerformedBruteForceCheckForUserPwdLogin = false;
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -72,7 +72,7 @@ class Login extends \Piwik\Plugin
             'Login.authenticate.processSuccessfulSession.end' => 'checkLoginFromAnotherCountry',
         ];
 
-        $loginPlugin = Piwik::getLoginPluginName();
+        $loginPlugin = Matomo::getLoginPluginName();
 
         if ($loginPlugin && $loginPlugin !== 'Login') {
             $hooks['Controller.' . $loginPlugin . '.logme']           = 'beforeLoginCheckBruteForce';
@@ -136,7 +136,7 @@ class Login extends \Piwik\Plugin
         // this is to kind of block eg a certain IP continuously. could alternatively also still keep writing those failed
         // attempts into the log and only allow login attempts again after the user had no login attempts for the configured
         // time frame
-        $bruteForce = StaticContainer::get('Piwik\Plugins\Login\Security\BruteForceDetection');
+        $bruteForce = StaticContainer::get('Matomo\Plugins\Login\Security\BruteForceDetection');
         if ($bruteForce->isEnabled() && !$this->hasAddedFailedAttempt) {
             // prefer the login the attempt was made for; otherwise derive it from the request
             $login = empty($login) ? $this->getUsernameUsedInPasswordLogin() : $this->normalizeUserLogin($login);
@@ -158,9 +158,9 @@ class Login extends \Piwik\Plugin
         if ($this->isModuleIsAPI()) {
             // Throw an exception if a token was provided but it was invalid
             if (StaticContainer::get(AuthenticationToken::class)->wasTokenAuthProvidedSecurely()) {
-                throw new NoAccessException(Piwik::translate('Login_TokenAuthenticationFailed'));
+                throw new NoAccessException(Matomo::translate('Login_TokenAuthenticationFailed'));
             } else {
-                throw new NoAccessException(Piwik::translate('Login_TokenAuthenticationFailedInsecure'));
+                throw new NoAccessException(Matomo::translate('Login_TokenAuthenticationFailedInsecure'));
             }
         }
     }
@@ -212,14 +212,14 @@ class Login extends \Piwik\Plugin
     private function performBruteForceCheck(?string $login): void
     {
         /** @var BruteForceDetection $bruteForce */
-        $bruteForce = StaticContainer::get('Piwik\Plugins\Login\Security\BruteForceDetection');
+        $bruteForce = StaticContainer::get('Matomo\Plugins\Login\Security\BruteForceDetection');
 
         if (!$bruteForce->isEnabled()) {
             return;
         }
 
         if (!$this->hasPerformedBruteForceCheck && !$bruteForce->isAllowedToLogin(IP::getIpFromHeader())) {
-            throw new Exception(Piwik::translate('Login_LoginNotAllowedBecauseBlocked'));
+            throw new Exception(Matomo::translate('Login_LoginNotAllowedBecauseBlocked'));
         }
 
         // for performance reasons we make sure to execute it only once per request
@@ -233,7 +233,7 @@ class Login extends \Piwik\Plugin
         }
 
         if (!$this->hasPerformedBruteForceCheckForUserPwdLogin && $bruteForce->isUserLoginBlocked($login)) {
-            $ex = new NoAccessException(Piwik::translate('Login_LoginNotAllowedBecauseUserLoginBlocked'), 403);
+            $ex = new NoAccessException(Matomo::translate('Login_LoginNotAllowedBecauseUserLoginBlocked'), 403);
             throw $ex;
         }
         // for performance reasons we make sure to execute it only once per request
@@ -269,7 +269,7 @@ class Login extends \Piwik\Plugin
         }
 
         // if this is a login request & form_rememberme was set, change the session cookie expire time before starting the session
-        if (\Piwik\Request::fromPost()->getBoolParameter('form_rememberme', false)) {
+        if (\Matomo\Request::fromPost()->getBoolParameter('form_rememberme', false)) {
             $loginCookieExpire = GeneralConfig::getConfigValue('login_cookie_expire');
             if (!is_numeric($loginCookieExpire)) {
                 $loginCookieExpire = null;
@@ -283,8 +283,8 @@ class Login extends \Piwik\Plugin
 
     private function shouldHandleRememberMe(): bool
     {
-        $module = Piwik::getModule();
-        $action = Piwik::getAction();
+        $module = Matomo::getModule();
+        $action = Matomo::getAction();
         return ($module == 'Login' || $module == 'CoreHome') && (empty($action) || $action == 'index' || $action == 'login');
     }
 
@@ -299,12 +299,12 @@ class Login extends \Piwik\Plugin
         $frontController = FrontController::getInstance();
 
         if (Common::isXmlHttpRequest()) {
-            $response = $frontController->dispatch(Piwik::getLoginPluginName(), 'ajaxNoAccess', [$exception->getMessage()]);
+            $response = $frontController->dispatch(Matomo::getLoginPluginName(), 'ajaxNoAccess', [$exception->getMessage()]);
             echo is_string($response) ? $response : '';
             return;
         }
 
-        $response = $frontController->dispatch(Piwik::getLoginPluginName(), 'login', [$exception->getMessage()]);
+        $response = $frontController->dispatch(Matomo::getLoginPluginName(), 'login', [$exception->getMessage()]);
         echo is_string($response) ? $response : '';
     }
 
@@ -321,8 +321,8 @@ class Login extends \Piwik\Plugin
     ) {
         $this->beforeLoginCheckBruteForce();
 
-        /** @var \Piwik\Auth $auth */
-        $auth = StaticContainer::get('Piwik\Auth');
+        /** @var \Matomo\Auth $auth */
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setLogin($login = null);
         $auth->setTokenAuth($tokenAuth);
     }
@@ -332,17 +332,17 @@ class Login extends \Piwik\Plugin
      */
     protected static function isModuleIsAPI()
     {
-        return Piwik::getModule() === 'API'
-            && (Piwik::getAction() == '' || Piwik::getAction() === 'index');
+        return Matomo::getModule() === 'API'
+            && (Matomo::getAction() == '' || Matomo::getAction() === 'index');
     }
 
     private function getUsernameUsedInPasswordLogin(): string
     {
-        $login = StaticContainer::get(\Piwik\Auth::class)->getLogin();
+        $login = StaticContainer::get(\Matomo\Auth::class)->getLogin();
         if (empty($login) || $login === 'anonymous') {
-            $login = \Piwik\Request::fromRequest()->getStringParameter('form_login', '');
-            if (Piwik::getAction() === 'logme') {
-                $login = \Piwik\Request::fromRequest()->getStringParameter('login', $login);
+            $login = \Matomo\Request::fromRequest()->getStringParameter('form_login', '');
+            if (Matomo::getAction() === 'logme') {
+                $login = \Matomo\Request::fromRequest()->getStringParameter('login', $login);
             }
         }
 

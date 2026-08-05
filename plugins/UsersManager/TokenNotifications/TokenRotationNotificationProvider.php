@@ -7,10 +7,10 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\TokenNotifications;
+namespace Matomo\Plugins\UsersManager\TokenNotifications;
 
-use Piwik\Config;
-use Piwik\Date;
+use Matomo\Config;
+use Matomo\Date;
 
 class TokenRotationNotificationProvider extends TokenNotificationProvider
 {

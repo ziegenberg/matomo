@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Visualizations;
+namespace Matomo\Plugins\Goals\Visualizations;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\AddColumnsProcessedMetricsGoal;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Site;
-use Piwik\Url;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\AddColumnsProcessedMetricsGoal;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Site;
+use Matomo\Url;
 
 require_once PIWIK_INCLUDE_PATH . '/core/Twig.php';
 
@@ -44,7 +44,7 @@ class Goals extends HtmlTable
         $idGoal = AddColumnsProcessedMetricsGoal::getProcessOnlyIdGoalToUseForReport($idGoal, $requestMethod);
 
         if (!empty($idGoal)) {
-            $this->config->filters[] = ['Piwik\Plugins\Goals\DataTable\Filter\RemoveUnusedGoalRevenueColumns'];
+            $this->config->filters[] = ['Matomo\Plugins\Goals\DataTable\Filter\RemoveUnusedGoalRevenueColumns'];
             $this->requestConfig->request_parameters_to_modify['idGoal'] = $idGoal;
 
             if ($idGoal == AddColumnsProcessedMetricsGoal::GOALS_PAGES || $idGoal == AddColumnsProcessedMetricsGoal::GOALS_PAGES_ECOMMERCE) {
@@ -77,24 +77,24 @@ class Goals extends HtmlTable
 
         if (1 == Common::getRequestVar('documentationForGoalsPage', 0, 'int')) {
             // TODO: should not use query parameter
-            $this->config->documentation = Piwik::translate(
+            $this->config->documentation = Matomo::translate(
                 'Goals_ConversionByTypeReportDocumentation',
                 ['<br />', '<br />', Url::getExternalLinkTag('https://matomo.org/docs/tracking-goals-web-analytics/'), '</a>']
             );
         }
 
         if ($this->displayType == self::GOALS_DISPLAY_NORMAL) {
-            $this->config->metrics_documentation['nb_visits'] = Piwik::translate('Goals_ColumnVisits');
+            $this->config->metrics_documentation['nb_visits'] = Matomo::translate('Goals_ColumnVisits');
         }
 
         if ($this->displayType == self::GOALS_DISPLAY_PAGES) {
-            $this->config->addTranslation('nb_visits', Piwik::translate('General_ColumnUniquePageviews'));
-            $this->config->metrics_documentation['nb_visits'] = Piwik::translate('General_ColumnUniquePageviewsDocumentation');
+            $this->config->addTranslation('nb_visits', Matomo::translate('General_ColumnUniquePageviews'));
+            $this->config->metrics_documentation['nb_visits'] = Matomo::translate('General_ColumnUniquePageviewsDocumentation');
             $this->removeUnusedRevenueColumns();
         }
 
         if ($this->displayType == self::GOALS_DISPLAY_ENTRY_PAGES) {
-            $this->config->metrics_documentation['entry_nb_visits'] = Piwik::translate('General_ColumnEntrancesDocumentation');
+            $this->config->metrics_documentation['entry_nb_visits'] = Matomo::translate('General_ColumnEntrancesDocumentation');
             $this->removeUnusedRevenueColumns();
         }
 
@@ -127,7 +127,7 @@ class Goals extends HtmlTable
         $idGoal = Common::getRequestVar('idGoal', AddColumnsProcessedMetricsGoal::GOALS_OVERVIEW, 'string');
 
         $goalsToProcess = null;
-        if (Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER == $idGoal) {
+        if (Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER == $idGoal) {
             $this->setPropertiesForEcommerceView();
 
             $goalsToProcess = [$idGoal];
@@ -204,14 +204,14 @@ class Goals extends HtmlTable
         }
 
         $this->config->translations = array_merge($this->config->translations, [
-            'goal_ecommerceOrder_nb_conversions'    => Piwik::translate('General_EcommerceOrders'),
-            'goal_ecommerceOrder_revenue'           => Piwik::translate('General_TotalRevenue'),
-            'goal_ecommerceOrder_revenue_per_visit' => Piwik::translate('General_ColumnValuePerVisit'),
+            'goal_ecommerceOrder_nb_conversions'    => Matomo::translate('General_EcommerceOrders'),
+            'goal_ecommerceOrder_revenue'           => Matomo::translate('General_TotalRevenue'),
+            'goal_ecommerceOrder_revenue_per_visit' => Matomo::translate('General_ColumnValuePerVisit'),
         ]);
 
-        $goalName = Piwik::translate('General_EcommerceOrders');
+        $goalName = Matomo::translate('General_EcommerceOrders');
         $this->config->metrics_documentation['revenue_per_visit'] =
-            Piwik::translate('Goals_ColumnRevenuePerVisitDocumentation', $goalName);
+            Matomo::translate('Goals_ColumnRevenuePerVisitDocumentation', $goalName);
     }
 
     protected function setPropertiesForGoalsOverview($idSite)
@@ -362,8 +362,8 @@ class Goals extends HtmlTable
             // add the ecommerce goal if ecommerce is enabled for the site
             if (Site::isEcommerceEnabledFor($idSite)) {
                 $ecommerceGoal = [
-                    'idgoal'      => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
-                    'name'        => Piwik::translate('Goals_EcommerceOrder'),
+                    'idgoal'      => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
+                    'name'        => Matomo::translate('Goals_EcommerceOrder'),
                     'quoted_name' => false,
                 ];
                 $allGoals[$ecommerceGoal['idgoal']] = $ecommerceGoal;

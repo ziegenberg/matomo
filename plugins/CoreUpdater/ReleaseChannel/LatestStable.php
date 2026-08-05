@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\ReleaseChannel;
+namespace Matomo\Plugins\CoreUpdater\ReleaseChannel;
 
-use Piwik\Piwik;
-use Piwik\Plugins\CoreUpdater\ReleaseChannel;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreUpdater\ReleaseChannel;
 
 class LatestStable extends ReleaseChannel
 {
@@ -21,12 +21,12 @@ class LatestStable extends ReleaseChannel
 
     public function getName()
     {
-        return Piwik::translate('CoreUpdater_LatestStableRelease');
+        return Matomo::translate('CoreUpdater_LatestStableRelease');
     }
 
     public function getDescription()
     {
-        return Piwik::translate('General_Recommended');
+        return Matomo::translate('General_Recommended');
     }
 
     public function getOrder()

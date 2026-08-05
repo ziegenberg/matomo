@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const SEARCH_ENGINES_RECORD_NAME = 'Referrers_keywordBySearchEngine';
     public const SOCIAL_NETWORKS_RECORD_NAME = 'Referrers_urlBySocialNetwork';

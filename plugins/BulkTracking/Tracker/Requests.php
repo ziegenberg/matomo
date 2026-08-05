@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\Tracker;
+namespace Matomo\Plugins\BulkTracking\Tracker;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TrackerConfig;
+use Matomo\Common;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TrackerConfig;
 
 class Requests
 {

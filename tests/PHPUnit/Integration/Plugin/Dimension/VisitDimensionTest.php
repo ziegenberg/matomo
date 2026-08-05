@@ -8,16 +8,16 @@
  */
 
 // there is a test that requires the class to be defined in a plugin
-namespace Piwik\Plugins\Test;
+namespace Matomo\Plugins\Test;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Segment;
-use Piwik\Plugin\Manager;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\Segment;
+use Matomo\Plugin\Manager;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class FakeVisitDimension extends VisitDimension
 {
@@ -170,8 +170,8 @@ class VisitDimensionTest extends IntegrationTestCase
         $segments = $this->conversionDimension->getSegments();
 
         $this->assertCount(2, $segments);
-        $this->assertInstanceOf('\Piwik\Plugin\Segment', $segments[0]);
-        $this->assertInstanceOf('\Piwik\Plugin\Segment', $segments[1]);
+        $this->assertInstanceOf('\Matomo\Plugin\Segment', $segments[0]);
+        $this->assertInstanceOf('\Matomo\Plugin\Segment', $segments[1]);
     }
 
     public function testAddSegmentShouldPrefilSomeSegmentValuesIfNotDefinedYet()
@@ -253,8 +253,8 @@ class VisitDimensionTest extends IntegrationTestCase
         $this->assertGreaterThan(5, count($dimensions));
 
         foreach ($dimensions as $dimension) {
-            $this->assertInstanceOf('\Piwik\Plugin\Dimension\VisitDimension', $dimension);
-            $this->assertStringStartsWith('Piwik\Plugins\Actions\Columns', get_class($dimension));
+            $this->assertInstanceOf('\Matomo\Plugin\Dimension\VisitDimension', $dimension);
+            $this->assertStringStartsWith('Matomo\Plugins\Actions\Columns', get_class($dimension));
         }
     }
 
@@ -268,7 +268,7 @@ class VisitDimensionTest extends IntegrationTestCase
         $this->assertGreaterThan(10, count($dimensions));
 
         foreach ($dimensions as $dimension) {
-            $this->assertInstanceOf('\Piwik\Plugin\Dimension\VisitDimension', $dimension);
+            $this->assertInstanceOf('\Matomo\Plugin\Dimension\VisitDimension', $dimension);
             $this->assertMatchesRegularExpression('/Piwik.Plugins.(DevicesDetection|Actions).Columns/', get_class($dimension));
         }
     }

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution\Reports;
+namespace Matomo\Plugins\Resolution\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Resolution\Columns\Configuration;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Resolution\Columns\Configuration;
+use Matomo\Plugin\ReportsProvider;
 
 class GetConfiguration extends Base
 {
@@ -20,8 +20,8 @@ class GetConfiguration extends Base
     {
         parent::init();
         $this->dimension     = new Configuration();
-        $this->name          = Piwik::translate('Resolution_Configurations');
-        $this->documentation = Piwik::translate('Resolution_WidgetGlobalVisitorsDocumentation', '<br />');
+        $this->name          = Matomo::translate('Resolution_Configurations');
+        $this->documentation = Matomo::translate('Resolution_WidgetGlobalVisitorsDocumentation', '<br />');
         $this->order = 7;
 
         $this->subcategoryId = 'DevicesDetection_Software';

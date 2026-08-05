@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Tracker\IgnoreCookie;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Tracker\IgnoreCookie;
 
 /**
  * Excludes visits where user agent's request contains either:
@@ -74,7 +74,7 @@ class DoNotTrackHeaderChecker
 
         $shouldIgnore = false;
 
-        Piwik::postEvent('PrivacyManager.shouldIgnoreDnt', array(&$shouldIgnore));
+        Matomo::postEvent('PrivacyManager.shouldIgnoreDnt', array(&$shouldIgnore));
         if ($shouldIgnore) {
             Common::printDebug("DoNotTrack header ignored by Matomo because of a plugin");
             return false;

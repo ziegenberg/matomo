@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\AssetManager;
+namespace Matomo\Tests\Unit\AssetManager;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\AssetManager\UIAssetCacheBuster;
+use Matomo\AssetManager\UIAssetCacheBuster;
 
 class UIAssetCacheBusterTest extends TestCase
 {

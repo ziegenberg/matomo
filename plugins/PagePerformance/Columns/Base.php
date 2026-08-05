@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns;
+namespace Matomo\Plugins\PagePerformance\Columns;
 
 use Exception;
-use Piwik\Config;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\ActionPageview;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Config;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\ActionPageview;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 abstract class Base extends ActionDimension
 {

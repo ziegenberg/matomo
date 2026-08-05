@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitsSummary\Reports;
+namespace Matomo\Plugins\VisitsSummary\Reports;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\CalculateEvolutionFilter;
-use Piwik\DbHelper;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter as MetricFormatter;
-use Piwik\Period;
-use Piwik\Period\Month;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
-use Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
-use Piwik\Plugins\CoreHome\Columns\Metrics\BounceRate;
-use Piwik\Plugins\CoreHome\Columns\UserId;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Widget\WidgetsList;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\CalculateEvolutionFilter;
+use Matomo\DbHelper;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter as MetricFormatter;
+use Matomo\Period;
+use Matomo\Period\Month;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
+use Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
+use Matomo\Plugins\CoreHome\Columns\Metrics\BounceRate;
+use Matomo\Plugins\CoreHome\Columns\UserId;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Widget\WidgetsList;
 
-class Get extends \Piwik\Plugin\Report
+class Get extends \Matomo\Plugin\Report
 {
     private $usersColumn = 'nb_users';
 
@@ -40,8 +40,8 @@ class Get extends \Piwik\Plugin\Report
     {
         parent::init();
         $this->categoryId    = 'General_Visitors';
-        $this->name          = Piwik::translate('VisitsSummary_VisitsSummary');
-        $this->documentation = Piwik::translate('VisitsSummary_VisitsSummaryReportDocumentation');
+        $this->name          = Matomo::translate('VisitsSummary_VisitsSummary');
+        $this->documentation = Matomo::translate('VisitsSummary_VisitsSummaryReportDocumentation');
         $this->processedMetrics = array(
             new BounceRate(),
             new ActionsPerVisit(),
@@ -54,7 +54,7 @@ class Get extends \Piwik\Plugin\Report
             'max_actions',
         );
 
-        $period = Piwik::getPeriod('day');
+        $period = Matomo::getPeriod('day');
         if (SettingsPiwik::isUniqueVisitorsEnabled($period)) {
             $this->metrics = array_merge(['nb_uniq_visitors'], $this->metrics);
         }
@@ -122,9 +122,9 @@ class Get extends \Piwik\Plugin\Report
             // Add evolution values to sparklines
             list($lastPeriodDate, $ignore) = Range::getLastDate();
             if ($lastPeriodDate !== false) {
-                $currentPeriod = Period\Factory::build(Piwik::getPeriod(), Common::getRequestVar('date'));
+                $currentPeriod = Period\Factory::build(Matomo::getPeriod(), Common::getRequestVar('date'));
                 $currentPrettyDate = ($currentPeriod instanceof Month ? $currentPeriod->getLocalizedLongString() : $currentPeriod->getPrettyString());
-                $lastPeriod = Period\Factory::build(Piwik::getPeriod(), $lastPeriodDate);
+                $lastPeriod = Period\Factory::build(Matomo::getPeriod(), $lastPeriodDate);
                 $lastPrettyDate = ($currentPeriod instanceof Month ? $lastPeriod->getLocalizedLongString() : $lastPeriod->getPrettyString());
 
                 /** @var DataTable $previousData */
@@ -158,7 +158,7 @@ class Get extends \Piwik\Plugin\Report
                         'currentValue' => $value,
                         'pastValue' => $pastValue,
                         'isLowerValueBetter' => Metrics::isLowerValueBetter($columnName),
-                        'tooltip' => Piwik::translate('General_EvolutionSummaryGeneric', [
+                        'tooltip' => Matomo::translate('General_EvolutionSummaryGeneric', [
                             $currentValueFormatted . ' ' . $columnTranslation,
                             $currentPrettyDate,
                             $pastValueFormatted . ' ' . $columnTranslation,
@@ -216,7 +216,7 @@ class Get extends \Piwik\Plugin\Report
     {
         $translations = $this->getSparklineTranslationsKeys();
         foreach ($translations as $metric => $key) {
-            $translations[$metric] = Piwik::translate('VisitsSummary_' . $key);
+            $translations[$metric] = Matomo::translate('VisitsSummary_' . $key);
         }
 
         return $translations;
@@ -276,7 +276,7 @@ class Get extends \Piwik\Plugin\Report
     {
         $metrics = parent::getMetrics();
 
-        $metrics['max_actions'] = Piwik::translate('General_ColumnMaxActions');
+        $metrics['max_actions'] = Matomo::translate('General_ColumnMaxActions');
 
         return $metrics;
     }
@@ -285,7 +285,7 @@ class Get extends \Piwik\Plugin\Report
     {
         $metrics = parent::getProcessedMetrics();
 
-        $metrics['avg_time_on_site'] = Piwik::translate('General_VisitDuration');
+        $metrics['avg_time_on_site'] = Matomo::translate('General_VisitDuration');
 
         return $metrics;
     }

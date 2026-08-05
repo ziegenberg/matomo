@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class ChallengeDisableBrowserArchiving extends Challenge
 {
     public function getName()
     {
-        return Piwik::translate('Tour_DisableBrowserArchiving');
+        return Matomo::translate('Tour_DisableBrowserArchiving');
     }
 
     public function getId()

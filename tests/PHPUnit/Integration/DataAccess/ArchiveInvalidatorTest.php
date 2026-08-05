@@ -7,30 +7,30 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\DataAccess;
+namespace Matomo\Tests\Integration\DataAccess;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\CronArchive\ReArchiveList;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\Model;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Period\Day;
-use Piwik\Period\Month;
-use Piwik\Period\Week;
-use Piwik\Period\Year;
-use Piwik\Piwik;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Segment;
-use Piwik\Log\NullLogger;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\CronArchive\ReArchiveList;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\Model;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Period\Day;
+use Matomo\Period\Month;
+use Matomo\Period\Week;
+use Matomo\Period\Year;
+use Matomo\Matomo;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Segment;
+use Matomo\Log\NullLogger;
 
 /**
  * @group Archiver
@@ -161,7 +161,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         $this->insertArchiveRow(1, '2020-03-03', 'year', $doneValue = ArchiveWriter::DONE_PARTIAL, 'ExamplePlugin');
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
 
         $archiveInvalidator->markArchivesAsInvalidated(
             [1],
@@ -227,7 +227,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         ]);
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
 
         $archiveInvalidator->markArchivesAsInvalidated(
             [1],
@@ -799,7 +799,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         $this->insertArchiveRow(1, $dateBeforeThreshold, 'day');
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
         $result = $archiveInvalidator->markArchivesAsInvalidated(
             array(1),
             array($dateBeforeThreshold),
@@ -848,7 +848,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         $this->insertArchiveRow(1, $dateAfterThreshold, 'day');
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
         $result = $archiveInvalidator->markArchivesAsInvalidated(array(1), array($dateBeforeThreshold, $dateAfterThreshold), 'day');
 
         $this->assertEquals($thresholdDate->toString(), $result->minimumDateWithLogs);
@@ -876,7 +876,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
     public function testMarkArchivesAsInvalidatedInvalidatesCorrectlyWhenNoArchiveTablesExist()
     {
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
         $result = $archiveInvalidator->markArchivesAsInvalidated([1], [Date::factory('2016-03-04')], false, null, false);
 
         $this->assertEquals([
@@ -946,7 +946,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         $this->insertArchiveRow(1, '2020-03-04', 'day', ArchiveWriter::DONE_PARTIAL, 'ExamplePlugin', false);
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
 
         $result = $archiveInvalidator->markArchivesAsInvalidated([1], ['2020-03-04'], 'day', null, false, false, 'ExamplePlugin.someData');
 
@@ -1025,7 +1025,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         }
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
 
         $result = $archiveInvalidator->markArchivesAsInvalidated($idSites, $dates, $period, $segment, $cascadeDown, false, $name);
 
@@ -1532,7 +1532,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
      */
     public function testMarkArchivesAsInvalidatedMarksAllSubrangesOfRange($idSites, $dates, $segment, $expectedIdArchives)
     {
-        $dates = array_map(array('Piwik\Date', 'factory'), $dates);
+        $dates = array_map(array('Matomo\Date', 'factory'), $dates);
 
         $this->insertArchiveRowsForTest();
 
@@ -1541,7 +1541,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         }
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
         $result = $archiveInvalidator->markArchivesOverlappingRangeAsInvalidated($idSites, array($dates), $segment);
 
         $this->assertEquals(array($dates[0]), $result->processedDates);
@@ -1751,7 +1751,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         $segmentHash = $segment->getHash();
 
         /** @var ArchiveInvalidator $archiveInvalidator */
-        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Archive\ArchiveInvalidator');
+        $archiveInvalidator = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Archive\ArchiveInvalidator');
 
         $existingInvalidations = [
             ['name' => 'done' . $segmentHash, 'idsite' => 1, 'date1' => '2020-03-02', 'date2' => '2020-03-08', 'period' => 2, 'report' => null],
@@ -2488,7 +2488,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
 
     private function insertArchiveRow($idSite, $date, $periodLabel, $doneValue = ArchiveWriter::DONE_OK, $plugin = false, $varyArchiveTypes = true)
     {
-        $periodObject = \Piwik\Period\Factory::build($periodLabel, $date);
+        $periodObject = \Matomo\Period\Factory::build($periodLabel, $date);
         $dateStart = $periodObject->getDateStart();
         $dateEnd = $periodObject->getDateEnd();
 
@@ -2497,7 +2497,7 @@ class ArchiveInvalidatorTest extends IntegrationTestCase
         $model = new Model();
         $idArchive = $model->allocateNewArchiveId($table);
 
-        $periodId = Piwik::$idPeriods[$periodLabel];
+        $periodId = Matomo::$idPeriods[$periodLabel];
 
         if ($varyArchiveTypes) {
             $doneFlag = 'done';

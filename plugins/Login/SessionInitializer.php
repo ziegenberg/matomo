@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
 use Exception;
-use Piwik\Auth as AuthInterface;
-use Piwik\AuthResult;
-use Piwik\Config;
-use Piwik\Cookie;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\ProxyHttp;
-use Piwik\Session;
+use Matomo\Auth as AuthInterface;
+use Matomo\AuthResult;
+use Matomo\Config;
+use Matomo\Cookie;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\ProxyHttp;
+use Matomo\Session;
 
 class SessionInitializer
 {
@@ -90,7 +90,7 @@ class SessionInitializer
     /**
      * Authenticates the user and, if successful, initializes an authenticated session.
      *
-     * @param \Piwik\Auth $auth The Auth implementation to use.
+     * @param \Matomo\Auth $auth The Auth implementation to use.
      * @param bool $rememberMe Whether the authenticated session should be remembered after
      *                         the browser is closed or not.
      * @throws Exception If authentication fails or the user is not allowed to login for some reason.
@@ -102,11 +102,11 @@ class SessionInitializer
         $authResult = $this->doAuthenticateSession($auth);
 
         if (!$authResult->wasAuthenticationSuccessful()) {
-            Piwik::postEvent('Login.authenticate.failed', array($auth->getLogin()));
+            Matomo::postEvent('Login.authenticate.failed', array($auth->getLogin()));
 
             $this->processFailedSession($rememberMe);
         } else {
-            Piwik::postEvent('Login.authenticate.successful', array($auth->getLogin()));
+            Matomo::postEvent('Login.authenticate.successful', array($auth->getLogin()));
 
             $this->processSuccessfulSession($authResult, $rememberMe);
         }
@@ -123,7 +123,7 @@ class SessionInitializer
      */
     protected function doAuthenticateSession(AuthInterface $auth)
     {
-        Piwik::postEvent(
+        Matomo::postEvent(
             'Login.authenticate',
             array(
                 $auth->getLogin(),
@@ -160,7 +160,7 @@ class SessionInitializer
         $cookie = $this->getAuthCookie($rememberMe);
         $cookie->delete();
 
-        throw new Exception(Piwik::translate('Login_LoginPasswordNotCorrect'));
+        throw new Exception(Matomo::translate('Login_LoginPasswordNotCorrect'));
     }
 
     /**

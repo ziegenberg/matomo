@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\Columns;
+namespace Matomo\Plugins\AIAgents\Columns;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugins\AIAgents\AIAgents;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugins\AIAgents\AIAgents;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class AIAgentName extends VisitDimension
 {

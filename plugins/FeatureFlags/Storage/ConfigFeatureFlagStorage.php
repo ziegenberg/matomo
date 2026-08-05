@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\Storage;
+namespace Matomo\Plugins\FeatureFlags\Storage;
 
 use Exception;
-use Piwik\Config;
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
-use Piwik\Plugins\FeatureFlags\FeatureFlagStorageInterface;
+use Matomo\Config;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagStorageInterface;
 
 class ConfigFeatureFlagStorage implements FeatureFlagStorageInterface
 {

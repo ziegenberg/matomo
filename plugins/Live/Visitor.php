@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Config;
-use Piwik\DataTable\Filter\ColumnDelete;
-use Piwik\Plugin;
-use Piwik\Piwik;
-use Piwik\Plugins\Live\Visualizations\VisitorLog;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Config;
+use Matomo\DataTable\Filter\ColumnDelete;
+use Matomo\Plugin;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\Visualizations\VisitorLog;
 
 class Visitor implements VisitorInterface
 {
@@ -68,7 +68,7 @@ class Visitor implements VisitorInterface
              *
              * @param VisitorDetailsAbstract[] $visitorDetails An array of visitorDetails
              */
-            Piwik::postEvent('Live.addVisitorDetails', array(&$instances));
+            Matomo::postEvent('Live.addVisitorDetails', array(&$instances));
 
             foreach (self::getAllVisitorDetailsClasses() as $className) {
                 $instance = new $className();
@@ -96,7 +96,7 @@ class Visitor implements VisitorInterface
              *
              * @param VisitorDetailsAbstract[] $visitorDetails An array of visitorDetails
              */
-            Piwik::postEvent('Live.filterVisitorDetails', array(&$instances));
+            Matomo::postEvent('Live.filterVisitorDetails', array(&$instances));
 
             $cache->save($cacheId, $instances);
         }
@@ -112,7 +112,7 @@ class Visitor implements VisitorInterface
      */
     protected static function getAllVisitorDetailsClasses()
     {
-        return Plugin\Manager::getInstance()->findComponents('VisitorDetails', 'Piwik\Plugins\Live\VisitorDetailsAbstract');
+        return Plugin\Manager::getInstance()->findComponents('VisitorDetails', 'Matomo\Plugins\Live\VisitorDetailsAbstract');
     }
 
     public function getVisitorId()
@@ -132,7 +132,7 @@ class Visitor implements VisitorInterface
      */
     public static function cleanVisitorDetails($visitorDetails)
     {
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             $toUnset = array(
                 'idvisitor',
                 'user_id',

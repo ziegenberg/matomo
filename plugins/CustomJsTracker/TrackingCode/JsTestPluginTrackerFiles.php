@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\TrackingCode;
+namespace Matomo\Plugins\CustomJsTracker\TrackingCode;
 
 /**
  * Used for when running Piwik tracker tests. We simply include all custom tracker files there.

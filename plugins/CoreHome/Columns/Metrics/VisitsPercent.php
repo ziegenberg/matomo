@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * Percent of visits in the whole table. Calculated as:
@@ -43,19 +43,19 @@ class VisitsPercent extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnPercentageVisits');
+        return Matomo::translate('General_ColumnPercentageVisits');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('General_ColumnPercentageVisitsDocumentation');
+        return Matomo::translate('General_ColumnPercentageVisitsDocumentation');
     }
 
     public function compute(Row $row)
     {
         $visits = $this->getMetric($row, 'nb_visits');
 
-        return Piwik::getQuotientSafe($visits, $this->cachedTotalVisits, $precision = 2);
+        return Matomo::getQuotientSafe($visits, $this->cachedTotalVisits, $precision = 2);
     }
 
     public function format($value, Formatter $formatter)

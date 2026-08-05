@@ -1,12 +1,12 @@
 <?php
 
-namespace Piwik\Plugins\DevicesDetection\Settings;
+namespace Matomo\Plugins\DevicesDetection\Settings;
 
-use Piwik\Piwik;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Matomo;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
 
 /**
  * @implements PolicyComparisonInterface<bool>
@@ -33,7 +33,7 @@ class OnlyMajorVersions implements
 
     public static function getTitle(): string
     {
-        return Piwik::translate("DevicesDetection_OnlyMajorVersionsSettingTitle");
+        return Matomo::translate("DevicesDetection_OnlyMajorVersionsSettingTitle");
     }
 
     public static function getInstance(?int $idSite = null): self
@@ -75,6 +75,6 @@ class OnlyMajorVersions implements
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate("DevicesDetection_OnlyMajorVersionsSettingRequirementNote");
+        return Matomo::translate("DevicesDetection_OnlyMajorVersionsSettingRequirementNote");
     }
 }

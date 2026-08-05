@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Archive;
+namespace Matomo\Tests\Integration\Archive;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Metrics;
-use Piwik\Period\Range;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\Goals\API as GoalsApi;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Metrics;
+use Matomo\Period\Range;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\Goals\API as GoalsApi;
 
 /**
  * @group PartialArchiveTest

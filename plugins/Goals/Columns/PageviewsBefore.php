@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns;
+namespace Matomo\Plugins\Goals\Columns;
 
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Tracker\ActionPageview;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Tracker\ActionPageview;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
 
 class PageviewsBefore extends ConversionDimension
 {

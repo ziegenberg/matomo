@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
 use Exception;
-use Piwik\Access;
-use Piwik\Auth\Password;
-use Piwik\Date;
-use Piwik\EventDispatcher;
-use Piwik\Option;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\LanguagesManager\Model as LanguagesModel;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\Settings\Storage\Backend\PluginSettingsTable;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\NewsletterSignup;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Auth\Password;
+use Matomo\Date;
+use Matomo\EventDispatcher;
+use Matomo\Option;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\LanguagesManager\Model as LanguagesModel;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Settings\Storage\Backend\PluginSettingsTable;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\NewsletterSignup;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManagerTest
@@ -55,8 +55,8 @@ class UsersManagerTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        \Piwik\Plugin\Manager::getInstance()->loadPlugin('UsersManager');
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->loadPlugin('UsersManager');
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
 
         $this->addSites(4);
 
@@ -525,8 +525,8 @@ class UsersManagerTest extends IntegrationTestCase
             $tourData['tourChallenge_completed'] = '1';
             $tourSettings->save($tourData);
 
-            \Piwik\Plugin\Manager::getInstance()->loadPlugins(['MobileMessaging', 'ProfessionalServices']);
-            \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+            \Matomo\Plugin\Manager::getInstance()->loadPlugins(['MobileMessaging', 'ProfessionalServices']);
+            \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
 
             $languagesModel = new LanguagesModel();
             $languagesModel->setLanguageForUser($login, 'de');
@@ -807,7 +807,7 @@ class UsersManagerTest extends IntegrationTestCase
         $access = $this->flatten($access);
 
         /** @var Access $accessInstance */
-        $accessInstance = self::$fixture->piwikEnvironment->getContainer()->get('Piwik\Access');
+        $accessInstance = self::$fixture->piwikEnvironment->getContainer()->get('Matomo\Access');
 
         FakeAccess::$superUser = false;
         $this->assertEquals(array_keys($access), $accessInstance->getSitesIdWithAdminAccess());
@@ -1353,7 +1353,7 @@ class UsersManagerTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-          'Piwik\Access' => new FakeAccess(),
+          'Matomo\Access' => new FakeAccess(),
         );
     }
 

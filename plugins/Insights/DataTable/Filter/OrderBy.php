@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\DataTable\Filter;
+namespace Matomo\Plugins\Insights\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable\Row;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable\Row;
 
 /**
  * Goal is to list all positive values first (the higher the better) and then all negative values (the lower the better).

@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Log\LoggerInterface;
 use Exception;
 
 /**
@@ -28,7 +28,7 @@ use Exception;
  *
  * **Defining an API for a plugin**
  *
- *     class API extends \Piwik\Plugin\API
+ *     class API extends \Matomo\Plugin\API
  *     {
  *         public function myMethod($idSite, $period, $date, $segment = false)
  *         {
@@ -122,14 +122,14 @@ abstract class API
         #[\SensitiveParameter]
         $passwordConfirmation
     ) {
-        $loginCurrentUser = Piwik::getCurrentUserLogin();
+        $loginCurrentUser = Matomo::getCurrentUserLogin();
 
-        if (!Piwik::doesUserRequirePasswordConfirmation($loginCurrentUser)) {
+        if (!Matomo::doesUserRequirePasswordConfirmation($loginCurrentUser)) {
             return; // password confirmation disabled for user
         }
 
         if (empty($passwordConfirmation)) {
-            throw new Exception(Piwik::translate('UsersManager_ConfirmWithReAuthentication'));
+            throw new Exception(Matomo::translate('UsersManager_ConfirmWithReAuthentication'));
         }
 
         try {
@@ -139,11 +139,11 @@ abstract class API
                     $passwordConfirmation
                 )
             ) {
-                throw new Exception(Piwik::translate('UsersManager_CurrentPasswordNotCorrect'));
+                throw new Exception(Matomo::translate('UsersManager_CurrentPasswordNotCorrect'));
             }
         } catch (Exception $e) {
             // in case of any error (e.g. the provided password is too weak)
-            throw new Exception(Piwik::translate('UsersManager_CurrentPasswordNotCorrect'));
+            throw new Exception(Matomo::translate('UsersManager_CurrentPasswordNotCorrect'));
         }
     }
 

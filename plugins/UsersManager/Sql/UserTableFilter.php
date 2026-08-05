@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Sql;
+namespace Matomo\Plugins\UsersManager\Sql;
 
-use Piwik\Common;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Matomo;
 
 class UserTableFilter
 {
@@ -54,7 +54,7 @@ class UserTableFilter
         // can only filter by superuser if current user is a superuser
         if (
             $this->filterByRole == 'superuser'
-            && !Piwik::hasUserSuperUserAccess()
+            && !Matomo::hasUserSuperUserAccess()
         ) {
             $this->filterByRole = null;
         }
@@ -92,17 +92,17 @@ class UserTableFilter
             if ($this->filterStatus === 'pending') {
                 $conditions[] = '(u.invite_token is not NULL and u.invite_expired_at > DATE(Now()))';
                 // Pending users are only visible for super user or the user, who invited the user
-                if (!Piwik::hasUserSuperUserAccess()) {
+                if (!Matomo::hasUserSuperUserAccess()) {
                     $conditions[] = 'u.invited_by = ?';
-                    $bind[] = Piwik::getCurrentUserLogin();
+                    $bind[] = Matomo::getCurrentUserLogin();
                 }
             }
             if ($this->filterStatus === 'expired') {
                 $conditions[] = '(u.invite_token is not NULL and u.invite_expired_at < DATE(Now()))';
                 // Expired users are only visible for super user or the user, who invited the user
-                if (!Piwik::hasUserSuperUserAccess()) {
+                if (!Matomo::hasUserSuperUserAccess()) {
                     $conditions[] = 'u.invited_by = ?';
-                    $bind[] = Piwik::getCurrentUserLogin();
+                    $bind[] = Matomo::getCurrentUserLogin();
                 }
             }
         }

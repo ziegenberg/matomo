@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 /**
  * Executes a callback for each row of a {@link DataTable} and prepends each existing segment with the

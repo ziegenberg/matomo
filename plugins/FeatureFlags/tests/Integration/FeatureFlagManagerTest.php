@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\tests\Integration;
+namespace Matomo\Plugins\FeatureFlags\tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
-use Piwik\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage;
-use Piwik\Plugins\FeatureFlags\tests\Integration\FeatureFlags\FakeFeatureFlag;
-use Piwik\Plugins\FeatureFlags\tests\Integration\FeatureFlags\FakeForcedEnabledFeatureFlag;
-use Piwik\Tests\Framework\Mock\FakeConfig;
-use Piwik\Tests\Framework\Mock\FakeLogger;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage;
+use Matomo\Plugins\FeatureFlags\tests\Integration\FeatureFlags\FakeFeatureFlag;
+use Matomo\Plugins\FeatureFlags\tests\Integration\FeatureFlags\FakeForcedEnabledFeatureFlag;
+use Matomo\Tests\Framework\Mock\FakeConfig;
+use Matomo\Tests\Framework\Mock\FakeLogger;
 
 class FeatureFlagManagerTests extends TestCase
 {

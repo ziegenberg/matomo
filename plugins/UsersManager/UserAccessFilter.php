@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
-use Piwik\Access;
+use Matomo\Access;
 
 /**
  * This class offers methods to filter a list of users, logins, or anything that is related to users/logins.

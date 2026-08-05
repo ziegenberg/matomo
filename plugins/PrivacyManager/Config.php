@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Exception\DI\DependencyException;
-use Piwik\Exception\DI\NotFoundException;
-use Piwik\Option;
-use Piwik\Plugins\PrivacyManager\Settings\ReferrerAnonymisation as ReferrerAnonymizationSettings;
-use Piwik\Tracker\Cache;
-use Piwik\Plugins\PrivacyManager\Settings\IpAddressMaskLength as IpAddressMaskLengthSetting;
-use Piwik\Plugins\PrivacyManager\Settings\IPAnonymisation as IPAnonymisationSetting;
-use Piwik\Plugins\Ecommerce\Settings\OrderIdAnonymization as OrderIdAnonymizationSetting;
+use Matomo\Exception\DI\DependencyException;
+use Matomo\Exception\DI\NotFoundException;
+use Matomo\Option;
+use Matomo\Plugins\PrivacyManager\Settings\ReferrerAnonymisation as ReferrerAnonymizationSettings;
+use Matomo\Tracker\Cache;
+use Matomo\Plugins\PrivacyManager\Settings\IpAddressMaskLength as IpAddressMaskLengthSetting;
+use Matomo\Plugins\PrivacyManager\Settings\IPAnonymisation as IPAnonymisationSetting;
+use Matomo\Plugins\Ecommerce\Settings\OrderIdAnonymization as OrderIdAnonymizationSetting;
 
 /**
  * @property bool $doNotTrackEnabled    Enable / Disable Do Not Track {@see DoNotTrackHeaderChecker}

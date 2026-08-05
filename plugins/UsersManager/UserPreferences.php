@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DbHelper;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Period\PeriodValidator;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DbHelper;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Period\PeriodValidator;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Site;
 
 class UserPreferences
 {
@@ -43,7 +43,7 @@ class UserPreferences
     {
         $defaultReport = $this->getDefaultReport();
 
-        if (is_numeric($defaultReport) && Piwik::isUserHasViewAccess($defaultReport)) {
+        if (is_numeric($defaultReport) && Matomo::isUserHasViewAccess($defaultReport)) {
             return $defaultReport;
         }
 
@@ -69,7 +69,7 @@ class UserPreferences
 
         return $this->api->getUserPreference(
             APIUsersManager::PREFERENCE_THEME_MODE,
-            Piwik::getCurrentUserLogin()
+            Matomo::getCurrentUserLogin()
         );
     }
 
@@ -86,7 +86,7 @@ class UserPreferences
         // User preference: default website ID to load
         $defaultReport = $this->api->getUserPreference(
             APIUsersManager::PREFERENCE_DEFAULT_REPORT,
-            Piwik::getCurrentUserLogin()
+            Matomo::getCurrentUserLogin()
         );
 
         if (!is_numeric($defaultReport)) {
@@ -108,7 +108,7 @@ class UserPreferences
             return false;
         }
 
-        if (!Piwik::isUserHasViewAccess($idSite)) {
+        if (!Matomo::isUserHasViewAccess($idSite)) {
             return false;
         }
 
@@ -170,7 +170,7 @@ class UserPreferences
         // NOTE: a change in this function might mean a change in plugins/UsersManager/javascripts/usersSettings.js as well
         $userSettingsDate = $this->api->getUserPreference(
             APIUsersManager::PREFERENCE_DEFAULT_REPORT_DATE,
-            Piwik::getCurrentUserLogin()
+            Matomo::getCurrentUserLogin()
         );
         if ($userSettingsDate == 'yesterday') {
             return $userSettingsDate;
@@ -191,7 +191,7 @@ class UserPreferences
         if (empty($defaultDate)) {
             $defaultDate = $this->api->getUserPreference(
                 APIUsersManager::PREFERENCE_DEFAULT_REPORT_DATE,
-                Piwik::getCurrentUserLogin()
+                Matomo::getCurrentUserLogin()
             );
         }
 

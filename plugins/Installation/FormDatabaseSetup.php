@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
 use Exception;
 use HTML_QuickForm2_DataSource_Array;
 use HTML_QuickForm2_Factory;
 use HTML_QuickForm2_Rule;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Db\Adapter;
-use Piwik\DbHelper;
-use Piwik\Filesystem;
-use Piwik\Piwik;
-use Piwik\QuickForm2;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Db\Adapter;
+use Matomo\DbHelper;
+use Matomo\Filesystem;
+use Matomo\Matomo;
+use Matomo\QuickForm2;
 use Zend_Db_Adapter_Exception;
 
 /**
@@ -37,13 +37,13 @@ class FormDatabaseSetup extends QuickForm2
     function init()
     {
         HTML_QuickForm2_Factory::registerRule('checkValidFilename',
-                                              'Piwik\Plugins\Installation\FormDatabaseSetupRuleCheckValidFilename'
+                                              'Matomo\Plugins\Installation\FormDatabaseSetupRuleCheckValidFilename'
         );
         HTML_QuickForm2_Factory::registerRule('checkValidDbname',
-                                              'Piwik\Plugins\Installation\FormDatabaseSetupRuleCheckValidDbname'
+                                              'Matomo\Plugins\Installation\FormDatabaseSetupRuleCheckValidDbname'
         );
         HTML_QuickForm2_Factory::registerRule('checkUserPrivileges',
-                                              'Piwik\Plugins\Installation\RuleCheckUserPrivileges'
+                                              'Matomo\Plugins\Installation\RuleCheckUserPrivileges'
         );
 
         $availableAdapters = Adapter::getAdapters();
@@ -51,45 +51,45 @@ class FormDatabaseSetup extends QuickForm2
         foreach ($availableAdapters as $adapter) {
             $adapters[$adapter] = $adapter;
             if (Adapter::isRecommendedAdapter($adapter)) {
-                $adapters[$adapter] .= ' (' . Piwik::translate('General_Recommended') . ')';
+                $adapters[$adapter] .= ' (' . Matomo::translate('General_Recommended') . ')';
             }
         }
 
         $this->addElement('text', 'host')
-            ->setLabel(Piwik::translate('Installation_DatabaseSetupServer'))
-            ->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_DatabaseSetupServer')));
+            ->setLabel(Matomo::translate('Installation_DatabaseSetupServer'))
+            ->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_DatabaseSetupServer')));
 
         $user = $this->addElement('text', 'username')
-            ->setLabel(Piwik::translate('Installation_DatabaseSetupLogin'));
-        $user->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_DatabaseSetupLogin')));
+            ->setLabel(Matomo::translate('Installation_DatabaseSetupLogin'));
+        $user->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_DatabaseSetupLogin')));
         $requiredPrivileges = RuleCheckUserPrivileges::getRequiredPrivilegesPretty();
         $user->addRule('checkUserPrivileges',
-            Piwik::translate('Installation_InsufficientPrivilegesMain', $requiredPrivileges . '<br/><br/>') .
-            Piwik::translate('Installation_InsufficientPrivilegesHelp'));
+            Matomo::translate('Installation_InsufficientPrivilegesMain', $requiredPrivileges . '<br/><br/>') .
+            Matomo::translate('Installation_InsufficientPrivilegesHelp'));
 
         $this->addElement('password', 'password')
-            ->setLabel(Piwik::translate('General_Password'));
+            ->setLabel(Matomo::translate('General_Password'));
 
         $item = $this->addElement('text', 'dbname')
-            ->setLabel(Piwik::translate('Installation_DatabaseSetupDatabaseName'));
-        $item->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_DatabaseSetupDatabaseName')));
-        $item->addRule('checkValidDbname', Piwik::translate('General_NotValid', Piwik::translate('Installation_DatabaseSetupDatabaseName')));
+            ->setLabel(Matomo::translate('Installation_DatabaseSetupDatabaseName'));
+        $item->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_DatabaseSetupDatabaseName')));
+        $item->addRule('checkValidDbname', Matomo::translate('General_NotValid', Matomo::translate('Installation_DatabaseSetupDatabaseName')));
 
         $this->addElement('text', 'tables_prefix')
-            ->setLabel(Piwik::translate('Installation_DatabaseSetupTablePrefix'))
-            ->addRule('checkValidFilename', Piwik::translate('General_NotValid', Piwik::translate('Installation_DatabaseSetupTablePrefix')));
+            ->setLabel(Matomo::translate('Installation_DatabaseSetupTablePrefix'))
+            ->addRule('checkValidFilename', Matomo::translate('General_NotValid', Matomo::translate('Installation_DatabaseSetupTablePrefix')));
 
         $this->addElement('select', 'adapter')
-            ->setLabel(Piwik::translate('Installation_DatabaseSetupAdapter'))
+            ->setLabel(Matomo::translate('Installation_DatabaseSetupAdapter'))
             ->loadOptions($adapters)
-            ->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_DatabaseSetupAdapter')));
+            ->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_DatabaseSetupAdapter')));
 
         $this->addElement('select', 'schema')
-            ->setLabel(Piwik::translate('Installation_DatabaseSetupEngine'))
+            ->setLabel(Matomo::translate('Installation_DatabaseSetupEngine'))
             ->loadOptions(['Mysql' => 'MySQL', 'Mariadb' => 'MariaDB'])
-            ->addRule('required', Piwik::translate('General_Required', Piwik::translate('Installation_DatabaseSetupEngine')));
+            ->addRule('required', Matomo::translate('General_Required', Matomo::translate('Installation_DatabaseSetupEngine')));
 
-        $this->addElement('submit', 'submit', array('value' => Piwik::translate('General_Next') . ' »', 'class' => 'btn'));
+        $this->addElement('submit', 'submit', array('value' => Matomo::translate('General_Next') . ' »', 'class' => 'btn'));
 
         $defaultDatabaseType = Config::getInstance()->database['type'];
         $this->addElement( 'hidden', 'type')->setLabel('Database engine');
@@ -352,7 +352,7 @@ class RuleCheckUserPrivileges extends HTML_QuickForm2_Rule
     /**
      * Drops the tables created by the privilege checking queries, if they exist.
      *
-     * @param \Piwik\Db $db The database object to use.
+     * @param \Matomo\Db $db The database object to use.
      */
     private function dropExtraTables($db)
     {

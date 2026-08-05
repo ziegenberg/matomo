@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Reports;
+namespace Matomo\Plugins\UserCountry\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\UserCountry\Columns\Region;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\UserCountry\Columns\Region;
 
 class GetRegion extends Base
 {
@@ -19,8 +19,8 @@ class GetRegion extends Base
     {
         parent::init();
         $this->dimension      = new Region();
-        $this->name           = Piwik::translate('UserCountry_Region');
-        $this->documentation  = Piwik::translate('UserCountry_getRegionDocumentation') . '<br/>' . $this->getGeoIPReportDocSuffix();
+        $this->name           = Matomo::translate('UserCountry_Region');
+        $this->documentation  = Matomo::translate('UserCountry_getRegionDocumentation') . '<br/>' . $this->getGeoIPReportDocSuffix();
         $this->order = 7;
     }
 

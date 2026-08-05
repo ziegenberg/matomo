@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\System;
+namespace Matomo\Plugins\API\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Application\Environment;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Cache as PiwikCache;
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugins\API\API;
-use Piwik\Plugins\CustomVariables\Columns\CustomVariableName;
-use Piwik\Plugins\CustomVariables\Columns\CustomVariableValue;
-use Piwik\Tests\Fixtures\ManyVisitsWithGeoIPAndEcommerce;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tracker\Cache;
+use Matomo\API\Request;
+use Matomo\Application\Environment;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Cache as PiwikCache;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugins\API\API;
+use Matomo\Plugins\CustomVariables\Columns\CustomVariableName;
+use Matomo\Plugins\CustomVariables\Columns\CustomVariableValue;
+use Matomo\Tests\Fixtures\ManyVisitsWithGeoIPAndEcommerce;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tracker\Cache;
 
 // Class to cache results of getSuggestedValuesForSegment to prevent it beeing called multiple time for each segment
 class CachedAPI extends API
@@ -265,7 +265,7 @@ class AutoSuggestAPITest extends SystemTestCase
         $exception = null;
         try {
             $environment->init();
-            $environment->getContainer()->get('Piwik\Plugin\Manager')->loadActivatedPlugins();
+            $environment->getContainer()->get('Matomo\Plugin\Manager')->loadActivatedPlugins();
 
             foreach (Dimension::getAllDimensions() as $dimension) {
                 if (
@@ -306,4 +306,4 @@ class AutoSuggestAPITest extends SystemTestCase
     }
 }
 
-\Piwik\Plugins\API\tests\System\AutoSuggestAPITest::$fixture = new ManyVisitsWithGeoIPAndEcommerce();
+\Matomo\Plugins\API\tests\System\AutoSuggestAPITest::$fixture = new ManyVisitsWithGeoIPAndEcommerce();

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics;
+namespace Matomo\Plugins\Goals\Columns\Metrics;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Tracker\GoalManager;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Tracker\GoalManager;
 
 /**
  * The amount of revenue per visit (or per conversion if there are no visits). Calculated as:
@@ -37,12 +37,12 @@ class RevenuePerVisit extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnValuePerVisit');
+        return Matomo::translate('General_ColumnValuePerVisit');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('General_ColumnValuePerVisitDocumentation');
+        return Matomo::translate('General_ColumnValuePerVisitDocumentation');
     }
 
     public function getDependentMetrics()
@@ -61,7 +61,7 @@ class RevenuePerVisit extends ProcessedMetric
                 continue;
             }
 
-            if (!is_numeric($goalId) && $goalId != Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+            if (!is_numeric($goalId) && $goalId != Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
                 continue;
             }
 
@@ -77,7 +77,7 @@ class RevenuePerVisit extends ProcessedMetric
 
         // If no visit for this metric, but some conversions, we still want to display some kind of "revenue per visit"
         // even though it will actually be in this edge case "Revenue per conversion"
-        return Piwik::getQuotientSafe($revenue, $nbVisits == 0 ? $conversions : $nbVisits, GoalManager::REVENUE_PRECISION);
+        return Matomo::getQuotientSafe($revenue, $nbVisits == 0 ? $conversions : $nbVisits, GoalManager::REVENUE_PRECISION);
     }
 
     public function format($value, Formatter $formatter)

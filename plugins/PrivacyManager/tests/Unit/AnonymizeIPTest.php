@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Unit;
+namespace Matomo\Plugins\PrivacyManager\tests\Unit;
 
 use Matomo\Network\IP;
-use Piwik\Plugins\PrivacyManager\IPAnonymizer;
+use Matomo\Plugins\PrivacyManager\IPAnonymizer;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/PrivacyManager/IPAnonymizer.php';
 

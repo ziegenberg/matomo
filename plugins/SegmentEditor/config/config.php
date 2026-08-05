@@ -2,6 +2,6 @@
 
 return array(
 
-    'Piwik\DataAccess\LogQueryBuilder' => Piwik\DI::get('Piwik\Plugins\SegmentEditor\SegmentQueryDecorator'),
+    'Matomo\DataAccess\LogQueryBuilder' => Matomo\DI::get('Matomo\Plugins\SegmentEditor\SegmentQueryDecorator'),
 
 );

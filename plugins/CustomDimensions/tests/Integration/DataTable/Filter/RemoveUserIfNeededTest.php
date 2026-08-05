@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Integration\DataTable\Filter;
+namespace Matomo\Plugins\CustomDimensions\tests\Integration\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CustomDimensions
@@ -24,7 +24,7 @@ use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
  */
 class RemoveUserIfNeededTest extends IntegrationTestCase
 {
-    private $filter = 'Piwik\Plugins\CustomDimensions\DataTable\Filter\RemoveUserIfNeeded';
+    private $filter = 'Matomo\Plugins\CustomDimensions\DataTable\Filter\RemoveUserIfNeeded';
 
     public function setUp(): void
     {

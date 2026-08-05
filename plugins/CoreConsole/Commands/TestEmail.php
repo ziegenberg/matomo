@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Config;
-use Piwik\Mail;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\SettingsPiwik;
+use Matomo\Config;
+use Matomo\Mail;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\SettingsPiwik;
 
 class TestEmail extends ConsoleCommand
 {

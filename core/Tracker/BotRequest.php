@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugin\RequestProcessors;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugin\RequestProcessors;
 
 /**
  * Class used to handle a Bot request.

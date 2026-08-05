@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
 
 /**
  * The average amount of time it took loading a page completely. Calculated as:
@@ -29,12 +29,12 @@ class AveragePageLoadTime extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('PagePerformance_ColumnAveragePageLoadTime');
+        return Matomo::translate('PagePerformance_ColumnAveragePageLoadTime');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('PagePerformance_ColumnAveragePageLoadTimeDocumentation');
+        return Matomo::translate('PagePerformance_ColumnAveragePageLoadTimeDocumentation');
     }
 
     public function compute(Row $row)

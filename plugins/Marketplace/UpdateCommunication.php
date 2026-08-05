@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Mail;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreUpdater\SystemSettings;
-use Piwik\Plugins\UsersManager\API as UsersManagerApi;
-use Piwik\SettingsPiwik;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Mail;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreUpdater\SystemSettings;
+use Matomo\Plugins\UsersManager\API as UsersManagerApi;
+use Matomo\SettingsPiwik;
+use Matomo\View;
 
 /**
  * Class to check and notify users via email if there are plugin updates available.
@@ -101,7 +101,7 @@ class UpdateCommunication
             $hasPluginUpdate = $hasPluginUpdate || !$plugin['isTheme'];
         }
 
-        $subject = Piwik::translate('CoreUpdater_NotificationSubjectAvailablePluginUpdate');
+        $subject = Matomo::translate('CoreUpdater_NotificationSubjectAvailablePluginUpdate');
         $message = $this->buildNotificationMessage($pluginsToBeNotified, $hasThemeUpdate, $hasPluginUpdate);
 
         $this->sendEmailNotification($subject, $message);
@@ -167,7 +167,7 @@ class UpdateCommunication
 
     protected function getPluginsHavingUpdate()
     {
-        $marketplace         = StaticContainer::get('Piwik\Plugins\Marketplace\Plugins');
+        $marketplace         = StaticContainer::get('Matomo\Plugins\Marketplace\Plugins');
         $pluginsHavingUpdate = $marketplace->getPluginsHavingUpdate();
 
         return $pluginsHavingUpdate;

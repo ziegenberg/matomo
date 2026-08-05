@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Tracker;
+namespace Matomo\Tests\Framework\Mock\Tracker;
 
-use Piwik\Tracker\Request;
+use Matomo\Tracker\Request;
 
 class RequestAuthenticated extends Request
 {

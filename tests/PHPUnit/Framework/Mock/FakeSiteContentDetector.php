@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
-use Piwik\SiteContentDetector;
+use Matomo\SiteContentDetector;
 
 class FakeSiteContentDetector extends SiteContentDetector
 {

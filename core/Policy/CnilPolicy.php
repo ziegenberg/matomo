@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Policy;
+namespace Matomo\Policy;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class CnilPolicy extends CompliancePolicy
 {
@@ -21,7 +21,7 @@ class CnilPolicy extends CompliancePolicy
 
     public static function generateDescription(): string
     {
-        return Piwik::translate('General_ComplianceCNILDescription', [
+        return Matomo::translate('General_ComplianceCNILDescription', [
             '<a href="' .
             Url::addCampaignParametersToMatomoLink(
                 'https://matomo.org/faq/how-to/how-do-i-configure-matomo-without-tracking-consent-for-french-visitors-cnil-exemption/',
@@ -45,21 +45,21 @@ class CnilPolicy extends CompliancePolicy
 
     protected static function generateWarnings(): string
     {
-        return Piwik::translate('General_ComplianceCNILWarning');
+        return Matomo::translate('General_ComplianceCNILWarning');
     }
 
     public static function getTitle(): string
     {
-        return Piwik::translate('General_ComplianceCNILTitle');
+        return Matomo::translate('General_ComplianceCNILTitle');
     }
 
     public static function getUnknownSettings(): array
     {
         return [
             [
-                'title' => Piwik::translate('General_ComplianceCNILUnknownSettingOptOutTitle'),
+                'title' => Matomo::translate('General_ComplianceCNILUnknownSettingOptOutTitle'),
                 'note' =>
-                    Piwik::translate('General_ComplianceCNILUnknownSettingOptOutNotes', [
+                    Matomo::translate('General_ComplianceCNILUnknownSettingOptOutNotes', [
                         '<a href="' .
                         Url::addCampaignParametersToMatomoLink(
                             'https://matomo.org/faq/general/faq_20000/',

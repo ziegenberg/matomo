@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\DataAccess;
+namespace Matomo\Tests\Integration\DataAccess;
 
-use Piwik\Access;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Period\Day;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Segment;
-use Piwik\Sequence;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Period\Day;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Segment;
+use Matomo\Sequence;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class TestArchiveWriter extends ArchiveWriter
 {

@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events;
+namespace Matomo\Plugins\Events;
 
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable\AllColumns;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable\AllColumns;
 
-class Events extends \Piwik\Plugin
+class Events extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -66,7 +66,7 @@ class Events extends \Piwik\Plugin
             'avg_event_value'      => 'Events_AvgValueDocumentation',
             'nb_events_with_value' => 'Events_EventsWithValueDocumentation',
         );
-        $documentation = array_map(array('\\Piwik\\Piwik', 'translate'), $documentation);
+        $documentation = array_map(array('\Matomo\Matomo', 'translate'), $documentation);
         return $documentation;
     }
 
@@ -80,7 +80,7 @@ class Events extends \Piwik\Plugin
             'avg_event_value'      => 'Events_AvgValue',
             'nb_events_with_value' => 'Events_EventsWithValue',
         );
-        $metrics = array_map(array('\\Piwik\\Piwik', 'translate'), $metrics);
+        $metrics = array_map(array('\Matomo\Matomo', 'translate'), $metrics);
         return $metrics;
     }
 
@@ -92,7 +92,7 @@ class Events extends \Piwik\Plugin
 
     public function getDimensionLabel($dimension)
     {
-        return Piwik::translate($this->metadataDimensions[$dimension][0]);
+        return Matomo::translate($this->metadataDimensions[$dimension][0]);
     }
     /**
      * @return array
@@ -135,7 +135,7 @@ class Events extends \Piwik\Plugin
             // Events.getActionFromCategoryId returns translation for Events.getAction
             if (strpos($apiMethod, $action) === 0) {
                 $columnLabel = $translations[$index];
-                return Piwik::translate($columnLabel);
+                return Matomo::translate($columnLabel);
             }
         }
         throw new \Exception("Translation not found for report $apiMethod");
@@ -226,8 +226,8 @@ class Events extends \Piwik\Plugin
 
             $avg = $avg ?: 0;
 
-            $msgEventMinMax = Piwik::translate("Events_EventValueTooltip", array($hits, "<br />", $min, $max));
-            $msgEventAvg = Piwik::translate("Events_AvgEventValue", $avg);
+            $msgEventMinMax = Matomo::translate("Events_EventValueTooltip", array($hits, "<br />", $min, $max));
+            $msgEventAvg = Matomo::translate("Events_AvgEventValue", $avg);
             return $msgEventMinMax . "<br/>" . $msgEventAvg;
         };
 

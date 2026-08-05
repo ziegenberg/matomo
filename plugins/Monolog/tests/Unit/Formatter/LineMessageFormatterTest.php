@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\tests\Unit\Formatter;
+namespace Matomo\Plugins\Monolog\tests\Unit\Formatter;
 
 use DateTimeImmutable;
 use Monolog\Level;
 use Monolog\LogRecord;
-use Piwik\Plugins\Monolog\Formatter\LineMessageFormatter;
+use Matomo\Plugins\Monolog\Formatter\LineMessageFormatter;
 
 /**
  * @group Log
- * @covers \Piwik\Plugins\Monolog\Formatter\LineMessageFormatter
+ * @covers \Matomo\Plugins\Monolog\Formatter\LineMessageFormatter
  */
 class LineMessageFormatterTest extends \PHPUnit\Framework\TestCase
 {

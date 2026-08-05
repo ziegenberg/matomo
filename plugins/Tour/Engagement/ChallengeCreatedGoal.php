@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class ChallengeCreatedGoal extends Challenge
 {
     public function getName()
     {
-        return Piwik::translate('Tour_DefineGoal');
+        return Matomo::translate('Tour_DefineGoal');
     }
 
     public function getDescription()
     {
-        return Piwik::translate('Tour_DefineGoalDescription');
+        return Matomo::translate('Tour_DefineGoalDescription');
     }
 
     public function getId()

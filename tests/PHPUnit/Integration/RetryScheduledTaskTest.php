@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Log\NullLogger;
-use Piwik\Option;
-use Piwik\Scheduler\RetryableException;
-use Piwik\Scheduler\ScheduledTaskLock;
-use Piwik\Scheduler\Scheduler;
-use Piwik\Scheduler\Task;
-use Piwik\Scheduler\Timetable;
-use Piwik\Tests\Framework\Mock\Concurrency\LockBackend\InMemoryLockBackend;
-use Piwik\Tests\Framework\Mock\PiwikOption;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Log\NullLogger;
+use Matomo\Option;
+use Matomo\Scheduler\RetryableException;
+use Matomo\Scheduler\ScheduledTaskLock;
+use Matomo\Scheduler\Scheduler;
+use Matomo\Scheduler\Task;
+use Matomo\Scheduler\Timetable;
+use Matomo\Tests\Framework\Mock\Concurrency\LockBackend\InMemoryLockBackend;
+use Matomo\Tests\Framework\Mock\PiwikOption;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Scheduler
@@ -60,20 +60,20 @@ class RetryScheduledTaskTest extends IntegrationTestCase
 
         // Mock timetable
         $now = time() - 60;
-        $taskName = 'Piwik\Tests\Integration\RetryScheduledTaskTest.exceptionalTask';
+        $taskName = 'Matomo\Tests\Integration\RetryScheduledTaskTest.exceptionalTask';
         $timetableData = serialize([$taskName => $now]);
 
         self::stubPiwikOption($timetableData);
 
         // Create task
-        $dailySchedule = $this->createPartialMock('Piwik\Scheduler\Schedule\Daily', array('getTime'));
+        $dailySchedule = $this->createPartialMock('Matomo\Scheduler\Schedule\Daily', array('getTime'));
         $dailySchedule->expects($this->any())
             ->method('getTime')
             ->will($this->returnValue($now));
 
         // Setup scheduler
         $tasks = [new Task($this, 'exceptionalTask', null, $dailySchedule)];
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $taskLoader->expects($this->atLeastOnce())
             ->method('loadTasks')
             ->willReturn($tasks);
@@ -82,7 +82,7 @@ class RetryScheduledTaskTest extends IntegrationTestCase
 
         // First run
         $scheduler->run();
-        $nextRun = $scheduler->getScheduledTimeForMethod('Piwik\Tests\Integration\RetryScheduledTaskTest', 'exceptionalTask', null);
+        $nextRun = $scheduler->getScheduledTimeForMethod('Matomo\Tests\Integration\RetryScheduledTaskTest', 'exceptionalTask', null);
 
         // Should be rescheduled one hour from now
         $this->assertEquals($now + 3660, $nextRun);
@@ -94,12 +94,12 @@ class RetryScheduledTaskTest extends IntegrationTestCase
     {
         // Mock timetable
         $now = time() - 60;
-        $taskName = 'Piwik\Tests\Integration\RetryScheduledTaskTest.normalExceptionTask';
+        $taskName = 'Matomo\Tests\Integration\RetryScheduledTaskTest.normalExceptionTask';
         $timetableData = serialize([$taskName => $now]);
         self::stubPiwikOption($timetableData);
 
         // Create task
-        $specificSchedule = $this->createPartialMock('Piwik\Scheduler\Schedule\SpecificTime', array('getTime'));
+        $specificSchedule = $this->createPartialMock('Matomo\Scheduler\Schedule\SpecificTime', array('getTime'));
         $specificSchedule->setScheduledTime($now + 50000);
         $specificSchedule->expects($this->any())
             ->method('getTime')
@@ -107,7 +107,7 @@ class RetryScheduledTaskTest extends IntegrationTestCase
 
         // Setup scheduler
         $tasks = [new Task($this, 'normalExceptionTask', null, $specificSchedule)];
-        $taskLoader = $this->createMock('Piwik\Scheduler\TaskLoader');
+        $taskLoader = $this->createMock('Matomo\Scheduler\TaskLoader');
         $taskLoader->expects($this->atLeastOnce())
             ->method('loadTasks')
             ->willReturn($tasks);
@@ -116,7 +116,7 @@ class RetryScheduledTaskTest extends IntegrationTestCase
 
         // First run
         $scheduler->run();
-        $nextRun = $scheduler->getScheduledTimeForMethod('Piwik\Tests\Integration\RetryScheduledTaskTest', 'normalExceptionTask', null);
+        $nextRun = $scheduler->getScheduledTimeForMethod('Matomo\Tests\Integration\RetryScheduledTaskTest', 'normalExceptionTask', null);
 
         // Should not have scheduled for retry
         $this->assertEquals($now + 50000, $nextRun);

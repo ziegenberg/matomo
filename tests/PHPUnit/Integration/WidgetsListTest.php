@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Plugin\Manager;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Plugins\Goals\API;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Widget\WidgetsList;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugin\Manager;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Plugins\Goals\API;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Widget\WidgetsList;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -210,7 +210,7 @@ class WidgetsListTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals;
+namespace Matomo\Plugins\Goals;
 
-use Piwik\Piwik;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Widget\WidgetContainerConfig;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Report\ReportWidgetFactory;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Widget\WidgetContainerConfig;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Report\ReportWidgetFactory;
 
 class Pages
 {
@@ -90,7 +90,7 @@ class Pages
     {
         $category    = 'Goals_Ecommerce';
         $subcategory = 'General_Overview';
-        $idGoal = Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER;
+        $idGoal = Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER;
 
         $widgets = array();
         $config  = $this->factory->createWidget();
@@ -132,7 +132,7 @@ class Pages
         $widgets[] = $config;
 
         $container = $this->createWidgetizableWidgetContainer('EcommerceOverview', $subcategory, $widgets);
-        $container->setName(Piwik::translate('Goals_EcommerceOverview'));
+        $container->setName(Matomo::translate('Goals_EcommerceOverview'));
         return array($container);
     }
 
@@ -148,12 +148,12 @@ class Pages
         $config->setCategoryId($category);
         $config->setSubcategoryId($subcategory);
         $config->setName('');
-        $config->setParameters(array('idGoal' => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER));
+        $config->setParameters(array('idGoal' => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER));
         $config->setOrder(5);
         $config->setIsNotWidgetizable();
 
         $extraParameters = [ 'segmented_visitor_log_segment_suffix' => 'visitEcommerceStatus==ordered' ];
-        $this->buildGoalByDimensionView(Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER, $config, $extraParameters);
+        $this->buildGoalByDimensionView(Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER, $config, $extraParameters);
 
         return array($config);
     }
@@ -208,7 +208,7 @@ class Pages
         $configs = array($container);
 
         $config = $this->factory->createContainerWidget('Goals' . $idGoal);
-        $config->setName(Piwik::translate('Goals_GoalConversionsBy', array($name)));
+        $config->setName(Matomo::translate('Goals_GoalConversionsBy', array($name)));
         $config->setSubcategoryId($idGoal);
         $config->setParameters(array());
         $config->setOrder(35);
@@ -227,10 +227,9 @@ class Pages
 
     private function createWidgetizableWidgetContainer($containerId, $pageName, $widgets)
     {
-        /** @var \Piwik\Widget\WidgetConfig[] $widgets */
+        /** @var \Matomo\Widget\WidgetConfig[] $widgets */
         $firstWidget = reset($widgets);
-        /** @var \Piwik\Report\ReportWidgetConfig $firstWidget */
-
+        /** @var \Matomo\Report\ReportWidgetConfig $firstWidget */
         if (!empty($pageName)) {
             // make sure to not show two titles (one for this container and one for the first widget)
             $firstWidget->setName('');
@@ -253,7 +252,7 @@ class Pages
     private function buildGoalByDimensionView($idGoal, WidgetContainerConfig $container, $extraParameters = [])
     {
         $container->setLayout('ByDimension');
-        $ecommerce = ($idGoal == Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER);
+        $ecommerce = ($idGoal == Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER);
 
         // for non-Goals reports, we show the goals table
         $customParams = array('documentationForGoalsPage' => '1');

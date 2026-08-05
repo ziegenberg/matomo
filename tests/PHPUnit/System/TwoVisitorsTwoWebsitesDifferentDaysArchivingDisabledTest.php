@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\TwoSitesTwoVisitorsDifferentDays;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\TwoSitesTwoVisitorsDifferentDays;
 
 /**
  * Tests IndexedBySite optimizations when archiving is disabled.
@@ -37,8 +37,8 @@ class TwoVisitorsTwoWebsitesDifferentDaysArchivingDisabledTest extends SystemTes
 
         $periods = array('day', 'week', 'month', 'year');
 
-        $dateStart = \Piwik\Date::factory($dateTime)->subDay(10)->toString();
-        $dateEnd = \Piwik\Date::factory($dateTime)->addDay(15)->toString();
+        $dateStart = \Matomo\Date::factory($dateTime)->subDay(10)->toString();
+        $dateEnd = \Matomo\Date::factory($dateTime)->addDay(15)->toString();
         $dateRange = $dateStart . "," . $dateEnd;
 
         return array(

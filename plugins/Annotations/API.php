@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Annotations;
+namespace Matomo\Plugins\Annotations;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Site;
 
 /**
  * Provides API methods to create, update, delete, and query annotations.
  *
  * @phpstan-type Annotation array{id:int, idNote:int, idsite:int, date:string, note:string, starred:int, user:string, canEditOrDelete:bool}
  *
- * @method static \Piwik\Plugins\Annotations\API getInstance()
+ * @method static \Matomo\Plugins\Annotations\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     // do not automatically apply `Common::sanitizeInputValue` to all API parameters
     protected $autoSanitizeInputParams = false;
@@ -48,7 +48,7 @@ class API extends \Piwik\Plugin\API
             'date' => $date,
             'note' => $this->filterNote($note),
             'starred' => (int) $starred,
-            'user' => Piwik::getCurrentUserLogin(),
+            'user' => Matomo::getCurrentUserLogin(),
         ];
 
         $model = new Model();
@@ -143,7 +143,7 @@ class API extends \Piwik\Plugin\API
      */
     public function deleteAll(int $idSite): void
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->checkSiteExists($idSite);
 
@@ -160,7 +160,7 @@ class API extends \Piwik\Plugin\API
      */
     public function get(int $idSite, int $idNote): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $this->checkSiteExists($idSite);
 
         $model = new Model();
@@ -185,7 +185,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAll(string $idSite, ?string $date = null, string $period = 'day', ?int $lastN = null): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $ids = array_map('intval', Site::getIdSitesFromIdSitesString($idSite, false, true));
         $model = new Model();
@@ -224,7 +224,7 @@ class API extends \Piwik\Plugin\API
         ?int $lastN = null,
         bool $getAnnotationText = false
     ): array {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $siteIds = array_map('intval', Site::getIdSitesFromIdSitesString($idSite, false, true));
         if (empty($siteIds)) {
@@ -293,7 +293,7 @@ class API extends \Piwik\Plugin\API
 
     private static function checkUserCanAddNotesFor(int $idSite): void
     {
-        if (!Piwik::isUserHasWriteAccess($idSite)) {
+        if (!Matomo::isUserHasWriteAccess($idSite)) {
             throw new Exception("The current user is not allowed to add notes for site #$idSite.");
         }
     }

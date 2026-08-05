@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class GetAIChatbotsRealTime extends AbstractAIChatbotsRealTimeChatbotsReport
 {
@@ -19,8 +19,8 @@ class GetAIChatbotsRealTime extends AbstractAIChatbotsRealTimeChatbotsReport
     {
         parent::init();
 
-        $this->name          = Piwik::translate('BotTracking_AIChatbotsLast30MinutesTitle');
-        $this->documentation = Piwik::translate('BotTracking_AIChatbotsLast30MinutesDocumentation');
+        $this->name          = Matomo::translate('BotTracking_AIChatbotsLast30MinutesTitle');
+        $this->documentation = Matomo::translate('BotTracking_AIChatbotsLast30MinutesDocumentation');
         $this->order         = 10;
     }
 

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Cache;
-use Piwik\Segment;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorApi;
-use Piwik\Plugins\SegmentEditor\Model as SegmentEditorModel;
+use Matomo\Cache;
+use Matomo\Segment;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorApi;
+use Matomo\Plugins\SegmentEditor\Model as SegmentEditorModel;
 
 /**
  * @group Segment

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Config;
-use Piwik\Plugins\Goals\API as APIGoals;
-use Piwik\Plugins\SegmentEditor\API as APISegmentEditor;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Config;
+use Matomo\Plugins\Goals\API as APIGoals;
+use Matomo\Plugins\SegmentEditor\API as APISegmentEditor;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Imports visits from several log files using the python log importer.

@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
 /**
  * Per-tick sample window the seasonal-decomposition helpers in {@see ForecastBuilder} pass

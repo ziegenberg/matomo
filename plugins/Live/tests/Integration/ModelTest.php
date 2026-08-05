@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\tests\Integration;
+namespace Matomo\Plugins\Live\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Plugins\Live\Exception\MaxExecutionTimeExceededException;
-use Piwik\Plugins\Live\Model;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Integration\SegmentTest;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\Exception\MaxExecutionTimeExceededException;
+use Matomo\Plugins\Live\Model;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Integration\SegmentTest;
 
 /**
  * @group Live
@@ -92,7 +92,7 @@ class ModelTest extends IntegrationTestCase
 
     public function testHandleMaxExecutionTimeErrorWhenTimeIsExceededNoReasonFound()
     {
-        $this->expectException(\Piwik\Plugins\Live\Exception\MaxExecutionTimeExceededException::class);
+        $this->expectException(\Matomo\Plugins\Live\Exception\MaxExecutionTimeExceededException::class);
         $this->expectExceptionMessage('Live_QueryMaxExecutionTimeExceeded  Live_QueryMaxExecutionTimeExceededReasonUnknown');
 
         $db = Db::get();
@@ -109,7 +109,7 @@ class ModelTest extends IntegrationTestCase
 
     public function testHandleMaxExecutionTimeErrorWhenTimeIsExceededManyReasonsFound()
     {
-        $this->expectException(\Piwik\Plugins\Live\Exception\MaxExecutionTimeExceededException::class);
+        $this->expectException(\Matomo\Plugins\Live\Exception\MaxExecutionTimeExceededException::class);
         $this->expectExceptionMessage('Live_QueryMaxExecutionTimeExceeded  Live_QueryMaxExecutionTimeExceededReasonDateRange Live_QueryMaxExecutionTimeExceededReasonSegment Live_QueryMaxExecutionTimeExceededLimit');
 
         $db = Db::get();
@@ -245,7 +245,7 @@ class ModelTest extends IntegrationTestCase
 
     public function testMakeLogVisitsQueryStringWithMultipleIdSites()
     {
-        Piwik::addAction('Live.API.getIdSitesString', function (&$idSites) {
+        Matomo::addAction('Live.API.getIdSitesString', function (&$idSites) {
             $idSites = array(2,3,4);
         });
 
@@ -789,7 +789,7 @@ class ModelTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 

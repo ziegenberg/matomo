@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Config;
-use Piwik\Filesystem;
-use Piwik\SettingsPiwik;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Config;
+use Matomo\Filesystem;
+use Matomo\SettingsPiwik;
+use Matomo\Plugin\ConsoleCommand;
 
 class DevelopmentEnable extends ConsoleCommand
 {

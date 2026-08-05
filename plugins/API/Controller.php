@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
-use Piwik\API\DocumentationGenerator;
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugins\API\Renderer\Original;
-use Piwik\Url;
-use Piwik\UrlHelper;
-use Piwik\View;
+use Matomo\API\DocumentationGenerator;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugins\API\Renderer\Original;
+use Matomo\Url;
+use Matomo\UrlHelper;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function index()
     {
@@ -60,7 +60,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function listAllMethods()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $ApiDocumentation = new DocumentationGenerator();
         $prefixUrls = Common::getRequestVar('prefixUrl', 'https://demo.matomo.cloud/', 'string');
@@ -163,18 +163,18 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function glossary()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $reports = Request::processRequest('API', array('method' => 'API.getGlossaryReports', 'filter_limit' => -1));
         $metrics = Request::processRequest('API', array('method' => 'API.getGlossaryMetrics', 'filter_limit' => -1));
 
         $glossaryItems = array(
             'metrics' => array(
-                'title' => Piwik::translate('General_Metrics'),
+                'title' => Matomo::translate('General_Metrics'),
                 'entries' => $metrics,
             ),
             'reports' => array(
-                'title' => Piwik::translate('General_Reports'),
+                'title' => Matomo::translate('General_Reports'),
                 'entries' => $reports,
             ),
         );
@@ -196,7 +196,7 @@ class Controller extends \Piwik\Plugin\Controller
          *
          * @param array &$glossaryItems An array containing all glossary items.
          */
-        Piwik::postEvent('API.addGlossaryItems', array(&$glossaryItems));
+        Matomo::postEvent('API.addGlossaryItems', array(&$glossaryItems));
 
         foreach ($glossaryItems as &$item) {
             $item['letters'] = array();

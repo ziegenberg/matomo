@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\Goals\API as APIGoals;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Cache;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API as APIGoals;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Cache;
 
 /**
  * Add config disable archiving

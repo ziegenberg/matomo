@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage\Backend;
+namespace Matomo\Settings\Storage\Backend;
 
-use Piwik\Concurrency\Lock;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
+use Matomo\Concurrency\Lock;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
 
 abstract class BaseSettingsTable implements BackendInterface
 {

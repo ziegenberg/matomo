@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\tests\System;
+namespace Matomo\Plugins\Ecommerce\tests\System;
 
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Tests\Fixtures\TwoSitesEcommerceOrderWithItems;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Tests\Fixtures\TwoSitesEcommerceOrderWithItems;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * Tests API methods after ecommerce orders are tracked.
@@ -88,7 +88,7 @@ class EcommerceOrderWithItemsTest extends SystemTestCase
                         'idSite'     => $idSite,
                         'date'       => $dateTime,
                         'periods'    => ['day', 'week'],
-                        'idGoal'     => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
+                        'idGoal'     => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
                         'segment'    => 'pageTitle==Looking%20at%20product%20page',
                         'testSuffix' => '_EcommerceOrderGoal_SegmentPageUrlContains',
                     ],
@@ -192,7 +192,7 @@ class EcommerceOrderWithItemsTest extends SystemTestCase
                         'periods'    => ['day'],
                         'apiModule'  => 'Goals',
                         'apiAction'  => 'get',
-                        'idGoal'     => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
+                        'idGoal'     => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
                         'testSuffix' => '_Metadata_Goals.Get_Order',
                     ],
                 ],
@@ -204,7 +204,7 @@ class EcommerceOrderWithItemsTest extends SystemTestCase
                         'periods'    => ['day'],
                         'apiModule'  => 'Goals',
                         'apiAction'  => 'get',
-                        'idGoal'     => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
+                        'idGoal'     => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
                         'testSuffix' => '_Metadata_Goals.Get_AbandonedCart',
                     ],
                 ],
@@ -258,7 +258,7 @@ class EcommerceOrderWithItemsTest extends SystemTestCase
                         'idSite'     => $idSite,
                         'date'       => $dateTime,
                         'periods'    => ['day', 'week'],
-                        'idGoal'     => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
+                        'idGoal'     => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
                         'testSuffix' => '_GoalAbandonedCart',
                     ],
                 ],
@@ -268,7 +268,7 @@ class EcommerceOrderWithItemsTest extends SystemTestCase
                         'idSite'     => $idSite,
                         'date'       => $dateTime,
                         'periods'    => ['day', 'week'],
-                        'idGoal'     => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
+                        'idGoal'     => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
                         'testSuffix' => '_GoalOrder',
                     ],
                 ],
@@ -482,7 +482,7 @@ class EcommerceOrderWithItemsTest extends SystemTestCase
                         'idSite'                 => $idSite,
                         'date'                   => $dateTime,
                         'periods'                => ['week'],
-                        'idGoal'                 => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
+                        'idGoal'                 => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER,
                         'otherRequestParameters' => [
                             'columns' => 'avg_order_revenue',
                         ],

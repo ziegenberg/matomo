@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces\Traits;
+namespace Matomo\Settings\Interfaces\Traits;
 
-use Piwik\Policy\CompliancePolicy;
+use Matomo\Policy\CompliancePolicy;
 
 /**
  * @template T of mixed
  *
- * @phpstan-require-implements \Piwik\Settings\Interfaces\PolicyComparisonInterface<T>
+ * @phpstan-require-implements \Matomo\Settings\Interfaces\PolicyComparisonInterface<T>
  */
 trait PolicyComparisonTrait
 {

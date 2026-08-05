@@ -7,8 +7,8 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleSettingsPlugin;
+namespace Matomo\Plugins\ExampleSettingsPlugin;
 
-class ExampleSettingsPlugin extends \Piwik\Plugin
+class ExampleSettingsPlugin extends \Matomo\Plugin
 {
 }

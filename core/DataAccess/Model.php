@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
 use Exception;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Period;
-use Piwik\Segment;
-use Piwik\Sequence;
-use Piwik\SettingsServer;
-use Piwik\Site;
-use Piwik\Log\LoggerInterface;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Period;
+use Matomo\Segment;
+use Matomo\Sequence;
+use Matomo\SettingsServer;
+use Matomo\Site;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Cleans up outdated archives
@@ -587,7 +587,7 @@ class Model
                 $sequence->create();
             } catch (Exception $ex) {
                 // Ignore duplicate entry error, as that means another request might have already created the sequence
-                if (!Db::get()->isErrNo($ex, \Piwik\Updater\Migration\Db::ERROR_CODE_DUPLICATE_ENTRY)) {
+                if (!Db::get()->isErrNo($ex, \Matomo\Updater\Migration\Db::ERROR_CODE_DUPLICATE_ENTRY)) {
                     throw $ex;
                 }
             }
@@ -664,7 +664,7 @@ class Model
 
         $idSitesUsed = array_column($rows, 'idsite');
 
-        $model = new \Piwik\Plugins\SitesManager\Model();
+        $model = new \Matomo\Plugins\SitesManager\Model();
         $idSitesExisting = $model->getSitesId();
 
         $deletedSites = array_diff($idSitesUsed, $idSitesExisting);

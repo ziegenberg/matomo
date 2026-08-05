@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\Categories;
+namespace Matomo\Plugins\VisitTime\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class TimesSubcategory extends Subcategory
 {
@@ -20,6 +20,6 @@ class TimesSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('VisitTime_TimesSubcategoryHelp') . '</p>';
+        return '<p>' . Matomo::translate('VisitTime_TimesSubcategoryHelp') . '</p>';
     }
 }

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Metrics\Formatter;
+namespace Matomo\Metrics\Formatter;
 
-use Piwik\Metrics\Formatter;
+use Matomo\Metrics\Formatter;
 
 /**
  * Metrics formatter that formats for HTML output. Uses non-breaking spaces in formatted values

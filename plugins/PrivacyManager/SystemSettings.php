@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Piwik;
-use Piwik\Settings\Plugin\SystemSetting;
-use Piwik\Settings\FieldConfig;
+use Matomo\Matomo;
+use Matomo\Settings\Plugin\SystemSetting;
+use Matomo\Settings\FieldConfig;
 
 /**
  * Defines Settings for PrivacyManager.
  */
-class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
+class SystemSettings extends \Matomo\Settings\Plugin\SystemSettings
 {
     /** @var SystemSetting */
     public $imprintUrl;
@@ -41,39 +41,39 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
     private function createImprintUrlSetting(): SystemSetting
     {
         return $this->makeSetting('ImprintUrl', $default = '', FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = Piwik::translate('PrivacyManager_ImprintUrl');
+            $field->title = Matomo::translate('PrivacyManager_ImprintUrl');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = Piwik::translate('PrivacyManager_ImprintUrlDescription') . ' ' .
-                Piwik::translate('PrivacyManager_PrivacyPolicyUrlDescriptionSuffix', ['anonymous']);
+            $field->description = Matomo::translate('PrivacyManager_ImprintUrlDescription') . ' ' .
+                Matomo::translate('PrivacyManager_PrivacyPolicyUrlDescriptionSuffix', ['anonymous']);
         });
     }
 
     private function createPrivacyPolicyUrlSetting(): SystemSetting
     {
         return $this->makeSetting('privacyPolicyUrl', $default = '', FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = Piwik::translate('PrivacyManager_PrivacyPolicyUrl');
+            $field->title = Matomo::translate('PrivacyManager_PrivacyPolicyUrl');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = Piwik::translate('PrivacyManager_PrivacyPolicyUrlDescription') . ' ' .
-                Piwik::translate('PrivacyManager_PrivacyPolicyUrlDescriptionSuffix', ['anonymous']);
+            $field->description = Matomo::translate('PrivacyManager_PrivacyPolicyUrlDescription') . ' ' .
+                Matomo::translate('PrivacyManager_PrivacyPolicyUrlDescriptionSuffix', ['anonymous']);
         });
     }
 
     private function createTermsAndConditionUrlSetting(): SystemSetting
     {
         return $this->makeSetting('termsAndConditionUrl', $default = '', FieldConfig::TYPE_STRING, function (FieldConfig $field) {
-            $field->title = Piwik::translate('PrivacyManager_TermsAndConditionUrl');
+            $field->title = Matomo::translate('PrivacyManager_TermsAndConditionUrl');
             $field->uiControl = FieldConfig::UI_CONTROL_TEXT;
-            $field->description = Piwik::translate('PrivacyManager_TermsAndConditionUrlDescription') . ' ' .
-                Piwik::translate('PrivacyManager_PrivacyPolicyUrlDescriptionSuffix', ['anonymous']);
+            $field->description = Matomo::translate('PrivacyManager_TermsAndConditionUrlDescription') . ' ' .
+                Matomo::translate('PrivacyManager_PrivacyPolicyUrlDescriptionSuffix', ['anonymous']);
         });
     }
 
     private function createShowInEmbeddedWidgetsSetting(): SystemSetting
     {
         return $this->makeSetting('showInEmbeddedWidgets', $default = false, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->title = Piwik::translate('PrivacyManager_ShowInEmbeddedWidgets');
+            $field->title = Matomo::translate('PrivacyManager_ShowInEmbeddedWidgets');
             $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
-            $field->description = Piwik::translate('PrivacyManager_ShowInEmbeddedWidgetsDescription');
+            $field->description = Matomo::translate('PrivacyManager_ShowInEmbeddedWidgetsDescription');
         });
     }
 }

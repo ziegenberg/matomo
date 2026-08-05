@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\BotTracking\Columns\ContentUrl;
-use Piwik\Plugins\BotTracking\Columns\Metrics\PageNotFound404Requests;
-use Piwik\Plugins\BotTracking\Columns\Metrics\ServerError5xxRequests;
-use Piwik\Plugins\BotTracking\Columns\Metrics\TotalBrokenRequests;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\BotTracking\Columns\ContentUrl;
+use Matomo\Plugins\BotTracking\Columns\Metrics\PageNotFound404Requests;
+use Matomo\Plugins\BotTracking\Columns\Metrics\ServerError5xxRequests;
+use Matomo\Plugins\BotTracking\Columns\Metrics\TotalBrokenRequests;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetAIChatbotBrokenContent extends Report
 {
@@ -29,8 +29,8 @@ class GetAIChatbotBrokenContent extends Report
     {
         parent::init();
 
-        $this->name              = Piwik::translate('BotTracking_AIChatbotsBrokenContentTitle');
-        $this->documentation     = Piwik::translate('BotTracking_AIChatbotsBrokenContentDocumentation');
+        $this->name              = Matomo::translate('BotTracking_AIChatbotsBrokenContentTitle');
+        $this->documentation     = Matomo::translate('BotTracking_AIChatbotsBrokenContentDocumentation');
         $this->categoryId        = 'General_AIAssistants';
         $this->subcategoryId     = 'BotTracking_AIChatbotsContentRequests';
         $this->dimension         = new ContentUrl();

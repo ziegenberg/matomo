@@ -7,8 +7,8 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleReport;
+namespace Matomo\Plugins\ExampleReport;
 
-class ExampleReport extends \Piwik\Plugin
+class ExampleReport extends \Matomo\Plugin
 {
 }

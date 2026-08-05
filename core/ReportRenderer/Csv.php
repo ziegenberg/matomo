@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ReportRenderer;
+namespace Matomo\ReportRenderer;
 
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Renderer\Csv as CsvDataTableRenderer;
-use Piwik\Piwik;
-use Piwik\ReportRenderer;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Renderer\Csv as CsvDataTableRenderer;
+use Matomo\Matomo;
+use Matomo\ReportRenderer;
 
 /**
  * CSV report renderer
@@ -117,7 +117,7 @@ class Csv extends ReportRenderer
 
         $reportData = $csvRenderer->render($processedReport);
         if (empty($reportData)) {
-            $reportData = $csvRenderer->formatValue(Piwik::translate('CoreHome_ThereIsNoDataForThisReport'));
+            $reportData = $csvRenderer->formatValue(Matomo::translate('CoreHome_ThereIsNoDataForThisReport'));
         }
 
         $reportName = $csvRenderer->formatValue($processedReport['metadata']['name']);
@@ -135,7 +135,7 @@ class Csv extends ReportRenderer
 
     /**
      * @param string $uniqueId
-     * @return \Piwik\DataTable\Renderer\Csv
+     * @return \Matomo\DataTable\Renderer\Csv
      */
     protected function getRenderer(DataTableInterface $table, $uniqueId)
     {

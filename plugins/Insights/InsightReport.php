@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights;
+namespace Matomo\Plugins\Insights;
 
-use Piwik\DataTable;
-use Piwik\Piwik;
+use Matomo\DataTable;
+use Matomo\Matomo;
 
 /**
  * Insight report generator
@@ -147,7 +147,7 @@ class InsightReport
 
         $dataTable = new DataTable();
         $dataTable->filter(
-            'Piwik\Plugins\Insights\DataTable\Filter\Insight',
+            'Matomo\Plugins\Insights\DataTable\Filter\Insight',
             array(
                 $currentReport,
                 $lastReport,
@@ -159,7 +159,7 @@ class InsightReport
         );
 
         $dataTable->filter(
-            'Piwik\Plugins\Insights\DataTable\Filter\MinGrowth',
+            'Matomo\Plugins\Insights\DataTable\Filter\MinGrowth',
             array(
                 'growth_percent_numeric',
                 $minGrowthPercentPositive,
@@ -169,7 +169,7 @@ class InsightReport
 
         if ($minIncreaseNew) {
             $dataTable->filter(
-                'Piwik\Plugins\Insights\DataTable\Filter\ExcludeLowValue',
+                'Matomo\Plugins\Insights\DataTable\Filter\ExcludeLowValue',
                 array(
                     'difference',
                     $minIncreaseNew,
@@ -180,7 +180,7 @@ class InsightReport
 
         if ($minChangeMovers) {
             $dataTable->filter(
-                'Piwik\Plugins\Insights\DataTable\Filter\ExcludeLowValue',
+                'Matomo\Plugins\Insights\DataTable\Filter\ExcludeLowValue',
                 array(
                     'difference',
                     $minChangeMovers,
@@ -191,7 +191,7 @@ class InsightReport
 
         if ($minDecreaseDisappeared) {
             $dataTable->filter(
-                'Piwik\Plugins\Insights\DataTable\Filter\ExcludeLowValue',
+                'Matomo\Plugins\Insights\DataTable\Filter\ExcludeLowValue',
                 array(
                     'difference',
                     $minDecreaseDisappeared,
@@ -201,7 +201,7 @@ class InsightReport
         }
 
         $dataTable->filter(
-            'Piwik\Plugins\Insights\DataTable\Filter\OrderBy',
+            'Matomo\Plugins\Insights\DataTable\Filter\OrderBy',
             array(
                 $this->getOrderByColumn($orderBy),
                 $orderBy === self::ORDER_BY_RELATIVE ? $this->getOrderByColumn(self::ORDER_BY_ABSOLUTE) : $this->getOrderByColumn(self::ORDER_BY_RELATIVE),
@@ -210,7 +210,7 @@ class InsightReport
         );
 
         $dataTable->filter(
-            'Piwik\Plugins\Insights\DataTable\Filter\Limit',
+            'Matomo\Plugins\Insights\DataTable\Filter\Limit',
             array(
                 'growth_percent_numeric',
                 $limitIncreaser,
@@ -283,6 +283,6 @@ class InsightReport
 
     private function getTotalEvolution($totalValue, $lastTotalValue)
     {
-        return Piwik::getPercentageSafe($totalValue - $lastTotalValue, $lastTotalValue, 1);
+        return Matomo::getPercentageSafe($totalValue - $lastTotalValue, $lastTotalValue, 1);
     }
 }

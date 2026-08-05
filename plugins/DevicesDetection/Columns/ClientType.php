@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Columns;
+namespace Matomo\Plugins\DevicesDetection\Columns;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Metrics\Formatter;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 class ClientType extends Base
 {
@@ -25,7 +25,7 @@ class ClientType extends Base
 
     public function __construct()
     {
-        $clientTypes = \Piwik\Plugins\DevicesDetection\getClientTypeMapping();
+        $clientTypes = \Matomo\Plugins\DevicesDetection\getClientTypeMapping();
         $clientTypeList = implode(", ", $clientTypes);
 
         $this->acceptValues = $clientTypeList;
@@ -33,12 +33,12 @@ class ClientType extends Base
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\DevicesDetection\getClientTypeLabel($value);
+        return \Matomo\Plugins\DevicesDetection\getClientTypeLabel($value);
     }
 
     public function getEnumColumnValues()
     {
-        return \Piwik\Plugins\DevicesDetection\getClientTypeMapping();
+        return \Matomo\Plugins\DevicesDetection\getClientTypeMapping();
     }
 
     /**
@@ -49,7 +49,7 @@ class ClientType extends Base
     {
         $parser    = $this->getUAParser($request->getUserAgent(), $request->getClientHints());
 
-        $clientTypes = \Piwik\Plugins\DevicesDetection\getClientTypeMapping();
+        $clientTypes = \Matomo\Plugins\DevicesDetection\getClientTypeMapping();
 
         return array_search($parser->getClient('type'), $clientTypes) ?: null;
     }

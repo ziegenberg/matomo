@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution\Reports;
+namespace Matomo\Plugins\Resolution\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Plugins\Resolution\Columns\Resolution;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Policy\PolicyManager;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Plugins\Resolution\Columns\Resolution;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Policy\PolicyManager;
 
 class GetResolution extends Base
 {
@@ -22,8 +22,8 @@ class GetResolution extends Base
     {
         parent::init();
         $this->dimension     = new Resolution();
-        $this->name          = Piwik::translate('Resolution_WidgetResolutions');
-        $this->documentation = Piwik::translate('Resolution_WidgetResolutionsDocumentation');
+        $this->name          = Matomo::translate('Resolution_WidgetResolutions');
+        $this->documentation = Matomo::translate('Resolution_WidgetResolutionsDocumentation');
         $this->order = 8;
 
         $this->subcategoryId = 'DevicesDetection_Devices';

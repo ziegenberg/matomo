@@ -1,10 +1,10 @@
 <?php
 
 return array(
-    'Piwik\Plugins\CoreUpdater\Updater' => Piwik\DI::autowire()
-        ->constructorParameter('tmpPath', Piwik\DI::get('path.tmp')),
+    'Matomo\Plugins\CoreUpdater\Updater' => Matomo\DI::autowire()
+        ->constructorParameter('tmpPath', Matomo\DI::get('path.tmp')),
 
-    'diagnostics.optional' => Piwik\DI::add(array(
-        Piwik\DI::get('Piwik\Plugins\CoreUpdater\Diagnostic\HttpsUpdateCheck'),
+    'diagnostics.optional' => Matomo\DI::add(array(
+        Matomo\DI::get('Matomo\Plugins\CoreUpdater\Diagnostic\HttpsUpdateCheck'),
     )),
 );

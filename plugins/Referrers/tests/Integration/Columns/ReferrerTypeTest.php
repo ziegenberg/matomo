@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Integration\Columns;
+namespace Matomo\Plugins\Referrers\tests\Integration\Columns;
 
-use Piwik\Common;
-use Piwik\Plugins\Referrers\Columns\ReferrerType;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Tracker\Visitor;
+use Matomo\Common;
+use Matomo\Plugins\Referrers\Columns\ReferrerType;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Tracker\Visitor;
 
 /**
  * @group Referrers

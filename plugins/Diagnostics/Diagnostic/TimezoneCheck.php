@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\SettingsServer;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\SettingsServer;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 /**
  * Check that the PHP timezone setting is set.

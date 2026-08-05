@@ -2,7 +2,7 @@
 
 return array(
 
-    'diagnostics.informational' => Piwik\DI::add(array(
-        Piwik\DI::get('Piwik\Plugins\PrivacyManager\Diagnostic\PrivacyInformational'),
+    'diagnostics.informational' => Matomo\DI::add(array(
+        Matomo\DI::get('Matomo\Plugins\PrivacyManager\Diagnostic\PrivacyInformational'),
     )),
 );

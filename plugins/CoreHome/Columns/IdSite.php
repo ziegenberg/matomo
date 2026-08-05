@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Site;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Site;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class IdSite extends VisitDimension
 {
@@ -54,7 +54,7 @@ class IdSite extends VisitDimension
             return Site::getNameFor($value);
         } catch (\Exception $ex) {
             $formatted = parent::formatValue($value, $idSite, $formatter);
-            return Piwik::translate('General_MeasurableId') . ': ' . $formatted;
+            return Matomo::translate('General_MeasurableId') . ': ' . $formatted;
         }
     }
 }

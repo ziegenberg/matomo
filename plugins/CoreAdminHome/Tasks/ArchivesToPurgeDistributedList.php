@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Tasks;
+namespace Matomo\Plugins\CoreAdminHome\Tasks;
 
-use Piwik\Concurrency\DistributedList;
-use Piwik\Date;
+use Matomo\Concurrency\DistributedList;
+use Matomo\Date;
 
 /**
  * Distributed list that holds a list of year-month archive table identifiers (eg, 2015_01 or 2014_11). Each item in the

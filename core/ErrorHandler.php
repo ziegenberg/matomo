@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\ErrorException;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\ErrorException;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Piwik's error handler function.
@@ -132,7 +132,7 @@ class ErrorHandler
 
     public static function registerErrorHandler()
     {
-        set_error_handler(array('Piwik\ErrorHandler', 'errorHandler'));
+        set_error_handler(array('Matomo\ErrorHandler', 'errorHandler'));
     }
 
     public static function errorHandler($errno, $errstr, $errfile, $errline)
@@ -197,7 +197,7 @@ class ErrorHandler
     private static function createLogMessage($errno, $errstr, $errfile, $errline)
     {
         return sprintf(
-            "%s(%d): %s - %s - Matomo " . (class_exists('Piwik\Version') ? Version::VERSION : '') . " - Please report this message in the Matomo forums: https://forum.matomo.org (please do a search first as it might have been reported already)",
+            "%s(%d): %s - %s - Matomo " . (class_exists('Matomo\Version') ? Version::VERSION : '') . " - Please report this message in the Matomo forums: https://forum.matomo.org (please do a search first as it might have been reported already)",
             $errfile,
             $errline,
             ErrorHandler::getErrNoString($errno),
@@ -211,7 +211,7 @@ class ErrorHandler
 
         $message = ErrorHandler::getErrNoString($errno) . ' - ' . $errstr;
 
-        $html = "<p>There is an error. Please report the message (Matomo " . (class_exists('Piwik\Version') ? Version::VERSION : '') . ")
+        $html = "<p>There is an error. Please report the message (Matomo " . (class_exists('Matomo\Version') ? Version::VERSION : '') . ")
         and full backtrace in the <a target='_blank' rel='noreferrer noopener' href='https://forum.matomo.org'>Matomo forums</a> (please do a search first as it might have been reported already!).</p>";
         $html .= "<p><strong>{$message}</strong> in <em>{$errfile}</em>";
         $html .= " on line {$errline}</p>";

@@ -7,44 +7,44 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager;
+namespace Matomo\Plugins\SitesManager;
 
 use DateTimeZone;
 use Exception;
 use Matomo\Network\IPUtils;
-use Piwik\Access;
-use Piwik\Common;
-use Piwik\Concurrency\Lock;
-use Piwik\Concurrency\LockBackend;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\Model as CoreModel;
-use Piwik\Date;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Intl\Data\Provider\CurrencyDataProvider;
-use Piwik\Measurable\Type\TypeManager;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\SettingsProvider;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Plugins\CorePluginsAdmin\SettingsMetadata;
-use Piwik\Plugins\SitesManager\Settings\FilterPIIParameters;
-use Piwik\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
-use Piwik\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
-use Piwik\Plugins\WebsiteMeasurable\Settings\Urls;
-use Piwik\ProxyHttp;
-use Piwik\Scheduler\Scheduler;
-use Piwik\Settings\Measurable\MeasurableProperty;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Site;
-use Piwik\SiteContentDetector;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\TrackerCodeGenerator;
-use Piwik\Translation\Translator;
-use Piwik\Url;
-use Piwik\UrlHelper;
-use Piwik\Validators\WhitelistedValue;
+use Matomo\Access;
+use Matomo\Common;
+use Matomo\Concurrency\Lock;
+use Matomo\Concurrency\LockBackend;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\Model as CoreModel;
+use Matomo\Date;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Intl\Data\Provider\CurrencyDataProvider;
+use Matomo\Measurable\Type\TypeManager;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\SettingsProvider;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Plugins\CorePluginsAdmin\SettingsMetadata;
+use Matomo\Plugins\SitesManager\Settings\FilterPIIParameters;
+use Matomo\Plugins\SitesManager\SiteContentDetection\ConsentManagerDetectionAbstract;
+use Matomo\Plugins\SitesManager\SiteContentDetection\SiteContentDetectionAbstract;
+use Matomo\Plugins\WebsiteMeasurable\Settings\Urls;
+use Matomo\ProxyHttp;
+use Matomo\Scheduler\Scheduler;
+use Matomo\Settings\Measurable\MeasurableProperty;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Site;
+use Matomo\SiteContentDetector;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\TrackerCodeGenerator;
+use Matomo\Translation\Translator;
+use Matomo\Url;
+use Matomo\UrlHelper;
+use Matomo\Validators\WhitelistedValue;
 
 /**
  * The SitesManager API gives you full control on Websites in Matomo (create, update and delete), and many methods to retrieve websites based on various attributes.
@@ -84,9 +84,9 @@ use Piwik\Validators\WhitelistedValue;
  * }
  * @phpstan-type SettingValues array<string, list<array{name: string, value: mixed}>>
  *
- * @method static \Piwik\Plugins\SitesManager\API getInstance()
+ * @method static \Matomo\Plugins\SitesManager\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const DEFAULT_SEARCH_KEYWORD_PARAMETERS = 'q,query,s,search,searchword,k,keyword,keywords';
     public const OPTION_EXCLUDED_IPS_GLOBAL = 'SitesManager_ExcludedIpsGlobal';
@@ -172,7 +172,7 @@ class API extends \Piwik\Plugin\API
         $excludedReferrers = '',
         bool $disableCampaignParameters = false
     ): string {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         if (empty($piwikUrl)) {
             $piwikUrl = SettingsPiwik::getPiwikUrl() ?: '';
@@ -252,7 +252,7 @@ class API extends \Piwik\Plugin\API
          * @param array &$urlParams The query parameters used in the <img> element's src
          *                          URL. See Matomo's image tracking docs for more info.
          */
-        Piwik::postEvent('SitesManager.getImageTrackingCode', [&$piwikUrl, &$urlParams]);
+        Matomo::postEvent('SitesManager.getImageTrackingCode', [&$piwikUrl, &$urlParams]);
 
         $trackerCodeGenerator = new TrackerCodeGenerator();
         if ($forceMatomoEndpoint) {
@@ -277,7 +277,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSitesFromGroup(string $group = ''): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $group = trim($group);
         $sites = $this->getModel()->getSitesFromGroup($group);
@@ -300,7 +300,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSitesGroups(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $groups = $this->getModel()->getSitesGroups();
         $cleanedGroups = array_map('trim', $groups);
@@ -316,7 +316,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSiteFromId(int $idSite): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $site = $this->getModel()->getSiteFromId($idSite);
 
@@ -342,7 +342,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSiteUrlsFromId(int $idSite): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         return $this->getModel()->getSiteUrlsFromId($idSite);
     }
 
@@ -363,7 +363,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAllSites(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $sites  = $this->getModel()->getAllSites();
         $return = [];
@@ -386,7 +386,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAllSitesId(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         try {
             return $this->getSitesId();
         } catch (Exception $e) {
@@ -492,7 +492,7 @@ class API extends \Piwik\Plugin\API
     public function getMessagesToWarnOnSiteRemoval(int $idSite): array
     {
         $messages = [];
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         /**
          * Triggered before a modal to delete a measurable is displayed
          *
@@ -501,7 +501,7 @@ class API extends \Piwik\Plugin\API
          * @param array &$messages Additional messages to be shown in the delete measurable modal body
          * @param int $idSite The idSite to be deleted
          */
-        Piwik::postEvent('SitesManager.getMessagesToWarnOnSiteRemoval', [&$messages, $idSite]);
+        Matomo::postEvent('SitesManager.getMessagesToWarnOnSiteRemoval', [&$messages, $idSite]);
 
         return $messages;
     }
@@ -584,9 +584,9 @@ class API extends \Piwik\Plugin\API
     public function getSitesIdWithAtLeastViewAccess($_restrictSitesToLogin = false): array
     {
         /** @var Scheduler $scheduler */
-        $scheduler = StaticContainer::getContainer()->get('Piwik\Scheduler\Scheduler');
+        $scheduler = StaticContainer::getContainer()->get('Matomo\Scheduler\Scheduler');
 
-        if (Piwik::hasUserSuperUserAccess() && !$scheduler->isRunningTask()) {
+        if (Matomo::hasUserSuperUserAccess() && !$scheduler->isRunningTask()) {
             $sitesId = Access::getInstance()->getSitesIdWithAtLeastViewAccess();
             return array_map('intval', $sitesId);
         }
@@ -596,10 +596,10 @@ class API extends \Piwik\Plugin\API
             // Only Superuser or logged in user can see viewable sites for a specific login,
             // but during scheduled task execution, we sometimes want to restrict sites to
             // a different login than the superuser.
-            && (Piwik::hasUserSuperUserAccessOrIsTheUser($_restrictSitesToLogin)
+            && (Matomo::hasUserSuperUserAccessOrIsTheUser($_restrictSitesToLogin)
                 || $scheduler->isRunningTask())
         ) {
-            if (Piwik::hasTheUserSuperUserAccess($_restrictSitesToLogin)) {
+            if (Matomo::hasTheUserSuperUserAccess($_restrictSitesToLogin)) {
                 return Access::getInstance()->getSitesIdWithAtLeastViewAccess();
             }
 
@@ -667,10 +667,10 @@ class API extends \Piwik\Plugin\API
         $url = $this->removeTrailingSlash($url);
         $normalisedUrls = $this->getNormalizedUrls($url);
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $ids   = $this->getModel()->getAllSitesIdFromSiteUrl($normalisedUrls);
         } else {
-            $login = Piwik::getCurrentUserLogin();
+            $login = Matomo::getCurrentUserLogin();
             $ids   = $this->getModel()->getSitesIdFromSiteUrlHavingAccess($login, $normalisedUrls);
         }
 
@@ -688,9 +688,9 @@ class API extends \Piwik\Plugin\API
      */
     public function getSitesIdFromTimezones($timezones): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
-        $timezones = Piwik::getArrayFromApiParameter($timezones);
+        $timezones = Matomo::getArrayFromApiParameter($timezones);
         $timezones = array_unique($timezones);
 
         $ids = $this->getModel()->getSitesFromTimezones($timezones);
@@ -721,7 +721,7 @@ class API extends \Piwik\Plugin\API
         $site['currency_name'] = ($key === $name) ? $site['currency'] : $name;
 
         // don't want to expose other user logins here
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             unset($site['creator_login']);
         }
     }
@@ -783,7 +783,7 @@ class API extends \Piwik\Plugin\API
         $excludedReferrers = null,
         $description = null
     ): int {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         SitesManager::dieIfSitesAdminIsDisabled();
 
         $this->checkName($siteName);
@@ -831,13 +831,13 @@ class API extends \Piwik\Plugin\API
 
         $bind['type'] = $this->checkAndReturnType($type);
 
-        if (!empty($group) && Piwik::hasUserSuperUserAccess()) {
+        if (!empty($group) && Matomo::hasUserSuperUserAccess()) {
             $bind['group'] = trim($group);
         } else {
             $bind['group'] = "";
         }
 
-        $bind['creator_login'] = Piwik::getCurrentUserLogin();
+        $bind['creator_login'] = Matomo::getCurrentUserLogin();
 
         $allSettings = $this->setAndValidateMeasurableSettings(0, 'website', $coreProperties);
 
@@ -881,7 +881,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param int $idSite The ID of the site that was added.
          */
-        Piwik::postEvent('SitesManager.addSite.end', [$idSite]);
+        Matomo::postEvent('SitesManager.addSite.end', [$idSite]);
 
         return (int) $idSite;
     }
@@ -929,7 +929,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSiteSettings(int $idSite): array
     {
-        Piwik::checkUserHasAdminAccess($idSite);
+        Matomo::checkUserHasAdminAccess($idSite);
 
         $measurableSettings = $this->settingsProvider->getAllMeasurableSettings($idSite);
 
@@ -938,7 +938,7 @@ class API extends \Piwik\Plugin\API
 
     /**
      * @param SettingValues $settingValues
-     * @return array<string, \Piwik\Settings\Measurable\MeasurableSettings>
+     * @return array<string, \Matomo\Settings\Measurable\MeasurableSettings>
      */
     private function setAndValidateMeasurableSettings(int $idSite, ?string $idType, array $settingValues): array
     {
@@ -990,7 +990,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         ?string $passwordConfirmation = null
     ): void {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         SitesManager::dieIfSitesAdminIsDisabled();
 
         if (StaticContainer::get(AuthenticationToken::class)->isSessionToken()) {
@@ -1024,7 +1024,7 @@ class API extends \Piwik\Plugin\API
              *
              * @param int $idSite The ID of the site being deleted.
              */
-            Piwik::postEvent('SitesManager.deleteSite.end', [$idSite]);
+            Matomo::postEvent('SitesManager.deleteSite.end', [$idSite]);
         });
     }
 
@@ -1110,7 +1110,7 @@ class API extends \Piwik\Plugin\API
      */
     public function addSiteAliasUrls(int $idSite, $urls): int
     {
-        Piwik::checkUserHasAdminAccess($idSite);
+        Matomo::checkUserHasAdminAccess($idSite);
 
         if (empty($urls)) {
             return 0;
@@ -1148,7 +1148,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setSiteAliasUrls(int $idSite, array $urls = []): int
     {
-        Piwik::checkUserHasAdminAccess($idSite);
+        Matomo::checkUserHasAdminAccess($idSite);
 
         $mainUrl = Site::getMainUrlFor($idSite);
         array_unshift($urls, $mainUrl);
@@ -1191,7 +1191,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setGlobalExcludedIps(string $excludedIps): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $excludedIps = $this->checkAndReturnExcludedIps($excludedIps);
         Option::set(self::OPTION_EXCLUDED_IPS_GLOBAL, $excludedIps);
         Cache::deleteTrackerCache();
@@ -1210,7 +1210,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setGlobalSearchParameters(string $searchKeywordParameters, string $searchCategoryParameters): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         Option::set(self::OPTION_SEARCH_KEYWORD_QUERY_PARAMETERS_GLOBAL, $searchKeywordParameters);
         Option::set(self::OPTION_SEARCH_CATEGORY_QUERY_PARAMETERS_GLOBAL, $searchCategoryParameters);
         Cache::deleteTrackerCache();
@@ -1226,7 +1226,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSearchKeywordParametersGlobal(): string
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         $names = Option::get(self::OPTION_SEARCH_KEYWORD_QUERY_PARAMETERS_GLOBAL);
         if ($names === false) {
             $names = self::DEFAULT_SEARCH_KEYWORD_PARAMETERS;
@@ -1244,7 +1244,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getSearchCategoryParametersGlobal()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         return Option::get(self::OPTION_SEARCH_CATEGORY_QUERY_PARAMETERS_GLOBAL);
     }
 
@@ -1282,7 +1282,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExcludedQueryParametersGlobal(?int $idSite = null): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         switch ($this->getExclusionTypeForQueryParams($idSite)) {
             case SitesManager::URL_PARAM_EXCLUSION_TYPE_NAME_COMMON_SESSION_PARAMETERS:
@@ -1303,7 +1303,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExcludedUserAgentsGlobal()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         return Option::get(self::OPTION_EXCLUDED_USER_AGENTS_GLOBAL);
     }
 
@@ -1318,7 +1318,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setGlobalExcludedUserAgents(string $excludedUserAgents): void
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         // update option
         $excludedUserAgents = $this->checkAndReturnCommaSeparatedStringList($excludedUserAgents);
@@ -1338,7 +1338,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExcludedReferrers(int $idSite): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         try {
             $attributes = Cache::getCacheWebsiteAttributes($idSite);
@@ -1365,7 +1365,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExcludedReferrersGlobal(): string
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         $exclusion = Option::get(self::OPTION_EXCLUDED_REFERRERS_GLOBAL);
 
         return is_string($exclusion) ? $exclusion : '';
@@ -1383,7 +1383,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setGlobalExcludedReferrers(string $excludedReferrers): void
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $excludedUrls = $this->checkAndReturnCommaSeparatedStringList($excludedReferrers);
 
@@ -1395,7 +1395,7 @@ class API extends \Piwik\Plugin\API
             $prefixedUrl = 'https://' . ltrim(preg_replace('/^https?:\/\//', '', $url) ?? '', '.');
             $parsedUrl = @parse_url($prefixedUrl);
             if (false === $parsedUrl || !UrlHelper::isLookLikeUrl($prefixedUrl)) {
-                throw new Exception(Piwik::translate('SitesManager_ExceptionInvalidUrl', [$url]));
+                throw new Exception(Matomo::translate('SitesManager_ExceptionInvalidUrl', [$url]));
             }
         }
 
@@ -1413,7 +1413,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getKeepURLFragmentsGlobal(): bool
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         return (bool)Option::get(self::OPTION_KEEP_URL_FRAGMENTS_GLOBAL);
     }
 
@@ -1428,7 +1428,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setKeepURLFragmentsGlobal($enabled): void
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         // update option
         Option::set(self::OPTION_KEEP_URL_FRAGMENTS_GLOBAL, (string)(int)$enabled);
@@ -1444,7 +1444,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExcludedIpsGlobal()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         return Option::get(self::OPTION_EXCLUDED_IPS_GLOBAL);
     }
 
@@ -1455,7 +1455,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getDefaultCurrency(): string
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
         $defaultCurrency = Option::get(self::OPTION_DEFAULT_CURRENCY);
         if ($defaultCurrency) {
             return $defaultCurrency;
@@ -1473,7 +1473,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setDefaultCurrency(string $defaultCurrency): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->checkValidCurrency($defaultCurrency);
         Option::set(self::OPTION_DEFAULT_CURRENCY, $defaultCurrency);
         return true;
@@ -1504,7 +1504,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setDefaultTimezone(string $defaultTimezone): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->checkValidTimezone($defaultTimezone);
         Option::set(self::OPTION_DEFAULT_TIMEZONE, $defaultTimezone);
         return true;
@@ -1524,7 +1524,7 @@ class API extends \Piwik\Plugin\API
      */
     public function setGlobalQueryParamExclusion(string $exclusionType, ?string $queryParamsToExclude = null): void
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $queryParamsToExclude = $this->checkAndReturnCommaSeparatedStringList($queryParamsToExclude ?? '');
         $whiteListValidator = new WhitelistedValue(SitesManager::URL_PARAM_EXCLUSION_TYPES);
@@ -1559,7 +1559,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getExclusionTypeForQueryParams(?int $idSite = null): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $result = FilterPIIParameters::getInstance($idSite)->getValue();
         if (!empty($result)) {
@@ -1631,7 +1631,7 @@ class API extends \Piwik\Plugin\API
         $excludedReferrers = null,
         $description = null
     ): void {
-        Piwik::checkUserHasAdminAccess($idSite);
+        Matomo::checkUserHasAdminAccess($idSite);
         SitesManager::dieIfSitesAdminIsDisabled();
 
         $idSites = $this->getSitesId();
@@ -1682,7 +1682,7 @@ class API extends \Piwik\Plugin\API
         }
         if (
             isset($group)
-            && Piwik::hasUserSuperUserAccess()
+            && Matomo::hasUserSuperUserAccess()
         ) {
             $bind['group'] = trim($group);
         }
@@ -1731,7 +1731,7 @@ class API extends \Piwik\Plugin\API
     public function updateSiteCreatedTime($idSites, Date $minDate): void
     {
         $idSites = Site::getIdSitesFromIdSitesString($idSites, false, true);
-        Piwik::checkUserHasAdminAccess($idSites);
+        Matomo::checkUserHasAdminAccess($idSites);
 
         $minDateSql = $minDate->subDay(1)->getDatetime();
 
@@ -1762,7 +1762,7 @@ class API extends \Piwik\Plugin\API
     public function getCurrencyList(): array
     {
         /** @var CurrencyDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\CurrencyDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\CurrencyDataProvider');
         $currency = $dataProvider->getCurrencyList();
 
         $return = [];
@@ -1785,7 +1785,7 @@ class API extends \Piwik\Plugin\API
     public function getCurrencySymbols(): array
     {
         /** @var CurrencyDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\CurrencyDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\CurrencyDataProvider');
         $currencies =  $dataProvider->getCurrencyList();
 
         return array_map(function ($a) {
@@ -1800,7 +1800,7 @@ class API extends \Piwik\Plugin\API
      */
     public function isTimezoneSupportEnabled(): bool
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         return SettingsServer::isTimezoneSupportEnabled();
     }
 
@@ -1818,7 +1818,7 @@ class API extends \Piwik\Plugin\API
             return ['UTC' => $this->getTimezonesListUTCOffsets()];
         }
 
-        $countries = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider')->getCountryList();
+        $countries = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider')->getCountryList();
 
         $return = [];
         $continents = [];
@@ -1934,7 +1934,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getUniqueSiteTimezones(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         return $this->getModel()->getUniqueSiteTimezones();
     }
@@ -1988,7 +1988,7 @@ class API extends \Piwik\Plugin\API
         $description = trim((string) $description);
 
         if (mb_strlen($description) > 255) {
-            throw new Exception(Piwik::translate('SitesManager_ExceptionInvalidWebsiteDescription'));
+            throw new Exception(Matomo::translate('SitesManager_ExceptionInvalidWebsiteDescription'));
         }
 
         return $description;
@@ -2005,7 +2005,7 @@ class API extends \Piwik\Plugin\API
      */
     public function renameGroup(string $oldGroupName, string $newGroupName): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if ($oldGroupName == $newGroupName) {
             return true;
@@ -2081,7 +2081,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getNumWebsitesToDisplayPerPage(): int
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         return SettingsPiwik::getWebsitesCountToDisplay();
     }
@@ -2102,7 +2102,7 @@ class API extends \Piwik\Plugin\API
      */
     public function detectConsentManager(int $idSite, int $timeOut = 60): ?array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $timeOut = max(1, min($timeOut, 60));
 

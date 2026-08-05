@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Command to selectively delete visits.

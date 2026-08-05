@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Session\SaveHandler;
+namespace Matomo\Tests\Integration\Session\SaveHandler;
 
-use Piwik\Session;
-use Piwik\Session\SaveHandler\DbTable;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Session;
+use Matomo\Session\SaveHandler\DbTable;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class DbTableTest extends IntegrationTestCase
 {

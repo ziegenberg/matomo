@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Contents;
+namespace Matomo\Plugins\Contents;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugins\Contents\Archiver;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugins\Contents\Archiver;
 
 /**
  * The Contents API exposes content tracking reports grouped by content name and content piece.
  *
- * @method static \Piwik\Plugins\Contents\API getInstance()
+ * @method static \Matomo\Plugins\Contents\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns content tracking metrics grouped by content name.
@@ -79,7 +79,7 @@ class API extends \Piwik\Plugin\API
      */
     private function getDataTable(string $name, $idSite, string $period, string $date, $segment, $idSubtable)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $recordName = Dimensions::getRecordNameForAction($name);
         $dataTable = Archive::createDataTableFromArchive($recordName, $idSite, $period, $date, $segment, false, false, $idSubtable);
 
@@ -107,7 +107,7 @@ class API extends \Piwik\Plugin\API
         $dataTable->filter(function (DataTable $table) {
             $row = $table->getRowFromLabel(Archiver::CONTENT_PIECE_NOT_SET);
             if ($row) {
-                $row->setColumn('label', Piwik::translate('General_NotDefined', Piwik::translate('Contents_ContentPiece')));
+                $row->setColumn('label', Matomo::translate('General_NotDefined', Matomo::translate('Contents_ContentPiece')));
             }
         });
     }

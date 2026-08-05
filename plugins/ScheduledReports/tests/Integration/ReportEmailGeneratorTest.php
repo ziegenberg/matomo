@@ -14,12 +14,12 @@
  * @license For license details see https://www.innocraft.com/license
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests\Integration;
+namespace Matomo\Plugins\ScheduledReports\tests\Integration;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\Plugins\ScheduledReports\GeneratedReport;
-use Piwik\Plugins\ScheduledReports\ReportEmailGenerator;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\ScheduledReports\GeneratedReport;
+use Matomo\Plugins\ScheduledReports\ReportEmailGenerator;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ReportEmailGeneratorTest
@@ -121,8 +121,8 @@ class ReportEmailGeneratorTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'observers.global' => \Piwik\DI::add([
-                ['Test.Mail.send', \Piwik\DI::value(function (PHPMailer $mail) {
+            'observers.global' => \Matomo\DI::add([
+                ['Test.Mail.send', \Matomo\DI::value(function (PHPMailer $mail) {
                     $this->mail = $mail;
                 })],
             ]),

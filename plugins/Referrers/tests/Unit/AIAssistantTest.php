@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Unit;
+namespace Matomo\Plugins\Referrers\tests\Unit;
 
-use Piwik\Plugins\Referrers\AIAssistant;
+use Matomo\Plugins\Referrers\AIAssistant;
 
 /**
  * @group AIAssistant
@@ -84,12 +84,12 @@ class AIAssistantTest extends \PHPUnit\Framework\TestCase
 
         yield 'ChatGPT look-a-url is detected as Unknown' => [
             'https://chatgpt.com.custom.org/i/16564-4345-5sdff-333',
-            \Piwik\Piwik::translate('General_Unknown'),
+            \Matomo\Matomo::translate('General_Unknown'),
         ];
 
         yield 'Unknown url is detected as Unknown' => [
             'https://xwayn.com',
-            \Piwik\Piwik::translate('General_Unknown'),
+            \Matomo\Matomo::translate('General_Unknown'),
         ];
     }
 

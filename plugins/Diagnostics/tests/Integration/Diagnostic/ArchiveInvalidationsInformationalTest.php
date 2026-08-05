@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Integration\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\tests\Integration\Diagnostic;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\Plugins\Diagnostics\Diagnostic\ArchiveInvalidationsInformational;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Translation\Translator;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\Plugins\Diagnostics\Diagnostic\ArchiveInvalidationsInformational;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Translation\Translator;
 
 class ArchiveInvalidationsInformationalTest extends IntegrationTestCase
 {

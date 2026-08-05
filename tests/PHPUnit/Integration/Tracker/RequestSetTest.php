@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Piwik;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestSet;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestSet;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class TestRequestSet extends RequestSet
 {
@@ -129,7 +129,7 @@ class RequestSetTest extends IntegrationTestCase
 
         $called = 0;
         $passedRequest = null;
-        Piwik::addAction('Tracker.initRequestSet', function ($param) use (&$called, &$passedRequest) {
+        Matomo::addAction('Tracker.initRequestSet', function ($param) use (&$called, &$passedRequest) {
             $called++;
             $passedRequest = $param;
         });
@@ -154,7 +154,7 @@ class RequestSetTest extends IntegrationTestCase
         $_GET  = array('idsite' => 1);
         $_POST = array('c_i' => 'click');
 
-        Piwik::addAction('Tracker.initRequestSet', function (RequestSet $requestSet) {
+        Matomo::addAction('Tracker.initRequestSet', function (RequestSet $requestSet) {
             $requestSet->setRequests(array(array('idsite' => '2'), array('idsite' => '3')));
         });
 

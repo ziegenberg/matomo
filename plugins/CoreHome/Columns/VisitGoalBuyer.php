@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class VisitGoalBuyer extends VisitDimension
 {
@@ -40,7 +40,7 @@ class VisitGoalBuyer extends VisitDimension
 
     public function __construct()
     {
-        $example = Piwik::translate('General_EcommerceVisitStatusEg', '"&segment=visitEcommerceStatus==ordered,visitEcommerceStatus==orderedThenAbandonedCart"');
+        $example = Matomo::translate('General_EcommerceVisitStatusEg', '"&segment=visitEcommerceStatus==ordered,visitEcommerceStatus==orderedThenAbandonedCart"');
         $this->acceptValues = implode(", ", self::$visitEcommerceStatus) . '. ' . $example;
     }
 
@@ -50,17 +50,17 @@ class VisitGoalBuyer extends VisitDimension
             case 'none':
             case '0':
             case self::TYPE_BUYER_NONE:
-                return Piwik::translate('UserCountryMap_None');
+                return Matomo::translate('UserCountryMap_None');
             case 'ordered':
             case '1':
             case self::TYPE_BUYER_ORDERED:
-                return Piwik::translate('CoreHome_VisitStatusOrdered');
+                return Matomo::translate('CoreHome_VisitStatusOrdered');
             case 'abandonedCart':
             case self::TYPE_BUYER_OPEN_CART:
-                return Piwik::translate('Goals_AbandonedCart');
+                return Matomo::translate('Goals_AbandonedCart');
             case 'orderedThenAbandonedCart':
             case self::TYPE_BUYER_ORDERED_AND_OPEN_CART:
-                return Piwik::translate('CoreHome_VisitStatusOrderedThenAbandoned');
+                return Matomo::translate('CoreHome_VisitStatusOrderedThenAbandoned');
         }
 
         return $value;

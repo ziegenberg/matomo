@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Access;
-use Piwik\AuthResult;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\AuthResult;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -70,12 +70,12 @@ class PiwikTest extends IntegrationTestCase
 
     public function testSecureDiv()
     {
-        $this->assertSame(3, Piwik::secureDiv(9, 3));
-        $this->assertSame(0, Piwik::secureDiv(9, 0));
-        $this->assertSame(10, Piwik::secureDiv(10, 1));
-        $this->assertSame(10.0, Piwik::secureDiv(10.0, 1.0));
-        $this->assertSame(5.5, Piwik::secureDiv(11.0, 2));
-        $this->assertSame(0, Piwik::secureDiv(11.0, 'a'));
+        $this->assertSame(3, Matomo::secureDiv(9, 3));
+        $this->assertSame(0, Matomo::secureDiv(9, 0));
+        $this->assertSame(10, Matomo::secureDiv(10, 1));
+        $this->assertSame(10.0, Matomo::secureDiv(10.0, 1.0));
+        $this->assertSame(5.5, Matomo::secureDiv(11.0, 2));
+        $this->assertSame(0, Matomo::secureDiv(11.0, 'a'));
     }
 
     /**
@@ -108,7 +108,7 @@ class PiwikTest extends IntegrationTestCase
     public function testCheckInvalidLoginString($toTest)
     {
         $this->expectException(\Exception::class);
-        Piwik::checkValidLoginString($toTest);
+        Matomo::checkValidLoginString($toTest);
     }
 
     /**
@@ -134,7 +134,7 @@ class PiwikTest extends IntegrationTestCase
      */
     public function testCheckValidLoginString($toTest)
     {
-        $this->assertNull(Piwik::checkValidLoginString($toTest));
+        $this->assertNull(Matomo::checkValidLoginString($toTest));
     }
 
     /**
@@ -157,7 +157,7 @@ class PiwikTest extends IntegrationTestCase
      */
     public function testIsAssociativeArray($array, $expected)
     {
-        $this->assertEquals($expected, Piwik::isAssociativeArray($array));
+        $this->assertEquals($expected, Matomo::isAssociativeArray($array));
     }
 
 
@@ -173,7 +173,7 @@ class PiwikTest extends IntegrationTestCase
         $mock->expects($this->any())->method('getName')->will($this->returnValue("test name"));
 
         $this->assertTrue(Access::getInstance()->reloadAccess($mock));
-        $this->assertTrue(Piwik::isUserIsAnonymous());
+        $this->assertTrue(Matomo::isUserIsAnonymous());
     }
 
     public function testIsUserIsAnonymousShouldReturnTrueWhenThereIsNoLogin()
@@ -188,7 +188,7 @@ class PiwikTest extends IntegrationTestCase
         $mock->expects($this->any())->method('getName')->will($this->returnValue("test name"));
 
         $this->assertFalse(Access::getInstance()->reloadAccess($mock));
-        $this->assertTrue(Piwik::isUserIsAnonymous());
+        $this->assertTrue(Matomo::isUserIsAnonymous());
     }
 
     public function testIsUserIsAnonymousShouldReturnFalseWhenLoginIsNotAnonymous()
@@ -203,7 +203,7 @@ class PiwikTest extends IntegrationTestCase
         $mock->expects($this->any())->method('getName')->will($this->returnValue("test name"));
 
         $this->assertTrue(Access::getInstance()->reloadAccess($mock));
-        $this->assertFalse(Piwik::isUserIsAnonymous());
+        $this->assertFalse(Matomo::isUserIsAnonymous());
     }
 
     public function testIsUserIsAnonymousShouldReturnFalseWhenLoginIsAnonymousButHasSuperUserAccess()
@@ -218,7 +218,7 @@ class PiwikTest extends IntegrationTestCase
         $mock->expects($this->any())->method('getName')->will($this->returnValue("test name"));
 
         $this->assertTrue(Access::getInstance()->reloadAccess($mock));
-        $this->assertFalse(Piwik::isUserIsAnonymous());
+        $this->assertFalse(Matomo::isUserIsAnonymous());
     }
 
     public function testIsUserIsAnonymousShouldReturnFalseWhenLoginIsAnonymousButSetSuperUserAccessUsed()
@@ -233,16 +233,16 @@ class PiwikTest extends IntegrationTestCase
         $mock->expects($this->any())->method('getName')->will($this->returnValue("test name"));
 
         $this->assertFalse(Access::getInstance()->reloadAccess($mock));
-        $this->assertTrue(Piwik::isUserIsAnonymous());
+        $this->assertTrue(Matomo::isUserIsAnonymous());
 
         Access::doAsSuperUser(function () {
-            $this->assertFalse(Piwik::isUserIsAnonymous());
+            $this->assertFalse(Matomo::isUserIsAnonymous());
         });
     }
 
     private function createPiwikAuthMockInstance()
     {
-        return $this->getMockBuilder('Piwik\\Auth')
+        return $this->getMockBuilder('Matomo\Auth')
             ->onlyMethods(array('authenticate', 'getName', 'getTokenAuthSecret', 'getLogin', 'setTokenAuth', 'setLogin',
                 'setPassword', 'setPasswordHash'))
             ->getMock();

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
-use Piwik\Metrics;
+use Matomo\Metrics;
 
 class Glossary
 {

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Tracker\LogTable;
+namespace Matomo\Plugins\CoreHome\Tracker\LogTable;
 
-use Piwik\Tracker\LogTable;
+use Matomo\Tracker\LogTable;
 
 class ConversionItem extends LogTable
 {

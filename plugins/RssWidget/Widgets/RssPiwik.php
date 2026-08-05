@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\RssWidget\Widgets;
+namespace Matomo\Plugins\RssWidget\Widgets;
 
-use Piwik\Piwik;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Plugins\RssWidget\RssRenderer;
+use Matomo\Matomo;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Plugins\RssWidget\RssRenderer;
 
-class RssPiwik extends \Piwik\Widget\Widget
+class RssPiwik extends \Matomo\Widget\Widget
 {
     public static function getCategory()
     {
@@ -54,7 +54,7 @@ class RssPiwik extends \Piwik\Widget\Widget
     private function error($e)
     {
         return '<div class="pk-emptyDataTable">'
-             . Piwik::translate('General_ErrorRequest', array('', ''))
+             . Matomo::translate('General_ErrorRequest', array('', ''))
              . ' - ' . $e->getMessage() . '</div>';
     }
 }

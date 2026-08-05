@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\API;
+namespace Matomo\Tests\Unit\API;
 
 use Exception;
-use Piwik\API\ResponseBuilder;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\Plugin\Manager;
+use Matomo\API\ResponseBuilder;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\Plugin\Manager;
 
 /**
  * @group Core

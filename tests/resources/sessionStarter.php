@@ -11,8 +11,8 @@
  * serverStaticFile.test.php has been created to avoid making too many modifications to /tests/core/Piwik.test.php
  */
 
-use Piwik\FrontController;
-use Piwik\Nonce;
+use Matomo\FrontController;
+use Matomo\Nonce;
 
 session_start(); // matomo should not fail if session was started by someone else
 define('PIWIK_DOCUMENT_ROOT', dirname(__FILE__) . '/../../');
@@ -25,10 +25,10 @@ if (!defined('PIWIK_INCLUDE_PATH')) {
 
 require_once PIWIK_INCLUDE_PATH . '/core/bootstrap.php';
 
-$environment = new \Piwik\Application\Environment(null);
+$environment = new \Matomo\Application\Environment(null);
 try {
     $environment->init();
-} catch (\Piwik\Exception\NotYetInstalledException $e) {
+} catch (\Matomo\Exception\NotYetInstalledException $e) {
     die($e->getMessage());
 }
 FrontController::getInstance()->init();

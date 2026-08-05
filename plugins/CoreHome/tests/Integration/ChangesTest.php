@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration;
+namespace Matomo\Plugins\CoreHome\tests\Integration;
 
-use Piwik\Tests\Fixtures\CreateChanges;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Changes\Model as ChangesModel;
+use Matomo\Tests\Fixtures\CreateChanges;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Changes\Model as ChangesModel;
 
 /**
  * @group CoreHome

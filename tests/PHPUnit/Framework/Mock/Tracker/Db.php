@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock\Tracker;
+namespace Matomo\Tests\Framework\Mock\Tracker;
 
-use Piwik\Tracker\Db\Pdo\Mysql;
+use Matomo\Tracker\Db\Pdo\Mysql;
 
 class Db extends Mysql
 {

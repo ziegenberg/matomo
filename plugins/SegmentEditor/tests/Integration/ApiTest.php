@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\tests\Integration;
+namespace Matomo\Plugins\SegmentEditor\tests\Integration;
 
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group SegmentEditor
@@ -762,13 +762,13 @@ class ApiTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 
     protected function createAdminUser()
     {
-        \Piwik\Plugins\UsersManager\API::getInstance()->addUser('myUserLogin', 'password', 'test@test.com');
+        \Matomo\Plugins\UsersManager\API::getInstance()->addUser('myUserLogin', 'password', 'test@test.com');
     }
 
     /**

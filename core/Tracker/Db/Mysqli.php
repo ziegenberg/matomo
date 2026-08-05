@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker\Db;
+namespace Matomo\Tracker\Db;
 
 use Exception;
-use Piwik\Tracker\Db;
+use Matomo\Tracker\Db;
 
 /**
  * mysqli wrapper
@@ -398,7 +398,7 @@ class Mysqli extends Db
 
     public function isErrNo($e, $errno)
     {
-        return \Piwik\Db\Adapter\Mysqli::isMysqliErrorNumber($e, $this->connection, $errno);
+        return \Matomo\Db\Adapter\Mysqli::isMysqliErrorNumber($e, $this->connection, $errno);
     }
 
     /**

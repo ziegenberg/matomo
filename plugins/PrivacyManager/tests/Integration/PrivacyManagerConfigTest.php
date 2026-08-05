@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration;
 
-use Piwik\Option;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\Plugins\PrivacyManager\API;
-use Piwik\Plugins\PrivacyManager\ReferrerAnonymizer;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Option;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\Plugins\PrivacyManager\API;
+use Matomo\Plugins\PrivacyManager\ReferrerAnonymizer;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Plugins

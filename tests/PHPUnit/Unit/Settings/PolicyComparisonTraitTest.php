@@ -1,11 +1,11 @@
 <?php
 
-namespace Piwik\Tests\Unit\Settings;
+namespace Matomo\Tests\Unit\Settings;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Policy\PolicyManager;
-use Piwik\Tests\Framework\Mock\Policy\TestPolicy;
-use Piwik\Tests\Framework\Mock\Settings\TraitImpls\PolicyComparisonTraitImpl;
+use Matomo\Policy\PolicyManager;
+use Matomo\Tests\Framework\Mock\Policy\TestPolicy;
+use Matomo\Tests\Framework\Mock\Settings\TraitImpls\PolicyComparisonTraitImpl;
 
 class PolicyComparisonTraitTest extends TestCase
 {

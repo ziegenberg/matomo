@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicePlugins\tests\Integration;
+namespace Matomo\Plugins\DevicePlugins\tests\Integration;
 
-use Piwik\DataTable;
-use Piwik\Plugins\CoreHome\Columns\Metrics\VisitsPercent;
-use Piwik\Plugins\DevicePlugins\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
+use Matomo\Plugins\CoreHome\Columns\Metrics\VisitsPercent;
+use Matomo\Plugins\DevicePlugins\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group DevicePlugins

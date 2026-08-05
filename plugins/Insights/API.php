@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights;
+namespace Matomo\Plugins\Insights;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\DataTable;
-use Piwik\Piwik;
+use Matomo\API\Request as ApiRequest;
+use Matomo\DataTable;
+use Matomo\Matomo;
 
 /**
  * Provides API methods for insight and mover/shaker comparisons between report periods.
  *
- * @method static \Piwik\Plugins\Insights\API getInstance()
+ * @method static \Matomo\Plugins\Insights\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Include only 'movers' which are existing in the current and past report.
@@ -65,7 +65,7 @@ class API extends \Piwik\Plugin\API
          * @param array &$reports An array containing a report unique id as key and an array of API parameters as
          *                        values.
          */
-        Piwik::postEvent('Insights.addReportToOverview', array(&$reports));
+        Matomo::postEvent('Insights.addReportToOverview', array(&$reports));
 
         return $reports;
     }
@@ -82,7 +82,7 @@ class API extends \Piwik\Plugin\API
      */
     public function canGenerateInsights(string $date, string $period): bool
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         try {
             $lastDate = $this->model->getLastDate($date, $period, 1);
@@ -114,7 +114,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getInsightsOverview(int $idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $defaultParams = array(
             'limitIncreaser' => 3,
@@ -143,7 +143,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMoversAndShakersOverview(int $idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $defaultParams = array(
             'limitIncreaser' => 4,
@@ -214,7 +214,7 @@ class API extends \Piwik\Plugin\API
         $limitIncreaser = 4,
         $limitDecreaser = 4
     ) {
-        Piwik::checkUserHasViewAccess([$idSite]);
+        Matomo::checkUserHasViewAccess([$idSite]);
 
         $metric  = 'nb_visits';
         $orderBy = InsightReport::ORDER_BY_ABSOLUTE;
@@ -275,7 +275,7 @@ class API extends \Piwik\Plugin\API
         $comparedToXPeriods = 1,
         string $orderBy = 'absolute'
     ) {
-        Piwik::checkUserHasViewAccess(array($idSite));
+        Matomo::checkUserHasViewAccess(array($idSite));
 
         $metric = 'nb_visits';
 

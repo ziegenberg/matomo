@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Config;
+namespace Matomo\Config;
 
-use Piwik\Common;
+use Matomo\Common;
 use Matomo\Ini\IniReader;
 use Matomo\Ini\IniReadingException;
 use Matomo\Ini\IniWriter;
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * Manages a list of INI files where the settings in each INI file merge with or override the
@@ -542,7 +542,7 @@ class IniFileChain
          *
          * @param array &$values Config values that will be saved
          */
-        Piwik::postEvent('Config.beforeSave', [&$values]);
+        Matomo::postEvent('Config.beforeSave', [&$values]);
         $values = $this->encodeValues($values);
 
         $writer = new IniWriter();

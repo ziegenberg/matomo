@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Manager;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Manager;
+use Matomo\Log\LoggerInterface;
 
 /**
  * An action
@@ -151,13 +151,13 @@ abstract class Action
         static $actions;
 
         if (is_null($actions)) {
-            $actions = Manager::getInstance()->findMultipleComponents('Actions', '\\Piwik\\Tracker\\Action');
+            $actions = Manager::getInstance()->findMultipleComponents('Actions', '\Matomo\Tracker\Action');
         }
 
         $instances = array();
 
         foreach ($actions as $action) {
-            /** @var \Piwik\Tracker\Action $action */
+            /** @var \Matomo\Tracker\Action $action */
             if ($action::shouldHandle($request)) {
                 $instances[] = new $action($request);
             }
@@ -306,7 +306,7 @@ abstract class Action
 
     public static function getTypeAsString($type)
     {
-        $class     = new \ReflectionClass("\\Piwik\\Tracker\\Action");
+        $class     = new \ReflectionClass("\\Matomo\\Tracker\\Action");
         $constants = $class->getConstants();
 
         $typeId = array_search($type, $constants);

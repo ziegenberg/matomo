@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Access;
-use Piwik\Common;
-use Piwik\CronArchive;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Translation\Translator;
+use Matomo\Access;
+use Matomo\Common;
+use Matomo\CronArchive;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Translation\Translator;
 
 /**
  * Informational about Matomo reports eg tracking or archiving related

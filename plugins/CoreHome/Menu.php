@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome;
+namespace Matomo\Plugins\CoreHome;
 
-use Piwik\Category\Category;
-use Piwik\Category\CategoryList;
-use Piwik\Menu\MenuTop;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Request;
+use Matomo\Category\Category;
+use Matomo\Category\CategoryList;
+use Matomo\Menu\MenuTop;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Request;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureTopMenu(MenuTop $menu)
     {
         $this->configureReportingGroupMenuItems($menu);
 
         $module = $this->getLoginModule();
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             $menu->registerMenuIcon('Login_LogIn', 'icon-sign-in');
-            $menu->addItem('Login_LogIn', null, array('module' => $module, 'action' => false), 1000, Piwik::translate('Login_LogIn'));
+            $menu->addItem('Login_LogIn', null, array('module' => $module, 'action' => false), 1000, Matomo::translate('Login_LogIn'));
         } else {
             $menu->registerMenuIcon('General_Logout', 'icon-sign-out');
-            $menu->addItem('General_Logout', null, array('module' => $module, 'action' => 'logout', 'idSite' => null), 1000, Piwik::translate('General_Logout'));
+            $menu->addItem('General_Logout', null, array('module' => $module, 'action' => 'logout', 'idSite' => null), 1000, Matomo::translate('General_Logout'));
         }
     }
 
@@ -73,7 +73,7 @@ class Menu extends \Piwik\Plugin\Menu
         $idSite = (int) $userPreferences->getDefaultWebsiteId();
         $idSite = Request::fromRequest()->getIntegerParameter('idSite', $idSite);
 
-        if (!$idSite || !Piwik::isUserHasViewAccess($idSite)) {
+        if (!$idSite || !Matomo::isUserHasViewAccess($idSite)) {
             return null;
         }
 
@@ -121,6 +121,6 @@ class Menu extends \Piwik\Plugin\Menu
 
     private function getLoginModule()
     {
-        return Piwik::getLoginPluginName();
+        return Matomo::getLoginPluginName();
     }
 }

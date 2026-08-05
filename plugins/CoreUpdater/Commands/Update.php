@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\Commands;
+namespace Matomo\Plugins\CoreUpdater\Commands;
 
-use Piwik\Filechecks;
-use Piwik\SettingsServer;
-use Piwik\Version;
-use Piwik\Config;
-use Piwik\DbHelper;
-use Piwik\Filesystem;
-use Piwik\Piwik;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\CoreUpdater\Commands\Update\CliUpdateObserver;
-use Piwik\Plugins\CoreUpdater\NoUpdatesFoundException;
-use Piwik\Updater;
+use Matomo\Filechecks;
+use Matomo\SettingsServer;
+use Matomo\Version;
+use Matomo\Config;
+use Matomo\DbHelper;
+use Matomo\Filesystem;
+use Matomo\Matomo;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\CoreUpdater\Commands\Update\CliUpdateObserver;
+use Matomo\Plugins\CoreUpdater\NoUpdatesFoundException;
+use Matomo\Updater;
 
 /**
  * @package CoreUpdater
@@ -35,10 +35,10 @@ class Update extends ConsoleCommand
     {
         $this->setName('core:update');
 
-        $this->setDescription(Piwik::translate('CoreUpdater_ConsoleCommandDescription'));
+        $this->setDescription(Matomo::translate('CoreUpdater_ConsoleCommandDescription'));
 
-        $this->addNoValueOption('yes', null, Piwik::translate('CoreUpdater_ConsoleParameterDescription'));
-        $this->addNoValueOption('skip-cache-clear', null, Piwik::translate('CoreUpdater_SkipCacheClearDesc'));
+        $this->addNoValueOption('yes', null, Matomo::translate('CoreUpdater_ConsoleParameterDescription'));
+        $this->addNoValueOption('skip-cache-clear', null, Matomo::translate('CoreUpdater_SkipCacheClearDesc'));
     }
 
     /**
@@ -51,7 +51,7 @@ class Update extends ConsoleCommand
         $skipCacheClear = $input->getOption('skip-cache-clear');
         try {
             if ($skipCacheClear) {
-                $output->writeln(Piwik::translate('CoreUpdater_SkipCacheClear'));
+                $output->writeln(Matomo::translate('CoreUpdater_SkipCacheClear'));
 
                 Filesystem::$skipCacheClearOnUpdate = true;
             }
@@ -65,19 +65,19 @@ class Update extends ConsoleCommand
 
                 if (!$yes) {
                     $yes = $this->askForConfirmation(
-                        '<comment>' . Piwik::translate('CoreUpdater_ExecuteDbUpgrade') . ' (y/N) </comment>',
+                        '<comment>' . Matomo::translate('CoreUpdater_ExecuteDbUpgrade') . ' (y/N) </comment>',
                         false
                     );
                 }
 
                 if ($yes) {
-                    $output->writeln("\n" . Piwik::translate('CoreUpdater_ConsoleStartingDbUpgrade'));
+                    $output->writeln("\n" . Matomo::translate('CoreUpdater_ConsoleStartingDbUpgrade'));
 
                     $this->makeUpdate(false);
 
-                    $this->writeSuccessMessage(Piwik::translate('CoreUpdater_PiwikHasBeenSuccessfullyUpgraded'));
+                    $this->writeSuccessMessage(Matomo::translate('CoreUpdater_PiwikHasBeenSuccessfullyUpgraded'));
                 } else {
-                    $this->writeSuccessMessage(Piwik::translate('CoreUpdater_DbUpgradeNotExecuted'));
+                    $this->writeSuccessMessage(Matomo::translate('CoreUpdater_DbUpgradeNotExecuted'));
                 }
 
                 $this->writeAlertMessageWhenCommandExecutedWithUnexpectedUser();
@@ -106,34 +106,34 @@ class Update extends ConsoleCommand
 
         $componentsWithUpdateFile = $updater->getComponentUpdates();
         if (empty($componentsWithUpdateFile)) {
-            throw new NoUpdatesFoundException(Piwik::translate('CoreUpdater_AlreadyUpToDate'));
+            throw new NoUpdatesFoundException(Matomo::translate('CoreUpdater_AlreadyUpToDate'));
         }
 
         $output->writeln(array(
             "",
-            "    *** " . Piwik::translate('CoreUpdater_UpdateTitle') . " ***",
+            "    *** " . Matomo::translate('CoreUpdater_UpdateTitle') . " ***",
         ));
 
         // handle case of existing database with no tables
         if (!DbHelper::isInstalled()) {
             $this->handleCoreError(
-                Piwik::translate('CoreUpdater_EmptyDatabaseError', Config::getInstance()->database['dbname'])
+                Matomo::translate('CoreUpdater_EmptyDatabaseError', Config::getInstance()->database['dbname'])
             );
             return;
         }
 
         $output->writeln(array(
             "",
-            "    " . Piwik::translate('CoreUpdater_DatabaseUpgradeRequired'),
+            "    " . Matomo::translate('CoreUpdater_DatabaseUpgradeRequired'),
             "",
-            "    " . Piwik::translate('CoreUpdater_YourDatabaseIsOutOfDate'),
+            "    " . Matomo::translate('CoreUpdater_YourDatabaseIsOutOfDate'),
         ));
 
         if ($this->isUpdatingCore($componentsWithUpdateFile)) {
             $currentVersion = $this->getCurrentVersionForCore($updater);
             $output->writeln(array(
                 "",
-                "    " . Piwik::translate('CoreUpdater_PiwikWillBeUpgradedFromVersionXToVersionY', array($currentVersion, Version::VERSION)),
+                "    " . Matomo::translate('CoreUpdater_PiwikWillBeUpgradedFromVersionXToVersionY', array($currentVersion, Version::VERSION)),
             ));
         }
 
@@ -141,7 +141,7 @@ class Update extends ConsoleCommand
         if (!empty($pluginsToUpdate)) {
             $output->writeln(array(
                 "",
-                "    " . Piwik::translate('CoreUpdater_TheFollowingPluginsWillBeUpgradedX', implode(', ', $pluginsToUpdate)),
+                "    " . Matomo::translate('CoreUpdater_TheFollowingPluginsWillBeUpgradedX', implode(', ', $pluginsToUpdate)),
             ));
         }
 
@@ -149,7 +149,7 @@ class Update extends ConsoleCommand
         if (!empty($dimensionsToUpdate)) {
             $output->writeln(array(
                 "",
-                "    " . Piwik::translate('CoreUpdater_TheFollowingDimensionsWillBeUpgradedX', implode(', ', $dimensionsToUpdate)),
+                "    " . Matomo::translate('CoreUpdater_TheFollowingDimensionsWillBeUpgradedX', implode(', ', $dimensionsToUpdate)),
             ));
         }
 
@@ -168,7 +168,7 @@ class Update extends ConsoleCommand
         $migrationQueries = $this->getMigrationQueriesToExecute($updater);
 
         if (empty($migrationQueries)) {
-            $output->writeln(array("    *** " . Piwik::translate('CoreUpdater_ConsoleUpdateNoSqlQueries') . " ***", ""));
+            $output->writeln(array("    *** " . Matomo::translate('CoreUpdater_ConsoleUpdateNoSqlQueries') . " ***", ""));
             return;
         }
 
@@ -176,11 +176,11 @@ class Update extends ConsoleCommand
         if ($updater->hasMajorDbUpdate()) {
             $output->writeln(array(
                 "",
-                sprintf("<comment>%s \n</comment>", Piwik::translate('CoreUpdater_MajorUpdateWarning1')),
+                sprintf("<comment>%s \n</comment>", Matomo::translate('CoreUpdater_MajorUpdateWarning1')),
             ));
         }
 
-        $output->writeln(array("    *** " . Piwik::translate('CoreUpdater_DryRun') . " ***", ""));
+        $output->writeln(array("    *** " . Matomo::translate('CoreUpdater_DryRun') . " ***", ""));
 
         foreach ($migrationQueries as $query) {
             $result = $query->__toString();
@@ -189,13 +189,13 @@ class Update extends ConsoleCommand
             }
         }
 
-        $output->writeln(array("", "    *** " . Piwik::translate('CoreUpdater_DryRunEnd') . " ***", ""));
+        $output->writeln(array("", "    *** " . Matomo::translate('CoreUpdater_DryRunEnd') . " ***", ""));
     }
 
     private function doRealUpdate(Updater $updater, $componentsWithUpdateFile)
     {
         $output = $this->getOutput();
-        $output->writeln(array("    " . Piwik::translate('CoreUpdater_TheUpgradeProcessMayTakeAWhilePleaseBePatient'), ""));
+        $output->writeln(array("    " . Matomo::translate('CoreUpdater_TheUpgradeProcessMayTakeAWhilePleaseBePatient'), ""));
 
         $updaterResult = $updater->updateComponents($componentsWithUpdateFile);
 
@@ -217,7 +217,7 @@ class Update extends ConsoleCommand
             || !empty($updaterResult['errors'])
         ) {
             $output->writeln(array(
-                "    " . Piwik::translate('CoreUpdater_HelpMessageIntroductionWhenWarning'),
+                "    " . Matomo::translate('CoreUpdater_HelpMessageIntroductionWhenWarning'),
                 "",
                 "    * " . $this->getUpdateHelpMessage(),
             ));
@@ -233,7 +233,7 @@ class Update extends ConsoleCommand
         $output = $this->getOutput();
         $output->writeln(array(
             "",
-            "    [X] " . Piwik::translate('CoreUpdater_CriticalErrorDuringTheUpgradeProcess'),
+            "    [X] " . Matomo::translate('CoreUpdater_CriticalErrorDuringTheUpgradeProcess'),
             "",
         ));
 
@@ -246,7 +246,7 @@ class Update extends ConsoleCommand
 
         $output->writeln(array(
             "",
-            "    " . Piwik::translate('CoreUpdater_HelpMessageIntroductionWhenError'),
+            "    " . Matomo::translate('CoreUpdater_HelpMessageIntroductionWhenError'),
             "",
             "    * " . $this->getUpdateHelpMessage(),
         ));
@@ -254,17 +254,17 @@ class Update extends ConsoleCommand
         if ($includeDiyHelp) {
             $output->writeln(array(
                 "",
-                "    " . Piwik::translate('CoreUpdater_ErrorDIYHelp'),
+                "    " . Matomo::translate('CoreUpdater_ErrorDIYHelp'),
                 "",
-                "    * " . Piwik::translate('CoreUpdater_ErrorDIYHelp_1'),
-                "    * " . Piwik::translate('CoreUpdater_ErrorDIYHelp_2'),
-                "    * " . Piwik::translate('CoreUpdater_ErrorDIYHelp_3'),
-                "    * " . Piwik::translate('CoreUpdater_ErrorDIYHelp_4'),
-                "    * " . Piwik::translate('CoreUpdater_ErrorDIYHelp_5'),
+                "    * " . Matomo::translate('CoreUpdater_ErrorDIYHelp_1'),
+                "    * " . Matomo::translate('CoreUpdater_ErrorDIYHelp_2'),
+                "    * " . Matomo::translate('CoreUpdater_ErrorDIYHelp_3'),
+                "    * " . Matomo::translate('CoreUpdater_ErrorDIYHelp_4'),
+                "    * " . Matomo::translate('CoreUpdater_ErrorDIYHelp_5'),
             ));
         }
 
-        throw new \RuntimeException(Piwik::translate('CoreUpdater_ConsoleUpdateFailure'));
+        throw new \RuntimeException(Matomo::translate('CoreUpdater_ConsoleUpdateFailure'));
     }
 
     private function outputUpdaterWarnings($warnings)
@@ -272,7 +272,7 @@ class Update extends ConsoleCommand
         $output = $this->getOutput();
         $output->writeln(array(
             "",
-            "    [!] " . Piwik::translate('CoreUpdater_WarningMessages'),
+            "    [!] " . Matomo::translate('CoreUpdater_WarningMessages'),
             "",
         ));
 
@@ -286,7 +286,7 @@ class Update extends ConsoleCommand
         $output = $this->getOutput();
         $output->writeln(array(
             "",
-            "    [X] " . Piwik::translate('CoreUpdater_ErrorDuringPluginsUpdates'),
+            "    [X] " . Matomo::translate('CoreUpdater_ErrorDuringPluginsUpdates'),
             "",
         ));
 
@@ -297,14 +297,14 @@ class Update extends ConsoleCommand
         if (!empty($deactivatedPlugins)) {
             $output->writeln(array(
                 "",
-                "    [!] " . Piwik::translate('CoreUpdater_WeAutomaticallyDeactivatedTheFollowingPlugins', implode(', ', $deactivatedPlugins)),
+                "    [!] " . Matomo::translate('CoreUpdater_WeAutomaticallyDeactivatedTheFollowingPlugins', implode(', ', $deactivatedPlugins)),
             ));
         }
     }
 
     private function getUpdateHelpMessage()
     {
-        return Piwik::translate('CoreUpdater_HelpMessageContent', array('[',']',"\n    *"));
+        return Matomo::translate('CoreUpdater_HelpMessageContent', array('[',']',"\n    *"));
     }
 
     private function isUpdatingCore($componentsWithUpdateFile)
@@ -386,7 +386,7 @@ class Update extends ConsoleCommand
             return;
         }
         $this->getOutput()->writeln(
-            sprintf("<comment>%s</comment>", Piwik::translate('CoreUpdater_ConsoleUpdateUnexpectedUserWarning', [
+            sprintf("<comment>%s</comment>", Matomo::translate('CoreUpdater_ConsoleUpdateUnexpectedUserWarning', [
                 $processUserAndGroup,
                 $fileOwnerUserAndGroup,
                 Filechecks::getCommandToChangeOwnerOfPiwikFiles(),

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events;
+namespace Matomo\Plugins\Events;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\View;
+use Matomo\Matomo;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\View;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {
@@ -23,17 +23,17 @@ class VisitorDetails extends VisitorDetailsAbstract
             $action['type'] = 'event';
             $action['icon'] = 'plugins/Morpheus/images/event.png';
             $action['iconSVG'] = 'plugins/Morpheus/images/event.svg';
-            $action['title'] = Piwik::translate('Events_Event');
-            $action['subtitle'] = Piwik::translate('Events_Category') . ': "' . $action['eventCategory'] . "'";
+            $action['title'] = Matomo::translate('Events_Event');
+            $action['subtitle'] = Matomo::translate('Events_Category') . ': "' . $action['eventCategory'] . "'";
 
             if (!empty($action['eventName'])) {
-                $action['subtitle'] .= ', ' . Piwik::translate('General_Name') . ': "' . $action['eventName'] . '"';
+                $action['subtitle'] .= ', ' . Matomo::translate('General_Name') . ': "' . $action['eventName'] . '"';
             }
             if (!empty($action['eventAction'])) {
-                $action['subtitle'] .= ', ' . Piwik::translate('General_Action') . ': "' . $action['eventAction'] . '"';
+                $action['subtitle'] .= ', ' . Matomo::translate('General_Action') . ': "' . $action['eventAction'] . '"';
             }
             if (!empty($action['eventValue'])) {
-                $action['subtitle'] .= ', ' . Piwik::translate('General_Value') . ': "' . $action['eventValue'] . '"';
+                $action['subtitle'] .= ', ' . Matomo::translate('General_Value') . ': "' . $action['eventValue'] . '"';
             }
 
             if (strlen(strval($action['pageTitle'])) > 0) {

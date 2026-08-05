@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\Sort;
-use Piwik\Plugins\Actions\API;
-use Piwik\Request;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\OneVisitSeveralPageViews;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\Sort;
+use Matomo\Plugins\Actions\API;
+use Matomo\Request;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\OneVisitSeveralPageViews;
 
 /**
  * Tests the class LabelFilter.
@@ -190,7 +190,7 @@ class LabelFilterTest extends SystemTestCase
     public static function provideContainerConfigBeforeClass()
     {
         return array(
-            'Piwik\Config' => \Piwik\DI::decorate(function ($previous) {
+            'Matomo\Config' => \Matomo\DI::decorate(function ($previous) {
                 $general = $previous->General;
                 $general['action_title_category_delimiter'] = "/";
                 $previous->General = $general;

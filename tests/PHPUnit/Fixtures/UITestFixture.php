@@ -7,43 +7,43 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
 use Exception;
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\EventDispatcher;
-use Piwik\Filesystem;
-use Piwik\FrontController;
-use Piwik\Option;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\API\API;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\Monolog\Handler\WebNotificationHandler;
-use Piwik\Plugins\PrivacyManager\IPAnonymizer;
-use Piwik\Plugins\PrivacyManager\SystemSettings;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Plugins\SegmentEditor\API as APISegmentEditor;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Plugins\VisitsSummary\API as VisitsSummaryAPI;
-use Piwik\ReportRenderer;
-use Piwik\Tests\Framework\XssTesting;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
-use Piwik\Container\Container;
-use Piwik\CronArchive\SegmentArchiving;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\EventDispatcher;
+use Matomo\Filesystem;
+use Matomo\FrontController;
+use Matomo\Option;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\API\API;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\Monolog\Handler\WebNotificationHandler;
+use Matomo\Plugins\PrivacyManager\IPAnonymizer;
+use Matomo\Plugins\PrivacyManager\SystemSettings;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Plugins\SegmentEditor\API as APISegmentEditor;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Plugins\VisitsSummary\API as VisitsSummaryAPI;
+use Matomo\ReportRenderer;
+use Matomo\Tests\Framework\XssTesting;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\Container\Container;
+use Matomo\CronArchive\SegmentArchiving;
 
 /**
  * Fixture for UI tests.
@@ -144,7 +144,7 @@ class UITestFixture extends SqlDump
 
         $this->addDangerousLinks();
 
-        $model = new \Piwik\Plugins\UsersManager\Model();
+        $model = new \Matomo\Plugins\UsersManager\Model();
         $user  = $model->getUser(self::VIEW_USER_LOGIN);
 
         if (empty($user)) {
@@ -473,7 +473,7 @@ class UITestFixture extends SqlDump
         $oldGet = $_GET;
 
         $_GET['idSite'] = 1;
-        $_GET['token_auth'] = \Piwik\Piwik::getCurrentUserTokenAuth();
+        $_GET['token_auth'] = \Matomo\Matomo::getCurrentUserTokenAuth();
 
         // create almost empty dashboard first, as this will be loaded as default quite often
         $dashboard = [
@@ -630,11 +630,11 @@ class UITestFixture extends SqlDump
         API::$_autoSuggestLookBack = floor(Date::today()->getTimestamp() - Date::factory('2012-01-01')->getTimestamp()) / (24 * 60 * 60);
 
         return [
-            'Tests.now' => \Piwik\DI::decorate(function () {
+            'Tests.now' => \Matomo\DI::decorate(function () {
                 return Option::get("Tests.forcedNowTimestamp");
             }),
-            'observers.global' => \Piwik\DI::add([
-                ['Report.addReports', \Piwik\DI::value(function (&$reports) {
+            'observers.global' => \Matomo\DI::add([
+                ['Report.addReports', \Matomo\DI::value(function (&$reports) {
                     $report = new XssReport();
                     $report->initForXss('forTwig');
                     $reports[] = $report;
@@ -643,10 +643,10 @@ class UITestFixture extends SqlDump
                     $report->initForXss('forVueJs');
                     $reports[] = $report;
                 })],
-                ['Dimension.addDimensions', \Piwik\DI::value(function (&$instances) {
+                ['Dimension.addDimensions', \Matomo\DI::value(function (&$instances) {
                     $instances[] = new XssDimension();
                 })],
-                ['API.Request.intercept', \Piwik\DI::value(function (&$result, $finalParameters, $pluginName, $methodName) {
+                ['API.Request.intercept', \Matomo\DI::value(function (&$result, $finalParameters, $pluginName, $methodName) {
                     if ($pluginName != 'ExampleAPI' && $methodName != 'xssReportforTwig' && $methodName != 'xssReportforVueJs') {
                         return;
                     }
@@ -667,13 +667,13 @@ class UITestFixture extends SqlDump
                     $result = $dataTable;
                 })],
             ]),
-            Proxy::class => \Piwik\DI::get(CustomApiProxy::class),
-            'log.handlers' => \Piwik\DI::decorate(function ($previous, Container $c) {
+            Proxy::class => \Matomo\DI::get(CustomApiProxy::class),
+            'log.handlers' => \Matomo\DI::decorate(function ($previous, Container $c) {
                 $previous[] = $c->get(WebNotificationHandler::class);
                 return $previous;
             }),
 
-            SegmentArchiving::class => \Piwik\DI::autowire()
+            SegmentArchiving::class => \Matomo\DI::autowire()
                 ->constructorParameter('beginningOfTimeLastNInYears', 15),
         ];
     }
@@ -803,8 +803,8 @@ class CustomApiProxy extends Proxy
     public function __construct()
     {
         parent::__construct();
-        $this->metadataArray['\Piwik\Plugins\ExampleAPI\API']['xssReportforTwig']['parameters'] = [];
-        $this->metadataArray['\Piwik\Plugins\ExampleAPI\API']['xssReportforVueJs']['parameters'] = [];
+        $this->metadataArray['\Matomo\Plugins\ExampleAPI\API']['xssReportforTwig']['parameters'] = [];
+        $this->metadataArray['\Matomo\Plugins\ExampleAPI\API']['xssReportforVueJs']['parameters'] = [];
     }
 
     public function isExistingApiAction($pluginName, $apiAction)

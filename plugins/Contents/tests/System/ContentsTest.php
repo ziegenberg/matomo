@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Contents\tests\System;
+namespace Matomo\Plugins\Contents\tests\System;
 
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Plugins\Contents\tests\Fixtures\TwoVisitsWithContents;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\Contents\tests\Fixtures\TwoVisitsWithContents;
 
 /**
  * Testing Contents

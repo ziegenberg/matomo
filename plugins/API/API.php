@@ -7,34 +7,34 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Cache;
-use Piwik\CacheId;
-use Piwik\Category\CategoryList;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\ColumnDelete;
-use Piwik\Date;
-use Piwik\Http\BadRequestException;
-use Piwik\IP;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\SettingsProvider;
-use Piwik\Plugins\API\DataTable\MergeDataTables;
-use Piwik\Plugins\CorePluginsAdmin\SettingsMetadata;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Translation\Translator;
-use Piwik\Measurable\Type\TypeManager;
-use Piwik\Version;
-use Piwik\Widget\WidgetsList;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Cache;
+use Matomo\CacheId;
+use Matomo\Category\CategoryList;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\ColumnDelete;
+use Matomo\Date;
+use Matomo\Http\BadRequestException;
+use Matomo\IP;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\SettingsProvider;
+use Matomo\Plugins\API\DataTable\MergeDataTables;
+use Matomo\Plugins\CorePluginsAdmin\SettingsMetadata;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Translation\Translator;
+use Matomo\Measurable\Type\TypeManager;
+use Matomo\Version;
+use Matomo\Widget\WidgetsList;
 
 require_once PIWIK_INCLUDE_PATH . '/core/Config.php';
 
@@ -56,9 +56,9 @@ require_once PIWIK_INCLUDE_PATH . '/core/Config.php';
  *
  * @phpstan-import-type ProcessedReportData from ProcessedReport
  *
- * @method static \Piwik\Plugins\API\API getInstance()
+ * @method static \Matomo\Plugins\API\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private SettingsProvider $settingsProvider;
 
@@ -83,7 +83,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMatomoVersion(): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         return Version::VERSION;
     }
 
@@ -94,7 +94,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getPhpVersion(): array
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         return [
             'version' => PHP_VERSION,
             'major' => PHP_MAJOR_VERSION,
@@ -124,7 +124,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getIpFromHeader(): string
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
         return IP::getIpFromHeader();
     }
 
@@ -136,7 +136,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAvailableMeasurableTypes()
     {
-        Piwik::checkUserHasSomeViewAccess();
+        Matomo::checkUserHasSomeViewAccess();
 
         $typeManager = new TypeManager();
         $types = $typeManager->getAllTypes();
@@ -149,9 +149,9 @@ class API extends \Piwik\Plugin\API
 
             $available[] = array(
                 'id' => $type->getId(),
-                'name' => Piwik::translate($type->getName()),
-                'description' => Piwik::translate($type->getDescription()),
-                'longDescription' => Piwik::translate($type->getLongDescription()),
+                'name' => Matomo::translate($type->getName()),
+                'description' => Matomo::translate($type->getDescription()),
+                'longDescription' => Matomo::translate($type->getLongDescription()),
                 'howToSetupUrl' => $type->getHowToSetupUrl(),
                 'settings' => $settingsMetadata->formatSettings($measurableSettings),
             );
@@ -171,13 +171,13 @@ class API extends \Piwik\Plugin\API
     public function getSegmentsMetadata($idSites = array(), $_hideImplementationData = true, $_showAllSegments = false): array
     {
         if (empty($idSites)) {
-            Piwik::checkUserHasSomeViewAccess();
+            Matomo::checkUserHasSomeViewAccess();
         } else {
             $idSites = Site::getIdSitesFromIdSitesString($idSites, false, true);
-            Piwik::checkUserHasViewAccess($idSites);
+            Matomo::checkUserHasViewAccess($idSites);
         }
 
-        $isNotAnonymous = !Piwik::isUserIsAnonymous();
+        $isNotAnonymous = !Matomo::isUserIsAnonymous();
 
         $sites   = (is_array($idSites) ? implode('.', $idSites) : (int) $idSites);
         $cache   = Cache::getTransientCache();
@@ -251,11 +251,11 @@ class API extends \Piwik\Plugin\API
         $hideMetricsDoc = false,
         $showSubtableReports = false
     ) {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         if ($language) {
             /** @var Translator $translator */
-            $translator = StaticContainer::get('Piwik\Translation\Translator');
+            $translator = StaticContainer::get('Matomo\Translation\Translator');
             $translator->setCurrentLanguage($language);
         }
 
@@ -291,7 +291,7 @@ class API extends \Piwik\Plugin\API
             throw new \Exception('Calling API.getReportMetadata without any idSite is no longer supported since Matomo 3.0.0. Please specify at least one idSite via the "idSite" parameter.');
         }
 
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $metadata = $this->processedReport->getReportMetadata($idSite, $period, $date, $hideMetricsDoc, $showSubtableReports);
         return $metadata;
@@ -335,7 +335,7 @@ class API extends \Piwik\Plugin\API
         $format_metrics = null,
         $idDimension = false
     ) {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $processed = $this->processedReport->getProcessedReport(
             $idSite,
@@ -366,7 +366,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getReportPagesMetadata($idSite)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $widgetsList  = WidgetsList::get();
         $categoryList = CategoryList::get();
@@ -383,7 +383,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getWidgetMetadata($idSite)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $widgetsList  = WidgetsList::get();
         $categoryList = CategoryList::get();
@@ -404,9 +404,9 @@ class API extends \Piwik\Plugin\API
      */
     public function get($idSite, $period, $date, $segment = false, $columns = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
-        $columns = Piwik::getArrayFromApiParameter($columns);
+        $columns = Matomo::getArrayFromApiParameter($columns);
 
         // build columns map for faster checks later on
         $columnsMap = array();
@@ -416,7 +416,7 @@ class API extends \Piwik\Plugin\API
 
         // find out which columns belong to which plugin
         $columnsByPlugin = array();
-        $meta = \Piwik\Plugins\API\API::getInstance()->getReportMetadata($idSite, $period, $date);
+        $meta = \Matomo\Plugins\API\API::getInstance()->getReportMetadata($idSite, $period, $date);
         foreach ($meta as $reportMeta) {
             // scan all *.get reports
             if (
@@ -498,7 +498,7 @@ class API extends \Piwik\Plugin\API
         $idSite = (int) $idSite;
         $site = new Site($idSite);
 
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $apiParameters = array();
         $entityNames = StaticContainer::get('entities.idNames');
@@ -552,10 +552,10 @@ class API extends \Piwik\Plugin\API
 
         $limit = BulkRequestLimit::getCurrentLimit();
         if ($limit > -1 && count($urls) > $limit) {
-            throw new BadRequestException(Piwik::translate('General_MaximumNumberOfBulkRequestUrlsIs', [$limit]));
+            throw new BadRequestException(Matomo::translate('General_MaximumNumberOfBulkRequestUrlsIs', [$limit]));
         }
 
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
         $queryParameters = $request->getParameters();
         unset($queryParameters['urls']);
 
@@ -565,7 +565,7 @@ class API extends \Piwik\Plugin\API
 
         $result = [];
         foreach ($urls as $url) {
-            $nestedRequest = \Piwik\Request::fromQueryString($url);
+            $nestedRequest = \Matomo\Request::fromQueryString($url);
 
             $this->checkNestedRequestAuthMatchesRoot($nestedRequest, $rootIsSessionToken, $rootTokenAuth);
 
@@ -597,12 +597,12 @@ class API extends \Piwik\Plugin\API
      * call. Any attempt to change the established context is treated as a conflicting set of
      * authentication parameters and aborts the whole bulk request.
      *
-     * @param \Piwik\Request $nestedRequest The bulk sub-request to validate against the root context.
+     * @param \Matomo\Request $nestedRequest The bulk sub-request to validate against the root context.
      * @param bool $rootIsSessionToken Whether the outer request authenticated via a session token.
      * @param string $rootTokenAuth The token the outer request authenticated with.
      */
     private function checkNestedRequestAuthMatchesRoot(
-        \Piwik\Request $nestedRequest,
+        \Matomo\Request $nestedRequest,
         bool $rootIsSessionToken,
         #[\SensitiveParameter]
         string $rootTokenAuth
@@ -613,7 +613,7 @@ class API extends \Piwik\Plugin\API
             array_key_exists('force_api_session', $params)
             && $nestedRequest->getBoolParameter('force_api_session', false) !== $rootIsSessionToken
         ) {
-            throw new BadRequestException(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+            throw new BadRequestException(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
         }
 
         if (
@@ -621,7 +621,7 @@ class API extends \Piwik\Plugin\API
             && array_key_exists('token_auth', $params)
             && $nestedRequest->getStringParameter('token_auth', '') !== $rootTokenAuth
         ) {
-            throw new BadRequestException(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+            throw new BadRequestException(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
         }
     }
 
@@ -632,8 +632,8 @@ class API extends \Piwik\Plugin\API
      */
     public function isPluginActivated($pluginName): bool
     {
-        Piwik::checkUserHasSomeViewAccess();
-        return \Piwik\Plugin\Manager::getInstance()->isPluginActivated($pluginName);
+        Matomo::checkUserHasSomeViewAccess();
+        return \Matomo\Plugin\Manager::getInstance()->isPluginActivated($pluginName);
     }
 
     /**
@@ -649,7 +649,7 @@ class API extends \Piwik\Plugin\API
             return array();
         }
 
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $maxSuggestionsToReturn = 30;
         $segment = $this->findSegment($segmentName, $idSite);
@@ -659,7 +659,7 @@ class API extends \Piwik\Plugin\API
 
         if (!empty($segment['suggestedValuesApi']) && is_string($segment['suggestedValuesApi']) && !Rules::isBrowserTriggerEnabled()) {
             if ($idSite === 'all') {
-                $now = Date::now()->setTimezone(\Piwik\Plugins\SitesManager\API::getInstance()->getDefaultTimezone());
+                $now = Date::now()->setTimezone(\Matomo\Plugins\SitesManager\API::getInstance()->getDefaultTimezone());
             } else {
                 $now = Date::now()->setTimezone(Site::getTimezoneFor($idSite));
             }
@@ -712,7 +712,7 @@ class API extends \Piwik\Plugin\API
                 }
 
                 $values = array_slice($values, 0, $maxSuggestionsToReturn);
-                $values     = array_map(['Piwik\Common', 'unsanitizeInputValue'], $values);
+                $values     = array_map(['Matomo\Common', 'unsanitizeInputValue'], $values);
                 return $values;
             }
         }
@@ -758,7 +758,7 @@ class API extends \Piwik\Plugin\API
             $values = $this->getMostFrequentValues($values);
         }
         $values = array_slice($values, 0, $maxSuggestionsToReturn);
-        $values = array_map(['Piwik\Common', 'unsanitizeInputValue'], $values);
+        $values = array_map(['Matomo\Common', 'unsanitizeInputValue'], $values);
 
         return $values;
     }
@@ -789,7 +789,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param string[] &$pages
          */
-        Piwik::postEvent('API.getPagesComparisonsDisabledFor', [&$pages]);
+        Matomo::postEvent('API.getPagesComparisonsDisabledFor', [&$pages]);
 
         return $pages;
     }
@@ -871,7 +871,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getGlossaryReports($idSite)
     {
-        $glossary = StaticContainer::get('Piwik\Plugins\API\Glossary');
+        $glossary = StaticContainer::get('Matomo\Plugins\API\Glossary');
         return $glossary->reportsGlossary($idSite);
     }
 
@@ -883,7 +883,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getGlossaryMetrics($idSite)
     {
-        $glossary = StaticContainer::get('Piwik\Plugins\API\Glossary');
+        $glossary = StaticContainer::get('Matomo\Plugins\API\Glossary');
         return $glossary->metricsGlossary($idSite);
     }
 
@@ -971,7 +971,7 @@ class API extends \Piwik\Plugin\API
 
 
 // phpcs:ignore PSR1.Classes.ClassDeclaration.MultipleClasses
-class Plugin extends \Piwik\Plugin
+class Plugin extends \Matomo\Plugin
 {
     public function __construct()
     {
@@ -980,7 +980,7 @@ class Plugin extends \Piwik\Plugin
     }
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -1017,7 +1017,7 @@ class Plugin extends \Piwik\Plugin
         // Do not perform page comparison check for glossary widget
         // This is performed here and not in Comparison.store.ts, as the widget might be used like on glossary.matomo.org
         // where url parameters are hidden in the request and javascript can't access the current module and action
-        if (Piwik::getModule() === 'API' && Piwik::getAction() === 'glossary' && \Piwik\Request::fromRequest()->getBoolParameter('widget', false)) {
+        if (Matomo::getModule() === 'API' && Matomo::getAction() === 'glossary' && \Matomo\Request::fromRequest()->getBoolParameter('widget', false)) {
             $out .= "piwik.isPagesComparisonApiDisabled = true;\n";
         }
     }

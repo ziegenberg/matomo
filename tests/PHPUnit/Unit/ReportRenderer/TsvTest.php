@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\ReportRenderer;
+namespace Matomo\Tests\Unit\ReportRenderer;
 
-use Piwik\DataTable;
-use Piwik\ReportRenderer\Tsv;
+use Matomo\DataTable;
+use Matomo\ReportRenderer\Tsv;
 use PHPUnit\Framework\TestCase;
 
 /**

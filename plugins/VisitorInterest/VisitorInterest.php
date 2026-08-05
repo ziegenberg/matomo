@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest;
+namespace Matomo\Plugins\VisitorInterest;
 
-use Piwik\FrontController;
-use Piwik\Piwik;
+use Matomo\FrontController;
+use Matomo\Matomo;
 
-class VisitorInterest extends \Piwik\Plugin
+class VisitorInterest extends \Matomo\Plugin
 {
     public function postLoad()
     {
-        Piwik::addAction('Template.footerVisitsFrequency', array('Piwik\Plugins\VisitorInterest\VisitorInterest', 'footerVisitsFrequency'));
+        Matomo::addAction('Template.footerVisitsFrequency', array('Matomo\Plugins\VisitorInterest\VisitorInterest', 'footerVisitsFrequency'));
     }
 
     public static function footerVisitsFrequency(&$out)

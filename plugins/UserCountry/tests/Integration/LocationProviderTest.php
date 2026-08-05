@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\Integration;
+namespace Matomo\Plugins\UserCountry\tests\Integration;
 
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2\ServerModule;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2\Php;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2\ServerModule;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UserCountry
@@ -31,7 +31,7 @@ class LocationProviderTest extends IntegrationTestCase
 
     public function testGetAllProviderInfoWithDuplicateOrder()
     {
-        \Piwik\Tests\Framework\Mock\LocationProvider::$locations = [
+        \Matomo\Tests\Framework\Mock\LocationProvider::$locations = [
             [
                 LocationProvider::CITY_NAME_KEY    => 'Manchaster',
                 LocationProvider::REGION_CODE_KEY  => '15',
@@ -46,7 +46,7 @@ class LocationProviderTest extends IntegrationTestCase
             new LocationProvider\DefaultProvider(),
             new Php(),
             new ServerModule(),
-            new \Piwik\Tests\Framework\Mock\LocationProvider(),
+            new \Matomo\Tests\Framework\Mock\LocationProvider(),
         ];
 
         $allProviders = LocationProvider::getAllProviderInfo();

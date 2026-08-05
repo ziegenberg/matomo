@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\tests\Unit\JqplotDataGenerator;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataTableFactory;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Period\Factory;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastBuilder;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
-use Piwik\Site;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataTableFactory;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Period\Factory;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastMetricClassifier;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastBuilder;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
+use Matomo\Site;
 use ReflectionClass;
 
 /**
@@ -2028,7 +2028,7 @@ class ForecastBuilderTest extends TestCase
 
         $rates = [50.0, 52.0, 48.0, 51.0, 49.0, 53.0, 47.0]; // Mon..Sun
         $dailySamples = [];
-        $cursor = \Piwik\Date::factory('2026-04-06');
+        $cursor = \Matomo\Date::factory('2026-04-06');
         for ($w = 0; $w < 3; ++$w) {
             for ($d = 0; $d < 7; ++$d) {
                 $dailySamples[$cursor->toString('Y-m-d')] = $rates[$d];
@@ -2068,7 +2068,7 @@ class ForecastBuilderTest extends TestCase
 
         $rates = [50.0, 52.0, 48.0, 51.0, 49.0, 53.0, 47.0];
         $dailySamples = [];
-        $cursor = \Piwik\Date::factory('2026-04-06');
+        $cursor = \Matomo\Date::factory('2026-04-06');
         for ($w = 0; $w < 3; ++$w) {
             for ($d = 0; $d < 7; ++$d) {
                 $dailySamples[$cursor->toString('Y-m-d')] = $rates[$d];
@@ -2268,7 +2268,7 @@ class ForecastBuilderTest extends TestCase
     private function buildFlatDailySamples(string $firstMonday, int $weeks, float $value): array
     {
         $samples = [];
-        $cursor = \Piwik\Date::factory($firstMonday);
+        $cursor = \Matomo\Date::factory($firstMonday);
         for ($w = 0; $w < $weeks; ++$w) {
             for ($d = 0; $d < 7; ++$d) {
                 $samples[$cursor->toString('Y-m-d')] = $value;
@@ -2289,7 +2289,7 @@ class ForecastBuilderTest extends TestCase
     {
         $pattern = [100.0, 110.0, 90.0, 120.0, 80.0, 60.0, 70.0]; // Mon..Sun
         $samples = [];
-        $cursor = \Piwik\Date::factory($firstMonday);
+        $cursor = \Matomo\Date::factory($firstMonday);
         for ($w = 0; $w < $weeks; ++$w) {
             for ($d = 0; $d < 7; ++$d) {
                 $samples[$cursor->toString('Y-m-d')] = $pattern[$d] * $scale;

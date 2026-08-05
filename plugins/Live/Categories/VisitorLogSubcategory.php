@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\Categories;
+namespace Matomo\Plugins\Live\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class VisitorLogSubcategory extends Subcategory
 {
@@ -21,10 +21,10 @@ class VisitorLogSubcategory extends Subcategory
 
     public function getHelp()
     {
-        $help = '<p>' . Piwik::translate('Live_VisitorLogSubcategoryHelp1') . '</p>';
-        $help .= '<p>' . Piwik::translate('Live_VisitorLogSubcategoryHelp2') . '</p>';
+        $help = '<p>' . Matomo::translate('Live_VisitorLogSubcategoryHelp1') . '</p>';
+        $help .= '<p>' . Matomo::translate('Live_VisitorLogSubcategoryHelp2') . '</p>';
         $help .= '<p>' . Url::getExternalLinkTag('https://matomo.org/docs/real-time/', null, null, 'App.Live.getLastVisitsDetails')
-            . Piwik::translate('Live_VisitorLogSubcategoryHelp3') . '</a></p>';
+            . Matomo::translate('Live_VisitorLogSubcategoryHelp3') . '</a></p>';
         return $help;
     }
 }

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\Annotations\API as APIAnnotations;
-use Piwik\Plugins\Goals\API as APIGoals;
-use Piwik\Tests\Framework\XssTesting;
-use Piwik\Plugins\CustomDimensions\API as CustomDimensionsAPI;
+use Matomo\Date;
+use Matomo\Plugins\Annotations\API as APIAnnotations;
+use Matomo\Plugins\Goals\API as APIGoals;
+use Matomo\Tests\Framework\XssTesting;
+use Matomo\Plugins\CustomDimensions\API as CustomDimensionsAPI;
 
 require_once PIWIK_INCLUDE_PATH . '/tests/PHPUnit/Fixtures/ManySitesImportedLogs.php';
 

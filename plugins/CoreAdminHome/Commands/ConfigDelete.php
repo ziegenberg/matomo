@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Config;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Plugin\SystemConfigSetting;
+use Matomo\Config;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Plugin\SystemConfigSetting;
 
 class ConfigDelete extends ConsoleCommand
 {

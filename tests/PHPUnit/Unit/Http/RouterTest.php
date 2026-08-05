@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Http;
+namespace Matomo\Tests\Unit\Http;
 
-use Piwik\Http\Router;
+use Matomo\Http\Router;
 
 /**
  * @group Core

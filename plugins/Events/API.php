@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events;
+namespace Matomo\Plugins\Events;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
 
 /**
  * The Events API lets you request reports about your users' Custom Events.
@@ -44,9 +44,9 @@ use Piwik\Piwik;
  * You may also omit `&flat=1` in which case, to get top Event actions for one Event category,
  * use `method=Events.getActionFromCategoryId` passing it the `&idSubtable=` of this Event category.
  *
- * @method static \Piwik\Plugins\Events\API getInstance()
+ * @method static \Matomo\Plugins\Events\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @var array<string, string>
@@ -176,7 +176,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment, bool $expanded = false, $idSubtable = null, $secondaryDimension = false, bool $flat = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $this->checkSecondaryDimension($name, $secondaryDimension);
         $recordName = $this->getRecordNameForAction($name, $secondaryDimension);
 
@@ -190,7 +190,7 @@ class API extends \Piwik\Plugin\API
         });
 
         if ($flat) {
-            $dataTable->filterSubtables('Piwik\Plugins\Events\DataTable\Filter\ReplaceEventNameNotSet');
+            $dataTable->filterSubtables('Matomo\Plugins\Events\DataTable\Filter\ReplaceEventNameNotSet');
         } else {
             $dataTable->filter('AddSegmentValue', array(function ($label) {
                 if ($label === Archiver::EVENT_NAME_NOT_SET) {
@@ -201,7 +201,7 @@ class API extends \Piwik\Plugin\API
             }));
         }
 
-        $dataTable->filter('Piwik\Plugins\Events\DataTable\Filter\ReplaceEventNameNotSet');
+        $dataTable->filter('Matomo\Plugins\Events\DataTable\Filter\ReplaceEventNameNotSet');
 
         return $dataTable;
     }

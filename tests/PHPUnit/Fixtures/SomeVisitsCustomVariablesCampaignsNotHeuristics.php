@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\Goals\API;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 use MatomoTracker;
 
 /**
@@ -214,7 +214,7 @@ class SomeVisitsCustomVariablesCampaignsNotHeuristics extends Fixture
     // see updateDomainHash() in piwik.js
     private function getFirstPartyCookieDomainHash()
     {
-        $host = \Piwik\Url::getHost();
+        $host = \Matomo\Url::getHost();
         $cookiePath = MatomoTracker::DEFAULT_COOKIE_PATH;
         return substr(sha1($host . $cookiePath), 0, 4);
     }

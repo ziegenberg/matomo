@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicePlugins\RecordBuilders;
+namespace Matomo\Plugins\DevicePlugins\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Config as PiwikConfig;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Plugins\DevicePlugins\Archiver;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Config as PiwikConfig;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Plugins\DevicePlugins\Archiver;
 
 class DevicePlugins extends RecordBuilder
 {
@@ -38,7 +38,7 @@ class DevicePlugins extends RecordBuilder
     protected function aggregate(ArchiveProcessor $archiveProcessor): array
     {
         $selects = [];
-        $columns = \Piwik\Plugins\DevicePlugins\DevicePlugins::getAllPluginColumns();
+        $columns = \Matomo\Plugins\DevicePlugins\DevicePlugins::getAllPluginColumns();
 
         foreach ($columns as $column) {
             $selects[] = sprintf(

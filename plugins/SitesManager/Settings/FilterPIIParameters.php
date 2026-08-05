@@ -1,16 +1,16 @@
 <?php
 
-namespace Piwik\Plugins\SitesManager\Settings;
+namespace Matomo\Plugins\SitesManager\Settings;
 
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Settings\Interfaces\OptionSettingInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\OptionGetterTrait;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Settings\Interfaces\OptionSettingInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\OptionGetterTrait;
 
 /**
  * @implements PolicyComparisonInterface<string>
@@ -35,7 +35,7 @@ class FilterPIIParameters implements
 
     public static function getTitle(): string
     {
-        return Piwik::translate('SitesManager_FilterPIIParametersSettingTitle');
+        return Matomo::translate('SitesManager_FilterPIIParametersSettingTitle');
     }
 
     public static function getInstance(?int $idSite = null)
@@ -60,7 +60,7 @@ class FilterPIIParameters implements
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate('SitesManager_FilterPiiParametersSettingRequirementNote');
+        return Matomo::translate('SitesManager_FilterPiiParametersSettingRequirementNote');
     }
 
     public function getValue()

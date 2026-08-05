@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Columns;
+namespace Matomo\Plugins\Referrers\Columns;
 
-use Piwik\Columns\Dimension;
+use Matomo\Columns\Dimension;
 
 class WebsitePage extends Dimension
 {

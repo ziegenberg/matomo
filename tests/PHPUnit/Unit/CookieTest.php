@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
 use DateTime;
-use Piwik\Common;
-use Piwik\Cookie;
-use Piwik\SettingsPiwik;
+use Matomo\Common;
+use Matomo\Cookie;
+use Matomo\SettingsPiwik;
 
 class CookieTest extends \PHPUnit\Framework\TestCase
 {

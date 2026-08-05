@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
 use Exception;
-use Piwik\API\DataTableManipulator\LabelFilter;
-use Piwik\API\DataTablePostProcessor;
-use Piwik\API\Request;
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\AddColumnsProcessedMetricsGoal;
-use Piwik\DataTable\Filter\CalculateEvolutionFilter;
-use Piwik\DataTable\Filter\SafeDecodeLabel;
-use Piwik\DataTable\Row;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\API\Filter\DataComparisonFilter;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionRate;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\Conversions;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\Revenue;
-use Piwik\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenuePerVisit;
-use Piwik\Site;
+use Matomo\API\DataTableManipulator\LabelFilter;
+use Matomo\API\DataTablePostProcessor;
+use Matomo\API\Request;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\AddColumnsProcessedMetricsGoal;
+use Matomo\DataTable\Filter\CalculateEvolutionFilter;
+use Matomo\DataTable\Filter\SafeDecodeLabel;
+use Matomo\DataTable\Row;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\API\Filter\DataComparisonFilter;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\ConversionRate;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\Conversions;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\Revenue;
+use Matomo\Plugins\Goals\Columns\Metrics\GoalSpecific\RevenuePerVisit;
+use Matomo\Site;
 
 /**
  * This class generates a Row evolution dataset, from input request.
@@ -79,7 +79,7 @@ class RowEvolution
         }
 
         $label = DataTablePostProcessor::unsanitizeLabelParameter($label);
-        $labels = Piwik::getArrayFromApiParameter($label, $onlyUnique = empty($labelSeries));
+        $labels = Matomo::getArrayFromApiParameter($label, $onlyUnique = empty($labelSeries));
 
         $labels = array_slice($labels, 0, 100);
 
@@ -97,28 +97,28 @@ class RowEvolution
             }
 
             // Use ecommerce specific metrics / column names when only showing ecommerce metrics
-            if ($showGoalMetricsForGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
-                $metadata['metrics']['goal_ecommerceOrder_nb_conversions'] = Piwik::translate('General_EcommerceOrders');
-                $metadata['metrics']['goal_ecommerceOrder_revenue'] = Piwik::translate('General_TotalRevenue');
-                $metadata['metrics']['goal_ecommerceOrder_conversion_rate'] = Piwik::translate('Goals_ConversionRate', Piwik::translate('General_EcommerceOrders'));
-                $metadata['metrics']['goal_ecommerceOrder_avg_order_revenue'] = Piwik::translate('General_AverageOrderValue');
-                $metadata['metrics']['goal_ecommerceOrder_items'] = Piwik::translate('General_PurchasedProducts');
-                $metadata['metrics']['goal_ecommerceOrder_revenue_per_visit'] = Piwik::translate('General_ColumnValuePerVisit');
+            if ($showGoalMetricsForGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+                $metadata['metrics']['goal_ecommerceOrder_nb_conversions'] = Matomo::translate('General_EcommerceOrders');
+                $metadata['metrics']['goal_ecommerceOrder_revenue'] = Matomo::translate('General_TotalRevenue');
+                $metadata['metrics']['goal_ecommerceOrder_conversion_rate'] = Matomo::translate('Goals_ConversionRate', Matomo::translate('General_EcommerceOrders'));
+                $metadata['metrics']['goal_ecommerceOrder_avg_order_revenue'] = Matomo::translate('General_AverageOrderValue');
+                $metadata['metrics']['goal_ecommerceOrder_items'] = Matomo::translate('General_PurchasedProducts');
+                $metadata['metrics']['goal_ecommerceOrder_revenue_per_visit'] = Matomo::translate('General_ColumnValuePerVisit');
             } else {
                 $goalsToProcess = $this->getGoalsToProcess($showGoalMetricsForGoal, $idSite);
 
                 foreach ($goalsToProcess as $idGoal) {
-                    if ($idGoal === Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
-                        $metadata['metrics']['goal_ecommerceOrder_conversion_rate'] = Piwik::translate('Goals_ConversionRate', Piwik::translate('General_EcommerceOrders'));
+                    if ($idGoal === Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER) {
+                        $metadata['metrics']['goal_ecommerceOrder_conversion_rate'] = Matomo::translate('Goals_ConversionRate', Matomo::translate('General_EcommerceOrders'));
 
                         if ((int) $showGoalMetricsForGoal === AddColumnsProcessedMetricsGoal::GOALS_OVERVIEW) {
                             // only conversion rate is used for goals overview
                             continue;
                         }
 
-                        $metadata['metrics']['goal_ecommerceOrder_nb_conversions'] = Piwik::translate('Goals_Conversions', Piwik::translate('General_EcommerceOrders'));
-                        $metadata['metrics']['goal_ecommerceOrder_revenue'] = Piwik::translate('General_EcommerceOrders') . ' ' . Piwik::translate('General_ColumnRevenue');
-                        $metadata['metrics']['goal_ecommerceOrder_revenue_per_visit'] = Piwik::translate('General_EcommerceOrders') . ' ' . Piwik::translate('General_ColumnValuePerVisit');
+                        $metadata['metrics']['goal_ecommerceOrder_nb_conversions'] = Matomo::translate('Goals_Conversions', Matomo::translate('General_EcommerceOrders'));
+                        $metadata['metrics']['goal_ecommerceOrder_revenue'] = Matomo::translate('General_EcommerceOrders') . ' ' . Matomo::translate('General_ColumnRevenue');
+                        $metadata['metrics']['goal_ecommerceOrder_revenue_per_visit'] = Matomo::translate('General_EcommerceOrders') . ' ' . Matomo::translate('General_ColumnValuePerVisit');
                         continue;
                     }
 
@@ -139,7 +139,7 @@ class RowEvolution
                     $metadata['metrics'][$revenuePerVisitMetric->getName()] = $revenuePerVisitMetric->getTranslatedName();
                 }
 
-                $metadata['metrics']['revenue_per_visit'] = Piwik::translate('General_ColumnValuePerVisit');
+                $metadata['metrics']['revenue_per_visit'] = Matomo::translate('General_ColumnValuePerVisit');
             }
         }
 
@@ -190,7 +190,7 @@ class RowEvolution
             case AddColumnsProcessedMetricsGoal::GOALS_FULL_TABLE:
             case AddColumnsProcessedMetricsGoal::GOALS_OVERVIEW:
                 return $this->getAllGoalIds($idSite);
-            case Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER:
+            case Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER:
             default:
                 return [$goalId];
         }
@@ -216,7 +216,7 @@ class RowEvolution
         $goalIds = [];
 
         if (Site::isEcommerceEnabledFor($idSite)) {
-            $goalIds[] = Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER;
+            $goalIds[] = Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_ORDER;
         }
 
         $siteGoals = Request::processRequest('Goals.getGoals', ['idSite' => $idSite, 'filter_limit' => '-1'], $default = []);
@@ -273,7 +273,7 @@ class RowEvolution
 
         // if the filter_limit query param is set, treat it as a request to limit
         // the number of labels used
-        $limit = \Piwik\Request::fromRequest()->getIntegerParameter('filter_limit', -1);
+        $limit = \Matomo\Request::fromRequest()->getIntegerParameter('filter_limit', -1);
         if ($limit >= 0) {
             $labels = array_slice($labels, 0, $limit);
         }
@@ -333,7 +333,7 @@ class RowEvolution
 
         // if we have a recursive label and no url, use the path
         if (!$urlFound) {
-            $label = Common::sanitizeInputValue(\Piwik\Request::fromRequest()->getStringParameter('labelPretty', '')) ?: $label;
+            $label = Common::sanitizeInputValue(\Matomo\Request::fromRequest()->getStringParameter('labelPretty', '')) ?: $label;
             $actualLabel = $this->formatQueryLabelForDisplay($idSite, $apiModule, $apiAction, $label);
         }
         $actualLabel = is_string($actualLabel) ? $actualLabel : '';
@@ -647,9 +647,9 @@ class RowEvolution
             $column = reset($metrics);
         }
 
-        $labelPretty = Common::sanitizeInputValue(\Piwik\Request::fromRequest()->getStringParameter('labelPretty', ''));
+        $labelPretty = Common::sanitizeInputValue(\Matomo\Request::fromRequest()->getStringParameter('labelPretty', ''));
         /** @var array<int, string> $labelPretty */
-        $labelPretty = Piwik::getArrayFromApiParameter($labelPretty);
+        $labelPretty = Matomo::getArrayFromApiParameter($labelPretty);
 
         // get the processed label and logo (if any) for every requested label
         /** @var array<int, string> $actualLabels */

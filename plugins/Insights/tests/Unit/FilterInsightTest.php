@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\tests\Unit;
+namespace Matomo\Plugins\Insights\tests\Unit;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugins\Insights\DataTable\Filter\Insight;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\Insights\DataTable\Filter\Insight;
 
 /**
  * @group Insights

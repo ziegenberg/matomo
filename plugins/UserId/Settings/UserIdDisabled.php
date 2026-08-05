@@ -1,16 +1,16 @@
 <?php
 
-namespace Piwik\Plugins\UserId\Settings;
+namespace Matomo\Plugins\UserId\Settings;
 
-use Piwik\Piwik;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Interfaces\MeasurableSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Site;
+use Matomo\Matomo;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Interfaces\MeasurableSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\MeasurableGetterTrait;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Site;
 
 /**
  * @implements PolicyComparisonInterface<bool>
@@ -57,7 +57,7 @@ class UserIdDisabled implements
 
     public static function getTitle(): string
     {
-        return Piwik::translate("UserId_UserIdDisabledSettingTitle");
+        return Matomo::translate("UserId_UserIdDisabledSettingTitle");
     }
 
     public static function getInstance(?int $idSite = null): self
@@ -113,6 +113,6 @@ class UserIdDisabled implements
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate("UserId_UserIdDisabledSettingRequirementNote");
+        return Matomo::translate("UserId_UserIdDisabledSettingRequirementNote");
     }
 }

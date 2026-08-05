@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\DataTable\Renderer;
+namespace Matomo\Tests\Unit\DataTable\Renderer;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Renderer\Csv;
+use Matomo\DataTable;
+use Matomo\DataTable\Renderer\Csv;
 
 /**
  * @group DataTableTest

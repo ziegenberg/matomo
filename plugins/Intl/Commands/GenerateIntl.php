@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Intl\Commands;
+namespace Matomo\Plugins\Intl\Commands;
 
 use DateTimeZone;
-use Piwik\Container\StaticContainer;
-use Piwik\Development;
-use Piwik\Filesystem;
-use Piwik\Http;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\EncodedEntities;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Writer;
+use Matomo\Container\StaticContainer;
+use Matomo\Development;
+use Matomo\Filesystem;
+use Matomo\Http;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\EncodedEntities;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Writer;
 
 /**
  * Console Command to generate Intl-data files for Piwik
@@ -72,7 +72,7 @@ class GenerateIntl extends ConsoleCommand
     protected function doExecute(): int
     {
         $input = $this->getInput();
-        $matomoLanguages = \Piwik\Plugins\LanguagesManager\API::getInstance()->getAvailableLanguages();
+        $matomoLanguages = \Matomo\Plugins\LanguagesManager\API::getInstance()->getAvailableLanguages();
 
         if ($input->getOption('language')) {
             $matomoLanguages = [$input->getOption('language')];
@@ -251,7 +251,7 @@ class GenerateIntl extends ConsoleCommand
      */
     protected function fetchLanguageData(string $langCode, string $requestLangCode, array &$translations): void
     {
-        $languageCodes = array_keys(StaticContainer::get('Piwik\Intl\Data\Provider\LanguageDataProvider')->getLanguageList());
+        $languageCodes = array_keys(StaticContainer::get('Matomo\Intl\Data\Provider\LanguageDataProvider')->getLanguageList());
 
         $languageDataUrl = 'https://raw.githubusercontent.com/unicode-org/cldr-json/%s/cldr-json/cldr-localenames-full/main/%s/languages.json';
 
@@ -320,7 +320,7 @@ class GenerateIntl extends ConsoleCommand
     {
         $territoryDataUrl = 'https://raw.githubusercontent.com/unicode-org/cldr-json/%s/cldr-json/cldr-localenames-full/main/%s/territories.json';
 
-        $countryCodes = array_keys(StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider')->getCountryList());
+        $countryCodes = array_keys(StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider')->getCountryList());
         $countryCodes = array_map('strtoupper', $countryCodes);
 
         $continentMapping = [
@@ -665,7 +665,7 @@ class GenerateIntl extends ConsoleCommand
                 throw new \Exception();
             }
 
-            $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\CurrencyDataProvider');
+            $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\CurrencyDataProvider');
             foreach ($dataProvider->getCurrencyList() as $code => $currency) {
                 if (isset($currencyData[$code]['displayName'])) {
                     $translations['Intl']['Currency_' . $code] = $this->transform($currencyData[$code]['displayName']);

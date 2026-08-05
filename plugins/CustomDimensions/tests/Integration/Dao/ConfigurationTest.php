@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Integration\Dao;
+namespace Matomo\Plugins\CustomDimensions\tests\Integration\Dao;
 
-use Piwik\Common;
-use Piwik\DbHelper;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Common;
+use Matomo\DbHelper;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
 use Zend_Db_Statement_Exception;
 
 /**

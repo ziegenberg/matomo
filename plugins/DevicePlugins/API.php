@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicePlugins;
+namespace Matomo\Plugins\DevicePlugins;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugins\DevicesDetection\Archiver as DDArchiver;
-use Piwik\Plugins\CoreHome\Columns\Metrics\VisitsPercent;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugins\DevicesDetection\Archiver as DDArchiver;
+use Matomo\Plugins\CoreHome\Columns\Metrics\VisitsPercent;
 
 /**
  * @see plugins/DevicePlugins/functions.php
@@ -24,9 +24,9 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/DevicePlugins/functions.php';
 /**
  * The DevicePlugins API lets you access reports about device plugins such as browser plugins.
  *
- * @method static \Piwik\Plugins\DevicePlugins\API getInstance()
+ * @method static \Matomo\Plugins\DevicePlugins\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @param int|string|int[] $idSite
@@ -35,7 +35,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable($name);
         $dataTable->queueFilter('ReplaceColumnNames');

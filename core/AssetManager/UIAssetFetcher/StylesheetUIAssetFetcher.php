@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager\UIAssetFetcher;
+namespace Matomo\AssetManager\UIAssetFetcher;
 
-use Piwik\AssetManager\UIAssetFetcher;
-use Piwik\Piwik;
+use Matomo\AssetManager\UIAssetFetcher;
+use Matomo\Matomo;
 
 class StylesheetUIAssetFetcher extends UIAssetFetcher
 {
@@ -67,7 +67,7 @@ class StylesheetUIAssetFetcher extends UIAssetFetcher
          *
          * @param string[] &$stylesheets The list of stylesheet paths.
          */
-        Piwik::postEvent('AssetManager.getStylesheetFiles', array(&$this->fileLocations));
+        Matomo::postEvent('AssetManager.getStylesheetFiles', array(&$this->fileLocations));
 
         $this->addUmdCssFilesIfDetected($this->plugins);
 

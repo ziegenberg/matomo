@@ -9,10 +9,10 @@
 
 namespace PHPUnit\Integration\Tracker\Config;
 
-use Piwik\Config;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Config\ThirdPartyCookies;
+use Matomo\Config;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Config\ThirdPartyCookies;
 
 class ThirdPartyCookiesTest extends IntegrationTestCase
 {

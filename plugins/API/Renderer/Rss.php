@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Renderer;
+namespace Matomo\Plugins\API\Renderer;
 
-use Piwik\API\ApiRenderer;
-use Piwik\Common;
+use Matomo\API\ApiRenderer;
+use Matomo\Common;
 
 class Rss extends ApiRenderer
 {
@@ -28,7 +28,7 @@ class Rss extends ApiRenderer
 
     public function renderDataTable($dataTable)
     {
-        /** @var \Piwik\DataTable\Renderer\Rss $tableRenderer */
+        /** @var \Matomo\DataTable\Renderer\Rss $tableRenderer */
         $tableRenderer = $this->buildDataTableRenderer($dataTable);
 
         $idSite = $this->requestObj->getIntegerParameter('idSite', 0);

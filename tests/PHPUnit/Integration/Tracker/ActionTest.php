@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Config;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\ActionPageview;
-use Piwik\Tracker\PageUrl;
-use Piwik\Tracker\Request;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\ActionPageview;
+use Matomo\Tracker\PageUrl;
+use Matomo\Tracker\Request;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -578,7 +578,7 @@ class ActionTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

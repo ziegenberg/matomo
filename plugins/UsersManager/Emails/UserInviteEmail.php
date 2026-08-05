@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Emails;
+namespace Matomo\Plugins\UsersManager\Emails;
 
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\View;
 
 class UserInviteEmail extends Mail
 {
@@ -66,7 +66,7 @@ class UserInviteEmail extends Mail
 
     protected function getDefaultSubject()
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'CoreAdminHome_UserInviteSubject',
             [$this->currentUser, $this->siteName]
         );
@@ -74,7 +74,7 @@ class UserInviteEmail extends Mail
 
     private function getDefaultSubjectWithStyle()
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'CoreAdminHome_UserInviteSubject',
             ['<strong>' . $this->currentUser . '</strong>', '<strong>' . $this->siteName . '</strong>']
         );
@@ -84,7 +84,7 @@ class UserInviteEmail extends Mail
     {
         $view = new View('@UsersManager/_userInviteEmail.twig');
         $view->login = $this->invitedUser['login'];
-        $view->loginPlugin = Piwik::getLoginPluginName();
+        $view->loginPlugin = Matomo::getLoginPluginName();
         $view->emailAddress = $this->invitedUser['email'];
         $view->token = $this->token;
 
@@ -92,7 +92,7 @@ class UserInviteEmail extends Mail
         $view->content = $this->getDefaultSubjectWithStyle();
 
         //notes for email footer
-        $view->notes = Piwik::translate('CoreAdminHome_UserInviteNotes', [$this->currentUser,  $this->expiryInDays]);
+        $view->notes = Matomo::translate('CoreAdminHome_UserInviteNotes', [$this->currentUser,  $this->expiryInDays]);
         return $view;
     }
 }

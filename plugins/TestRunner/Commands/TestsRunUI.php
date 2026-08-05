@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner\Commands;
+namespace Matomo\Plugins\TestRunner\Commands;
 
-use Piwik\AssetManager;
-use Piwik\Config;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\AssetManager;
+use Matomo\Config;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Tests\Framework\Fixture;
 
 class TestsRunUI extends ConsoleCommand
 {

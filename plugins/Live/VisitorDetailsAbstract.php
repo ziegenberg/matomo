@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
-use Piwik\DataTable;
-use Piwik\Db;
+use Matomo\DataTable;
+use Matomo\Db;
 
 /**
  * Class VisitorDetailsAbstract

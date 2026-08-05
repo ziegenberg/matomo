@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Integration;
+namespace Matomo\Plugins\BotTracking\tests\Integration;
 
-use Piwik\DataTable;
-use Piwik\Plugins\BotTracking\API;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Plugins\BotTracking\tests\Fixtures\BotTraffic;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
+use Matomo\Plugins\BotTracking\API;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Plugins\BotTracking\tests\Fixtures\BotTraffic;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Verifies the Human/AI-Favoured Pages reports read back from their archived records correctly:

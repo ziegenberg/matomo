@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
-use Piwik\Container\Container;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Config;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\Container\Container;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Config;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -78,9 +78,9 @@ class ConfigGetTest extends ConsoleCommandTestCase
     {
         return array(
             // use a config instance that will save to a test INI file
-            'Piwik\Config' => function (Container $container) {
+            'Matomo\Config' => function (Container $container) {
                 /** @var GlobalSettingsProvider $actualGlobalSettingsProvider */
-                $actualGlobalSettingsProvider = $container->get('Piwik\Application\Kernel\GlobalSettingsProvider');
+                $actualGlobalSettingsProvider = $container->get('Matomo\Application\Kernel\GlobalSettingsProvider');
 
                 $config = self::makeTestConfig();
 

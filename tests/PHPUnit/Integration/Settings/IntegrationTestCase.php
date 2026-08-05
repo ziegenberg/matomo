@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings;
+namespace Matomo\Tests\Integration\Settings;
 
 use PHPUnit\Framework\Constraint\IsType;
-use Piwik\Db;
-use Piwik\Settings\Setting;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\Mock\Settings\FakeSystemSettings;
+use Matomo\Db;
+use Matomo\Settings\Setting;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\Mock\Settings\FakeSystemSettings;
 
 /**
  * @group PluginSettings
  * @group Settings
  * @group Storage
  */
-class IntegrationTestCase extends \Piwik\Tests\Framework\TestCase\IntegrationTestCase
+class IntegrationTestCase extends \Matomo\Tests\Framework\TestCase\IntegrationTestCase
 {
     /**
      * @var FakeSystemSettings
@@ -71,7 +71,7 @@ class IntegrationTestCase extends \Piwik\Tests\Framework\TestCase\IntegrationTes
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

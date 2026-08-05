@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Translation\Translator;
+use Matomo\Container\StaticContainer;
+use Matomo\Translation\Translator;
 
 /**
  * Class NumberFormatter
@@ -80,7 +80,7 @@ class NumberFormatter
     /**
      * Formats a given number
      *
-     * @see \Piwik\NumberFormatter::format()
+     * @see \Matomo\NumberFormatter::format()
      *
      * @param string|int|float $value
      * @param int $maximumFractionDigits
@@ -97,7 +97,7 @@ class NumberFormatter
     /**
      * Formats a given number in compact format
      *
-     * @see \Piwik\NumberFormatter::format()
+     * @see \Matomo\NumberFormatter::format()
      *
      * @param string|int|float $value
      * @return mixed|string
@@ -188,7 +188,7 @@ class NumberFormatter
     /**
      * Formats a given number as currency value in compact format
      *
-     * @see \Piwik\NumberFormatter::format()
+     * @see \Matomo\NumberFormatter::format()
      *
      * @param string|int|float $value
      * @param string $currency

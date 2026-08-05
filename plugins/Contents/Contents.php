@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Contents;
+namespace Matomo\Plugins\Contents;
 
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\Piwik;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\Matomo;
 
-class Contents extends \Piwik\Plugin
+class Contents extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -49,8 +49,8 @@ class Contents extends \Piwik\Plugin
 
     public function addMetricDocumentationTranslations(&$translations)
     {
-        $translations['nb_impressions'] = Piwik::translate('Contents_ImpressionsMetricDocumentation');
-        $translations['nb_interactions'] = Piwik::translate('Contents_InteractionsMetricDocumentation');
+        $translations['nb_impressions'] = Matomo::translate('Contents_ImpressionsMetricDocumentation');
+        $translations['nb_interactions'] = Matomo::translate('Contents_InteractionsMetricDocumentation');
     }
 
     public function provideActionDimensionFields(&$fields, &$joins)

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Emails;
+namespace Matomo\Plugins\CoreAdminHome\Emails;
 
-use Piwik\Mail;
-use Piwik\View;
-use Piwik\Piwik;
+use Matomo\Mail;
+use Matomo\View;
+use Matomo\Matomo;
 
 abstract class SecurityNotificationEmail extends Mail
 {
@@ -69,7 +69,7 @@ abstract class SecurityNotificationEmail extends Mail
 
     protected function getDefaultSubject()
     {
-        return Piwik::translate('CoreAdminHome_SecurityNotificationEmailSubject');
+        return Matomo::translate('CoreAdminHome_SecurityNotificationEmailSubject');
     }
 
     protected function getDefaultBodyView()

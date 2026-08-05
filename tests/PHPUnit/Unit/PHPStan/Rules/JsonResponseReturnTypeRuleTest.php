@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules;
+namespace Matomo\Tests\Unit\PHPStan\Rules;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
-use Piwik\Tests\PHPStan\Rules\JsonResponseReturnTypeRule;
+use Matomo\Tests\PHPStan\Rules\JsonResponseReturnTypeRule;
 
 /**
  * @group Core
@@ -28,12 +28,12 @@ class JsonResponseReturnTypeRuleTest extends RuleTestCase
     {
         $this->analyse([__DIR__ . '/data/JsonResponseController.php'], [
             [
-                'Controller action missingReturnType() is marked #[\Piwik\Http\JsonResponse] and must'
+                'Controller action missingReturnType() is marked #[\Matomo\Http\JsonResponse] and must'
                 . ' declare a "string" return type.',
                 58,
             ],
             [
-                'Controller action wrongReturnType() is marked #[\Piwik\Http\JsonResponse] and must declare'
+                'Controller action wrongReturnType() is marked #[\Matomo\Http\JsonResponse] and must declare'
                 . ' a "string" return type.',
                 64,
             ],

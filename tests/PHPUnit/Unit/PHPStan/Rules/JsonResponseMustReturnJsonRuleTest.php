@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules;
+namespace Matomo\Tests\Unit\PHPStan\Rules;
 
 use PHPStan\Rules\Rule;
 use PHPStan\Testing\RuleTestCase;
-use Piwik\Tests\PHPStan\Rules\JsonResponseMustReturnJsonRule;
+use Matomo\Tests\PHPStan\Rules\JsonResponseMustReturnJsonRule;
 
 /**
  * @group Core
@@ -28,7 +28,7 @@ class JsonResponseMustReturnJsonRuleTest extends RuleTestCase
     {
         $this->analyse([__DIR__ . '/data/JsonResponseController.php'], [
             [
-                'Controller action attributedMixedReturn() is marked #[\Piwik\Http\JsonResponse] but'
+                'Controller action attributedMixedReturn() is marked #[\Matomo\Http\JsonResponse] but'
                 . ' returns a non-JSON value on this path; such an action must return JSON on every'
                 . ' path. Split it into separate actions (or remove the attribute).',
                 216,

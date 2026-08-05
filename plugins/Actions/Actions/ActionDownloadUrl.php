@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Actions;
+namespace Matomo\Plugins\Actions\Actions;
 
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
 
 /**
  * This class represents a download.

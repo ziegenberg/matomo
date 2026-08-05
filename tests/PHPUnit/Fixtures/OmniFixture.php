@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\API\Request;
-use Piwik\Cache;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Plugins\UsersManager\Model;
+use Matomo\API\Request;
+use Matomo\Cache;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Plugins\UsersManager\Model;
 use ReflectionClass;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * This fixture is the combination of every other fixture defined by Piwik. Should be used
@@ -73,20 +73,20 @@ class OmniFixture extends Fixture
 
         foreach ($classes as $className) {
             if (
-                is_subclass_of($className, 'Piwik\\Tests\\Framework\\Fixture')
+                is_subclass_of($className, 'Matomo\Tests\Framework\Fixture')
                 && !is_subclass_of($className, __CLASS__)
                 && $className != __CLASS__
-                && $className != "Piwik\\Tests\\Fixtures\\SqlDump"
-                && $className != "Piwik\\Tests\\Fixtures\\UpdaterTestFixture"
-                && $className != "Piwik\\Tests\\Fixtures\\UITestFixture"
-                && $className != "Piwik\\Tests\\Fixtures\\VisitsInDifferentTimezones"
+                && $className != "Matomo\\Tests\\Fixtures\\SqlDump"
+                && $className != "Matomo\\Tests\\Fixtures\\UpdaterTestFixture"
+                && $className != "Matomo\\Tests\\Fixtures\\UITestFixture"
+                && $className != "Matomo\\Tests\\Fixtures\\VisitsInDifferentTimezones"
             ) {
                 $klassReflect = new ReflectionClass($className);
                 if (
                     !strpos($klassReflect->getFilename(), "tests/PHPUnit/Fixtures")
                     && $className != "CustomAlerts"
-                    && $className != "Piwik\\Plugins\\Insights\\tests\\Fixtures\\SomeVisitsDifferentPathsOnTwoDays"
-                    && $className != "Piwik\\Plugins\\Contents\\tests\\Fixtures\\TwoVisitsWithContents"
+                    && $className != "Matomo\\Plugins\\Insights\\tests\\Fixtures\\SomeVisitsDifferentPathsOnTwoDays"
+                    && $className != "Matomo\\Plugins\\Contents\\tests\\Fixtures\\TwoVisitsWithContents"
                 ) {
                     continue;
                 }
@@ -105,13 +105,13 @@ class OmniFixture extends Fixture
         }
 
 
-        if (!empty($this->fixtures['Piwik\\Tests\\Fixtures\\ManySitesImportedLogsWithXssAttempts'])) {
-            $this->now = $this->fixtures['Piwik\\Tests\\Fixtures\\ManySitesImportedLogsWithXssAttempts']->now;
+        if (!empty($this->fixtures['Matomo\Tests\Fixtures\ManySitesImportedLogsWithXssAttempts'])) {
+            $this->now = $this->fixtures['Matomo\Tests\Fixtures\ManySitesImportedLogsWithXssAttempts']->now;
 
             // make sure ManySitesImportedLogsWithXssAttempts is the first fixture
-            $fixture = $this->fixtures['Piwik\\Tests\\Fixtures\\ManySitesImportedLogsWithXssAttempts'];
-            unset($this->fixtures['Piwik\\Tests\\Fixtures\\ManySitesImportedLogsWithXssAttempts']);
-            $this->fixtures = array_merge(array('Piwik\\Tests\\Fixtures\\ManySitesImportedLogsWithXssAttempts' => $fixture), $this->fixtures);
+            $fixture = $this->fixtures['Matomo\Tests\Fixtures\ManySitesImportedLogsWithXssAttempts'];
+            unset($this->fixtures['Matomo\Tests\Fixtures\ManySitesImportedLogsWithXssAttempts']);
+            $this->fixtures = array_merge(array('Matomo\Tests\Fixtures\ManySitesImportedLogsWithXssAttempts' => $fixture), $this->fixtures);
         }
     }
 
@@ -127,7 +127,7 @@ class OmniFixture extends Fixture
 
     public static function getTokenAuth()
     {
-        $model = new \Piwik\Plugins\UsersManager\Model();
+        $model = new \Matomo\Plugins\UsersManager\Model();
         $user  = $model->getUser(self::ADMIN_USER_LOGIN);
 
         if (!empty($user)) {

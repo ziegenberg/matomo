@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Exception;
+namespace Matomo\Exception;
 
-use Piwik\Common;
-use Piwik\Url;
-use Piwik\UrlHelper;
+use Matomo\Common;
+use Matomo\Url;
+use Matomo\UrlHelper;
 
-class RedirectException extends \Piwik\Exception\Exception implements IRedirectException
+class RedirectException extends \Matomo\Exception\Exception implements IRedirectException
 {
     private $redirectTo;
     private $countdown;

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Db\Schema;
+namespace Matomo\Tests\Integration\Db\Schema;
 
-use Piwik\Config\DatabaseConfig;
-use Piwik\Db;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Config\DatabaseConfig;
+use Matomo\Db;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class MysqlTest extends IntegrationTestCase
 {

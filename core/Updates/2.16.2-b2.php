@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
 
 /**
  * Update for version 2.16.2-b2.
@@ -19,7 +19,7 @@ class Updates_2_16_2_b2 extends PiwikUpdates
 {
     public function doUpdate(Updater $updater)
     {
-        $pluginManager = \Piwik\Plugin\Manager::getInstance();
+        $pluginManager = \Matomo\Plugin\Manager::getInstance();
         $pluginName = 'UserId';
 
         try {

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Config;
-use Piwik\ProxyHttp;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\ProxyHttp;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
+use Matomo\Url;
+use Matomo\View;
 
 /**
  * Check that Matomo is configured to force SSL.

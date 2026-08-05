@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions;
+namespace Matomo\Plugins\Actions;
 
 use PDOStatement;
-use Piwik\Config;
-use Piwik\DataTable\Row\DataTableSummaryRow;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics as PiwikMetrics;
-use Piwik\Piwik;
-use Piwik\RankingQuery;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\PageUrl;
-use Piwik\Tracker\GoalManager;
+use Matomo\Config;
+use Matomo\DataTable\Row\DataTableSummaryRow;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics as PiwikMetrics;
+use Matomo\Matomo;
+use Matomo\RankingQuery;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\PageUrl;
+use Matomo\Tracker\GoalManager;
 use Zend_Db_Statement;
 
 /**
@@ -280,7 +280,7 @@ class ArchivingHelper
         ) {
             /**
              * Ensures this metric is available. It will be calculated later using a filter.
-             * @see \Piwik\Plugins\Goals\DataTable\Filter\CalculateConversionPageRate
+             * @see \Matomo\Plugins\Goals\DataTable\Filter\CalculateConversionPageRate
              */
             $row[PiwikMetrics::INDEX_GOAL_NB_CONVERSIONS_PAGE_RATE] = 0;
         }
@@ -427,7 +427,7 @@ class ArchivingHelper
         }
 
         if (isset($goalMetrics[PiwikMetrics::INDEX_GOAL_NB_CONVERSIONS_ENTRY])) {
-            $goalMetrics[PiwikMetrics::INDEX_GOAL_NB_CONVERSIONS_ENTRY_RATE] = Piwik::getQuotientSafe(
+            $goalMetrics[PiwikMetrics::INDEX_GOAL_NB_CONVERSIONS_ENTRY_RATE] = Matomo::getQuotientSafe(
                 $goalMetrics[PiwikMetrics::INDEX_GOAL_NB_CONVERSIONS_ENTRY],
                 $nbEntrances,
                 GoalManager::REVENUE_PRECISION + 1
@@ -435,7 +435,7 @@ class ArchivingHelper
         }
 
         if (isset($goalMetrics[PiwikMetrics::INDEX_GOAL_REVENUE_ENTRY])) {
-            $goalMetrics[PiwikMetrics::INDEX_GOAL_REVENUE_PER_ENTRY] = (float) Piwik::getQuotientSafe(
+            $goalMetrics[PiwikMetrics::INDEX_GOAL_REVENUE_PER_ENTRY] = (float) Matomo::getQuotientSafe(
                 $goalMetrics[PiwikMetrics::INDEX_GOAL_REVENUE_ENTRY],
                 $nbEntrances,
                 GoalManager::REVENUE_PRECISION + 1
@@ -948,8 +948,8 @@ class ArchivingHelper
     public static function getUnknownActionName($type)
     {
         if (empty(self::$defaultActionNameWhenNotDefined)) {
-            self::$defaultActionNameWhenNotDefined = Piwik::translate('General_NotDefined', Piwik::translate('Actions_ColumnPageName'));
-            self::$defaultActionUrlWhenNotDefined = Piwik::translate('General_NotDefined', Piwik::translate('Actions_ColumnPageURL'));
+            self::$defaultActionNameWhenNotDefined = Matomo::translate('General_NotDefined', Matomo::translate('Actions_ColumnPageName'));
+            self::$defaultActionUrlWhenNotDefined = Matomo::translate('General_NotDefined', Matomo::translate('Actions_ColumnPageURL'));
         }
         if ($type == Action::TYPE_PAGE_TITLE) {
             return self::$defaultActionNameWhenNotDefined;
@@ -1073,7 +1073,7 @@ class ArchivingHelper
      *
      * @param int $idAction
      * @param int $actionType
-     * @param \Piwik\DataTable\Row|false|null $actionRow
+     * @param \Matomo\DataTable\Row|false|null $actionRow
      */
     private static function setCachedActionRow($idAction, $actionType, $actionRow)
     {

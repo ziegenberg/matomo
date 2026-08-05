@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Exception\DI\DependencyException;
+use Matomo\Exception\DI\DependencyException;
 use Exception;
-use Piwik\API\Request;
-use Piwik\API\ResponseBuilder;
-use Piwik\Container\ContainerDoesNotExistException;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\IRedirectException;
-use Piwik\Http\HttpCodeException;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Plugins\Monolog\Processor\ExceptionToTextProcessor;
-use Piwik\Log\LoggerInterface;
+use Matomo\API\Request;
+use Matomo\API\ResponseBuilder;
+use Matomo\Container\ContainerDoesNotExistException;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\IRedirectException;
+use Matomo\Http\HttpCodeException;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\Plugins\Monolog\Processor\ExceptionToTextProcessor;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Contains Piwik's uncaught exception handler.
@@ -28,7 +28,7 @@ class ExceptionHandler
 {
     public static function setUp()
     {
-        set_exception_handler(['Piwik\ExceptionHandler', 'handleException']);
+        set_exception_handler(['Matomo\ExceptionHandler', 'handleException']);
     }
 
     /**
@@ -79,7 +79,7 @@ class ExceptionHandler
                 // For these exception types, use the exception-provided error code.
                 http_response_code($exception->getCode());
                 break;
-            case ($exception instanceof \Piwik\Exception\NotYetInstalledException):
+            case ($exception instanceof \Matomo\Exception\NotYetInstalledException):
                 http_response_code(404);
                 break;
             default:
@@ -114,7 +114,7 @@ class ExceptionHandler
         $dbConfig = Db::getDatabaseConfig();
 
         $valuesToReplace = [
-            'tokenauth'   => Piwik::getCurrentUserTokenAuth(),
+            'tokenauth'   => Matomo::getCurrentUserTokenAuth(),
             'generalSalt' => SettingsPiwik::getSalt(),
             'dbuser'      => $dbConfig['username'],
             'dbpass'      => $dbConfig['password'],
@@ -215,7 +215,7 @@ class ExceptionHandler
              * @param string &$result The HTML of the error page.
              * @param Exception $ex The Exception displayed in the error page.
              */
-            Piwik::postEvent('FrontController.modifyErrorPage', [&$result, $ex]);
+            Matomo::postEvent('FrontController.modifyErrorPage', [&$result, $ex]);
         } catch (ContainerDoesNotExistException $ex) {
             // this can happen when an error occurs before the Piwik environment is created
         }
@@ -226,10 +226,10 @@ class ExceptionHandler
     public static function shouldPrintBackTraceWithMessage(): bool
     {
         if (
-            class_exists('\Piwik\SettingsServer')
-            && class_exists('\Piwik\Common')
-            && \Piwik\SettingsServer::isArchivePhpTriggered()
-            && \Piwik\Common::isPhpCliMode()
+            class_exists('\Matomo\SettingsServer')
+            && class_exists('\Matomo\Common')
+            && \Matomo\SettingsServer::isArchivePhpTriggered()
+            && \Matomo\Common::isPhpCliMode()
         ) {
             return true;
         }

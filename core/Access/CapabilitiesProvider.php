@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Access;
+namespace Matomo\Access;
 
 use Exception;
-use Piwik\CacheId;
-use Piwik\Piwik;
-use Piwik\Cache as PiwikCache;
+use Matomo\CacheId;
+use Matomo\Matomo;
+use Matomo\Cache as PiwikCache;
 
 class CapabilitiesProvider
 {
@@ -42,7 +42,7 @@ class CapabilitiesProvider
              * @param Capability[] $capabilities An array of capabilities
              * @internal
              */
-            Piwik::postEvent('Access.Capability.addCapabilities', array(&$capabilities));
+            Matomo::postEvent('Access.Capability.addCapabilities', array(&$capabilities));
 
             /**
              * Triggered to filter / restrict capabilities.
@@ -61,7 +61,7 @@ class CapabilitiesProvider
              * @param Capability[] $capabilities An array of capabilities
              * @internal
              */
-            Piwik::postEvent('Access.Capability.filterCapabilities', array(&$capabilities));
+            Matomo::postEvent('Access.Capability.filterCapabilities', array(&$capabilities));
 
             $capabilities = \array_values($capabilities);
 
@@ -119,7 +119,7 @@ class CapabilitiesProvider
     {
         if (!$this->isValidCapability($capabilityId)) {
             $capabilities = $this->getAllCapabilityIds();
-            throw new \Exception(Piwik::translate("UsersManager_ExceptionAccessValues", implode(", ", $capabilities)));
+            throw new \Exception(Matomo::translate("UsersManager_ExceptionAccessValues", implode(", ", $capabilities)));
         }
     }
 

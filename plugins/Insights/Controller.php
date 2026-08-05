@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights;
+namespace Matomo\Plugins\Insights;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\View;
 
 /**
  * Insights Controller
  */
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     public function __construct()
     {
         parent::__construct();
 
         $this->checkSitePermission();
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
     }
 
     public function getInsightsOverview()

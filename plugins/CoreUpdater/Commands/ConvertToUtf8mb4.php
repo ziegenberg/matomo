@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater\Commands;
+namespace Matomo\Plugins\CoreUpdater\Commands;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugin\ConsoleCommand;
 
 /**
  * @package CoreUpdater
@@ -29,8 +29,8 @@ class ConvertToUtf8mb4 extends ConsoleCommand
 
         $this->setDescription('Converts the database to utf8mb4');
 
-        $this->addNoValueOption('show', null, Piwik::translate('Show all commands / queries only.'));
-        $this->addNoValueOption('yes', null, Piwik::translate('CoreUpdater_ConsoleParameterDescription'));
+        $this->addNoValueOption('show', null, Matomo::translate('Show all commands / queries only.'));
+        $this->addNoValueOption('yes', null, Matomo::translate('CoreUpdater_ConsoleParameterDescription'));
         $this->addNoValueOption('keep-tracking', null, 'Do not disable tracking while conversion is running');
     }
 
@@ -86,12 +86,12 @@ class ConvertToUtf8mb4 extends ConsoleCommand
             $config = Config::getInstance();
 
             if (!$keepTracking) {
-                $output->writeln("\n" . Piwik::translate('Disabling Matomo Tracking'));
+                $output->writeln("\n" . Matomo::translate('Disabling Matomo Tracking'));
                 $config->Tracker['record_statistics'] = '0';
                 $config->forceSave();
             }
 
-            $output->writeln("\n" . Piwik::translate('CoreUpdater_ConsoleStartingDbUpgrade'));
+            $output->writeln("\n" . Matomo::translate('CoreUpdater_ConsoleStartingDbUpgrade'));
 
             try {
                 foreach ($queries as $query) {
@@ -109,7 +109,7 @@ class ConvertToUtf8mb4 extends ConsoleCommand
                 $config->database['collation'] = $collation;
             } finally {
                 if (!$keepTracking) {
-                    $output->writeln("\n" . Piwik::translate('Enabling Matomo Tracking'));
+                    $output->writeln("\n" . Matomo::translate('Enabling Matomo Tracking'));
                     $config->Tracker['record_statistics'] = '1';
                 }
                 $config->forceSave();
@@ -152,7 +152,7 @@ class ConvertToUtf8mb4 extends ConsoleCommand
     private function detectCollation(): ?string
     {
         try {
-            $metadataProvider = StaticContainer::get('Piwik\Plugins\DBStats\MySQLMetadataProvider');
+            $metadataProvider = StaticContainer::get('Matomo\Plugins\DBStats\MySQLMetadataProvider');
             $userTableStatus = $metadataProvider->getTableStatus('user');
             if (empty($userTableStatus['Collation'] ?? null)) {
                 // if there is no user table, or no collation for it, abort detection

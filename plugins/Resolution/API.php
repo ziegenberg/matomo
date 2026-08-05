@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution;
+namespace Matomo\Plugins\Resolution;
 
 use Exception;
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Site;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Site;
 
 /**
  * @see plugins/Resolution/functions.php
@@ -23,18 +23,18 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/Resolution/functions.php';
 /**
  * Provides API methods for screen resolution and device configuration reports.
  *
- * @method static \Piwik\Plugins\Resolution\API getInstance()
+ * @method static \Matomo\Plugins\Resolution\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @param int|string|int[] $idSite
      * @param string|null|false $segment
-     * @return \Piwik\DataTable|\Piwik\DataTable\Map
+     * @return \Matomo\DataTable|\Matomo\DataTable\Map
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable($name);
         $dataTable->queueFilter('ReplaceColumnNames');
@@ -61,7 +61,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getResolution($idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $idSites = Site::getIdSitesFromIdSitesString($idSite);
 
@@ -72,7 +72,7 @@ class API extends \Piwik\Plugin\API
 
         // show an error only if none of the requested sites is left
         if (count($idSitesFiltered) === 0 && count($idSites) !== count($idSitesFiltered)) {
-            throw new Exception(Piwik::translate('Resolution_ScreenResolutionReportDisabledByCompliancePolicy'));
+            throw new Exception(Matomo::translate('Resolution_ScreenResolutionReportDisabledByCompliancePolicy'));
         }
 
         $dataTable = $this->getDataTable(Archiver::RESOLUTION_RECORD_NAME, $idSitesFiltered, $period, $date, $segment);

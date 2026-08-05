@@ -7,38 +7,38 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\API\ResponseBuilder;
-use Piwik\Auth\PasswordStrength;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Nonce;
-use Piwik\Notification;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugin\ControllerAdmin;
-use Piwik\Plugin\ThemeStyles;
-use Piwik\Plugins\LanguagesManager\API as APILanguagesManager;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\IgnoreCookie;
-use Piwik\Translation\Translator;
-use Piwik\Url;
-use Piwik\View;
-use Piwik\Session\SessionInitializer;
-use Piwik\Plugins\CoreAdminHome\Emails\TokenAuthCreatedEmail;
-use Piwik\Plugins\CoreAdminHome\Emails\TokenAuthDeletedEmail;
+use Matomo\API\Request;
+use Matomo\API\ResponseBuilder;
+use Matomo\Auth\PasswordStrength;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Nonce;
+use Matomo\Notification;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugin\ControllerAdmin;
+use Matomo\Plugin\ThemeStyles;
+use Matomo\Plugins\LanguagesManager\API as APILanguagesManager;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\IgnoreCookie;
+use Matomo\Translation\Translator;
+use Matomo\Url;
+use Matomo\View;
+use Matomo\Session\SessionInitializer;
+use Matomo\Plugins\CoreAdminHome\Emails\TokenAuthCreatedEmail;
+use Matomo\Plugins\CoreAdminHome\Emails\TokenAuthDeletedEmail;
 
 class Controller extends ControllerAdmin
 {
@@ -80,8 +80,8 @@ class Controller extends ControllerAdmin
      */
     public function index()
     {
-        Piwik::checkUserIsNotAnonymous();
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeAdminAccess();
         UsersManager::dieIfUsersAdminIsDisabled();
 
         $view = new View('@UsersManager/index');
@@ -94,7 +94,7 @@ class Controller extends ControllerAdmin
             $idSiteSelected = $this->idSite ?: $defaultWebsiteId;
         }
 
-        if (!Piwik::isUserHasAdminAccess($idSiteSelected) && count($IdSitesAdmin) > 0) {
+        if (!Matomo::isUserHasAdminAccess($idSiteSelected) && count($IdSitesAdmin) > 0) {
             // make sure to show a website where user actually has admin access
             $idSiteSelected = $IdSitesAdmin[0];
         }
@@ -104,29 +104,29 @@ class Controller extends ControllerAdmin
         $view->inviteTokenExpiryDays = GeneralConfig::getConfigValue('default_invite_user_token_expiry_days');
         $view->idSiteSelected = $idSiteSelected;
         $view->defaultReportSiteName = $defaultReportSiteName;
-        $view->currentUserRole = Piwik::hasUserSuperUserAccess() ? 'superuser' : 'admin';
+        $view->currentUserRole = Matomo::hasUserSuperUserAccess() ? 'superuser' : 'admin';
         $view->accessLevels = [
-            ['key' => 'noaccess', 'value' => Piwik::translate('UsersManager_PrivNone'), 'type' => 'role'],
-            ['key' => 'view', 'value' => Piwik::translate('UsersManager_PrivView'), 'type' => 'role'],
-            ['key' => 'write', 'value' => Piwik::translate('UsersManager_PrivWrite'), 'type' => 'role'],
-            ['key' => 'admin', 'value' => Piwik::translate('UsersManager_PrivAdmin'), 'type' => 'role'],
-            ['key' => 'superuser', 'value' => Piwik::translate('Installation_SuperUser'), 'type' => 'role', 'disabled' => true],
+            ['key' => 'noaccess', 'value' => Matomo::translate('UsersManager_PrivNone'), 'type' => 'role'],
+            ['key' => 'view', 'value' => Matomo::translate('UsersManager_PrivView'), 'type' => 'role'],
+            ['key' => 'write', 'value' => Matomo::translate('UsersManager_PrivWrite'), 'type' => 'role'],
+            ['key' => 'admin', 'value' => Matomo::translate('UsersManager_PrivAdmin'), 'type' => 'role'],
+            ['key' => 'superuser', 'value' => Matomo::translate('Installation_SuperUser'), 'type' => 'role', 'disabled' => true],
         ];
         $view->filterAccessLevels = [
             ['key' => '', 'value' => '', 'type' => 'role'], // show all
-            ['key' => 'noaccess', 'value' => Piwik::translate('UsersManager_PrivNone'), 'type' => 'role'],
-            ['key' => 'some', 'value' => Piwik::translate('UsersManager_AtLeastView'), 'type' => 'role'],
-            ['key' => 'view', 'value' => Piwik::translate('UsersManager_PrivView'), 'type' => 'role'],
-            ['key' => 'write', 'value' => Piwik::translate('UsersManager_PrivWrite'), 'type' => 'role'],
-            ['key' => 'admin', 'value' => Piwik::translate('UsersManager_PrivAdmin'), 'type' => 'role'],
-            ['key' => 'superuser', 'value' => Piwik::translate('Installation_SuperUser'), 'type' => 'role'],
+            ['key' => 'noaccess', 'value' => Matomo::translate('UsersManager_PrivNone'), 'type' => 'role'],
+            ['key' => 'some', 'value' => Matomo::translate('UsersManager_AtLeastView'), 'type' => 'role'],
+            ['key' => 'view', 'value' => Matomo::translate('UsersManager_PrivView'), 'type' => 'role'],
+            ['key' => 'write', 'value' => Matomo::translate('UsersManager_PrivWrite'), 'type' => 'role'],
+            ['key' => 'admin', 'value' => Matomo::translate('UsersManager_PrivAdmin'), 'type' => 'role'],
+            ['key' => 'superuser', 'value' => Matomo::translate('Installation_SuperUser'), 'type' => 'role'],
         ];
 
         $view->statusAccessLevels = [
           ['key' => '', 'value' => ''], // show all
-          ['key' => 'pending', 'value' => Piwik::translate('UsersManager_Pending')],
-          ['key' => 'active', 'value' => Piwik::translate('UsersManager_Active')],
-          ['key' => 'expired', 'value' => Piwik::translate('UsersManager_Expired')],
+          ['key' => 'pending', 'value' => Matomo::translate('UsersManager_Pending')],
+          ['key' => 'active', 'value' => Matomo::translate('UsersManager_Active')],
+          ['key' => 'expired', 'value' => Matomo::translate('UsersManager_Expired')],
         ];
 
         $capabilities = Request::processRequest('UsersManager.getAvailableCapabilities', [], []);
@@ -147,7 +147,7 @@ class Controller extends ControllerAdmin
             'inviteComponent' => 'UsersManager.UserInvite',
             'resendInviteComponent' => 'UsersManager.ResendInviteModal',
         ];
-        Piwik::postEvent('UsersManager.getInviteVueComponents', [&$inviteVueComponents]);
+        Matomo::postEvent('UsersManager.getInviteVueComponents', [&$inviteVueComponents]);
 
         $view->inviteComponent = $inviteVueComponents['inviteComponent'];
         $view->resendInviteComponent = $inviteVueComponents['resendInviteComponent'];
@@ -217,7 +217,7 @@ class Controller extends ControllerAdmin
          *
          * @param array &$dates Array of (date => translation)
          */
-        Piwik::postEvent('UsersManager.getDefaultDates', array(&$dates));
+        Matomo::postEvent('UsersManager.getDefaultDates', array(&$dates));
 
         return $dates;
     }
@@ -227,14 +227,14 @@ class Controller extends ControllerAdmin
      */
     public function userSettings()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $view = new View('@UsersManager/userSettings');
 
-        $userLogin = Piwik::getCurrentUserLogin();
+        $userLogin = Matomo::getCurrentUserLogin();
         $user = Request::processRequest('UsersManager.getUser', array('userLogin' => $userLogin));
         $view->userEmail = $user['email'] ?? '';
-        $view->userTokenAuth = Piwik::getCurrentUserTokenAuth();
+        $view->userTokenAuth = Matomo::getCurrentUserTokenAuth();
         $view->setIgnoreCookieNonce = Nonce::getNonce(self::NONCE_SET_IGNORE_COOKIE);
         $view->isUsersAdminEnabled = UsersManager::isUsersAdminEnabled();
 
@@ -246,9 +246,9 @@ class Controller extends ControllerAdmin
 
         $view->themeMode = $userPreferences->getThemeMode();
         $view->themeModeOptions = array(
-            array('key' => ThemeStyles::LIGHT_MODE, 'value' => Piwik::translate('UsersManager_ThemeModeLightDefault')),
-            array('key' => ThemeStyles::DARK_MODE, 'value' => Piwik::translate('UsersManager_ThemeModeDark')),
-            array('key' => ThemeStyles::AUTO_MODE, 'value' => Piwik::translate('UsersManager_ThemeModeMatchBrowser')),
+            array('key' => ThemeStyles::LIGHT_MODE, 'value' => Matomo::translate('UsersManager_ThemeModeLightDefault')),
+            array('key' => ThemeStyles::DARK_MODE, 'value' => Matomo::translate('UsersManager_ThemeModeDark')),
+            array('key' => ThemeStyles::AUTO_MODE, 'value' => Matomo::translate('UsersManager_ThemeModeMatchBrowser')),
         );
 
         $storedDefaultReport = $this->getStoredDefaultReportForUser($userLogin);
@@ -279,10 +279,10 @@ class Controller extends ControllerAdmin
 
         $defaultReportOptions = array();
         if (Plugin\Manager::getInstance()->isPluginActivated('MultiSites')) {
-            $defaultReportOptions[] = array('key' => 'MultiSites', 'value' => Piwik::translate('General_AllWebsitesDashboard'));
+            $defaultReportOptions[] = array('key' => 'MultiSites', 'value' => Matomo::translate('General_AllWebsitesDashboard'));
         }
 
-        $defaultReportOptions[] = array('key' => $reportOptionsValue, 'value' => Piwik::translate('General_DashboardForASpecificWebsite'));
+        $defaultReportOptions[] = array('key' => $reportOptionsValue, 'value' => Matomo::translate('General_DashboardForASpecificWebsite'));
 
         $view->defaultReportOptions = $defaultReportOptions;
         $view->defaultDate = $this->getDefaultDateForUser($userLogin);
@@ -305,8 +305,8 @@ class Controller extends ControllerAdmin
         $this->setBasicVariablesView($view);
 
         $view->timeFormats = array(
-            '1' => Piwik::translate('General_12HourClock'),
-            '0' => Piwik::translate('General_24HourClock'),
+            '1' => Matomo::translate('General_12HourClock'),
+            '0' => Matomo::translate('General_24HourClock'),
         );
 
         return $view->render();
@@ -347,9 +347,9 @@ class Controller extends ControllerAdmin
      */
     public function userSecurity()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
-        $tokens = $this->userModel->getAllNonSystemTokensForLogin(Piwik::getCurrentUserLogin());
+        $tokens = $this->userModel->getAllNonSystemTokensForLogin(Matomo::getCurrentUserLogin());
         $tokens = array_map(function ($token) {
             foreach (['date_created', 'last_used', 'date_expired'] as $key) {
                 if (!empty($token[$key])) {
@@ -374,7 +374,7 @@ class Controller extends ControllerAdmin
      */
     public function deleteToken()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $idTokenAuth = Common::getRequestVar('idtokenauth', '', 'string');
 
@@ -393,32 +393,32 @@ class Controller extends ControllerAdmin
             Nonce::checkNonce(self::NONCE_DELETE_AUTH_TOKEN);
 
             if ($idTokenAuth === 'all') {
-                $this->userModel->deleteAllTokensForUser(Piwik::getCurrentUserLogin());
+                $this->userModel->deleteAllTokensForUser(Matomo::getCurrentUserLogin());
 
-                $notification = new Notification(Piwik::translate('UsersManager_TokensSuccessfullyDeleted'));
+                $notification = new Notification(Matomo::translate('UsersManager_TokensSuccessfullyDeleted'));
                 $notification->context = Notification::CONTEXT_SUCCESS;
                 Notification\Manager::notify('successdeletetokens', $notification);
 
                 $container = StaticContainer::getContainer();
                 $email = $container->make(TokenAuthDeletedEmail::class, array(
-                    'login' => Piwik::getCurrentUserLogin(),
-                    'emailAddress' => Piwik::getCurrentUserEmail(),
+                    'login' => Matomo::getCurrentUserLogin(),
+                    'emailAddress' => Matomo::getCurrentUserEmail(),
                     'tokenDescription' => '',
                     'all' => true,
                 ));
                 $email->safeSend();
             } elseif (is_numeric($idTokenAuth)) {
-                $description = $this->userModel->getUserTokenDescriptionByIdTokenAuth($idTokenAuth, Piwik::getCurrentUserLogin());
-                $this->userModel->deleteToken($idTokenAuth, Piwik::getCurrentUserLogin());
+                $description = $this->userModel->getUserTokenDescriptionByIdTokenAuth($idTokenAuth, Matomo::getCurrentUserLogin());
+                $this->userModel->deleteToken($idTokenAuth, Matomo::getCurrentUserLogin());
 
-                $notification = new Notification(Piwik::translate('UsersManager_TokenSuccessfullyDeleted'));
+                $notification = new Notification(Matomo::translate('UsersManager_TokenSuccessfullyDeleted'));
                 $notification->context = Notification::CONTEXT_SUCCESS;
                 Notification\Manager::notify('successdeletetoken', $notification);
 
                 $container = StaticContainer::getContainer();
                 $email = $container->make(TokenAuthDeletedEmail::class, array(
-                    'login' => Piwik::getCurrentUserLogin(),
-                    'emailAddress' => Piwik::getCurrentUserEmail(),
+                    'login' => Matomo::getCurrentUserLogin(),
+                    'emailAddress' => Matomo::getCurrentUserEmail(),
                     'tokenDescription' => $description,
                 ));
                 $email->safeSend();
@@ -435,7 +435,7 @@ class Controller extends ControllerAdmin
      */
     public function addNewToken()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $params = ['module' => 'UsersManager', 'action' => 'addNewToken'];
 
@@ -443,7 +443,7 @@ class Controller extends ControllerAdmin
             throw new Exception('Not allowed');
         }
 
-        $postRequest = \Piwik\Request::fromPost();
+        $postRequest = \Matomo\Request::fromPost();
         $postRequestHasData = count($postRequest->getParameters());
 
         $today = Date::factory('now');
@@ -469,7 +469,7 @@ class Controller extends ControllerAdmin
             $secureOnly = $postRequest->getBoolParameter('secure_only', false);
             $hasTokenExpiry = $postRequest->getBoolParameter('has_expiration', false);
 
-            $login = Piwik::getCurrentUserLogin();
+            $login = Matomo::getCurrentUserLogin();
 
             $generatedToken = $this->userModel->generateRandomTokenAuth();
 
@@ -485,8 +485,8 @@ class Controller extends ControllerAdmin
 
             $container = StaticContainer::getContainer();
             $email = $container->make(TokenAuthCreatedEmail::class, [
-                'login' => Piwik::getCurrentUserLogin(),
-                'emailAddress' => Piwik::getCurrentUserEmail(),
+                'login' => Matomo::getCurrentUserLogin(),
+                'emailAddress' => Matomo::getCurrentUserEmail(),
                 'tokenDescription' => $description,
             ]);
             $email->safeSend();
@@ -512,7 +512,7 @@ class Controller extends ControllerAdmin
      */
     public function anonymousSettings()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $view = new View('@UsersManager/anonymousSettings');
 
@@ -526,13 +526,13 @@ class Controller extends ControllerAdmin
 
     public function setIgnoreCookie()
     {
-        Piwik::checkUserHasSomeViewAccess();
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSomeViewAccess();
+        Matomo::checkUserIsNotAnonymous();
 
         Nonce::checkNonce(self::NONCE_SET_IGNORE_COOKIE);
 
         IgnoreCookie::setIgnoreCookie();
-        Piwik::redirectToModule('UsersManager', 'userSettings', ['nonce' => false]);
+        Matomo::redirectToModule('UsersManager', 'userSettings', ['nonce' => false]);
     }
 
     /**
@@ -541,7 +541,7 @@ class Controller extends ControllerAdmin
      */
     protected function initViewAnonymousUserSettings($view)
     {
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             return;
         }
 
@@ -570,7 +570,7 @@ class Controller extends ControllerAdmin
         $anonymousDefaultReport = Request::processRequest('UsersManager.getUserPreference', array('userLogin' => $userLogin, 'preferenceName' => APIUsersManager::PREFERENCE_DEFAULT_REPORT));
         if ($anonymousDefaultReport === false) {
             if (empty($anonymousSites)) {
-                $anonymousDefaultReport = Piwik::getLoginPluginName();
+                $anonymousDefaultReport = Matomo::getLoginPluginName();
             } else {
                 // we manually imitate what would happen, in case the anonymous user logs in
                 // and is redirected to the first website available to them in the list
@@ -594,9 +594,9 @@ class Controller extends ControllerAdmin
         $view->anonymousDefaultDate = $this->getDefaultDateForUser($userLogin);
 
         $view->defaultReportOptions = array(
-            array('key' => 'Login', 'value' => Piwik::translate('UsersManager_TheLoginScreen')),
-            array('key' => 'MultiSites', 'value' => Piwik::translate('General_AllWebsitesDashboard'), 'disabled' => empty($anonymousSites)),
-            array('key' => '1', 'value' => Piwik::translate('General_DashboardForASpecificWebsite')),
+            array('key' => 'Login', 'value' => Matomo::translate('UsersManager_TheLoginScreen')),
+            array('key' => 'MultiSites', 'value' => Matomo::translate('General_AllWebsitesDashboard'), 'disabled' => empty($anonymousSites)),
+            array('key' => '1', 'value' => Matomo::translate('General_DashboardForASpecificWebsite')),
         );
     }
 
@@ -607,7 +607,7 @@ class Controller extends ControllerAdmin
     {
         $response = new ResponseBuilder(Common::getRequestVar('format'));
         try {
-            Piwik::checkUserHasSuperUserAccess();
+            Matomo::checkUserHasSuperUserAccess();
             $this->checkTokenInUrl();
 
             $anonymousDefaultReport = Common::getRequestVar('anonymousDefaultReport');
@@ -646,9 +646,9 @@ class Controller extends ControllerAdmin
             $defaultDate = Common::getRequestVar('defaultDate');
             $language = Common::getRequestVar('language');
             $timeFormat = Common::getRequestVar('timeformat');
-            $userLogin = Piwik::getCurrentUserLogin();
+            $userLogin = Matomo::getCurrentUserLogin();
 
-            Piwik::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
+            Matomo::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
 
             $this->processEmailChange($userLogin);
 
@@ -712,14 +712,14 @@ class Controller extends ControllerAdmin
      */
     public function recordPasswordChange()
     {
-        $userLogin = Piwik::getCurrentUserLogin();
+        $userLogin = Matomo::getCurrentUserLogin();
 
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($userLogin);
         Nonce::checkNonce(self::NONCE_CHANGE_PASSWORD);
 
         $this->processPasswordChange($userLogin);
 
-        $notification = new Notification(Piwik::translate('CoreAdminHome_SettingsSaveSuccess'));
+        $notification = new Notification(Matomo::translate('CoreAdminHome_SettingsSaveSuccess'));
         $notification->context = Notification::CONTEXT_SUCCESS;
         Notification\Manager::notify('successpass', $notification);
         $this->redirectToIndex('UsersManager', 'userSecurity');
@@ -735,7 +735,7 @@ class Controller extends ControllerAdmin
             throw new Exception("Cannot change email with untrusted hostname!");
         }
 
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
         $email = $request->getStringParameter('email');
         $passwordCurrent = $request->getStringParameter('passwordConfirmation', '');
 
@@ -758,7 +758,7 @@ class Controller extends ControllerAdmin
             throw new Exception("Cannot change password with untrusted hostname!");
         }
 
-        $request = \Piwik\Request::fromRequest();
+        $request = \Matomo\Request::fromRequest();
         $newPassword = $request->getStringParameter('password', '');
         $passwordBis = $request->getStringParameter('passwordBis', '');
         $passwordCurrent = $request->getStringParameter('passwordConfirmation', '');
@@ -787,7 +787,7 @@ class Controller extends ControllerAdmin
         // logs the user in with the new password
         $newPassword = Common::unsanitizeInputValue($newPassword);
         $sessionInitializer = new SessionInitializer();
-        $auth = StaticContainer::get('Piwik\Auth');
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setTokenAuth(null); // ensure authenticated through password
         $auth->setLogin($userLogin);
         $auth->setPassword($newPassword);

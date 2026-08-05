@@ -9,11 +9,11 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\tests\Unit\Providers;
+namespace Matomo\Plugins\AIAgents\tests\Unit\Providers;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Plugins\AIAgents\Providers\NovaAct;
-use Piwik\Tracker\Request;
+use Matomo\Plugins\AIAgents\Providers\NovaAct;
+use Matomo\Tracker\Request;
 
 /**
  * @group AIAgents

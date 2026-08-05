@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Integration\Dao;
+namespace Matomo\Plugins\CustomDimensions\tests\Integration\Dao;
 
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
-use Piwik\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor as Processor;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\ActionPageview;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor as Processor;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\ActionPageview;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * @group CustomDimensions

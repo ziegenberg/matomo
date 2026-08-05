@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\tests\System\Commands\FeatureFlags;
+namespace Matomo\Plugins\FeatureFlags\tests\System\Commands\FeatureFlags;
 
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
 
 class FakeFeatureFlag implements FeatureFlagInterface
 {

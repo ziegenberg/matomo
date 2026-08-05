@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\Emails\UserInviteEmail;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Site;
-use Piwik\Updater;
-use Piwik\Updater\Migration;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updates as PiwikUpdates;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\Emails\UserInviteEmail;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Site;
+use Matomo\Updater;
+use Matomo\Updater\Migration;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updates as PiwikUpdates;
 
 /**
  * Update for version 4.11.0-rc2
@@ -85,7 +85,7 @@ class Updates_4_11_0_rc2 extends PiwikUpdates
 
                 // send email
                 $email = StaticContainer::getContainer()->make(UserInviteEmail::class, [
-                  'currentUser'  => Piwik::getCurrentUserLogin(),
+                  'currentUser'  => Matomo::getCurrentUserLogin(),
                   'invitedUser'  => $user,
                   'siteName'     => $siteName,
                   'token'        => $generatedToken,

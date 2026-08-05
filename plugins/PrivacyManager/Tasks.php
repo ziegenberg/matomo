@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Plugins\PrivacyManager\Model\DataSubjects;
-use Piwik\Plugins\PrivacyManager\Model\LogDataAnonymizations;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Plugins\PrivacyManager\Model\DataSubjects;
+use Matomo\Plugins\PrivacyManager\Model\LogDataAnonymizations;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
 
-class Tasks extends \Piwik\Plugin\Tasks
+class Tasks extends \Matomo\Plugin\Tasks
 {
     private LogDataAnonymizations $logDataAnonymizations;
 
@@ -56,7 +56,7 @@ class Tasks extends \Piwik\Plugin\Tasks
 
     /**
      * To test execute the following command:
-     * `./console core:run-scheduled-tasks "Piwik\Plugins\PrivacyManager\Tasks.deleteLogData"`
+     * `./console core:run-scheduled-tasks "Matomo\Plugins\PrivacyManager\Tasks.deleteLogData"`
      */
     public function deleteLogData()
     {

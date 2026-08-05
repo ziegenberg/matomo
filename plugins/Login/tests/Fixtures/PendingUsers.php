@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Fixtures;
+namespace Matomo\Plugins\Login\tests\Fixtures;
 
-use Piwik\Plugins\PrivacyManager\SystemSettings;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Plugins\PrivacyManager\SystemSettings;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Simple fixture that creates a user with pending invitation

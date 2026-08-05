@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDirPlugin\tests\Integration;
+namespace Matomo\Plugins\CustomDirPlugin\tests\Integration;
 
-use Piwik\Plugins\CustomDirPlugin\SystemSettings;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\CustomDirPlugin\SystemSettings;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CustomDirPlugin

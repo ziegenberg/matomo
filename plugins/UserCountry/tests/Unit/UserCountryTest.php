@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\tests\Unit;
+namespace Matomo\Plugins\UserCountry\tests\Unit;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
-use Piwik\Plugins\UserCountry\Columns\Country;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Plugins\UserCountry\Columns\Country;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tests\Framework\Fixture;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/UserCountry.php';
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
@@ -40,7 +40,7 @@ class UserCountryTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetFlagFromCode()
     {
-        $flag = \Piwik\Plugins\UserCountry\getFlagFromCode("us");
+        $flag = \Matomo\Plugins\UserCountry\getFlagFromCode("us");
         $this->assertEquals(basename($flag), "us.png");
     }
 
@@ -49,7 +49,7 @@ class UserCountryTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetFlagFromInvalidCode()
     {
-        $flag = \Piwik\Plugins\UserCountry\getFlagFromCode("foo");
+        $flag = \Matomo\Plugins\UserCountry\getFlagFromCode("foo");
         $this->assertEquals(basename($flag), "xx.png");
     }
 
@@ -59,7 +59,7 @@ class UserCountryTest extends \PHPUnit\Framework\TestCase
     public function testFlagsAndContinents()
     {
         /** @var RegionDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         $continents = $dataProvider->getContinentList();
         $countries = $dataProvider->getCountryList(true);

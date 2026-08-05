@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry;
+namespace Matomo\Plugins\UserCountry;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
 
-class UserCountry extends \Piwik\Plugin
+class UserCountry extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -75,7 +75,7 @@ class UserCountry extends \Piwik\Plugin
     public static function getCountriesForContinent($continent)
     {
         /** @var RegionDataProvider $regionDataProvider */
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         $result = array();
         $continent = strtolower($continent);

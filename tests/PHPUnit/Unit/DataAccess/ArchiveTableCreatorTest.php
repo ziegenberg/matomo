@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\DataAccess;
+namespace Matomo\Tests\Unit\DataAccess;
 
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
 
 /**
  * @group Core

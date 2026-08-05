@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration;
 
-use Piwik\Changes\Model as ChangesModel;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Plugins\CoreAdminHome\CoreAdminHome;
-use Piwik\Plugins\CoreAdminHome\Controller;
-use Piwik\Plugins\CoreAdminHome\OptOutManager;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\UsersManager\API as UsersManagerAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Translation\Loader\DevelopmentLoader;
-use Piwik\Translation\Loader\JsonFileLoader;
-use Piwik\Translation\Translator;
+use Matomo\Changes\Model as ChangesModel;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Plugins\CoreAdminHome\CoreAdminHome;
+use Matomo\Plugins\CoreAdminHome\Controller;
+use Matomo\Plugins\CoreAdminHome\OptOutManager;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\UsersManager\API as UsersManagerAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Translation\Loader\DevelopmentLoader;
+use Matomo\Translation\Loader\JsonFileLoader;
+use Matomo\Translation\Translator;
 
 /**
  * @group CoreAdminHome
@@ -137,7 +137,7 @@ class ControllerTest extends IntegrationTestCase
 
         $response = $controller->setMailSettings();
 
-        $this->assertStringContainsString(Piwik::translate('UsersManager_CurrentPasswordNotCorrect'), $response);
+        $this->assertStringContainsString(Matomo::translate('UsersManager_CurrentPasswordNotCorrect'), $response);
         // nothing must have been persisted
         $this->assertSame($originalHost, Config::getInstance()->mail['host']);
     }
@@ -156,7 +156,7 @@ class ControllerTest extends IntegrationTestCase
 
         $response = $controller->setMailSettings();
 
-        $this->assertStringContainsString(Piwik::translate('UsersManager_CurrentPasswordNotCorrect'), $response);
+        $this->assertStringContainsString(Matomo::translate('UsersManager_CurrentPasswordNotCorrect'), $response);
         // nothing must have been persisted
         $this->assertSame($originalHost, Config::getInstance()->mail['host']);
     }
@@ -366,7 +366,7 @@ class ControllerTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
             'test.vars.loadChanges' => true,
         ];
     }

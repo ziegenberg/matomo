@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Columns;
+namespace Matomo\Plugins\Referrers\Columns;
 
-use Piwik\Common;
-use Piwik\Metrics\Formatter;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Common;
+use Matomo\Metrics\Formatter;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 class ReferrerType extends Base
 {
@@ -23,13 +23,13 @@ class ReferrerType extends Base
     protected $segmentName = 'referrerType';
     protected $nameSingular = 'Referrers_Type';
     protected $namePlural = 'Referrers_ReferrerTypes';
-    protected $sqlFilterValue = 'Piwik\Plugins\Referrers\getReferrerTypeFromShortName';
+    protected $sqlFilterValue = 'Matomo\Plugins\Referrers\getReferrerTypeFromShortName';
     protected $acceptValues = 'direct, search, website, campaign, ai';
     protected $category = 'Referrers_Referrers';
 
     public function formatValue($value, $idSite, Formatter $formatter)
     {
-        return \Piwik\Plugins\Referrers\getReferrerTypeLabel($value);
+        return \Matomo\Plugins\Referrers\getReferrerTypeLabel($value);
     }
 
     public function getEnumColumnValues()

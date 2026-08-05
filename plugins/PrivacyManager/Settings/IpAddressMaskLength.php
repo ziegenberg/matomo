@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Settings;
+namespace Matomo\Plugins\PrivacyManager\Settings;
 
-use Piwik\Piwik;
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Settings\Interfaces\CustomSettingInterface;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Policy\CnilPolicy;
+use Matomo\Matomo;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Settings\Interfaces\CustomSettingInterface;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\Settings\Interfaces\Traits\Getters\CustomGetterTrait;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Policy\CnilPolicy;
 
 /**
  * @implements CustomSettingInterface<int|null>
@@ -60,14 +60,14 @@ class IpAddressMaskLength implements CustomSettingInterface, PolicyComparisonInt
 
     public static function getTitle(): string
     {
-        return Piwik::translate('PrivacyManager_AnonymizeIpMaskLengthSettingTitle');
+        return Matomo::translate('PrivacyManager_AnonymizeIpMaskLengthSettingTitle');
     }
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
         // TODO add in logic for generating message for different policy requirements
         $currentValue = self::getCurrentMaskLength($idSite);
-        return Piwik::translate('PrivacyManager_AnonymizeIpMaskLengthSettingRequirementNote', [ 2, $currentValue ]);
+        return Matomo::translate('PrivacyManager_AnonymizeIpMaskLengthSettingRequirementNote', [ 2, $currentValue ]);
     }
 
     public static function getInlineHelp(): string

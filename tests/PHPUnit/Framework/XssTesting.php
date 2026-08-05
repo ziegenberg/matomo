@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework;
+namespace Matomo\Tests\Framework;
 
-use Piwik\Common;
-use Piwik\Option;
+use Matomo\Common;
+use Matomo\Option;
 
 /**
  * TODO: doc
@@ -106,7 +106,7 @@ JS;
     public static function getJavaScriptAddEvent()
     {
         $xssTesting = new XssTesting();
-        return ['Template.jsGlobalVariables', \Piwik\DI::value(function (&$out) use ($xssTesting) {
+        return ['Template.jsGlobalVariables', \Matomo\DI::value(function (&$out) use ($xssTesting) {
             $out .= $xssTesting->getJavaScriptCode();
         })];
     }

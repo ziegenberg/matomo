@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Category;
+namespace Matomo\Category;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * Base type for category. lets you change the name for a categoryId and specify a different order
@@ -27,8 +27,8 @@ class Category
     public const DEFAULT_GROUP = '';
 
     /**
-     * The id of the category as specified eg in {@link Piwik\Widget\WidgetConfig::setCategoryId()`} or
-     * {@link Piwik\Plugin\Report::getCategoryId()}. The id is used as the name in the menu and will be visible in the
+     * The id of the category as specified eg in {@link Matomo\Widget\WidgetConfig::setCategoryId()`} or
+     * {@link Matomo\Plugin\Report::getCategoryId()}. The id is used as the name in the menu and will be visible in the
      * URL.
      *
      * @var string Should be a translation key, eg 'General_Visits'
@@ -150,7 +150,7 @@ class Category
 
     public function getDisplayName()
     {
-        return Piwik::translate($this->getId());
+        return Matomo::translate($this->getId());
     }
 
     public function addSubcategory(Subcategory $subcategory)

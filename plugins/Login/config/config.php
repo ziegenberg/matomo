@@ -1,12 +1,12 @@
 <?php
 
-use Piwik\Container\StaticContainer;
-use Piwik\Auth\PasswordStrength;
+use Matomo\Container\StaticContainer;
+use Matomo\Auth\PasswordStrength;
 
 return [
-    'Piwik\Auth' => Piwik\DI::create('Piwik\Plugins\Login\Auth'),
-    'Piwik\Auth\PasswordStrength' => Piwik\DI::factory(function () {
-        $settings = StaticContainer::get('Piwik\Plugins\Login\SystemSettings');
+    'Matomo\Auth' => Matomo\DI::create('Matomo\Plugins\Login\Auth'),
+    'Matomo\Auth\PasswordStrength' => Matomo\DI::factory(function () {
+        $settings = StaticContainer::get('Matomo\Plugins\Login\SystemSettings');
         $featureEnabled = $settings->enablePasswordStrengthCheck->getValue();
         return new PasswordStrength($featureEnabled);
     }),

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Dimension;
+namespace Matomo\Plugins\CustomDimensions\Dimension;
 
 use Exception;
-use Piwik\Piwik;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Matomo;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
 
 class Dimension
 {
@@ -40,7 +40,7 @@ class Dimension
     public function checkExists()
     {
         if (empty($this->dimension)) {
-            $msg = Piwik::translate('CustomDimensions_ExceptionDimensionDoesNotExist', array($this->idDimension, $this->idSite));
+            $msg = Matomo::translate('CustomDimensions_ExceptionDimensionDoesNotExist', array($this->idDimension, $this->idSite));
             throw new Exception($msg);
         }
     }
@@ -50,7 +50,7 @@ class Dimension
         $this->checkExists();
 
         if (empty($this->dimension['active'])) {
-            $msg = Piwik::translate('CustomDimensions_ExceptionDimensionIsNotActive', array($this->idDimension, $this->idSite));
+            $msg = Matomo::translate('CustomDimensions_ExceptionDimensionIsNotActive', array($this->idDimension, $this->idSite));
             throw new Exception($msg);
         }
     }

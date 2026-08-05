@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\tests\Integration;
+namespace Matomo\Plugins\MultiSites\tests\Integration;
 
-use Piwik\DataTable;
-use Piwik\Period;
-use Piwik\Plugins\MultiSites\Dashboard;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\DataTable;
+use Matomo\Period;
+use Matomo\Plugins\MultiSites\Dashboard;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group MultiSites
@@ -39,7 +39,7 @@ class DashboardTest extends IntegrationTestCase
 
         Fixture::loadAllTranslations();
 
-        $this->dashboard = $this->getMockBuilder('Piwik\Plugins\MultiSites\Dashboard')
+        $this->dashboard = $this->getMockBuilder('Matomo\Plugins\MultiSites\Dashboard')
                                 ->setMethods(null)
                                 ->disableOriginalConstructor()
                                 ->getMock();

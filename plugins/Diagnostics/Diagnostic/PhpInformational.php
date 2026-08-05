@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\CliMulti\CliPhp;
-use Piwik\Config\GeneralConfig;
-use Piwik\Date;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
+use Matomo\CliMulti\CliPhp;
+use Matomo\Config\GeneralConfig;
+use Matomo\Date;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
 
 /**
  * Information about PHP.

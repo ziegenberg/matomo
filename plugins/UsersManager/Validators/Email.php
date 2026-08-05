@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Validators;
+namespace Matomo\Plugins\UsersManager\Validators;
 
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Validators\BaseValidator;
-use Piwik\Validators\Exception;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Validators\BaseValidator;
+use Matomo\Validators\Exception;
 
 class Email extends BaseValidator
 {
@@ -31,8 +31,8 @@ class Email extends BaseValidator
             return;
         }
 
-        if (!Piwik::isValidEmailString($value)) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorNotEmailLike', [$value]));
+        if (!Matomo::isValidEmailString($value)) {
+            throw new Exception(Matomo::translate('General_ValidatorErrorNotEmailLike', [$value]));
         }
 
         if ($this->checkUnique) {
@@ -48,19 +48,19 @@ class Email extends BaseValidator
     private function isUnique($email)
     {
         if (APIUsersManager::getInstance()->userEmailExists($email)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionEmailExists', $email));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionEmailExists', $email));
         }
 
         if ($this->userLogin && mb_strtolower($this->userLogin) !== mb_strtolower($email) && APIUsersManager::getInstance()->userExists($email)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionEmailExistsAsLogin', $email));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionEmailExistsAsLogin', $email));
         }
 
         if (!$this->userLogin && APIUsersManager::getInstance()->userExists($email)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionEmailExistsAsLogin', $email));
+            throw new Exception(Matomo::translate('UsersManager_ExceptionEmailExistsAsLogin', $email));
         }
 
-        if (!Piwik::isValidEmailString($email)) {
-            throw new Exception(Piwik::translate('UsersManager_ExceptionInvalidEmail'));
+        if (!Matomo::isValidEmailString($email)) {
+            throw new Exception(Matomo::translate('UsersManager_ExceptionInvalidEmail'));
         }
     }
 }

@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CustomDimensions\FeatureFlags;
+namespace Matomo\Plugins\CustomDimensions\FeatureFlags;
 
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
 
 class CustomDimensionReportWithRollUp implements FeatureFlagInterface
 {

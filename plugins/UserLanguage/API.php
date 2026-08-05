@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserLanguage;
+namespace Matomo\Plugins\UserLanguage;
 
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Piwik;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Matomo;
 
 /**
  * @see plugins/UserLanguage/functions.php
@@ -21,9 +21,9 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/UserLanguage/functions.php';
 /**
  * The UserLanguage API lets you access reports about your Visitors language setting
  *
- * @method static \Piwik\Plugins\UserLanguage\API getInstance()
+ * @method static \Matomo\Plugins\UserLanguage\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @param int|string|int[] $idSite
@@ -32,7 +32,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable($name);
         $dataTable->queueFilter('ReplaceColumnNames');

@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
-use Piwik\Config\GeneralConfig;
-use Piwik\Piwik;
+use Matomo\Config\GeneralConfig;
+use Matomo\Matomo;
 
 class BulkRequestLimit
 {
@@ -21,8 +21,8 @@ class BulkRequestLimit
         $configLimit = GeneralConfig::getConfigValue('API_bulk_request_limit');
         $configLimit = is_numeric($configLimit) ? (int)$configLimit : -1;
 
-        if (Piwik::isUserIsAnonymous()) {
-            $defaultLimit = Piwik::isUserHasSomeViewAccess() ? 50 : 10;
+        if (Matomo::isUserIsAnonymous()) {
+            $defaultLimit = Matomo::isUserHasSomeViewAccess() ? 50 : 10;
             if ($configLimit > -1) {
                 return min($defaultLimit, $configLimit);
             }

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicePlugins\Columns;
+namespace Matomo\Plugins\DevicePlugins\Columns;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 class PluginPdf extends DevicePluginColumn
 {
@@ -23,7 +23,7 @@ class PluginPdf extends DevicePluginColumn
 
     public function getName()
     {
-        return Piwik::translate('General_Plugin') . ' (PDF)';
+        return Matomo::translate('General_Plugin') . ' (PDF)';
     }
 
     /**

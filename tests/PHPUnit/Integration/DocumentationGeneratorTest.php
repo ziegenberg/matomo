@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\API\DocumentationGenerator;
-use Piwik\API\Proxy;
-use Piwik\EventDispatcher;
+use Matomo\API\DocumentationGenerator;
+use Matomo\API\Proxy;
+use Matomo\EventDispatcher;
 use ReflectionClass;
 
 /**

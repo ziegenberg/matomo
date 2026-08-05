@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\API\Proxy;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\ExampleReport\Reports\GetExampleReport;
-use Piwik\Plugins\Actions\Columns\ExitPageUrl;
-use Piwik\Piwik;
-use Piwik\Metrics;
-use Piwik\Plugins\ExampleTracker\Columns\ExampleDimension;
-use Piwik\Plugins\Referrers\Columns\Keyword;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Widget\WidgetsList;
+use Matomo\API\Proxy;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\ExampleReport\Reports\GetExampleReport;
+use Matomo\Plugins\Actions\Columns\ExitPageUrl;
+use Matomo\Matomo;
+use Matomo\Metrics;
+use Matomo\Plugins\ExampleTracker\Columns\ExampleDimension;
+use Matomo\Plugins\Referrers\Columns\Keyword;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Widget\WidgetsList;
 
 class GetBasicReport extends Report
 {
@@ -48,7 +48,7 @@ class GetAdvancedReport extends GetBasicReport
 
         $this->action      = 'getAdvancedReport';
         $this->subcategoryId = 'Actions_SubmenuPageTitles';
-        $this->documentation = Piwik::translate('ExampleReportDocumentation');
+        $this->documentation = Matomo::translate('ExampleReportDocumentation');
         $this->dimension   = new ExitPageUrl();
         $this->metrics     = array('nb_actions', 'nb_visits');
         $this->processedMetrics = array('conversion_rate', 'bounce_rate');
@@ -331,14 +331,14 @@ class ReportTest extends IntegrationTestCase
 
         $report = ReportsProvider::factory($module, $action);
 
-        $this->assertInstanceOf('Piwik\Plugins\ExampleReport\Reports\GetExampleReport', $report);
+        $this->assertInstanceOf('Matomo\Plugins\ExampleReport\Reports\GetExampleReport', $report);
         $this->assertEquals($module, $report->getModule());
         $this->assertEquals($action, $report->getAction());
 
         // action ucfirst should work as well
         $report = ReportsProvider::factory($module, ucfirst($action));
 
-        $this->assertInstanceOf('Piwik\Plugins\ExampleReport\Reports\GetExampleReport', $report);
+        $this->assertInstanceOf('Matomo\Plugins\ExampleReport\Reports\GetExampleReport', $report);
         $this->assertEquals($module, $report->getModule());
         $this->assertEquals($action, $report->getAction());
     }
@@ -374,7 +374,7 @@ class ReportTest extends IntegrationTestCase
         $subtableDimension = $report->getSubtableDimension();
 
         $this->assertNotNull($subtableDimension);
-        $this->assertInstanceOf("Piwik\\Plugins\\Referrers\\Columns\\Keyword", $subtableDimension);
+        $this->assertInstanceOf("Matomo\\Plugins\\Referrers\\Columns\\Keyword", $subtableDimension);
     }
 
     public function testFetchShouldUseCorrectApiUrl()
@@ -383,7 +383,7 @@ class ReportTest extends IntegrationTestCase
 
         $proxyMock = $this->getMockBuilder('stdClass')->addMethods(array('call', '__construct'))->getMock();
         $proxyMock->expects($this->once())->method('call')->with(
-            '\\Piwik\\Plugins\\ExampleReport\\API',
+            '\\Matomo\\Plugins\\ExampleReport\\API',
             'getExampleReport',
             array(
                 'idSite' => 1,
@@ -409,7 +409,7 @@ class ReportTest extends IntegrationTestCase
 
         $proxyMock = $this->getMockBuilder('stdClass')->addMethods(array('call', '__construct'))->getMock();
         $proxyMock->expects($this->once())->method('call')->with(
-            '\\Piwik\\Plugins\\Referrers\\API',
+            '\\Matomo\\Plugins\\Referrers\\API',
             'getSearchEnginesFromKeywordId',
             array(
                 'idSubtable' => 23,
@@ -425,7 +425,7 @@ class ReportTest extends IntegrationTestCase
         )->willReturn("result");
         StaticContainer::getContainer()->set(Proxy::class, $proxyMock);
 
-        $report = new \Piwik\Plugins\Referrers\Reports\GetKeywords();
+        $report = new \Matomo\Plugins\Referrers\Reports\GetKeywords();
         $result = $report->fetchSubtable(23, array('idSite' => 1, 'date' => '2012-01-02'));
         $this->assertEquals("result", $result);
     }
@@ -435,7 +435,7 @@ class ReportTest extends IntegrationTestCase
         PluginManager::getInstance()->loadPlugins(array('Referrers'));
 
         $report = Report::getForDimension(new Keyword());
-        $this->assertInstanceOf("Piwik\\Plugins\\Referrers\\Reports\\GetKeywords", $report);
+        $this->assertInstanceOf("Matomo\\Plugins\\Referrers\\Reports\\GetKeywords", $report);
     }
 
     public function testGetForDimensionShouldReturnNullIfNoReportExistsForDimension()

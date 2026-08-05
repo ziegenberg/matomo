@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin\Model;
+namespace Matomo\Plugins\CorePluginsAdmin\Model;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\CorePluginsAdmin\CorePluginsAdmin;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\CorePluginsAdmin\CorePluginsAdmin;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
 
 class TagManagerTeaser
 {
@@ -38,7 +38,7 @@ class TagManagerTeaser
                 && (!$pluginManager->isPluginActivated('TagManager')
                 || !$pluginManager->isPluginLoaded('TagManager'))
                 && $pluginManager->isPluginInFilesystem('TagManager')
-                && Piwik::isUserHasSomeAdminAccess()
+                && Matomo::isUserHasSomeAdminAccess()
                 && $this->isEnabledGlobally()
                 && $this->isEnabledForUser();
     }

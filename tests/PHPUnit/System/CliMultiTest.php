@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Archiver\Request;
-use Piwik\CliMulti;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CoreConsole\FeatureFlags\CliMultiProcessSymfony;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\TestLogger;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Version;
+use Matomo\Archiver\Request;
+use Matomo\CliMulti;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CoreConsole\FeatureFlags\CliMultiProcessSymfony;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\TestLogger;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Version;
 
 /**
  * @group Core
@@ -26,7 +26,7 @@ use Piwik\Version;
 class CliMultiTest extends SystemTestCase
 {
     /**
-     * @var \Piwik\CliMulti
+     * @var \Matomo\CliMulti
      */
     private $cliMulti;
 
@@ -69,7 +69,7 @@ class CliMultiTest extends SystemTestCase
             'getPiwikVersion' => '{"value":"' . Version::VERSION . '"}',
         ];
 
-        \Piwik\Common::$isCliMode = true;
+        \Matomo\Common::$isCliMode = true;
 
         // deactivate symfony process usage by default
         // required as local instance could have activated the feature flag
@@ -196,7 +196,7 @@ class CliMultiTest extends SystemTestCase
     {
         $urls = $this->buildUrls('getAnswerToLife', 'getAnswerToLife');
 
-        \Piwik\Common::$isCliMode = false;
+        \Matomo\Common::$isCliMode = false;
 
         $this->assertRequestReturnsValidResponses($urls, ['getAnswerToLife', 'getAnswerToLife']);
         $this->assertDebugLogContainsRequestDetails($urls, 'http');

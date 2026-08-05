@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updates;
+use Matomo\Updater;
 
 /**
  * Update for version 3.6.0-b4.

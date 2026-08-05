@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Common;
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CustomVariables\CustomVariables;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\SettingsPiwik;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CustomVariables\CustomVariables;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\SettingsPiwik;
+use Matomo\View;
 
 /**
  * Generates the Javascript code to be inserted on every page of the website to track.
@@ -224,7 +224,7 @@ class TrackerCodeGenerator
          *                         domain is different from the normal domain.
          * @param array $parameters The parameters supplied to `TrackerCodeGenerator::generate()`.
          */
-        Piwik::postEvent('Tracker.getJavascriptCode', array(&$codeImpl, $parameters));
+        Matomo::postEvent('Tracker.getJavascriptCode', array(&$codeImpl, $parameters));
 
         $setTrackerUrl = 'var u="' . $codeImpl['protocol'] . '{$piwikUrl}/";';
 

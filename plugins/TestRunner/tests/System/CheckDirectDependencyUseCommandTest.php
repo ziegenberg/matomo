@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner\tests\System;
+namespace Matomo\Plugins\TestRunner\tests\System;
 
-use Piwik\Plugins\TestRunner\Commands\CheckDirectDependencyUse;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Plugins\TestRunner\Commands\CheckDirectDependencyUse;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 
@@ -26,7 +26,7 @@ class CheckDirectDependencyUseCommandTest extends SystemTestCase
      */
     public function testCommand($pluginName, $expectedResult)
     {
-        $console = new \Piwik\Console(self::$fixture->piwikEnvironment);
+        $console = new \Matomo\Console(self::$fixture->piwikEnvironment);
         $checkDirectDependencyUse = new CheckDirectDependencyUse();
         $console->addCommands([$checkDirectDependencyUse]);
         $command = $console->find('tests:check-direct-dependency-use');

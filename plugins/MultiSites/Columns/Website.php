@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\Columns;
+namespace Matomo\Plugins\MultiSites\Columns;
 
-use Piwik\Columns\Dimension;
-use Piwik\Piwik;
+use Matomo\Columns\Dimension;
+use Matomo\Matomo;
 
 class Website extends Dimension
 {
     public function getName()
     {
-        return Piwik::translate('General_Website');
+        return Matomo::translate('General_Website');
     }
 }

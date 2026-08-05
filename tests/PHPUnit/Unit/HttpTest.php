@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\Config;
-use Piwik\Http;
+use Matomo\Config;
+use Matomo\Http;
 use ReflectionMethod;
 
 /**
@@ -23,7 +23,7 @@ class HttpTest extends \PHPUnit\Framework\TestCase
      */
     public function testgetProxyConfiguration($url, $proxyConfiguration, $expected)
     {
-        $getProxyConfiguration = new ReflectionMethod('\\Piwik\\Http', 'getProxyConfiguration');
+        $getProxyConfiguration = new ReflectionMethod('\Matomo\Http', 'getProxyConfiguration');
 
         Config::getInstance()->proxy['host'] = $proxyConfiguration[0];
         Config::getInstance()->proxy['port'] = $proxyConfiguration[1];

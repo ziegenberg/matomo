@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
+use Matomo\Url;
 
 /**
  * Check if Piwik can use LOAD DATA INFILE.

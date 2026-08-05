@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable\Filter\SafeDecodeLabel;
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin\Manager;
-use Piwik\Tracker\GoalManager;
-use Piwik\Translation\Translator;
-use Piwik\Twig\Extension\EscapeFilter;
-use Piwik\View\RenderTokenParser;
-use Piwik\Visualization\Sparkline;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable\Filter\SafeDecodeLabel;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin\Manager;
+use Matomo\Tracker\GoalManager;
+use Matomo\Translation\Translator;
+use Matomo\Twig\Extension\EscapeFilter;
+use Matomo\View\RenderTokenParser;
+use Matomo\Visualization\Sparkline;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\ChainLoader;
@@ -114,7 +114,7 @@ class Twig
         $this->formatter = new Formatter();
 
         //create loader for custom theme to overwrite twig templates
-        if ($theme && $theme->getPluginName() != \Piwik\Plugin\Manager::DEFAULT_THEME) {
+        if ($theme && $theme->getPluginName() != \Matomo\Plugin\Manager::DEFAULT_THEME) {
             $customLoader = $this->getCustomThemeLoader($theme);
             if ($customLoader) {
                 //make it possible to overwrite plugin templates
@@ -232,7 +232,7 @@ class Twig
     protected function addFunctionIsPluginLoaded(): void
     {
         $isPluginLoadedFunction = new TwigFunction('isPluginLoaded', function ($pluginName) {
-            return \Piwik\Plugin\Manager::getInstance()->isPluginLoaded($pluginName);
+            return \Matomo\Plugin\Manager::getInstance()->isPluginLoaded($pluginName);
         });
         $this->twig->addFunction($isPluginLoadedFunction);
     }
@@ -271,7 +271,7 @@ class Twig
             $str    = '';
             $params = array_merge([&$str], $params);
 
-            Piwik::postEvent($eventName, $params);
+            Matomo::postEvent($eventName, $params);
             return $str;
         }, ['is_safe' => ['html']]);
         $this->twig->addFunction($postEventFunction);
@@ -336,7 +336,7 @@ class Twig
 
     private function getDefaultThemeLoader(): FilesystemLoader
     {
-        $themeDir    = Manager::getPluginDirectory(\Piwik\Plugin\Manager::DEFAULT_THEME) . '/templates/';
+        $themeDir    = Manager::getPluginDirectory(\Matomo\Plugin\Manager::DEFAULT_THEME) . '/templates/';
         $themeLoader = new FilesystemLoader([$themeDir], PIWIK_DOCUMENT_ROOT . DIRECTORY_SEPARATOR);
 
         return $themeLoader;
@@ -426,7 +426,7 @@ class Twig
     {
         $percentage = new TwigFilter('percentage', function ($string, $totalValue, $precision = 1) {
             $formatter = NumberFormatter::getInstance();
-            return $formatter->formatPercent(Piwik::getPercentageSafe($string, $totalValue, $precision), $precision);
+            return $formatter->formatPercent(Matomo::getPercentageSafe($string, $totalValue, $precision), $precision);
         });
         $this->twig->addFilter($percentage);
     }
@@ -491,7 +491,7 @@ class Twig
 
     protected function addFilterNonce(): void
     {
-        $nonce = new TwigFilter('nonce', ['Piwik\\Nonce', 'getNonce']);
+        $nonce = new TwigFilter('nonce', ['Matomo\Nonce', 'getNonce']);
         $this->twig->addFilter($nonce);
     }
 
@@ -564,7 +564,7 @@ class Twig
             }
 
             try {
-                $stringTranslated = Piwik::translate($stringToken, $aValues);
+                $stringTranslated = Matomo::translate($stringToken, $aValues);
             } catch (Exception $e) {
                 $stringTranslated = $stringToken;
             }
@@ -594,7 +594,7 @@ class Twig
 
     private function addPluginNamespaces(FilesystemLoader $loader): void
     {
-        $pluginManager = \Piwik\Plugin\Manager::getInstance();
+        $pluginManager = \Matomo\Plugin\Manager::getInstance();
         $plugins = $pluginManager->getAllPluginsNames();
 
         foreach ($plugins as $name) {
@@ -611,7 +611,7 @@ class Twig
      */
     private function addCustomPluginNamespaces(FilesystemLoader $loader, string $pluginName): void
     {
-        $pluginManager = \Piwik\Plugin\Manager::getInstance();
+        $pluginManager = \Matomo\Plugin\Manager::getInstance();
         $plugins = $pluginManager->getAllPluginsNames();
 
         $pluginsDir = Manager::getPluginDirectory($pluginName);

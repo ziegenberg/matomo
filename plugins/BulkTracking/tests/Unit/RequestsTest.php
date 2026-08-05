@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\tests\Unit;
+namespace Matomo\Plugins\BulkTracking\tests\Unit;
 
-use Piwik\Plugins\BulkTracking\Tracker\Requests;
-use Piwik\Tracker\Request;
+use Matomo\Plugins\BulkTracking\Tracker\Requests;
+use Matomo\Tracker\Request;
 
 /**
  * @group BulkTracking

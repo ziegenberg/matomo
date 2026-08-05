@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Morpheus;
+namespace Matomo\Plugins\Morpheus;
 
-use Piwik\Development;
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
+use Matomo\Development;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureAdminMenu(MenuAdmin $menu)
     {
@@ -32,7 +32,7 @@ class Menu extends \Piwik\Plugin\Menu
         $menu->registerMenuIcon('SitesManager_Sites', $manageMeasurablesIcon);
         $menu->registerMenuIcon('MobileAppMeasurable_MobileApps', $manageMeasurablesIcon);
 
-        if (Development::isEnabled() && Piwik::isUserHasSomeAdminAccess()) {
+        if (Development::isEnabled() && Matomo::isUserHasSomeAdminAccess()) {
             $menu->addDevelopmentItem('CoreAdminHome_UiDemo', $this->urlForAction('demo'));
         }
     }

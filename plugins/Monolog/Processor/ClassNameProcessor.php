@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Processor;
+namespace Matomo\Plugins\Monolog\Processor;
 
 use Monolog\LogRecord;
-use Piwik\Plugin;
+use Matomo\Plugin;
 
 /**
  * Records the name of the class that logged.
@@ -19,11 +19,11 @@ class ClassNameProcessor
 {
     private $skippedClasses = array(
         __CLASS__,
-        'Piwik\Log',
-        'Piwik\Piwik',
-        'Piwik\CronArchive',
+        'Matomo\Log',
+        'Matomo\Matomo',
+        'Matomo\CronArchive',
         'Monolog\Logger',
-        'Piwik\Log\Logger',
+        'Matomo\Log\Logger',
     );
 
     public function __invoke(LogRecord $record): LogRecord

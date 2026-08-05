@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\IntranetMeasurable;
+namespace Matomo\Plugins\IntranetMeasurable;
 
-use Piwik\Settings\Setting;
+use Matomo\Settings\Setting;
 
-class MeasurableSettings extends \Piwik\Plugins\WebsiteMeasurable\MeasurableSettings
+class MeasurableSettings extends \Matomo\Plugins\WebsiteMeasurable\MeasurableSettings
 {
     /** @var Setting */
     public $trustvisitorcookies;

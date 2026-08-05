@@ -1,7 +1,7 @@
 <?php
 
-use Piwik\Container\StaticContainer;
-use Piwik\DI;
+use Matomo\Container\StaticContainer;
+use Matomo\DI;
 
 return [
     'observers.global' => DI::add([

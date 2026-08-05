@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Plugin;
+namespace Matomo\Tests\Integration\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin;
-use Piwik\Plugin\SettingsProvider;
-use Piwik\Settings\Measurable\MeasurableSettings;
-use Piwik\Settings\Plugin\SystemSettings;
-use Piwik\Settings\Plugin\UserSettings;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin;
+use Matomo\Plugin\SettingsProvider;
+use Matomo\Settings\Measurable\MeasurableSettings;
+use Matomo\Settings\Plugin\SystemSettings;
+use Matomo\Settings\Plugin\UserSettings;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group SettingsProvider
@@ -45,7 +45,7 @@ class SettingsProviderTest extends IntegrationTestCase
             Fixture::createWebsite('2015-01-01 00:00:00');
         }
 
-        $this->pluginManager = StaticContainer::get('Piwik\Plugin\Manager');
+        $this->pluginManager = StaticContainer::get('Matomo\Plugin\Manager');
         $this->settings = new SettingsProvider($this->pluginManager);
     }
 

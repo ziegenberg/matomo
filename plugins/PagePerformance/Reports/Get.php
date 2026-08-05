@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Reports;
+namespace Matomo\Plugins\PagePerformance\Reports;
 
-use Piwik\EventDispatcher;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\PagePerformance\Metrics;
-use Piwik\Plugins\PagePerformance\Visualizations\JqplotGraph\StackedBarEvolution;
-use Piwik\Plugins\PagePerformance\Visualizations\PerformanceColumns;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Url;
-use Piwik\Widget\WidgetsList;
+use Matomo\EventDispatcher;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\PagePerformance\Metrics;
+use Matomo\Plugins\PagePerformance\Visualizations\JqplotGraph\StackedBarEvolution;
+use Matomo\Plugins\PagePerformance\Visualizations\PerformanceColumns;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Url;
+use Matomo\Widget\WidgetsList;
 
-class Get extends \Piwik\Plugin\Report
+class Get extends \Matomo\Plugin\Report
 {
     protected function init()
     {
@@ -31,8 +31,8 @@ class Get extends \Piwik\Plugin\Report
         $this->subcategoryId = 'PagePerformance_Performance';
         $this->order = 5;
 
-        $this->name = Piwik::translate('PagePerformance_Overview');
-        $this->documentation = Piwik::translate('PagePerformance_OverviewDocumentation');
+        $this->name = Matomo::translate('PagePerformance_Overview');
+        $this->documentation = Matomo::translate('PagePerformance_OverviewDocumentation');
         $this->onlineGuideUrl = Url::addCampaignParametersToMatomoLink('https://matomo.org/faq/how-to/how-do-i-see-page-performance-reports/');
         $this->processedMetrics = Metrics::getAllPagePerformanceMetrics();
         $this->metrics = Metrics::getAllPagePerformanceMetrics();

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions;
+namespace Matomo\Plugins\CustomDimensions;
 
-use Piwik\API\Request;
-use Piwik\Category\Subcategory;
-use Piwik\Common;
-use Piwik\Plugins\CustomDimensions\Dao\Configuration;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
-use Piwik\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker;
-use Piwik\Plugin;
+use Matomo\API\Request;
+use Matomo\Category\Subcategory;
+use Matomo\Common;
+use Matomo\Plugins\CustomDimensions\Dao\Configuration;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker;
+use Matomo\Plugin;
 
 class CustomDimensions extends Plugin
 {
@@ -64,7 +64,7 @@ class CustomDimensions extends Plugin
     }
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -100,7 +100,7 @@ class CustomDimensions extends Plugin
                 continue;
             }
 
-            $recordBuilder = new \Piwik\Plugins\CustomDimensions\RecordBuilders\CustomDimension($dimension);
+            $recordBuilder = new \Matomo\Plugins\CustomDimensions\RecordBuilders\CustomDimension($dimension);
             $recordBuilders[] = $recordBuilder;
         }
     }
@@ -246,7 +246,7 @@ class CustomDimensions extends Plugin
 
     private function getCustomDimensions($idSite)
     {
-        $cache = \Piwik\Cache::getTransientCache();
+        $cache = \Matomo\Cache::getTransientCache();
         $key = 'ConfiguredCustomDimensions_' . (int) $idSite;
         if ($cache->contains($key)) {
             $dimensions = $cache->fetch($key);

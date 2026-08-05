@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Tracker;
+namespace Matomo\Tests\Unit\Tracker;
 
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
-use Piwik\Tracker\GoalManager;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\Tracker\GoalManager;
 
 /**
  * @group Core

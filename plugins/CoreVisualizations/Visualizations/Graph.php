@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations;
 
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Plugin\Metric;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugins\CoreVisualizations\Metrics\Formatter\Numeric;
-use Piwik\Piwik;
-use Piwik\Plugin\Visualization;
-use Piwik\SettingsPiwik;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Plugin\Metric;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugins\CoreVisualizations\Metrics\Formatter\Numeric;
+use Matomo\Matomo;
+use Matomo\Plugin\Visualization;
+use Matomo\SettingsPiwik;
 
 /**
  * This is an abstract visualization that should be the base of any 'graph' visualization.
@@ -48,8 +48,8 @@ abstract class Graph extends Visualization
     public function beforeRender()
     {
         if ($this->config->show_goals) {
-            $this->config->translations['nb_conversions'] = Piwik::translate('Goals_ColumnConversions');
-            $this->config->translations['revenue'] = Piwik::translate('General_TotalRevenue');
+            $this->config->translations['nb_conversions'] = Matomo::translate('Goals_ColumnConversions');
+            $this->config->translations['revenue'] = Matomo::translate('General_TotalRevenue');
         }
     }
 
@@ -73,7 +73,7 @@ abstract class Graph extends Visualization
         if ($this->config->add_total_row) {
             $this->requestConfig->request_parameters_to_modify['totals'] = 1;
             $this->requestConfig->request_parameters_to_modify['keep_totals_row'] = 1;
-            $this->requestConfig->request_parameters_to_modify['keep_totals_row_label'] = Piwik::translate('General_Total');
+            $this->requestConfig->request_parameters_to_modify['keep_totals_row_label'] = Matomo::translate('General_Total');
         }
 
         if (!empty($this->config->columns_to_display)) {
@@ -165,7 +165,7 @@ abstract class Graph extends Visualization
     protected function addTranslations(): void
     {
         if ($this->config->add_total_row) {
-            $totalTranslation = Piwik::translate('General_Total');
+            $totalTranslation = Matomo::translate('General_Total');
             $this->selectableRows['total'] = [
                 'label'     => $totalTranslation,
                 'matcher'   => 'total',
@@ -175,8 +175,8 @@ abstract class Graph extends Visualization
 
         if ($this->config->show_goals) {
             $this->config->addTranslations([
-                'nb_conversions' => Piwik::translate('Goals_ColumnConversions'),
-                'revenue'        => Piwik::translate('General_TotalRevenue'),
+                'nb_conversions' => Matomo::translate('Goals_ColumnConversions'),
+                'revenue'        => Matomo::translate('General_TotalRevenue'),
             ]);
         }
 

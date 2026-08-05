@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Translation\Loader;
+namespace Matomo\Tests\Unit\Translation\Loader;
 
-use Piwik\Validators\UrlLike;
+use Matomo\Validators\UrlLike;
 
 /**
  * @group Validator
@@ -57,7 +57,7 @@ class UrlLikeTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateFailValueIsNotUrlLike($url)
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('ValidatorErrorNotUrlLike');
 
         $this->validate($url);

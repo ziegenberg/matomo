@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Columns;
+namespace Matomo\Plugins\UserCountry\Columns;
 
-use Piwik\Piwik;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
-use Piwik\Tracker\Action;
+use Matomo\Matomo;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
+use Matomo\Tracker\Action;
 
 class Latitude extends Base
 {
@@ -27,7 +27,7 @@ class Latitude extends Base
 
     public function getAcceptValues()
     {
-        return Piwik::translate('UserCountry_LatitudeSegmentHelp', '&segment=lat&gt;X;lat&lt;Y;long&gt;M;long&lt;N');
+        return Matomo::translate('UserCountry_LatitudeSegmentHelp', '&segment=lat&gt;X;lat&lt;Y;long&gt;M;long&lt;N');
     }
 
     /**

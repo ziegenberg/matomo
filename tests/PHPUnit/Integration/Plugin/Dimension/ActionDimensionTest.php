@@ -8,14 +8,14 @@
  */
 
 // there is a test that requires the class to be defined in a plugin
-namespace Piwik\Plugins\Test;
+namespace Matomo\Plugins\Test;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Segment;
-use Piwik\Plugin\Manager;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Segment;
+use Matomo\Plugin\Manager;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class FakeActionDimension extends ActionDimension
 {
@@ -113,8 +113,8 @@ class ActionDimensionTest extends IntegrationTestCase
         $segments = $list->getSegments();
 
         $this->assertCount(2, $segments);
-        $this->assertInstanceOf('\Piwik\Plugin\Segment', $segments[0]);
-        $this->assertInstanceOf('\Piwik\Plugin\Segment', $segments[1]);
+        $this->assertInstanceOf('\Matomo\Plugin\Segment', $segments[0]);
+        $this->assertInstanceOf('\Matomo\Plugin\Segment', $segments[1]);
     }
 
     public function testAddSegmentShouldPrefilSomeSegmentValuesIfNotDefinedYet()
@@ -149,8 +149,8 @@ class ActionDimensionTest extends IntegrationTestCase
         $this->assertGreaterThan(5, count($dimensions));
 
         foreach ($dimensions as $dimension) {
-            $this->assertInstanceOf('\Piwik\Plugin\Dimension\ActionDimension', $dimension);
-            $this->assertStringStartsWith('Piwik\Plugins\Actions\Columns', get_class($dimension));
+            $this->assertInstanceOf('\Matomo\Plugin\Dimension\ActionDimension', $dimension);
+            $this->assertStringStartsWith('Matomo\Plugins\Actions\Columns', get_class($dimension));
         }
     }
 
@@ -163,7 +163,7 @@ class ActionDimensionTest extends IntegrationTestCase
         $this->assertGreaterThan(8, count($dimensions));
 
         foreach ($dimensions as $dimension) {
-            $this->assertInstanceOf('\Piwik\Plugin\Dimension\ActionDimension', $dimension);
+            $this->assertInstanceOf('\Matomo\Plugin\Dimension\ActionDimension', $dimension);
             $this->assertMatchesRegularExpression('/Piwik.Plugins.(Actions|Events).Columns/', get_class($dimension));
         }
     }

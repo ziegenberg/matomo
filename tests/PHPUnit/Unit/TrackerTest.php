@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\Tracker\Request;
-use Piwik\Tests\Framework\Mock\Tracker\Handler;
-use Piwik\Tests\Framework\Mock\Tracker\RequestSet;
-use Piwik\Tracker;
+use Matomo\Tracker\Request;
+use Matomo\Tests\Framework\Mock\Tracker\Handler;
+use Matomo\Tests\Framework\Mock\Tracker\RequestSet;
+use Matomo\Tracker;
 
 /**
  * @group TrackerTest

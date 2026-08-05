@@ -7,27 +7,27 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
 use Exception;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\Plugins\Marketplace\Api\Service;
-use Piwik\Plugins\Marketplace\Plugins\InvalidLicenses;
-use Piwik\Plugins\Marketplace\PluginTrial\Service as PluginTrialService;
-use Piwik\Plugins\UsersManager\SystemSettings;
-use Piwik\Plugins\UsersManager\Validators\AllowedEmailDomain;
-use Piwik\Plugins\UsersManager\Validators\Email;
-use Piwik\Validators\Exception as ValidatorException;
-use Piwik\Validators\NotEmpty;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\Plugins\Marketplace\Api\Service;
+use Matomo\Plugins\Marketplace\Plugins\InvalidLicenses;
+use Matomo\Plugins\Marketplace\PluginTrial\Service as PluginTrialService;
+use Matomo\Plugins\UsersManager\SystemSettings;
+use Matomo\Plugins\UsersManager\Validators\AllowedEmailDomain;
+use Matomo\Plugins\UsersManager\Validators\Email;
+use Matomo\Validators\Exception as ValidatorException;
+use Matomo\Validators\NotEmpty;
 
 /**
  * The Marketplace API lets you manage your license key so you can download & install in one-click <a target="_blank" rel="noreferrer" href="https://matomo.org/recommends/premium-plugins/">paid premium plugins</a> you have subscribed to.
  *
- * @method static \Piwik\Plugins\Marketplace\API getInstance()
+ * @method static \Matomo\Plugins\Marketplace\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private Client $marketplaceClient;
 
@@ -62,7 +62,7 @@ class API extends \Piwik\Plugin\API
      */
     public function createAccount(string $email): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $licenseKey = (new LicenseKey())->get();
 
@@ -80,7 +80,7 @@ class API extends \Piwik\Plugin\API
         } catch (ValidatorException $e) {
             // rethrow with changed message
             throw new ValidatorException(
-                Piwik::translate('Marketplace_CreateAccountErrorEmailInvalid', $email)
+                Matomo::translate('Marketplace_CreateAccountErrorEmailInvalid', $email)
             );
         }
 
@@ -113,11 +113,11 @@ class API extends \Piwik\Plugin\API
         if (200 !== $status || empty($licenseKey)) {
             switch ($status) {
                 case 400:
-                    $message = Piwik::translate('Marketplace_CreateAccountErrorAPIEmailInvalid');
+                    $message = Matomo::translate('Marketplace_CreateAccountErrorAPIEmailInvalid');
                     break;
 
                 case 409:
-                    $message = Piwik::translate('Marketplace_CreateAccountErrorAPIEmailExists', $email);
+                    $message = Matomo::translate('Marketplace_CreateAccountErrorAPIEmailExists', $email);
                     break;
 
                 default:
@@ -141,7 +141,7 @@ class API extends \Piwik\Plugin\API
      */
     public function deleteLicenseKey(): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->setLicenseKey(null);
         return true;
@@ -153,9 +153,9 @@ class API extends \Piwik\Plugin\API
      */
     public function requestTrial(string $pluginName): bool
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             throw new Exception('Cannot request trial as a super user');
         }
 
@@ -179,7 +179,7 @@ class API extends \Piwik\Plugin\API
      */
     public function startFreeTrial(string $pluginName): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!$this->pluginManager->isValidPluginName($pluginName)) {
             throw new Exception('Invalid plugin name given');
@@ -210,7 +210,7 @@ class API extends \Piwik\Plugin\API
         ) {
             // We expect an exact empty 201 response from this API
             // Anything different should be an error
-            throw new Exception(Piwik::translate('Marketplace_TrialStartErrorAPI'));
+            throw new Exception(Matomo::translate('Marketplace_TrialStartErrorAPI'));
         }
 
         return true;
@@ -225,7 +225,7 @@ class API extends \Piwik\Plugin\API
      */
     public function saveLicenseKey(string $licenseKey): bool
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $licenseKey = trim($licenseKey);
 
@@ -244,7 +244,7 @@ class API extends \Piwik\Plugin\API
         }
 
         if (empty($consumer['isValid'])) {
-            throw new Exception(Piwik::translate('Marketplace_ExceptionLinceseKeyIsNotValid'));
+            throw new Exception(Matomo::translate('Marketplace_ExceptionLinceseKeyIsNotValid'));
         }
 
         $this->setLicenseKey($licenseKey);

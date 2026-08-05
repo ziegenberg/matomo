@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\TrackingCode;
+namespace Matomo\Plugins\CustomJsTracker\TrackingCode;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class PiwikJsManipulator
 {
@@ -53,7 +53,7 @@ class PiwikJsManipulator
          *
          * @param string $content the generated JavaScript tracker code
          */
-        Piwik::postEvent('CustomJsTracker.manipulateJsTracker', array(&$content));
+        Matomo::postEvent('CustomJsTracker.manipulateJsTracker', array(&$content));
         $this->content = $content;
 
         return $this->content;

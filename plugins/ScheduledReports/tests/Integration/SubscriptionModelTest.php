@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests;
+namespace Matomo\Plugins\ScheduledReports\tests;
 
-use Piwik\Plugins\ScheduledReports\API;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Plugins\ScheduledReports\SubscriptionModel;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\ScheduledReports\API;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Plugins\ScheduledReports\SubscriptionModel;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group ScheduledReports
@@ -134,7 +134,7 @@ class SubscriptionModelTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

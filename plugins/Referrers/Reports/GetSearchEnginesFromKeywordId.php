@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Referrers\Columns\SearchEngine;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Referrers\Columns\SearchEngine;
 
 class GetSearchEnginesFromKeywordId extends Base
 {
@@ -19,8 +19,8 @@ class GetSearchEnginesFromKeywordId extends Base
     {
         parent::init();
         $this->dimension     = new SearchEngine();
-        $this->name          = Piwik::translate('Referrers_Keywords');
-        $this->documentation = Piwik::translate('Referrers_KeywordsReportDocumentation', '<br />');
+        $this->name          = Matomo::translate('Referrers_Keywords');
+        $this->documentation = Matomo::translate('Referrers_KeywordsReportDocumentation', '<br />');
         $this->isSubtableReport = true;
         $this->order = 4;
     }

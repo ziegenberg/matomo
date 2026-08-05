@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Plugins\Goals\API as APIGoals;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Cache;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Plugins\Goals\API as APIGoals;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Cache;
 
 /**
  * This fixture adds one website and tracks two visits by one visitor.

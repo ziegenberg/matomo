@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleSettingsPlugin;
+namespace Matomo\Plugins\ExampleSettingsPlugin;
 
-use Piwik\Settings\Setting;
-use Piwik\Settings\FieldConfig;
+use Matomo\Settings\Setting;
+use Matomo\Settings\FieldConfig;
 
 /**
  * Defines Settings for ExampleSettingsPlugin.
@@ -20,7 +20,7 @@ use Piwik\Settings\FieldConfig;
  * $settings->autoRefresh->getValue();
  * $settings->color->getValue();
  */
-class UserSettings extends \Piwik\Settings\Plugin\UserSettings
+class UserSettings extends \Matomo\Settings\Plugin\UserSettings
 {
     /** @var Setting */
     public $autoRefresh;

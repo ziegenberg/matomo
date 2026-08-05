@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater;
+namespace Matomo\Plugins\CoreUpdater;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Http;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\UpdateCheck\ReleaseChannel as BaseReleaseChannel;
-use Piwik\Url;
-use Piwik\Version;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Http;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\UpdateCheck\ReleaseChannel as BaseReleaseChannel;
+use Matomo\Url;
+use Matomo\Version;
 
 abstract class ReleaseChannel extends BaseReleaseChannel
 {

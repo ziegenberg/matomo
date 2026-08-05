@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\BotTrackingMethod;
+namespace Matomo\Plugins\BotTracking\BotTrackingMethod;
 
-use Piwik\Plugins\SitesManager\SiteContentDetection\Cloudflare as SitesManagerCloudflare;
-use Piwik\View;
+use Matomo\Plugins\SitesManager\SiteContentDetection\Cloudflare as SitesManagerCloudflare;
+use Matomo\View;
 
 class Cloudflare extends BotTrackingMethodAbstract
 {

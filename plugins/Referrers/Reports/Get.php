@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\CalculateEvolutionFilter;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\NumberFormatter;
-use Piwik\Period;
-use Piwik\Period\Factory;
-use Piwik\Period\Month;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\Referrers\Archiver;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\CalculateEvolutionFilter;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\NumberFormatter;
+use Matomo\Period;
+use Matomo\Period\Factory;
+use Matomo\Period\Month;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\Referrers\Archiver;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class Get extends Base
 {
@@ -35,8 +35,8 @@ class Get extends Base
     {
         parent::init();
 
-        $this->name = Piwik::translate('Referrers_ReferrersOverview');
-        $this->documentation = Piwik::translate('Referrers_ReferrersOverviewDocumentation');
+        $this->name = Matomo::translate('Referrers_ReferrersOverview');
+        $this->documentation = Matomo::translate('Referrers_ReferrersOverviewDocumentation');
         $this->processedMetrics = [
             // none
         ];
@@ -102,10 +102,10 @@ class Get extends Base
                         'currentValue' => $value,
                         'pastValue' => $pastValue,
                         'isLowerValueBetter' => Metrics::isLowerValueBetter($columnName),
-                        'tooltip' => Piwik::translate('General_EvolutionSummaryGeneric', array(
-                            Piwik::translate('General_NVisits', $currentValueFormatted),
+                        'tooltip' => Matomo::translate('General_EvolutionSummaryGeneric', array(
+                            Matomo::translate('General_NVisits', $currentValueFormatted),
                             $date,
-                            Piwik::translate('General_NVisits', $pastValueFormatted),
+                            Matomo::translate('General_NVisits', $pastValueFormatted),
                             $lastPeriodDate,
                             CalculateEvolutionFilter::calculate($value, $pastValue, $precision = 1),
                         )),
@@ -164,25 +164,25 @@ class Get extends Base
     private function getSparklineTranslations(): array
     {
         $translations = [
-            'Referrers_visitorsFromDirectEntry' => Piwik::translate('Referrers_TypeDirectEntries'),
-            'Referrers_visitorsFromWebsites' => Piwik::translate('Referrers_TypeWebsites'),
-            'Referrers_visitorsFromSearchEngines' => Piwik::translate('Referrers_TypeSearchEngines'),
-            'Referrers_visitorsFromSocialNetworks' => Piwik::translate('Referrers_TypeSocialNetworks'),
-            'Referrers_visitorsFromAIAssistants' => Piwik::translate('Referrers_TypeAIAssistants'),
-            'Referrers_visitorsFromCampaigns' => Piwik::translate('Referrers_TypeCampaigns'),
+            'Referrers_visitorsFromDirectEntry' => Matomo::translate('Referrers_TypeDirectEntries'),
+            'Referrers_visitorsFromWebsites' => Matomo::translate('Referrers_TypeWebsites'),
+            'Referrers_visitorsFromSearchEngines' => Matomo::translate('Referrers_TypeSearchEngines'),
+            'Referrers_visitorsFromSocialNetworks' => Matomo::translate('Referrers_TypeSocialNetworks'),
+            'Referrers_visitorsFromAIAssistants' => Matomo::translate('Referrers_TypeAIAssistants'),
+            'Referrers_visitorsFromCampaigns' => Matomo::translate('Referrers_TypeCampaigns'),
         ];
 
         foreach ($translations as $name => $label) {
-            $translations[$name . '_percent'] = Piwik::translate('Referrers_XPercentOfVisits');
+            $translations[$name . '_percent'] = Matomo::translate('Referrers_XPercentOfVisits');
         }
 
         return array_merge($translations, [
-            Archiver::METRIC_DISTINCT_SEARCH_ENGINE_RECORD_NAME => Piwik::translate('Referrers_DistinctSearchEngines'),
-            Archiver::METRIC_DISTINCT_SOCIAL_NETWORK_RECORD_NAME => Piwik::translate('Referrers_DistinctSocialNetworks'),
-            Archiver::METRIC_DISTINCT_AI_ASSISTANT_RECORD_NAME => Piwik::translate('Referrers_DistinctAIAssistants'),
-            Archiver::METRIC_DISTINCT_WEBSITE_RECORD_NAME => Piwik::translate('Referrers_DistinctWebsites'),
-            Archiver::METRIC_DISTINCT_KEYWORD_RECORD_NAME => Piwik::translate('Referrers_DistinctKeywords'),
-            Archiver::METRIC_DISTINCT_CAMPAIGN_RECORD_NAME => Piwik::translate('Referrers_DistinctCampaigns'),
+            Archiver::METRIC_DISTINCT_SEARCH_ENGINE_RECORD_NAME => Matomo::translate('Referrers_DistinctSearchEngines'),
+            Archiver::METRIC_DISTINCT_SOCIAL_NETWORK_RECORD_NAME => Matomo::translate('Referrers_DistinctSocialNetworks'),
+            Archiver::METRIC_DISTINCT_AI_ASSISTANT_RECORD_NAME => Matomo::translate('Referrers_DistinctAIAssistants'),
+            Archiver::METRIC_DISTINCT_WEBSITE_RECORD_NAME => Matomo::translate('Referrers_DistinctWebsites'),
+            Archiver::METRIC_DISTINCT_KEYWORD_RECORD_NAME => Matomo::translate('Referrers_DistinctKeywords'),
+            Archiver::METRIC_DISTINCT_CAMPAIGN_RECORD_NAME => Matomo::translate('Referrers_DistinctCampaigns'),
         ]);
     }
 }

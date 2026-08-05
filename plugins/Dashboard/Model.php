@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Dashboard;
+namespace Matomo\Plugins\Dashboard;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Widget\WidgetsList;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Widget\WidgetsList;
 
 class Model
 {

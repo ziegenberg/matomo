@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
-use Piwik\CliMulti\ProcessSymfony;
-use Piwik\Plugins\CoreAdminHome\Tasks;
-use Piwik\Plugins\CoreAdminHome\tests\Fixtures\RunScheduledTasksProcessSignal as RunScheduledTasksProcessSignalFixture;
-use Piwik\Plugins\CoreConsole\FeatureFlags\SystemSignals;
-use Piwik\Scheduler\Task;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\CliMulti\ProcessSymfony;
+use Matomo\Plugins\CoreAdminHome\Tasks;
+use Matomo\Plugins\CoreAdminHome\tests\Fixtures\RunScheduledTasksProcessSignal as RunScheduledTasksProcessSignalFixture;
+use Matomo\Plugins\CoreConsole\FeatureFlags\SystemSignals;
+use Matomo\Scheduler\Task;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

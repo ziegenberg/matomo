@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\tests\Integration\Commands;
+namespace Matomo\Plugins\Diagnostics\tests\Integration\Commands;
 
-use Piwik\Tests\Fixtures\OneVisitorTwoVisits;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
-use Piwik\Plugins\VisitsSummary\API as VisitsSummaryAPI;
+use Matomo\Tests\Fixtures\OneVisitorTwoVisits;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\Plugins\VisitsSummary\API as VisitsSummaryAPI;
 
 /**
  * TODO: This could be a unit test if we could inject the ArchiveTableDao in the command

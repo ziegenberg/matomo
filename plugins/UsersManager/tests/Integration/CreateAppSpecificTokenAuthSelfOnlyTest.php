@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
 use Exception;
-use Piwik\Plugins\UsersManager\API as UsersAPI;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\UsersManager\API as UsersAPI;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager
@@ -32,7 +32,7 @@ class CreateAppSpecificTokenAuthSelfOnlyTest extends IntegrationTestCase
 
     public function provideContainerConfig()
     {
-        return ['Piwik\Access' => new FakeAccess()];
+        return ['Matomo\Access' => new FakeAccess()];
     }
 
     public function testLoggedInUserCannotCreateTokenForAnotherUser()

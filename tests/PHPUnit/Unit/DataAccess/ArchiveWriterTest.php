@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
-use Piwik\Archive\Chunk;
-use Piwik\DataAccess\ArchiveWriter;
+use Matomo\Archive\Chunk;
+use Matomo\DataAccess\ArchiveWriter;
 
 /**
  * @group ArchiveWriterTest
@@ -96,7 +96,7 @@ class ArchiveWriterTest extends \PHPUnit\Framework\TestCase
 
     private function assertInsertBlobRecordInsertedRecordsInBulk($expectedBlobs, $blobs)
     {
-        $writer = $this->getMockBuilder('Piwik\DataAccess\ArchiveWriter')
+        $writer = $this->getMockBuilder('Matomo\DataAccess\ArchiveWriter')
             ->disableOriginalConstructor()
             ->onlyMethods(array('insertRecord', 'compress'))
             ->getMock();
@@ -116,7 +116,7 @@ class ArchiveWriterTest extends \PHPUnit\Framework\TestCase
 
     private function assertInsertBlobRecordInsertedASingleRecord($expectedBlob, $blob)
     {
-        $writer = $this->getMockBuilder('Piwik\DataAccess\ArchiveWriter')
+        $writer = $this->getMockBuilder('Matomo\DataAccess\ArchiveWriter')
             ->disableOriginalConstructor()
             ->onlyMethods(array('insertRecord', 'compress'))
             ->getMock();

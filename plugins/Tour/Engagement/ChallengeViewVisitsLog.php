@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class ChallengeViewVisitsLog extends Challenge
 {
     public function getName()
     {
-        return Piwik::translate('Tour_ViewX', Piwik::translate('Live_VisitsLog'));
+        return Matomo::translate('Tour_ViewX', Matomo::translate('Live_VisitsLog'));
     }
 
     public function getDescription()
     {
-        return Piwik::translate('Tour_ViewVisitsLogDescription');
+        return Matomo::translate('Tour_ViewVisitsLogDescription');
     }
 
     public function getId()

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\tests\Unit\TranslationWriter\Filter;
+namespace Matomo\Plugins\LanguagesManager\tests\Unit\TranslationWriter\Filter;
 
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\EmptyTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\EmptyTranslations;
 
 /**
  * @group LanguagesManager

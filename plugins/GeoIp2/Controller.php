@@ -1,17 +1,17 @@
 <?php
 
-namespace Piwik\Plugins\GeoIp2;
+namespace Matomo\Plugins\GeoIp2;
 
-use Piwik\Common;
-use Piwik\Http;
-use Piwik\Http\JsonResponse;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\GeoIp2\LocationProvider\GeoIp2;
-use Piwik\Plugins\UserCountry\UserCountry;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Http;
+use Matomo\Http\JsonResponse;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\GeoIp2\LocationProvider\GeoIp2;
+use Matomo\Plugins\UserCountry\UserCountry;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     private const DOWNLOAD_URL_OPTION_PREFIX = 'geoip2.download_url.';
     private const INVALID_HTTP_METHOD_ERROR = 'Invalid HTTP method.';
@@ -37,7 +37,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     public function downloadFreeDBIPLiteDB(): string
     {
         $this->dieIfGeolocationAdminIsDisabled();
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $this->checkTokenInUrl();
@@ -94,7 +94,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     public function updateGeoIPLinks(): string
     {
         $this->dieIfGeolocationAdminIsDisabled();
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             try {
                 $this->checkTokenInUrl();
@@ -142,7 +142,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     public function downloadMissingGeoIpDb(): string
     {
         $this->dieIfGeolocationAdminIsDisabled();
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             try {
@@ -155,7 +155,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
                 $url = GeoIP2AutoUpdater::getConfiguredUrl($key);
                 if (!is_string($url) || $url === '') {
-                    throw new \Exception(Piwik::translate('General_DownloadFail_HttpRequestFail'));
+                    throw new \Exception(Matomo::translate('General_DownloadFail_HttpRequestFail'));
                 }
                 $this->trackOrValidateConfiguredDownloadUrl($key, $url, $isContinuation);
 
@@ -219,7 +219,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $this->deleteDownloadedChunksForType($key, $expectedUrl, $configuredUrl);
         $this->deleteTrackedDownloadUrl($key);
 
-        throw new \Exception(Piwik::translate('General_DownloadFail_HttpRequestFail'));
+        throw new \Exception(Matomo::translate('General_DownloadFail_HttpRequestFail'));
     }
 
     private function deleteDownloadedChunksForType(string $key, string $expectedUrl, string $configuredUrl): void
@@ -287,7 +287,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
             return [
                 'to_download'       => $missingDbKey,
-                'to_download_label' => Piwik::translate('GeoIp2_DownloadingDb', $link) . '...',
+                'to_download_label' => Matomo::translate('GeoIp2_DownloadingDb', $link) . '...',
             ];
         }
         return false;

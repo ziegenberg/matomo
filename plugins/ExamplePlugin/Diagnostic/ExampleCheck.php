@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin\Diagnostic;
+namespace Matomo\Plugins\ExamplePlugin\Diagnostic;
 
-use Piwik\Plugins\Diagnostics\Diagnostic\Diagnostic;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\Diagnostics\Diagnostic\Diagnostic;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
 
 class ExampleCheck implements Diagnostic
 {

@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\tests\Integration;
+namespace Matomo\Plugins\LanguagesManager\tests\Integration;
 
-use Piwik\Cache;
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\LanguageDataProvider;
-use Piwik\Plugins\LanguagesManager\API;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\ByParameterCount;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\EmptyTranslations;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\EncodedEntities;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\CoreTranslations;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
-use Piwik\Plugins\LanguagesManager\TranslationWriter\Writer;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Cache;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\LanguageDataProvider;
+use Matomo\Plugins\LanguagesManager\API;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\ByParameterCount;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\EmptyTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\EncodedEntities;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Filter\UnnecassaryWhitespaces;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\CoreTranslations;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Validate\NoScripts;
+use Matomo\Plugins\LanguagesManager\TranslationWriter\Writer;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * @group LanguagesManager
@@ -32,7 +32,7 @@ class LanguagesManagerTest extends \PHPUnit\Framework\TestCase
         // we also test that none of the language php files outputs any character on the screen (eg. space before the <?php)
         $languages = API::getInstance()->getAvailableLanguages();
 
-        $plugins = \Piwik\Plugin\Manager::getInstance()->readPluginsDirectory();
+        $plugins = \Matomo\Plugin\Manager::getInstance()->readPluginsDirectory();
 
         $pluginsWithTranslation = array();
 
@@ -138,7 +138,7 @@ class LanguagesManagerTest extends \PHPUnit\Framework\TestCase
     public function testTranslationsUseNumberedPlaceholders()
     {
         Cache::flushAll();
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
         $translator->reset();
         Fixture::loadAllTranslations();
         $translations = $translator->getAllTranslations();
@@ -162,7 +162,7 @@ class LanguagesManagerTest extends \PHPUnit\Framework\TestCase
     public function testTranslationsUseEscapedPercentSigns()
     {
         Cache::flushAll();
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
         $translator->reset();
         Fixture::loadAllTranslations();
         $translations = $translator->getAllTranslations();
@@ -192,7 +192,7 @@ class LanguagesManagerTest extends \PHPUnit\Framework\TestCase
         $languages = API::getInstance()->getAvailableLanguages();
 
         /** @var LanguageDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\LanguageDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\LanguageDataProvider');
         $languagesReference = $dataProvider->getLanguageList();
 
         foreach ($languages as $language) {
@@ -232,7 +232,7 @@ class LanguagesManagerTest extends \PHPUnit\Framework\TestCase
     public function testGetLanguagesList()
     {
         /** @var LanguageDataProvider $languageDataProvider */
-        $languageDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\LanguageDataProvider');
+        $languageDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\LanguageDataProvider');
 
         $languages = $languageDataProvider->getLanguageList();
         $this->assertTrue(count($languages) > 0);

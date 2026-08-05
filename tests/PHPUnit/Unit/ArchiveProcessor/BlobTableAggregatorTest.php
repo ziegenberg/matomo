@@ -10,9 +10,9 @@
 namespace PHPUnit\Unit\ArchiveProcessor;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\ArchiveProcessor\BlobTableAggregator;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\ArchiveProcessor\BlobTableAggregator;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 class BlobTableAggregatorTest extends TestCase
 {

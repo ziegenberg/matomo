@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\Api;
+namespace Matomo\Plugins\Marketplace\Api;
 
-use Piwik\Http;
+use Matomo\Http;
 
 class Service
 {

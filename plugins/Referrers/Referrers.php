@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\SiteUrls;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\SiteUrls;
 
 /**
  * @see plugins/Referrers/functions.php
  */
 require_once PIWIK_INCLUDE_PATH . '/plugins/Referrers/functions.php';
 
-class Referrers extends \Piwik\Plugin
+class Referrers extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -41,30 +41,30 @@ class Referrers extends \Piwik\Plugin
 
     public function getDefaultMetricTranslations(&$translations)
     {
-        $translations['Referrers_visitorsFromSearchEngines'] = Piwik::translate('Referrers_VisitorsFromSearchEngines');
-        $translations['Referrers_visitorsFromSearchEngines_percent'] = Piwik::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromSearchEngines']);
+        $translations['Referrers_visitorsFromSearchEngines'] = Matomo::translate('Referrers_VisitorsFromSearchEngines');
+        $translations['Referrers_visitorsFromSearchEngines_percent'] = Matomo::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromSearchEngines']);
 
-        $translations['Referrers_visitorsFromSocialNetworks'] = Piwik::translate('Referrers_VisitorsFromSocialNetworks');
-        $translations['Referrers_visitorsFromSocialNetworks_percent'] = Piwik::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromSocialNetworks']);
+        $translations['Referrers_visitorsFromSocialNetworks'] = Matomo::translate('Referrers_VisitorsFromSocialNetworks');
+        $translations['Referrers_visitorsFromSocialNetworks_percent'] = Matomo::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromSocialNetworks']);
 
-        $translations['Referrers_visitorsFromAIAssistants'] = Piwik::translate('Referrers_VisitorsFromAIAssistants');
-        $translations['Referrers_visitorsFromAIAssistants_percent'] = Piwik::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromAIAssistants']);
+        $translations['Referrers_visitorsFromAIAssistants'] = Matomo::translate('Referrers_VisitorsFromAIAssistants');
+        $translations['Referrers_visitorsFromAIAssistants_percent'] = Matomo::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromAIAssistants']);
 
-        $translations['Referrers_visitorsFromDirectEntry'] = Piwik::translate('Referrers_VisitorsFromDirectEntry');
-        $translations['Referrers_visitorsFromDirectEntry_percent'] = Piwik::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromDirectEntry']);
+        $translations['Referrers_visitorsFromDirectEntry'] = Matomo::translate('Referrers_VisitorsFromDirectEntry');
+        $translations['Referrers_visitorsFromDirectEntry_percent'] = Matomo::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromDirectEntry']);
 
-        $translations['Referrers_visitorsFromWebsites'] = Piwik::translate('Referrers_VisitorsFromWebsites');
-        $translations['Referrers_visitorsFromWebsites_percent'] = Piwik::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromWebsites']);
+        $translations['Referrers_visitorsFromWebsites'] = Matomo::translate('Referrers_VisitorsFromWebsites');
+        $translations['Referrers_visitorsFromWebsites_percent'] = Matomo::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromWebsites']);
 
-        $translations['Referrers_visitorsFromCampaigns'] = Piwik::translate('Referrers_VisitorsFromCampaigns');
-        $translations['Referrers_visitorsFromCampaigns_percent'] = Piwik::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromCampaigns']);
+        $translations['Referrers_visitorsFromCampaigns'] = Matomo::translate('Referrers_VisitorsFromCampaigns');
+        $translations['Referrers_visitorsFromCampaigns_percent'] = Matomo::translate('Referrers_PercentOfX', $translations['Referrers_visitorsFromCampaigns']);
 
-        $translations[Archiver::METRIC_DISTINCT_SEARCH_ENGINE_RECORD_NAME] = ucfirst(Piwik::translate('Referrers_DistinctSearchEngines'));
-        $translations[Archiver::METRIC_DISTINCT_SOCIAL_NETWORK_RECORD_NAME] = ucfirst(Piwik::translate('Referrers_DistinctSocialNetworks'));
-        $translations[Archiver::METRIC_DISTINCT_AI_ASSISTANT_RECORD_NAME] = ucfirst(Piwik::translate('Referrers_DistinctAIAssistants'));
-        $translations[Archiver::METRIC_DISTINCT_WEBSITE_RECORD_NAME] = ucfirst(Piwik::translate('Referrers_DistinctWebsites'));
-        $translations[Archiver::METRIC_DISTINCT_KEYWORD_RECORD_NAME] = ucfirst(Piwik::translate('Referrers_DistinctKeywords'));
-        $translations[Archiver::METRIC_DISTINCT_CAMPAIGN_RECORD_NAME] = ucfirst(Piwik::translate('Referrers_DistinctCampaigns'));
+        $translations[Archiver::METRIC_DISTINCT_SEARCH_ENGINE_RECORD_NAME] = ucfirst(Matomo::translate('Referrers_DistinctSearchEngines'));
+        $translations[Archiver::METRIC_DISTINCT_SOCIAL_NETWORK_RECORD_NAME] = ucfirst(Matomo::translate('Referrers_DistinctSocialNetworks'));
+        $translations[Archiver::METRIC_DISTINCT_AI_ASSISTANT_RECORD_NAME] = ucfirst(Matomo::translate('Referrers_DistinctAIAssistants'));
+        $translations[Archiver::METRIC_DISTINCT_WEBSITE_RECORD_NAME] = ucfirst(Matomo::translate('Referrers_DistinctWebsites'));
+        $translations[Archiver::METRIC_DISTINCT_KEYWORD_RECORD_NAME] = ucfirst(Matomo::translate('Referrers_DistinctKeywords'));
+        $translations[Archiver::METRIC_DISTINCT_CAMPAIGN_RECORD_NAME] = ucfirst(Matomo::translate('Referrers_DistinctCampaigns'));
     }
 
     public function addMetricSemanticTypes(array &$types): void
@@ -198,7 +198,7 @@ class Referrers extends \Piwik\Plugin
                 break;
         }
 
-        $label = strtolower(Piwik::translate($indexTranslation));
+        $label = strtolower(Matomo::translate($indexTranslation));
 
         // return html that displays it as grey & italic
         return '<span class="datatable-label-category">(' . $label . ')</span>';

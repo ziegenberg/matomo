@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin;
+namespace Matomo\Plugins\CorePluginsAdmin;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Policy\PolicyManager;
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Setting;
-use Piwik\Settings\Settings;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Policy\PolicyManager;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Setting;
+use Matomo\Settings\Settings;
 use Exception;
 
 class SettingsMetadata
@@ -56,7 +56,7 @@ class SettingsMetadata
             $message = $e->getMessage();
 
             if (!empty($setting)) {
-                $title = Piwik::translate(strip_tags($setting->configureField()->title));
+                $title = Matomo::translate(strip_tags($setting->configureField()->title));
                 if (strpos($message, $title) !== 0) {
                     // only prefix it if not already prefixed
                     $message = $title . ': ' . $message;

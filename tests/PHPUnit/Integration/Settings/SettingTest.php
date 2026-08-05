@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings\Plugin;
+namespace Matomo\Tests\Integration\Settings\Plugin;
 
-use Piwik\Settings\FieldConfig;
-use Piwik\Settings\Setting;
-use Piwik\Settings\Storage\Storage;
-use Piwik\Settings\Storage\Backend;
+use Matomo\Settings\FieldConfig;
+use Matomo\Settings\Setting;
+use Matomo\Settings\Storage\Storage;
+use Matomo\Settings\Storage\Backend;
 use Exception;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\Settings\FakeBackend;
-use Piwik\Validators\NotEmpty;
-use Piwik\Validators\NumberRange;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\Settings\FakeBackend;
+use Matomo\Validators\NotEmpty;
+use Matomo\Validators\NumberRange;
 
 /**
  * @group Settings

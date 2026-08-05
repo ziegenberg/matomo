@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager;
+namespace Matomo\Plugins\PrivacyManager;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Db\TransactionLevel;
-use Piwik\Log;
-use Piwik\LogDeleter;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Db\TransactionLevel;
+use Matomo\Log;
+use Matomo\LogDeleter;
+use Matomo\Matomo;
 
 /**
  * Purges the log_visit, log_conversion and related tables of old visit data.
@@ -91,11 +91,11 @@ class LogDataPurger
          *         Db::query('DELETE FROM mytable WHERE creation_date < ' . $dateUpperLimit->getDateTime());
          *     }
          *
-         * @param \Piwik\Date $dateUpperLimit A date where visits that occur before this time should be deleted.
+         * @param \Matomo\Date $dateUpperLimit A date where visits that occur before this time should be deleted.
          * @param int $deleteLogsOlderThan The number of days after which log entries are considered old.
          *                                 Visits and related data whose age is greater than this number will be purged.
          */
-        Piwik::postEvent('PrivacyManager.deleteLogsOlderThan', array($dateUpperLimit, $deleteLogsOlderThan));
+        Matomo::postEvent('PrivacyManager.deleteLogsOlderThan', array($dateUpperLimit, $deleteLogsOlderThan));
 
         // optimize table overhead after deletion
         Db\Schema::getInstance()->optimizeTables($logTables);
@@ -171,7 +171,7 @@ class LogDataPurger
     // let's hardcode, since these are not dynamically created tables
     public static function getDeleteTableLogTables()
     {
-        $provider = StaticContainer::get('Piwik\Plugin\LogTablesProvider');
+        $provider = StaticContainer::get('Matomo\Plugin\LogTablesProvider');
 
         $result = array();
         foreach ($provider->getAllLogTables() as $logTable) {

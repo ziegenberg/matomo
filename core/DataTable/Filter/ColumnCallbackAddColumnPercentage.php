@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * Calculates a percentage value for each row of a {@link DataTable} and adds the result
@@ -35,6 +35,6 @@ class ColumnCallbackAddColumnPercentage extends ColumnCallbackAddColumnQuotient
      */
     protected function formatValue($value, $divisor)
     {
-        return Piwik::getPercentageSafe($value, $divisor, $this->quotientPrecision) . '%';
+        return Matomo::getPercentageSafe($value, $divisor, $this->quotientPrecision) . '%';
     }
 }

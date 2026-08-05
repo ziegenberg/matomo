@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\PluginTrial;
+namespace Matomo\Plugins\Marketplace\PluginTrial;
 
 use Exception;
-use Piwik\Notification as MatomoNotification;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Url;
+use Matomo\Notification as MatomoNotification;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Url;
 
 class Notification
 {
@@ -56,11 +56,11 @@ class Notification
             'action' => 'overview',
         ]);
         $link = sprintf('<a href="%s#?showPlugin=%s">', $marketplaceUrl, $this->pluginName);
-        $message = '<b>' . Piwik::translate(
+        $message = '<b>' . Matomo::translate(
             'Marketplace_TrialRequestedNotification1',
             [htmlentities($this->storage->getDisplayName()), $link, '</a>']
         ) . '</b><br><br>';
-        $message .= Piwik::translate('Marketplace_TrialRequestedNotification2', [htmlentities($this->storage->getDisplayName()), $link, '</a>']);
+        $message .= Matomo::translate('Marketplace_TrialRequestedNotification2', [htmlentities($this->storage->getDisplayName()), $link, '</a>']);
 
         $notification = new MatomoNotification($message);
         $notification->raw = true;
@@ -80,6 +80,6 @@ class Notification
 
     private function getNotificationId(): string
     {
-        return sprintf('Marketplace_PluginTrialRequest_%s_%s', md5(Piwik::getCurrentUserLogin()), $this->pluginName);
+        return sprintf('Marketplace_PluginTrialRequest_%s_%s', md5(Matomo::getCurrentUserLogin()), $this->pluginName);
     }
 }

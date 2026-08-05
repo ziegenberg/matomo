@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\Reports;
+namespace Matomo\Plugins\Live\Reports;
 
-use Piwik\Config\GeneralConfig;
-use Piwik\Plugins\Live\Controller;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\View;
-use Piwik\Widget\WidgetsList;
+use Matomo\Config\GeneralConfig;
+use Matomo\Plugins\Live\Controller;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\View;
+use Matomo\Widget\WidgetsList;
 
 class GetSimpleLastVisitCount extends Base
 {

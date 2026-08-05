@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Config;
+namespace Matomo\Updater\Migration\Config;
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * Provides config migrations.
@@ -19,7 +19,7 @@ use Piwik\Container\StaticContainer;
 class Factory
 {
     /**
-     * @var \Piwik\Container\Container
+     * @var \Matomo\Container\Container
      */
     private $container;
 
@@ -41,7 +41,7 @@ class Factory
      */
     public function set($section, $key, $value)
     {
-        return $this->container->make('Piwik\Updater\Migration\Config\Set', array(
+        return $this->container->make('Matomo\Updater\Migration\Config\Set', array(
             'section' => $section,
             'key' => $key,
             'value' => $value,

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration;
+namespace Matomo\Plugins\CoreHome\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\NoAccessException;
-use Piwik\Plugins\CoreHome\LoginAllowlist;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\NoAccessException;
+use Matomo\Plugins\CoreHome\LoginAllowlist;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class CustomLoginAllowlist extends LoginAllowlist
 {
@@ -243,7 +243,7 @@ class LoginAllowlistTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

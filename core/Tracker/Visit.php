@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
 use Matomo\Network\IPUtils;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\LogTablesProvider;
-use Piwik\Plugins\Actions\Tracker\ActionsRequestProcessor;
-use Piwik\Tracker;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\LogTablesProvider;
+use Matomo\Plugins\Actions\Tracker\ActionsRequestProcessor;
+use Matomo\Tracker;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * Class used to handle a Visit.
@@ -71,10 +71,10 @@ class Visit implements VisitInterface
 
     public function __construct()
     {
-        $requestProcessors = StaticContainer::get('Piwik\Plugin\RequestProcessors');
+        $requestProcessors = StaticContainer::get('Matomo\Plugin\RequestProcessors');
         $this->requestProcessors = $requestProcessors->getRequestProcessors();
         $this->visitProperties = null;
-        $this->userSettings = StaticContainer::get('Piwik\Tracker\Settings');
+        $this->userSettings = StaticContainer::get('Matomo\Tracker\Settings');
     }
 
     public function setRequest(Request $request)
@@ -403,7 +403,7 @@ class Visit implements VisitInterface
         $allLogTables = StaticContainer::get(LogTablesProvider::class)->getAllLogTables();
 
         foreach ($allLogTables as $logTable) {
-            if (!$logTable->hasIdVisitorColumn() || $logTable instanceof \Piwik\Plugins\CoreHome\Tracker\LogTable\Visit) {
+            if (!$logTable->hasIdVisitorColumn() || $logTable instanceof \Matomo\Plugins\CoreHome\Tracker\LogTable\Visit) {
                 // skip all log tables that do not contain the idvisitor column, and `log_visit`, as it is already handled
                 continue;
             }

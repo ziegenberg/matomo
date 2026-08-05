@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\TestRequest;
+namespace Matomo\Tests\Framework\TestRequest;
 
-use Piwik\API\DocumentationGenerator;
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Url;
-use Piwik\UrlHelper;
+use Matomo\API\DocumentationGenerator;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Url;
+use Matomo\UrlHelper;
 use Exception;
 
 /**

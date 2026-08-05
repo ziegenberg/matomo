@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
 
@@ -27,7 +27,7 @@ abstract class BaseFactory
      * Creates a new instance of a class using a string ID.
      *
      * @param string $classId The ID of the class.
-     * @return \Piwik\DataTable\Renderer
+     * @return \Matomo\DataTable\Renderer
      * @throws Exception if $classId is invalid.
      */
     public static function factory($classId)

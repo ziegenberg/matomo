@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Resolution;
+namespace Matomo\Plugins\Resolution;
 
-use Piwik\Plugins\Resolution\Settings\ScreenResolutionDetectionDisabled;
-use Piwik\Plugins\SegmentEditor\Settings\LimitSegments;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Cache as TrackerCache;
+use Matomo\Plugins\Resolution\Settings\ScreenResolutionDetectionDisabled;
+use Matomo\Plugins\SegmentEditor\Settings\LimitSegments;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Cache as TrackerCache;
 
-class Resolution extends \Piwik\Plugin
+class Resolution extends \Matomo\Plugin
 {
     public function registerEvents()
     {
@@ -26,8 +26,8 @@ class Resolution extends \Piwik\Plugin
     /**
      * Check if compliance policy disables screen resolution detection
      *
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     public static function isScreenResolutionDetectionDisabledByCompliancePolicy(?int $idSite = null): bool
     {

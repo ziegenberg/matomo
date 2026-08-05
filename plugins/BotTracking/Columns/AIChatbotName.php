@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Columns;
+namespace Matomo\Plugins\BotTracking\Columns;
 
-use Piwik\Columns\Dimension;
+use Matomo\Columns\Dimension;
 
 class AIChatbotName extends Dimension
 {

@@ -7,34 +7,34 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Application\Kernel\PluginList;
-use Piwik\Cache;
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Config as PiwikConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Development;
-use Piwik\EventDispatcher;
-use Piwik\Exception\PluginDeactivatedException;
-use Piwik\Exception\PluginNotFoundException;
-use Piwik\Filesystem;
-use Piwik\Log;
-use Piwik\Notification;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Settings\Storage as SettingsStorage;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Theme;
-use Piwik\Translation\Translator;
-use Piwik\Updater;
+use Matomo\Application\Kernel\PluginList;
+use Matomo\Cache;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Config as PiwikConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Development;
+use Matomo\EventDispatcher;
+use Matomo\Exception\PluginDeactivatedException;
+use Matomo\Exception\PluginNotFoundException;
+use Matomo\Filesystem;
+use Matomo\Log;
+use Matomo\Notification;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Settings\Storage as SettingsStorage;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Theme;
+use Matomo\Translation\Translator;
+use Matomo\Updater;
 
 /**
  * The singleton that manages plugin loading/unloading and installation/uninstallation.
@@ -49,7 +49,7 @@ class Manager
      */
     public static function getInstance()
     {
-        return StaticContainer::get('Piwik\Plugin\Manager');
+        return StaticContainer::get('Matomo\Plugin\Manager');
     }
 
     /**
@@ -630,7 +630,7 @@ class Manager
          *
          * @param string $pluginName The plugin that has been deactivated.
          */
-        Piwik::postEvent('PluginManager.pluginDeactivated', array($pluginName));
+        Matomo::postEvent('PluginManager.pluginDeactivated', array($pluginName));
     }
 
     /**
@@ -641,7 +641,7 @@ class Manager
      * @param string $componentName     The name of the component you want to look for. In case you request a
      *                                  component named 'Menu' it'll look for a file named 'Menu.php' within the
      *                                  root of all plugin folders that implement a class named
-     *                                  Piwik\Plugins\$PluginName\Menu.
+     *                                  Matomo\Plugins\$PluginName\Menu.
      * @param string $expectedSubclass  If not empty, a check will be performed whether a found file extends the
      *                                  given subclass. If the requested file exists but does not extend this class
      *                                  a warning will be shown to advice a developer to extend this certain class.
@@ -727,7 +727,7 @@ class Manager
          *
          * @param string $pluginName The plugin that has been uninstalled.
          */
-        Piwik::postEvent('PluginManager.pluginUninstalled', array($pluginName));
+        Matomo::postEvent('PluginManager.pluginUninstalled', array($pluginName));
 
         return true;
     }
@@ -816,7 +816,7 @@ class Manager
          *
          * @param string $pluginName The plugin that has been activated.
          */
-        Piwik::postEvent('PluginManager.pluginActivated', array($pluginName));
+        Matomo::postEvent('PluginManager.pluginActivated', array($pluginName));
     }
 
     /**
@@ -908,14 +908,14 @@ class Manager
      *               - **invalid**: If the plugin is invalid, this property will be set to true.
      *                              If the plugin is not invalid, this property will not exist.
      *               - **info**: If the plugin was loaded, will hold the plugin information.
-     *                           See {@link Piwik\Plugin::getInformation()}.
+     *                           See {@link Matomo\Plugin::getInformation()}.
      * @phpstan-return array<string, array{info?: array<string, mixed>, activated: bool, alwaysActivated: bool, uninstallable: bool, invalid?: bool, missingRequirements?: string}>
      * @api
      */
     public function loadAllPluginsAndGetTheirInfo()
     {
         /** @var Translator $translator */
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
 
         $plugins = array();
 
@@ -1055,7 +1055,7 @@ class Manager
 
     /**
      * Returns an array containing the names of all loaded plugins (eg. 'UserCountry' and NOT the
-     * fully qualified class name '\Piwik\Plugins\UserCountry\UserCountry').
+     * fully qualified class name '\Matomo\Plugins\UserCountry\UserCountry').
      *
      * @return list<string>
      */
@@ -1215,9 +1215,9 @@ class Manager
 
             // at this state we do not know yet whether current user has super user access. We do not even know
             // if someone is actually logged in.
-            $message  = Piwik::translate('CorePluginsAdmin_WeCouldNotLoadThePluginAsItHasMissingDependencies', array($pluginName, $newPlugin->getMissingDependenciesAsString()));
+            $message  = Matomo::translate('CorePluginsAdmin_WeCouldNotLoadThePluginAsItHasMissingDependencies', array($pluginName, $newPlugin->getMissingDependenciesAsString()));
             $message .= ' ';
-            $message .= Piwik::translate('General_PleaseContactYourPiwikAdministrator');
+            $message .= Matomo::translate('General_PleaseContactYourPiwikAdministrator');
 
             $notification = new Notification($message);
             $notification->context = Notification::CONTEXT_ERROR;
@@ -1241,7 +1241,7 @@ class Manager
                 // prevent requesting license info during a tracker request see https://github.com/matomo-org/matomo/issues/14401
                 // as possibly many instances would try to do this at the same time
                 try {
-                    $plugins = StaticContainer::get('Piwik\Plugins\Marketplace\Plugins');
+                    $plugins = StaticContainer::get('Matomo\Plugins\Marketplace\Plugins');
                     $licenseInfo = $plugins->getLicenseValidInfo($pluginName);
                 } catch (\Exception $e) {
                     $licenseInfo = [];
@@ -1296,7 +1296,7 @@ class Manager
      */
     public static function getAllPluginsNames()
     {
-        $pluginList = StaticContainer::get('Piwik\Application\Kernel\PluginList');
+        $pluginList = StaticContainer::get('Matomo\Application\Kernel\PluginList');
 
         $pluginsToLoad = array_merge(
             self::getInstance()->readPluginsDirectory(),
@@ -1385,7 +1385,7 @@ class Manager
         if ($pluginName === 'API') {
             $className = 'Plugin';
         }
-        return "\\Piwik\\Plugins\\$pluginName\\$className";
+        return "\\Matomo\\Plugins\\{$pluginName}\\{$className}";
     }
 
     private function resetTransientCache(): void
@@ -1434,14 +1434,14 @@ class Manager
      * Install a specific plugin
      *
      * @return void
-     * @throws \Piwik\Plugin\PluginException if installation fails
+     * @throws \Matomo\Plugin\PluginException if installation fails
      */
     private function executePluginInstall(Plugin $plugin)
     {
         try {
             $plugin->install();
         } catch (\Exception $e) {
-            throw new \Piwik\Plugin\PluginException($plugin->getPluginName(), $e->getMessage());
+            throw new \Matomo\Plugin\PluginException($plugin->getPluginName(), $e->getMessage());
         }
     }
 
@@ -1522,7 +1522,7 @@ class Manager
              *
              * @param string $pluginName The plugin that has been installed.
              */
-            Piwik::postEvent('PluginManager.pluginInstalled', array($pluginName));
+            Matomo::postEvent('PluginManager.pluginInstalled', array($pluginName));
         }
 
         if ($saveConfig) {
@@ -1804,7 +1804,7 @@ class Manager
     public function loadPluginTranslations()
     {
         /** @var Translator $translator */
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
         foreach ($this->getAllPluginsNames() as $pluginName) {
             $translator->addDirectory(self::getPluginDirectory($pluginName) . '/lang');
         }

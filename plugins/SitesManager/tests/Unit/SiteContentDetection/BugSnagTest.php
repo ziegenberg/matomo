@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\SitesManager\tests\Unit\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\tests\Unit\SiteContentDetection;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Plugins\SitesManager\SiteContentDetection\BugSnag;
+use Matomo\Plugins\SitesManager\SiteContentDetection\BugSnag;
 
 /**
  * @group SitesManager

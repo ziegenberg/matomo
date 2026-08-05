@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry;
+namespace Matomo\Plugins\UserCountry;
 
 use Matomo\Cache\Cache;
 use Matomo\Cache\Transient;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\RawLogDao;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\RawLogDao;
 use Matomo\Network\IPUtils;
-use Piwik\Plugins\UserCountry\LocationProvider\DisabledProvider;
-use Piwik\Tracker\Visit;
-use Piwik\Log\LoggerInterface;
+use Matomo\Plugins\UserCountry\LocationProvider\DisabledProvider;
+use Matomo\Tracker\Visit;
+use Matomo\Log\LoggerInterface;
 
 require_once PIWIK_INCLUDE_PATH . "/plugins/UserCountry/LocationProvider.php";
 
@@ -312,9 +312,9 @@ class VisitorGeolocator
     public static function getDefaultLocationCache()
     {
         if (self::$defaultLocationCache === null) {
-            if (class_exists('\Piwik\Cache\Transient')) {
+            if (class_exists('\Matomo\Cache\Transient')) {
                 // during the oneclickupdate from 3.x => greater, this class will be loaded, so we have to use it instead of the Matomo namespaced one
-                self::$defaultLocationCache = new \Piwik\Cache\Transient();
+                self::$defaultLocationCache = new \Matomo\Cache\Transient();
             } else {
                 self::$defaultLocationCache = new Transient();
             }

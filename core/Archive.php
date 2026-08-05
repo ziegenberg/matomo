@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Archive\ArchiveQuery;
-use Piwik\Archive\ArchiveQueryFactory;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataCollection;
-use Piwik\Archive\Parameters;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveSelector;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Plugins\AIAgents;
-use Piwik\Plugins\CoreAdminHome\API;
-use Piwik\Plugins\VisitFrequency;
+use Matomo\Archive\ArchiveQuery;
+use Matomo\Archive\ArchiveQueryFactory;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataCollection;
+use Matomo\Archive\Parameters;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveSelector;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Plugins\AIAgents;
+use Matomo\Plugins\CoreAdminHome\API;
+use Matomo\Plugins\VisitFrequency;
 
 /**
  * The **Archive** class is used to query cached analytics statistics
@@ -221,7 +221,7 @@ class Archive implements ArchiveQuery
      * @param string $period 'day', `'week'`, `'month'`, `'year'` or `'range'`
      * @param Date|string $strDate 'YYYY-MM-DD', magic keywords (ie, 'today'; {@link Date::factory()}
      *                             or date range (ie, 'YYYY-MM-DD,YYYY-MM-DD').
-     * @param string|null|false $segment Segment definition or false if no segment should be used. {@link Piwik\Segment}
+     * @param string|null|false $segment Segment definition or false if no segment should be used. {@link Matomo\Segment}
      * @param string|null|false $_restrictSitesToLogin Used only when running as a scheduled task.
      * @return ArchiveQuery
      */
@@ -485,7 +485,7 @@ class Archive implements ArchiveQuery
      */
     public static function createDataTableFromArchive($recordName, $idSite, $period, $date, $segment, $expanded = false, $flat = false, $idSubtable = null, $depth = null)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         if ($idSubtable === false || $idSubtable === '') {
             $idSubtable = null;
@@ -579,7 +579,7 @@ class Archive implements ArchiveQuery
              * Triggered when no archive data is found in an API request.
              * @ignore
              */
-            Piwik::postEvent('Archive.noArchivedData');
+            Matomo::postEvent('Archive.noArchivedData');
             return $result;
         }
 
@@ -724,7 +724,7 @@ class Archive implements ArchiveQuery
                 }
 
                 // Allow for site timezone, local time may have started a new day ahead of UTC
-                $today = \Piwik\Date::factory('now', $site->getTimezone());
+                $today = \Matomo\Date::factory('now', $site->getTimezone());
 
                 // if the starting date is in the future we know there are no visits
                 if ($period->getDateStart()->isLater($today)) {
@@ -954,7 +954,7 @@ class Archive implements ArchiveQuery
 
         if (
             empty($plugin)
-            || !\Piwik\Plugin\Manager::getInstance()->isPluginActivated($plugin)
+            || !\Matomo\Plugin\Manager::getInstance()->isPluginActivated($plugin)
         ) {
             throw new \Exception("Error: The report '$report' was requested but it is not available at this stage."
                                . " (Plugin '$plugin' is not activated.)");

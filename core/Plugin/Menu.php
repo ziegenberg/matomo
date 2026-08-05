@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Development;
-use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuTop;
-use Piwik\Period;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Site;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Development;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Menu\MenuTop;
+use Matomo\Period;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Site;
+use Matomo\Url;
 
 /**
  * Base class of all plugin menu providers. Plugins that define their own menu items can extend this class to easily
@@ -293,7 +293,7 @@ class Menu
             return;
         }
 
-        $controllerClass = '\\Piwik\\Plugins\\' . $module . '\\Controller';
+        $controllerClass = '\Matomo\Plugins\\' . $module . '\\Controller';
 
         if (!Development::methodExists($controllerClass, $action)) {
             Development::error($prefix . 'The defined action "' . $action . '" does not exist in ' . $controllerClass . '". Make sure to define such a method.');

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\tests\Unit\DataTable\Filter;
+namespace Matomo\Plugins\Referrers\tests\Unit\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\Plugins\Referrers\DataTable\Filter\UrlsFromWebsiteId;
+use Matomo\DataTable;
+use Matomo\Plugins\Referrers\DataTable\Filter\UrlsFromWebsiteId;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/Referrers/functions.php';
 

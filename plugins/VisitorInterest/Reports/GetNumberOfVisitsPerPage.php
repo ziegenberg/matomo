@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest\Reports;
+namespace Matomo\Plugins\VisitorInterest\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Cloud;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\VisitorInterest\Columns\PagesPerVisit;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Cloud;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\VisitorInterest\Columns\PagesPerVisit;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetNumberOfVisitsPerPage extends Base
 {
@@ -26,9 +26,9 @@ class GetNumberOfVisitsPerPage extends Base
     {
         parent::init();
         $this->dimension     = new PagesPerVisit();
-        $this->name          = Piwik::translate('VisitorInterest_WidgetPages');
-        $this->documentation = Piwik::translate('VisitorInterest_WidgetPagesDocumentation')
-                             . '<br />' . Piwik::translate('General_ChangeTagCloudView');
+        $this->name          = Matomo::translate('VisitorInterest_WidgetPages');
+        $this->documentation = Matomo::translate('VisitorInterest_WidgetPagesDocumentation')
+                             . '<br />' . Matomo::translate('General_ChangeTagCloudView');
         $this->metrics       = array('nb_visits');
         $this->processedMetrics = [];
         $this->constantRowsCount = true;
@@ -52,7 +52,7 @@ class GetNumberOfVisitsPerPage extends Base
         $view->requestConfig->filter_sort_column = 'label';
         $view->requestConfig->filter_sort_order  = 'asc';
 
-        $view->config->addTranslation('label', Piwik::translate('VisitorInterest_ColumnVisitDuration'));
+        $view->config->addTranslation('label', Matomo::translate('VisitorInterest_ColumnVisitDuration'));
         $view->config->enable_sort = false;
         $view->config->show_exclude_low_population = false;
         $view->config->show_offset_information = false;

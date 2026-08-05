@@ -10,15 +10,15 @@
 namespace Integration;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\Model as UsersManagerModel;
-use Piwik\Plugins\UsersManager\SystemSettings;
-use Piwik\Plugins\UsersManager\tests\Fixtures\Tokens as TokensFixture;
-use Piwik\Plugins\UsersManager\UserNotifications\UserNotifierTask;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\Model as UsersManagerModel;
+use Matomo\Plugins\UsersManager\SystemSettings;
+use Matomo\Plugins\UsersManager\tests\Fixtures\Tokens as TokensFixture;
+use Matomo\Plugins\UsersManager\UserNotifications\UserNotifierTask;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group UsersManager
@@ -158,9 +158,9 @@ class InactiveUsersNotificationEmailTest extends IntegrationTestCase
     public function provideContainerConfig(): array
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
-            'observers.global' => \Piwik\DI::add([
-                ['Test.Mail.send', \Piwik\DI::value(function (PHPMailer $mail) {
+            'Matomo\Access' => new FakeAccess(),
+            'observers.global' => \Matomo\DI::add([
+                ['Test.Mail.send', \Matomo\DI::value(function (PHPMailer $mail) {
                     $body = $mail->createBody();
                     $body = preg_replace("/=[\r\n]+/", '', $body);
                     preg_match('|Hello, (.*?)!.*<tbody>(.*)</tbody>|isu', $body, $matches);

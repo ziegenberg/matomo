@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\API\Request;
-use Piwik\Plugins\Actions\Columns\PageTitle;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
-use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\API\Request;
+use Matomo\Plugins\Actions\Columns\PageTitle;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
+use Matomo\Plugins\Actions\Columns\Metrics\BounceRate;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Plugin\ReportsProvider;
 
 class GetPageTitles extends Base
 {
@@ -27,8 +27,8 @@ class GetPageTitles extends Base
         parent::init();
 
         $this->dimension     = new PageTitle();
-        $this->name          = Piwik::translate('Actions_SubmenuPageTitles');
-        $this->documentation = Piwik::translate(
+        $this->name          = Matomo::translate('Actions_SubmenuPageTitles');
+        $this->documentation = Matomo::translate(
             'Actions_PageTitlesReportDocumentation',
             ['<br />', htmlentities('<title>', ENT_COMPAT | ENT_HTML401, 'UTF-8')]
         );
@@ -50,7 +50,7 @@ class GetPageTitles extends Base
     public function getMetrics()
     {
         $metrics = parent::getMetrics();
-        $metrics['nb_visits'] = Piwik::translate('General_ColumnUniquePageviews');
+        $metrics['nb_visits'] = Matomo::translate('General_ColumnUniquePageviews');
 
         return $metrics;
     }
@@ -58,8 +58,8 @@ class GetPageTitles extends Base
     protected function getMetricsDocumentation()
     {
         $metrics = parent::getMetricsDocumentation();
-        $metrics['nb_visits']   = Piwik::translate('General_ColumnUniquePageviewsDocumentation');
-        $metrics['bounce_rate'] = Piwik::translate('General_ColumnPageBounceRateDocumentation');
+        $metrics['nb_visits']   = Matomo::translate('General_ColumnUniquePageviewsDocumentation');
+        $metrics['bounce_rate'] = Matomo::translate('General_ColumnPageBounceRateDocumentation');
 
         return $metrics;
     }

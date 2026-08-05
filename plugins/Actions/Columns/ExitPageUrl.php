@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns;
+namespace Matomo\Plugins\Actions\Columns;
 
-use Piwik\Columns\DimensionMetricFactory;
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\Join;
-use Piwik\Columns\MetricsList;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TableLogAction;
-use Piwik\Tracker\Visitor;
+use Matomo\Columns\DimensionMetricFactory;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\Join;
+use Matomo\Columns\MetricsList;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TableLogAction;
+use Matomo\Tracker\Visitor;
 
 class ExitPageUrl extends VisitDimension
 {

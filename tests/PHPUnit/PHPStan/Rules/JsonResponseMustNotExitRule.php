@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -44,7 +44,7 @@ class JsonResponseMustNotExitRule implements Rule
 
         foreach (JsonResponseRuleHelper::findExits($node) as $exit) {
             $errors[] = RuleErrorBuilder::message(sprintf(
-                'Controller action %s() is marked #[\\Piwik\\Http\\JsonResponse] but calls exit/die;'
+                'Controller action %s() is marked #[\Matomo\Http\JsonResponse] but calls exit/die;'
                 . ' this bypasses the JSON header handling in FrontController, so the attribute has no'
                 . ' effect. Return the JSON string instead, or drop the attribute and send the header'
                 . ' manually.',

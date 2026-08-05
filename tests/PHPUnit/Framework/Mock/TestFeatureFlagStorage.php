@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
-use Piwik\Plugins\FeatureFlags\FeatureFlagStorageInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\FeatureFlagStorageInterface;
 
 /**
  * Feature flag storage used in the test environment to force-enable selected feature

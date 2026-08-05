@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Fixture;
+namespace Matomo\Plugins\CoreAdminHome\tests\Fixture;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Fixture that adds log table rows that use duplicate actions.

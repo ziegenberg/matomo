@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Intl\Data\Provider;
+namespace Matomo\Tests\Unit\Intl\Data\Provider;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Config\GeneralConfig;
-use Piwik\Intl\Data\Provider\CurrencyDataProvider;
+use Matomo\Config\GeneralConfig;
+use Matomo\Intl\Data\Provider\CurrencyDataProvider;
 
 class CurrencyDataProviderTest extends TestCase
 {

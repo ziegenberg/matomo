@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Insights\Widgets;
+namespace Matomo\Plugins\Insights\Widgets;
 
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\WidgetConfig;
 
-class GetInsightsOverview extends \Piwik\Widget\Widget
+class GetInsightsOverview extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {

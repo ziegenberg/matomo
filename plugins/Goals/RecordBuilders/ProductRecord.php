@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\RecordBuilders;
+namespace Matomo\Plugins\Goals\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\Config;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Goals\Archiver;
-use Piwik\Tracker\GoalManager;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\Config;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Goals\Archiver;
+use Matomo\Tracker\GoalManager;
 
 class ProductRecord extends Base
 {

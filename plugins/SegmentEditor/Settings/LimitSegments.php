@@ -1,16 +1,16 @@
 <?php
 
-namespace Piwik\Plugins\SegmentEditor\Settings;
+namespace Matomo\Plugins\SegmentEditor\Settings;
 
-use Piwik\Piwik;
-use Piwik\Plugins\PrivacyManager\Settings\CompliancePolicyEnforcedSetting;
-use Piwik\Policy\CnilPolicy;
+use Matomo\Matomo;
+use Matomo\Plugins\PrivacyManager\Settings\CompliancePolicyEnforcedSetting;
+use Matomo\Policy\CnilPolicy;
 
 class LimitSegments extends CompliancePolicyEnforcedSetting
 {
     public static function getTitle(): string
     {
-        return Piwik::translate("SegmentEditor_LimitSegmentsSettingTitle");
+        return Matomo::translate("SegmentEditor_LimitSegmentsSettingTitle");
     }
 
     public static function getPolicyRequirements(): array
@@ -22,6 +22,6 @@ class LimitSegments extends CompliancePolicyEnforcedSetting
 
     public static function getComplianceRequirementNote(?int $idSite = null): string
     {
-        return Piwik::translate("SegmentEditor_LimitSegmentsSettingRequirementNote");
+        return Matomo::translate("SegmentEditor_LimitSegmentsSettingRequirementNote");
     }
 }

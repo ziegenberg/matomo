@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserId;
+namespace Matomo\Plugins\UserId;
 
 /**
  * Plugin adds a new Users report showing all unique user IDs and some aggregated data
  */
-class UserId extends \Piwik\Plugin
+class UserId extends \Matomo\Plugin
 {
     /**
      * Register event observers

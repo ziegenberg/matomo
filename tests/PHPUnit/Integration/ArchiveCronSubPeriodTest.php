@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Log\LoggerInterface;
-use Piwik\Period;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeLogger;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Log\LoggerInterface;
+use Matomo\Period;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeLogger;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -299,7 +299,7 @@ class ArchiveCronSubPeriodTest extends IntegrationTestCase
     {
         return [
             // disable browser archiving
-            Config::class => \Piwik\DI::decorate(function (Config $previous) {
+            Config::class => \Matomo\DI::decorate(function (Config $previous) {
                 $previous->General['enable_browser_archiving_triggering'] = 0;
                 $previous->General['browser_archiving_disabled_enforce'] = 1;
                 return $previous;

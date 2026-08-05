@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager;
+namespace Matomo\AssetManager;
 
 abstract class UIAsset
 {
@@ -32,7 +32,7 @@ abstract class UIAsset
      * Removes the previous file if it exists.
      * Also tries to remove compressed version of the file.
      *
-     * @see \Piwik\ProxyHttp::serverStaticFile()
+     * @see \Matomo\ProxyHttp::serverStaticFile()
      */
     abstract public function delete();
 

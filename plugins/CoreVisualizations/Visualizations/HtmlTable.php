@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\DataTable;
-use Piwik\NumberFormatter;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\Visualization;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\DataTable;
+use Matomo\NumberFormatter;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\Visualization;
 
 /**
  * DataTable visualization that shows DataTable data in an HTML table.
@@ -235,7 +235,7 @@ class HtmlTable extends Visualization
 
                 if (is_numeric($value)) {
                     $percentageColumnName = $column . '_row_percentage';
-                    $rowPercentage = $formatter->formatPercent(Piwik::getPercentageSafe($value, $reportTotal, $precision = 1), $precision);
+                    $rowPercentage = $formatter->formatPercent(Matomo::getPercentageSafe($value, $reportTotal, $precision = 1), $precision);
                     $row->setMetadata($percentageColumnName, $rowPercentage);
                 }
 
@@ -244,7 +244,7 @@ class HtmlTable extends Visualization
 
                     $siteTotalPercentage = $column . '_site_total_percentage';
                     if ($siteTotal && $siteTotal > $reportTotal) {
-                        $rowPercentage = $formatter->formatPercent(Piwik::getPercentageSafe($value, $siteTotal, $precision = 1), $precision);
+                        $rowPercentage = $formatter->formatPercent(Matomo::getPercentageSafe($value, $siteTotal, $precision = 1), $precision);
                         $row->setMetadata($siteTotalPercentage, $rowPercentage);
                     }
                 }

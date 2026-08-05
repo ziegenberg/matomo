@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\tests\Unit;
+namespace Matomo\Plugins\Actions\tests\Unit;
 
-use Piwik\ArchiveProcessor;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Plugins\Actions\Archiver;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\Actions\RecordBuilders\ActionReports;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\PageUrl;
+use Matomo\ArchiveProcessor;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Plugins\Actions\Archiver;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\Actions\RecordBuilders\ActionReports;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\PageUrl;
 
 /**
  * @group Actions

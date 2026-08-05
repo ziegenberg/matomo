@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Diagnostic;
+namespace Matomo\Plugins\UserCountry\Diagnostic;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Diagnostics\Diagnostic\Diagnostic;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
+use Matomo\Matomo;
+use Matomo\Plugins\Diagnostics\Diagnostic\Diagnostic;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
 
 /**
  * Check the geolocation setup.
@@ -46,7 +46,7 @@ class GeolocationDiagnostic implements Diagnostic
         $statusMessage = $allProviders[$currentProviderId]['statusMessage'] ?? null;
 
         if ($providerStatus === LocationProvider::BROKEN) {
-            $message = Piwik::translate('UserCountry_GeolocationProviderBroken', '<strong>' . $allProviders[$currentProviderId]['title'] . '</strong>');
+            $message = Matomo::translate('UserCountry_GeolocationProviderBroken', '<strong>' . $allProviders[$currentProviderId]['title'] . '</strong>');
             if ($statusMessage) {
                 $message .= '<br /><br />' . $statusMessage;
             }
@@ -57,9 +57,9 @@ class GeolocationDiagnostic implements Diagnostic
             $provider = $allProviders[$currentProviderId] ?? null;
 
             if ($provider) {
-                $message = Piwik::translate('UserCountry_GeolocationProviderBroken', '<strong>' . $allProviders[$currentProviderId]['title'] . '</strong>');
+                $message = Matomo::translate('UserCountry_GeolocationProviderBroken', '<strong>' . $allProviders[$currentProviderId]['title'] . '</strong>');
             } else {
-                $message = Piwik::translate('UserCountry_GeolocationProviderUnavailable', '<strong>' . LocationProvider::getCurrentProviderId() . '</strong>');
+                $message = Matomo::translate('UserCountry_GeolocationProviderUnavailable', '<strong>' . LocationProvider::getCurrentProviderId() . '</strong>');
             }
 
             return [DiagnosticResult::singleResult($label, DiagnosticResult::STATUS_ERROR, $message)];

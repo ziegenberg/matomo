@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking;
+namespace Matomo\Plugins\BotTracking;
 
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Site;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Site;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
 
 class NoRecentRequestsMessage
 {

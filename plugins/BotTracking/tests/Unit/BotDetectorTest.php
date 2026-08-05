@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Unit;
+namespace Matomo\Plugins\BotTracking\tests\Unit;
 
-use Piwik\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\BotDetector;
 use PHPUnit\Framework\TestCase;
 
 /**

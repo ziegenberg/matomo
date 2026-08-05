@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\tests\System;
+namespace Matomo\Plugins\Ecommerce\tests\System;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Ecommerce\tests\Fixtures\AbandonedCartWithoutConversions;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Matomo;
+use Matomo\Plugins\Ecommerce\tests\Fixtures\AbandonedCartWithoutConversions;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 class AbandonedCartWithoutConversionsTest extends SystemTestCase
 {
@@ -42,7 +42,7 @@ class AbandonedCartWithoutConversionsTest extends SystemTestCase
                     'idSite' => $idSite,
                     'date' => $dateTime,
                     'periods' => ['day', 'week'],
-                    'idGoal' => Piwik::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
+                    'idGoal' => Matomo::LABEL_ID_GOAL_IS_ECOMMERCE_CART,
                 ],
             ],
             [

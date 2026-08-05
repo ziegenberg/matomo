@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
 abstract class BaseValidator
 {
     /**
      * The method to validate a value. If the value has not an expected format, an instance of
-     * {@link Piwik\Validators\Exception} should be thrown.
+     * {@link Matomo\Validators\Exception} should be thrown.
      *
      * @param $value
      * @throws Exception

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Date;
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Date;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/VisitTime/functions.php';
 
@@ -37,7 +37,7 @@ class ServerTime extends ActionDimension
     public function formatValue($value, $idSite, Formatter $formatter)
     {
         $hourInTz = VisitLastActionTime::convertHourToHourInSiteTimezone($value, $idSite);
-        return \Piwik\Plugins\VisitTime\getTimeLabel($hourInTz);
+        return \Matomo\Plugins\VisitTime\getTimeLabel($hourInTz);
     }
 
     public function install()

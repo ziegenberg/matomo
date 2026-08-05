@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\tests\System\Commands;
+namespace Matomo\Plugins\FeatureFlags\tests\System\Commands;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DI;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DI;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
 
 class DisableFeatureFlagCommandTest extends ConsoleCommandTestCase
 {

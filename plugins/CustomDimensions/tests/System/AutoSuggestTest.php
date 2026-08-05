@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\System;
+namespace Matomo\Plugins\CustomDimensions\tests\System;
 
-use Piwik\Date;
-use Piwik\Plugins\CustomDimensions\Dao\AutoSuggest;
-use Piwik\Plugins\CustomDimensions\tests\Fixtures\TrackVisitsWithCustomDimensionsFixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Date;
+use Matomo\Plugins\CustomDimensions\Dao\AutoSuggest;
+use Matomo\Plugins\CustomDimensions\tests\Fixtures\TrackVisitsWithCustomDimensionsFixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group CustomDimensions

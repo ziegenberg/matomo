@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Fixtures;
+namespace Matomo\Tests\Fixtures;
 
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Plugins\Goals\API as APIGoals;
-use Piwik\Plugins\SegmentEditor\API as APISegmentEditor;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\XssTesting;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Plugins\Goals\API as APIGoals;
+use Matomo\Plugins\SegmentEditor\API as APISegmentEditor;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\XssTesting;
 
 /**
  * Adds one site and tracks some visits across multiple pages with a couple conversions and a single country segment

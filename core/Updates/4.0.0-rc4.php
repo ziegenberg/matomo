@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\DbHelper;
-use Piwik\Plugin\ReleaseChannels;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\DbHelper;
+use Matomo\Plugin\ReleaseChannels;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Update for version 4.0.0-rc4.

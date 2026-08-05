@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Menu;
+namespace Matomo\Menu;
 
-use Piwik\Cache;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Singleton;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Cache;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Singleton;
+use Matomo\Plugin\Manager as PluginManager;
 
 /**
  * Base class for classes that manage one of Piwik's menus.
@@ -22,7 +22,7 @@ use Piwik\Plugin\Manager as PluginManager;
  * Each menu has a class that manages the menu's content. Each class invokes
  * a different event to allow plugins to add new menu items.
  *
- * @static \Piwik\Menu\MenuAbstract getInstance()
+ * @static \Matomo\Menu\MenuAbstract getInstance()
  */
 abstract class MenuAbstract extends Singleton
 {
@@ -86,7 +86,7 @@ abstract class MenuAbstract extends Singleton
     /**
      * Returns a list of available plugin menu instances.
      *
-     * @return \Piwik\Plugin\Menu[]
+     * @return \Matomo\Plugin\Menu[]
      */
     protected function getAllMenus()
     {
@@ -97,7 +97,7 @@ abstract class MenuAbstract extends Singleton
             return $cache->fetch($cacheId);
         }
 
-        $components = PluginManager::getInstance()->findComponents('Menu', 'Piwik\\Plugin\\Menu');
+        $components = PluginManager::getInstance()->findComponents('Menu', 'Matomo\Plugin\Menu');
 
         $menus = [];
         foreach ($components as $component) {

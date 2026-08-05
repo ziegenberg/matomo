@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging\SMSProvider;
+namespace Matomo\Plugins\MobileMessaging\SMSProvider;
 
 use Exception;
-use Piwik\Http;
-use Piwik\Piwik;
-use Piwik\Plugins\MobileMessaging\APIException;
-use Piwik\Plugins\MobileMessaging\SMSProvider;
+use Matomo\Http;
+use Matomo\Matomo;
+use Matomo\Plugins\MobileMessaging\APIException;
+use Matomo\Plugins\MobileMessaging\SMSProvider;
 
 require_once PIWIK_INCLUDE_PATH . "/plugins/MobileMessaging/APIException.php";
 
@@ -151,6 +151,6 @@ class ASPSMS extends SMSProvider
             self::CHECK_CREDIT_RESOURCE
         );
 
-        return Piwik::translate('MobileMessaging_Available_Credits', array($credits['Credits']));
+        return Matomo::translate('MobileMessaging_Available_Credits', array($credits['Credits']));
     }
 }

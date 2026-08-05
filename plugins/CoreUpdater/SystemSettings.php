@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater;
+namespace Matomo\Plugins\CoreUpdater;
 
-use Piwik\Db\Settings;
-use Piwik\DbHelper;
-use Piwik\Piwik;
-use Piwik\Plugin\ReleaseChannels;
-use Piwik\Plugins\CoreAdminHome\Controller as CoreAdminController;
-use Piwik\Plugins\Marketplace\UpdateCommunication as PluginUpdateCommunication;
-use Piwik\Settings\Setting;
-use Piwik\Settings\FieldConfig;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
+use Matomo\Db\Settings;
+use Matomo\DbHelper;
+use Matomo\Matomo;
+use Matomo\Plugin\ReleaseChannels;
+use Matomo\Plugins\CoreAdminHome\Controller as CoreAdminController;
+use Matomo\Plugins\Marketplace\UpdateCommunication as PluginUpdateCommunication;
+use Matomo\Settings\Setting;
+use Matomo\Settings\FieldConfig;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
 
 /**
  * Defines Settings for CoreUpdater.
@@ -28,7 +28,7 @@ use Piwik\Url;
  * $settings->metric->getValue();
  * $settings->description->getValue();
  */
-class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
+class SystemSettings extends \Matomo\Settings\Plugin\SystemSettings
 {
     /** @var Setting */
     public $releaseChannel;
@@ -50,9 +50,9 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
 
     protected function init()
     {
-        $this->title = Piwik::translate('CoreAdminHome_UpdateSettings');
+        $this->title = Matomo::translate('CoreAdminHome_UpdateSettings');
 
-        $isWritable = Piwik::hasUserSuperUserAccess() && CoreAdminController::isGeneralSettingsAdminEnabled();
+        $isWritable = Matomo::hasUserSuperUserAccess() && CoreAdminController::isGeneralSettingsAdminEnabled();
         $this->releaseChannel = $this->createReleaseChannel();
         $this->releaseChannel->setIsWritableByCurrentUser($isWritable
             && SettingsPiwik::isMultiServerEnvironment() === false);
@@ -74,7 +74,7 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
 
         return $this->makeSettingManagedInConfigOnly('General', 'release_channel', $default, FieldConfig::TYPE_STRING, function (FieldConfig $field) use ($releaseChannels) {
 
-            $field->introduction = Piwik::translate('CoreAdminHome_ReleaseChannel');
+            $field->introduction = Matomo::translate('CoreAdminHome_ReleaseChannel');
             $field->uiControl = FieldConfig::UI_CONTROL_RADIO;
 
             $field->availableValues = array();
@@ -97,35 +97,35 @@ class SystemSettings extends \Piwik\Settings\Plugin\SystemSettings
                 }
             };
 
-            $field->inlineHelp = Piwik::translate('CoreAdminHome_DevelopmentProcess')
+            $field->inlineHelp = Matomo::translate('CoreAdminHome_DevelopmentProcess')
                             . '<br/>'
-                            . Piwik::translate(
+                            . Matomo::translate(
                                 'CoreAdminHome_StableReleases',
                                 [Url::getExternalLinkTag('https://developer.matomo.org/guides/core-team-workflow#influencing-piwik-development'), '</a>']
                             )
                             . '<br/>'
-                            . Piwik::translate('CoreAdminHome_LtsReleases');
+                            . Matomo::translate('CoreAdminHome_LtsReleases');
         });
     }
 
     private function createSendPluginUpdateEmail()
     {
         return $this->makeSetting('enable_plugin_update_communication', $default = true, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->introduction = Piwik::translate('CoreAdminHome_SendPluginUpdateCommunication');
+            $field->introduction = Matomo::translate('CoreAdminHome_SendPluginUpdateCommunication');
             $field->uiControl = FieldConfig::UI_CONTROL_RADIO;
-            $field->availableValues = array('1' => sprintf('%s (%s)', Piwik::translate('General_Yes'), Piwik::translate('General_Default')),
-                                            '0' => Piwik::translate('General_No'));
-            $field->inlineHelp = Piwik::translate('CoreAdminHome_SendPluginUpdateCommunicationHelp');
+            $field->availableValues = array('1' => sprintf('%s (%s)', Matomo::translate('General_Yes'), Matomo::translate('General_Default')),
+                                            '0' => Matomo::translate('General_No'));
+            $field->inlineHelp = Matomo::translate('CoreAdminHome_SendPluginUpdateCommunicationHelp');
         });
     }
 
     private function createUpdateToUtf8mb4()
     {
         return $this->makeSetting('update_to_utf8mb4', $default = false, FieldConfig::TYPE_BOOL, function (FieldConfig $field) {
-            $field->introduction = Piwik::translate('CoreUpdater_ConvertToUtf8mb4');
-            $field->title = Piwik::translate('CoreUpdater_TriggerDatabaseConversion');
+            $field->introduction = Matomo::translate('CoreUpdater_ConvertToUtf8mb4');
+            $field->title = Matomo::translate('CoreUpdater_TriggerDatabaseConversion');
             $field->uiControl = FieldConfig::UI_CONTROL_CHECKBOX;
-            $field->inlineHelp = Piwik::translate('CoreUpdater_Utf8mb4ConversionHelp', [
+            $field->inlineHelp = Matomo::translate('CoreUpdater_Utf8mb4ConversionHelp', [
                 '�',
                 '<code>' . PIWIK_INCLUDE_PATH . '/console core:convert-to-utf8mb4</code>',
                 Url::getExternalLinkTag('https://matomo.org/faq/how-to-update/how-to-convert-the-database-to-utf8mb4-charset/'),

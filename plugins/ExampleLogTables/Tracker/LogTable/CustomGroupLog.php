@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleLogTables\Tracker\LogTable;
+namespace Matomo\Plugins\ExampleLogTables\Tracker\LogTable;
 
-use Piwik\Tracker\LogTable;
+use Matomo\Tracker\LogTable;
 
 class CustomGroupLog extends LogTable
 {

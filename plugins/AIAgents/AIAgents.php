@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents;
+namespace Matomo\Plugins\AIAgents;
 
-use Piwik\Columns\Dimension;
-use Piwik\Plugin;
-use Piwik\Plugins\AIAgents\Providers\AgentAbstract;
-use Piwik\Plugins\AIAgents\Providers\ChatGPT;
-use Piwik\Plugins\AIAgents\Providers\NovaAct;
+use Matomo\Columns\Dimension;
+use Matomo\Plugin;
+use Matomo\Plugins\AIAgents\Providers\AgentAbstract;
+use Matomo\Plugins\AIAgents\Providers\ChatGPT;
+use Matomo\Plugins\AIAgents\Providers\NovaAct;
 
 class AIAgents extends Plugin
 {

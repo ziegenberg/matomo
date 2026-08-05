@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Period\Factory;
-use Piwik\Period\Range;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
-use Piwik\Plugins\CoreVisualizations\Visualizations\EvolutionPeriodSelector;
-use Piwik\Site;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Period\Factory;
+use Matomo\Period\Range;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator\ForecastSeriesState;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
+use Matomo\Plugins\CoreVisualizations\Visualizations\EvolutionPeriodSelector;
+use Matomo\Site;
 
 /**
  * Visualization that renders HTML for a line graph using jqPlot.

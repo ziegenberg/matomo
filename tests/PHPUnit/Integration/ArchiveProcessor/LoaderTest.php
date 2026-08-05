@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\ArchiveProcessor;
+namespace Matomo\Tests\Integration\ArchiveProcessor;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Loader;
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Log\LoggerInterface;
-use Piwik\Period\Factory;
-use Piwik\Piwik;
-use Piwik\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric;
-use Piwik\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric2;
-use Piwik\Plugins\Goals\API;
-use Piwik\Segment;
-use Piwik\Sequence;
-use Piwik\Site;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\SegmentEditor\API as SegmentApi;
-use Piwik\ArchiveProcessor\Rules;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Loader;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Log\LoggerInterface;
+use Matomo\Period\Factory;
+use Matomo\Matomo;
+use Matomo\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric;
+use Matomo\Plugins\ExamplePlugin\RecordBuilders\ExampleMetric2;
+use Matomo\Plugins\Goals\API;
+use Matomo\Segment;
+use Matomo\Sequence;
+use Matomo\Site;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SegmentEditor\API as SegmentApi;
+use Matomo\ArchiveProcessor\Rules;
 
 /**
  * @group ArchiveProcessor
@@ -1568,7 +1568,7 @@ class LoaderTest extends IntegrationTestCase
 
     public function testCanSkipThisArchiveReturnsFalseIfSiteIsNotUsingTracker()
     {
-        Piwik::addAction('CronArchive.getIdSitesNotUsingTracker', function (&$idSites) {
+        Matomo::addAction('CronArchive.getIdSitesNotUsingTracker', function (&$idSites) {
             $idSites[] = 1;
         });
 

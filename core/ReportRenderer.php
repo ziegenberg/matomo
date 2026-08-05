@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable\Row;
-use Piwik\DataTable\Simple;
-use Piwik\Plugins\ImageGraph\API;
+use Matomo\API\Request;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable\Row;
+use Matomo\DataTable\Simple;
+use Matomo\Plugins\ImageGraph\API;
 
 /**
  * A Report Renderer produces user friendly renderings of any given Piwik report.
@@ -65,12 +65,12 @@ abstract class ReportRenderer extends BaseFactory
 
     protected static function getClassNameFromClassId($rendererType)
     {
-        return 'Piwik\ReportRenderer\\' . self::normalizeRendererType($rendererType);
+        return 'Matomo\ReportRenderer\\' . self::normalizeRendererType($rendererType);
     }
 
     protected static function getInvalidClassIdExceptionMessage($rendererType)
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'General_ExceptionInvalidReportRendererFormat',
             [self::normalizeRendererType($rendererType), implode(', ', self::$availableReportRenderers)]
         );
@@ -245,8 +245,8 @@ abstract class ReportRenderer extends BaseFactory
             }
 
             $reportColumns = [
-                'label' => Piwik::translate('General_Name'),
-                'value' => Piwik::translate('General_Value'),
+                'label' => Matomo::translate('General_Name'),
+                'value' => Matomo::translate('General_Value'),
             ];
         }
 

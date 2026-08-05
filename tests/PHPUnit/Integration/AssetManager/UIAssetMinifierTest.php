@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\AssetManager;
+namespace Matomo\Tests\Integration\AssetManager;
 
-use Piwik\AssetManager\UIAsset\OnDiskUIAsset;
-use Piwik\AssetManager\UIAssetMinifier;
+use Matomo\AssetManager\UIAsset\OnDiskUIAsset;
+use Matomo\AssetManager\UIAssetMinifier;
 
 class UIAssetMinifierTest extends \PHPUnit\Framework\TestCase
 {

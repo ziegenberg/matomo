@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\PHPStan\Rules\data;
+namespace Matomo\Tests\Unit\PHPStan\Rules\data;
 
-use Piwik\DataTable\Renderer\Json;
-use Piwik\Http\JsonResponse;
-use Piwik\Plugin\Controller;
+use Matomo\DataTable\Renderer\Json;
+use Matomo\Http\JsonResponse;
+use Matomo\Plugin\Controller;
 
 /**
  * Fixture controller exercising every #[JsonResponse] rule scenario. It is never executed; the
@@ -96,7 +96,7 @@ class JsonResponseController extends Controller
 
     public function rawJsonContentTypeHeader(): string
     {
-        \Piwik\Common::sendHeader('Content-Type: application/json; charset=utf-8');
+        \Matomo\Common::sendHeader('Content-Type: application/json; charset=utf-8');
         return json_encode([]);
     }
 
@@ -167,7 +167,7 @@ class JsonResponseController extends Controller
     // E1: a non-Content-Type header that merely contains "json" -> must NOT be flagged
     public function nonJsonContentTypeHeaderIsIgnored(): string
     {
-        \Piwik\Common::sendHeader('X-Content-Type: application/json');
+        \Matomo\Common::sendHeader('X-Content-Type: application/json');
         return 'plain text';
     }
 
@@ -175,7 +175,7 @@ class JsonResponseController extends Controller
     #[JsonResponse]
     public function attributedRawHeader(): string
     {
-        \Piwik\Common::sendHeader('Content-Type: application/json; charset=utf-8');
+        \Matomo\Common::sendHeader('Content-Type: application/json; charset=utf-8');
         return json_encode([]);
     }
 
@@ -204,7 +204,7 @@ class JsonResponseController extends Controller
     // a non-JSON media type header must NOT be treated as a raw JSON header
     public function nonJsonMediaTypeHeaderIsIgnored(): string
     {
-        \Piwik\Common::sendHeader('Content-Type: application/notjson');
+        \Matomo\Common::sendHeader('Content-Type: application/notjson');
         return 'plain';
     }
 

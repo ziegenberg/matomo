@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration\Api;
+namespace Matomo\Plugins\Marketplace\tests\Integration\Api;
 
-use Piwik\Plugin;
-use Piwik\Plugin\ReleaseChannels;
-use Piwik\Plugins\Marketplace\Environment;
-use Piwik\Option;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Version;
+use Matomo\Plugin;
+use Matomo\Plugin\ReleaseChannels;
+use Matomo\Plugins\Marketplace\Environment;
+use Matomo\Option;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Version;
 
 /**
  * @group Plugins

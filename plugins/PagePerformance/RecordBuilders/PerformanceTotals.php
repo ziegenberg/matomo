@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\RecordBuilders;
+namespace Matomo\Plugins\PagePerformance\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Plugins\PagePerformance\Archiver;
-use Piwik\Plugins\PagePerformance\Columns\Base;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomCompletion;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomProcessing;
-use Piwik\Plugins\PagePerformance\Columns\TimeNetwork;
-use Piwik\Plugins\PagePerformance\Columns\TimeOnLoad;
-use Piwik\Plugins\PagePerformance\Columns\TimeServer;
-use Piwik\Plugins\PagePerformance\Columns\TimeTransfer;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Plugins\PagePerformance\Archiver;
+use Matomo\Plugins\PagePerformance\Columns\Base;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomCompletion;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomProcessing;
+use Matomo\Plugins\PagePerformance\Columns\TimeNetwork;
+use Matomo\Plugins\PagePerformance\Columns\TimeOnLoad;
+use Matomo\Plugins\PagePerformance\Columns\TimeServer;
+use Matomo\Plugins\PagePerformance\Columns\TimeTransfer;
 
 class PerformanceTotals extends RecordBuilder
 {

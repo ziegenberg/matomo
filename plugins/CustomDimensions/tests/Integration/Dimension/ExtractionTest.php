@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Integration\Dimension;
+namespace Matomo\Plugins\CustomDimensions\tests\Integration\Dimension;
 
-use Piwik\Piwik;
-use Piwik\Plugins\CustomDimensions\Dimension\Extraction;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\ActionPageview;
-use Piwik\Tracker\Request;
+use Matomo\Matomo;
+use Matomo\Plugins\CustomDimensions\Dimension\Extraction;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\ActionPageview;
+use Matomo\Tracker\Request;
 
 /**
  * @group CustomDimensions
@@ -220,7 +220,7 @@ class ExtractionTest extends IntegrationTestCase
     {
         $check = '/foo(*)/';
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage(Piwik::translate('General_ValidatorErrorNoValidRegex', array($check)));
+        $this->expectExceptionMessage(Matomo::translate('General_ValidatorErrorNoValidRegex', array($check)));
         $this->buildExtraction('url', $check)->check();
     }
 

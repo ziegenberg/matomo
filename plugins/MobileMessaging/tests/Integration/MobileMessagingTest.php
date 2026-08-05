@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging\tests\Integration;
+namespace Matomo\Plugins\MobileMessaging\tests\Integration;
 
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\MobileMessaging\API as APIMobileMessaging;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\MobileMessaging\Model;
-use Piwik\Plugins\MobileMessaging\SMSProvider;
-use Piwik\Plugins\ScheduledReports\API as APIScheduledReports;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\MobileMessaging\API as APIMobileMessaging;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\MobileMessaging\Model;
+use Matomo\Plugins\MobileMessaging\SMSProvider;
+use Matomo\Plugins\ScheduledReports\API as APIScheduledReports;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Class Plugins_MobileMessagingTest
@@ -39,8 +39,8 @@ class MobileMessagingTest extends IntegrationTestCase
 
         $this->idSiteAccess = APISitesManager::getInstance()->addSite("test", "http://test");
 
-        \Piwik\Plugin\Manager::getInstance()->loadPlugins(array('ScheduledReports', 'MobileMessaging', 'MultiSites'));
-        \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+        \Matomo\Plugin\Manager::getInstance()->loadPlugins(array('ScheduledReports', 'MobileMessaging', 'MultiSites'));
+        \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
     }
 
     /**
@@ -49,8 +49,8 @@ class MobileMessagingTest extends IntegrationTestCase
     public function testWarnUserViaSMSMultiSitesDeactivated()
     {
         // safety net
-        \Piwik\Plugin\Manager::getInstance()->loadPlugins(array('ScheduledReports', 'MobileMessaging'));
-        $this->assertFalse(\Piwik\Plugin\Manager::getInstance()->isPluginActivated('MultiSites'));
+        \Matomo\Plugin\Manager::getInstance()->loadPlugins(array('ScheduledReports', 'MobileMessaging'));
+        $this->assertFalse(\Matomo\Plugin\Manager::getInstance()->isPluginActivated('MultiSites'));
 
         $APIScheduledReports = APIScheduledReports::getInstance();
         $reportId = $APIScheduledReports->addReport(
@@ -72,7 +72,7 @@ class MobileMessagingTest extends IntegrationTestCase
         );
 
         $this->assertEquals(
-            \Piwik\Piwik::translate('MobileMessaging_MultiSites_Must_Be_Activated'),
+            \Matomo\Matomo::translate('MobileMessaging_MultiSites_Must_Be_Activated'),
             $contents
         );
     }
@@ -232,7 +232,7 @@ class MobileMessagingTest extends IntegrationTestCase
         $model = new Model();
         $mobileMessagingAPI->setSMSAPICredential('StubbedProvider', []);
         $mobileMessagingAPI->addPhoneNumber('+6  (76) 93 26 47');
-        $this->assertEquals('+676932647', key($model->getPhoneNumbers(Piwik::getCurrentUserLogin(), false)));
+        $this->assertEquals('+676932647', key($model->getPhoneNumbers(Matomo::getCurrentUserLogin(), false)));
     }
 
     public function testResendVerificationCodeDoesNotWorkWithin60Seconds()
@@ -347,7 +347,7 @@ class MobileMessagingTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

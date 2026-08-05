@@ -1,14 +1,14 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Plugin;
+namespace Matomo\Tests\Framework\Mock\Plugin;
 
-use Piwik\Plugins\CoreHome\Tracker\LogTable\Action;
-use Piwik\Plugins\CoreHome\Tracker\LogTable\Conversion;
-use Piwik\Plugins\CoreHome\Tracker\LogTable\ConversionItem;
-use Piwik\Plugins\CoreHome\Tracker\LogTable\LinkVisitAction;
-use Piwik\Plugins\CoreHome\Tracker\LogTable\Visit;
+use Matomo\Plugins\CoreHome\Tracker\LogTable\Action;
+use Matomo\Plugins\CoreHome\Tracker\LogTable\Conversion;
+use Matomo\Plugins\CoreHome\Tracker\LogTable\ConversionItem;
+use Matomo\Plugins\CoreHome\Tracker\LogTable\LinkVisitAction;
+use Matomo\Plugins\CoreHome\Tracker\LogTable\Visit;
 
-class LogTablesProvider extends \Piwik\Plugin\LogTablesProvider
+class LogTablesProvider extends \Matomo\Plugin\LogTablesProvider
 {
     public function __construct()
     {

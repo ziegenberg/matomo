@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Columns;
+namespace Matomo\Plugins\Ecommerce\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Columns\Discriminator;
-use Piwik\Columns\Join\ActionNameJoin;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Manager;
-use Piwik\Plugin\Segment;
-use Piwik\Plugins\CustomVariables\Tracker\CustomVariablesRequestProcessor;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\TableLogAction;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Columns\Discriminator;
+use Matomo\Columns\Join\ActionNameJoin;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Manager;
+use Matomo\Plugin\Segment;
+use Matomo\Plugins\CustomVariables\Tracker\CustomVariablesRequestProcessor;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\TableLogAction;
 
 class ProductViewCategory extends ActionDimension
 {
@@ -52,7 +52,7 @@ class ProductViewCategory extends ActionDimension
             $segment = new Segment();
             $segment->setCategory($this->category);
             $segment->setType('dimension');
-            $segment->setName(Piwik::translate('Ecommerce_ViewedProductCategory') . ' ' . ($i + 1));
+            $segment->setName(Matomo::translate('Ecommerce_ViewedProductCategory') . ' ' . ($i + 1));
             $segment->setSegment($productCategoryName);
             $segment->setSqlFilter([TableLogAction::class, 'getOptimizedIdActionSqlMatch']);
             $segment->setSqlSegment('log_link_visit_action.' . $productCategoryColumnName);
@@ -76,7 +76,7 @@ class ProductViewCategory extends ActionDimension
         $segment->setCategory($this->category);
         $segment->setType('dimension');
         $segment->setSegment('productViewCategory');
-        $segment->setName(Piwik::translate('Ecommerce_ViewedProductCategory'));
+        $segment->setName(Matomo::translate('Ecommerce_ViewedProductCategory'));
         $segment->setUnionOfSegments($individualProductCategorySegments);
         $segmentsList->addSegment($dimensionSegmentFactory->createSegment($segment));
     }

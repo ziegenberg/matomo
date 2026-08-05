@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\Integration;
+namespace Matomo\Plugins\SitesManager\tests\Integration;
 
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\SitesManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\SitesManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Class Plugins_SitesManagerTest
@@ -58,7 +58,7 @@ class SitesManagerTest extends IntegrationTestCase
 
     public function testOnSiteDeletedShouldRemoveRememberedArchiveReports()
     {
-        $archive = StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+        $archive = StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
         $archive->rememberToInvalidateArchivedReportsLater($this->siteId, Date::factory('2014-04-05'));
         $archive->rememberToInvalidateArchivedReportsLater($this->siteId, Date::factory('2014-04-06'));
         $archive->rememberToInvalidateArchivedReportsLater(4949, Date::factory('2014-04-05'));
@@ -123,7 +123,7 @@ class SitesManagerTest extends IntegrationTestCase
     {
         \Zend_Session::$_unitTestEnabled = true;
 
-        $session = new \Piwik\Session\SessionNamespace('siteWithoutData');
+        $session = new \Matomo\Session\SessionNamespace('siteWithoutData');
         $session->ignoreMessage = true;
 
         $this->assertFalse(SitesManager::shouldShowEmptySiteMessage($this->siteId));
@@ -133,7 +133,7 @@ class SitesManagerTest extends IntegrationTestCase
     {
         \Zend_Session::$_unitTestEnabled = true;
 
-        Piwik::addAction('SitesManager.shouldPerformEmptySiteCheck', function (&$shouldPerformEmptySiteCheck) {
+        Matomo::addAction('SitesManager.shouldPerformEmptySiteCheck', function (&$shouldPerformEmptySiteCheck) {
             $shouldPerformEmptySiteCheck = false;
         });
 
@@ -149,7 +149,7 @@ class SitesManagerTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         ];
     }
 }

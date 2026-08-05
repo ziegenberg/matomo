@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Widgetize\tests\Fixtures;
+namespace Matomo\Plugins\Widgetize\tests\Fixtures;
 
-use Piwik\Plugins\Goals;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Plugins\Goals;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Generates tracker testing data for our SimpleSystemTest

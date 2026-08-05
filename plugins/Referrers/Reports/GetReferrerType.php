@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines;
-use Piwik\Plugins\Referrers\Columns\ReferrerType;
-use Piwik\Widget\WidgetsList;
-use Piwik\Report\ReportWidgetFactory;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines;
+use Matomo\Plugins\Referrers\Columns\ReferrerType;
+use Matomo\Widget\WidgetsList;
+use Matomo\Report\ReportWidgetFactory;
 
 class GetReferrerType extends Base
 {
@@ -25,20 +25,20 @@ class GetReferrerType extends Base
     {
         parent::init();
         $this->dimension     = new ReferrerType();
-        $this->name          = Piwik::translate('Referrers_Type');
-        $this->documentation = Piwik::translate('Referrers_TypeReportDocumentation') . '<br />'
-                             . '<b>' . Piwik::translate('Referrers_DirectEntry') . ':</b> ' . Piwik::translate('Referrers_DirectEntryDocumentation') . '<br />'
-                             . '<b>' . Piwik::translate('Referrers_SearchEngines') . ':</b> ' . Piwik::translate(
+        $this->name          = Matomo::translate('Referrers_Type');
+        $this->documentation = Matomo::translate('Referrers_TypeReportDocumentation') . '<br />'
+                             . '<b>' . Matomo::translate('Referrers_DirectEntry') . ':</b> ' . Matomo::translate('Referrers_DirectEntryDocumentation') . '<br />'
+                             . '<b>' . Matomo::translate('Referrers_SearchEngines') . ':</b> ' . Matomo::translate(
                                  'Referrers_SearchEnginesDocumentation',
-                                 array('<br />', '&quot;' . Piwik::translate('Referrers_SubmenuSearchEngines') . '&quot;')
+                                 array('<br />', '&quot;' . Matomo::translate('Referrers_SubmenuSearchEngines') . '&quot;')
                              ) . '<br />'
-                             . '<b>' . Piwik::translate('Referrers_Websites') . ':</b> ' . Piwik::translate(
+                             . '<b>' . Matomo::translate('Referrers_Websites') . ':</b> ' . Matomo::translate(
                                  'Referrers_WebsitesDocumentation',
-                                 array('<br />', '&quot;' . Piwik::translate('Referrers_SubmenuWebsitesOnly') . '&quot;')
+                                 array('<br />', '&quot;' . Matomo::translate('Referrers_SubmenuWebsitesOnly') . '&quot;')
                              ) . '<br />'
-                             . '<b>' . Piwik::translate('Referrers_Campaigns') . ':</b> ' . Piwik::translate(
+                             . '<b>' . Matomo::translate('Referrers_Campaigns') . ':</b> ' . Matomo::translate(
                                  'Referrers_CampaignsDocumentation',
-                                 array('<br />', '&quot;' . Piwik::translate('Referrers_Campaigns') . '&quot;')
+                                 array('<br />', '&quot;' . Matomo::translate('Referrers_Campaigns') . '&quot;')
                              );
         $this->constantRowsCount = true;
         $this->hasGoalMetrics = true;
@@ -90,19 +90,19 @@ class GetReferrerType extends Base
 
         switch ($idSubtable) {
             case Common::REFERRER_TYPE_SEARCH_ENGINE:
-                $labelColumnTitle = Piwik::translate('General_ColumnKeyword');
+                $labelColumnTitle = Matomo::translate('General_ColumnKeyword');
                 break;
             case Common::REFERRER_TYPE_SOCIAL_NETWORK:
-                $labelColumnTitle = Piwik::translate('Referrers_ColumnSocial');
+                $labelColumnTitle = Matomo::translate('Referrers_ColumnSocial');
                 break;
             case Common::REFERRER_TYPE_AI_ASSISTANT:
-                $labelColumnTitle = Piwik::translate('Referrers_ColumnAIAssistant');
+                $labelColumnTitle = Matomo::translate('Referrers_ColumnAIAssistant');
                 break;
             case Common::REFERRER_TYPE_WEBSITE:
-                $labelColumnTitle = Piwik::translate('Referrers_ColumnWebsite');
+                $labelColumnTitle = Matomo::translate('Referrers_ColumnWebsite');
                 break;
             case Common::REFERRER_TYPE_CAMPAIGN:
-                $labelColumnTitle = Piwik::translate('Referrers_ColumnCampaign');
+                $labelColumnTitle = Matomo::translate('Referrers_ColumnCampaign');
                 break;
             default:
                 break;
@@ -131,7 +131,7 @@ class GetReferrerType extends Base
         }
 
         $out = '';
-        Piwik::postEvent('Template.afterReferrerTypeReport', array(&$out));
+        Matomo::postEvent('Template.afterReferrerTypeReport', array(&$out));
         $view->config->show_footer_message = $out;
     }
 }

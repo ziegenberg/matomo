@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DataAccess\RawLogDao;
-use Piwik\Tests\Fixtures\ManySitesImportedLogs;
-use Piwik\Tests\Framework\TestCase\ConsoleCommandTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\DataAccess\RawLogDao;
+use Matomo\Tests\Fixtures\ManySitesImportedLogs;
+use Matomo\Tests\Framework\TestCase\ConsoleCommandTestCase;
 
 /**
  * @group Core
@@ -132,7 +132,7 @@ class DeleteLogsDataTest extends ConsoleCommandTestCase
         list($from, $to) = explode(",", $dateRange);
 
         /** @var RawLogDao $dao */
-        $dao = StaticContainer::get('Piwik\DataAccess\RawLogDao');
+        $dao = StaticContainer::get('Matomo\DataAccess\RawLogDao');
         $this->assertNotEmpty($dao->countVisitsWithDatesLimit($from, $to));
     }
 }

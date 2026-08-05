@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\Singleton;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\Singleton;
 
 /**
  * Contains methods to access AI assistant definition data.
@@ -66,7 +66,7 @@ class AIAssistant extends Singleton
             }
         }
 
-        Piwik::postEvent('Referrer.addAIAssistantUrls', [&$this->definitionList]);
+        Matomo::postEvent('Referrer.addAIAssistantUrls', [&$this->definitionList]);
 
         return $this->definitionList ?? [];
     }
@@ -166,7 +166,7 @@ class AIAssistant extends Singleton
             }
         }
 
-        return Piwik::translate('General_Unknown');
+        return Matomo::translate('General_Unknown');
     }
 
     /**

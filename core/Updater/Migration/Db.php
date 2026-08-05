@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration;
+namespace Matomo\Updater\Migration;
 
-use Piwik\Updater\Migration;
+use Matomo\Updater\Migration;
 
 /**
  * Base class for a single database migration. Any database migration must extend this class.

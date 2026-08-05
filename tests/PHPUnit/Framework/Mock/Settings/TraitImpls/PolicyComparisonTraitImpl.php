@@ -1,10 +1,10 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Settings\TraitImpls;
+namespace Matomo\Tests\Framework\Mock\Settings\TraitImpls;
 
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait;
-use Piwik\Tests\Framework\Mock\Policy\TestPolicy;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait;
+use Matomo\Tests\Framework\Mock\Policy\TestPolicy;
 
 class PolicyComparisonTraitImpl implements PolicyComparisonInterface
 {

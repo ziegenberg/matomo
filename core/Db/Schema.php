@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Db;
+namespace Matomo\Db;
 
-use Piwik\Config;
-use Piwik\Singleton;
+use Matomo\Config;
+use Matomo\Singleton;
 
 /**
  * Schema abstraction
  *
- * @method static \Piwik\Db\Schema getInstance()
+ * @method static \Matomo\Db\Schema getInstance()
  */
 class Schema extends Singleton
 {
@@ -44,7 +44,7 @@ class Schema extends Singleton
         }
 
         $class = str_replace(' ', '\\', ucwords(str_replace('_', ' ', strtolower($schemaName))));
-        return '\Piwik\Db\Schema\\' . $class;
+        return '\Matomo\Db\Schema\\' . $class;
     }
 
     /**
@@ -330,7 +330,7 @@ class Schema extends Singleton
      * set to **1**.
      *
      * @param array $tables The name of the table to optimize or an array of tables to optimize.
-     *                             Table names must be prefixed (see {@link Piwik\Common::prefixTable()}).
+     *                             Table names must be prefixed (see {@link Matomo\Common::prefixTable()}).
      * @param bool $force If true, the `OPTIMIZE TABLE` query will be run even if InnoDB tables are being used.
      */
     public function optimizeTables(array $tables, bool $force = false): bool

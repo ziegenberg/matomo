@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Archive\ArchiveState;
-use Piwik\Archive\DataTableFactory;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\Period;
-use Piwik\Period\Factory;
-use Piwik\Plugins\API\Filter\DataComparisonFilter;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as JqplotEvolutionGraph;
-use Piwik\Site;
-use Piwik\Url;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Archive\ArchiveState;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\Period;
+use Matomo\Period\Factory;
+use Matomo\Plugins\API\Filter\DataComparisonFilter;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution as JqplotEvolutionGraph;
+use Matomo\Site;
+use Matomo\Url;
 
 /**
  * Generates JQPlot JSON data/config for evolution graphs.
@@ -150,7 +150,7 @@ class Evolution extends JqplotDataGenerator
                     'idSite'  => $idSite,
                     'period'  => $periodLabel,
                     'date'    => $dateInUrl->toString(),
-                    'segment' => \Piwik\API\Request::getRawSegmentFromRequest(),
+                    'segment' => \Matomo\API\Request::getRawSegmentFromRequest(),
                 );
                 $link = Url::getQueryStringFromParameters($parameters);
                 $axisXOnClick[] = $link;

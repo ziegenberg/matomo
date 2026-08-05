@@ -12,21 +12,21 @@ define('PIWIK_ENABLE_DISPATCH', false);
 
 require_once __DIR__ . '/../../tests/PHPUnit/proxy/index.php';
 
-$environment = new \Piwik\Application\Environment(null);
+$environment = new \Matomo\Application\Environment(null);
 $environment->init();
 
-\Piwik\Access::getInstance()->setSuperUserAccess(true);
+\Matomo\Access::getInstance()->setSuperUserAccess(true);
 
 $executed = false;
-\Piwik\Piwik::addAction('Request.dispatch', function () use (&$executed) {
+\Matomo\Matomo::addAction('Request.dispatch', function () use (&$executed) {
     if (!$executed) {
         $executed = true;
         throw new \Twig\Error\RuntimeError('test message');
     }
 });
 
-\Piwik\FrontController::$enableDispatch = true;
+\Matomo\FrontController::$enableDispatch = true;
 
-\Piwik\FrontController::getInstance()->init();
+\Matomo\FrontController::getInstance()->init();
 
-echo \Piwik\FrontController::getInstance()->dispatch('CoreHome', 'index');
+echo \Matomo\FrontController::getInstance()->dispatch('CoreHome', 'index');

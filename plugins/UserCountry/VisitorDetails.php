@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry;
+namespace Matomo\Plugins\UserCountry;
 
-use Piwik\Common;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\Tracker\Visit;
+use Matomo\Common;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\Tracker\Visit;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
 
@@ -174,7 +174,7 @@ class VisitorDetails extends VisitorDetailsAbstract
             $profile['continents'][] = array(
                 'continent'  => $continentCode,
                 'nb_visits'  => $nbVisits,
-                'prettyName' => \Piwik\Plugins\UserCountry\continentTranslate($continentCode),
+                'prettyName' => \Matomo\Plugins\UserCountry\continentTranslate($continentCode),
             );
         }
 
@@ -185,8 +185,8 @@ class VisitorDetails extends VisitorDetailsAbstract
             $countryInfo = array(
                 'country'    => $countryCode,
                 'nb_visits'  => $nbVisits,
-                'flag'       => \Piwik\Plugins\UserCountry\getFlagFromCode($countryCode),
-                'prettyName' => \Piwik\Plugins\UserCountry\countryTranslate($countryCode),
+                'flag'       => \Matomo\Plugins\UserCountry\getFlagFromCode($countryCode),
+                'prettyName' => \Matomo\Plugins\UserCountry\countryTranslate($countryCode),
             );
             if (!empty($this->cities[$countryCode])) {
                 $countryInfo['cities'] = array_unique($this->cities[$countryCode]);

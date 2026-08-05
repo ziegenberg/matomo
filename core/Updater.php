@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Columns\Updater as ColumnUpdater;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Installation\ServerFilesGenerator;
-use Piwik\Updater\Migration;
-use Piwik\Exception\MissingFilePermissionException;
-use Piwik\Updater\UpdateObserver;
+use Matomo\Columns\Updater as ColumnUpdater;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Installation\ServerFilesGenerator;
+use Matomo\Updater\Migration;
+use Matomo\Exception\MissingFilePermissionException;
+use Matomo\Updater\UpdateObserver;
 use Zend_Db_Exception;
 
 /**
@@ -105,7 +105,7 @@ class Updater
              *
              * @param string $name The component that has been installed.
              */
-            Piwik::postEvent('Updater.componentInstalled', array($name));
+            Matomo::postEvent('Updater.componentInstalled', array($name));
 
             return;
         }
@@ -133,7 +133,7 @@ class Updater
          * @param string $componentName 'core', plugin name or dimension name
          * @param string $updatedVersion version updated to
          */
-        Piwik::postEvent('Updater.componentUpdated', array($name, $version));
+        Matomo::postEvent('Updater.componentUpdated', array($name, $version));
     }
 
     /**
@@ -155,7 +155,7 @@ class Updater
          *
          * @param string $name The component that has been uninstalled.
          */
-        Piwik::postEvent('Updater.componentUninstalled', array($name));
+        Matomo::postEvent('Updater.componentUninstalled', array($name));
     }
 
     /**
@@ -275,14 +275,14 @@ class Updater
         $className = 'Updates_' . $suffix;
 
         if ($componentName == 'core') {
-            return '\\Piwik\\Updates\\' . $className;
+            return '\Matomo\Updates\\' . $className;
         }
 
         if (ColumnUpdater::isDimensionComponent($componentName)) {
-            return '\\Piwik\\Columns\\Updater';
+            return '\Matomo\Columns\Updater';
         }
 
-        return '\\Piwik\\Plugins\\' . $componentName . '\\' . $className;
+        return '\Matomo\Plugins\\' . $componentName . '\\' . $className;
     }
 
     /**
@@ -486,7 +486,7 @@ class Updater
              */
             Access::doAsSuperUser(function () use ($componentsWithUpdateFile, &$coreError, &$deactivatedPlugins, &$errors, &$warnings) {
 
-                $pluginManager = \Piwik\Plugin\Manager::getInstance();
+                $pluginManager = \Matomo\Plugin\Manager::getInstance();
 
                 // if error in any core update, show message + help message + EXIT
                 // if errors in any plugins updates, show them on screen, disable plugins that errored + CONTINUE
@@ -525,7 +525,7 @@ class Updater
         /**
          * Triggered after Piwik has been updated.
          */
-        Piwik::postEvent('CoreUpdater.update.end');
+        Matomo::postEvent('CoreUpdater.update.end');
 
         return $result;
     }
@@ -542,7 +542,7 @@ class Updater
             'core' => Version::VERSION,
         );
 
-        $manager = \Piwik\Plugin\Manager::getInstance();
+        $manager = \Matomo\Plugin\Manager::getInstance();
         $plugins = $manager->getLoadedPlugins();
         foreach ($plugins as $pluginName => $plugin) {
             if ($manager->isPluginInstalled($pluginName)) {
@@ -636,7 +636,7 @@ class Updater
     {
         if (!is_object($migration)) {
             // keep BC for old format (pre 3.0): array($sqlQuery => $errorCodeToIgnore)
-            $migrationFactory = StaticContainer::get('Piwik\Updater\Migration\Factory');
+            $migrationFactory = StaticContainer::get('Matomo\Updater\Migration\Factory');
             $migration = $migrationFactory->db->sql($index, $migration);
         }
 

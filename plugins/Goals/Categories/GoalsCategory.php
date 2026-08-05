@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Categories;
+namespace Matomo\Plugins\Goals\Categories;
 
-use Piwik\Category\Category;
+use Matomo\Category\Category;
 
 class GoalsCategory extends Category
 {

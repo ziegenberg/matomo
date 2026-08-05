@@ -7,28 +7,28 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance;
+namespace Matomo\Plugins\PagePerformance;
 
-use Piwik\Columns\Dimension;
-use Piwik\Plugins\PagePerformance\Columns\Base;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AveragePageLoadTime;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomCompletion;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomProcessing;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeNetwork;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeServer;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeOnLoad;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AverageTimeTransfer;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomCompletion;
-use Piwik\Plugins\PagePerformance\Columns\TimeDomProcessing;
-use Piwik\Plugins\PagePerformance\Columns\TimeNetwork;
-use Piwik\Plugins\PagePerformance\Columns\TimeServer;
-use Piwik\Plugins\PagePerformance\Columns\TimeOnLoad;
-use Piwik\Plugins\PagePerformance\Columns\TimeTransfer;
+use Matomo\Columns\Dimension;
+use Matomo\Plugins\PagePerformance\Columns\Base;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AveragePageLoadTime;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomCompletion;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeDomProcessing;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeNetwork;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeServer;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeOnLoad;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AverageTimeTransfer;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomCompletion;
+use Matomo\Plugins\PagePerformance\Columns\TimeDomProcessing;
+use Matomo\Plugins\PagePerformance\Columns\TimeNetwork;
+use Matomo\Plugins\PagePerformance\Columns\TimeServer;
+use Matomo\Plugins\PagePerformance\Columns\TimeOnLoad;
+use Matomo\Plugins\PagePerformance\Columns\TimeTransfer;
 
 class Metrics
 {
     /**
-     * @return \Piwik\Plugins\PagePerformance\Columns\Metrics\AveragePerformanceMetric[]
+     * @return \Matomo\Plugins\PagePerformance\Columns\Metrics\AveragePerformanceMetric[]
      */
     public static function getPagePerformanceMetrics()
     {
@@ -51,7 +51,7 @@ class Metrics
     }
 
     /**
-     * @return \Piwik\Plugins\PagePerformance\Columns\Metrics\AveragePerformanceMetric[]
+     * @return \Matomo\Plugins\PagePerformance\Columns\Metrics\AveragePerformanceMetric[]
      */
     public static function getAllPagePerformanceMetrics()
     {

@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\Engagement;
+namespace Matomo\Plugins\Tour\Engagement;
 
-use Piwik\Piwik;
-use Piwik\Plugins\TwoFactorAuth\TwoFactorAuthentication;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Plugins\TwoFactorAuth\TwoFactorAuthentication;
+use Matomo\Url;
 
 class ChallengeSetupTwoFa extends Challenge
 {
     public function getName()
     {
-        return Piwik::translate('Tour_SetupX', Piwik::translate('TwoFactorAuth_TwoFactorAuthentication'));
+        return Matomo::translate('Tour_SetupX', Matomo::translate('TwoFactorAuth_TwoFactorAuthentication'));
     }
 
     public function getDescription()
     {
-        return Piwik::translate('TwoFactorAuth_TwoFactorAuthenticationIntro', array('', ''));
+        return Matomo::translate('TwoFactorAuth_TwoFactorAuthenticationIntro', array('', ''));
     }
 
     public function getId()

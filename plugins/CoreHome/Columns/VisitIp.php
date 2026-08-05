@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Common;
-use Piwik\Metrics\Formatter;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Common;
+use Matomo\Metrics\Formatter;
 use Matomo\Network\IPUtils;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Segment;
-use Piwik\Segment\SegmentsList;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\Segment;
+use Matomo\Segment\SegmentsList;
 
 /**
  * Dimension for the log_visit.location_ip column. This column is added in the CREATE TABLE
@@ -34,7 +34,7 @@ class VisitIp extends VisitDimension
 
     public function getAcceptValues()
     {
-        return Piwik::translate('General_VisitorIPSegmentHelp', ['13.54.122.1', '<code>visitIp>13.54.122.0;visitIp<13.54.122.255</code>']);
+        return Matomo::translate('General_VisitorIPSegmentHelp', ['13.54.122.1', '<code>visitIp>13.54.122.0;visitIp<13.54.122.255</code>']);
     }
 
     public function formatValue($value, $idSite, Formatter $formatter)

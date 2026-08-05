@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Site;
-use Piwik\Log\LoggerInterface;
+use Matomo\API\Request;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Site;
+use Matomo\Log\LoggerInterface;
 
 /**
  * @see plugins/Live/Visitor.php
@@ -44,9 +44,9 @@ require_once PIWIK_INCLUDE_PATH . '/plugins/UserCountry/functions.php';
  *
  * See also the documentation about <a href='https://matomo.org/docs/real-time/' rel='noreferrer' target='_blank'>Real time widget and visitor level reports</a> in Matomo.
  * You may also be interested in steps to <a href='https://matomo.org/faq/how-to/faq_24536/'>export your RAW data to a data warehouse</a>.
- * @method static \Piwik\Plugins\Live\API getInstance()
+ * @method static \Matomo\Plugins\Live\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private LoggerInterface $logger;
 
@@ -69,7 +69,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getCounters($idSite, int $lastMinutes, $segment = false, $showColumns = [], $hideColumns = []): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         if ($lastMinutes < 1 || $lastMinutes > 2880) {
             throw new \InvalidArgumentException('lastMinutes only accepts values between 1 and 2880');
@@ -174,12 +174,12 @@ class API extends \Piwik\Plugin\API
      */
     public function getLastVisitsDetails($idSite, $period = false, $date = false, $segment = false, $countVisitorsToFetch = false, $minTimestamp = false, $flat = false, $doNotFetchActions = false, $enhanced = false, $intersectSegment = false): DataTable
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $idSites = Site::getIdSitesFromIdSitesString($idSite, false, true);
         if (is_array($idSites) && count($idSites) === 1) {
             $idSites = array_shift($idSites);
         }
-        Piwik::checkUserHasViewAccess($idSites);
+        Matomo::checkUserHasViewAccess($idSites);
 
         if (is_numeric($minTimestamp)) {
             $minTimestamp = (int) $minTimestamp;
@@ -206,11 +206,11 @@ class API extends \Piwik\Plugin\API
             $filterLimit     = (int) $countVisitorsToFetch;
             $filterOffset    = 0;
         } else {
-            $filterLimit  = \Piwik\Request::fromRequest()->getIntegerParameter('filter_limit', 10);
-            $filterOffset = \Piwik\Request::fromRequest()->getIntegerParameter('filter_offset', 0);
+            $filterLimit  = \Matomo\Request::fromRequest()->getIntegerParameter('filter_limit', 10);
+            $filterOffset = \Matomo\Request::fromRequest()->getIntegerParameter('filter_offset', 0);
         }
 
-        $filterSortOrder = \Piwik\Request::fromRequest()->getStringParameter('filter_sort_order', '');
+        $filterSortOrder = \Matomo\Request::fromRequest()->getStringParameter('filter_sort_order', '');
         // Normalize an empty value (e.g. an empty request parameter) to the documented false default.
         if ($intersectSegment === '') {
             $intersectSegment = false;
@@ -219,7 +219,7 @@ class API extends \Piwik\Plugin\API
         $dataTable = $this->loadLastVisitsDetailsFromDatabase($idSites, $period, $date, $segment, $filterOffset, $filterLimit, $minTimestamp, $filterSortOrder, $visitorId = false, $intersectSegment);
         $this->addFilterToCleanVisitors($dataTable, $flat, $doNotFetchActions);
 
-        $filterSortColumn = \Piwik\Request::fromRequest()->getStringParameter('filter_sort_column', '');
+        $filterSortColumn = \Matomo\Request::fromRequest()->getStringParameter('filter_sort_column', '');
 
         if ($filterSortColumn) {
             $this->logger->warning('Sorting the API method "Live.getLastVisitDetails" by column is currently not supported. To avoid this warning remove the URL parameter "filter_sort_column" from your API request.');
@@ -248,7 +248,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getVisitorProfile(int $idSite, $visitorId = false, $segment = false, $limitVisits = false): array
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         Live::checkIsVisitorProfileEnabled($idSite);
 
         if (!is_numeric($limitVisits) || $limitVisits <= 0) {
@@ -298,7 +298,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMostRecentVisitorId(int $idSite, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         Live::checkIsVisitorLogEnabled($idSite);
 
         // for faster performance search for a visitor within the last 7 days first
@@ -362,7 +362,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getFirstVisitForVisitorId($idSite, $visitorId): DataTable
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         Live::checkIsVisitorProfileEnabled($idSite);
 
         if (empty($visitorId)) {
@@ -387,7 +387,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getMostRecentVisitsDateTime($idSite, ?string $period = null, ?string $date = null): string
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $model = new Model();
         return $model->getMostRecentVisitsDateTime($idSite, $period, $date);

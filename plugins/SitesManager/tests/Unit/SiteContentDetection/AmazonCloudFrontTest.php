@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\Unit\SiteContentDetection;
+namespace Matomo\Plugins\SitesManager\tests\Unit\SiteContentDetection;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Plugins\SitesManager\SiteContentDetection\AmazonCloudFront;
+use Matomo\Plugins\SitesManager\SiteContentDetection\AmazonCloudFront;
 
 /**
  * @group SitesManager

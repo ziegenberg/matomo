@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DataAccess\TableMetadata;
-use Piwik\Db;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DataAccess\TableMetadata;
+use Matomo\Db;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -156,7 +156,7 @@ class DbTest extends IntegrationTestCase
         self::assertTrue(
             Db::get()->isErrNo(
                 $dbException,
-                \Piwik\Updater\Migration\Db::ERROR_CODE_SYNTAX_ERROR
+                \Matomo\Updater\Migration\Db::ERROR_CODE_SYNTAX_ERROR
             )
         );
 
@@ -184,7 +184,7 @@ class DbTest extends IntegrationTestCase
         self::assertTrue(
             Db::get()->isErrNo(
                 $dbException,
-                \Piwik\Updater\Migration\Db::ERROR_CODE_MYSQL_SERVER_HAS_GONE_AWAY
+                \Matomo\Updater\Migration\Db::ERROR_CODE_MYSQL_SERVER_HAS_GONE_AWAY
             )
             || false !== stripos($dbException->getMessage(), 'server has gone away')
         );
@@ -297,8 +297,8 @@ class DbTest extends IntegrationTestCase
     public function getDbAdapter()
     {
         return array(
-            array('Mysqli', 'Piwik\Db\Adapter\Mysqli'),
-            array('PDO\MYSQL', 'Piwik\Db\Adapter\Pdo\Mysql'),
+            array('Mysqli', 'Matomo\Db\Adapter\Mysqli'),
+            array('PDO\MYSQL', 'Matomo\Db\Adapter\Pdo\Mysql'),
         );
     }
 

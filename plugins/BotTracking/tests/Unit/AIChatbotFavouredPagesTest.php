@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\tests\Unit;
+namespace Matomo\Plugins\BotTracking\tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages;
 
 /**
  * Covers the pure union logic behind the Favoured Pages records (the merge that used to live in the

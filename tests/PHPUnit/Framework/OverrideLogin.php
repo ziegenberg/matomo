@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework;
+namespace Matomo\Tests\Framework;
 
-use Piwik\Access;
+use Matomo\Access;
 
 // needed by tests that use stored segments w/ the proxy index.php
 /**

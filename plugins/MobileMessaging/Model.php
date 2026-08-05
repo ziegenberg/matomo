@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging;
+namespace Matomo\Plugins\MobileMessaging;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Settings\Storage\Factory;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Settings\Storage\Factory;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
 
 /**
  * @phpstan-type PhoneVerificationData array{
@@ -55,7 +55,7 @@ class Model
             $from
         );
 
-        $this->increaseCount(Piwik::getCurrentUserLogin(), MobileMessaging::SMS_SENT_COUNT_OPTION, $phoneNumber);
+        $this->increaseCount(Matomo::getCurrentUserLogin(), MobileMessaging::SMS_SENT_COUNT_OPTION, $phoneNumber);
 
         return true;
     }
@@ -283,7 +283,7 @@ class Model
 
     private function getCredentialManagerLogin(): string
     {
-        return $this->getDelegatedManagement() ? Piwik::getCurrentUserLogin() : '';
+        return $this->getDelegatedManagement() ? Matomo::getCurrentUserLogin() : '';
     }
 
     /**

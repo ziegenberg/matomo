@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands\SetConfig;
+namespace Matomo\Plugins\CoreAdminHome\Commands\SetConfig;
 
-use Piwik\Config;
+use Matomo\Config;
 
 /**
  * Representation of a INI config manipulation operation. Only supports two types

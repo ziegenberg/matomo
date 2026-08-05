@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
 use Exception;
-use Piwik\Config;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\Date;
-use Piwik\Log;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CoreAdminHome\Controller;
-use Piwik\Segment;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Site;
-use Piwik\Tracker\Cache;
+use Matomo\Config;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\Date;
+use Matomo\Log;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CoreAdminHome\Controller;
+use Matomo\Segment;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Site;
+use Matomo\Tracker\Cache;
 
 /**
  * This class contains Archiving rules/logic which are used when creating and processing Archives.
@@ -131,7 +131,7 @@ class Rules
 
     public static function getMinTimeProcessedForInProgressArchive(
         Date $dateStart,
-        \Piwik\Period $period,
+        \Matomo\Period $period,
         Segment $segment,
         Site $site
     ) {
@@ -166,7 +166,7 @@ class Rules
     {
         $timeToLiveSeconds = (int)$timeToLiveSeconds;
         if ($timeToLiveSeconds <= 0) {
-            throw new Exception(Piwik::translate('General_ExceptionInvalidArchiveTimeToLive'));
+            throw new Exception(Matomo::translate('General_ExceptionInvalidArchiveTimeToLive'));
         }
         Option::set(self::OPTION_TODAY_ARCHIVE_TTL, $timeToLiveSeconds, $autoLoad = true);
     }
@@ -263,7 +263,7 @@ class Rules
              * @param bool &$isRequestAuthorizedToArchive
              * @param Parameters $params
              */
-            Piwik::postEvent('Archiving.isRequestAuthorizedToArchive', [&$isRequestAuthorizedToArchive, $params]);
+            Matomo::postEvent('Archiving.isRequestAuthorizedToArchive', [&$isRequestAuthorizedToArchive, $params]);
         }
 
         return $isRequestAuthorizedToArchive;

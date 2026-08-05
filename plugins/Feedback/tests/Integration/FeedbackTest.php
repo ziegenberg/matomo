@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Feedback\tests\Unit;
+namespace Matomo\Plugins\Feedback\tests\Unit;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugins\Feedback\API;
-use Piwik\Plugins\Feedback\Feedback;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Settings\Storage\Backend\PluginSettingsTable;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugins\Feedback\API;
+use Matomo\Plugins\Feedback\Feedback;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Settings\Storage\Backend\PluginSettingsTable;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class FeedbackTest extends IntegrationTestCase
 {
@@ -74,7 +74,7 @@ class FeedbackTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-          'Piwik\Access' => new FakeAccess(),
+          'Matomo\Access' => new FakeAccess(),
         );
     }
 
@@ -126,7 +126,7 @@ class FeedbackTest extends IntegrationTestCase
 
         //test failed without message
         $result = $api->sendFeedbackForFeature('test');
-        $this->assertEquals(Piwik::translate("Feedback_FormNotEnoughFeedbackText"), $result);
+        $this->assertEquals(Matomo::translate("Feedback_FormNotEnoughFeedbackText"), $result);
 
         //test pass with like is string 0
         $result = $api->sendFeedbackForFeature('test', "0", null, "dislike this test");

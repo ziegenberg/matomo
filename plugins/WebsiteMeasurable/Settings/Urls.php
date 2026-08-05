@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\WebsiteMeasurable\Settings;
+namespace Matomo\Plugins\WebsiteMeasurable\Settings;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Settings\FieldConfig;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Settings\FieldConfig;
 use Exception;
-use Piwik\UrlHelper;
+use Matomo\UrlHelper;
 
-class Urls extends \Piwik\Settings\Measurable\MeasurableProperty
+class Urls extends \Matomo\Settings\Measurable\MeasurableProperty
 {
     public function __construct($idSite)
     {
@@ -34,8 +34,8 @@ class Urls extends \Piwik\Settings\Measurable\MeasurableProperty
         }
 
         $config = new FieldConfig();
-        $config->title = Piwik::translate('SitesManager_Urls');
-        $config->inlineHelp = Piwik::translate('SitesManager_AliasUrlHelp');
+        $config->title = Matomo::translate('SitesManager_Urls');
+        $config->inlineHelp = Matomo::translate('SitesManager_AliasUrlHelp');
         $config->uiControl = FieldConfig::UI_CONTROL_TEXTAREA;
         $config->uiControlAttributes = array(
           'cols' => '25',
@@ -71,7 +71,7 @@ class Urls extends \Piwik\Settings\Measurable\MeasurableProperty
             !is_array($urls)
             || count($urls) == 0
         ) {
-            throw new Exception(Piwik::translate('SitesManager_ExceptionNoUrl'));
+            throw new Exception(Matomo::translate('SitesManager_ExceptionNoUrl'));
         }
     }
 
@@ -87,7 +87,7 @@ class Urls extends \Piwik\Settings\Measurable\MeasurableProperty
 
         foreach ($urls as $url) {
             if (!UrlHelper::isLookLikeUrl($url)) {
-                throw new Exception(sprintf(Piwik::translate('SitesManager_ExceptionInvalidUrl'), $url));
+                throw new Exception(sprintf(Matomo::translate('SitesManager_ExceptionInvalidUrl'), $url));
             }
         }
     }

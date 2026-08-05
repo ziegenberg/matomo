@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Piwik;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Matomo;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 abstract class AbstractAIChatbotsRealTimeReport extends Report
 {
@@ -41,7 +41,7 @@ abstract class AbstractAIChatbotsRealTimeReport extends Report
 
         $view->requestConfig->filter_sort_column = $this->defaultSortColumn;
         $view->requestConfig->filter_sort_order  = 'desc';
-        $view->config->show_footer_message        = Piwik::translate(
+        $view->config->show_footer_message        = Matomo::translate(
             'BotTracking_AIChatbotsRealTimeReportLimitFooter',
             [$this->getReportRowLimit()]
         );

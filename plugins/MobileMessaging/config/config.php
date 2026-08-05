@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'diagnostics.optional' => Piwik\DI::add([
-        Piwik\DI::get(\Piwik\Plugins\MobileMessaging\Diagnostic\MobileMessagingInformational::class),
+    'diagnostics.optional' => Matomo\DI::add([
+        Matomo\DI::get(\Matomo\Plugins\MobileMessaging\Diagnostic\MobileMessagingInformational::class),
     ]),
 ];

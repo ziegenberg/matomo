@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\Reports;
+namespace Matomo\Plugins\MultiSites\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\MultiSites\Columns\Website;
+use Matomo\Matomo;
+use Matomo\Plugins\MultiSites\Columns\Website;
 
 class GetOne extends Base
 {
@@ -18,8 +18,8 @@ class GetOne extends Base
     {
         parent::init();
         $this->dimension     = new Website();
-        $this->name          = Piwik::translate('General_SingleWebsitesDashboard');
-        $this->documentation = Piwik::translate('MultiSites_SingleWebsitesDashboardDocumentation');
+        $this->name          = Matomo::translate('General_SingleWebsitesDashboard');
+        $this->documentation = Matomo::translate('MultiSites_SingleWebsitesDashboardDocumentation');
         $this->constantRowsCount = false;
         $this->order = 5;
     }

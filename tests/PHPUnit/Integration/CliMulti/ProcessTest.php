@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\CliMulti;
+namespace Matomo\Tests\Integration\CliMulti;
 
-use Piwik\CliMulti\Process;
-use Piwik\Tests\Framework\Mock\File;
+use Matomo\CliMulti\Process;
+use Matomo\Tests\Framework\Mock\File;
 use ReflectionProperty;
 
 /**

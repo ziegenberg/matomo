@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Container\Container;
-use Piwik\Plugin\RequestProcessors;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker;
-use Piwik\Tracker\BotRequestProcessor;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestProcessor;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Version;
+use Matomo\Container\Container;
+use Matomo\Plugin\RequestProcessors;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker;
+use Matomo\Tracker\BotRequestProcessor;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestProcessor;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Version;
 
 /**
  * @group Core

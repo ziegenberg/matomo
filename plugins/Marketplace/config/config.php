@@ -1,9 +1,9 @@
 <?php
 
-use Piwik\Config\GeneralConfig;
-use Piwik\Plugins\Marketplace\Api\Service;
-use Piwik\Plugins\Marketplace\LicenseKey;
-use Piwik\Container\Container;
+use Matomo\Config\GeneralConfig;
+use Matomo\Plugins\Marketplace\Api\Service;
+use Matomo\Plugins\Marketplace\LicenseKey;
+use Matomo\Container\Container;
 
 return array(
     'MarketplaceEndpoint' => function (Container $c) {
@@ -16,7 +16,7 @@ return array(
 
         return 'https://' . $domain;
     },
-    'Piwik\Plugins\Marketplace\Api\Service' => function (Container $c) {
+    'Matomo\Plugins\Marketplace\Api\Service' => function (Container $c) {
         $domain = $c->get('MarketplaceEndpoint');
 
         $service = new Service($domain);

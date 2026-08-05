@@ -7,14 +7,14 @@
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\AIAgents\tests\Integration;
+namespace Matomo\Plugins\AIAgents\tests\Integration;
 
 use MatomoTracker;
-use Piwik\Date;
-use Piwik\Plugins\AIAgents\Providers\ChatGPT as ChatGPTAgent;
-use Piwik\Plugins\Live\API as LiveAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Date;
+use Matomo\Plugins\AIAgents\Providers\ChatGPT as ChatGPTAgent;
+use Matomo\Plugins\Live\API as LiveAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group AIAgents

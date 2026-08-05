@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ProfessionalServices\tests\Framework\Mock;
+namespace Matomo\Plugins\ProfessionalServices\tests\Framework\Mock;
 
-class Promo extends \Piwik\Plugins\ProfessionalServices\Promo
+class Promo extends \Matomo\Plugins\ProfessionalServices\Promo
 {
     public function getLinkTitle()
     {

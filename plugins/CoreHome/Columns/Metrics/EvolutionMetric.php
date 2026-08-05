@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns\Metrics;
+namespace Matomo\Plugins\CoreHome\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\Archive\DataTableFactory;
-use Piwik\DataTable\Row;
-use Piwik\Date;
-use Piwik\Metrics;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Site;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\Metric;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\Archive\DataTableFactory;
+use Matomo\DataTable\Row;
+use Matomo\Date;
+use Matomo\Metrics;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Site;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\Metric;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * Calculates evolution values for any other metric. An evolution is the percent change from a
@@ -121,7 +121,7 @@ class EvolutionMetric extends ProcessedMetric
             $defaultMetricTranslations = Metrics::getDefaultMetricTranslations();
             $metricName = isset($defaultMetricTranslations[$this->wrapped]) ? $defaultMetricTranslations[$this->wrapped] : $this->wrapped;
         }
-        return Piwik::translate('CoreHome_EvolutionMetricName', [$metricName]);
+        return Matomo::translate('CoreHome_EvolutionMetricName', [$metricName]);
     }
 
     public function getTrendValue($computedValue = 0)
@@ -172,7 +172,7 @@ class EvolutionMetric extends ProcessedMetric
         } elseif ($divisor == 0) {
             return 1;
         } else {
-            return Piwik::getQuotientSafe($dividend, $divisor, $this->quotientPrecision + 2);
+            return Matomo::getQuotientSafe($dividend, $divisor, $this->quotientPrecision + 2);
         }
     }
 

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExamplePlugin\Widgets;
+namespace Matomo\Plugins\ExamplePlugin\Widgets;
 
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 /**
  * This class allows you to add your own widget to the Piwik platform. In case you want to remove widgets from another
@@ -47,23 +47,23 @@ class MyExampleWidget extends Widget
          * Optionally set URL parameters that will be used when this widget is requested.
          * $config->setParameters(array('myparam' => 'myvalue'));
          */
-
         /**
          * Define whether a widget is enabled or not. For instance some widgets might not be available to every user or
          * might depend on a setting (such as Ecommerce) of a site. In such a case you can perform any checks and then
          * set `true` or `false`. If your widget is only available to users having super user access you can do the
          * following:
          *
-         * $config->setIsEnabled(\Piwik\Piwik::hasUserSuperUserAccess());
+         * $config->setIsEnabled(\Matomo\Matomo::hasUserSuperUserAccess());
          * or
-         * if (!\Piwik\Piwik::hasUserSuperUserAccess())
+         * if (!\Matomo\Matomo::hasUserSuperUserAccess())
          *     $config->disable();
          */
+        
     }
 
     /**
      * This method renders the widget. It's on you how to generate the content of the widget.
-     * As long as you return a string everything is fine. You can use for instance a "Piwik\View" to render a
+     * As long as you return a string everything is fine. You can use for instance a "Matomo\View" to render a
      * twig template. In such a case don't forget to create a twig template (eg. myViewTemplate.twig) in the
      * "templates" directory of your plugin.
      *

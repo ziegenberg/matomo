@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Renderer;
+namespace Matomo\DataTable\Renderer;
 
 use Exception;
-use Piwik\DataTable\Map;
-use Piwik\DataTable\Renderer;
-use Piwik\DataTable;
-use Piwik\DataTable\Simple;
-use Piwik\Piwik;
+use Matomo\DataTable\Map;
+use Matomo\DataTable\Renderer;
+use Matomo\DataTable;
+use Matomo\DataTable\Simple;
+use Matomo\Matomo;
 
 /**
  * XML export of a given DataTable.
@@ -107,7 +107,7 @@ class Xml extends Renderer
      */
     private function renderArray(array $array, string $prefixLines): string
     {
-        $isAssociativeArray = Piwik::isAssociativeArray($array);
+        $isAssociativeArray = Matomo::isAssociativeArray($array);
 
         // check if array contains arrays, and if not wrap the result in an extra <row> element
         // (only check if this is the root renderArray call)

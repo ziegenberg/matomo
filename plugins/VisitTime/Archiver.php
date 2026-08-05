@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime;
+namespace Matomo\Plugins\VisitTime;
 
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const SERVER_TIME_RECORD_NAME = 'VisitTime_serverTime';
     public const LOCAL_TIME_RECORD_NAME = 'VisitTime_localTime';

@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\BulkTracking\tests\Integration;
+namespace Matomo\Plugins\BulkTracking\tests\Integration;
 
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Plugins\BulkTracking\tests\Mock\TrackerResponse;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\Tracker\ScheduledTasksRunner;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker;
-use Piwik\Plugins\BulkTracking\Tracker\Handler;
-use Piwik\Tests\Framework\Mock\Tracker\RequestSet;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Plugins\BulkTracking\tests\Mock\TrackerResponse;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\Tracker\ScheduledTasksRunner;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker;
+use Matomo\Plugins\BulkTracking\Tracker\Handler;
+use Matomo\Tests\Framework\Mock\Tracker\RequestSet;
 use Exception;
 
 /**

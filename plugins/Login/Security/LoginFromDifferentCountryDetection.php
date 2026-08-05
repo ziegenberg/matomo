@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\Security;
+namespace Matomo\Plugins\Login\Security;
 
-use Piwik\Container\StaticContainer;
-use Piwik\IP;
-use Piwik\Piwik;
-use Piwik\Plugins\Login\Emails\LoginFromDifferentCountryEmail;
-use Piwik\Plugins\Login\Model;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Container\StaticContainer;
+use Matomo\IP;
+use Matomo\Matomo;
+use Matomo\Plugins\Login\Emails\LoginFromDifferentCountryEmail;
+use Matomo\Plugins\Login\Model;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
 
 class LoginFromDifferentCountryDetection
 {
@@ -88,7 +88,7 @@ class LoginFromDifferentCountryDetection
 
     private function sendLoginFromDifferentCountryEmailToUser(string $login, string $countryCode, string $ip): void
     {
-        $country = $countryCode ? Piwik::translate('Intl_Country_' . strtoupper($countryCode)) : '';
+        $country = $countryCode ? Matomo::translate('Intl_Country_' . strtoupper($countryCode)) : '';
         $user = $this->usersModel->getUser($login);
 
         if (empty($user)) {

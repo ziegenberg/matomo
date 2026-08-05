@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'diagnostics.optional' => Piwik\DI::add(array(
-        Piwik\DI::get('Piwik\Plugins\UserCountry\Diagnostic\GeolocationDiagnostic'),
+    'diagnostics.optional' => Matomo\DI::add(array(
+        Matomo\DI::get('Matomo\Plugins\UserCountry\Diagnostic\GeolocationDiagnostic'),
     )),
 );

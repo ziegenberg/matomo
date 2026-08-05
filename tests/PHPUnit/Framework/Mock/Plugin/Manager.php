@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Plugin;
+namespace Matomo\Tests\Framework\Mock\Plugin;
 
-class Manager extends \Piwik\Plugin\Manager
+class Manager extends \Matomo\Plugin\Manager
 {
     private $pluginsToActivate = array();
 

@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Tracker;
+namespace Matomo\Plugins\CoreHome\Tracker;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\EventDispatcher;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\RequestProcessor;
-use Piwik\Tracker\Settings;
-use Piwik\Tracker\TrackerConfig;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Tracker\VisitExcluded;
-use Piwik\Tracker\VisitorRecognizer;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\EventDispatcher;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\RequestProcessor;
+use Matomo\Tracker\Settings;
+use Matomo\Tracker\TrackerConfig;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Tracker\VisitExcluded;
+use Matomo\Tracker\VisitorRecognizer;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
 
 /**
  * Encapsulates core tracking logic related to visits.
@@ -31,7 +31,7 @@ use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
  * This RequestProcessor exposes the following metadata for the **CoreHome** plugin:
  *
  * * **visitorId**: A hash that identifies the current visitor being tracked. This value is
- *                  calculated using the Piwik\Tracker\Settings::getConfigId() method.
+ *                  calculated using the Matomo\Tracker\Settings::getConfigId() method.
  *
  *                  Set in `processRequestParams()`.
  *

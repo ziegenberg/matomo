@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns\Metrics;
+namespace Matomo\Plugins\Actions\Columns\Metrics;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
 
 /**
  * The average amount of time it takes to generate a page. Calculated as
@@ -39,7 +39,7 @@ class AveragePageGenerationTime extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_ColumnAverageGenerationTime');
+        return Matomo::translate('General_ColumnAverageGenerationTime');
     }
 
     public function getDependentMetrics()
@@ -57,7 +57,7 @@ class AveragePageGenerationTime extends ProcessedMetric
         $sumGenerationTime = $this->getMetric($row, 'sum_time_generation');
         $hitsWithTimeGeneration = $this->getMetric($row, 'nb_hits_with_time_generation');
 
-        return Piwik::getQuotientSafe($sumGenerationTime, $hitsWithTimeGeneration, $precision = 3);
+        return Matomo::getQuotientSafe($sumGenerationTime, $hitsWithTimeGeneration, $precision = 3);
     }
 
     public function format($value, Formatter $formatter)

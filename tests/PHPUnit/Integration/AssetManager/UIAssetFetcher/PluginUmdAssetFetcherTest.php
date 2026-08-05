@@ -9,13 +9,13 @@
 
 namespace PHPUnit\Integration\AssetManager\UIAssetFetcher;
 
-use Piwik\AssetManager\UIAsset\OnDiskUIAsset;
-use Piwik\AssetManager\UIAssetFetcher\Chunk;
-use Piwik\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
-use Piwik\Exception\ThingNotFoundException;
-use Piwik\Filesystem;
-use Piwik\Plugin\Manager;
-use Piwik\Tests\Framework\TestCase\UnitTestCase;
+use Matomo\AssetManager\UIAsset\OnDiskUIAsset;
+use Matomo\AssetManager\UIAssetFetcher\Chunk;
+use Matomo\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
+use Matomo\Exception\ThingNotFoundException;
+use Matomo\Filesystem;
+use Matomo\Plugin\Manager;
+use Matomo\Tests\Framework\TestCase\UnitTestCase;
 
 class PluginUmdAssetFetcherTest extends UnitTestCase
 {
@@ -511,7 +511,7 @@ class PluginUmdAssetFetcherTest extends UnitTestCase
     protected function provideContainerConfig()
     {
         return [
-            'plugins.shouldLoadOnDemand' => \Piwik\DI::add(array_keys(self::TEST_PLUGIN_DEPENDENCIES_ON_DEMAND)),
+            'plugins.shouldLoadOnDemand' => \Matomo\DI::add(array_keys(self::TEST_PLUGIN_DEPENDENCIES_ON_DEMAND)),
         ];
     }
 }

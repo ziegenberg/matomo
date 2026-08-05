@@ -7,36 +7,36 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\Http\JsonResponse;
-use Piwik\Date;
-use Piwik\Filesystem;
-use Piwik\Log;
-use Piwik\Nonce;
-use Piwik\Notification;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\CorePluginsAdmin\Controller as PluginsController;
-use Piwik\Plugins\CorePluginsAdmin\CorePluginsAdmin;
-use Piwik\Plugins\CorePluginsAdmin\PluginInstaller;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\Marketplace\Input\PluginName;
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
-use Piwik\Plugins\Marketplace\Input\Sort;
-use Piwik\Plugins\Marketplace\PluginTrial\Service as PluginTrialService;
-use Piwik\ProxyHttp;
-use Piwik\Request;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\Http\JsonResponse;
+use Matomo\Date;
+use Matomo\Filesystem;
+use Matomo\Log;
+use Matomo\Nonce;
+use Matomo\Notification;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\CorePluginsAdmin\Controller as PluginsController;
+use Matomo\Plugins\CorePluginsAdmin\CorePluginsAdmin;
+use Matomo\Plugins\CorePluginsAdmin\PluginInstaller;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\Marketplace\Input\PluginName;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Plugins\Marketplace\Input\Sort;
+use Matomo\Plugins\Marketplace\PluginTrial\Service as PluginTrialService;
+use Matomo\ProxyHttp;
+use Matomo\Request;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Url;
+use Matomo\View;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     public const UPDATE_NONCE = 'Marketplace.updatePlugin';
     public const INSTALL_NONCE = 'Marketplace.installPlugin';
@@ -89,7 +89,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function subscriptionOverview()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         // we want to make sure to fetch the latest results, eg in case user has purchased a subscription meanwhile
         // this is also like a self-repair to clear the caches :)
@@ -129,7 +129,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function manageLicenseKey()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         return $this->renderTemplate('@Marketplace/manageLicenseKey', array(
             'hasValidLicenseKey' => $this->licenseKey->has() && $this->consumer->isValidConsumer(),
@@ -139,7 +139,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     #[JsonResponse]
     public function getPaidPluginsToInstallAtOnceParams(): string
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!$this->isInstallAllPaidPluginsVisible()) {
             return json_encode([]);
@@ -184,7 +184,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         }
 
         $view->plugin       = $plugin;
-        $view->isSuperUser  = Piwik::hasUserSuperUserAccess();
+        $view->isSuperUser  = Matomo::hasUserSuperUserAccess();
         $view->installNonce = Nonce::getNonce(static::INSTALL_NONCE);
         $view->updateNonce  = Nonce::getNonce(static::UPDATE_NONCE);
         $view->activeTab    = $activeTab;
@@ -196,7 +196,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function download()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->dieIfPluginsAdminIsDisabled();
 
@@ -245,23 +245,23 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
         $view->paidPluginsToInstallAtOnce = $this->getAllPaidPluginsToInstallAtOnce();
         $view->isValidConsumer = $this->consumer->isValidConsumer();
         $view->pluginTypeOptions = array(
-            'plugins' => Piwik::translate('General_Plugins'),
-            'premium' => Piwik::translate('Marketplace_PaidPlugins'),
-            'themes' => Piwik::translate('CorePluginsAdmin_Themes'),
+            'plugins' => Matomo::translate('General_Plugins'),
+            'premium' => Matomo::translate('Marketplace_PaidPlugins'),
+            'themes' => Matomo::translate('CorePluginsAdmin_Themes'),
         );
         $view->pluginSortOptions = array(
-            Sort::METHOD_LAST_UPDATED => Piwik::translate('Marketplace_SortByLastUpdated'),
-            Sort::METHOD_POPULAR => Piwik::translate('Marketplace_SortByPopular'),
-            Sort::METHOD_NEWEST => Piwik::translate('Marketplace_SortByNewest'),
-            Sort::METHOD_ALPHA => Piwik::translate('Marketplace_SortByAlpha'),
+            Sort::METHOD_LAST_UPDATED => Matomo::translate('Marketplace_SortByLastUpdated'),
+            Sort::METHOD_POPULAR => Matomo::translate('Marketplace_SortByPopular'),
+            Sort::METHOD_NEWEST => Matomo::translate('Marketplace_SortByNewest'),
+            Sort::METHOD_ALPHA => Matomo::translate('Marketplace_SortByAlpha'),
         );
         $view->defaultSort = Sort::DEFAULT_SORT;
         $view->installNonce = Nonce::getNonce(static::INSTALL_NONCE);
         $view->updateNonce = Nonce::getNonce(static::UPDATE_NONCE);
         $view->deactivateNonce = Nonce::getNonce(PluginsController::DEACTIVATE_NONCE);
         $view->activateNonce = Nonce::getNonce(PluginsController::ACTIVATE_NONCE);
-        $view->currentUserEmail = Piwik::getCurrentUserEmail();
-        $view->isSuperUser = Piwik::hasUserSuperUserAccess();
+        $view->currentUserEmail = Matomo::getCurrentUserEmail();
+        $view->isSuperUser = Matomo::hasUserSuperUserAccess();
         $view->isPluginsAdminEnabled = CorePluginsAdmin::isPluginsAdminEnabled();
         $view->isAutoUpdatePossible = SettingsPiwik::isAutoUpdatePossible();
         $view->isAutoUpdateEnabled = SettingsPiwik::isAutoUpdateEnabled();
@@ -276,7 +276,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     #[JsonResponse]
     public function updateOverview(): string
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $paidPlugins = $this->getPaidPlugins();
 
@@ -290,7 +290,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     #[JsonResponse]
     public function searchPlugins(): string
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $request = Request::fromRequest();
 
@@ -323,7 +323,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function installAllPaidPlugins()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->dieIfPluginsAdminIsDisabled();
         Plugin\ControllerAdmin::displayWarningIfConfigFileNotWritable();
@@ -407,10 +407,10 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
             }
 
             if ($hasErrors) {
-                $notification          = new Notification(Piwik::translate('Marketplace_OnlySomePaidPluginsInstalledAndActivated'));
+                $notification          = new Notification(Matomo::translate('Marketplace_OnlySomePaidPluginsInstalledAndActivated'));
                 $notification->context = Notification::CONTEXT_INFO;
             } else {
-                $notification          = new Notification(Piwik::translate('Marketplace_AllPaidPluginsInstalledAndActivated'));
+                $notification          = new Notification(Matomo::translate('Marketplace_AllPaidPluginsInstalledAndActivated'));
                 $notification->context = Notification::CONTEXT_SUCCESS;
             }
 
@@ -447,7 +447,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     private function createUpdateOrInstallView($template, $nonceName)
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
         $this->dieIfPluginsAdminIsDisabled();
         $this->displayWarningIfConfigFileNotWritable();
 
@@ -476,7 +476,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
                         $downloadLink = Url::addCampaignParametersToMatomoLink('https://plugins.matomo.org/' . $pluginName);
                         $translateKey = 'Marketplace_PluginDownloadLinkMissingFree';
                     }
-                    $message = Piwik::translate($translateKey, [$pluginName, Url::getExternalLinkTag($downloadLink), '</a>', Url::getExternalLinkTag($faqLink), '</a>']);
+                    $message = Matomo::translate($translateKey, [$pluginName, Url::getExternalLinkTag($downloadLink), '</a>', Url::getExternalLinkTag($faqLink), '</a>']);
                     $isRaw = true;
                 }
                 $notification = new Notification($message);
@@ -539,7 +539,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     protected function configureViewAndCheckPermission($template)
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
 
         $view = new View($template);
         $this->setBasicVariablesView($view);
@@ -557,7 +557,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
     {
         return (
             $this->consumer->isValidConsumer() &&
-            Piwik::hasUserSuperUserAccess() &&
+            Matomo::hasUserSuperUserAccess() &&
             SettingsPiwik::isAutoUpdatePossible() &&
             CorePluginsAdmin::isPluginsAdminEnabled() &&
             count($this->getAllPaidPluginsToInstallAtOnce()) > 0

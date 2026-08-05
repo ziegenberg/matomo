@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Widgets;
+namespace Matomo\Plugins\BotTracking\Widgets;
 
-use Piwik\Widget\Widget;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\Widget;
+use Matomo\Widget\WidgetConfig;
 
 class NoRecentRequests extends Widget
 {

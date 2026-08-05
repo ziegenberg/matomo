@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\Unit\Dimension;
+namespace Matomo\Plugins\CustomDimensions\tests\Unit\Dimension;
 
-use Piwik\Plugins\CustomDimensions\Dimension\Scope;
+use Matomo\Plugins\CustomDimensions\Dimension\Scope;
 
 /**
  * @group CustomDimensions

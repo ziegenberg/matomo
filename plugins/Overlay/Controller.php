@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Overlay;
+namespace Matomo\Plugins\Overlay;
 
-use Piwik\API\CORSHandler;
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugins\Actions\ArchivingHelper;
-use Piwik\Plugins\SegmentEditor\SegmentFormatter;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\ProxyHttp;
-use Piwik\Session;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\PageUrl;
-use Piwik\View;
-use Piwik\Plugins\SitesManager;
+use Matomo\API\CORSHandler;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugins\Actions\ArchivingHelper;
+use Matomo\Plugins\SegmentEditor\SegmentFormatter;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\ProxyHttp;
+use Matomo\Session;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\PageUrl;
+use Matomo\View;
+use Matomo\Plugins\SitesManager;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     private SegmentFormatter $segmentFormatter;
 
@@ -38,7 +38,7 @@ class Controller extends \Piwik\Plugin\Controller
     /** The index of the plugin */
     public function index()
     {
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
         // Overlay needs to send requests w/ the session cookie from within the tracked website, which means
         // we can't use SameSite=Lax. So, we regenerate the session ID here (in Session.php there is a hardcoded
@@ -169,7 +169,7 @@ class Controller extends \Piwik\Plugin\Controller
     public function startOverlaySession()
     {
         $this->checkSitePermission();
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
         $view = new View('@Overlay/startOverlaySession');
 
@@ -199,23 +199,23 @@ class Controller extends \Piwik\Plugin\Controller
     public function showErrorWrongDomain()
     {
         $this->checkSitePermission();
-        Piwik::checkUserHasViewAccess($this->idSite);
+        Matomo::checkUserHasViewAccess($this->idSite);
 
         $url = Common::getRequestVar('url', '');
 
-        $message = Piwik::translate('Overlay_RedirectUrlError', [$url, '<br />']);
+        $message = Matomo::translate('Overlay_RedirectUrlError', [$url, '<br />']);
 
         $view = new View('@Overlay/showErrorWrongDomain');
         $this->addCustomLogoInfo($view);
         $view->message = $message;
 
-        if (Piwik::isUserHasWriteAccess($this->idSite)) {
+        if (Matomo::isUserHasWriteAccess($this->idSite)) {
             $url = 'index.php?module=SitesManager&action=index';
-            $troubleshoot = Piwik::translate('Overlay_RedirectUrlErrorAdmin');
+            $troubleshoot = Matomo::translate('Overlay_RedirectUrlErrorAdmin');
             $troubleshoot = sprintf($troubleshoot, '<a href="' . $url . '" target="_top">', '</a>');
             $view->troubleshoot = $troubleshoot;
         } else {
-            $view->troubleshoot = Piwik::translate('Overlay_RedirectUrlErrorUser');
+            $view->troubleshoot = Matomo::translate('Overlay_RedirectUrlErrorUser');
         }
 
         $this->outputCORSHeaders();

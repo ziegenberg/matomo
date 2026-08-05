@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager;
+namespace Matomo\Plugins\SitesManager;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Piwik;
-use Piwik\Measurable\Type\TypeManager;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Matomo;
+use Matomo\Measurable\Type\TypeManager;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     private $typeManager;
 
@@ -24,11 +24,11 @@ class Menu extends \Piwik\Plugin\Menu
 
     public function configureAdminMenu(MenuAdmin $menu)
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $menu->addMeasurableItem('General_Settings', $this->urlForAction('globalSettings'), $order = 11);
         }
 
-        if (Piwik::isUserHasSomeAdminAccess() && SitesManager::isSitesAdminEnabled()) {
+        if (Matomo::isUserHasSomeAdminAccess() && SitesManager::isSitesAdminEnabled()) {
             $menu->addMeasurableItem('SitesManager_MenuManage', $this->urlForAction('index'), $order = 10);
 
             $type = $this->getFirstTypeIfOnlyOneIsInUse();

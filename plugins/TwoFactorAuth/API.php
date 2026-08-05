@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TwoFactorAuth;
+namespace Matomo\Plugins\TwoFactorAuth;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * Provides API methods for managing two-factor authentication.
  *
- * @method static \Piwik\Plugins\TwoFactorAuth\API getInstance()
+ * @method static \Matomo\Plugins\TwoFactorAuth\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     private TwoFactorAuthentication $twoFa;
 
@@ -37,7 +37,7 @@ class API extends \Piwik\Plugin\API
         #[\SensitiveParameter]
         string $passwordConfirmation = ''
     ) {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         $this->confirmCurrentUserPassword($passwordConfirmation);
         $this->twoFa->disable2FAforUser($userLogin);

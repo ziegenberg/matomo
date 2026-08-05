@@ -1,24 +1,24 @@
 <?php
 
-namespace Piwik\Plugins\UsersManager\Repository;
+namespace Matomo\Plugins\UsersManager\Repository;
 
-use Piwik\Auth\Password;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugins\CoreAdminHome\Emails\UserCreatedEmail;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Emails\UserInviteEmail;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UserAccessFilter;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\Plugins\UsersManager\Validators\AllowedEmailDomain;
-use Piwik\Plugins\UsersManager\Validators\Email;
-use Piwik\Plugins\UsersManager\Validators\Login;
-use Piwik\Site;
-use Piwik\Validators\BaseValidator;
+use Matomo\Auth\Password;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugins\CoreAdminHome\Emails\UserCreatedEmail;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Emails\UserInviteEmail;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UserAccessFilter;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\Plugins\UsersManager\Validators\AllowedEmailDomain;
+use Matomo\Plugins\UsersManager\Validators\Email;
+use Matomo\Plugins\UsersManager\Validators\Login;
+use Matomo\Site;
+use Matomo\Validators\BaseValidator;
 
 class UserRepository
 {
@@ -68,13 +68,13 @@ class UserRepository
     ): void {
 
 
-        if (!Piwik::hasUserSuperUserAccess()) {
+        if (!Matomo::hasUserSuperUserAccess()) {
             // check if the user has admin access to the site
-            Piwik::checkUserHasAdminAccess($initialIdSite);
+            Matomo::checkUserHasAdminAccess($initialIdSite);
         }
 
-        BaseValidator::check(Piwik::translate('General_Username'), $userLogin, [new Login(true)]);
-        BaseValidator::check(Piwik::translate('Installation_Email'), $email, [new Email(true), $this->allowedEmailDomain]);
+        BaseValidator::check(Matomo::translate('General_Username'), $userLogin, [new Login(true)]);
+        BaseValidator::check(Matomo::translate('Installation_Email'), $email, [new Email(true), $this->allowedEmailDomain]);
 
         if (!empty($password)) {
             if (!$isPasswordHashed) {
@@ -97,7 +97,7 @@ class UserRepository
     public function inviteUser(string $userLogin, string $email, ?int $initialIdSite = null, $expiryInDays = null): void
     {
         $this->create($userLogin, $email, $initialIdSite);
-        $this->model->updateUserFields($userLogin, ['invited_by' => Piwik::getCurrentUserLogin()]);
+        $this->model->updateUserFields($userLogin, ['invited_by' => Matomo::getCurrentUserLogin()]);
         $user = $this->model->getUser($userLogin);
         $generatedToken = $this->model->generateRandomInviteToken();
         $this->model->attachInviteToken($userLogin, $generatedToken, $expiryInDays);
@@ -121,10 +121,10 @@ class UserRepository
 
     protected function sendUserCreationNotification(string $createdUserLogin): void
     {
-        if (Piwik::getCurrentUserLogin() !== 'anonymous' && Piwik::getCurrentUserEmail() !== '') {
+        if (Matomo::getCurrentUserLogin() !== 'anonymous' && Matomo::getCurrentUserEmail() !== '') {
             $mail = StaticContainer::getContainer()->make(UserCreatedEmail::class, [
-                'login' => Piwik::getCurrentUserLogin(),
-                'emailAddress' => Piwik::getCurrentUserEmail(),
+                'login' => Matomo::getCurrentUserLogin(),
+                'emailAddress' => Matomo::getCurrentUserEmail(),
                 'userLogin' => $createdUserLogin,
             ]);
             $mail->safeSend();
@@ -142,7 +142,7 @@ class UserRepository
         }
 
         $email = StaticContainer::getContainer()->make(UserInviteEmail::class, [
-            'currentUser'  => Piwik::getCurrentUserLogin(),
+            'currentUser'  => Matomo::getCurrentUserLogin(),
             'invitedUser'  => $user,
             'siteName'     => $siteName,
             'token'        => $inviteToken,
@@ -204,7 +204,7 @@ class UserRepository
             }
         }
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $user['uses_2fa'] = !empty($user['twofactor_secret']) && $this->isTwoFactorAuthPluginEnabled();
             unset($user['twofactor_secret']);
             return $user;
@@ -212,7 +212,7 @@ class UserRepository
 
         $newUser = ['login' => $user['login']];
 
-        if ($user['login'] === Piwik::getCurrentUserLogin() || !empty($user['superuser_access'])) {
+        if ($user['login'] === Matomo::getCurrentUserLogin() || !empty($user['superuser_access'])) {
             $newUser['email'] = $user['email'];
         }
 

@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Profiler;
-use Piwik\Timer;
-use Piwik\Tracker;
-use Piwik\Tracker\Db as TrackerDb;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Profiler;
+use Matomo\Timer;
+use Matomo\Tracker;
+use Matomo\Tracker\Db as TrackerDb;
+use Matomo\Url;
 
 class Response
 {

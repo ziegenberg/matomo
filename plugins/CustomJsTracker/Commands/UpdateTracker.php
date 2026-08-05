@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\Commands;
+namespace Matomo\Plugins\CustomJsTracker\Commands;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\CustomJsTracker\TrackerUpdater;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\CustomJsTracker\TrackerUpdater;
 
 class UpdateTracker extends ConsoleCommand
 {
@@ -47,7 +47,7 @@ class UpdateTracker extends ConsoleCommand
 
     public function updateTracker($sourceFile, $targetFile, $ignoreMinified)
     {
-        $pluginTrackerFiles = StaticContainer::get('Piwik\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles');
+        $pluginTrackerFiles = StaticContainer::get('Matomo\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles');
 
         if ($ignoreMinified) {
             if (empty($sourceFile) || $sourceFile === $this->getPathOriginalPiwikJs()) {
@@ -57,7 +57,7 @@ class UpdateTracker extends ConsoleCommand
             $pluginTrackerFiles->ignoreMinified();
         }
 
-        $updater = StaticContainer::getContainer()->make('Piwik\Plugins\CustomJsTracker\TrackerUpdater', array(
+        $updater = StaticContainer::getContainer()->make('Matomo\Plugins\CustomJsTracker\TrackerUpdater', array(
             'fromFile' => $sourceFile, 'toFile' => $targetFile,
         ));
         $updater->setTrackerFiles($pluginTrackerFiles);

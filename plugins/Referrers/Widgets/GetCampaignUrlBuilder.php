@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Widgets;
+namespace Matomo\Plugins\Referrers\Widgets;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Widget\WidgetConfig;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Widget\WidgetConfig;
 
-class GetCampaignUrlBuilder extends \Piwik\Widget\Widget
+class GetCampaignUrlBuilder extends \Matomo\Widget\Widget
 {
     public static function configure(WidgetConfig $config)
     {
@@ -27,7 +27,7 @@ class GetCampaignUrlBuilder extends \Piwik\Widget\Widget
         ]);
 
         $idSite = self::getIdSite();
-        if (!Piwik::isUserHasViewAccess($idSite)) {
+        if (!Matomo::isUserHasViewAccess($idSite)) {
             $config->disable();
         }
     }

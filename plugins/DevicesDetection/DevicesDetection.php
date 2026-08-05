@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection;
+namespace Matomo\Plugins\DevicesDetection;
 
-use Piwik\Plugins\DevicesDetection\Settings\OnlyMajorVersions;
-use Piwik\Plugins\DevicesDetection\Settings\DeviceModelDetectionDisabled;
-use Piwik\Plugins\SegmentEditor\Settings\LimitSegments;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Cache as TrackerCache;
+use Matomo\Plugins\DevicesDetection\Settings\OnlyMajorVersions;
+use Matomo\Plugins\DevicesDetection\Settings\DeviceModelDetectionDisabled;
+use Matomo\Plugins\SegmentEditor\Settings\LimitSegments;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Cache as TrackerCache;
 
 require_once PIWIK_INCLUDE_PATH . '/plugins/DevicesDetection/functions.php';
 
-class DevicesDetection extends \Piwik\Plugin
+class DevicesDetection extends \Matomo\Plugin
 {
     public function registerEvents()
     {
@@ -65,8 +65,8 @@ class DevicesDetection extends \Piwik\Plugin
     /**
      * Check if compliance policy disables device model detection
      *
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     public static function isDeviceModelDetectionDisabledByCompliancePolicy(?int $idSite = null): bool
     {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\TestRunner\Commands;
+namespace Matomo\Plugins\TestRunner\Commands;
 
-use Piwik\Filesystem;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\View;
+use Matomo\Filesystem;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\View;
 
 /**
  * Command to generate an self-updating github action yml file either for Matomo Core or

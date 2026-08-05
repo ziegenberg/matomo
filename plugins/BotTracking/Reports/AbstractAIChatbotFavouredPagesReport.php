@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\PageUrl;
-use Piwik\Plugins\BotTracking\Columns\Metrics\AIChatbotRequests;
-use Piwik\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
-use Piwik\Plugins\BotTracking\Columns\Metrics\UniqueHumanPageviews;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\PageUrl;
+use Matomo\Plugins\BotTracking\Columns\Metrics\AIChatbotRequests;
+use Matomo\Plugins\BotTracking\Columns\Metrics\DiscrepancyScore;
+use Matomo\Plugins\BotTracking\Columns\Metrics\UniqueHumanPageviews;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 /**
  * Shared base for the Human-Favoured and AI-Favoured Pages reports.
@@ -29,7 +29,7 @@ use Piwik\Widget\WidgetsList;
  * Both reports expose the same flat URL dimension, the same Unique Human Pageviews +
  * AI Chatbot Requests metric pair, and a Discrepancy Score whose variant (human-favoured vs
  * ai-favoured) is provided by the concrete subclass. Each variant is backed by its own archived
- * blob record built and scored during archiving (see {@see \Piwik\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages});
+ * blob record built and scored during archiving (see {@see \Matomo\Plugins\BotTracking\RecordBuilders\AIChatbotFavouredPages});
  * the API just reads it. Report-level surfaces (Custom Alerts, Scheduled Reports, glossary) treat
  * them as ordinary reports, and Row Evolution is supported because the per-period data is pre-computed.
  */

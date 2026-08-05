@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\Reports;
+namespace Matomo\Plugins\Referrers\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\Referrers\Columns\Referrer;
-use Piwik\Plugins\Referrers\Referrers;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\Referrers\Columns\Referrer;
+use Matomo\Plugins\Referrers\Referrers;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetAll extends Base
 {
@@ -23,8 +23,8 @@ class GetAll extends Base
     {
         parent::init();
         $this->dimension     = new Referrer();
-        $this->name          = Piwik::translate('Referrers_WidgetGetAll');
-        $this->documentation = Piwik::translate('Referrers_AllReferrersReportDocumentation', '<br />');
+        $this->name          = Matomo::translate('Referrers_WidgetGetAll');
+        $this->documentation = Matomo::translate('Referrers_AllReferrersReportDocumentation', '<br />');
         $this->order = 2;
 
         $this->subcategoryId = 'Referrers_WidgetGetAll';

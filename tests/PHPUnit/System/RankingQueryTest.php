@@ -9,16 +9,16 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\DataAccess\LogAggregator;
-use Piwik\Period;
-use Piwik\RankingQuery;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Tests\Fixtures\ManyVisitsWithGeoIP;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\DataAccess\LogAggregator;
+use Matomo\Period;
+use Matomo\RankingQuery;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Tests\Fixtures\ManyVisitsWithGeoIP;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Core

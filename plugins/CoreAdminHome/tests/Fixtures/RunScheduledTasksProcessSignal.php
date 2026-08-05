@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Fixtures;
+namespace Matomo\Plugins\CoreAdminHome\tests\Fixtures;
 
 use Closure;
-use Piwik\Container\Container;
-use Piwik\DI;
-use Piwik\Plugins\CoreAdminHome\tests\Fixtures\RunScheduledTasksProcessSignal\StepControl;
-use Piwik\Plugins\Monolog\Handler\EchoHandler;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Container\Container;
+use Matomo\DI;
+use Matomo\Plugins\CoreAdminHome\tests\Fixtures\RunScheduledTasksProcessSignal\StepControl;
+use Matomo\Plugins\Monolog\Handler\EchoHandler;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Provides container configuration and helpers to run process signal tests.

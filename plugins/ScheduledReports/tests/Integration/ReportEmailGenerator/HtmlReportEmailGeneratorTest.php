@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports\tests\Integration\ReportEmailGenerator;
+namespace Matomo\Plugins\ScheduledReports\tests\Integration\ReportEmailGenerator;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Piwik\Plugins\ScheduledReports\GeneratedReport;
-use Piwik\Plugins\ScheduledReports\ReportEmailGenerator\HtmlReportEmailGenerator;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\ScheduledReports\GeneratedReport;
+use Matomo\Plugins\ScheduledReports\ReportEmailGenerator\HtmlReportEmailGenerator;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group HtmlReportEmailGeneratorTest
@@ -62,8 +62,8 @@ class HtmlReportEmailGeneratorTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'observers.global' => \Piwik\DI::add([
-                ['Test.Mail.send', \Piwik\DI::value(function (PHPMailer $mail) {
+            'observers.global' => \Matomo\DI::add([
+                ['Test.Mail.send', \Matomo\DI::value(function (PHPMailer $mail) {
                     $this->mail = $mail;
                     $this->mail->preSend();
                 })],

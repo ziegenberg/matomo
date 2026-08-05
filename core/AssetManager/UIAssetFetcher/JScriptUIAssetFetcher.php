@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager\UIAssetFetcher;
+namespace Matomo\AssetManager\UIAssetFetcher;
 
-use Piwik\AssetManager\UIAssetFetcher;
-use Piwik\Piwik;
+use Matomo\AssetManager\UIAssetFetcher;
+use Matomo\Matomo;
 
 class JScriptUIAssetFetcher extends UIAssetFetcher
 {
@@ -41,7 +41,7 @@ class JScriptUIAssetFetcher extends UIAssetFetcher
              *
              * @param string[] $jsFiles The JavaScript files to load.
              */
-             Piwik::postEvent('AssetManager.getJavaScriptFiles', array(&$this->fileLocations), null, $this->plugins);
+             Matomo::postEvent('AssetManager.getJavaScriptFiles', array(&$this->fileLocations), null, $this->plugins);
         }
 
         $this->addThemeFiles();

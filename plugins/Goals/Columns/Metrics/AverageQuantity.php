@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics;
+namespace Matomo\Plugins\Goals\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * The average amount of products in each order or abandoned cart. Calculated as:
@@ -30,7 +30,7 @@ class AverageQuantity extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_AverageQuantity');
+        return Matomo::translate('General_AverageQuantity');
     }
 
     public function compute(Row $row)
@@ -39,7 +39,7 @@ class AverageQuantity extends ProcessedMetric
         $orders = $this->getMetric($row, 'orders');
         $abandonedCarts = $this->getMetric($row, 'abandoned_carts');
 
-        return Piwik::getQuotientSafe($quantity, $orders === false ? $abandonedCarts : $orders, $precision = 1);
+        return Matomo::getQuotientSafe($quantity, $orders === false ? $abandonedCarts : $orders, $precision = 1);
     }
 
     public function getDependentMetrics()

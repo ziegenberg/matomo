@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\System;
+namespace Matomo\Plugins\PrivacyManager\tests\System;
 
-use Piwik\Access;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\Plugins\PrivacyManager\API;
-use Piwik\Plugins\PrivacyManager\tests\Fixtures\MultipleSitesMultipleVisitsFixture;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Access;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\Plugins\PrivacyManager\API;
+use Matomo\Plugins\PrivacyManager\tests\Fixtures\MultipleSitesMultipleVisitsFixture;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group PrivacyManager
@@ -93,7 +93,7 @@ class APITest extends SystemTestCase
         $result = json_encode($result, JSON_PRETTY_PRINT);
         $fileExpected = PIWIK_DOCUMENT_ROOT . '/plugins/PrivacyManager/tests/System/expected/' . $fileName . '.json';
         $fileProcessed = str_replace('/expected/', '/processed/', $fileExpected);
-        \Piwik\Filesystem::mkdir(dirname($fileProcessed));
+        \Matomo\Filesystem::mkdir(dirname($fileProcessed));
         file_put_contents($fileProcessed, $result);
 
         $this->assertJsonStringEqualsJsonFile($fileExpected, $result);

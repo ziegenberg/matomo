@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\SettingsServer;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tests\Framework\Mock\Tracker\Handler;
-use Piwik\Tests\Framework\Mock\Tracker\RequestSet;
-use Piwik\Tracker;
-use Piwik\Tracker\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\SettingsServer;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tests\Framework\Mock\Tracker\Handler;
+use Matomo\Tests\Framework\Mock\Tracker\RequestSet;
+use Matomo\Tracker;
+use Matomo\Tracker\Request;
 
 /**
  * @group TrackerTest
@@ -162,7 +162,7 @@ class TrackerTest extends IntegrationTestCase
     {
         $db = $this->tracker->getDatabase();
 
-        $this->assertInstanceOf('Piwik\\Tracker\\Db', $db);
+        $this->assertInstanceOf('Matomo\Tracker\Db', $db);
     }
 
     public function testIsDatabaseConnectedShouldReturnTrueWhenDbIsConnected()
@@ -186,7 +186,7 @@ class TrackerTest extends IntegrationTestCase
     public function testTrackRequestShouldNotTrackAnythingIfRequestIsEmpty()
     {
         $called = false;
-        Piwik::addAction('Tracker.makeNewVisitObject', function () use (&$called) {
+        Matomo::addAction('Tracker.makeNewVisitObject', function () use (&$called) {
             $called = true;
         });
 
@@ -198,7 +198,7 @@ class TrackerTest extends IntegrationTestCase
     public function testTrackRequestShouldTrackIfRequestIsNotEmpty()
     {
         $called = false;
-        Piwik::addAction('Tracker.makeNewVisitObject', function () use (&$called) {
+        Matomo::addAction('Tracker.makeNewVisitObject', function () use (&$called) {
             $called = true;
         });
 
@@ -339,7 +339,7 @@ class TrackerTest extends IntegrationTestCase
     public function testMainShouldPostEndEvent()
     {
         $called = false;
-        Piwik::addAction('Tracker.end', function () use (&$called) {
+        Matomo::addAction('Tracker.end', function () use (&$called) {
             $called = true;
         });
 
@@ -351,7 +351,7 @@ class TrackerTest extends IntegrationTestCase
     public function testMainShouldPostEndEventEvenIfShouldNotRecordStats()
     {
         $called = false;
-        Piwik::addAction('Tracker.end', function () use (&$called) {
+        Matomo::addAction('Tracker.end', function () use (&$called) {
             $called = true;
         });
 
@@ -367,7 +367,7 @@ class TrackerTest extends IntegrationTestCase
     public function testMainShouldPostEndEventEvenIfThereIsAnException()
     {
         $called = false;
-        Piwik::addAction('Tracker.end', function () use (&$called) {
+        Matomo::addAction('Tracker.end', function () use (&$called) {
             $called = true;
         });
 

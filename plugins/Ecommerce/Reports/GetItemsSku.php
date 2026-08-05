@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Reports;
+namespace Matomo\Plugins\Ecommerce\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\Ecommerce\Columns\ProductSku;
+use Matomo\Matomo;
+use Matomo\Plugins\Ecommerce\Columns\ProductSku;
 
 class GetItemsSku extends BaseItem
 {
@@ -18,7 +18,7 @@ class GetItemsSku extends BaseItem
     {
         parent::init();
 
-        $this->name      = Piwik::translate('Goals_ProductSKU');
+        $this->name      = Matomo::translate('Goals_ProductSKU');
         $this->dimension = new ProductSku();
         $this->order     = 31;
 

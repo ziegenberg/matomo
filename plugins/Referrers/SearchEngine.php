@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\Singleton;
-use Piwik\Url;
-use Piwik\UrlHelper;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\Singleton;
+use Matomo\Url;
+use Matomo\UrlHelper;
 
 /**
  * Contains methods to access search engine definition data.
@@ -63,7 +63,7 @@ class SearchEngine extends Singleton
             }
         }
 
-        Piwik::postEvent('Referrer.addSearchEngineUrls', array(&$this->definitionList));
+        Matomo::postEvent('Referrer.addSearchEngineUrls', array(&$this->definitionList));
 
         return $this->definitionList;
     }
@@ -186,7 +186,7 @@ class SearchEngine extends Singleton
      *     eg. if the url is "https://www.google.com/partners.html" this will return false,
      *       as the google keyword parameter couldn't be found.
      *
-     * @see \Piwik\Plugins\Referrers\tests\Unit\SearchEngineTest
+     * @see \Matomo\Plugins\Referrers\tests\Unit\SearchEngineTest
      * @param string $referrerUrl URL referrer URL, eg. $_SERVER['HTTP_REFERER']
      * @return array|bool   false if a keyword couldn't be extracted,
      *                        or array(

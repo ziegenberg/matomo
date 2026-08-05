@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager\tests\Fixtures;
+namespace Matomo\Plugins\SitesManager\tests\Fixtures;
 
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\MobileAppMeasurable;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\MobileAppMeasurable;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Track actions with bandwidth

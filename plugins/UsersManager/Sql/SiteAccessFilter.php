@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Sql;
+namespace Matomo\Plugins\UsersManager\Sql;
 
-use Piwik\Common;
+use Matomo\Common;
 
 class SiteAccessFilter
 {
@@ -61,8 +61,8 @@ class SiteAccessFilter
         $result = [];
 
         if ($this->filterSearch) {
-            $bind = array_merge($bind, \Piwik\Plugins\SitesManager\Model::getPatternMatchSqlBind($this->filterSearch));
-            $result[] = \Piwik\Plugins\SitesManager\Model::getPatternMatchSqlQuery('s');
+            $bind = array_merge($bind, \Matomo\Plugins\SitesManager\Model::getPatternMatchSqlBind($this->filterSearch));
+            $result[] = \Matomo\Plugins\SitesManager\Model::getPatternMatchSqlQuery('s');
         }
 
         if ($this->filterByRole) {

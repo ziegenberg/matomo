@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Access;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\Login\PasswordVerifier;
-use Piwik\Plugins\UsersManager\API as UsersAPI;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\Login\PasswordVerifier;
+use Matomo\Plugins\UsersManager\API as UsersAPI;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * Verifies that checking a password does not change the current authentication state.
@@ -56,8 +56,8 @@ class PasswordVerifierAuthStateTest extends IntegrationTestCase
     {
         Access::getInstance()->setSuperUserAccess(false);
 
-        /** @var \Piwik\Auth $auth */
-        $auth = StaticContainer::get('Piwik\Auth');
+        /** @var \Matomo\Auth $auth */
+        $auth = StaticContainer::get('Matomo\Auth');
         $auth->setLogin('anonymous');
         $auth->setTokenAuth('anonymous');
         $auth->setPasswordHash(null);

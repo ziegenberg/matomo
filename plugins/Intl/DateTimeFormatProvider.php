@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Intl;
+namespace Matomo\Plugins\Intl;
 
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Translation\Translator;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Translation\Translator;
 
 /**
  * Provides date and time formats.
  */
-class DateTimeFormatProvider extends \Piwik\Intl\Data\Provider\DateTimeFormatProvider
+class DateTimeFormatProvider extends \Matomo\Intl\Data\Provider\DateTimeFormatProvider
 {
     protected $use12HourClock;
 

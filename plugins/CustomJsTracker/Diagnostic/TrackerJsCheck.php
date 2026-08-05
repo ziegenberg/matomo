@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\Diagnostic;
+namespace Matomo\Plugins\CustomJsTracker\Diagnostic;
 
-use Piwik\Filechecks;
-use Piwik\Filesystem;
-use Piwik\Plugins\CustomJsTracker\File;
-use Piwik\Plugins\Diagnostics\Diagnostic\Diagnostic;
-use Piwik\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Tracker\TrackerCodeGenerator;
-use Piwik\Translation\Translator;
+use Matomo\Filechecks;
+use Matomo\Filesystem;
+use Matomo\Plugins\CustomJsTracker\File;
+use Matomo\Plugins\Diagnostics\Diagnostic\Diagnostic;
+use Matomo\Plugins\Diagnostics\Diagnostic\DiagnosticResult;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Tracker\TrackerCodeGenerator;
+use Matomo\Translation\Translator;
 
 /**
  * Check Piwik JS is writable

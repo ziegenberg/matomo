@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Tracker\BotRequestProcessor;
-use Piwik\Tracker\RequestProcessor;
+use Matomo\Container\StaticContainer;
+use Matomo\Tracker\BotRequestProcessor;
+use Matomo\Tracker\RequestProcessor;
 
 class RequestProcessors
 {
@@ -21,7 +21,7 @@ class RequestProcessors
     public function getRequestProcessors(): array
     {
         $manager    = Manager::getInstance();
-        $processors = $manager->findMultipleComponents('Tracker', 'Piwik\\Tracker\\RequestProcessor');
+        $processors = $manager->findMultipleComponents('Tracker', 'Matomo\Tracker\RequestProcessor');
 
         $instances = array();
         foreach ($processors as $processor) {
@@ -37,7 +37,7 @@ class RequestProcessors
     public function getBotRequestProcessors(): array
     {
         $manager    = Manager::getInstance();
-        $processors = $manager->findMultipleComponents('Tracker', 'Piwik\\Tracker\\BotRequestProcessor');
+        $processors = $manager->findMultipleComponents('Tracker', 'Matomo\Tracker\BotRequestProcessor');
 
         $instances = [];
         foreach ($processors as $processor) {

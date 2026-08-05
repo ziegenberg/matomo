@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_1_12_b15 extends Updates
 {
     public function doUpdate(Updater $updater)
     {
         try {
-            \Piwik\Plugin\Manager::getInstance()->activatePlugin('SegmentEditor');
+            \Matomo\Plugin\Manager::getInstance()->activatePlugin('SegmentEditor');
         } catch (\Exception $e) {
             // pass
         }

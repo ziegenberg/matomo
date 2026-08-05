@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\AssetManager;
-use Piwik\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
-use Piwik\Development;
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugin\Manager;
-use Piwik\ProxyHttp;
-use Piwik\SettingsPiwik;
-use Piwik\Theme;
+use Matomo\AssetManager;
+use Matomo\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
+use Matomo\Development;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugin\Manager;
+use Matomo\ProxyHttp;
+use Matomo\SettingsPiwik;
+use Matomo\Theme;
 
 /**
  * @phpstan-type TotalsType array{merged: int, gzip: int}

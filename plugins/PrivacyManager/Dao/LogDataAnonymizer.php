@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\Dao;
+namespace Matomo\Plugins\PrivacyManager\Dao;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\DbHelper;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\DbHelper;
 use Matomo\Network\IP;
-use Piwik\Plugins\PrivacyManager\Config;
-use Piwik\Plugins\PrivacyManager\IPAnonymizer;
-use Piwik\Plugins\PrivacyManager\Tracker\RequestProcessor;
-use Piwik\Plugins\UserCountry\LocationProvider;
-use Piwik\Plugins\UserCountry\VisitorGeolocator;
-use Piwik\Tracker\Model;
+use Matomo\Plugins\PrivacyManager\Config;
+use Matomo\Plugins\PrivacyManager\IPAnonymizer;
+use Matomo\Plugins\PrivacyManager\Tracker\RequestProcessor;
+use Matomo\Plugins\UserCountry\LocationProvider;
+use Matomo\Plugins\UserCountry\VisitorGeolocator;
+use Matomo\Tracker\Model;
 use Exception;
 
 class LogDataAnonymizer

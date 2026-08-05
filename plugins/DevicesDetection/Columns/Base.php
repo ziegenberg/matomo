@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Columns;
+namespace Matomo\Plugins\DevicesDetection\Columns;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DeviceDetector\DeviceDetectorFactory;
-use Piwik\Plugin\Dimension\VisitDimension;
+use Matomo\Container\StaticContainer;
+use Matomo\DeviceDetector\DeviceDetectorFactory;
+use Matomo\Plugin\Dimension\VisitDimension;
 
 abstract class Base extends VisitDimension
 {

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitsSummary\Widgets;
+namespace Matomo\Plugins\VisitsSummary\Widgets;
 
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
-class Index extends \Piwik\Widget\WidgetContainerConfig
+class Index extends \Matomo\Widget\WidgetContainerConfig
 {
     protected $categoryId = 'General_Visitors';
     protected $name = 'VisitsSummary_WidgetOverviewGraph';

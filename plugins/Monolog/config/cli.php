@@ -1,22 +1,22 @@
 <?php
 
-use Piwik\Container\Container;
-use Piwik\Log\Logger;
-use Piwik\Plugins\Monolog\Handler\FailureLogMessageDetector;
+use Matomo\Container\Container;
+use Matomo\Log\Logger;
+use Matomo\Plugins\Monolog\Handler\FailureLogMessageDetector;
 use Symfony\Bridge\Monolog\Handler\ConsoleHandler;
 use Symfony\Component\Console\Output\OutputInterface;
 
 return array(
 
     // Log
-    'log.handlers' => Piwik\DI::factory(function (Container $c) {
+    'log.handlers' => Matomo\DI::factory(function (Container $c) {
         $writers = [];
         $writers[] = $c->get(FailureLogMessageDetector::class);
         $writers[] = $c->get('Symfony\Bridge\Monolog\Handler\ConsoleHandler');
         if ($c->has('ini.log.log_writers')) {
             $writerNames = $c->get('ini.log.log_writers');
             if (in_array('file', $writerNames)) {
-                $writers[] = $c->get('Piwik\Plugins\Monolog\Handler\FileHandler');
+                $writers[] = $c->get('Matomo\Plugins\Monolog\Handler\FileHandler');
             }
         }
         return $writers;
@@ -32,7 +32,7 @@ return array(
             OutputInterface::VERBOSITY_QUIET => Logger::ERROR,
         );
         $handler = new ConsoleHandler(null, true, $verbosityMap);
-        $handler->setFormatter(new \Piwik\Plugins\Monolog\Formatter\ConsoleFormatter([
+        $handler->setFormatter(new \Matomo\Plugins\Monolog\Formatter\ConsoleFormatter([
             'date_format' => 'Y-m-d H:i:s',
             'format' => $c->get('log.console.format'),
             'multiline' => true,

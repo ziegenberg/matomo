@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\ArchivingMetrics;
+namespace Matomo\Plugins\ArchivingMetrics;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Date;
-use Piwik\Plugins\ArchivingMetrics\Clock\Clock;
-use Piwik\Plugins\ArchivingMetrics\Clock\ClockInterface;
-use Piwik\Plugins\ArchivingMetrics\Writer\DbWriter;
-use Piwik\Plugins\ArchivingMetrics\Writer\WriterInterface;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Date;
+use Matomo\Plugins\ArchivingMetrics\Clock\Clock;
+use Matomo\Plugins\ArchivingMetrics\Clock\ClockInterface;
+use Matomo\Plugins\ArchivingMetrics\Writer\DbWriter;
+use Matomo\Plugins\ArchivingMetrics\Writer\WriterInterface;
 
 final class Timer
 {

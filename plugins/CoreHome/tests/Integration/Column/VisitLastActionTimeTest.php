@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\tests\Integration\Column;
+namespace Matomo\Plugins\CoreHome\tests\Integration\Column;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Plugins\CoreHome\Columns\VisitLastActionTime;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Tracker\Visitor;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Plugins\CoreHome\Columns\VisitLastActionTime;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Tracker\Visitor;
 
 /**
  * @group CoreHome

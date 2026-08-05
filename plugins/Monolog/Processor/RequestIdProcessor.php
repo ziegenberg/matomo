@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\Processor;
+namespace Matomo\Plugins\Monolog\Processor;
 
 use Monolog\LogRecord;
-use Piwik\Common;
-use Piwik\FrontController;
+use Matomo\Common;
+use Matomo\FrontController;
 
 /**
  * Adds a unique "request id" to the log message to follow log entries for each HTTP request.

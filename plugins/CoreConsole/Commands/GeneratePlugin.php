@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Filesystem;
-use Piwik\Plugins\ExamplePlugin\ExamplePlugin;
-use Piwik\Plugin;
-use Piwik\Version;
+use Matomo\Filesystem;
+use Matomo\Plugins\ExamplePlugin\ExamplePlugin;
+use Matomo\Plugin;
+use Matomo\Version;
 
 class GeneratePlugin extends GeneratePluginBase
 {

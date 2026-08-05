@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Updater;
-use Piwik\Updates;
-use Piwik\Plugin\Manager;
+use Matomo\Updater;
+use Matomo\Updates;
+use Matomo\Plugin\Manager;
 
 class Updates_2_14_0_b1 extends Updates
 {

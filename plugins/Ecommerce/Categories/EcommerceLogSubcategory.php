@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Categories;
+namespace Matomo\Plugins\Ecommerce\Categories;
 
-use Piwik\Category\Subcategory;
-use Piwik\Piwik;
+use Matomo\Category\Subcategory;
+use Matomo\Matomo;
 
 class EcommerceLogSubcategory extends Subcategory
 {
@@ -20,7 +20,7 @@ class EcommerceLogSubcategory extends Subcategory
 
     public function getHelp()
     {
-        return '<p>' . Piwik::translate('Ecommerce_EcommerceLogSubcategoryHelp1') . '</p>'
-            . '<p>' . Piwik::translate('Ecommerce_EcommerceLogSubcategoryHelp2') . '</p>';
+        return '<p>' . Matomo::translate('Ecommerce_EcommerceLogSubcategoryHelp1') . '</p>'
+            . '<p>' . Matomo::translate('Ecommerce_EcommerceLogSubcategoryHelp2') . '</p>';
     }
 }

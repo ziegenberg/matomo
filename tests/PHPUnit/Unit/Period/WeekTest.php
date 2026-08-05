@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Period;
+namespace Matomo\Tests\Unit\Period;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Period\Week;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Period\Week;
 
 /**
  * Class WeekTest
@@ -138,7 +138,7 @@ class WeekTest extends BasePeriodTest
      */
     public function testGetLocalizedShortString($language, $shouldBe)
     {
-        StaticContainer::get('Piwik\Translation\Translator')->setCurrentLanguage($language);
+        StaticContainer::get('Matomo\Translation\Translator')->setCurrentLanguage($language);
         // a week within a month
         $week = new Week(Date::factory('2024-10-09'));
         $this->assertEquals($shouldBe[0], $week->getLocalizedShortString());
@@ -168,7 +168,7 @@ class WeekTest extends BasePeriodTest
      */
     public function testGetLocalizedLongString($language, $shouldBe)
     {
-        StaticContainer::get('Piwik\Translation\Translator')->setCurrentLanguage($language);
+        StaticContainer::get('Matomo\Translation\Translator')->setCurrentLanguage($language);
         // a week within a month
         $week = new Week(Date::factory('2024-10-09'));
         $this->assertEquals($shouldBe[0], $week->getLocalizedLongString());

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Tour\tests\System;
+namespace Matomo\Plugins\Tour\tests\System;
 
-use Piwik\API\Request;
-use Piwik\Plugins\ScheduledReports\ScheduledReports;
-use Piwik\Plugins\Tour\Dao\DataFinder;
-use Piwik\Plugins\Tour\tests\Fixtures\SimpleFixtureTrackFewVisits;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\API\Request;
+use Matomo\Plugins\ScheduledReports\ScheduledReports;
+use Matomo\Plugins\Tour\Dao\DataFinder;
+use Matomo\Plugins\Tour\tests\Fixtures\SimpleFixtureTrackFewVisits;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
 
 /**
  * @group Tour

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\Commands;
+namespace Matomo\Plugins\FeatureFlags\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
 
 class DeleteFeatureFlag extends ConsoleCommand
 {

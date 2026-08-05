@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\View;
+namespace Matomo\View;
 
-use Piwik\View;
+use Matomo\View;
 
 class HtmlEmailFooterView extends View
 {

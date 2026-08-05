@@ -9,16 +9,16 @@
  *
  */
 
-namespace Piwik\Plugins\LanguagesManager;
+namespace Matomo\Plugins\LanguagesManager;
 
-use Piwik\Cache as PiwikCache;
-use Piwik\Config;
-use Piwik\Development;
-use Piwik\Filesystem;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Translation\Loader\DevelopmentLoader;
+use Matomo\Cache as PiwikCache;
+use Matomo\Config;
+use Matomo\Development;
+use Matomo\Filesystem;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Translation\Loader\DevelopmentLoader;
 
 /**
  * The LanguagesManager API lets you access existing Matomo translations, and change Users languages preferences.
@@ -41,9 +41,9 @@ use Piwik\Translation\Loader\DevelopmentLoader;
  * @phpstan-type TranslationEntry array{label: string, value: string}
  * @phpstan-type Translations array<string, array<string, string>>
  *
- * @method static \Piwik\Plugins\LanguagesManager\API getInstance()
+ * @method static \Matomo\Plugins\LanguagesManager\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @var array<int, list<AvailableLanguage>>
@@ -110,7 +110,7 @@ class API extends \Piwik\Plugin\API
          *
          * @param array
          */
-        Piwik::postEvent('LanguagesManager.getAvailableLanguages', array(&$languages));
+        Matomo::postEvent('LanguagesManager.getAvailableLanguages', array(&$languages));
 
         $this->languageNames[$cacheKey] = $languages;
         return $languages;
@@ -303,7 +303,7 @@ class API extends \Piwik\Plugin\API
             return false;
         }
 
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
 
         $lang = $this->getModel()->getLanguageForUser($login);
 
@@ -324,8 +324,8 @@ class API extends \Piwik\Plugin\API
      */
     public function setLanguageForUser(string $login, string $languageCode): bool
     {
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
+        Matomo::checkUserIsNotAnonymous();
 
         if (!$this->isLanguageAvailable($languageCode)) {
             return false;
@@ -348,7 +348,7 @@ class API extends \Piwik\Plugin\API
             return false;
         }
 
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
 
         return $this->getModel()->uses12HourClock($login);
     }
@@ -366,7 +366,7 @@ class API extends \Piwik\Plugin\API
             return false;
         }
 
-        Piwik::checkUserHasSuperUserAccessOrIsTheUser($login);
+        Matomo::checkUserHasSuperUserAccessOrIsTheUser($login);
 
         return $this->getModel()->set12HourClock($login, $use12HourClock);
     }

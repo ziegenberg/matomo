@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest\Reports;
+namespace Matomo\Plugins\VisitorInterest\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\VisitorInterest\Columns\VisitorDaysSinceLast;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\VisitorInterest\Columns\VisitorDaysSinceLast;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetNumberOfVisitsByDaysSinceLast extends Base
 {
@@ -24,8 +24,8 @@ class GetNumberOfVisitsByDaysSinceLast extends Base
     {
         parent::init();
         $this->dimension     = new VisitorDaysSinceLast();
-        $this->name          = Piwik::translate('VisitorInterest_VisitsByDaysSinceLast');
-        $this->documentation = Piwik::translate('VisitorInterest_WidgetVisitsByDaysSinceLastDocumentation');
+        $this->name          = Matomo::translate('VisitorInterest_VisitsByDaysSinceLast');
+        $this->documentation = Matomo::translate('VisitorInterest_WidgetVisitsByDaysSinceLastDocumentation');
         $this->metrics       = array('nb_visits');
         $this->processedMetrics = [];
         $this->constantRowsCount = true;
@@ -53,7 +53,7 @@ class GetNumberOfVisitsByDaysSinceLast extends Base
         $view->config->show_all_views_icons    = false;
         $view->config->show_table_all_columns  = false;
         $view->config->show_exclude_low_population = false;
-        $view->config->addTranslation('label', Piwik::translate('General_DaysSinceLastVisit'));
+        $view->config->addTranslation('label', Matomo::translate('General_DaysSinceLastVisit'));
 
         if (!$view->isViewDataTableId(Evolution::ID)) {
             $view->config->show_limit_control = false;

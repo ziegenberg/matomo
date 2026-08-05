@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Tests\Framework\Mock\File;
+use Matomo\Tests\Framework\Mock\File;
 
 function filesize($filename)
 {
@@ -29,7 +29,7 @@ function file_exists($filename)
     return \file_exists($filename);
 }
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
 class File
 {

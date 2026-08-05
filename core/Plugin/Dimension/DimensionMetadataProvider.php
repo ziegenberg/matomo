@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin\Dimension;
+namespace Matomo\Plugin\Dimension;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * Provides metadata about dimensions for the LogDataPurger class.
@@ -89,7 +89,7 @@ class DimensionMetadataProvider
          *     });
          * @param array $result
          */
-        Piwik::postEvent('Db.getActionReferenceColumnsByTable', array(&$result));
+        Matomo::postEvent('Db.getActionReferenceColumnsByTable', array(&$result));
 
         return $result;
     }

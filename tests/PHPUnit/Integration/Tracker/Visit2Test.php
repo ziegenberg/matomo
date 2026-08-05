@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
 // Tests Visits and Dimensions behavior which is a lot of logic so not in VisitTest
 
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit;
-use Piwik\Tracker\Visitor;
-use Piwik\Piwik;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit;
+use Matomo\Tracker\Visitor;
+use Matomo\Matomo;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class FakeTrackerVisitDimension1 extends VisitDimension
 {
@@ -146,7 +146,7 @@ class Visit2Test extends IntegrationTestCase
     {
         parent::setUp();
         Fixture::createWebsite('2014-01-01 00:00:00');
-        Piwik::addAction('Tracker.Request.getIdSite', function (&$idSite) {
+        Matomo::addAction('Tracker.Request.getIdSite', function (&$idSite) {
             $idSite = 1;
         });
     }

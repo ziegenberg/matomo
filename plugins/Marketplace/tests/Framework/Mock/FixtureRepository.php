@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Framework\Mock;
+namespace Matomo\Plugins\Marketplace\tests\Framework\Mock;
 
-use Piwik\Filesystem;
+use Matomo\Filesystem;
 
 /**
  * Serves Marketplace HTTP responses from a directory of recorded fixtures.

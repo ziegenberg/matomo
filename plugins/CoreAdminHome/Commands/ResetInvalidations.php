@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\DataAccess\Model;
-use Piwik\Date;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Site;
+use Matomo\DataAccess\Model;
+use Matomo\Date;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Site;
 
 class ResetInvalidations extends ConsoleCommand
 {

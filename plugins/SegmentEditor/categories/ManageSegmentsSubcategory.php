@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SegmentEditor\Categories;
+namespace Matomo\Plugins\SegmentEditor\Categories;
 
-use Piwik\Category\Subcategory;
+use Matomo\Category\Subcategory;
 
 class ManageSegmentsSubcategory extends Subcategory
 {

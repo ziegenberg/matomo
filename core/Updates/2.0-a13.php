@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Option;
-use Piwik\Updater;
-use Piwik\Updates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Common;
+use Matomo\Option;
+use Matomo\Updater;
+use Matomo\Updates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 class Updates_2_0_a13 extends Updates
 {
@@ -28,7 +28,7 @@ class Updates_2_0_a13 extends Updates
     {
         // Renaming old archived records now that the plugin is called Referrers
         $migrations = array();
-        $tables = \Piwik\DbHelper::getTablesInstalled();
+        $tables = \Matomo\DbHelper::getTablesInstalled();
         foreach ($tables as $tableName) {
             if (strpos($tableName, 'archive_') !== false) {
                 $migrations[] = $this->migration->db->sql('UPDATE `' . $tableName . '` SET `name`=REPLACE(`name`, \'Referers_\', \'Referrers_\') WHERE `name` LIKE \'Referers_%\'');

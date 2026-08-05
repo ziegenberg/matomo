@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\IntranetMeasurable\Tracker;
+namespace Matomo\Plugins\IntranetMeasurable\Tracker;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Plugins\IntranetMeasurable\Type;
-use Piwik\Tracker\Cache;
-use Piwik\Tracker\Request;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Plugins\IntranetMeasurable\Type;
+use Matomo\Tracker\Cache;
+use Matomo\Tracker\Request;
 
-class RequestProcessor extends \Piwik\Tracker\RequestProcessor
+class RequestProcessor extends \Matomo\Tracker\RequestProcessor
 {
     private $didEnableSetting = false;
     private $settingName = 'ini.Tracker.trust_visitors_cookies';
@@ -43,7 +43,7 @@ class RequestProcessor extends \Piwik\Tracker\RequestProcessor
 
     private function setTrustCookiesSetting($value)
     {
-        StaticContainer::get('Piwik\Tracker\VisitorRecognizer')->setTrustCookiesOnly($value);
+        StaticContainer::get('Matomo\Tracker\VisitorRecognizer')->setTrustCookiesOnly($value);
         StaticContainer::getContainer()->set($this->settingName, $value);
     }
 }

@@ -9,12 +9,12 @@
 
 namespace PHPUnit\Integration\CronArchive;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CronArchive\ArchiveFilter;
-use Piwik\Date;
-use Piwik\Plugins\SegmentEditor\API as SegmentAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CronArchive\ArchiveFilter;
+use Matomo\Date;
+use Matomo\Plugins\SegmentEditor\API as SegmentAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core

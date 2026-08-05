@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Archiver\Request;
-use Piwik\CliMulti\CliPhp;
-use Piwik\CliMulti\Output;
-use Piwik\CliMulti\OutputInterface;
-use Piwik\CliMulti\Process;
-use Piwik\CliMulti\ProcessSymfony;
-use Piwik\CliMulti\StaticOutput;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\Log\NullLogger;
-use Piwik\Plugins\CoreConsole\FeatureFlags\CliMultiProcessSymfony;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Archiver\Request;
+use Matomo\CliMulti\CliPhp;
+use Matomo\CliMulti\Output;
+use Matomo\CliMulti\OutputInterface;
+use Matomo\CliMulti\Process;
+use Matomo\CliMulti\ProcessSymfony;
+use Matomo\CliMulti\StaticOutput;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\Log\NullLogger;
+use Matomo\Plugins\CoreConsole\FeatureFlags\CliMultiProcessSymfony;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
 use Throwable;
 
 /**
@@ -396,13 +396,13 @@ class CliMulti
          *
          * @param bool &$supportsAsync Whether async is supported or not.
          */
-        Piwik::postEvent('CliMulti.supportsAsync', array(&$supportsAsync));
+        Matomo::postEvent('CliMulti.supportsAsync', array(&$supportsAsync));
 
         return $supportsAsync;
     }
 
     /**
-     * Returns whether Symfony\Process instead of the default Piwik\Process for
+     * Returns whether Symfony\Process instead of the default Matomo\Process for
      * async cli multi execution.
      *
      * Requirements:
@@ -659,7 +659,7 @@ class CliMulti
 
     private static function getSuperUserTokenAuth()
     {
-        return Piwik::requestTemporarySystemAuthToken('CliMultiNonAsyncArchive', 36);
+        return Matomo::requestTemporarySystemAuthToken('CliMultiNonAsyncArchive', 36);
     }
 
     public function setUrlToPiwik($urlToPiwik)

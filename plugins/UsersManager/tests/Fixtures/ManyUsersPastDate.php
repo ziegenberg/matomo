@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Fixtures;
+namespace Matomo\Plugins\UsersManager\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\tests\Fixtures\ManyUsers;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\tests\Fixtures\ManyUsers;
 
 /**
  * Fixture with a larger number of users setting the 'now' date to 2013

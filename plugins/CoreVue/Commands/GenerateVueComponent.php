@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVue\Commands;
+namespace Matomo\Plugins\CoreVue\Commands;
 
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CoreConsole\Commands\GenerateVueConstructBase;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CoreConsole\Commands\GenerateVueConstructBase;
 
 class GenerateVueComponent extends GenerateVueConstructBase
 {

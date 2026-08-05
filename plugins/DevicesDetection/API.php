@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection;
+namespace Matomo\Plugins\DevicesDetection;
 
 use DeviceDetector\Parser\Device\AbstractDeviceParser;
 use Exception;
-use Piwik\Archive;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
+use Matomo\Archive;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
 use DeviceDetector\Parser\Client\Browser as BrowserParser;
-use Piwik\Site;
+use Matomo\Site;
 
 /**
  * The DevicesDetection API lets you access reports about your visitors' device types, brands, models,
  * operating systems, and browsers.
  *
- * @method static \Piwik\Plugins\DevicesDetection\API getInstance()
+ * @method static \Matomo\Plugins\DevicesDetection\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * @param int|string|int[] $idSite
@@ -33,7 +33,7 @@ class API extends \Piwik\Plugin\API
      */
     protected function getDataTable(string $name, $idSite, string $period, string $date, $segment)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $archive = Archive::build($idSite, $period, $date, $segment);
         $dataTable = $archive->getDataTable($name);
         $dataTable->queueFilter('ReplaceColumnNames');
@@ -144,7 +144,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getModel($idSite, string $period, string $date, $segment = false)
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
         $idSites = Site::getIdSitesFromIdSitesString($idSite);
 
         // filter sites where model report disabled by compliance
@@ -154,7 +154,7 @@ class API extends \Piwik\Plugin\API
 
         // show an error only if none of the requested sites is left
         if (count($idSitesFiltered) === 0 && count($idSites) !== count($idSitesFiltered)) {
-            throw new Exception(Piwik::translate('DevicesDetection_DeviceModelReportDisabledByCompliancePolicy'));
+            throw new Exception(Matomo::translate('DevicesDetection_DeviceModelReportDisabledByCompliancePolicy'));
         }
 
         $dataTable = $this->getDataTable('DevicesDetection_models', $idSitesFiltered, $period, $date, $segment);

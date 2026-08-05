@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\Providers;
+namespace Matomo\Plugins\AIAgents\Providers;
 
-use Piwik\Singleton;
-use Piwik\Tracker\Request;
+use Matomo\Singleton;
+use Matomo\Tracker\Request;
 
 abstract class AgentAbstract extends Singleton
 {

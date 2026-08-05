@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugins\ArchivingMetrics\Timer;
-use Piwik\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugins\ArchivingMetrics\Timer;
+use Matomo\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CoreAdminHome

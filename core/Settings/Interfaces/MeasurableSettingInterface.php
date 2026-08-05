@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces;
+namespace Matomo\Settings\Interfaces;
 
-use Piwik\Settings\Measurable\MeasurableProperty;
-use Piwik\Settings\Measurable\MeasurableSetting;
+use Matomo\Settings\Measurable\MeasurableProperty;
+use Matomo\Settings\Measurable\MeasurableSetting;
 
 /**
  * @template T of mixed

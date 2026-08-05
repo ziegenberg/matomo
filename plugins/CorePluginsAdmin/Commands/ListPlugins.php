@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin\Commands;
+namespace Matomo\Plugins\CorePluginsAdmin\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugin\Manager;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugin\Manager;
 
 /**
  * plugin:list console command.

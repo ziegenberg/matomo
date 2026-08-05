@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ReportRenderer;
+namespace Matomo\ReportRenderer;
 
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Renderer\Tsv as TsvDataTableRenderer;
-use Piwik\Piwik;
-use Piwik\ReportRenderer;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Renderer\Tsv as TsvDataTableRenderer;
+use Matomo\Matomo;
+use Matomo\ReportRenderer;
 
 /**
  * TSV report renderer
@@ -117,7 +117,7 @@ class Tsv extends ReportRenderer
 
         $reportData = $tsvRenderer->render();
         if (empty($reportData)) {
-            $reportData = Piwik::translate('CoreHome_ThereIsNoDataForThisReport');
+            $reportData = Matomo::translate('CoreHome_ThereIsNoDataForThisReport');
         }
 
         $reportName = $tsvRenderer->formatValue($processedReport['metadata']['name']);
@@ -135,7 +135,7 @@ class Tsv extends ReportRenderer
 
     /**
      * @param string $uniqueId
-     * @return \Piwik\DataTable\Renderer\Tsv
+     * @return \Matomo\DataTable\Renderer\Tsv
      */
     protected function getRenderer(DataTableInterface $table, $uniqueId)
     {

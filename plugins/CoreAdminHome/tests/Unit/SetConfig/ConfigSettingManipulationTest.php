@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Unit\Commands\SetConfig;
+namespace Matomo\Plugins\CoreAdminHome\tests\Unit\Commands\SetConfig;
 
-use Piwik\Config;
-use Piwik\Plugins\CoreAdminHome\Commands\SetConfig\ConfigSettingManipulation;
+use Matomo\Config;
+use Matomo\Plugins\CoreAdminHome\Commands\SetConfig\ConfigSettingManipulation;
 
 // phpunit mocks can't return references, so we need a manual one
-class DumbMockConfig extends \Piwik\Config
+class DumbMockConfig extends \Matomo\Config
 {
     /**
      * @var array

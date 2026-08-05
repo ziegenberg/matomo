@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Annotations;
+namespace Matomo\Plugins\Annotations;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\View;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\View;
 
 /**
  * Controller for the Annotations plugin.
  *
  */
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     /**
      * Controller action that returns HTML displaying annotations for a site and
@@ -232,6 +232,6 @@ class Controller extends \Piwik\Plugin\Controller
      */
     public static function canUserAddNotesFor(int $idSite): bool
     {
-        return Piwik::isUserHasWriteAccess($idSite);
+        return Matomo::isUserHasWriteAccess($idSite);
     }
 }

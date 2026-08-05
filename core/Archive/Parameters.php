@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
-use Piwik\Period;
-use Piwik\Segment;
+use Matomo\Period;
+use Matomo\Segment;
 
 class Parameters
 {

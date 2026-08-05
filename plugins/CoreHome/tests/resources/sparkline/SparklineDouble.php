@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Plugins\CoreHome\tests\resources\sparkline;
+namespace Matomo\Plugins\CoreHome\tests\resources\sparkline;
 
 class SparklineDouble
 {

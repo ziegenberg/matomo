@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Plugin;
+namespace Matomo\Tests\Framework\Mock\Plugin;
 
-use Piwik\Tracker\LogTable;
+use Matomo\Tracker\LogTable;
 
 class OtherCustomUserLogTable extends LogTable
 {

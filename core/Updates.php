@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Updater\Migration;
+use Matomo\Updater\Migration;
 
 /**
  * Base class for update scripts.
@@ -47,7 +47,7 @@ abstract class Updates
      * This method should perform all updating logic. If you define migrations in an overridden `getMigrations()`
      * method, you must call {@link Updater::executeMigrations()} here.
      *
-     * See {@link \Piwik\Plugins\ExamplePlugin\Updates\Updates_0_0_2} for an example.
+     * See {@link \Matomo\Plugins\ExamplePlugin\Updates\Updates_0_0_2} for an example.
      *
      * @api
      */

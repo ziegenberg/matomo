@@ -9,28 +9,28 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking;
+namespace Matomo\Plugins\BotTracking;
 
-use Piwik\Archive;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Plugins\BotTracking\RecordBuilders\AIChatbotReports;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\BotTracking\Reports\Get;
-use Piwik\Plugins\Referrers\AIAssistant;
-use Piwik\Site;
+use Matomo\Archive;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Plugins\BotTracking\RecordBuilders\AIChatbotReports;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\BotTracking\Reports\Get;
+use Matomo\Plugins\Referrers\AIAssistant;
+use Matomo\Site;
 
 /**
  * Provides API methods for bot and AI chatbot reporting.
  *
- * @method static \Piwik\Plugins\BotTracking\API getInstance()
+ * @method static \Matomo\Plugins\BotTracking\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     public const REAL_TIME_DEFAULT_LOOKBACK_MINUTES = 30;
     private const REAL_TIME_MIN_LOOKBACK_MINUTES = 1;
@@ -53,7 +53,7 @@ class API extends \Piwik\Plugin\API
      */
     public function get($idSite, string $period, string $date, $columns = null): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $archive = Archive::build($idSite, $period, $date, '');
 
@@ -65,7 +65,7 @@ class API extends \Piwik\Plugin\API
             });
         }
 
-        $requestedColumns = Piwik::getArrayFromApiParameter($columns);
+        $requestedColumns = Matomo::getArrayFromApiParameter($columns);
 
         /** @var Get $report */
         $report  = ReportsProvider::factory('BotTracking', 'get');
@@ -101,7 +101,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIChatbotRequests($idSite, string $period, string $date, bool $expanded = false, bool $flat = false, ?string $secondaryDimension = null): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         $archiveName = Archiver::AI_CHATBOTS_PAGES_RECORD;
 
@@ -139,7 +139,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIChatbotsRealTime($idSite, $lastMinutes = self::REAL_TIME_DEFAULT_LOOKBACK_MINUTES): DataTable
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         [$startDate, $endDate] = $this->getRealTimeDateRange($lastMinutes);
         $idSites               = Site::getIdSitesFromIdSitesString($idSite, false, true);
@@ -163,7 +163,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getTopPageUrlsRealTime($idSite, $lastMinutes = self::REAL_TIME_DEFAULT_LOOKBACK_MINUTES): DataTable
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         [$startDate, $endDate] = $this->getRealTimeDateRange($lastMinutes);
         $idSites               = Site::getIdSitesFromIdSitesString($idSite, false, true);
@@ -190,7 +190,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getPageUrlsForAIChatbot($idSite, string $period, string $date, int $idSubtable): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         return Archive::createDataTableFromArchive(Archiver::AI_CHATBOTS_PAGES_RECORD, $idSite, $period, $date, '', false, false, $idSubtable);
     }
@@ -212,7 +212,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getDocumentUrlsForAIChatbot($idSite, string $period, string $date, int $idSubtable): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         return Archive::createDataTableFromArchive(Archiver::AI_CHATBOTS_DOCUMENTS_RECORD, $idSite, $period, $date, '', false, false, $idSubtable);
     }
@@ -233,7 +233,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIChatbotContentPages($idSite, string $period, string $date): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         return Archive::createDataTableFromArchive(Archiver::AI_CHATBOTS_REQUESTED_PAGES_RECORD, $idSite, $period, $date, '', false, false);
     }
@@ -254,7 +254,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIChatbotContentDocuments($idSite, string $period, string $date): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         return Archive::createDataTableFromArchive(Archiver::AI_CHATBOTS_REQUESTED_DOCUMENTS_RECORD, $idSite, $period, $date, '', false, false);
     }
@@ -275,7 +275,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIChatbotBrokenContent($idSite, string $period, string $date): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         return Archive::createDataTableFromArchive(Archiver::AI_CHATBOTS_BROKEN_CONTENT_RECORD, $idSite, $period, $date, '', false, false);
     }
@@ -301,7 +301,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIChatbotHumanFavouredPages($idSite, string $period, string $date): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         // The scored data is archived (see AIChatbotFavouredPages); just read it back. The empty
         // segment is intentional — these reports are unsegmented, so a requested segment is ignored.
@@ -331,7 +331,7 @@ class API extends \Piwik\Plugin\API
      */
     public function getAIChatbotAIFavouredPages($idSite, string $period, string $date): DataTableInterface
     {
-        Piwik::checkUserHasViewAccess($idSite);
+        Matomo::checkUserHasViewAccess($idSite);
 
         // See getAIChatbotHumanFavouredPages: the scored data is archived; read it back unsegmented.
         $table = Archive::createDataTableFromArchive(Archiver::AI_CHATBOTS_AI_FAVOURED_PAGES_RECORD, $idSite, $period, $date, '', false, false);

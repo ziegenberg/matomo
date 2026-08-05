@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics;
+namespace Matomo\Plugins\Goals\Columns\Metrics;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Columns\Dimension;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
 
 /**
  * The average value for each order. Calculated as:
@@ -38,12 +38,12 @@ class AverageOrderRevenue extends ProcessedMetric
         $revenue = $this->getMetric($row, 'revenue');
         $conversions = $this->getMetric($row, 'nb_conversions');
 
-        return Piwik::getQuotientSafe($revenue, $conversions, $precision = 2);
+        return Matomo::getQuotientSafe($revenue, $conversions, $precision = 2);
     }
 
     public function getTranslatedName()
     {
-        return Piwik::translate('General_AverageOrderValue');
+        return Matomo::translate('General_AverageOrderValue');
     }
 
     public function getDependentMetrics()

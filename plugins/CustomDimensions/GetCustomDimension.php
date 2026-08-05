@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions;
+namespace Matomo\Plugins\CustomDimensions;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
-use Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
-use Piwik\Plugins\CoreHome\Columns\Metrics\BounceRate;
-use Piwik\Plugins\CoreHome\Columns\UserId;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\CustomDimensions\Columns\Metrics\AverageTimeOnDimension;
-use Piwik\Plugins\CustomDimensions\Dimension\CustomActionDimension;
-use Piwik\Plugins\CustomDimensions\Dimension\CustomVisitDimension;
-use Piwik\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
+use Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
+use Matomo\Plugins\CoreHome\Columns\Metrics\BounceRate;
+use Matomo\Plugins\CoreHome\Columns\UserId;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\CustomDimensions\Columns\Metrics\AverageTimeOnDimension;
+use Matomo\Plugins\CustomDimensions\Dimension\CustomActionDimension;
+use Matomo\Plugins\CustomDimensions\Dimension\CustomVisitDimension;
+use Matomo\Plugins\CustomDimensions\Tracker\CustomDimensionsRequestProcessor;
 
 /**
  * This class defines a new report.
@@ -46,7 +46,7 @@ class GetCustomDimension extends Report
         $this->module = 'CustomDimensions';
         $this->action = 'getCustomDimension';
         $this->categoryId = 'CustomDimensions_CustomDimensions';
-        $this->name  = Piwik::translate($this->categoryId);
+        $this->name  = Matomo::translate($this->categoryId);
         $this->order = 100;
         $this->actionToLoadSubTables = $this->action;
 
@@ -87,7 +87,7 @@ class GetCustomDimension extends Report
         $idReport = sprintf('%s_%s_idDimension--%d', $module, $method, $idDimension);
 
         if ($view->requestConfig->idSubtable) {
-            $view->config->addTranslation('label', Piwik::translate('Actions_ColumnActionURL'));
+            $view->config->addTranslation('label', Matomo::translate('Actions_ColumnActionURL'));
         }
 
         $view->requestConfig->request_parameters_to_modify['idDimension'] = $idDimension;
@@ -127,7 +127,7 @@ class GetCustomDimension extends Report
                     return false;
                 }
 
-                return Piwik::translate("Actions_AvgGenerationTimeTooltip", array(
+                return Matomo::translate("Actions_AvgGenerationTimeTooltip", array(
                     $hits,
                     "<br />",
                     $formatter->getPrettyTimeFromSeconds($min, true),
@@ -151,11 +151,11 @@ class GetCustomDimension extends Report
         $metrics = parent::getMetrics();
 
         if ($this->scopeOfDimension === CustomDimensions::SCOPE_ACTION) {
-            $metrics['nb_visits'] = Piwik::translate('CustomDimensions_ColumnUniqueActions');
+            $metrics['nb_visits'] = Matomo::translate('CustomDimensions_ColumnUniqueActions');
         }
 
         if (array_key_exists('nb_hits', $metrics)) {
-            $metrics['nb_hits'] = Piwik::translate('General_ColumnNbActions');
+            $metrics['nb_hits'] = Matomo::translate('General_ColumnNbActions');
         }
 
         return $metrics;

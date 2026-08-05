@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\tests\Unit;
+namespace Matomo\Plugins\API\tests\Unit;
 
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Plugins\API\Renderer\Console;
-use Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Plugins\API\Renderer\Console;
+use Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
 
 /**
  * @group Plugin
@@ -98,7 +98,7 @@ class ConsoleRendererTest extends \PHPUnit\Framework\TestCase
         $response = $this->builder->renderDataTable($dataTable);
 
         $this->assertSame("- 1 ['nb_visits' => 5, 'nb_random' => 10] [] [idsubtable = ]<br />
-<hr />Metadata<br /><br /> <b>processedRows</b><br />0 => Object [Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite]1 => Object [stdClass]2 => 2016-01-01", $response);
+<hr />Metadata<br /><br /> <b>processedRows</b><br />0 => Object [Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite]1 => Object [stdClass]2 => 2016-01-01", $response);
     }
 
     public function testRenderArrayShouldReturnConsoleResult()

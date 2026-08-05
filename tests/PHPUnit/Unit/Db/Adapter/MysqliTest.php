@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Db\Adapter;
+namespace Matomo\Tests\Unit\Db\Adapter;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Piwik\Db\Adapter\Mysqli;
+use Matomo\Db\Adapter\Mysqli;
 
 class MysqliTest extends TestCase
 {

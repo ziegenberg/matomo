@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\JsTrackerInstallCheck\tests\Integration;
+namespace Matomo\Plugins\JsTrackerInstallCheck\tests\Integration;
 
-use Piwik\Date;
-use Piwik\Plugins\JsTrackerInstallCheck\JsTrackerInstallCheck;
-use Piwik\Plugins\JsTrackerInstallCheck\NonceOption\JsTrackerInstallCheckOption;
-use Piwik\Site;
+use Matomo\Date;
+use Matomo\Plugins\JsTrackerInstallCheck\JsTrackerInstallCheck;
+use Matomo\Plugins\JsTrackerInstallCheck\NonceOption\JsTrackerInstallCheckOption;
+use Matomo\Site;
 
 /**
  * @group JsTrackerInstallCheck
@@ -197,7 +197,7 @@ class JsTrackerInstallCheckTest extends JsTrackerInstallCheckIntegrationTestCase
 
     private function createRequestMock(bool $hasParam, array $allParams = [], int $idSite = 0)
     {
-        $mock = $this->getMockBuilder('\Piwik\Tracker\Request')
+        $mock = $this->getMockBuilder('\Matomo\Tracker\Request')
             ->disableOriginalConstructor()
             ->getMock();
 

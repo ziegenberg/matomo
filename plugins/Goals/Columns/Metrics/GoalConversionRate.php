@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Goals\Columns\Metrics;
+namespace Matomo\Plugins\Goals\Columns\Metrics;
 
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugins\Goals\Goals;
-use Piwik\Tracker\GoalManager;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugins\Goals\Goals;
+use Matomo\Tracker\GoalManager;
 
 /**
  * The conversion rate for a specific goal. Calculated as:
@@ -32,12 +32,12 @@ class GoalConversionRate extends GoalSpecificProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('Goals_ConversionRate', $this->getGoalName());
+        return Matomo::translate('Goals_ConversionRate', $this->getGoalName());
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('Goals_ColumnConversionRateDocumentation', $this->getGoalNameForDocs());
+        return Matomo::translate('Goals_ColumnConversionRateDocumentation', $this->getGoalNameForDocs());
     }
 
     public function getDependentMetrics()
@@ -55,6 +55,6 @@ class GoalConversionRate extends GoalSpecificProcessedMetric
         $nbVisits = $this->getMetric($row, 'nb_visits');
         $conversions = $this->getMetric($row, Goals::makeGoalColumn($this->idGoal, 'nb_visits_converted'));
 
-        return Piwik::getQuotientSafe($conversions, $nbVisits, GoalManager::REVENUE_PRECISION + 2);
+        return Matomo::getQuotientSafe($conversions, $nbVisits, GoalManager::REVENUE_PRECISION + 2);
     }
 }

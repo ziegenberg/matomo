@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class Profilable extends VisitDimension
 {

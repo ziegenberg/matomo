@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Test\Columns;
+namespace Matomo\Plugins\Test\Columns;
 
-use Piwik\Columns\Updater as ColumnsUpdater;
-use Piwik\Common;
-use Piwik\Config\DatabaseConfig;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Updater\Migration;
+use Matomo\Columns\Updater as ColumnsUpdater;
+use Matomo\Common;
+use Matomo\Config\DatabaseConfig;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Updater\Migration;
 
 // NOTE: we can't use PHPUnit mock framework since we have to set columnName/columnType. reflection will set it, but
 // for some reason, methods of base type don't see the set value.
@@ -190,7 +190,7 @@ class UpdaterTest extends IntegrationTestCase
 
     private function getMockUpdater($hasNewVersion = true)
     {
-        $result = $this->getMockBuilder("Piwik\\Updater")->onlyMethods(array('hasNewVersion'))->getMock();
+        $result = $this->getMockBuilder("Matomo\\Updater")->onlyMethods(array('hasNewVersion'))->getMock();
 
         $result->expects($this->any())->method('hasNewVersion')->will($this->returnCallback(function () use ($hasNewVersion) {
             return $hasNewVersion;

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Actions;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Actions;
+use Matomo\Url;
 
 abstract class SiteSearchBase extends Base
 {
@@ -56,9 +56,9 @@ abstract class SiteSearchBase extends Base
     protected function addSiteSearchDisplayProperties(ViewDataTable $view)
     {
         $view->config->addTranslations(array(
-            'nb_visits'           => Piwik::translate('Actions_ColumnSearches'),
-            'exit_rate'           => str_replace("% ", "%&nbsp;", Piwik::translate('Actions_ColumnSearchExits')),
-            'nb_pages_per_search' => Piwik::translate('Actions_ColumnPagesPerSearch'),
+            'nb_visits'           => Matomo::translate('Actions_ColumnSearches'),
+            'exit_rate'           => str_replace("% ", "%&nbsp;", Matomo::translate('Actions_ColumnSearchExits')),
+            'nb_pages_per_search' => Matomo::translate('Actions_ColumnPagesPerSearch'),
         ));
 
         $view->config->show_bar_chart         = false;

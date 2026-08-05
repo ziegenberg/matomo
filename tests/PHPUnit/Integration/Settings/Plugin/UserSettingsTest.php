@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings\Plugin;
+namespace Matomo\Tests\Integration\Settings\Plugin;
 
-use Piwik\Settings\Plugin\UserSetting;
-use Piwik\Settings\Plugin\UserSettings;
-use Piwik\Tests\Framework\Mock\Settings\FakeUserSettings;
-use Piwik\Tests\Integration\Settings\BaseSettingsTestCase;
+use Matomo\Settings\Plugin\UserSetting;
+use Matomo\Settings\Plugin\UserSettings;
+use Matomo\Tests\Framework\Mock\Settings\FakeUserSettings;
+use Matomo\Tests\Integration\Settings\BaseSettingsTestCase;
 
 /**
  * @group PluginSettings
@@ -34,7 +34,7 @@ class UserSettingsTest extends BaseSettingsTestCase
 
     public function testConstructorGetPluginNameCanDetectPluginNameAutomatically()
     {
-        $settings = new \Piwik\Plugins\ExampleSettingsPlugin\UserSettings();
+        $settings = new \Matomo\Plugins\ExampleSettingsPlugin\UserSettings();
         $this->assertSame('ExampleSettingsPlugin', $settings->getPluginName());
         $this->assertSame('ExampleSettingsPlugin', $this->settings->getPluginName());
     }

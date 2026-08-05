@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace;
+namespace Matomo\Plugins\Marketplace;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\NumberFormatter;
-use Piwik\ProfessionalServices\Advertising;
-use Piwik\Plugin\Dependency as PluginDependency;
-use Piwik\Plugin;
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
-use Piwik\Plugins\Marketplace\Input\Sort;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\NumberFormatter;
+use Matomo\ProfessionalServices\Advertising;
+use Matomo\Plugin\Dependency as PluginDependency;
+use Matomo\Plugin;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Plugins\Marketplace\Input\Sort;
 
 class Plugins
 {

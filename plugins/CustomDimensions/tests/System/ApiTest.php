@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\tests\System;
+namespace Matomo\Plugins\CustomDimensions\tests\System;
 
-use Piwik\Cache;
-use Piwik\Context;
-use Piwik\Plugins\CustomDimensions\tests\Fixtures\TrackVisitsWithCustomDimensionsFixture;
-use Piwik\ReportRenderer;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Config;
-use Piwik\Plugins\CustomDimensions\FeatureFlags\CustomDimensionReportWithRollUp;
+use Matomo\Cache;
+use Matomo\Context;
+use Matomo\Plugins\CustomDimensions\tests\Fixtures\TrackVisitsWithCustomDimensionsFixture;
+use Matomo\ReportRenderer;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Config;
+use Matomo\Plugins\CustomDimensions\FeatureFlags\CustomDimensionReportWithRollUp;
 
 /**
  * @group CustomDimensions
@@ -376,7 +376,7 @@ class ApiTest extends SystemTestCase
                 'otherRequestParameters' => [
                     'idReport'     => 1,
                     'reportFormat' => ReportRenderer::PDF_FORMAT,
-                    'outputType'   => \Piwik\Plugins\ScheduledReports\API::OUTPUT_RETURN,
+                    'outputType'   => \Matomo\Plugins\ScheduledReports\API::OUTPUT_RETURN,
                     'serialize'    => 0,
                 ],
             ]);

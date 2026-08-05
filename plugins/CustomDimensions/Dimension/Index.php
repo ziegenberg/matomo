@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Dimension;
+namespace Matomo\Plugins\CustomDimensions\Dimension;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\API\Request;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
 
 class Index
 {

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces\Traits\Getters;
+namespace Matomo\Settings\Interfaces\Traits\Getters;
 
-use Piwik\Piwik;
-use Piwik\Settings\Plugin\SystemSetting;
+use Matomo\Matomo;
+use Matomo\Settings\Plugin\SystemSetting;
 
 /**
  * @template T of mixed
  *
- * @phpstan-require-implements \Piwik\Settings\Interfaces\SystemSettingInterface<T>
+ * @phpstan-require-implements \Matomo\Settings\Interfaces\SystemSettingInterface<T>
  */
 trait SystemGetterTrait
 {
@@ -25,7 +25,7 @@ trait SystemGetterTrait
             self::getSystemName(),
             self::getSystemDefaultValue(),
             self::getSystemType(),
-            Piwik::getPluginNameOfMatomoClass(static::class)
+            Matomo::getPluginNameOfMatomoClass(static::class)
         );
     }
 

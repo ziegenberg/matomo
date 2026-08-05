@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions;
+namespace Matomo\Plugins\Actions;
 
-use Piwik\Columns\Dimension;
-use Piwik\Site;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Tracker\Action;
+use Matomo\Columns\Dimension;
+use Matomo\Site;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Tracker\Action;
 
 /**
  * Actions plugin
@@ -20,12 +20,12 @@ use Piwik\Tracker\Action;
  * Reports about the page views, the outlinks and downloads.
  *
  */
-class Actions extends \Piwik\Plugin
+class Actions extends \Matomo\Plugin
 {
     public const ACTIONS_REPORT_ROWS_DISPLAY = 100;
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -181,7 +181,7 @@ class Actions extends \Piwik\Plugin
     }
 
     /**
-     * @param \Piwik\DataTable $dataTable
+     * @param \Matomo\DataTable $dataTable
      * @param int $level
      */
     public static function setDataTableRowLevels($dataTable, $level = 0)

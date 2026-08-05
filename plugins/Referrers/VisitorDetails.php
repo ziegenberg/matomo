@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers;
+namespace Matomo\Plugins\Referrers;
 
-use Piwik\Common;
-use Piwik\Plugins\Live\VisitorDetailsAbstract;
-use Piwik\Plugins\PrivacyManager\Settings\CampaignParameterValuesMasked;
-use Piwik\UrlHelper;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Plugins\Live\VisitorDetailsAbstract;
+use Matomo\Plugins\PrivacyManager\Settings\CampaignParameterValuesMasked;
+use Matomo\UrlHelper;
+use Matomo\View;
 
 class VisitorDetails extends VisitorDetailsAbstract
 {

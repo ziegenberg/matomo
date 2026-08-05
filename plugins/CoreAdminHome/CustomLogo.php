@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome;
+namespace Matomo\Plugins\CoreAdminHome;
 
-use Piwik\Exception\DI\NotFoundException;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\Exception;
-use Piwik\Filesystem;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\SettingsPiwik;
+use Matomo\Exception\DI\NotFoundException;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\Exception;
+use Matomo\Filesystem;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\SettingsPiwik;
 
 class CustomLogo
 {
@@ -126,7 +126,7 @@ class CustomLogo
     {
         $logo = $defaultLogo;
 
-        $theme = \Piwik\Plugin\Manager::getInstance()->getThemeEnabled();
+        $theme = \Matomo\Plugin\Manager::getInstance()->getThemeEnabled();
         if (!$theme) {
             $themeName = Manager::DEFAULT_THEME;
         } else {
@@ -166,7 +166,7 @@ class CustomLogo
     public static function getTempPathUserLogoUploads(): string
     {
         // use sha1 of the username to prevent usage of unsafe characters in the path
-        $path = StaticContainer::get('path.tmp') . '/logos/' . sha1(Piwik::getCurrentUserLogin()) . '/';
+        $path = StaticContainer::get('path.tmp') . '/logos/' . sha1(Matomo::getCurrentUserLogin()) . '/';
 
         if (!is_dir($path)) {
             Filesystem::mkdir($path);
@@ -257,7 +257,7 @@ class CustomLogo
          *
          * @param string $absolutePath The absolute path to the logo file on the Piwik server.
          */
-        Piwik::postEvent('CoreAdminHome.customLogoChanged', [$absolutePath]);
+        Matomo::postEvent('CoreAdminHome.customLogoChanged', [$absolutePath]);
     }
 
     public function uploadFaviconToTempFolder(): bool

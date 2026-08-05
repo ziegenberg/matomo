@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Columns;
+namespace Matomo\Columns;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\ComputedMetric;
+use Matomo\Matomo;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\ComputedMetric;
 
 /**
  * A factory to create metrics from a dimension.
@@ -51,7 +51,7 @@ class DimensionMetricFactory
     }
 
     /**
-     * @return \Piwik\Plugin\ComputedMetric
+     * @return \Matomo\Plugin\ComputedMetric
      */
     public function createComputedMetric($metricName1, $metricName2, $aggregation)
     {
@@ -83,37 +83,37 @@ class DimensionMetricFactory
             case ArchivedMetric::AGGREGATION_COUNT:
                 $prefix = ArchivedMetric::AGGREGATION_COUNT_PREFIX;
                 $translatedName = $dimension->getNamePlural();
-                $documentation = Piwik::translate('General_ComputedMetricCountDocumentation', $dimension->getNamePlural());
+                $documentation = Matomo::translate('General_ComputedMetricCountDocumentation', $dimension->getNamePlural());
                 $semanticType = Dimension::TYPE_NUMBER;
                 break;
             case ArchivedMetric::AGGREGATION_SUM:
                 $prefix = ArchivedMetric::AGGREGATION_SUM_PREFIX;
-                $translatedName = Piwik::translate('General_ComputedMetricSum', $dimension->getNamePlural());
-                $documentation  = Piwik::translate('General_ComputedMetricSumDocumentation', $dimension->getNamePlural());
+                $translatedName = Matomo::translate('General_ComputedMetricSum', $dimension->getNamePlural());
+                $documentation  = Matomo::translate('General_ComputedMetricSumDocumentation', $dimension->getNamePlural());
                 if ($dimension->getType() == Dimension::TYPE_BOOL) {
                     $semanticType = Dimension::TYPE_NUMBER;
                 }
                 break;
             case ArchivedMetric::AGGREGATION_MAX:
                 $prefix = ArchivedMetric::AGGREGATION_MAX_PREFIX;
-                $translatedName = Piwik::translate('General_ComputedMetricMax', $dimension->getNamePlural());
-                $documentation  = Piwik::translate('General_ComputedMetricMaxDocumentation', $dimension->getNamePlural());
+                $translatedName = Matomo::translate('General_ComputedMetricMax', $dimension->getNamePlural());
+                $documentation  = Matomo::translate('General_ComputedMetricMaxDocumentation', $dimension->getNamePlural());
                 break;
             case ArchivedMetric::AGGREGATION_MIN:
                 $prefix = ArchivedMetric::AGGREGATION_MIN_PREFIX;
-                $translatedName = Piwik::translate('General_ComputedMetricMin', $dimension->getNamePlural());
-                $documentation  = Piwik::translate('General_ComputedMetricMinDocumentation', $dimension->getNamePlural());
+                $translatedName = Matomo::translate('General_ComputedMetricMin', $dimension->getNamePlural());
+                $documentation  = Matomo::translate('General_ComputedMetricMinDocumentation', $dimension->getNamePlural());
                 break;
             case ArchivedMetric::AGGREGATION_UNIQUE:
                 $prefix = ArchivedMetric::AGGREGATION_UNIQUE_PREFIX;
-                $translatedName = Piwik::translate('General_ComputedMetricUniqueCount', $dimension->getNamePlural());
-                $documentation  = Piwik::translate('General_ComputedMetricUniqueCountDocumentation', $dimension->getNamePlural());
+                $translatedName = Matomo::translate('General_ComputedMetricUniqueCount', $dimension->getNamePlural());
+                $documentation  = Matomo::translate('General_ComputedMetricUniqueCountDocumentation', $dimension->getNamePlural());
                 $semanticType = Dimension::TYPE_NUMBER;
                 break;
             case ArchivedMetric::AGGREGATION_COUNT_WITH_NUMERIC_VALUE:
                 $prefix = ArchivedMetric::AGGREGATION_COUNT_WITH_NUMERIC_VALUE_PREFIX;
-                $translatedName = Piwik::translate('General_ComputedMetricCountWithValue', $dimension->getName());
-                $documentation  = Piwik::translate('General_ComputedMetricCountWithValueDocumentation', $dimension->getName());
+                $translatedName = Matomo::translate('General_ComputedMetricCountWithValue', $dimension->getName());
+                $documentation  = Matomo::translate('General_ComputedMetricCountWithValueDocumentation', $dimension->getName());
                 $semanticType = Dimension::TYPE_NUMBER;
                 break;
         }

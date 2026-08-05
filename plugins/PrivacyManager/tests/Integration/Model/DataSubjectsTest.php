@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PrivacyManager\tests\Integration\Model;
+namespace Matomo\Plugins\PrivacyManager\tests\Integration\Model;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Plugins\PrivacyManager\Model\DataSubjects;
-use Piwik\Plugins\PrivacyManager\tests\Fixtures\MultipleSitesMultipleVisitsFixture;
-use Piwik\Plugins\PrivacyManager\tests\Fixtures\TestLogFoo;
-use Piwik\Plugins\PrivacyManager\tests\Fixtures\TestLogFooBar;
-use Piwik\Plugins\PrivacyManager\tests\Fixtures\TestLogFooBarBaz;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Plugins\PrivacyManager\Model\DataSubjects;
+use Matomo\Plugins\PrivacyManager\tests\Fixtures\MultipleSitesMultipleVisitsFixture;
+use Matomo\Plugins\PrivacyManager\tests\Fixtures\TestLogFoo;
+use Matomo\Plugins\PrivacyManager\tests\Fixtures\TestLogFooBar;
+use Matomo\Plugins\PrivacyManager\tests\Fixtures\TestLogFooBarBaz;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
 
 /**
  * Class DataSubjectsTest
@@ -52,7 +52,7 @@ class DataSubjectsTest extends IntegrationTestCase
         $this->theFixture->installLogTables();
         $this->theFixture->setUpLocation();
 
-        $logTablesProvider = StaticContainer::get('Piwik\Plugin\LogTablesProvider');
+        $logTablesProvider = StaticContainer::get('Matomo\Plugin\LogTablesProvider');
         $this->dataSubjects = new DataSubjects($logTablesProvider);
         $this->originalTimezone = ini_get('date.timezone');
         $this->originalTrackingTime = $this->theFixture->trackingTime;

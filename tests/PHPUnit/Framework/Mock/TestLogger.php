@@ -1,8 +1,8 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
-use Piwik\Log\LoggerInterface;
+use Matomo\Log\LoggerInterface;
 use Psr\Log\AbstractLogger;
 
 /**

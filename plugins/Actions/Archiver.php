@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions;
+namespace Matomo\Plugins\Actions;
 
 /**
  * Class encapsulating logic to process Day/Period Archiving for the Actions reports
  *
  */
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const DOWNLOADS_RECORD_NAME = 'Actions_downloads';
     public const OUTLINKS_RECORD_NAME = 'Actions_outlink';

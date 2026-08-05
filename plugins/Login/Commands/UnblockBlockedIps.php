@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\Commands;
+namespace Matomo\Plugins\Login\Commands;
 
-use Piwik\API\Request;
-use Piwik\Piwik;
-use Piwik\Plugin\ConsoleCommand;
+use Matomo\API\Request;
+use Matomo\Matomo;
+use Matomo\Plugin\ConsoleCommand;
 
 class UnblockBlockedIps extends ConsoleCommand
 {
@@ -24,7 +24,7 @@ class UnblockBlockedIps extends ConsoleCommand
     protected function doExecute(): int
     {
         Request::processRequest('Login.unblockBruteForceIPs');
-        $message = sprintf('<info>%s</info>', Piwik::translate('General_Done'));
+        $message = sprintf('<info>%s</info>', Matomo::translate('General_Done'));
 
         $this->getOutput()->writeln($message);
 

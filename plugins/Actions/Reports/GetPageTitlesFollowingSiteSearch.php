@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Columns\DestinationPage;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
-use Piwik\Plugins\Actions\Columns\Metrics\BounceRate;
-use Piwik\Plugins\Actions\Columns\Metrics\ExitRate;
-use Piwik\Plugin\ReportsProvider;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Columns\DestinationPage;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\Actions\Columns\Metrics\AverageTimeOnPage;
+use Matomo\Plugins\Actions\Columns\Metrics\BounceRate;
+use Matomo\Plugins\Actions\Columns\Metrics\ExitRate;
+use Matomo\Plugin\ReportsProvider;
 
 class GetPageTitlesFollowingSiteSearch extends SiteSearchBase
 {
@@ -24,8 +24,8 @@ class GetPageTitlesFollowingSiteSearch extends SiteSearchBase
     {
         parent::init();
         $this->dimension     = new DestinationPage();
-        $this->name          = Piwik::translate('Actions_WidgetPageTitlesFollowingSearch');
-        $this->documentation = Piwik::translate('Actions_SiteSearchFollowingPagesDoc') . '<br/>' . Piwik::translate('General_UsePlusMinusIconsDocumentation');
+        $this->name          = Matomo::translate('Actions_WidgetPageTitlesFollowingSearch');
+        $this->documentation = Matomo::translate('Actions_SiteSearchFollowingPagesDoc') . '<br/>' . Matomo::translate('General_UsePlusMinusIconsDocumentation');
         $this->metrics       = array('nb_hits_following_search', 'nb_hits');
         $this->processedMetrics = array(
             new AverageTimeOnPage(),
@@ -40,7 +40,7 @@ class GetPageTitlesFollowingSiteSearch extends SiteSearchBase
 
     public function configureView(ViewDataTable $view)
     {
-        $title = Piwik::translate('Actions_WidgetPageUrlsFollowingSearch');
+        $title = Matomo::translate('Actions_WidgetPageUrlsFollowingSearch');
 
         $this->configureViewForUrlAndTitle($view, $title);
     }
@@ -48,8 +48,8 @@ class GetPageTitlesFollowingSiteSearch extends SiteSearchBase
     public function getMetrics()
     {
         return array(
-            'nb_hits_following_search' => Piwik::translate('General_ColumnViewedAfterSearch'),
-            'nb_hits'                  => Piwik::translate('General_ColumnPageviews'),
+            'nb_hits_following_search' => Matomo::translate('General_ColumnViewedAfterSearch'),
+            'nb_hits'                  => Matomo::translate('General_ColumnPageviews'),
         );
     }
 
@@ -61,8 +61,8 @@ class GetPageTitlesFollowingSiteSearch extends SiteSearchBase
     protected function getMetricsDocumentation()
     {
         return array(
-            'nb_hits_following_search' => Piwik::translate('General_ColumnViewedAfterSearchDocumentation'),
-            'nb_hits'                  => Piwik::translate('General_ColumnPageviewsDocumentation'),
+            'nb_hits_following_search' => Matomo::translate('General_ColumnViewedAfterSearchDocumentation'),
+            'nb_hits'                  => Matomo::translate('General_ColumnPageviewsDocumentation'),
         );
     }
 

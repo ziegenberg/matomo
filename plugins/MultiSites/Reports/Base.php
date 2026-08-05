@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\Reports;
+namespace Matomo\Plugins\MultiSites\Reports;
 
-use Piwik\Columns\Dimension;
-use Piwik\Piwik;
-use Piwik\Plugins\MultiSites\API;
+use Matomo\Columns\Dimension;
+use Matomo\Matomo;
+use Matomo\Plugins\MultiSites\API;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     protected function init()
     {
@@ -26,10 +26,10 @@ abstract class Base extends \Piwik\Plugin\Report
 
         foreach ($allMetricsInfo as $metricName => $metricSettings) {
             $metadataMetrics[$metricName] =
-                Piwik::translate($metricSettings[API::METRIC_TRANSLATION_KEY]);
+                Matomo::translate($metricSettings[API::METRIC_TRANSLATION_KEY]);
 
             $processedMetricsMetadata[$metricSettings[API::METRIC_EVOLUTION_COL_NAME_KEY]] =
-                Piwik::translate($metricSettings[API::METRIC_TRANSLATION_KEY]) . " " . Piwik::translate('MultiSites_Evolution');
+                Matomo::translate($metricSettings[API::METRIC_TRANSLATION_KEY]) . " " . Matomo::translate('MultiSites_Evolution');
         }
 
         $this->metrics = array_keys($metadataMetrics);

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest\Columns;
+namespace Matomo\Plugins\VisitorInterest\Columns;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class VisitorSecondsSinceLast extends VisitDimension
 {
@@ -29,7 +29,7 @@ class VisitorSecondsSinceLast extends VisitDimension
 
     public function getName()
     {
-        return Piwik::translate('General_SecondsSinceLastVisit');
+        return Matomo::translate('General_SecondsSinceLastVisit');
     }
 
     /**

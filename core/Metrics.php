@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Cache as PiwikCache;
-use Piwik\Columns\Dimension;
-use Piwik\Tracker\GoalManager;
+use Matomo\Cache as PiwikCache;
+use Matomo\Columns\Dimension;
+use Matomo\Tracker\GoalManager;
 
-require_once PIWIK_INCLUDE_PATH . "/core/Piwik.php";
+require_once PIWIK_INCLUDE_PATH . "/core/Matomo.php";
 
 /**
  * This class contains metadata regarding core metrics and contains several
@@ -236,7 +236,7 @@ class Metrics
              *
              * @ignore
              */
-            Piwik::postEvent('Metrics.addMetricIdToNameMapping', [&$value]);
+            Matomo::postEvent('Metrics.addMetricIdToNameMapping', [&$value]);
 
             $cache->save($cacheKey, $value);
         }
@@ -307,7 +307,7 @@ class Metrics
          *     }
          * }
          */
-        Piwik::postEvent('Metrics.isLowerValueBetter', [&$isLowerBetter, $column]);
+        Matomo::postEvent('Metrics.isLowerValueBetter', [&$isLowerBetter, $column]);
 
         if (!is_null($isLowerBetter)) {
             return true;
@@ -351,7 +351,7 @@ class Metrics
          * @param string $column name of the column to determine
          * @param string $idSite id of the current site
          */
-        Piwik::postEvent('Metrics.getEvolutionUnit', [&$unit, $column, $idSite]);
+        Matomo::postEvent('Metrics.getEvolutionUnit', [&$unit, $column, $idSite]);
 
         if (!empty($unit)) {
             return $unit;
@@ -430,7 +430,7 @@ class Metrics
              *
              * @param string $types The array mapping of metric_name => metric semantic type
              */
-            Piwik::postEvent('Metrics.getDefaultMetricSemanticTypes', [&$types]);
+            Matomo::postEvent('Metrics.getDefaultMetricSemanticTypes', [&$types]);
 
             $cache->save($cacheId, $types);
         }
@@ -477,15 +477,15 @@ class Metrics
             'exit_rate'                     => 'General_ColumnExitRate',
         );
 
-        $dailySum = ' (' . Piwik::translate('General_DailySum') . ')';
-        $afterEntry = ' ' . Piwik::translate('General_AfterEntry');
+        $dailySum = ' (' . Matomo::translate('General_DailySum') . ')';
+        $afterEntry = ' ' . Matomo::translate('General_AfterEntry');
 
-        $translations['sum_daily_nb_uniq_visitors'] = Piwik::translate('General_ColumnNbUniqVisitors') . $dailySum;
-        $translations['sum_daily_nb_users'] = Piwik::translate('General_ColumnNbUsers') . $dailySum;
-        $translations['sum_daily_entry_nb_uniq_visitors'] = Piwik::translate('General_ColumnUniqueEntrances') . $dailySum;
-        $translations['sum_daily_exit_nb_uniq_visitors'] = Piwik::translate('General_ColumnUniqueExits') . $dailySum;
-        $translations['entry_nb_actions'] = Piwik::translate('General_ColumnNbActions') . $afterEntry;
-        $translations['entry_sum_visit_length'] = Piwik::translate('General_ColumnSumVisitLength') . $afterEntry;
+        $translations['sum_daily_nb_uniq_visitors'] = Matomo::translate('General_ColumnNbUniqVisitors') . $dailySum;
+        $translations['sum_daily_nb_users'] = Matomo::translate('General_ColumnNbUsers') . $dailySum;
+        $translations['sum_daily_entry_nb_uniq_visitors'] = Matomo::translate('General_ColumnUniqueEntrances') . $dailySum;
+        $translations['sum_daily_exit_nb_uniq_visitors'] = Matomo::translate('General_ColumnUniqueExits') . $dailySum;
+        $translations['entry_nb_actions'] = Matomo::translate('General_ColumnNbActions') . $afterEntry;
+        $translations['entry_sum_visit_length'] = Matomo::translate('General_ColumnSumVisitLength') . $afterEntry;
 
         $translations = array_merge(self::getDefaultMetrics(), self::getDefaultProcessedMetrics(), $translations);
 
@@ -494,9 +494,9 @@ class Metrics
          *
          * @param string $translations The array mapping of column_name => Plugin_TranslationForColumn
          */
-        Piwik::postEvent('Metrics.getDefaultMetricTranslations', array(&$translations));
+        Matomo::postEvent('Metrics.getDefaultMetricTranslations', array(&$translations));
 
-        $translations = array_map(array('\\Piwik\\Piwik', 'translate'), $translations);
+        $translations = array_map(array('\Matomo\Matomo', 'translate'), $translations);
 
         $cache->save($cacheId, $translations);
 
@@ -522,7 +522,7 @@ class Metrics
             'nb_actions'       => 'General_ColumnNbActions',
             'nb_users'         => 'General_ColumnNbUsers',
         );
-        $translations = array_map(array('\\Piwik\\Piwik', 'translate'), $translations);
+        $translations = array_map(array('\Matomo\Matomo', 'translate'), $translations);
 
         $cache->save($cacheId, $translations);
 
@@ -549,7 +549,7 @@ class Metrics
             'bounce_rate'          => 'General_ColumnBounceRate',
             'conversion_rate'      => 'General_ColumnConversionRate',
         );
-        $translations = array_map(array('\\Piwik\\Piwik', 'translate'), $translations);
+        $translations = array_map(array('\Matomo\Matomo', 'translate'), $translations);
 
         $cache->save($cacheId, $translations);
 
@@ -628,9 +628,9 @@ class Metrics
          *
          * @param string[] $translations The array mapping of column_name => Plugin_TranslationForColumnDocumentation
          */
-        Piwik::postEvent('Metrics.getDefaultMetricDocumentationTranslations', array(&$translations));
+        Matomo::postEvent('Metrics.getDefaultMetricDocumentationTranslations', array(&$translations));
 
-        $translations = array_map(array('\\Piwik\\Piwik', 'translate'), $translations);
+        $translations = array_map(array('\Matomo\Matomo', 'translate'), $translations);
 
         $cache->save($cacheId, $translations);
 
@@ -642,7 +642,7 @@ class Metrics
      */
     public static function getPercentVisitColumn()
     {
-        return str_replace(' ', '&nbsp;', Piwik::translate('General_ColumnPercentageVisits'));
+        return str_replace(' ', '&nbsp;', Matomo::translate('General_ColumnPercentageVisits'));
     }
 
     /**

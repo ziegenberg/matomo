@@ -9,17 +9,17 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\PrivacyManager\tests\System;
+namespace Matomo\Plugins\PrivacyManager\tests\System;
 
-use Piwik\API\Request;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Fixtures\UITestFixture;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Framework\TestRequest\ApiTestConfig;
-use Piwik\Tests\Framework\TestRequest\Response;
+use Matomo\API\Request;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Fixtures\UITestFixture;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Framework\TestRequest\ApiTestConfig;
+use Matomo\Tests\Framework\TestRequest\Response;
 
 /**
  * CNIL rounding integration coverage using the standard Matomo system test pattern.

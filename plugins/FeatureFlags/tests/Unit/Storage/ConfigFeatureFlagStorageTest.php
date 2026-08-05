@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\FeatureFlags\tests\Unit\Storage;
+namespace Matomo\Plugins\FeatureFlags\tests\Unit\Storage;
 
 use PHPUnit\Framework\TestCase;
-use Piwik\Config;
-use Piwik\Plugins\FeatureFlags\FeatureFlagInterface;
-use Piwik\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage;
-use Piwik\Tests\Framework\Mock\FakeConfig;
+use Matomo\Config;
+use Matomo\Plugins\FeatureFlags\FeatureFlagInterface;
+use Matomo\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage;
+use Matomo\Tests\Framework\Mock\FakeConfig;
 
 class ConfigFeatureFlagStorageTest extends TestCase
 {

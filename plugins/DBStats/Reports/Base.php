@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats\Reports;
+namespace Matomo\Plugins\DBStats\Reports;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\Plugins\DBStats\DBStats;
+use Matomo\Metrics\Formatter;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\Plugins\DBStats\DBStats;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     public function isEnabled()
     {
-        return Piwik::hasUserSuperUserAccess();
+        return Matomo::hasUserSuperUserAccess();
     }
 
     public function configureReportMetadata(&$availableReports, $info)
@@ -51,14 +51,14 @@ abstract class Base extends \Piwik\Plugin\Report
         }
 
         $view->config->addTranslations(array(
-            'label'          => Piwik::translate('DBStats_Table'),
-            'year'           => Piwik::translate('Intl_PeriodYear'),
-            'data_size'      => Piwik::translate('DBStats_DataSize'),
-            'index_size'     => Piwik::translate('DBStats_IndexSize'),
-            'total_size'     => Piwik::translate('DBStats_TotalSize'),
-            'row_count'      => Piwik::translate('DBStats_RowCount'),
-            'percent_total'  => '%&nbsp;' . Piwik::translate('DBStats_DBSize'),
-            'estimated_size' => Piwik::translate('DBStats_EstimatedSize'),
+            'label'          => Matomo::translate('DBStats_Table'),
+            'year'           => Matomo::translate('Intl_PeriodYear'),
+            'data_size'      => Matomo::translate('DBStats_DataSize'),
+            'index_size'     => Matomo::translate('DBStats_IndexSize'),
+            'total_size'     => Matomo::translate('DBStats_TotalSize'),
+            'row_count'      => Matomo::translate('DBStats_RowCount'),
+            'percent_total'  => '%&nbsp;' . Matomo::translate('DBStats_DBSize'),
+            'estimated_size' => Matomo::translate('DBStats_EstimatedSize'),
         ));
     }
 
@@ -84,7 +84,7 @@ abstract class Base extends \Piwik\Plugin\Report
 
         if ($view->isViewDataTableId(HtmlTable::ID)) {
             // add summary row only if displaying a table
-            $view->config->filters[] = array('AddSummaryRow', Piwik::translate('General_Total'));
+            $view->config->filters[] = array('AddSummaryRow', Matomo::translate('General_Total'));
 
             // add percentage column if desired
             if (
@@ -114,7 +114,7 @@ abstract class Base extends \Piwik\Plugin\Report
                 $view->requestConfig->filter_sort_order  = 'desc';
             } else {
                 $view->config->columns_to_display = array('label', 'row_count');
-                $view->config->y_axis_unit        = ' ' . Piwik::translate('General_Rows');
+                $view->config->y_axis_unit        = ' ' . Matomo::translate('General_Rows');
 
                 $view->requestConfig->filter_sort_column = 'row_count';
                 $view->requestConfig->filter_sort_order  = 'desc';
@@ -151,7 +151,7 @@ abstract class Base extends \Piwik\Plugin\Report
     {
         $lastGenerated = self::getDateOfLastCachingRun();
         if ($lastGenerated !== false) {
-            $view->config->show_footer_message = Piwik::translate('Mobile_LastUpdated', $lastGenerated);
+            $view->config->show_footer_message = Matomo::translate('Mobile_LastUpdated', $lastGenerated);
         }
     }
 

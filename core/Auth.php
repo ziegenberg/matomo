@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
 
@@ -16,7 +16,7 @@ use Exception;
  *
  * Plugins that provide Auth implementations must provide a class that implements
  * this interface. Additionally, an instance of that class must be set in the
- * container with the 'Piwik\Auth' key during the
+ * container with the 'Matomo\Auth' key during the
  * [Request.initAuthenticationObject](https://developer.matomo.org/api-reference/events#requestinitauthenticationobject)
  * event.
  *
@@ -34,13 +34,13 @@ use Exception;
  * **How an Auth implementation will be used**
  *
  *     // authenticating by password
- *     $auth = StaticContainer::get('Piwik\Auth');
+ *     $auth = StaticContainer::get('Matomo\Auth');
  *     $auth->setLogin('user');
  *     $auth->setPassword('password');
  *     $result = $auth->authenticate();
  *
  *     // authenticating by token auth
- *     $auth = StaticContainer::get('Piwik\Auth');
+ *     $auth = StaticContainer::get('Matomo\Auth');
  *     $auth->setLogin('user');
  *     $auth->setTokenAuth('...');
  *     $result = $auth->authenticate();
@@ -120,7 +120,7 @@ interface Auth
      * Note: this method must successfully authenticate if the token auth supplied is a special hash
      * of the user's real token auth. This is because the SessionInitializer class stores a
      * hash of the token auth in the session cookie. You can calculate the token auth hash using the
-     * {@link \Piwik\Plugins\Login\SessionInitializer::getHashTokenAuth()} method.
+     * {@link \Matomo\Plugins\Login\SessionInitializer::getHashTokenAuth()} method.
      *
      * @return AuthResult
      * @throws Exception if the Auth implementation has an invalid state (ie, no login

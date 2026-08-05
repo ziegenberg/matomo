@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\Columns\Metrics;
+namespace Matomo\Plugins\PagePerformance\Columns\Metrics;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * The average amount of time it takes to transfer a page. Calculated as
@@ -25,11 +25,11 @@ class AverageTimeTransfer extends AveragePerformanceMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeTransfer');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeTransfer');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('PagePerformance_ColumnAverageTimeTransferDocumentation');
+        return Matomo::translate('PagePerformance_ColumnAverageTimeTransferDocumentation');
     }
 }

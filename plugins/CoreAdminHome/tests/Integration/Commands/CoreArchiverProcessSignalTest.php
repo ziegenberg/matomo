@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CliMulti\ProcessSymfony;
-use Piwik\Common;
-use Piwik\DataAccess\Model;
-use Piwik\Db;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\Tasks;
-use Piwik\Plugins\CoreAdminHome\tests\Fixtures\CoreArchiverProcessSignal as CoreArchiverProcessSignalFixture;
-use Piwik\Plugins\CoreConsole\FeatureFlags\CliMultiProcessSymfony;
-use Piwik\Plugins\CoreConsole\FeatureFlags\SystemSignals;
-use Piwik\Scheduler\Task;
-use Piwik\Segment;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CliMulti\ProcessSymfony;
+use Matomo\Common;
+use Matomo\DataAccess\Model;
+use Matomo\Db;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\Tasks;
+use Matomo\Plugins\CoreAdminHome\tests\Fixtures\CoreArchiverProcessSignal as CoreArchiverProcessSignalFixture;
+use Matomo\Plugins\CoreConsole\FeatureFlags\CliMultiProcessSymfony;
+use Matomo\Plugins\CoreConsole\FeatureFlags\SystemSignals;
+use Matomo\Scheduler\Task;
+use Matomo\Segment;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Core
@@ -478,7 +478,7 @@ class CoreArchiverProcessSignalTest extends IntegrationTestCase
             foreach ($invalidations as $invalidation) {
                 if (
                     $invalidation['name'] === $doneFlag
-                    && $invalidation['period'] == Piwik::$idPeriods[$blockSpec['period']]
+                    && $invalidation['period'] == Matomo::$idPeriods[$blockSpec['period']]
                     && $invalidation['date1'] == $blockSpec['date']
                 ) {
                     return true;

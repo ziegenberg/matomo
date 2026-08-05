@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\Providers;
+namespace Matomo\Plugins\AIAgents\Providers;
 
-use Piwik\Request as PiwikRequest;
-use Piwik\Tracker\Request;
+use Matomo\Request as PiwikRequest;
+use Matomo\Tracker\Request;
 
 class ChatGPT extends AgentAbstract
 {

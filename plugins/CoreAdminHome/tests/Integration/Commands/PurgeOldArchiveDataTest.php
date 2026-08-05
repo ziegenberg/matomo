@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Integration\Commands;
+namespace Matomo\Plugins\CoreAdminHome\tests\Integration\Commands;
 
-use Piwik\Archive\ArchivePurger;
-use Piwik\Console;
-use Piwik\Date;
-use Piwik\Plugins\CoreAdminHome\Commands\PurgeOldArchiveData;
-use Piwik\Tests\Fixtures\RawArchiveDataWithTempAndInvalidated;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Archive\ArchivePurger;
+use Matomo\Console;
+use Matomo\Date;
+use Matomo\Plugins\CoreAdminHome\Commands\PurgeOldArchiveData;
+use Matomo\Tests\Fixtures\RawArchiveDataWithTempAndInvalidated;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 use Symfony\Component\Console\Tester\ApplicationTester;
 
 /**

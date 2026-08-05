@@ -7,35 +7,35 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater;
+namespace Matomo\Plugins\CoreUpdater;
 
 use Exception;
-use Piwik\AssetManager;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Http\JsonResponse;
-use Piwik\DbHelper;
-use Piwik\Development;
-use Piwik\Filechecks;
-use Piwik\FileIntegrity;
-use Piwik\Filesystem;
-use Piwik\Nonce;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugins\CoreVue\CoreVue;
-use Piwik\Plugins\Marketplace\Plugins;
-use Piwik\Request;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Updater as DbUpdater;
-use Piwik\Updater\Migration\Db as DbMigration;
-use Piwik\Url;
-use Piwik\Version;
-use Piwik\View;
-use Piwik\View\OneClickDone;
+use Matomo\AssetManager;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Http\JsonResponse;
+use Matomo\DbHelper;
+use Matomo\Development;
+use Matomo\Filechecks;
+use Matomo\FileIntegrity;
+use Matomo\Filesystem;
+use Matomo\Nonce;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugins\CoreVue\CoreVue;
+use Matomo\Plugins\Marketplace\Plugins;
+use Matomo\Request;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Updater as DbUpdater;
+use Matomo\Updater\Migration\Db as DbMigration;
+use Matomo\Url;
+use Matomo\Version;
+use Matomo\View;
+use Matomo\View\OneClickDone;
 
-class Controller extends \Piwik\Plugin\Controller
+class Controller extends \Matomo\Plugin\Controller
 {
     private $coreError = false;
     private $warningMessages = array();
@@ -115,7 +115,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function newVersionAvailable()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!SettingsPiwik::isAutoUpdateEnabled()) {
             throw new Exception('Auto updater is disabled');
@@ -154,7 +154,7 @@ class Controller extends \Piwik\Plugin\Controller
 
     public function oneClickUpdate()
     {
-        Piwik::checkUserHasSuperUserAccess();
+        Matomo::checkUserHasSuperUserAccess();
 
         if (!SettingsPiwik::isAutoUpdateEnabled()) {
             throw new Exception('Auto updater is disabled');
@@ -162,7 +162,7 @@ class Controller extends \Piwik\Plugin\Controller
 
         Nonce::checkNonce('oneClickUpdate');
 
-        $view = new OneClickDone(Piwik::getCurrentUserTokenAuth());
+        $view = new OneClickDone(Matomo::getCurrentUserTokenAuth());
 
         try {
             $messages = $this->updater->updatePiwik();
@@ -242,7 +242,7 @@ class Controller extends \Piwik\Plugin\Controller
             $view->error = $error;
         } else {
             $updateDetailsToken = null;
-            if (Piwik::hasUserSuperUserAccess()) {
+            if (Matomo::hasUserSuperUserAccess()) {
                 $updateDetailsToken = $this->getUpdateDetailsToken();
                 if ($updateDetailsToken === null) {
                     $updateDetailsToken = $this->refreshUpdateDetailsToken();
@@ -278,14 +278,14 @@ class Controller extends \Piwik\Plugin\Controller
             && empty($this->errorMessages)
             && empty($this->deactivatedPlugins)
         ) {
-            Piwik::redirectToModule('CoreHome');
+            Matomo::redirectToModule('CoreHome');
         }
     }
 
     private function checkNewVersionIsAvailableOrDie()
     {
         if (!$this->updater->isNewVersionAvailable()) {
-            throw new Exception(Piwik::translate('CoreUpdater_ExceptionAlreadyLatestVersion', Version::VERSION));
+            throw new Exception(Matomo::translate('CoreUpdater_ExceptionAlreadyLatestVersion', Version::VERSION));
         }
     }
 
@@ -294,7 +294,7 @@ class Controller extends \Piwik\Plugin\Controller
         try {
             return $this->runUpdaterAndExit();
         } catch (NoUpdatesFoundException $e) {
-            Piwik::redirectToModule('CoreHome');
+            Matomo::redirectToModule('CoreHome');
         }
     }
 
@@ -403,7 +403,7 @@ class Controller extends \Piwik\Plugin\Controller
 
         // handle case of existing database with no tables
         if (!DbHelper::isInstalled()) {
-            $this->errorMessages[] = Piwik::translate('CoreUpdater_EmptyDatabaseError', Config::getInstance()->database['dbname']);
+            $this->errorMessages[] = Matomo::translate('CoreUpdater_EmptyDatabaseError', Config::getInstance()->database['dbname']);
             $this->coreError = true;
             $currentVersion = 'N/A';
         } else {
@@ -429,7 +429,7 @@ class Controller extends \Piwik\Plugin\Controller
         [$success, $messages] = FileIntegrity::getFileIntegrityInformation();
 
         if (!$success) {
-            $this->warningMessages[] = Piwik::translate('General_FileIntegrityWarning');
+            $this->warningMessages[] = Matomo::translate('General_FileIntegrityWarning');
         }
         if (count($messages) > 0) {
             $this->warningMessages = array_merge($this->warningMessages, $messages);

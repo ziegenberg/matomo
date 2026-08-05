@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-use Piwik\Access;
-use Piwik\Application\Environment;
-use Piwik\Auth\Password;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Site;
-use Piwik\Tracker\Cache;
-use Piwik\Config;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Plugins\LanguagesManager\API as APILanguageManager;
-use Piwik\Updater;
-use Piwik\Plugins\CoreUpdater;
+use Matomo\Access;
+use Matomo\Application\Environment;
+use Matomo\Auth\Password;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Site;
+use Matomo\Tracker\Cache;
+use Matomo\Config;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Plugins\LanguagesManager\API as APILanguageManager;
+use Matomo\Updater;
+use Matomo\Plugins\CoreUpdater;
 
 $subdir = str_replace(DIRECTORY_SEPARATOR, '', $argv[1]);
 $dbConfig = json_decode($argv[2], $isAssoc = true);
@@ -91,7 +91,7 @@ function createSuperUser()
     $login    = 'superUserLogin';
     $password = $passwordHelper->hash(UsersManager::getPasswordHash('pas3!"§$%&/()=?\'ㄨ<|-_#*+~>word'));
 
-    $model = new \Piwik\Plugins\UsersManager\Model();
+    $model = new \Matomo\Plugins\UsersManager\Model();
     $user  = $model->getUser($login);
 
     if (empty($user)) {
@@ -181,7 +181,7 @@ DbHelper::createTables();
 print "setup tables\n";
 
 // setup plugins
-$pluginsManager = \Piwik\Plugin\Manager::getInstance();
+$pluginsManager = \Matomo\Plugin\Manager::getInstance();
 $pluginsManager->loadActivatedPlugins();
 
 $pluginsManager->installLoadedPlugins();
@@ -226,9 +226,9 @@ $settings = StaticContainer::get(CoreUpdater\SystemSettings::class);
 $settings->releaseChannel->setValue('git_commit');
 $settings->releaseChannel->save();
 
-\Piwik\UpdateCheck::check(true); // ensure new version is detected correctly
+\Matomo\UpdateCheck::check(true); // ensure new version is detected correctly
 
 print "set release channel\n";
 
 // print token auth (on last line so it can be easily parsed)
-print Piwik::requestTemporarySystemAuthToken('InstallerUITests', 24);
+print Matomo::requestTemporarySystemAuthToken('InstallerUITests', 24);

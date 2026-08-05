@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Validator;
+namespace Matomo\Tests\Unit\Validator;
 
-use Piwik\Validators\WhitelistedValue;
+use Matomo\Validators\WhitelistedValue;
 
 /**
  * @group Validator
@@ -33,7 +33,7 @@ class WhiteListedValueTest extends \PHPUnit\Framework\TestCase
      */
     public function testValidateFailInvalidFormat($date)
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('General_ValidatorErrorXNotWhitelisted');
         $this->validate($date);
     }
@@ -51,7 +51,7 @@ class WhiteListedValueTest extends \PHPUnit\Framework\TestCase
 
     public function testConstructThrowsExceptionIfParamIsNotAnArray()
     {
-        $this->expectException(\Piwik\Validators\Exception::class);
+        $this->expectException(\Matomo\Validators\Exception::class);
         $this->expectExceptionMessage('The whitelisted values need to be an array');
         new WhitelistedValue('foobar');
     }

@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Columns\Metrics;
+namespace Matomo\Plugins\BotTracking\Columns\Metrics;
 
-use Piwik\Columns\Dimension;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\Columns\Dimension;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugins\BotTracking\Metrics;
 
 class ClickThroughRate extends ProcessedMetric
 {
@@ -27,12 +27,12 @@ class ClickThroughRate extends ProcessedMetric
 
     public function getTranslatedName()
     {
-        return Piwik::translate('BotTracking_ColumnClickThroughRate');
+        return Matomo::translate('BotTracking_ColumnClickThroughRate');
     }
 
     public function getDocumentation()
     {
-        return Piwik::translate('BotTracking_ColumnClickThroughRateDocumentation');
+        return Matomo::translate('BotTracking_ColumnClickThroughRateDocumentation');
     }
 
     public function getDependentMetrics()
@@ -51,7 +51,7 @@ class ClickThroughRate extends ProcessedMetric
         $requests = is_numeric($rawRequests) ? (int) $rawRequests : 0;
         $visits  = is_numeric($rawVisits)  ? (int) $rawVisits  : 0;
 
-        return Piwik::getQuotientSafe($visits, $requests, 4);
+        return Matomo::getQuotientSafe($visits, $requests, 4);
     }
 
     /**

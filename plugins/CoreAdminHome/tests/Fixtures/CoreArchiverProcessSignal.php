@@ -9,19 +9,19 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Fixtures;
+namespace Matomo\Plugins\CoreAdminHome\tests\Fixtures;
 
 use Closure;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Config;
-use Piwik\Container\Container;
-use Piwik\Date;
-use Piwik\DI;
-use Piwik\Plugins\CoreAdminHome\tests\Fixtures\CoreArchiverProcessSignal\StepControl;
-use Piwik\Plugins\Monolog\Handler\EchoHandler;
-use Piwik\Plugins\SegmentEditor\API as APISegmentEditor;
-use Piwik\Request;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Config;
+use Matomo\Container\Container;
+use Matomo\Date;
+use Matomo\DI;
+use Matomo\Plugins\CoreAdminHome\tests\Fixtures\CoreArchiverProcessSignal\StepControl;
+use Matomo\Plugins\Monolog\Handler\EchoHandler;
+use Matomo\Plugins\SegmentEditor\API as APISegmentEditor;
+use Matomo\Request;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Fixture that adds one site and tracks one pageview for today.

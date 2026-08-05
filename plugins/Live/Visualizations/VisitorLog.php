@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live\Visualizations;
+namespace Matomo\Plugins\Live\Visualizations;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\Piwik;
-use Piwik\Plugin;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugin\Visualization;
-use Piwik\Plugins\Live\Live;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Tracker\Action;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\Matomo;
+use Matomo\Plugin;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugin\Visualization;
+use Matomo\Plugins\Live\Live;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Tracker\Action;
 
 /**
  * A special DataTable visualization for the Live.getLastVisitsDetails API method.
@@ -69,7 +69,7 @@ class VisitorLog extends Visualization
                 $settings = PrivacyManager::getPurgeDataSettings();
                 if (!empty($settings['delete_logs_older_than'])) {
                     $numDaysDelete = $settings['delete_logs_older_than'];
-                    $view->config->no_data_message = Piwik::translate('CoreHome_ThereIsNoDataForThisReport') .  ' ' . Piwik::translate('Live_VisitorLogNoDataMessagePurged', $numDaysDelete);
+                    $view->config->no_data_message = Matomo::translate('CoreHome_ThereIsNoDataForThisReport') .  ' ' . Matomo::translate('Live_VisitorLogNoDataMessagePurged', $numDaysDelete);
                 }
             }
         };
@@ -94,7 +94,7 @@ class VisitorLog extends Visualization
     public function beforeRender()
     {
         $this->config->show_as_content_block = false;
-        $this->config->title = Piwik::translate('Live_VisitorLog');
+        $this->config->title = Matomo::translate('Live_VisitorLog');
         $this->config->disable_row_actions = true;
         $this->config->datatable_js_type = 'VisitorLog';
         $this->config->enable_sort       = false;
@@ -106,7 +106,7 @@ class VisitorLog extends Visualization
         $this->config->show_export_as_rss_feed     = false;
         $this->config->disable_all_rows_filter_limit = true;
 
-        $this->config->documentation = Piwik::translate('Live_VisitorLogDocumentation', array('<br />', '<br />'));
+        $this->config->documentation = Matomo::translate('Live_VisitorLogDocumentation', array('<br />', '<br />'));
 
         if (!is_array($this->config->custom_parameters)) {
             $this->config->custom_parameters = array();
@@ -120,7 +120,7 @@ class VisitorLog extends Visualization
 
         $this->config->custom_parameters['smallWidth'] = (int)(1 == Common::getRequestVar('small', 0, 'int'));
         $this->config->custom_parameters['hideProfileLink'] = (int)(1 == Common::getRequestVar('hideProfileLink', 0, 'int'));
-        $this->config->custom_parameters['pageUrlNotDefined'] = Piwik::translate('General_NotDefined', Piwik::translate('Actions_ColumnPageURL'));
+        $this->config->custom_parameters['pageUrlNotDefined'] = Matomo::translate('General_NotDefined', Matomo::translate('Actions_ColumnPageURL'));
 
         if (!Live::isVisitorProfileEnabled()) {
             $this->config->custom_parameters['hideProfileLink'] = 1;
@@ -133,7 +133,7 @@ class VisitorLog extends Visualization
                     'buttons' => array(
                         array(
                             'id'    => static::ID,
-                            'title' => Piwik::translate('Live_LinkVisitorLog'),
+                            'title' => Matomo::translate('Live_LinkVisitorLog'),
                             'icon'  => 'plugins/Morpheus/images/table.png',
                         ),
                     ),
@@ -152,7 +152,7 @@ class VisitorLog extends Visualization
         if ($enableAddNewSegment) {
             $this->config->datatable_actions[] = [
                 'id' => 'addSegmentToMatomo',
-                'title' => Piwik::translate('SegmentEditor_AddThisToMatomo'),
+                'title' => Matomo::translate('SegmentEditor_AddThisToMatomo'),
                 'icon' => 'icon-segment',
             ];
         }

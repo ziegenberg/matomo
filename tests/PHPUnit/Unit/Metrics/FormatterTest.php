@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Metrics;
+namespace Matomo\Tests\Unit\Metrics;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Metrics\Formatter;
-use Piwik\NumberFormatter;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Container\StaticContainer;
+use Matomo\Metrics\Formatter;
+use Matomo\NumberFormatter;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
 
 /**
  * @group Core
@@ -78,7 +78,7 @@ class FormatterTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetPrettyNumberReturnsCorrectResultWhenLocaleIsEuropean($number, $expected)
     {
-        StaticContainer::get('Piwik\Translation\Translator')->setCurrentLanguage('de');
+        StaticContainer::get('Matomo\Translation\Translator')->setCurrentLanguage('de');
         $this->assertEquals($expected, $this->formatter->getPrettyNumber($number, 2));
     }
 
@@ -95,7 +95,7 @@ class FormatterTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetPrettyMoneyReturnsCorrectResult($value, $idSite, $language, $expected)
     {
-        StaticContainer::get('Piwik\Translation\Translator')->setCurrentLanguage($language);
+        StaticContainer::get('Matomo\Translation\Translator')->setCurrentLanguage($language);
 
         $this->assertEquals($expected, $this->formatter->getPrettyMoney($value, $idSite));
     }
@@ -105,7 +105,7 @@ class FormatterTest extends \PHPUnit\Framework\TestCase
      */
     public function testGetPrettyPercentFromQuotientReturnsCorrectResult($value, $language, $expected)
     {
-        StaticContainer::get('Piwik\Translation\Translator')->setCurrentLanguage($language);
+        StaticContainer::get('Matomo\Translation\Translator')->setCurrentLanguage($language);
 
         $this->assertEquals($expected, $this->formatter->getPrettyPercentFromQuotient($value));
     }

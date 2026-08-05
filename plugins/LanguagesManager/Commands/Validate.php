@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\LanguagesManager\Commands;
+namespace Matomo\Plugins\LanguagesManager\Commands;
 
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\LanguagesManager\API;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\LanguagesManager\API;
 
 class Validate extends TranslationBase
 {

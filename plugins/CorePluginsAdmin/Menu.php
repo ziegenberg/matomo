@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CorePluginsAdmin;
+namespace Matomo\Plugins\CorePluginsAdmin;
 
-use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuTop;
-use Piwik\Piwik;
-use Piwik\Plugins\CorePluginsAdmin\Model\TagManagerTeaser;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Menu\MenuTop;
+use Matomo\Matomo;
+use Matomo\Plugins\CorePluginsAdmin\Model\TagManagerTeaser;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public function configureTopMenu(MenuTop $menu)
     {
-        $tagManagerTeaser = new TagManagerTeaser(Piwik::getCurrentUserLogin());
+        $tagManagerTeaser = new TagManagerTeaser(Matomo::getCurrentUserLogin());
 
         if ($tagManagerTeaser->shouldShowTeaser()) {
             $menu->addItem('Tag Manager', null, $this->urlForAction('tagManagerTeaser'));
@@ -27,13 +27,13 @@ class Menu extends \Piwik\Plugin\Menu
 
     public function configureAdminMenu(MenuAdmin $menu)
     {
-        if (!Piwik::isUserIsAnonymous()) {
+        if (!Matomo::isUserIsAnonymous()) {
             $menu->addPlatformItem('', [], 7);
         }
 
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             $menu->addPluginItem(
-                Piwik::translate('General_ManagePlugins'),
+                Matomo::translate('General_ManagePlugins'),
                 $this->urlForAction('plugins', ['activated' => '']),
                 10,
                 false,

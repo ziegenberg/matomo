@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Dimension;
+namespace Matomo\Plugins\CustomDimensions\Dimension;
 
 use Exception;
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class Name
 {
@@ -26,18 +26,18 @@ class Name
         $maxLen = 255;
 
         if (empty($this->name)) {
-            throw new Exception(Piwik::translate('CustomDimensions_NameIsRequired'));
+            throw new Exception(Matomo::translate('CustomDimensions_NameIsRequired'));
         }
 
         if (strlen($this->name) > $maxLen) {
-            throw new Exception(Piwik::translate('CustomDimensions_NameIsTooLong', $maxLen));
+            throw new Exception(Matomo::translate('CustomDimensions_NameIsTooLong', $maxLen));
         }
 
         $blockedCharacters = self::getBlockedCharacters();
 
         // we do not really have to do this and it is not very effective for preventing XSS but doesn't hurt to have
         if (strip_tags($this->name) !== $this->name || str_replace($blockedCharacters, '', $this->name) !== $this->name) {
-            throw new Exception(Piwik::translate('CustomDimensions_NameAllowedCharacters'));
+            throw new Exception(Matomo::translate('CustomDimensions_NameAllowedCharacters'));
         }
     }
 

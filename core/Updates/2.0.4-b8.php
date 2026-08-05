@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Config;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
-use Piwik\UpdaterErrorException;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Config;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\Plugins\PrivacyManager\Config as PrivacyManagerConfig;
+use Matomo\UpdaterErrorException;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_2_0_4_b8 extends Updates
 {

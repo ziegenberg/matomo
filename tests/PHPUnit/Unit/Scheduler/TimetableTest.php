@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Scheduler;
+namespace Matomo\Tests\Unit\Scheduler;
 
-use Piwik\Date;
-use Piwik\Scheduler\Task;
-use Piwik\Scheduler\Timetable;
-use Piwik\Tests\Framework\Mock\PiwikOption;
-use Piwik\Option;
+use Matomo\Date;
+use Matomo\Scheduler\Task;
+use Matomo\Scheduler\Timetable;
+use Matomo\Tests\Framework\Mock\PiwikOption;
+use Matomo\Option;
 
 /**
  * @group Scheduler

@@ -1,10 +1,10 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Settings;
+namespace Matomo\Tests\Framework\Mock\Settings;
 
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\Interfaces\SettingValueInterface;
-use Piwik\tests\Framework\Mock\Policy\TestPolicy;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\Interfaces\SettingValueInterface;
+use Matomo\tests\Framework\Mock\Policy\TestPolicy;
 
 class FakePolicySetting implements PolicyComparisonInterface, SettingValueInterface
 {

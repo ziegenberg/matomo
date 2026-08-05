@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
-use Piwik\Mail;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Mail;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class Onboarding
 {
@@ -20,7 +20,7 @@ class Onboarding
 
     public static function sendSysAdminMail($email)
     {
-        if (!Piwik::isValidEmailString($email)) {
+        if (!Matomo::isValidEmailString($email)) {
             return;
         }
         if (Option::get(self::OPTION_NAME_INSTALL_MAIL)) {

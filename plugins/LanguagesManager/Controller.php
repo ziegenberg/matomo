@@ -9,14 +9,14 @@
  *
  */
 
-namespace Piwik\Plugins\LanguagesManager;
+namespace Matomo\Plugins\LanguagesManager;
 
-use Piwik\Common;
-use Piwik\Nonce;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Nonce;
+use Matomo\Matomo;
+use Matomo\Url;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     /**
      * anonymous = in the session
@@ -35,7 +35,7 @@ class Controller extends \Piwik\Plugin\ControllerAdmin
 
     public function searchTranslation()
     {
-        Piwik::checkUserHasSomeAdminAccess();
+        Matomo::checkUserHasSomeAdminAccess();
 
         return $this->renderTemplate('searchTranslation');
     }

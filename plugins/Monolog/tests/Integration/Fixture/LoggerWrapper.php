@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Monolog\tests\Integration\Fixture;
+namespace Matomo\Plugins\Monolog\tests\Integration\Fixture;
 
-use Piwik\Log;
+use Matomo\Log;
 
 class LoggerWrapper
 {

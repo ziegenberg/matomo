@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Plugin;
-use Piwik\Updater;
-use Piwik\Version;
+use Matomo\Plugin;
+use Matomo\Updater;
+use Matomo\Version;
 
 class GenerateUpdate extends GeneratePluginBase
 {
@@ -31,7 +31,7 @@ class GenerateUpdate extends GeneratePluginBase
         $className = $this->getUpdateClassName($component, $version);
 
         $exampleFolder = Plugin\Manager::getPluginDirectory('ExamplePlugin');
-        $replace       = array('Piwik\Plugins\ExamplePlugin\Updates' => $namespace,
+        $replace       = array('Matomo\Plugins\ExamplePlugin\Updates' => $namespace,
                                'ExamplePlugin' => $component,
                                'Updates_0_0_2' => $className,
                                '0.0.2'         => $version);

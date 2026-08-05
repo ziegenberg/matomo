@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitorInterest\Reports;
+namespace Matomo\Plugins\VisitorInterest\Reports;
 
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\VisitorInterest\Columns\VisitsbyVisitNumber;
-use Piwik\Plugins\CoreHome\Columns\Metrics\VisitsPercent;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\VisitorInterest\Columns\VisitsbyVisitNumber;
+use Matomo\Plugins\CoreHome\Columns\Metrics\VisitsPercent;
 
 class GetNumberOfVisitsByVisitCount extends Base
 {
@@ -24,9 +24,9 @@ class GetNumberOfVisitsByVisitCount extends Base
     {
         parent::init();
         $this->dimension     = new VisitsbyVisitNumber();
-        $this->name          = Piwik::translate('VisitorInterest_visitsByVisitCount');
-        $this->documentation = Piwik::translate('VisitorInterest_WidgetVisitsByNumDocumentation')
-                             . '<br />' . Piwik::translate('General_ChangeTagCloudView');
+        $this->name          = Matomo::translate('VisitorInterest_visitsByVisitCount');
+        $this->documentation = Matomo::translate('VisitorInterest_WidgetVisitsByNumDocumentation')
+                             . '<br />' . Matomo::translate('General_ChangeTagCloudView');
         $this->metrics       = array('nb_visits');
         $this->processedMetrics  = array(
             new VisitsPercent(),
@@ -39,7 +39,7 @@ class GetNumberOfVisitsByVisitCount extends Base
     {
         $documentation = parent::getMetricsDocumentation();
 
-        $documentation['nb_visits_percentage'] = Piwik::translate('VisitorInterest_ColumnPercentageVisitsDocumentation');
+        $documentation['nb_visits_percentage'] = Matomo::translate('VisitorInterest_ColumnPercentageVisitsDocumentation');
 
         return $documentation;
     }
@@ -51,7 +51,7 @@ class GetNumberOfVisitsByVisitCount extends Base
         $view->requestConfig->filter_limit = 15;
 
         $view->config->addTranslations(array(
-            'label'                => Piwik::translate('VisitorInterest_VisitNum'),
+            'label'                => Matomo::translate('VisitorInterest_VisitNum'),
             'nb_visits_percentage' => Metrics::getPercentVisitColumn()));
 
         $view->config->columns_to_display = array('label', 'nb_visits', 'nb_visits_percentage');

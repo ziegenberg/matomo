@@ -1,10 +1,10 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Policy;
+namespace Matomo\Tests\Framework\Mock\Policy;
 
-use Piwik\Tests\Framework\Mock\Settings\FakePolicySetting;
+use Matomo\Tests\Framework\Mock\Settings\FakePolicySetting;
 
-class PolicyManager extends \Piwik\Policy\PolicyManager
+class PolicyManager extends \Matomo\Policy\PolicyManager
 {
     public static function getAllPolicies(): array
     {

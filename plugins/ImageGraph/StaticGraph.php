@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ImageGraph;
+namespace Matomo\Plugins\ImageGraph;
 
 use CpChart\Data;
 use CpChart\Image;
-use Piwik\Container\StaticContainer;
-use Piwik\NumberFormatter;
-use Piwik\Piwik;
-use Piwik\BaseFactory;
+use Matomo\Container\StaticContainer;
+use Matomo\NumberFormatter;
+use Matomo\Matomo;
+use Matomo\BaseFactory;
 
 /**
  * The StaticGraph abstract class is used as a base class for different types of static graphs.
@@ -78,7 +78,7 @@ abstract class StaticGraph extends BaseFactory
 
     protected static function getInvalidClassIdExceptionMessage($graphType)
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'General_ExceptionInvalidStaticGraphType',
             array($graphType, implode(', ', self::getAvailableStaticGraphTypes()))
         );
@@ -274,7 +274,7 @@ abstract class StaticGraph extends BaseFactory
             $formatMethodName = 'formatYAxisNonUnifont';
         }
 
-        $this->pData->setAxisDisplay(0, AXIS_FORMAT_CUSTOM, '\\Piwik\\Plugins\\ImageGraph\\' . $formatMethodName);
+        $this->pData->setAxisDisplay(0, AXIS_FORMAT_CUSTOM, '\Matomo\Plugins\ImageGraph\\' . $formatMethodName);
         $this->pData->addPoints($abscissaSeries, self::ABSCISSA_SERIE_NAME);
         $this->pData->setAbscissa(self::ABSCISSA_SERIE_NAME);
     }

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Db;
+namespace Matomo\Db;
 
 /**
  * Database schema interface
@@ -164,7 +164,7 @@ interface SchemaInterface
      * set to **1**.
      *
      * @param array $tables The name of the table to optimize or an array of tables to optimize.
-     *                      Table names must be prefixed (see {@link Piwik\Common::prefixTable()}).
+     *                      Table names must be prefixed (see {@link Matomo\Common::prefixTable()}).
      * @param bool $force If true, the `OPTIMIZE TABLE` query will be run even if InnoDB tables are being used.
      */
     public function optimizeTables(array $tables, bool $force = false): bool;

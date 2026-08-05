@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\DataTable\Filter;
+namespace Matomo\Plugins\Referrers\DataTable\Filter;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Period\Range;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Period\Range;
 
 /**
  * Utility function that sets the subtables for the getReferrerType report.

@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Validators;
+namespace Matomo\Plugins\UsersManager\Validators;
 
-use Piwik\API\Request;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\SystemSettings;
-use Piwik\Validators\BaseValidator;
-use Piwik\Validators\Exception;
+use Matomo\API\Request;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\SystemSettings;
+use Matomo\Validators\BaseValidator;
+use Matomo\Validators\Exception;
 
 class AllowedEmailDomain extends BaseValidator
 {
@@ -65,7 +65,7 @@ class AllowedEmailDomain extends BaseValidator
         }
 
         if (!$this->doesEmailEndWithAValidDomain($value, $domains)) {
-            $message = Piwik::translate('UsersManager_ErrorEmailDomainNotAllowed', [$value, implode(', ', $domains)]);
+            $message = Matomo::translate('UsersManager_ErrorEmailDomainNotAllowed', [$value, implode(', ', $domains)]);
             throw new Exception($message);
         }
     }

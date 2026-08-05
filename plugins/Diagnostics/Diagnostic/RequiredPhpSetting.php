@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
 class RequiredPhpSetting implements \JsonSerializable
 {

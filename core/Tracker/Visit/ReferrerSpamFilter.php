@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker\Visit;
+namespace Matomo\Tracker\Visit;
 
-use Piwik\Cache;
-use Piwik\Common;
-use Piwik\Option;
-use Piwik\Tracker\Request;
+use Matomo\Cache;
+use Matomo\Common;
+use Matomo\Option;
+use Matomo\Tracker\Request;
 
 /**
  * Filters out tracking requests issued by spammers.

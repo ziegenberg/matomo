@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
+namespace Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
 
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph;
 
 /**
  * Visualization that renders HTML for a Pie graph using jqPlot.

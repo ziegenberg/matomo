@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\Reports;
+namespace Matomo\Plugins\VisitTime\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreHome\Columns\VisitFirstActionTime;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreHome\Columns\VisitFirstActionTime;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph;
 
 class GetVisitInformationPerServerTime extends Base
 {
@@ -22,8 +22,8 @@ class GetVisitInformationPerServerTime extends Base
     {
         parent::init();
         $this->dimension     = new VisitFirstActionTime();
-        $this->name          = Piwik::translate('VisitTime_SiteTime');
-        $this->documentation = Piwik::translate('VisitTime_WidgetSiteTimeDocumentation', array('<strong>', '</strong>'));
+        $this->name          = Matomo::translate('VisitTime_SiteTime');
+        $this->documentation = Matomo::translate('VisitTime_WidgetSiteTimeDocumentation', array('<strong>', '</strong>'));
         $this->constantRowsCount = true;
         $this->hasGoalMetrics = true;
         $this->order = 20;
@@ -40,7 +40,7 @@ class GetVisitInformationPerServerTime extends Base
         $view->requestConfig->filter_limit = 24;
         $view->requestConfig->request_parameters_to_modify['hideFutureHoursWhenToday'] = 1;
 
-        $view->config->addTranslation('label', Piwik::translate('VisitTime_ColumnServerHour'));
+        $view->config->addTranslation('label', Matomo::translate('VisitTime_ColumnServerHour'));
 
         if ($view->isViewDataTableId(Graph::ID)) {
             $view->config->max_graph_elements = false;

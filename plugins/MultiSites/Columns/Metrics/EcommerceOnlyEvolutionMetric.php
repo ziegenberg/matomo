@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MultiSites\Columns\Metrics;
+namespace Matomo\Plugins\MultiSites\Columns\Metrics;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
-use Piwik\Site;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Plugins\CoreHome\Columns\Metrics\EvolutionMetric;
+use Matomo\Site;
 
 /**
  * Ecommerce evolution metric adapter. This is a special processed metric for MultiSites API methods. It will

@@ -1,10 +1,10 @@
 <?php
 
-namespace Piwik\Plugins\FeatureFlags\config;
+namespace Matomo\Plugins\FeatureFlags\config;
 
-use Piwik\DI;
-use Piwik\Log\Logger;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\DI;
+use Matomo\Log\Logger;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
 
 return [
     /**
@@ -13,7 +13,7 @@ return [
      * The first one will be overwritten by the second one (if set).
      */
     'featureflag.storages' => [
-        DI::get('Piwik\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage'),
+        DI::get('Matomo\Plugins\FeatureFlags\Storage\ConfigFeatureFlagStorage'),
     ],
     /**
      * Defines the directory that Plugin\Manager::getInstance()->findMultipleComponents will search for when loading feature flags

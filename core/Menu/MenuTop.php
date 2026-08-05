@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Menu;
+namespace Matomo\Menu;
 
 /**
  * Contains menu entries for the Top menu (the menu at the very top of the page).
  * Plugins can implement the `configureTopMenu()` method of the `Menu` plugin class to add, rename of remove
  * items. If your plugin does not have a `Menu` class yet you can create one using `./console generate:menu`.
  *
- * @method static \Piwik\Menu\MenuTop getInstance()
+ * @method static \Matomo\Menu\MenuTop getInstance()
  */
 class MenuTop extends MenuAbstract
 {

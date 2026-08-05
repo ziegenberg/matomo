@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Container;
+namespace Matomo\Tests\Unit\Container;
 
 use DI\Definition\ValueDefinition;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Container\IniConfigDefinitionSource;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Container\IniConfigDefinitionSource;
 
 class IniConfigDefinitionSourceTest extends \PHPUnit\Framework\TestCase
 {
@@ -90,7 +90,7 @@ class IniConfigDefinitionSourceTest extends \PHPUnit\Framework\TestCase
      */
     private function createConfig()
     {
-        return $this->getMockBuilder('Piwik\Application\Kernel\GlobalSettingsProvider')
+        return $this->getMockBuilder('Matomo\Application\Kernel\GlobalSettingsProvider')
                 ->disableOriginalConstructor()->getMock();
     }
 }

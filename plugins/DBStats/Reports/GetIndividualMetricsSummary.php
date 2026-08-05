@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DBStats\Reports;
+namespace Matomo\Plugins\DBStats\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
 
 /**
  * Shows a datatable that displays how many occurrences there are of each individual
@@ -22,7 +22,7 @@ class GetIndividualMetricsSummary extends Base
 {
     protected function init()
     {
-        $this->name = Piwik::translate('General_Metrics');
+        $this->name = Matomo::translate('General_Metrics');
     }
 
     public function configureView(ViewDataTable $view)
@@ -36,7 +36,7 @@ class GetIndividualMetricsSummary extends Base
         );
 
         $view->requestConfig->filter_sort_order = 'asc';
-        $view->config->addTranslation('label', Piwik::translate('General_Metric'));
+        $view->config->addTranslation('label', Matomo::translate('General_Metric'));
 
         $this->setIndividualSummaryFooterMessage($view);
     }

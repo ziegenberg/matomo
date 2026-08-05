@@ -7,32 +7,32 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager;
+namespace Matomo\Plugins\UsersManager;
 
 use Exception;
-use Piwik\Access\Role\Admin;
-use Piwik\Access\Role\Write;
-use Piwik\API\Request;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreHome\SystemSummary;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\SettingsPiwik;
+use Matomo\Access\Role\Admin;
+use Matomo\Access\Role\Write;
+use Matomo\API\Request;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreHome\SystemSummary;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\SettingsPiwik;
 
 /**
  * Manage Piwik users
  *
  */
-class UsersManager extends \Piwik\Plugin
+class UsersManager extends \Matomo\Plugin
 {
     public const PASSWORD_MIN_LENGTH = 6;
     public const PASSWORD_MAX_LENGTH = 200;
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -53,7 +53,7 @@ class UsersManager extends \Piwik\Plugin
 
     public static function dieIfUsersAdminIsDisabled()
     {
-        Piwik::checkUserIsNotAnonymous();
+        Matomo::checkUserIsNotAnonymous();
         if (!self::isUsersAdminEnabled()) {
             throw new \Exception('Creating, updating, and deleting users has been disabled.');
         }
@@ -74,7 +74,7 @@ class UsersManager extends \Piwik\Plugin
 
         $systemSummary[] = new SystemSummary\Item(
             $key = 'users',
-            Piwik::translate('General_NUsers', $numUsers),
+            Matomo::translate('General_NUsers', $numUsers),
             $value = null,
             array('module' => 'UsersManager', 'action' => 'index'),
             $icon = 'icon-user',
@@ -157,7 +157,7 @@ class UsersManager extends \Piwik\Plugin
      */
     private function getFallbackDefaultReportForLogin(string $login)
     {
-        if (Piwik::hasTheUserSuperUserAccess($login)) {
+        if (Matomo::hasTheUserSuperUserAccess($login)) {
             $siteIds = SitesManagerAPI::getInstance()->getAllSitesId();
         } else {
             $siteIds = array_column((new Model())->getSitesAccessFromUser($login), 'site');
@@ -224,16 +224,16 @@ class UsersManager extends \Piwik\Plugin
          * @param string $password Checking password in plain text.
          */
 
-        Piwik::postEvent('UsersManager.checkPassword', array($password));
+        Matomo::postEvent('UsersManager.checkPassword', array($password));
 
         if (!self::isValidPasswordString($password)) {
-            throw new Exception(Piwik::translate(
+            throw new Exception(Matomo::translate(
                 'UsersManager_ExceptionInvalidPassword',
                 array(self::PASSWORD_MIN_LENGTH)
             ));
         }
         if (mb_strlen($password) > self::PASSWORD_MAX_LENGTH) {
-            throw new Exception(Piwik::translate(
+            throw new Exception(Matomo::translate(
                 'UsersManager_ExceptionInvalidPasswordTooLong',
                 array(self::PASSWORD_MAX_LENGTH)
             ));

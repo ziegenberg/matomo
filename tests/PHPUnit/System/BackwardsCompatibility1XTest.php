@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\VisitFrequency\API as VisitFrequencyApi;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\SqlDump;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\VisitFrequency\API as VisitFrequencyApi;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\SqlDump;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Tests that Piwik 2.0 works w/ data from Piwik 1.12.
@@ -38,7 +38,7 @@ class BackwardsCompatibility1XTest extends SystemTestCase
 
         // ensure all plugins are installed correctly (some plugins database tables would be missing otherwise)
         foreach ($installedPlugins as $installedPlugin) {
-            \Piwik\Plugin\Manager::getInstance()->loadPlugin($installedPlugin)->install();
+            \Matomo\Plugin\Manager::getInstance()->loadPlugin($installedPlugin)->install();
         }
 
         $result = Fixture::updateDatabase();
@@ -84,7 +84,7 @@ class BackwardsCompatibility1XTest extends SystemTestCase
     {
         // note: not sure why I have to manually activate plugin in order for `./console tests:run BackwardsCompatibility1XTest` to work
         try {
-            \Piwik\Plugin\Manager::getInstance()->activatePlugin('DevicesDetection');
+            \Matomo\Plugin\Manager::getInstance()->activatePlugin('DevicesDetection');
         } catch (\Exception $e) {
         }
 
@@ -154,7 +154,7 @@ class BackwardsCompatibility1XTest extends SystemTestCase
         ];
 
         /**
-         * When Piwik\Tests\System\BackwardsCompatibility1XTest is failing,
+         * When Matomo\Tests\System\BackwardsCompatibility1XTest is failing,
          * as this test compares fixtures to OneVisitorTwoVisits* fixtures,
          * sometimes for a given API method that fails to generate the same output as OneVisitorTwoVisits does,
          * we need to add the API below which will cause the fixtures for this API to be created in processed/
@@ -298,7 +298,7 @@ class BackwardsCompatibility1XTest extends SystemTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Config' => \Piwik\DI::decorate(function ($previous) {
+            'Matomo\Config' => \Matomo\DI::decorate(function ($previous) {
                 $general = $previous->General;
                 $general['action_title_category_delimiter'] = "/";
                 $previous->General = $general;

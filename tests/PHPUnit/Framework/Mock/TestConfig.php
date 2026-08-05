@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Config;
-use Piwik\Plugin\Manager;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Config;
+use Matomo\Plugin\Manager;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 
 class TestConfig extends Config
 {
@@ -115,7 +115,7 @@ class TestConfig extends Config
         $chain->set('PluginsInstalled', array('PluginsInstalled' => array()));
     }
 
-    private function setFromTestEnvironment(\Piwik\Tests\Framework\TestingEnvironmentVariables $testingEnvironment)
+    private function setFromTestEnvironment(\Matomo\Tests\Framework\TestingEnvironmentVariables $testingEnvironment)
     {
         $chain = $this->settings->getIniFileChain();
 

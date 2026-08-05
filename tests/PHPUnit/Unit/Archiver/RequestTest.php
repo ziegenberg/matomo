@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\Archiver;
+namespace Matomo\Tests\Unit\Archiver;
 
-use Piwik\Archiver\Request;
-use Piwik\Date;
+use Matomo\Archiver\Request;
+use Matomo\Date;
 
 class RequestTest extends \PHPUnit\Framework\TestCase
 {

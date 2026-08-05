@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UserCountry\Reports;
+namespace Matomo\Plugins\UserCountry\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
-use Piwik\Plugins\UserCountry\Columns\Continent;
-use Piwik\Report\ReportWidgetFactory;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\JqplotGraph\Evolution;
+use Matomo\Plugins\UserCountry\Columns\Continent;
+use Matomo\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
 
 class GetContinent extends Base
 {
@@ -22,8 +22,8 @@ class GetContinent extends Base
     {
         parent::init();
         $this->dimension      = new Continent();
-        $this->name           = Piwik::translate('UserCountry_Continent');
-        $this->documentation  = Piwik::translate('UserCountry_getContinentDocumentation');
+        $this->name           = Matomo::translate('UserCountry_Continent');
+        $this->documentation  = Matomo::translate('UserCountry_getContinentDocumentation');
         $this->order = 6;
     }
 

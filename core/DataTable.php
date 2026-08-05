@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\DataTable\Manager;
-use Piwik\DataTable\Renderer\Html;
-use Piwik\DataTable\Row;
-use Piwik\DataTable\Row\DataTableSummaryRow;
-use Piwik\DataTable\Simple;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\DataTable\Manager;
+use Matomo\DataTable\Renderer\Html;
+use Matomo\DataTable\Row;
+use Matomo\DataTable\Row\DataTableSummaryRow;
+use Matomo\DataTable\Simple;
 use ReflectionClass;
 
 /**
@@ -83,7 +83,7 @@ require_once PIWIK_INCLUDE_PATH . "/core/DataTable/Bridges.php";
  * applied to DataTable\Map instances. So you can visit every DataTable in a {@link DataTable\Map}
  * without having to write a recursive visiting function.
  *
- * All predefined filters exist in the **Piwik\DataTable\BaseFilter** namespace.
+ * All predefined filters exist in the **Matomo\DataTable\BaseFilter** namespace.
  *
  * _Note: For convenience, [anonymous functions](https://www.php.net/manual/en/functions.anonymous.php)
  * can be used as DataTable filters._
@@ -136,7 +136,7 @@ require_once PIWIK_INCLUDE_PATH . "/core/DataTable/Bridges.php";
  *
  * **Getting & setting metadata**
  *
- *     $dataTable = \Piwik\Plugins\Referrers\API::getInstance()->getSearchEngines($idSite = 1, $period = 'day', $date = '2007-07-24');
+ *     $dataTable = \Matomo\Plugins\Referrers\API::getInstance()->getSearchEngines($idSite = 1, $period = 'day', $date = '2007-07-24');
  *     $oldPeriod = $dataTable->metadata['period'];
  *     $dataTable->metadata['period'] = Period\Factory::build('week', Date::factory('2013-10-18'));
  *
@@ -183,7 +183,7 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
 
     /**
      * Name for metadata that describes how individual columns should be aggregated when {@link addDataTable()}
-     * or {@link Piwik\DataTable\Row::sumRow()} is called.
+     * or {@link Matomo\DataTable\Row::sumRow()} is called.
      *
      * This metadata value must be an array that maps column names with valid operations. Valid aggregation operations are:
      *
@@ -217,9 +217,9 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
     public const LABEL_ARCHIVED_METADATA_ROW = '__datatable_metadata__';
 
     /**
-     * Name for metadata that contains extra {@link Piwik\Plugin\ProcessedMetric}s for a DataTable.
+     * Name for metadata that contains extra {@link Matomo\Plugin\ProcessedMetric}s for a DataTable.
      * These metrics will be added in addition to the ones specified in the table's associated
-     * {@link Piwik\Plugin\Report} class.
+     * {@link Matomo\Plugin\Report} class.
      */
     public const EXTRA_PROCESSED_METRICS_METADATA_NAME = 'extra_processed_metrics';
 
@@ -514,8 +514,8 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
      * If {@link enableRecursiveFilters()} was called, the filter will be applied
      * to all subtables as well.
      *
-     * @param string|callable $className Class name, eg. `"Sort"` or "Piwik\DataTable\Filters\Sort"`. If no
-     *                                  namespace is supplied, `Piwik\DataTable\Filter` is assumed. This parameter
+     * @param string|callable $className Class name, eg. `"Sort"` or "Matomo\DataTable\Filters\Sort"`. If no
+     *                                  namespace is supplied, `Matomo\DataTable\Filter` is assumed. This parameter
      *                                  can also be a closure that takes a DataTable as its first parameter.
      * @param array $parameters Array of extra parameters to pass to the filter.
      * @return void
@@ -540,7 +540,7 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
         }
 
         if (!class_exists($className, true)) {
-            $className = 'Piwik\DataTable\Filter\\' . $className;
+            $className = 'Matomo\DataTable\Filter\\' . $className;
         }
         $reflectionObj = new ReflectionClass($className);
 
@@ -575,8 +575,8 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
     /**
      * Applies a filter to all subtables but not to this datatable.
      *
-     * @param string|callable $className Class name, eg. `"Sort"` or "Piwik\DataTable\Filters\Sort"`. If no
-     *                                  namespace is supplied, `Piwik\DataTable\BaseFilter` is assumed. This parameter
+     * @param string|callable $className Class name, eg. `"Sort"` or "Matomo\DataTable\Filters\Sort"`. If no
+     *                                  namespace is supplied, `Matomo\DataTable\BaseFilter` is assumed. This parameter
      *                                  can also be a closure that takes a DataTable as its first parameter.
      * @param array $parameters Array of extra parameters to pass to the filter.
      * @return void
@@ -641,7 +641,7 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
      * @param string $className  eg 'Limit' or 'Sort'. Passing a `Closure` or an `array($class, $methodName)` is not
      *                           supported yet. We check for exact match. So if you disable 'Limit' and
      *                           call `->filter('Limit')` this filter won't be executed. If you call
-     *                           `->filter('Piwik\DataTable\Filter\Limit')` that filter will be executed. See it as a
+     *                           `->filter('Matomo\DataTable\Filter\Limit')` that filter will be executed. See it as a
      *                           feature.
      * @return void
      * @ignore

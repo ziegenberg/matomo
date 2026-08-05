@@ -9,18 +9,18 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\RecordBuilders;
+namespace Matomo\Plugins\BotTracking\RecordBuilders;
 
-use Piwik\ArchiveProcessor;
-use Piwik\ArchiveProcessor\Record;
-use Piwik\ArchiveProcessor\RecordBuilder;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable;
-use Piwik\Plugins\BotTracking\Archiver;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\BotTracking\Metrics;
-use Piwik\Tracker\Action;
+use Matomo\ArchiveProcessor;
+use Matomo\ArchiveProcessor\Record;
+use Matomo\ArchiveProcessor\RecordBuilder;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable;
+use Matomo\Plugins\BotTracking\Archiver;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\BotTracking\Metrics;
+use Matomo\Tracker\Action;
 
 /**
  * Builds three flat blob records for the "AI Chatbots Content Requests" subcategory:

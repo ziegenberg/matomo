@@ -9,15 +9,15 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\AIAgents\tests\Fixtures;
+namespace Matomo\Plugins\AIAgents\tests\Fixtures;
 
 use MatomoTracker;
-use Piwik\Config;
-use Piwik\Date;
-use Piwik\Plugins\AIAgents\API;
-use Piwik\Plugins\AIAgents\Providers\ChatGPT as ChatGPTAgent;
-use Piwik\Plugins\SegmentEditor\API as SegmentEditorAPI;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Config;
+use Matomo\Date;
+use Matomo\Plugins\AIAgents\API;
+use Matomo\Plugins\AIAgents\Providers\ChatGPT as ChatGPTAgent;
+use Matomo\Plugins\SegmentEditor\API as SegmentEditorAPI;
+use Matomo\Tests\Framework\Fixture;
 
 class AIAgents extends Fixture
 {

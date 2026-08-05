@@ -7,36 +7,36 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\tests\Integration;
+namespace Matomo\Plugins\UsersManager\tests\Integration;
 
-use Piwik\Access\Capability;
-use Piwik\Access\Role\Admin;
-use Piwik\Access\Role\View;
-use Piwik\Access\Role\Write;
-use Piwik\API\Request;
-use Piwik\Auth\Password;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\DbHelper;
-use Piwik\EventDispatcher;
-use Piwik\Mail;
-use Piwik\NoAccessException;
-use Piwik\Option;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\Emails\UserCreatedEmail;
-use Piwik\Plugins\UsersManager\Emails\UserInviteEmail;
-use Piwik\Plugins\UsersManager\SystemSettings;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Settings\Storage\UserScopedSettingsAccessManager;
-use Piwik\Plugins\UsersManager\API;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Plugins\UsersManager\UsersManager;
-use Piwik\Plugins\UsersManager\UserUpdater;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Access\Capability;
+use Matomo\Access\Role\Admin;
+use Matomo\Access\Role\View;
+use Matomo\Access\Role\Write;
+use Matomo\API\Request;
+use Matomo\Auth\Password;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\DbHelper;
+use Matomo\EventDispatcher;
+use Matomo\Mail;
+use Matomo\NoAccessException;
+use Matomo\Option;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\Emails\UserCreatedEmail;
+use Matomo\Plugins\UsersManager\Emails\UserInviteEmail;
+use Matomo\Plugins\UsersManager\SystemSettings;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Settings\Storage\UserScopedSettingsAccessManager;
+use Matomo\Plugins\UsersManager\API;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Plugins\UsersManager\UsersManager;
+use Matomo\Plugins\UsersManager\UserUpdater;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 class TestCap1 extends Capability
 {
@@ -185,7 +185,7 @@ class APITest extends IntegrationTestCase
     {
         $eventTriggered = false;
         $self           = $this;
-        Piwik::addAction('UsersManager.removeSiteAccess', function ($login, $idSites) use (&$eventTriggered, $self) {
+        Matomo::addAction('UsersManager.removeSiteAccess', function ($login, $idSites) use (&$eventTriggered, $self) {
             $eventTriggered = true;
             self::assertEquals($self->login, $login);
             self::assertEquals([1, 2], $idSites);
@@ -199,7 +199,7 @@ class APITest extends IntegrationTestCase
     public function testSetUserAccessShouldNotTriggerRemoveSiteAccessEventIfAccessIsAdded()
     {
         $eventTriggered = false;
-        Piwik::addAction('UsersManager.removeSiteAccess', function () use (&$eventTriggered) {
+        Matomo::addAction('UsersManager.removeSiteAccess', function () use (&$eventTriggered) {
             $eventTriggered = true;
         });
 
@@ -429,7 +429,7 @@ class APITest extends IntegrationTestCase
     public function testUpdateUser()
     {
         $capturedMails = [];
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
             $capturedMails[] = $mail;
         });
 
@@ -474,7 +474,7 @@ class APITest extends IntegrationTestCase
     {
         Config::getInstance()->General['enable_update_users_email'] = 0;
         $capturedMails                                              = [];
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
             $capturedMails[] = $mail;
         });
 
@@ -493,7 +493,7 @@ class APITest extends IntegrationTestCase
     public function testUpdateUserDoesNotSendEmailIfNoChangeAndDoesNotRequirePassword()
     {
         $capturedMails = [];
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
             $capturedMails[] = $mail;
         });
 
@@ -1669,7 +1669,7 @@ class APITest extends IntegrationTestCase
         $eventWasFired = false;
         $capturedMails = [];
 
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
             $capturedMails[] = $mail;
         });
 
@@ -1705,7 +1705,7 @@ class APITest extends IntegrationTestCase
         $eventWasFired = false;
         $capturedMails = [];
 
-        Piwik::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
+        Matomo::addAction('Mail.send', function (Mail $mail) use (&$capturedMails) {
             $capturedMails[] = $mail;
         });
 
@@ -1992,19 +1992,19 @@ class APITest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return [
-            'Piwik\Access'                       => new FakeAccess(),
-            'usersmanager.user_preference_names' => \Piwik\DI::add(
+            'Matomo\Access'                       => new FakeAccess(),
+            'usersmanager.user_preference_names' => \Matomo\DI::add(
                 [
                     'randomDoesNotExist',
                     'RandomNOTREQUESTED',
                     'preferenceName',
                 ]
             ),
-            'observers.global'                   => \Piwik\DI::add(
+            'observers.global'                   => \Matomo\DI::add(
                 [
                     [
                         'Access.Capability.addCapabilities',
-                        \Piwik\DI::value(function (&$capabilities) {
+                        \Matomo\DI::value(function (&$capabilities) {
                             $capabilities[] = new TestCap1();
                             $capabilities[] = new TestCap2();
                             $capabilities[] = new TestCap3();

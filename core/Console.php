@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
 use Monolog\Handler\FingersCrossedHandler;
-use Piwik\Application\Environment;
-use Piwik\Config\ConfigNotFoundException;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugins\Monolog\Handler\FailureLogMessageDetector;
-use Piwik\Log\LoggerInterface;
+use Matomo\Application\Environment;
+use Matomo\Config\ConfigNotFoundException;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugins\Monolog\Handler\FailureLogMessageDetector;
+use Matomo\Log\LoggerInterface;
 use Symfony\Bridge\Monolog\Handler\ConsoleHandler;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
@@ -140,7 +140,7 @@ class Console extends Application
         /**
          * @ignore
          */
-        Piwik::postEvent('Console.doRun', [&$exitCode, $input, $output]);
+        Matomo::postEvent('Console.doRun', [&$exitCode, $input, $output]);
 
         if ($exitCode === null) {
             $self = $this;
@@ -171,8 +171,8 @@ class Console extends Application
     {
         if (!class_exists($command)) {
             Log::warning(sprintf('Cannot add command %s, class does not exist', $command));
-        } elseif (!is_subclass_of($command, 'Piwik\Plugin\ConsoleCommand')) {
-            Log::warning(sprintf('Cannot add command %s, class does not extend Piwik\Plugin\ConsoleCommand', $command));
+        } elseif (!is_subclass_of($command, 'Matomo\Plugin\ConsoleCommand')) {
+            Log::warning(sprintf('Cannot add command %s, class does not extend Matomo\Plugin\ConsoleCommand', $command));
         } else {
             $commandInstance = new $command();
 
@@ -191,7 +191,7 @@ class Console extends Application
     private function getAvailableCommands()
     {
         $commands = $this->getDefaultPiwikCommands();
-        $detected = PluginManager::getInstance()->findMultipleComponents('Commands', 'Piwik\\Plugin\\ConsoleCommand');
+        $detected = PluginManager::getInstance()->findMultipleComponents('Commands', 'Matomo\Plugin\ConsoleCommand');
 
         $commands = array_merge($commands, $detected);
 
@@ -203,7 +203,7 @@ class Console extends Application
          *
          *     public function filterConsoleCommands(&$commands)
          *     {
-         *         $key = array_search('Piwik\Plugins\MyPlugin\Commands\MyCommand', $commands);
+         *         $key = array_search('Matomo\Plugins\MyPlugin\Commands\MyCommand', $commands);
          *         if (false !== $key) {
          *             unset($commands[$key]);
          *         }
@@ -211,7 +211,7 @@ class Console extends Application
          *
          * @param array &$commands An array containing a list of command class names.
          */
-        Piwik::postEvent('Console.filterCommands', array(&$commands));
+        Matomo::postEvent('Console.filterCommands', array(&$commands));
 
         $commands = array_values(array_unique($commands));
 
@@ -293,7 +293,7 @@ class Console extends Application
     private function getDefaultPiwikCommands()
     {
         $commands = array(
-            'Piwik\CliMulti\RequestCommand',
+            'Matomo\CliMulti\RequestCommand',
         );
 
         $commandsFromPluginsMarkedInConfig = $this->getCommandsFromPluginsMarkedInConfig();
@@ -310,16 +310,16 @@ class Console extends Application
         $commands = array();
         foreach ($plugins as $plugin) {
             $instance = new Plugin($plugin);
-            $commands = array_merge($commands, $instance->findMultipleComponents('Commands', 'Piwik\\Plugin\\ConsoleCommand'));
+            $commands = array_merge($commands, $instance->findMultipleComponents('Commands', 'Matomo\Plugin\ConsoleCommand'));
         }
         return $commands;
     }
 
     private function initAuth()
     {
-        Piwik::postEvent('Request.initAuthenticationObject');
+        Matomo::postEvent('Request.initAuthenticationObject');
         try {
-            StaticContainer::get('Piwik\Auth');
+            StaticContainer::get('Matomo\Auth');
         } catch (Exception $e) {
             $message = "Authentication object cannot be found in the container. Maybe the Login plugin is not activated?
                         You can activate the plugin by adding:

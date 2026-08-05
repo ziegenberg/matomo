@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Diagnostics\Diagnostic;
+namespace Matomo\Plugins\Diagnostics\Diagnostic;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Http;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\Translation\Translator;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Http;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\Translation\Translator;
 
 abstract class AbstractPrivateDirectories implements Diagnostic
 {
@@ -143,7 +143,7 @@ abstract class AbstractPrivateDirectories implements Diagnostic
             $result->addItem(
                 new DiagnosticResultItem(
                     DiagnosticResult::STATUS_WARNING,
-                    Piwik::translate(
+                    Matomo::translate(
                         'Diagnostics_PrivateDirectoryCantCheckUrl',
                         [Common::sanitizeInputValue($testUrl), Common::sanitizeInputValue($error)]
                     )

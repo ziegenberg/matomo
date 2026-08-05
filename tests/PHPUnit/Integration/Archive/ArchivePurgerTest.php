@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Archive;
+namespace Matomo\Tests\Integration\Archive;
 
-use Piwik\Archive\ArchivePurger;
-use Piwik\Config;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Period\Month;
-use Piwik\Tests\Fixtures\RawArchiveDataWithTempAndInvalidated;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Segment;
+use Matomo\Archive\ArchivePurger;
+use Matomo\Config;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Period\Month;
+use Matomo\Tests\Fixtures\RawArchiveDataWithTempAndInvalidated;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Segment;
 
 /**
  * @group ArchivePurgerTest

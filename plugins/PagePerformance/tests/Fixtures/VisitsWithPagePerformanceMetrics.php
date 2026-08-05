@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\tests\Fixtures;
+namespace Matomo\Plugins\PagePerformance\tests\Fixtures;
 
-use Piwik\Date;
-use Piwik\Plugins\SegmentEditor\API as APISegmentEditor;
-use Piwik\Tests\Framework\Fixture;
+use Matomo\Date;
+use Matomo\Plugins\SegmentEditor\API as APISegmentEditor;
+use Matomo\Tests\Framework\Fixture;
 
 /**
  * Adds two sites and tracks several visits all in the past.

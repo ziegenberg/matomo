@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\SitesManager\API;
-use Piwik\Policy\CnilPolicy;
-use Piwik\Policy\PolicyManager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeAccess;
-use Piwik\Tests\Framework\Mock\Tracker\RequestAuthenticated;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit;
-use Piwik\Tracker\VisitExcluded;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\SitesManager\API;
+use Matomo\Policy\CnilPolicy;
+use Matomo\Policy\PolicyManager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeAccess;
+use Matomo\Tests\Framework\Mock\Tracker\RequestAuthenticated;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit;
+use Matomo\Tracker\VisitExcluded;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * @group Core
@@ -499,7 +499,7 @@ class VisitTest extends IntegrationTestCase
 
         $visit->handle();
 
-        $archive = StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+        $archive = StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
         $remembered = $archive->getRememberedArchivedReportsThatShouldBeInvalidated();
 
         $this->assertSameReportsInvalidated($expectedRemeberedArchivedReports, $remembered);
@@ -585,7 +585,7 @@ class VisitTest extends IntegrationTestCase
     public function provideContainerConfig()
     {
         return array(
-            'Piwik\Access' => new FakeAccess(),
+            'Matomo\Access' => new FakeAccess(),
         );
     }
 }

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\UsersManager\Emails;
+namespace Matomo\Plugins\UsersManager\Emails;
 
-use Piwik\Config;
-use Piwik\Mail;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\TokenNotifications\TokenNotification;
-use Piwik\SettingsPiwik;
-use Piwik\Url;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\Mail;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\TokenNotifications\TokenNotification;
+use Matomo\SettingsPiwik;
+use Matomo\Url;
+use Matomo\View;
 
 class AuthTokenRotationNotificationEmail extends Mail
 {
@@ -50,7 +50,7 @@ class AuthTokenRotationNotificationEmail extends Mail
     {
         $rotationPeriodDays = Config::getInstance()->General['auth_token_rotation_notification_days'];
 
-        return $rotationPeriodDays . ' ' . Piwik::translate('Intl_PeriodDay' . ($rotationPeriodDays === 1 ? '' : 's'));
+        return $rotationPeriodDays . ' ' . Matomo::translate('Intl_PeriodDay' . ($rotationPeriodDays === 1 ? '' : 's'));
     }
 
     protected function getManageAuthTokensLink(): string
@@ -68,7 +68,7 @@ class AuthTokenRotationNotificationEmail extends Mail
 
     protected function getDefaultSubject(): string
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'UsersManager_AuthTokenNotificationEmailSubjectAll',
             [
                 $this->getInstanceUrl(),

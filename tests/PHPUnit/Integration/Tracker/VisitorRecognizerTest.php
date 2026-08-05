@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Tracker;
+namespace Matomo\Tests\Integration\Tracker;
 
 use Matomo\Network\IP;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\EventDispatcher;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tracker\Model;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visit\VisitProperties;
-use Piwik\Tracker\VisitorRecognizer;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\EventDispatcher;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tracker\Model;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visit\VisitProperties;
+use Matomo\Tracker\VisitorRecognizer;
 
 /**
  * @group Core

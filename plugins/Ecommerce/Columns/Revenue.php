@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Columns;
+namespace Matomo\Plugins\Ecommerce\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Columns\Discriminator;
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\Segment;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Columns\Discriminator;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\Segment;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class Revenue extends BaseConversion
 {
@@ -40,7 +40,7 @@ class Revenue extends BaseConversion
         //new Segment revenue on order
         $segment = new Segment();
         $segment->setCategory($this->category);
-        $segment->setName(Piwik::translate('Ecommerce_OrderRevenue'));
+        $segment->setName(Matomo::translate('Ecommerce_OrderRevenue'));
         $segment->setSegment('revenueOrder');
         $segment->setSqlSegment('log_conversion.idvisit');
         $segment->setSqlFilter(function ($valueToMatch, $sqlField, $matchType) {
@@ -51,7 +51,7 @@ class Revenue extends BaseConversion
         //new Segment revenue left in cart
         $segment = new Segment();
         $segment->setCategory($this->category);
-        $segment->setName(Piwik::translate('Ecommerce_RevenueLeftInCart'));
+        $segment->setName(Matomo::translate('Ecommerce_RevenueLeftInCart'));
         $segment->setSegment('revenueAbandonedCart');
         $segment->setSqlSegment('log_conversion.idvisit');
         $segment->setSqlFilter(function ($valueToMatch, $sqlField, $matchType) {

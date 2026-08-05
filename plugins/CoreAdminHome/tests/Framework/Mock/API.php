@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\tests\Framework\Mock;
+namespace Matomo\Plugins\CoreAdminHome\tests\Framework\Mock;
 
-class API extends \Piwik\Plugins\CoreAdminHome\API
+class API extends \Matomo\Plugins\CoreAdminHome\API
 {
     private $invalidatedReports = array();
 

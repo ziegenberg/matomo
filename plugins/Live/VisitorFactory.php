@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Live;
+namespace Matomo\Plugins\Live;
 
 use Exception;
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class VisitorFactory
 {
@@ -20,7 +20,7 @@ class VisitorFactory
      *
      * @param array $visitorRawData
      * @throws \Exception
-     * @return \Piwik\Plugins\Live\VisitorInterface
+     * @return \Matomo\Plugins\Live\VisitorInterface
      * @ignore
      */
     public function create(array $visitorRawData = array())
@@ -30,14 +30,14 @@ class VisitorFactory
         /**
          * Triggered while visit is filtering in live plugin. Subscribers to this
          * event can force the use of a custom visitor object that extends from
-         * {@link \Piwik\Plugins\Live\VisitorInterface}.
+         * {@link \Matomo\Plugins\Live\VisitorInterface}.
          *
-         * @param \Piwik\Plugins\Live\VisitorInterface &$visitor Initialized to null, but can be set to
+         * @param \Matomo\Plugins\Live\VisitorInterface &$visitor Initialized to null, but can be set to
          *                                              a new visitor object. If it isn't modified
          *                                              Piwik uses the default class.
          * @param array $visitorRawData Raw data using in Visitor object constructor.
          */
-        Piwik::postEvent('Live.makeNewVisitorObject', array(&$visitor, $visitorRawData));
+        Matomo::postEvent('Live.makeNewVisitorObject', array(&$visitor, $visitorRawData));
 
         if (is_null($visitor)) {
             $visitor = new Visitor($visitorRawData);

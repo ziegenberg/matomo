@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions;
+namespace Matomo\Plugins\CustomDimensions;
 
-use Piwik\Common;
-use Piwik\Piwik;
+use Matomo\Common;
+use Matomo\Matomo;
 
-class Controller extends \Piwik\Plugin\ControllerAdmin
+class Controller extends \Matomo\Plugin\ControllerAdmin
 {
     public function manage()
     {
         $idSite = Common::getRequestVar('idSite');
 
-        Piwik::checkUserHasWriteAccess($idSite);
+        Matomo::checkUserHasWriteAccess($idSite);
 
         return $this->renderTemplate('manage', array(
             'idSite' => $this->idSite,
-            'title' => Piwik::translate('CustomDimensions_CustomDimensions')));
+            'title' => Matomo::translate('CustomDimensions_CustomDimensions')));
     }
 }

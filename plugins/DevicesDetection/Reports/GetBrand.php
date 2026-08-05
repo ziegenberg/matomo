@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\DevicesDetection\Reports;
+namespace Matomo\Plugins\DevicesDetection\Reports;
 
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\DevicesDetection\Columns\DeviceBrand;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\DevicesDetection\Columns\DeviceBrand;
 
 class GetBrand extends Base
 {
@@ -19,8 +19,8 @@ class GetBrand extends Base
     {
         parent::init();
         $this->dimension     = new DeviceBrand();
-        $this->name          = Piwik::translate('DevicesDetection_DeviceBrand');
-        $this->documentation = Piwik::translate('DevicesDetection_DeviceBrandReportDocumentation');
+        $this->name          = Matomo::translate('DevicesDetection_DeviceBrand');
+        $this->documentation = Matomo::translate('DevicesDetection_DeviceBrandReportDocumentation');
         $this->order = 4;
         $this->hasGoalMetrics = true;
         $this->subcategoryId = 'DevicesDetection_Devices';
@@ -30,6 +30,6 @@ class GetBrand extends Base
     {
         $view->config->show_search = true;
         $view->config->show_exclude_low_population = false;
-        $view->config->addTranslation('label', Piwik::translate("DevicesDetection_dataTableLabelBrands"));
+        $view->config->addTranslation('label', Matomo::translate("DevicesDetection_dataTableLabelBrands"));
     }
 }

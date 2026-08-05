@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\Mock;
+namespace Matomo\Tests\Framework\Mock;
 
-use Piwik\Plugins\UserCountry\LocationProvider as CountryLocationProvider;
+use Matomo\Plugins\UserCountry\LocationProvider as CountryLocationProvider;
 
 /**
  * @since 2.8.0

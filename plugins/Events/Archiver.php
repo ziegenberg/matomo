@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Events;
+namespace Matomo\Plugins\Events;
 
 /**
  * Processing reports for Events
@@ -53,7 +53,7 @@ namespace Piwik\Plugins\Events;
     - For a given Name, Category is often constant
 
  */
-class Archiver extends \Piwik\Plugin\Archiver
+class Archiver extends \Matomo\Plugin\Archiver
 {
     public const EVENTS_CATEGORY_ACTION_RECORD_NAME = 'Events_category_action';
     public const EVENTS_CATEGORY_NAME_RECORD_NAME = 'Events_category_name';

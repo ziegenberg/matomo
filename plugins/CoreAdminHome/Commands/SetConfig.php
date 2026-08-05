@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
-use Piwik\Config;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\CoreAdminHome\Commands\SetConfig\ConfigSettingManipulation;
+use Matomo\Config;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\CoreAdminHome\Commands\SetConfig\ConfigSettingManipulation;
 
 class SetConfig extends ConsoleCommand
 {

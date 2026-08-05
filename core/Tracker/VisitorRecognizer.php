@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Common;
-use Piwik\EventDispatcher;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\EventDispatcher;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Tracker\Visit\VisitProperties;
 
 /**
  * Tracker service that finds the last known visit for the visitor being tracked.

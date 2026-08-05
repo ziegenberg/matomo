@@ -10,22 +10,22 @@ define('PIWIK_INCLUDE_PATH', PIWIK_DOCUMENT_ROOT);
 
 require_once PIWIK_INCLUDE_PATH . '/core/bootstrap.php';
 
-$environment = new \Piwik\Application\Environment(null);
+$environment = new \Matomo\Application\Environment(null);
 $environment->init();
-$dbConfig = Piwik\Config::getInstance()->database_tests;
+$dbConfig = Matomo\Config::getInstance()->database_tests;
 $dbConfig['dbname'] = 'tracker_tests';
 
 try {
-	Piwik\Db::createDatabaseObject($dbConfig);
+	Matomo\Db::createDatabaseObject($dbConfig);
 } catch (Exception $e) {
 	$dbInfosConnectOnly = $dbConfig;
 	$dbInfosConnectOnly['dbname'] = null;
-	Piwik\Db::createDatabaseObject($dbInfosConnectOnly);
-	Piwik\DbHelper::createDatabase($dbConfig['dbname']);
-	Piwik\Db::createDatabaseObject($dbConfig);
+	Matomo\Db::createDatabaseObject($dbInfosConnectOnly);
+	Matomo\DbHelper::createDatabase($dbConfig['dbname']);
+	Matomo\Db::createDatabaseObject($dbConfig);
 }
 
-$db = Piwik\Db::get();
+$db = Matomo\Db::get();
 
 function sendWebBug() {
 	$trans_gif_64 = "R0lGODlhAQABAIAAAAAAAAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==";
@@ -38,7 +38,7 @@ function isPost()
     return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
 
-if (!Piwik\Db::hasDatabaseObject()) {
+if (!Matomo\Db::hasDatabaseObject()) {
 	sendWebBug();
 	exit;
 }

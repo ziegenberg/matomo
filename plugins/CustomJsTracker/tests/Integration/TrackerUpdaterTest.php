@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\tests\Integration;
+namespace Matomo\Plugins\CustomJsTracker\tests\Integration;
 
-use Piwik\Plugins\CustomJsTracker\File;
-use Piwik\Plugins\CustomJsTracker\tests\Framework\Mock\PluginTrackerFilesMock;
-use Piwik\Plugins\CustomJsTracker\TrackerUpdater;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\CustomJsTracker\File;
+use Matomo\Plugins\CustomJsTracker\tests\Framework\Mock\PluginTrackerFilesMock;
+use Matomo\Plugins\CustomJsTracker\TrackerUpdater;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group CustomJsTracker
@@ -115,7 +115,7 @@ class TrackerUpdaterTest extends IntegrationTestCase
 
     public function testCheckWillSucceedShouldNotThrowExceptionIfTargetIsNotWritable()
     {
-        $this->expectException(\Piwik\Plugins\CustomJsTracker\Exception\AccessDeniedException::class);
+        $this->expectException(\Matomo\Plugins\CustomJsTracker\Exception\AccessDeniedException::class);
         $this->expectExceptionMessage('not writable');
 
         $updater = $this->makeUpdater(null, $this->dir . 'not-writable/MyNotExisIngFilessss.js');
@@ -236,8 +236,8 @@ var myArray = [];
     public function provideContainerConfig()
     {
         return [
-            'observers.global' => \Piwik\DI::add([
-                ['CustomJsTracker.trackerJsChanged', \Piwik\DI::value(function ($path) {
+            'observers.global' => \Matomo\DI::add([
+                ['CustomJsTracker.trackerJsChanged', \Matomo\DI::value(function ($path) {
                     $this->trackerJsChangedEventPath = $path;
                 })],
             ]),

@@ -9,13 +9,13 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\BotTracking\Reports;
+namespace Matomo\Plugins\BotTracking\Reports;
 
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\BotTracking\Columns\AIChatbotName;
-use Piwik\Plugins\BotTracking\Columns\Metrics\Requests;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Plugins\BotTracking\Metrics;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\BotTracking\Columns\AIChatbotName;
+use Matomo\Plugins\BotTracking\Columns\Metrics\Requests;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Plugins\BotTracking\Metrics;
 
 abstract class AbstractAIChatbotsRealTimeChatbotsReport extends AbstractAIChatbotsRealTimeReport
 {

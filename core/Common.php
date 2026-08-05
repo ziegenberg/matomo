@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\CliMulti\Process;
-use Piwik\Config\DatabaseConfig;
-use Piwik\Config\GeneralConfig;
-use Piwik\Tracker\Cache as TrackerCache;
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\LanguageDataProvider;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
-use Piwik\Log\LoggerInterface;
-use Piwik\Tracker\TrackerConfig;
+use Matomo\CliMulti\Process;
+use Matomo\Config\DatabaseConfig;
+use Matomo\Config\GeneralConfig;
+use Matomo\Tracker\Cache as TrackerCache;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\LanguageDataProvider;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Log\LoggerInterface;
+use Matomo\Tracker\TrackerConfig;
 
 /**
  * Contains helper methods used by both Piwik Core and the Piwik Tracking engine.
@@ -880,7 +880,7 @@ class Common
         }
 
         /** @var RegionDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         $validCountries = $dataProvider->getCountryList();
 
@@ -898,7 +898,7 @@ class Common
     public static function extractCountryCodeFromBrowserLanguage($browserLanguage, $validCountries, $enableLanguageToCountryGuess)
     {
         /** @var LanguageDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\LanguageDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\LanguageDataProvider');
 
         $langToCountry = $dataProvider->getLanguageToCountryList();
 
@@ -1000,7 +1000,7 @@ class Common
     public static function getContinent($country)
     {
         /** @var RegionDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         $countryList = $dataProvider->getCountryList();
 
@@ -1262,7 +1262,7 @@ class Common
     protected static function checkValidLanguagesIsSet($validLanguages)
     {
         /** @var LanguageDataProvider $dataProvider */
-        $dataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\LanguageDataProvider');
+        $dataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\LanguageDataProvider');
 
         if (empty($validLanguages)) {
             $validLanguages = array_keys($dataProvider->getLanguageList());

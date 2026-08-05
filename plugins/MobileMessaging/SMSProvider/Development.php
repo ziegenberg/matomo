@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\MobileMessaging\SMSProvider;
+namespace Matomo\Plugins\MobileMessaging\SMSProvider;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugins\MobileMessaging\SMSProvider;
-use Piwik\Development as PiwikDevelopment;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugins\MobileMessaging\SMSProvider;
+use Matomo\Development as PiwikDevelopment;
 
 /**
  * Used for development only

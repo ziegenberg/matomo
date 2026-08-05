@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\DataTable\Filter;
+namespace Matomo\Plugins\Referrers\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Plugins\Referrers\SearchEngine;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Plugins\Referrers\SearchEngine;
 
 class KeywordsFromSearchEngineId extends BaseFilter
 {
@@ -62,6 +62,6 @@ class KeywordsFromSearchEngineId extends BaseFilter
             });
         }
 
-        $table->queueFilter('Piwik\Plugins\Referrers\DataTable\Filter\KeywordNotDefined');
+        $table->queueFilter('Matomo\Plugins\Referrers\DataTable\Filter\KeywordNotDefined');
     }
 }

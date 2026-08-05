@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Columns;
+namespace Matomo\Plugins\Actions\Columns;
 
-use Piwik\Columns\DimensionSegmentFactory;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Segment;
-use Piwik\Plugins\Actions\Actions\ActionSiteSearch;
-use Piwik\Segment\SegmentsList;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\Request;
-use Piwik\Tracker\Visitor;
+use Matomo\Columns\DimensionSegmentFactory;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Segment;
+use Matomo\Plugins\Actions\Actions\ActionSiteSearch;
+use Matomo\Segment\SegmentsList;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\Request;
+use Matomo\Tracker\Visitor;
 
 class SearchCategory extends ActionDimension
 {

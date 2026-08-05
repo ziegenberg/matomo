@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomJsTracker\tests\Framework\Mock;
+namespace Matomo\Plugins\CustomJsTracker\tests\Framework\Mock;
 
-use Piwik\Plugins\CustomJsTracker\File;
-use Piwik\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles;
+use Matomo\Plugins\CustomJsTracker\File;
+use Matomo\Plugins\CustomJsTracker\TrackingCode\PluginTrackerFiles;
 
 class PluginTrackerFilesMock extends PluginTrackerFiles
 {

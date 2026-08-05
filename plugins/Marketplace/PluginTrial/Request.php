@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\PluginTrial;
+namespace Matomo\Plugins\Marketplace\PluginTrial;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Marketplace\Emails\RequestTrialNotificationEmail;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Marketplace\Emails\RequestTrialNotificationEmail;
 
 class Request
 {
@@ -71,7 +71,7 @@ class Request
      */
     private function sendEmailToSuperUsers(): void
     {
-        $superUsers = Piwik::getAllSuperUserAccessEmailAddresses();
+        $superUsers = Matomo::getAllSuperUserAccessEmailAddresses();
 
         foreach ($superUsers as $login => $email) {
             $email = StaticContainer::getContainer()->make(

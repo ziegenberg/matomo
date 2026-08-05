@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ExampleSettingsPlugin;
+namespace Matomo\Plugins\ExampleSettingsPlugin;
 
-use Piwik\Plugins\MobileAppMeasurable\Type as MobileAppType;
-use Piwik\Settings\Setting;
-use Piwik\Settings\FieldConfig;
+use Matomo\Plugins\MobileAppMeasurable\Type as MobileAppType;
+use Matomo\Settings\Setting;
+use Matomo\Settings\FieldConfig;
 
 /**
  * Defines Settings for ExampleSettingsPlugin.
  *
  * Usage like this:
- * // require Piwik\Plugin\SettingsProvider via Dependency Injection eg in constructor of your class
+ * // require Matomo\Plugin\SettingsProvider via Dependency Injection eg in constructor of your class
  * $settings = $settingsProvider->getMeasurableSettings('ExampleSettingsPlugin', $idSite);
  * $settings->appId->getValue();
  * $settings->contactEmails->getValue();
  */
-class MeasurableSettings extends \Piwik\Settings\Measurable\MeasurableSettings
+class MeasurableSettings extends \Matomo\Settings\Measurable\MeasurableSettings
 {
     /** @var Setting|null */
     public $appId;

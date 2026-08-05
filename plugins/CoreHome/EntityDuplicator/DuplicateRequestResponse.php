@@ -9,9 +9,9 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreHome\EntityDuplicator;
+namespace Matomo\Plugins\CoreHome\EntityDuplicator;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * The object for building a consistent response to the duplication of an entity.
@@ -130,7 +130,7 @@ class DuplicateRequestResponse
 
         // If the flag is set to post the event and the request was successful, post the event for the duplication
         if ($this->success && $this->eventDataToPost !== null) {
-            Piwik::postEvent('EntityDuplicator.DuplicationSuccessful', $this->eventDataToPost);
+            Matomo::postEvent('EntityDuplicator.DuplicationSuccessful', $this->eventDataToPost);
         }
 
         return $responseArray;

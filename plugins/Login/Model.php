@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Plugins\Login\Security\BruteForceDetection;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Plugins\Login\Security\BruteForceDetection;
 
 class Model
 {

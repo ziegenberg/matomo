@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\VisitTime\Reports;
+namespace Matomo\Plugins\VisitTime\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\CoreVisualizations\Visualizations\Graph;
-use Piwik\Plugins\VisitTime\Columns\DayOfTheWeek;
-use Piwik\Period;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\CoreVisualizations\Visualizations\Graph;
+use Matomo\Plugins\VisitTime\Columns\DayOfTheWeek;
+use Matomo\Period;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Site;
 
 class GetByDayOfWeek extends Base
 {
@@ -26,8 +26,8 @@ class GetByDayOfWeek extends Base
     {
         parent::init();
         $this->dimension     = new DayOfTheWeek();
-        $this->name          = Piwik::translate('VisitTime_VisitsByDayOfWeek');
-        $this->documentation = Piwik::translate('VisitTime_WidgetByDayOfWeekDocumentation');
+        $this->name          = Matomo::translate('VisitTime_VisitsByDayOfWeek');
+        $this->documentation = Matomo::translate('VisitTime_WidgetByDayOfWeekDocumentation');
         $this->constantRowsCount = true;
         $this->order = 25;
         $this->subcategoryId = 'VisitTime_SubmenuTimes';
@@ -40,7 +40,7 @@ class GetByDayOfWeek extends Base
         $view->requestConfig->filter_limit = 7;
 
         $view->config->enable_sort = false;
-        $view->config->show_footer_message = Piwik::translate('General_ReportGeneratedFrom', $this->getDateRangeForFooterMessage());
+        $view->config->show_footer_message = Matomo::translate('General_ReportGeneratedFrom', $this->getDateRangeForFooterMessage());
 
         if (property_exists($view->config, 'disable_row_evolution')) {
             $view->config->disable_row_evolution = true;

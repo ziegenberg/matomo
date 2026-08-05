@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Referrers\DataTable\Filter;
+namespace Matomo\Plugins\Referrers\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
 
 class UrlsForSocial extends BaseFilter
 {
@@ -23,7 +23,7 @@ class UrlsForSocial extends BaseFilter
         $table->filter('ColumnCallbackAddMetadata', array('label', 'url'));
 
         // prettify the DataTable
-        $table->filter('ColumnCallbackReplace', array('label', 'Piwik\Plugins\Referrers\removeUrlProtocol'));
+        $table->filter('ColumnCallbackReplace', array('label', 'Matomo\Plugins\Referrers\removeUrlProtocol'));
         $table->queueFilter('ReplaceColumnNames');
     }
 }

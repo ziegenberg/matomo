@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreUpdater;
+namespace Matomo\Plugins\CoreUpdater;
 
 use Exception;
-use Piwik\API\ResponseBuilder;
-use Piwik\Common;
-use Piwik\Filesystem;
-use Piwik\FrontController;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\UpdateCheck;
-use Piwik\Updater as PiwikCoreUpdater;
-use Piwik\Version;
+use Matomo\API\ResponseBuilder;
+use Matomo\Common;
+use Matomo\Filesystem;
+use Matomo\FrontController;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\UpdateCheck;
+use Matomo\Updater as PiwikCoreUpdater;
+use Matomo\Version;
 
-class CoreUpdater extends \Piwik\Plugin
+class CoreUpdater extends \Matomo\Plugin
 {
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -39,8 +39,8 @@ class CoreUpdater extends \Piwik\Plugin
             return;
         }
 
-        $module = Piwik::getModule();
-        $action = Piwik::getAction();
+        $module = Matomo::getModule();
+        $action = Matomo::getAction();
 
         if (
             $module == 'CoreUpdater'
@@ -74,7 +74,7 @@ class CoreUpdater extends \Piwik\Plugin
                 Common::sendResponseCode(503);
                 exit;
             } else {
-                Piwik::redirectToModule('CoreUpdater');
+                Matomo::redirectToModule('CoreUpdater');
             }
         }
     }

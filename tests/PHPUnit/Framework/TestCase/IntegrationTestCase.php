@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Framework\TestCase;
+namespace Matomo\Tests\Framework\TestCase;
 
-use Piwik\Access;
-use Piwik\Cache as PiwikCache;
-use Piwik\Db;
-use Piwik\EventDispatcher;
-use Piwik\Option;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Access;
+use Matomo\Cache as PiwikCache;
+use Matomo\Db;
+use Matomo\EventDispatcher;
+use Matomo\Option;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 
 /**
  * Tests extending IntegrationTestCase are much slower to run: the setUp will

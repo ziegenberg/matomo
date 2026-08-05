@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\API\Proxy;
-use Piwik\API\Request;
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\Sort;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\ViewDataTable\Factory as ViewDataTableFactory;
+use Matomo\API\Proxy;
+use Matomo\API\Request;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\Sort;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\ViewDataTable\Factory as ViewDataTableFactory;
 use Exception;
-use Piwik\Widget\WidgetsList;
-use Piwik\Report\ReportWidgetFactory;
+use Matomo\Widget\WidgetsList;
+use Matomo\Report\ReportWidgetFactory;
 
 /**
  * Defines a new report. This class contains all information a report defines except the corresponding API method which
@@ -166,7 +166,7 @@ class Report
     /**
      * An instance of a dimension if the report has one. You can create a new dimension using the Piwik console CLI tool
      * if needed.
-     * @var \Piwik\Columns\Dimension
+     * @var \Matomo\Columns\Dimension
      */
     protected $dimension;
 
@@ -279,7 +279,7 @@ class Report
     public function checkIsEnabled()
     {
         if (!$this->isEnabled()) {
-            throw new Exception(Piwik::translate('General_ExceptionReportNotEnabled'));
+            throw new Exception(Matomo::translate('General_ExceptionReportNotEnabled'));
         }
     }
 
@@ -830,7 +830,7 @@ class Report
     }
 
     /**
-     * @return \Piwik\Columns\Dimension|null
+     * @return \Matomo\Columns\Dimension|null
      * @ignore
      */
     public function getDimension()
@@ -1062,7 +1062,7 @@ class Report
      * @return Metric[]
      * @api
      */
-    public static function getMetricsForTable(DataTable $dataTable, ?Report $report = null, $baseType = 'Piwik\\Plugin\\Metric')
+    public static function getMetricsForTable(DataTable $dataTable, ?Report $report = null, $baseType = 'Matomo\Plugin\Metric')
     {
         $metrics = $dataTable->getMetadata(DataTable::EXTRA_PROCESSED_METRICS_METADATA_NAME) ?: array();
 
@@ -1095,7 +1095,7 @@ class Report
     public static function getProcessedMetricsForTable(DataTable $dataTable, ?Report $report = null)
     {
         /** @var ProcessedMetric[] $metrics */
-        $metrics = self::getMetricsForTable($dataTable, $report, 'Piwik\\Plugin\\ProcessedMetric');
+        $metrics = self::getMetricsForTable($dataTable, $report, 'Matomo\Plugin\ProcessedMetric');
 
         // sort metrics w/ dependent metrics calculated before the metrics that depend on them
         $result = [];

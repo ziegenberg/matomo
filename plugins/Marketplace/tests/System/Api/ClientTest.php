@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\System\Api;
+namespace Matomo\Plugins\Marketplace\tests\System\Api;
 
-use Piwik\Cache;
-use Piwik\Http;
-use Piwik\Plugin;
-use Piwik\Plugins\Marketplace\Api\Client;
-use Piwik\Plugins\Marketplace\Api\Service;
-use Piwik\Plugins\Marketplace\Environment;
-use Piwik\Plugins\Marketplace\Input\PurchaseType;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Version;
-use Piwik\Plugins\Marketplace\tests\Framework\Mock\Service as TestService;
-use Piwik\Log\NullLogger;
+use Matomo\Cache;
+use Matomo\Http;
+use Matomo\Plugin;
+use Matomo\Plugins\Marketplace\Api\Client;
+use Matomo\Plugins\Marketplace\Api\Service;
+use Matomo\Plugins\Marketplace\Environment;
+use Matomo\Plugins\Marketplace\Input\PurchaseType;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Version;
+use Matomo\Plugins\Marketplace\tests\Framework\Mock\Service as TestService;
+use Matomo\Log\NullLogger;
 
 /**
  * @group Plugins
@@ -115,7 +115,7 @@ class ClientTest extends SystemTestCase
 
     public function testGetPluginInfoShouldThrowExceptionIfPluginDoesNotExistOnMarketplace()
     {
-        $this->expectException(\Piwik\Plugins\Marketplace\Api\Exception::class);
+        $this->expectException(\Matomo\Plugins\Marketplace\Api\Exception::class);
         $this->expectExceptionMessage('Requested plugin does not exist.');
 
         $this->client->getPluginInfo('NotExistingPlugIn');
@@ -226,7 +226,7 @@ class ClientTest extends SystemTestCase
     {
         $this->markTestSkipped('Skipped until Matomo 6 compatible plugins are published on the Marketplace.');
 
-        $this->expectException(\Piwik\Plugins\Marketplace\Api\Exception::class);
+        $this->expectException(\Matomo\Plugins\Marketplace\Api\Exception::class);
         $this->expectExceptionMessage('Plugin is not downloadable');
 
         $this->client->getDownloadUrl('FormAnalytics');

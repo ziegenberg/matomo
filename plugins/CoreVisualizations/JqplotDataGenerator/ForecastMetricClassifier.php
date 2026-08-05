@@ -9,10 +9,10 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
-use Piwik\Columns\Dimension;
-use Piwik\Metrics;
+use Matomo\Columns\Dimension;
+use Matomo\Metrics;
 
 /**
  * Classifies a metric for the evolution-graph forecast pipeline. Owns two related decisions:

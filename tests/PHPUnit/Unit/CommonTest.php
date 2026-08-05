@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit;
+namespace Matomo\Tests\Unit;
 
 use __PHP_Incomplete_Class;
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Piwik\Application\Environment;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Filesystem;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
-use Piwik\Log;
-use Piwik\Plugins\LanguagesManager\API as APILanguagesManager;
-use Piwik\Tests\Framework\Mock\FakeLogger;
+use Matomo\Application\Environment;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Filesystem;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Log;
+use Matomo\Plugins\LanguagesManager\API as APILanguagesManager;
+use Matomo\Tests\Framework\Mock\FakeLogger;
 
 /**
  * @backupGlobals enabled
@@ -346,10 +346,10 @@ class CommonTest extends TestCase
     public function testSafeUnserialize()
     {
         // should unserialize an allowed class
-        $this->assertTrue(Common::safe_unserialize('O:12:"Piwik\Common":0:{}', ['Piwik\Common']) instanceof Common);
+        $this->assertTrue(\Matomo\Common::safe_unserialize('O:13:"Matomo\Common":0:{}', ['Matomo\Common']) instanceof \Matomo\Common);
 
         // not allowed classed should result in an incomplete class
-        $this->assertTrue(Common::safe_unserialize('O:12:"Piwik\Common":0:{}') instanceof __PHP_Incomplete_Class);
+        $this->assertTrue(\Matomo\Common::safe_unserialize('O:13:"Matomo\Common":0:{}') instanceof __PHP_Incomplete_Class);
 
         // strings not unserializable should return false and trigger a debug log
         $logger = $this->createFakeLogger();
@@ -429,7 +429,7 @@ class CommonTest extends TestCase
     public function getCountryCodeTestData()
     {
         /** @var RegionDataProvider $regionDataProvider */
-        $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+        $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
 
         return [ // browser language, valid countries, expected result
                  ['', [], 'xx'],

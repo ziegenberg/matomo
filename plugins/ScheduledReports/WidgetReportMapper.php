@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\ScheduledReports;
+namespace Matomo\Plugins\ScheduledReports;
 
-use Piwik\Piwik;
-use Piwik\Plugins\API\API as ReportsApi;
-use Piwik\Plugins\Events\Widgets\EventsByDimension;
-use Piwik\Report\ReportWidgetConfig;
-use Piwik\Widget\WidgetConfig;
-use Piwik\Widget\WidgetsList;
+use Matomo\Matomo;
+use Matomo\Plugins\API\API as ReportsApi;
+use Matomo\Plugins\Events\Widgets\EventsByDimension;
+use Matomo\Report\ReportWidgetConfig;
+use Matomo\Widget\WidgetConfig;
+use Matomo\Widget\WidgetsList;
 
 /**
  * Utility that builds a map between dashboard widgets and scheduled-report definitions.
@@ -161,8 +161,8 @@ class WidgetReportMapper
                 continue;
             }
 
-            $translatedWidgetName = Piwik::translate($widgetName);
-            $translatedCategoryName = Piwik::translate($widgetConfig->getCategoryId());
+            $translatedWidgetName = Matomo::translate($widgetName);
+            $translatedCategoryName = Matomo::translate($widgetConfig->getCategoryId());
             if (
                 !empty($translatedCategoryName)
                 && stripos($translatedWidgetName, $translatedCategoryName) !== 0

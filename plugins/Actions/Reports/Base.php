@@ -7,25 +7,25 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Actions\Reports;
+namespace Matomo\Plugins\Actions\Reports;
 
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
-use Piwik\Plugin\ViewDataTable;
-use Piwik\Plugins\Actions\Actions;
-use Piwik\Plugins\Actions\Columns\EntryPageTitle;
-use Piwik\Plugins\Actions\Columns\EntryPageUrl;
-use Piwik\Plugins\Actions\Columns\ExitPageTitle;
-use Piwik\Plugins\Actions\Columns\ExitPageUrl;
-use Piwik\Plugins\Actions\Columns\PageTitle;
-use Piwik\Plugins\Actions\Columns\PageUrl;
-use Piwik\Plugins\CoreVisualizations\Visualizations\HtmlTable;
-use Piwik\API\Request;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
+use Matomo\Plugin\ViewDataTable;
+use Matomo\Plugins\Actions\Actions;
+use Matomo\Plugins\Actions\Columns\EntryPageTitle;
+use Matomo\Plugins\Actions\Columns\EntryPageUrl;
+use Matomo\Plugins\Actions\Columns\ExitPageTitle;
+use Matomo\Plugins\Actions\Columns\ExitPageUrl;
+use Matomo\Plugins\Actions\Columns\PageTitle;
+use Matomo\Plugins\Actions\Columns\PageUrl;
+use Matomo\Plugins\CoreVisualizations\Visualizations\HtmlTable;
+use Matomo\API\Request;
 
-abstract class Base extends \Piwik\Plugin\Report
+abstract class Base extends \Matomo\Plugin\Report
 {
     protected function init()
     {
@@ -75,8 +75,8 @@ abstract class Base extends \Piwik\Plugin\Report
     protected function addPageDisplayProperties(ViewDataTable $view)
     {
         $view->config->addTranslations(array(
-            'nb_hits'             => Piwik::translate('General_ColumnPageviews'),
-            'nb_visits'           => Piwik::translate('General_ColumnUniquePageviews'),
+            'nb_hits'             => Matomo::translate('General_ColumnPageviews'),
+            'nb_visits'           => Matomo::translate('General_ColumnUniquePageviews'),
         ));
 
         $formatter = new Formatter();
@@ -87,7 +87,7 @@ abstract class Base extends \Piwik\Plugin\Report
                 return false;
             }
 
-            return Piwik::translate("Actions_AvgGenerationTimeTooltip", array(
+            return Matomo::translate("Actions_AvgGenerationTimeTooltip", array(
                 $hits,
                 "<br />",
                 $formatter->getPrettyTimeFromSeconds($min, true),
@@ -120,7 +120,7 @@ abstract class Base extends \Piwik\Plugin\Report
             }
             $view->requestConfig->filter_excludelowpop_value = function () {
                 // computing minimum value to exclude (2 percent of the total number of actions)
-                $visitsInfo = \Piwik\Plugins\VisitsSummary\Controller::getVisitsSummary()->getFirstRow();
+                $visitsInfo = \Matomo\Plugins\VisitsSummary\Controller::getVisitsSummary()->getFirstRow();
                 $nbActions = $visitsInfo->getColumn('nb_actions');
                 $nbActionsLowPopulationThreshold = floor(0.02 * $nbActions);
 

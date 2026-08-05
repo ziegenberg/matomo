@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome;
+namespace Matomo\Plugins\CoreAdminHome;
 
-use Piwik\Common;
-use Piwik\Nonce;
-use Piwik\Piwik;
-use Piwik\Plugins\LanguagesManager\API as APILanguagesManager;
-use Piwik\Plugins\LanguagesManager\LanguagesManager;
-use Piwik\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
-use Piwik\Request;
-use Piwik\Tracker\IgnoreCookie;
-use Piwik\Url;
-use Piwik\UrlHelper;
-use Piwik\View;
+use Matomo\Common;
+use Matomo\Nonce;
+use Matomo\Matomo;
+use Matomo\Plugins\LanguagesManager\API as APILanguagesManager;
+use Matomo\Plugins\LanguagesManager\LanguagesManager;
+use Matomo\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
+use Matomo\Request;
+use Matomo\Tracker\IgnoreCookie;
+use Matomo\Url;
+use Matomo\UrlHelper;
+use Matomo\View;
 
 /*
  * There are three different opt-out choices:
@@ -195,7 +195,7 @@ class OptOutManager
             || (!empty($parsedUrl['scheme']) && !in_array(strtolower($parsedUrl['scheme']), ['http', 'https']))
             || (empty($parsedUrl['host']) || !Url::isValidHost($parsedUrl['host']))
         ) {
-            throw new \Piwik\Exception\Exception('The provided URL is invalid.');
+            throw new \Matomo\Exception\Exception('The provided URL is invalid.');
         }
 
         // We put together the url based on the parsed parameters manually to ensure it might not include unexpected values
@@ -308,7 +308,7 @@ HTML;
 
         // Self contained code translations are static and always use the language of the user who generated the embed code
         $translations = $this->getTranslations($language);
-        $translations['OptOutErrorNoTracker'] = Piwik::translate('CoreAdminHome_OptOutErrorNoTracker', [], $language);
+        $translations['OptOutErrorNoTracker'] = Matomo::translate('CoreAdminHome_OptOutErrorNoTracker', [], $language);
         $settings = array_merge($settings, $translations);
         $settingsString = 'var settings = ' . json_encode($settings) . ';';
 
@@ -535,16 +535,16 @@ JS;
     private function getTranslations(?string $language = null): array
     {
         return [
-            'OptOutComplete'        => Piwik::translate('CoreAdminHome_OptOutComplete', [], $language),
-            'OptOutCompleteBis'     => Piwik::translate('CoreAdminHome_OptOutCompleteBis', [], $language),
-            'YouMayOptOut2'         => Piwik::translate('CoreAdminHome_YouMayOptOut2', [], $language),
-            'YouMayOptOut3'         => Piwik::translate('CoreAdminHome_YouMayOptOut3', [], $language),
-            'OptOutErrorNoCookies'  => Piwik::translate('CoreAdminHome_OptOutErrorNoCookies', [], $language),
-            'OptOutErrorNotHttps'   => Piwik::translate('CoreAdminHome_OptOutErrorNotHttps', [], $language),
-            'YouAreNotOptedOut'     => Piwik::translate('CoreAdminHome_YouAreNotOptedOut', [], $language),
-            'UncheckToOptOut'       => Piwik::translate('CoreAdminHome_UncheckToOptOut', [], $language),
-            'YouAreOptedOut'        => Piwik::translate('CoreAdminHome_YouAreOptedOut', [], $language),
-            'CheckToOptIn'          => Piwik::translate('CoreAdminHome_CheckToOptIn', [], $language),
+            'OptOutComplete'        => Matomo::translate('CoreAdminHome_OptOutComplete', [], $language),
+            'OptOutCompleteBis'     => Matomo::translate('CoreAdminHome_OptOutCompleteBis', [], $language),
+            'YouMayOptOut2'         => Matomo::translate('CoreAdminHome_YouMayOptOut2', [], $language),
+            'YouMayOptOut3'         => Matomo::translate('CoreAdminHome_YouMayOptOut3', [], $language),
+            'OptOutErrorNoCookies'  => Matomo::translate('CoreAdminHome_OptOutErrorNoCookies', [], $language),
+            'OptOutErrorNotHttps'   => Matomo::translate('CoreAdminHome_OptOutErrorNotHttps', [], $language),
+            'YouAreNotOptedOut'     => Matomo::translate('CoreAdminHome_YouAreNotOptedOut', [], $language),
+            'UncheckToOptOut'       => Matomo::translate('CoreAdminHome_UncheckToOptOut', [], $language),
+            'YouAreOptedOut'        => Matomo::translate('CoreAdminHome_YouAreOptedOut', [], $language),
+            'CheckToOptIn'          => Matomo::translate('CoreAdminHome_CheckToOptIn', [], $language),
         ];
     }
 

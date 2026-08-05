@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Columns;
+namespace Matomo\Columns;
 
-use Piwik\Piwik;
-use Piwik\Plugin\Segment;
+use Matomo\Matomo;
+use Matomo\Plugin\Segment;
 
 /**
  * A factory to create segments from a dimension.
@@ -154,7 +154,7 @@ class DimensionSegmentFactory
         if (!empty($enum)) {
             $enumValues = array_values($enum);
             $enumValues = array_slice($enumValues, 0, 20);
-            $acceptValues = Piwik::translate('General_ForExampleShort') . ' ' . implode(', ', $enumValues);
+            $acceptValues = Matomo::translate('General_ForExampleShort') . ' ' . implode(', ', $enumValues);
         }
 
         return $acceptValues;

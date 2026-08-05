@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreHome\Columns;
+namespace Matomo\Plugins\CoreHome\Columns;
 
-use Piwik\Metrics\Formatter;
-use Piwik\Plugin\Dimension\ActionDimension;
+use Matomo\Metrics\Formatter;
+use Matomo\Plugin\Dimension\ActionDimension;
 
 class ServerMinute extends ActionDimension
 {

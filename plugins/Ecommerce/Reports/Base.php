@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Ecommerce\Reports;
+namespace Matomo\Plugins\Ecommerce\Reports;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Url;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Url;
+use Matomo\Site;
 
 abstract class Base extends Report
 {
@@ -38,9 +38,9 @@ abstract class Base extends Report
     public function checkIsEnabled()
     {
         if (!$this->isEnabled()) {
-            $message = Piwik::translate('General_ExceptionReportNotEnabled');
+            $message = Matomo::translate('General_ExceptionReportNotEnabled');
 
-            if (Piwik::hasUserSuperUserAccess()) {
+            if (Matomo::hasUserSuperUserAccess()) {
                 $message .= ' Most likely Ecommerce is not enabled for the requested site.';
             }
 

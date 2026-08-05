@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreAdminHome\Commands;
+namespace Matomo\Plugins\CoreAdminHome\Commands;
 
 use Exception;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Container\StaticContainer;
-use Piwik\Period;
-use Piwik\Period\Range;
-use Piwik\Piwik;
-use Piwik\Plugins\SegmentEditor\API;
-use Piwik\Segment;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\SitesManager\API as SitesManagerAPI;
-use Piwik\Site;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Log\LoggerInterface;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Container\StaticContainer;
+use Matomo\Period;
+use Matomo\Period\Range;
+use Matomo\Matomo;
+use Matomo\Plugins\SegmentEditor\API;
+use Matomo\Segment;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\SitesManager\API as SitesManagerAPI;
+use Matomo\Site;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Provides a simple interface for invalidating report data by date ranges, site IDs and periods.
@@ -317,7 +317,7 @@ class InvalidateReportData extends ConsoleCommand
         }
 
         if ($periods == self::ALL_OPTION_VALUE) {
-            $result = array_keys(Piwik::$idPeriods);
+            $result = array_keys(Matomo::$idPeriods);
             return $result;
         }
 
@@ -325,7 +325,7 @@ class InvalidateReportData extends ConsoleCommand
         $periods = array_map('trim', $periods);
 
         foreach ($periods as $periodIdentifier) {
-            if (!isset(Piwik::$idPeriods[$periodIdentifier])) {
+            if (!isset(Matomo::$idPeriods[$periodIdentifier])) {
                 throw new \InvalidArgumentException("Invalid period type '$periodIdentifier' supplied in --periods.");
             }
         }
@@ -348,7 +348,7 @@ class InvalidateReportData extends ConsoleCommand
 
     private function getPeriodDates($periodType, $dateRange)
     {
-        if (!isset(Piwik::$idPeriods[$periodType])) {
+        if (!isset(Matomo::$idPeriods[$periodType])) {
             throw new \InvalidArgumentException("Invalid period type '$periodType'.");
         }
 

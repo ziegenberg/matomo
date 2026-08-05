@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration;
+namespace Matomo\Tests\Integration;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CronArchive;
-use Piwik\Date;
-use Piwik\Plugin\Manager;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\Mock\FakeLogger;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Plugins\SegmentEditor\API as SegmentAPI;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CronArchive;
+use Matomo\Date;
+use Matomo\Plugin\Manager;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\Mock\FakeLogger;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Plugins\SegmentEditor\API as SegmentAPI;
 
 /**
  * @group Archiver
@@ -29,7 +29,7 @@ class CronArchiveInvalidSegmentTest extends IntegrationTestCase
 
     public function setUp(): void
     {
-        \Piwik\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
+        \Matomo\Tests\Framework\Mock\FakeCliMulti::$specifiedResults = array(
           '/method=API.get/' => json_encode(array(array('nb_visits' => 1))),
         );
 
@@ -90,8 +90,8 @@ class CronArchiveInvalidSegmentTest extends IntegrationTestCase
         Date::$now = strtotime('2020-02-03 04:05:06');
 
         return array(
-            'observers.global' => \Piwik\DI::add([
-                ['API.CoreAdminHome.archiveReports', \Piwik\DI::value(function (&$result) {
+            'observers.global' => \Matomo\DI::add([
+                ['API.CoreAdminHome.archiveReports', \Matomo\DI::value(function (&$result) {
                     Manager::getInstance()->deactivatePlugin('UserLanguage');
                 })],
             ]),

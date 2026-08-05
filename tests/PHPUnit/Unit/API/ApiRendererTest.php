@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Unit\API;
+namespace Matomo\Tests\Unit\API;
 
-use Piwik\API\ApiRenderer;
-use Piwik\Plugin\Manager;
+use Matomo\API\ApiRenderer;
+use Matomo\Plugin\Manager;
 
 /**
  * @group Core
@@ -26,19 +26,19 @@ class ApiRendererTest extends \PHPUnit\Framework\TestCase
     public function testFactoryShouldCreateAnInstanceIfValidFormatGiven()
     {
         $renderer = ApiRenderer::factory('xml', array());
-        $this->assertInstanceOf('Piwik\Plugins\API\Renderer\Xml', $renderer);
+        $this->assertInstanceOf('Matomo\Plugins\API\Renderer\Xml', $renderer);
 
         $renderer = ApiRenderer::factory('XML', array());
-        $this->assertInstanceOf('Piwik\Plugins\API\Renderer\Xml', $renderer);
+        $this->assertInstanceOf('Matomo\Plugins\API\Renderer\Xml', $renderer);
 
         $renderer = ApiRenderer::factory('cSv', array());
-        $this->assertInstanceOf('Piwik\Plugins\API\Renderer\Csv', $renderer);
+        $this->assertInstanceOf('Matomo\Plugins\API\Renderer\Csv', $renderer);
 
         $renderer = ApiRenderer::factory('xmL', array());
-        $this->assertInstanceOf('Piwik\Plugins\API\Renderer\Xml', $renderer);
+        $this->assertInstanceOf('Matomo\Plugins\API\Renderer\Xml', $renderer);
 
         $renderer = ApiRenderer::factory('OriginAl', array());
-        $this->assertInstanceOf('Piwik\Plugins\API\Renderer\Original', $renderer);
+        $this->assertInstanceOf('Matomo\Plugins\API\Renderer\Original', $renderer);
     }
 
     public function testFactoryShouldThrowAnExceptionIfInvalidFormatGiven()

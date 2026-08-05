@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Overlay;
+namespace Matomo\Plugins\Overlay;
 
 use Exception;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable;
-use Piwik\Plugins\Transitions\API as APITransitions;
-use Piwik\Tracker\PageUrl;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable;
+use Matomo\Plugins\Transitions\API as APITransitions;
+use Matomo\Tracker\PageUrl;
 
 /**
  * The Overlay API exposes translation data and overlay-specific page transition reports.
  *
- * @method static \Piwik\Plugins\Overlay\API getInstance()
+ * @method static \Matomo\Plugins\Overlay\API getInstance()
  */
-class API extends \Piwik\Plugin\API
+class API extends \Matomo\Plugin\API
 {
     /**
      * Returns the translation strings used by the Overlay client.
@@ -36,7 +36,7 @@ class API extends \Piwik\Plugin\API
             'link'             => 'Overlay_Link',
         );
 
-        return array_map(array('\\Piwik\\Piwik','translate'), $translations);
+        return array_map(array('\Matomo\Matomo','translate'), $translations);
     }
 
     /**

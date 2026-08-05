@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Metrics\Formatter;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Metrics\Formatter;
 
 /**
  * Base type of metric metadata classes.
@@ -26,7 +26,7 @@ use Piwik\Metrics\Formatter;
  * Currently, only processed metrics can be defined as metric metadata classes. Support for
  * aggregated metrics will be added at a later date.
  *
- * See {@link Piwik\Plugin\ProcessedMetric} and {@link Piwik\Plugin|AggregatedMetric}.
+ * See {@link Matomo\Plugin\ProcessedMetric} and {@link Matomo\Plugin|AggregatedMetric}.
  *
  * @api
  */
@@ -90,7 +90,7 @@ abstract class Metric
      * party services that connect with Matomo can make full use of the data your plugin
      * tracks.
      *
-     * See {@link \Piwik\Columns\Dimension} for the list of available semantic types.
+     * See {@link \Matomo\Columns\Dimension} for the list of available semantic types.
      */
     public function getSemanticType(): ?string
     {
@@ -127,7 +127,7 @@ abstract class Metric
     }
 
     /**
-     * Helper method that will access a metric in a {@link Piwik\DataTable\Row} or array either by
+     * Helper method that will access a metric in a {@link Matomo\DataTable\Row} or array either by
      * its name or by its special numerical index value.
      *
      * @param Row|array $row
@@ -175,7 +175,7 @@ abstract class Metric
 
     /**
      * Helper method that will determine the actual column name for a metric in a
-     * {@link Piwik\DataTable} and return every column value for this name.
+     * {@link Matomo\DataTable} and return every column value for this name.
      *
      * @param string $columnName
      * @param int[]|null $mappingNameToId A custom mapping of metric names to special index values. By
@@ -193,7 +193,7 @@ abstract class Metric
     }
 
     /**
-     * Helper method that determines the actual column for a metric in a {@link Piwik\DataTable}.
+     * Helper method that determines the actual column for a metric in a {@link Matomo\DataTable}.
      *
      * @param string $columnName
      * @param int[]|null $mappingNameToId A custom mapping of metric names to special index values. By

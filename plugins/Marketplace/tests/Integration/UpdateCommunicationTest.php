@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Marketplace\tests\Integration;
+namespace Matomo\Plugins\Marketplace\tests\Integration;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Option;
-use Piwik\Plugins\CoreUpdater\SystemSettings;
-use Piwik\Plugins\Marketplace\UpdateCommunication;
-use Piwik\Tests\Framework\Fixture;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Twig;
-use Piwik\View;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Option;
+use Matomo\Plugins\CoreUpdater\SystemSettings;
+use Matomo\Plugins\Marketplace\UpdateCommunication;
+use Matomo\Tests\Framework\Fixture;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Twig;
+use Matomo\View;
 
-use function Piwik\piwik_escape_filter;
+use function Matomo\piwik_escape_filter;
 
 /**
  * @group Plugins
@@ -41,7 +41,7 @@ class UpdateCommunicationTest extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->settings = StaticContainer::get('Piwik\Plugins\CoreUpdater\SystemSettings');
+        $this->settings = StaticContainer::get('Matomo\Plugins\CoreUpdater\SystemSettings');
         $this->settings->sendPluginUpdateEmail->setValue(true);
 
         $this->updateCommunication = new UpdateCommunication($this->settings);
@@ -184,7 +184,7 @@ Happy analysing!
      */
     private function getCommunicationMock($pluginsHavingUpdate)
     {
-        $mock = $this->getMockBuilder('\Piwik\Plugins\Marketplace\UpdateCommunication')
+        $mock = $this->getMockBuilder('\Matomo\Plugins\Marketplace\UpdateCommunication')
                      ->setMethods(array('getPluginsHavingUpdate', 'sendEmailNotification'))
                      ->setConstructorArgs(array($this->settings))
                      ->getMock();

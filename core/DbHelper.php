@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Db\Schema;
-use Piwik\DataAccess\ArchiveTableCreator;
+use Matomo\Db\Schema;
+use Matomo\DataAccess\ArchiveTableCreator;
 
 /**
  * Contains database related helper functions.
@@ -148,7 +148,7 @@ class DbHelper
         // subsequent DB update). Invalidate the cache that would otherwise make Columns\Updater
         // believe the dimension columns are already installed because the dimension files on disk
         // are unchanged. See Columns\Updater::clearCache().
-        \Piwik\Columns\Updater::clearCache();
+        \Matomo\Columns\Updater::clearCache();
     }
 
     /**

@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Installation;
+namespace Matomo\Plugins\Installation;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Exception\NotYetInstalledException;
-use Piwik\FrontController;
-use Piwik\Piwik;
-use Piwik\Plugins\Installation\Exception\DatabaseConnectionFailedException;
-use Piwik\SettingsPiwik;
-use Piwik\View as PiwikView;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Exception\NotYetInstalledException;
+use Matomo\FrontController;
+use Matomo\Matomo;
+use Matomo\Plugins\Installation\Exception\DatabaseConnectionFailedException;
+use Matomo\SettingsPiwik;
+use Matomo\View as PiwikView;
 
-class Installation extends \Piwik\Plugin
+class Installation extends \Matomo\Plugin
 {
-    protected $installationControllerName = '\\Piwik\\Plugins\\Installation\\Controller';
+    protected $installationControllerName = '\Matomo\Plugins\Installation\Controller';
 
     /**
-     * @see \Piwik\Plugin::registerEvents
+     * @see \Matomo\Plugin::registerEvents
      */
     public function registerEvents()
     {
@@ -135,7 +135,7 @@ class Installation extends \Piwik\Plugin
             }
             return;
         } else {
-            Piwik::exitWithErrorMessage($this->getMessageToInviteUserToInstallPiwik($message));
+            Matomo::exitWithErrorMessage($this->getMessageToInviteUserToInstallPiwik($message));
         }
 
         exit;
@@ -167,11 +167,11 @@ class Installation extends \Piwik\Plugin
         $messageWhenPiwikSeemsNotInstalled =
             $message .
             "\n<br/>" .
-            Piwik::translate('Installation_NoConfigFileFound') .
+            Matomo::translate('Installation_NoConfigFileFound') .
             "<br/><b>» " .
-            Piwik::translate('Installation_YouMayInstallPiwikNow', array("<a href='index.php'>", "</a></b>")) .
+            Matomo::translate('Installation_YouMayInstallPiwikNow', array("<a href='index.php'>", "</a></b>")) .
             "<br/><small>" .
-            Piwik::translate('Installation_IfPiwikInstalledBeforeTablesCanBeKept') .
+            Matomo::translate('Installation_IfPiwikInstalledBeforeTablesCanBeKept') .
             "</small>";
         return $messageWhenPiwikSeemsNotInstalled;
     }

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class WhitelistedValue extends BaseValidator
 {
@@ -29,7 +29,7 @@ class WhitelistedValue extends BaseValidator
     public function validate($value)
     {
         if (!in_array($value, $this->whitelisted, true)) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorXNotWhitelisted', array($value, implode(', ', $this->whitelisted))));
+            throw new Exception(Matomo::translate('General_ValidatorErrorXNotWhitelisted', array($value, implode(', ', $this->whitelisted))));
         }
     }
 }

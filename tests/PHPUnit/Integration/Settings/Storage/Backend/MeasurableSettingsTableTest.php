@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\Integration\Settings\Storage\Backend;
+namespace Matomo\Tests\Integration\Settings\Storage\Backend;
 
-use Piwik\Settings\Storage\Backend\MeasurableSettingsTable;
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Settings\Storage\Backend\MeasurableSettingsTable;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
 
 /**
  * @group Settings

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login;
+namespace Matomo\Plugins\Login;
 
-use Piwik\Piwik;
-use Piwik\QuickForm2;
+use Matomo\Matomo;
+use Matomo\QuickForm2;
 
 class FormResetPassword extends QuickForm2
 {
@@ -22,14 +22,14 @@ class FormResetPassword extends QuickForm2
     public function init()
     {
         $this->addElement('text', 'form_login')
-            ->addRule('required', Piwik::translate('General_Required', Piwik::translate('Login_LoginOrEmail')));
+            ->addRule('required', Matomo::translate('General_Required', Matomo::translate('Login_LoginOrEmail')));
 
         $password = $this->addElement('password', 'form_password');
-        $password->addRule('required', Piwik::translate('General_Required', Piwik::translate('General_Password')));
+        $password->addRule('required', Matomo::translate('General_Required', Matomo::translate('General_Password')));
 
         $passwordBis = $this->addElement('password', 'form_password_bis');
-        $passwordBis->addRule('required', Piwik::translate('General_Required', Piwik::translate('Login_PasswordRepeat')));
-        $passwordBis->addRule('eq', Piwik::translate('Login_PasswordsDoNotMatch'), ['operand' => $password]);
+        $passwordBis->addRule('required', Matomo::translate('General_Required', Matomo::translate('Login_PasswordRepeat')));
+        $passwordBis->addRule('eq', Matomo::translate('Login_PasswordsDoNotMatch'), ['operand' => $password]);
 
         $this->addElement('hidden', 'form_nonce');
 

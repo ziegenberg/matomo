@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\System;
+namespace Matomo\Tests\System;
 
-use Piwik\EventDispatcher;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\Referrers\Reports\GetWebsites;
-use Piwik\Tests\Framework\TestCase\SystemTestCase;
-use Piwik\Tests\Fixtures\ManyVisitsWithSubDirReferrersAndCustomVars;
+use Matomo\EventDispatcher;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\Referrers\Reports\GetWebsites;
+use Matomo\Tests\Framework\TestCase\SystemTestCase;
+use Matomo\Tests\Fixtures\ManyVisitsWithSubDirReferrersAndCustomVars;
 
 /**
  * Tests the flattening of reports.

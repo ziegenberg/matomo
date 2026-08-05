@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API;
+namespace Matomo\Plugins\API;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Menu\MenuAdmin;
-use Piwik\Menu\MenuTop;
-use Piwik\Piwik;
+use Matomo\Container\StaticContainer;
+use Matomo\Menu\MenuAdmin;
+use Matomo\Menu\MenuTop;
+use Matomo\Matomo;
 use DeviceDetector\Parser\OperatingSystem;
-use Piwik\Url;
+use Matomo\Url;
 
-class Menu extends \Piwik\Plugin\Menu
+class Menu extends \Matomo\Plugin\Menu
 {
     public const DD_SHORT_NAME_ANDROID = 'AND';
     public const DD_SHORT_NAME_IOS     = 'IOS';
@@ -32,10 +32,10 @@ class Menu extends \Piwik\Plugin\Menu
             'General_API',
             $this->urlForAction('listAllAPI', array('segment' => false)),
             7,
-            Piwik::translate('API_TopLinkTooltip')
+            Matomo::translate('API_TopLinkTooltip')
         );
 
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             $menu->addPlatformItem(
                 'API_Glossary',
                 $this->urlForAction('glossary', array('segment' => false)),

@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataTable;
-use Piwik\Date;
-use Piwik\Site;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataTable;
+use Matomo\Date;
+use Matomo\Site;
 
 class ArchiveState
 {

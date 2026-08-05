@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\PagePerformance\JqplotDataGenerator;
+namespace Matomo\Plugins\PagePerformance\JqplotDataGenerator;
 
-use Piwik\DataTable;
-use Piwik\Period;
-use Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+use Matomo\DataTable;
+use Matomo\Period;
+use Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
 /**
  * Generates JQPlot JSON data/config for evolution graphs.

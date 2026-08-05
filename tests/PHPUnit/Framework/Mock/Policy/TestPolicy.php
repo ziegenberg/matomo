@@ -1,11 +1,11 @@
 <?php
 
-namespace Piwik\Tests\Framework\Mock\Policy;
+namespace Matomo\Tests\Framework\Mock\Policy;
 
-use Piwik\Tests\Framework\Mock\Plugin\Manager as MockManager;
-use Piwik\Plugin\Manager;
+use Matomo\Tests\Framework\Mock\Plugin\Manager as MockManager;
+use Matomo\Plugin\Manager;
 
-class TestPolicy extends \Piwik\Policy\CompliancePolicy
+class TestPolicy extends \Matomo\Policy\CompliancePolicy
 {
     /** @var bool */
     private static $system = false;

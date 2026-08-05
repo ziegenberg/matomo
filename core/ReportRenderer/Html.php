@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ReportRenderer;
+namespace Matomo\ReportRenderer;
 
-use Piwik\Piwik;
-use Piwik\ReportRenderer;
-use Piwik\View;
+use Matomo\Matomo;
+use Matomo\ReportRenderer;
+use Matomo\View;
 
 /**
  * HTML report renderer
@@ -154,7 +154,7 @@ class Html extends ReportRenderer
     {
         $additionalFile = array();
 
-        $segment = \Piwik\Plugins\ScheduledReports\API::getSegment($report['idsegment']);
+        $segment = \Matomo\Plugins\ScheduledReports\API::getSegment($report['idsegment']);
 
         $segmentName = $segment != null ? sprintf(' (%s)', $segment['name']) : '';
 
@@ -166,7 +166,7 @@ class Html extends ReportRenderer
                 $processedReportMetadata['name'],
                 $prettyDate,
                 $report['idsite'],
-                Piwik::translate('General_Report'),
+                Matomo::translate('General_Report'),
                 $report['idreport'],
                 $segmentName
             );

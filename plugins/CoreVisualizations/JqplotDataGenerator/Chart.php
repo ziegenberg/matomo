@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreVisualizations\JqplotDataGenerator;
+namespace Matomo\Plugins\CoreVisualizations\JqplotDataGenerator;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\NumberFormatter;
-use Piwik\ProxyHttp;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\NumberFormatter;
+use Matomo\ProxyHttp;
 
 class Chart
 {
@@ -130,7 +130,7 @@ class Chart
             }
         }
 
-        $currencies = StaticContainer::get('Piwik\Intl\Data\Provider\CurrencyDataProvider')->getCurrencyList();
+        $currencies = StaticContainer::get('Matomo\Intl\Data\Provider\CurrencyDataProvider')->getCurrencyList();
         $currencies = array_column($currencies, 0);
 
         // generate jqplot axes config

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\SitesManager;
+namespace Matomo\Plugins\SitesManager;
 
-use Piwik\Access;
-use Piwik\Db;
-use Piwik\Common;
+use Matomo\Access;
+use Matomo\Db;
+use Matomo\Common;
 use Exception;
 
 class Model

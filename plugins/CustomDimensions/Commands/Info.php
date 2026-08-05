@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CustomDimensions\Commands;
+namespace Matomo\Plugins\CustomDimensions\Commands;
 
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugins\CustomDimensions\CustomDimensions;
-use Piwik\Plugins\CustomDimensions\Dao\LogTable;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugins\CustomDimensions\CustomDimensions;
+use Matomo\Plugins\CustomDimensions\Dao\LogTable;
 
 class Info extends ConsoleCommand
 {

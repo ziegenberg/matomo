@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\Login\tests\Integration;
+namespace Matomo\Plugins\Login\tests\Integration;
 
-use Piwik\Tests\Framework\TestCase\IntegrationTestCase;
-use Piwik\Auth;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Plugins\Login\Controller;
-use Piwik\Plugins\Login\PasswordResetter;
-use Piwik\Nonce;
-use Piwik\Auth\PasswordStrength;
-use Piwik\Date;
-use Piwik\Plugins\UsersManager\Model;
-use Piwik\Session\SessionInitializer;
+use Matomo\Tests\Framework\TestCase\IntegrationTestCase;
+use Matomo\Auth;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Plugins\Login\Controller;
+use Matomo\Plugins\Login\PasswordResetter;
+use Matomo\Nonce;
+use Matomo\Auth\PasswordStrength;
+use Matomo\Date;
+use Matomo\Plugins\UsersManager\Model;
+use Matomo\Session\SessionInitializer;
 
 /**
  * @group Login

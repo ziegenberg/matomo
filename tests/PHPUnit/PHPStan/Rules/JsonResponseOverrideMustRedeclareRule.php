@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tests\PHPStan\Rules;
+namespace Matomo\Tests\PHPStan\Rules;
 
 use PhpParser\Node;
 use PhpParser\Node\Stmt\ClassMethod;
@@ -46,9 +46,9 @@ class JsonResponseOverrideMustRedeclareRule implements Rule
 
         return [
             RuleErrorBuilder::message(sprintf(
-                'Controller action %s() overrides an action marked #[\\Piwik\\Http\\JsonResponse] but'
+                'Controller action %s() overrides an action marked #[\Matomo\Http\JsonResponse] but'
                 . ' does not re-declare the attribute. PHP does not inherit method attributes, so the'
-                . ' override must repeat #[\\Piwik\\Http\\JsonResponse] to keep serving JSON.',
+                . ' override must repeat #[\Matomo\Http\JsonResponse] to keep serving JSON.',
                 $node->name->toString()
             ))
                 ->identifier('matomo.jsonResponse.overrideMustRedeclare')

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Visualization;
+namespace Matomo\Visualization;
 
-use Piwik\Common;
-use Piwik\Piwik;
-use Piwik\View\ViewInterface;
+use Matomo\Common;
+use Matomo\Matomo;
+use Matomo\View\ViewInterface;
 
 /**
  * Renders a sparkline image given a PHP data array.
@@ -69,8 +69,8 @@ class Sparkline implements ViewInterface
         }
 
 
-        $thousandSeparator = Piwik::translate('Intl_NumberSymbolGroup');
-        $decimalSeparator = Piwik::translate('Intl_NumberSymbolDecimal');
+        $thousandSeparator = Matomo::translate('Intl_NumberSymbolGroup');
+        $decimalSeparator = Matomo::translate('Intl_NumberSymbolDecimal');
 
         $sparkline->setData(); // remove default series
         foreach ($this->serieses as $seriesIndex => $series) {

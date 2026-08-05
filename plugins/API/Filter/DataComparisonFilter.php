@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\API\Filter;
+namespace Matomo\Plugins\API\Filter;
 
-use Piwik\API\Request;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\DataTable;
-use Piwik\DataTable\DataTableInterface;
-use Piwik\Http\BadRequestException;
-use Piwik\Metrics;
-use Piwik\Period;
-use Piwik\Period\Factory;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugins\API\Filter\DataComparisonFilter\ComparisonRowGenerator;
-use Piwik\Segment;
-use Piwik\Site;
+use Matomo\API\Request;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\DataTable;
+use Matomo\DataTable\DataTableInterface;
+use Matomo\Http\BadRequestException;
+use Matomo\Metrics;
+use Matomo\Period;
+use Matomo\Period\Factory;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugins\API\Filter\DataComparisonFilter\ComparisonRowGenerator;
+use Matomo\Segment;
+use Matomo\Site;
 
 /**
  * Handles the API portion of the data comparison feature.
@@ -65,7 +65,7 @@ use Piwik\Site;
  */
 class DataComparisonFilter
 {
-    private \Piwik\Request $request;
+    private \Matomo\Request $request;
 
     /**
      * @var int
@@ -126,7 +126,7 @@ class DataComparisonFilter
 
     public function __construct($request, ?Report $report = null)
     {
-        $this->request = new \Piwik\Request($request);
+        $this->request = new \Matomo\Request($request);
 
         $generalConfig = Config::getInstance()->General;
         $this->segmentCompareLimit = (int) $generalConfig['data_comparison_segment_limit'];
@@ -140,19 +140,19 @@ class DataComparisonFilter
         $this->compareSegments = self::getCompareSegments();
         $segmentCompareLimitPlusMain = $this->segmentCompareLimit + 1;
         if (count($this->compareSegments) > $segmentCompareLimitPlusMain) {
-            throw new BadRequestException(Piwik::translate('General_MaximumNumberOfSegmentsComparedIs', [$segmentCompareLimitPlusMain]));
+            throw new BadRequestException(Matomo::translate('General_MaximumNumberOfSegmentsComparedIs', [$segmentCompareLimitPlusMain]));
         }
 
         $this->compareDates = self::getCompareDates($request);
         $this->comparePeriods = self::getComparePeriods($request);
 
         if (count($this->compareDates) !== count($this->comparePeriods)) {
-            throw new BadRequestException(Piwik::translate('General_CompareDatesParamMustMatchComparePeriods', ['compareDates', 'comparePeriods']));
+            throw new BadRequestException(Matomo::translate('General_CompareDatesParamMustMatchComparePeriods', ['compareDates', 'comparePeriods']));
         }
 
         $periodCompareLimitPlusMain = $this->periodCompareLimit + 1;
         if (count($this->compareDates) > $periodCompareLimitPlusMain) {
-            throw new BadRequestException(Piwik::translate('General_MaximumNumberOfPeriodsComparedIs', [$periodCompareLimitPlusMain]));
+            throw new BadRequestException(Matomo::translate('General_MaximumNumberOfPeriodsComparedIs', [$periodCompareLimitPlusMain]));
         }
 
         if (
@@ -432,7 +432,7 @@ class DataComparisonFilter
             return null;
         }
 
-        /** @var \Piwik\Plugin\Segment $segment */
+        /** @var \Matomo\Plugin\Segment $segment */
         $segment     = reset($segments);
         $segmentName = $segment->getSegment();
         return $segmentName;
@@ -593,7 +593,7 @@ class DataComparisonFilter
      * Returns whether to include trend values for all evolution columns or not
      * This is requested only for sparklines
      *
-     * @see \Piwik\Plugins\CoreVisualizations\Visualizations\Sparklines::render()
+     * @see \Matomo\Plugins\CoreVisualizations\Visualizations\Sparklines::render()
      *
      * @throws \Exception
      */
@@ -615,7 +615,7 @@ class DataComparisonFilter
 
         [$periodIndex, $segmentIndex] = self::getIndividualComparisonRowIndices(null, $labelSeriesIndex, count($compareSegments));
 
-        $idSite = \Piwik\Request::fromRequest()->getStringParameter('idSite');
+        $idSite = \Matomo\Request::fromRequest()->getStringParameter('idSite');
         $segmentObj = new Segment($compareSegments[$segmentIndex], [$idSite]);
         $prettySegment = $segmentObj->getStoredSegmentName($idSite);
 

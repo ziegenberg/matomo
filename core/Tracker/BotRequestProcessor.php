@@ -9,7 +9,7 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 abstract class BotRequestProcessor
 {
