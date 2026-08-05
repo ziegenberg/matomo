@@ -99,6 +99,7 @@
     "autoload-dev": {
         "psr-4": {
             "Piwik\\Tests\\": "tests/PHPUnit/",
+            "Matomo\\Tests\\": "tests/PHPUnit/",
             "Utils\\MigrateNamespace\\": "utils/migrate-namespace/src"
         }
     },
