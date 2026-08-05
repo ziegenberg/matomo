@@ -8,6 +8,7 @@
  *
  * @method static \Matomo\AssetManager\UIAssetCacheBuster getInstance()
  */
+
 namespace Matomo\AssetManager;
 
 use Matomo\Plugin\Manager;

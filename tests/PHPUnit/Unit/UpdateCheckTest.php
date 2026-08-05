@@ -52,7 +52,7 @@ class UpdateCheckTest extends TestCase
         parent::setUp();
 
         $this->originalAutoUpdateConfig = \Matomo\Config::getInstance()->General['enable_auto_update'] ?? null;
-        $this->originalReleaseChannels  = \Matomo\Container\StaticContainer::getContainer()->get('\Matomo\Plugin\ReleaseChannels');
+        $this->originalReleaseChannels  = StaticContainer::getContainer()->get('\Matomo\Plugin\ReleaseChannels');
 
         Config::getInstance()->General['enable_auto_update'] = true;
 
@@ -76,13 +76,13 @@ class UpdateCheckTest extends TestCase
             ]
         );
 
-        \Matomo\Container\StaticContainer::getContainer()->set('\Matomo\Plugin\ReleaseChannels', $releaseChannels);
+        StaticContainer::getContainer()->set('\Matomo\Plugin\ReleaseChannels', $releaseChannels);
     }
 
     public function tearDown(): void
     {
         \Matomo\Option::setSingletonInstance(null);
-        \Matomo\Container\StaticContainer::getContainer()->set('\Matomo\Plugin\ReleaseChannels', $this->originalReleaseChannels);
+        StaticContainer::getContainer()->set('\Matomo\Plugin\ReleaseChannels', $this->originalReleaseChannels);
 
         Config::getInstance()->General['enable_auto_update'] = $this->originalAutoUpdateConfig;
 

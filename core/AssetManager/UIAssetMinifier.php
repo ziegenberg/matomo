@@ -8,6 +8,7 @@
  *
  * @method static \Matomo\AssetManager\UIAssetMinifier getInstance()
  */
+
 namespace Matomo\AssetManager;
 
 use Exception;

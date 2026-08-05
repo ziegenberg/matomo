@@ -58,7 +58,6 @@ class MyExampleWidget extends Widget
          * if (!\Matomo\Matomo::hasUserSuperUserAccess())
          *     $config->disable();
          */
-        
     }
 
     /**
