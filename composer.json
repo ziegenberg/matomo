@@ -74,6 +74,7 @@
     },
     "require-dev": {
         "matomo-org/matomo-coding-standards": "dev-master",
+        "nikic/php-parser": "^5.0",
         "phpstan/phpstan": "^2.0",
         "phpunit/phpunit": "^9.0",
         "symfony/var-dumper": "~6.4.0",
@@ -96,7 +97,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Piwik\\Tests\\": "tests/PHPUnit/"
+            "Piwik\\Tests\\": "tests/PHPUnit/",
+            "Utils\\MigrateNamespace\\": "utils/migrate-namespace/src",
+            "Utils\\MigrateNamespace\\Tests\\": "utils/migrate-namespace/tests"
         }
     },
     "scripts": {
