@@ -40,6 +40,48 @@ final class RootNamespaceSwapperTest extends TestCase
         $this->assertSame($expected, $this->migrator->migrate($expected), 'Fixture: ' . $name);
     }
 
+    public function testStringRawEscapingPreserved(): void
+    {
+        $input = "<?php\n\n\$a = 'Piwik\\\\Foo';\n";
+        $expected = "<?php\n\n\$a = 'Matomo\\\\Foo';\n";
+        $this->assertSame($expected, $this->migrator->migrate($input));
+
+        $input = "<?php\n\n\$a = \"Piwik\\Foo\";\n";
+        $expected = "<?php\n\n\$a = \"Matomo\\Foo\";\n";
+        $this->assertSame($expected, $this->migrator->migrate($input));
+    }
+
+    public function testDocCommentSwappedOnlyWhenTextDiffers(): void
+    {
+        $input = <<<'PHP'
+<?php
+
+/**
+ * @param \Piwik\Foo $foo
+ */
+function f($foo) {}
+PHP;
+        $expected = <<<'PHP'
+<?php
+
+/**
+ * @param \Matomo\Foo $foo
+ */
+function f($foo) {}
+PHP;
+        $this->assertSame($expected, $this->migrator->migrate($input));
+
+        $input = <<<'PHP'
+<?php
+
+/**
+ * No Piwik here.
+ */
+function f() {}
+PHP;
+        $this->assertSame($input, $this->migrator->migrate($input));
+    }
+
     /**
      * @return \Iterator<string, array{0: string, 1: string, 2: string}>
      */

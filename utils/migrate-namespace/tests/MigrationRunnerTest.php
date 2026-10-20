@@ -101,6 +101,38 @@ final class MigrationRunnerTest extends TestCase
         $this->assertSame("<?php\n\nnamespace Matomo;\n\nclass A {}\n", file_get_contents($changed));
     }
 
+    public function testNoOpOverCanonicalTree(): void
+    {
+        $canonical = $this->dir . '/Canonical.php';
+        $source = <<<'PHP'
+<?php
+
+namespace Matomo;
+
+/**
+ * @param \Matomo\Foo $foo
+ */
+class A
+{
+    /** @var Matomo\DataTable */
+    public $table;
+
+    public function get()
+    {
+        return 'Matomo\Foo';
+    }
+}
+PHP;
+        file_put_contents($canonical, $source);
+
+        [$stdout, $stderr] = $this->streams();
+        $exit = (new MigrationRunner(null, $stdout, $stderr))->run([$this->dir]);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame($source, file_get_contents($canonical));
+        $this->assertStringContainsString('0 changed, 1 unchanged, 0 failed', $this->streamContents($stdout));
+    }
+
     public function testSubmoduleDirectoriesAreSkipped(): void
     {
         $submodule = $this->dir . '/plugins/TagManager';

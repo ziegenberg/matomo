@@ -13,8 +13,6 @@ use PhpParser\Error;
  */
 final class MigrationRunner
 {
-    private const SKIPPED_DIRS = ['vendor', '.git', 'node_modules'];
-
     private const SKIPPED_DIR_PATTERN = '/(^|[\/\\\\])('
         . '(?:vendor|\.git|node_modules)'
         . ')([\/\\\\]|$)/';
@@ -50,7 +48,7 @@ final class MigrationRunner
         $unchanged = 0;
         $failed = [];
 
-        foreach ($this->collectFiles($paths, $failed) as $path) {
+        foreach (self::collectPhpFiles($paths, $failed) as $path) {
             $original = @file_get_contents($path);
 
             if ($original === false) {
@@ -105,11 +103,15 @@ final class MigrationRunner
     }
 
     /**
+     * Collects every PHP file under the given paths, recursively, applying the
+     * same skip rules as run() (vendor/.git/node_modules and git-submodule
+     * checkouts are never touched).
+     *
      * @param list<string> $paths
      * @param list<string> $failed Filled with 'path: reason' entries for unreadable paths.
      * @return list<string>
      */
-    private function collectFiles(array $paths, array &$failed): array
+    public static function collectPhpFiles(array $paths, array &$failed): array
     {
         $files = [];
 
@@ -121,7 +123,7 @@ final class MigrationRunner
             }
 
             if (is_dir($path)) {
-                foreach ($this->collectDir($path, $failed) as $file) {
+                foreach (self::collectDir($path, $failed) as $file) {
                     $files[] = $file;
                 }
 
@@ -140,7 +142,7 @@ final class MigrationRunner
      * @param list<string> $failed Filled with 'path: reason' entries for unreadable directories.
      * @return list<string>
      */
-    private function collectDir(string $dir, array &$failed): array
+    private static function collectDir(string $dir, array &$failed): array
     {
         $files = [];
 

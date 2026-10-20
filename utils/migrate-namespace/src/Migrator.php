@@ -15,9 +15,10 @@ use PhpParser\PrettyPrinter\Standard;
  * format-preserve print.
  *
  * The swapped tree is printed with printFormatPreserving against the pristine
- * original AST, so only the changed name tokens are reprinted and everything
- * else (whitespace, comments, layout) is copied from the original token
- * stream.
+ * original AST, so only the changed tokens are reprinted and everything else
+ * (whitespace, comments, layout) is copied from the original token stream.
+ * The EscapingPreservingPrinter additionally keeps the original quoting and
+ * escaping of changed string literals byte-for-byte.
  */
 final class Migrator
 {
@@ -27,11 +28,12 @@ final class Migrator
     public function __construct(?Parser $parser = null, ?Standard $printer = null)
     {
         $this->parser = $parser ?? (new ParserFactory())->createForHostVersion();
-        $this->printer = $printer ?? new Standard();
+        $this->printer = $printer ?? new EscapingPreservingPrinter();
     }
 
     /**
-     * Rewrites Piwik\ -> Matomo\ in code names only.
+     * Rewrites Piwik\ -> Matomo\ in code names, string literals, and PHPDoc
+     * comments.
      *
      * @throws \PhpParser\Error When the code cannot be parsed.
      */
@@ -49,7 +51,7 @@ final class Migrator
 
         $traverser = new NodeTraverser(
             new CloningVisitor(),
-            new RootNamespaceSwapper($aliasMap)
+            new RootNamespaceSwapper($aliasMap, $tokens)
         );
 
         // traverse() returns clones while $stmts still holds the pristine
