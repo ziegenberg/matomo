@@ -41,8 +41,19 @@ class Container extends DIContainer implements ContainerInterface
     {
         try {
             return parent::get($name);
-        } catch (\DI\NotFoundException $e) {
-            throw new NotFoundException($e->getMessage(), $e->getCode(), $e);
+        } catch (\Throwable $e) {
+            $matomoName = self::legacyNameToMatomo($name);
+            if ($matomoName !== null) {
+                try {
+                    return parent::get($matomoName);
+                } catch (\Throwable $e2) {
+                    // Matomo\ key also failed; throw the original below.
+                }
+            }
+            if ($e instanceof \DI\NotFoundException) {
+                throw new NotFoundException($e->getMessage(), $e->getCode(), $e);
+            }
+            throw $e;
         }
     }
 
@@ -55,10 +66,22 @@ class Container extends DIContainer implements ContainerInterface
     {
         try {
             return parent::make($name, $parameters);
-        } catch (\DI\NotFoundException $e) {
-            throw new NotFoundException($e->getMessage(), $e->getCode(), $e);
-        } catch (\DI\DependencyException $e) {
-            throw new DependencyException($e->getMessage(), $e->getCode(), $e);
+        } catch (\Throwable $e) {
+            $matomoName = self::legacyNameToMatomo($name);
+            if ($matomoName !== null) {
+                try {
+                    return parent::make($matomoName, $parameters);
+                } catch (\Throwable $e2) {
+                    // Matomo\ key also failed; throw the original below.
+                }
+            }
+            if ($e instanceof \DI\NotFoundException) {
+                throw new NotFoundException($e->getMessage(), $e->getCode(), $e);
+            }
+            if ($e instanceof \DI\DependencyException) {
+                throw new DependencyException($e->getMessage(), $e->getCode(), $e);
+            }
+            throw $e;
         }
     }
 
@@ -69,5 +92,35 @@ class Container extends DIContainer implements ContainerInterface
         } catch (\DI\DependencyException $e) {
             throw new DependencyException($e->getMessage(), $e->getCode(), $e);
         }
+    }
+
+    /**
+     * Returns the `Matomo\` counterpart of a deprecated `Piwik\` container
+     * entry name, or null when the name is not a `Piwik\` root-namespace key.
+     *
+     * During the 7.x release line the root namespace is `Matomo\` but un-migrated
+     * plugins still request core services under their deprecated `Piwik\` names
+     * (e.g. `Piwik\Log\LoggerInterface`). {@see LegacyAutoloader} aliases the
+     * classes via {@see class_alias()}, but PHP-DI container keys are strings: a
+     * `Piwik\` key misses its `Matomo\` definition and autowiring an interface
+     * fails with "not instantiable". This helper rewrites the key so
+     * {@see get()} and {@see make()} can retry under the canonical `Matomo\`
+     * name, honouring the same facade/exceptions-map rules as the alias layer
+     * (e.g. `Piwik\Piwik` -> `Matomo\Matomo`). The alias layer is removed in
+     * Matomo 8.0.
+     */
+    private static function legacyNameToMatomo(string $name): ?string
+    {
+        if (strncmp($name, 'Piwik\\', 6) !== 0) {
+            return null;
+        }
+
+        $matomoName = \LegacyAutoloader::getOppositeName($name);
+
+        if (strncmp($matomoName, 'Matomo\\', 7) !== 0) {
+            return null;
+        }
+
+        return $matomoName;
     }
 }

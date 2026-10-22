@@ -435,11 +435,15 @@ class Manager
         spl_autoload_register(function ($className) use ($pluginDirs) {
             if (str_starts_with($className, 'Piwik\Plugins\\')) {
                 $withoutPrefix = str_replace('Piwik\Plugins\\', '', $className);
-                $path = str_replace('\\', DIRECTORY_SEPARATOR, $withoutPrefix) . '.php';
-                foreach ($pluginDirs as $pluginsDirectory) {
-                    if (file_exists($pluginsDirectory . $path)) {
-                        require_once $pluginsDirectory . $path;
-                    }
+            } elseif (str_starts_with($className, 'Matomo\Plugins\\')) {
+                $withoutPrefix = str_replace('Matomo\Plugins\\', '', $className);
+            } else {
+                return;
+            }
+            $path = str_replace('\\', DIRECTORY_SEPARATOR, $withoutPrefix) . '.php';
+            foreach ($pluginDirs as $pluginsDirectory) {
+                if (file_exists($pluginsDirectory . $path)) {
+                    require_once $pluginsDirectory . $path;
                 }
             }
         });
