@@ -47,6 +47,7 @@ return array(
         Piwik\DI::get('Piwik\Plugins\Diagnostics\Diagnostic\ReportInformational'),
         Piwik\DI::get('Piwik\Plugins\Diagnostics\Diagnostic\UserInformational'),
         Piwik\DI::get(\Piwik\Plugins\Diagnostics\Diagnostic\ArchiveInvalidationsInformational::class),
+        Piwik\DI::get(\Piwik\Plugins\Diagnostics\Diagnostic\DeprecatedNamespaceUsageInformational::class),
     ),
     // Allows other plugins to disable diagnostics that were previously registered
     'diagnostics.disabled' => array(),
