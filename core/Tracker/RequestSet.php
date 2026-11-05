@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Request\AuthenticationToken;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
 
 class RequestSet
 {
@@ -103,12 +103,12 @@ class RequestSet
          * a sent JSON instead of default $_GET+$_POST. It would allow you for example to track requests based on
          * XML or you could import tracking requests stored in a file.
          *
-         * @param \Piwik\Tracker\RequestSet &$requestSet  Call {@link setRequests()} to initialize requests and
+         * @param \Matomo\Tracker\RequestSet &$requestSet  Call {@link setRequests()} to initialize requests and
          *                                                {@link setTokenAuth()} to set a detected auth token.
          *
          * @ignore This event is not public yet as the RequestSet API is not really stable yet
          */
-        Piwik::postEvent('Tracker.initRequestSet', array($this));
+        Matomo::postEvent('Tracker.initRequestSet', array($this));
 
         if (!$this->areRequestsInitialized()) {
             $this->requests = array();

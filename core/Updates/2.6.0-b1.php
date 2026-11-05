@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Config;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Config;
+use Matomo\Updates;
+use Matomo\Updater;
 
 /**
  * Update for version 2.6.0-b1.

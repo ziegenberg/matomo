@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Mail;
+namespace Matomo\Mail;
 
 use PHPMailer\PHPMailer\Exception as PHPMailerException;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\DI\DependencyException;
-use Piwik\Exception\DI\NotFoundException;
-use Piwik\Mail;
-use Piwik\Piwik;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\DI\DependencyException;
+use Matomo\Exception\DI\NotFoundException;
+use Matomo\Mail;
+use Matomo\Matomo;
 
 class Transport
 {
@@ -48,7 +48,7 @@ class Transport
         $phpMailer->XMailer = ' ';
         // avoid triggering automated (vacation) responses
         $phpMailer->addCustomHeader('Auto-Submitted', 'yes');
-        PHPMailer::setLanguage(StaticContainer::get('Piwik\Translation\Translator')->getCurrentLanguage());
+        PHPMailer::setLanguage(StaticContainer::get('Matomo\Translation\Translator')->getCurrentLanguage());
         $this->initSmtpTransport($phpMailer);
 
         if ($mail->isSmtpDebugEnabled()) {
@@ -108,7 +108,7 @@ class Transport
              * @ignore
              * @internal
              */
-            Piwik::postTestEvent("Test.Mail.send", array($phpMailer));
+            Matomo::postTestEvent("Test.Mail.send", array($phpMailer));
             return true;
         }
 

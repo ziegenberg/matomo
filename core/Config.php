@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\MissingFilePermissionException;
-use Piwik\Plugins\CoreAdminHome\Controller;
-use Piwik\Plugins\CorePluginsAdmin\CorePluginsAdmin;
-use Piwik\ProfessionalServices\Advertising;
-use Piwik\Log\LoggerInterface;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\MissingFilePermissionException;
+use Matomo\Plugins\CoreAdminHome\Controller;
+use Matomo\Plugins\CorePluginsAdmin\CorePluginsAdmin;
+use Matomo\ProfessionalServices\Advertising;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Singleton that provides read & write access to Piwik's INI configuration.
@@ -64,7 +64,7 @@ class Config
      */
     public static function getInstance()
     {
-        return StaticContainer::get('Piwik\Config');
+        return StaticContainer::get('Matomo\Config');
     }
 
     public function __construct(GlobalSettingsProvider $settings)
@@ -427,7 +427,7 @@ class Config
              *
              * @param string $localPath Absolute path to the changed file on the server.
              */
-            Piwik::postEvent('Core.configFileChanged', [$localPath]);
+            Matomo::postEvent('Core.configFileChanged', [$localPath]);
         }
     }
 
@@ -448,7 +448,7 @@ class Config
     public function getConfigNotWritableException()
     {
         $path = "config/" . basename($this->getLocalPath());
-        return new MissingFilePermissionException(Piwik::translate('General_ConfigFileIsNotWritable', array("(" . $path . ")", "")));
+        return new MissingFilePermissionException(Matomo::translate('General_ConfigFileIsNotWritable', array("(" . $path . ")", "")));
     }
 
     /**
@@ -496,7 +496,7 @@ class Config
                  *
                  * @param string $localPath Absolute path to the changed file on the server.
                  */
-                Piwik::postEvent('Core.configFileSanityCheckFailed', [$localPath]);
+                Matomo::postEvent('Core.configFileSanityCheckFailed', [$localPath]);
             }
 
             return false;

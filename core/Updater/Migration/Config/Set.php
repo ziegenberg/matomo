@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Config;
+namespace Matomo\Updater\Migration\Config;
 
-use Piwik\Config;
-use Piwik\Updater\Migration;
+use Matomo\Config;
+use Matomo\Updater\Migration;
 
 /**
  * Sets the given configuration to Matomo config value

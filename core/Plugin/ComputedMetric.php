@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Archive\DataTableFactory;
-use Piwik\Columns\Dimension;
-use Piwik\Columns\MetricsList;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Metrics\Formatter;
-use Piwik\Piwik;
+use Matomo\Archive\DataTableFactory;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\MetricsList;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Metrics\Formatter;
+use Matomo\Matomo;
 
 class ComputedMetric extends ProcessedMetric
 {
@@ -128,7 +128,7 @@ class ComputedMetric extends ProcessedMetric
             $precision = 3;
         }
 
-        return Piwik::getQuotientSafe($metric1, $metric2, $precision);
+        return Matomo::getQuotientSafe($metric1, $metric2, $precision);
     }
 
     private function getDetectedType()
@@ -191,12 +191,12 @@ class ComputedMetric extends ProcessedMetric
                 if ($metric1 && $metric1 instanceof ArchivedMetric && $metric2 && $metric2 instanceof ArchivedMetric) {
                     $metric1Name = $metric1->getDimension()->getName();
                     $metric2Name = $metric2->getDimension()->getName();
-                    return Piwik::translate('General_ComputedMetricAverage', array($metric1Name, $metric2Name));
+                    return Matomo::translate('General_ComputedMetricAverage', array($metric1Name, $metric2Name));
                 }
 
                 if ($metric1 && $metric1 instanceof ArchivedMetric) {
                     $metric1Name = $metric1->getDimension()->getName();
-                    return Piwik::translate('General_AverageX', array($metric1Name));
+                    return Matomo::translate('General_AverageX', array($metric1Name));
                 }
 
                 if ($metric1 && $metric2) {
@@ -206,9 +206,9 @@ class ComputedMetric extends ProcessedMetric
                 return $this->metric1 . ' per ' . $this->metric2;
             } elseif ($this->aggregation === self::AGGREGATION_RATE) {
                 if ($metric1 && $metric1 instanceof ArchivedMetric) {
-                    return Piwik::translate('General_ComputedMetricRate', array($metric1->getTranslatedName()));
+                    return Matomo::translate('General_ComputedMetricRate', array($metric1->getTranslatedName()));
                 } else {
-                    return Piwik::translate('General_ComputedMetricRate', array($this->metric1));
+                    return Matomo::translate('General_ComputedMetricRate', array($this->metric1));
                 }
             }
         }
@@ -224,19 +224,19 @@ class ComputedMetric extends ProcessedMetric
 
             if ($this->aggregation === self::AGGREGATION_AVG) {
                 if ($metric1 && $metric1 instanceof ArchivedMetric && $metric2 && $metric2 instanceof ArchivedMetric) {
-                    return Piwik::translate('General_ComputedMetricAverageDocumentation', array($metric1->getDimension()->getName(), $metric2->getTranslatedName()));
+                    return Matomo::translate('General_ComputedMetricAverageDocumentation', array($metric1->getDimension()->getName(), $metric2->getTranslatedName()));
                 }
 
                 if ($metric1 && $metric1 instanceof ArchivedMetric) {
-                    return Piwik::translate('General_ComputedMetricAverageShortDocumentation', array($metric1->getDimension()->getName()));
+                    return Matomo::translate('General_ComputedMetricAverageShortDocumentation', array($metric1->getDimension()->getName()));
                 }
 
-                return Piwik::translate('General_ComputedMetricAverageDocumentation', array($this->metric1, $this->metric2));
+                return Matomo::translate('General_ComputedMetricAverageDocumentation', array($this->metric1, $this->metric2));
             } elseif ($this->aggregation === self::AGGREGATION_RATE) {
                 if ($metric1 && $metric1 instanceof ArchivedMetric) {
-                    return Piwik::translate('General_ComputedMetricRateDocumentation', array($metric1->getDimension()->getNamePlural(), $metric2->getDimension()->getNamePlural()));
+                    return Matomo::translate('General_ComputedMetricRateDocumentation', array($metric1->getDimension()->getNamePlural(), $metric2->getDimension()->getNamePlural()));
                 } else {
-                    return Piwik::translate('General_ComputedMetricRateShortDocumentation', array($this->metric1));
+                    return Matomo::translate('General_ComputedMetricRateShortDocumentation', array($this->metric1));
                 }
             }
         }

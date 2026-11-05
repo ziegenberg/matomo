@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Http;
+namespace Matomo\Http;
 
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Url;
-use Piwik\View\SecurityPolicy;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Url;
+use Matomo\View\SecurityPolicy;
 
 /**
  * Sends the response headers for a data response: one that carries data rather than application UI.

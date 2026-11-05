@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Policy;
+namespace Matomo\Policy;
 
 /**
  * Allows evaluating a policy-controlled setting as if no compliance policy was

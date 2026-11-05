@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Db\Adapter;
-use Piwik\Db\TransactionalDatabaseInterface;
-use Piwik\Db\TransactionalDatabaseStaticTrait;
+use Matomo\Db\Adapter;
+use Matomo\Db\TransactionalDatabaseInterface;
+use Matomo\Db\TransactionalDatabaseStaticTrait;
 
 /**
  * Contains SQL related helper functions for Piwik's MySQL database.
@@ -47,7 +47,7 @@ class Db implements TransactionalDatabaseInterface
     /**
      * Returns the database connection and creates it if it hasn't been already.
      *
-     * @return \Piwik\Tracker\Db|\Piwik\Db\AdapterInterface|\Piwik\Db
+     * @return \Matomo\Tracker\Db|\Matomo\Db\AdapterInterface|\Matomo\Db
      */
     public static function get()
     {
@@ -80,7 +80,7 @@ class Db implements TransactionalDatabaseInterface
      *
      * @since Matomo 3.12
      *
-     * @return \Piwik\Tracker\Db|\Piwik\Db\AdapterInterface|\Piwik\Db
+     * @return \Matomo\Tracker\Db|\Matomo\Db\AdapterInterface|\Matomo\Db
      */
     public static function getReader()
     {
@@ -127,7 +127,7 @@ class Db implements TransactionalDatabaseInterface
          *                        - **adapter**: either `'PDO\MYSQL'` or `'MYSQLI'`
          *                        - **type**: The MySQL engine to use, for instance 'InnoDB'
          */
-        Piwik::postEvent('Db.getDatabaseConfig', array(&$dbConfig));
+        Matomo::postEvent('Db.getDatabaseConfig', array(&$dbConfig));
 
         $dbConfig['profiler'] = @$config->Debug['enable_sql_profiler'];
 
@@ -136,7 +136,7 @@ class Db implements TransactionalDatabaseInterface
 
     /**
      * For tests only.
-     * @param \Piwik\Db\AdapterInterface|null $connection
+     * @param \Matomo\Db\AdapterInterface|null $connection
      * @ignore
      * @internal
      * @return void
@@ -437,7 +437,7 @@ class Db implements TransactionalDatabaseInterface
      *     $idVisit = // ...
      *     Db::deleteAllRows(Common::prefixTable('log_visit'), "WHERE idvisit <= ?", "idvisit ASC", 100000, array($idVisit));
      *
-     * @param string $table The name of the table to delete from. Must be prefixed (see {@link Piwik\Common::prefixTable()}).
+     * @param string $table The name of the table to delete from. Must be prefixed (see {@link Matomo\Common::prefixTable()}).
      * @param string $where The where clause of the query. Must include the WHERE keyword.
      * @param string $orderBy The column to order by and the order by direction, eg, `idvisit ASC`.
      * @param int $maxRowsPerQuery The maximum number of rows to delete per `DELETE` query.
@@ -467,7 +467,7 @@ class Db implements TransactionalDatabaseInterface
      * Drops the supplied table or tables.
      *
      * @param string|array $tables The name of the table to drop or an array of table names to drop.
-     *                             Table names must be prefixed (see {@link Piwik\Common::prefixTable()}).
+     *                             Table names must be prefixed (see {@link Matomo\Common::prefixTable()}).
      * @return \Zend_Db_Statement
      */
     public static function dropTables($tables)
@@ -497,9 +497,9 @@ class Db implements TransactionalDatabaseInterface
      * should still work if it has not been granted.
      *
      * @param string|array $tablesToRead The table or tables to obtain 'read' locks on. Table names must
-     *                                   be prefixed (see {@link Piwik\Common::prefixTable()}).
+     *                                   be prefixed (see {@link Matomo\Common::prefixTable()}).
      * @param string|array $tablesToWrite The table or tables to obtain 'write' locks on. Table names must
-     *                                    be prefixed (see {@link Piwik\Common::prefixTable()}).
+     *                                    be prefixed (see {@link Matomo\Common::prefixTable()}).
      * @return int The number of rows affected, see {@link exec()}.
      */
     public static function lockTables($tablesToRead, $tablesToWrite = array())

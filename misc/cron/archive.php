@@ -23,10 +23,10 @@ define('PIWIK_ENABLE_SESSION_START', false);
 
 require_once PIWIK_INCLUDE_PATH . '/core/Common.php';
 
-if (Piwik\Common::isPhpCliMode()) {
+if (Matomo\Common::isPhpCliMode()) {
     require_once PIWIK_INCLUDE_PATH . "/core/bootstrap.php";
 
-    $console = new Piwik\Console();
+    $console = new Matomo\Console();
 
     // manipulate command line arguments so CoreArchiver command will be executed
     $script = array_shift($_SERVER['argv']);
@@ -49,12 +49,12 @@ try 'php archive.php --url=https://your.piwik/path'
 
     $console->run();
 } else { // if running via web request, use CoreAdminHome.runCronArchiving method
-    Piwik\Common::sendHeader('Content-type: text/plain');
+    Matomo\Common::sendHeader('Content-type: text/plain');
     $_GET['module'] = 'API';
     $_GET['method'] = 'CoreAdminHome.runCronArchiving';
     $_GET['format'] = 'console'; // will use Content-type text/plain
 
-    if('' === Piwik\Common::getRequestVar('token_auth', '', 'string')) {
+    if('' === Matomo\Common::getRequestVar('token_auth', '', 'string')) {
         echo "
 <b>You must specify the Super User token_auth as a parameter to this script, eg. <code>?token_auth=XYZ</code> if you wish to run this script through the browser. </b><br>
 However it is recommended to run it <a href='https://matomo.org/docs/setup-auto-archiving/'>via cron in the command line</a>, since it can take a long time to run.<br/>

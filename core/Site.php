@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Http\BadRequestException;
-use Piwik\Plugins\SitesManager\API;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Http\BadRequestException;
+use Matomo\Plugins\SitesManager\API;
 
 /**
  * Provides access to individual [site entity](/guides/persistence-and-the-mysql-backend#websites-aka-sites) data
@@ -73,7 +73,7 @@ class Site
         $this->id = (int) $idsite;
 
         if (!empty(self::$infoSites[$this->id])) {
-            Piwik::checkUserHasViewAccess($this->id);
+            Matomo::checkUserHasViewAccess($this->id);
             $site = self::$infoSites[$this->id];
         } else {
             $site = API::getInstance()->getSiteFromId($this->id);
@@ -135,7 +135,7 @@ class Site
          * This is not yet public as it doesn't work 100% accurately. Eg if `setSiteFromArray()` is called directly this event will not be triggered.
          * @ignore
          */
-        Piwik::postEvent('Site.setSites', array(&$sites));
+        Matomo::postEvent('Site.setSites', array(&$sites));
     }
 
     /**
@@ -499,7 +499,7 @@ class Site
      */
     public static function getSites()
     {
-        if (Piwik::hasUserSuperUserAccess()) {
+        if (Matomo::hasUserSuperUserAccess()) {
             return self::$infoSites;
         }
 
@@ -517,7 +517,7 @@ class Site
 
         // the cache is shared by everything that runs in this request, so check access on every read
         if (isset(self::$infoSites[$idsite])) {
-            Piwik::checkUserHasViewAccess($idsite);
+            Matomo::checkUserHasViewAccess($idsite);
         } else {
             $site = API::getInstance()->getSiteFromId($idsite);
             self::setSiteFromArray($idsite, $site);
@@ -635,7 +635,7 @@ class Site
     {
         $currencyCode = self::getCurrencyFor($idsite);
         $key = 'Intl_CurrencySymbol_' . $currencyCode;
-        $symbol = Piwik::translate($key);
+        $symbol = Matomo::translate($key);
 
         if ($key === $symbol) {
             return $currencyCode;

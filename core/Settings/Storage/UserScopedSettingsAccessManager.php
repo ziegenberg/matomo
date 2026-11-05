@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage;
+namespace Matomo\Settings\Storage;
 
 use Exception;
-use Piwik\Settings\Storage\Backend\PluginSettingsTable;
+use Matomo\Settings\Storage\Backend\PluginSettingsTable;
 
 class UserScopedSettingsAccessManager
 {

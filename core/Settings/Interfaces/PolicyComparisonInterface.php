@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces;
+namespace Matomo\Settings\Interfaces;
 
-use Piwik\Policy\CompliancePolicy;
+use Matomo\Policy\CompliancePolicy;
 
 /**
  * Implemented by settings that a compliance policy can control.
@@ -19,7 +19,7 @@ use Piwik\Policy\CompliancePolicy;
  * it is currently being enforced. That state is not tied to any single policy: a
  * setting has one enforcement state per scope, not one per policy it subscribes to.
  *
- * Implement this interface via {@link \Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait},
+ * Implement this interface via {@link \Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait},
  * which provides default implementations for the enforcement state and dashboard
  * metadata methods. Methods may be added to this interface in major releases; the
  * trait always ships matching defaults, so trait users are unaffected.

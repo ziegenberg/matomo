@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Dependency;
-use Piwik\Plugin\Manager;
-use Piwik\Plugin\MetadataLoader;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Dependency;
+use Matomo\Plugin\Manager;
+use Matomo\Plugin\MetadataLoader;
 
-if (!class_exists('Piwik\Plugin')) {
+if (!class_exists('Matomo\Plugin')) {
 
 /**
  * Base class of all Plugin Descriptor classes.
@@ -49,9 +49,9 @@ if (!class_exists('Piwik\Plugin')) {
  *
  * **How to extend**
  *
- *     use Piwik\Common;
- *     use Piwik\Plugin;
- *     use Piwik\Db;
+ *     use Matomo\Common;
+ *     use Matomo\Plugin;
+ *     use Matomo\Db;
  *
  *     class MyPlugin extends Plugin
  *     {
@@ -338,7 +338,7 @@ if (!class_exists('Piwik\Plugin')) {
 
         /**
          * Returns the plugin's base class name without the namespace,
-         * e.g., `"UserCountry"` when the plugin class is `"Piwik\Plugins\UserCountry\UserCountry"`.
+         * e.g., `"UserCountry"` when the plugin class is `"Matomo\Plugins\UserCountry\UserCountry"`.
          *
          * @return string
          */
@@ -353,7 +353,7 @@ if (!class_exists('Piwik\Plugin')) {
          * @param string $componentName      The name of the component you want to look for. In case you request a
          *                                   component named 'Menu' it'll look for a file named 'Menu.php' within the
          *                                   root of the plugin folder that implements a class named
-         *                                   Piwik\Plugin\$PluginName\Menu . If such a file exists but does not implement
+         *                                   Matomo\Plugin\$PluginName\Menu . If such a file exists but does not implement
          *                                   this class it'll silently ignored.
          * @param string $expectedSubclass   If not empty, a check will be performed whether a found file extends the
          *                                   given subclass. If the requested file exists but does not extend this class
@@ -394,7 +394,7 @@ if (!class_exists('Piwik\Plugin')) {
 
                 require_once $componentFile;
 
-                $classname = sprintf('Piwik\\Plugins\\%s\\%s', $this->pluginName, $componentName);
+                $classname = sprintf('Matomo\\Plugins\\%s\\%s', $this->pluginName, $componentName);
 
                 if (!class_exists($classname)) {
                     return null;
@@ -477,7 +477,7 @@ if (!class_exists('Piwik\Plugin')) {
         public function getMissingDependenciesAsString($piwikVersion = null)
         {
             if ($this->requiresInternetConnection() && !SettingsPiwik::isInternetEnabled()) {
-                return Piwik::translate('CorePluginsAdmin_PluginRequiresInternet');
+                return Matomo::translate('CorePluginsAdmin_PluginRequiresInternet');
             }
 
             if (empty($this->pluginInformation['require'])) {
@@ -496,7 +496,7 @@ if (!class_exists('Piwik\Plugin')) {
                 $causedBy[] = ucfirst($dependency['requirement']) . ' ' . $dependency['causedBy'];
             }
 
-            return Piwik::translate("CorePluginsAdmin_PluginRequirement", array(
+            return Matomo::translate("CorePluginsAdmin_PluginRequirement", array(
             $this->getPluginName(),
             implode(', ', $causedBy),
             ));
@@ -512,8 +512,8 @@ if (!class_exists('Piwik\Plugin')) {
          * Note: the time frame is limited by the `[General] rearchive_reports_in_past_last_n_months`
          * INI config value.
          *
-         * @throws \Piwik\Exception\DI\DependencyException
-         * @throws \Piwik\Exception\DI\NotFoundException
+         * @throws \Matomo\Exception\DI\DependencyException
+         * @throws \Matomo\Exception\DI\NotFoundException
          */
         public function schedulePluginReArchiving()
         {
@@ -569,7 +569,7 @@ if (!class_exists('Piwik\Plugin')) {
          */
         public static function getPluginNameFromNamespace($namespaceOrClassName)
         {
-            if ($namespaceOrClassName && preg_match("/Piwik\\\\Plugins\\\\([a-zA-Z_0-9]+)\\\\/", $namespaceOrClassName, $matches)) {
+            if ($namespaceOrClassName && preg_match("/Matomo\\\\Plugins\\\\([a-zA-Z_0-9]+)\\\\/", $namespaceOrClassName, $matches)) {
                 return $matches[1];
             } else {
                 return false;
@@ -636,7 +636,7 @@ if (!class_exists('Piwik\Plugin')) {
                 require_once $file;
 
                 $fileName  = str_replace(array($baseDir . '/', '.php'), '', $file);
-                $klassName = sprintf('Piwik\\Plugins\\%s\\%s\\%s', $this->pluginName, str_replace('/', '\\', $directoryWithinPlugin), str_replace('/', '\\', $fileName));
+                $klassName = sprintf('Matomo\\Plugins\\%s\\%s\\%s', $this->pluginName, str_replace('/', '\\', $directoryWithinPlugin), str_replace('/', '\\', $fileName));
 
                 if (!class_exists($klassName)) {
                     continue;

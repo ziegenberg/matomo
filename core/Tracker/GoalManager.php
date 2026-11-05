@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Exception\InvalidRequestParameterException;
-use Piwik\Log\LoggerInterface;
-use Piwik\Piwik;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CustomVariables\CustomVariables;
-use Piwik\Plugins\Events\Actions\ActionEvent;
-use Piwik\Tracker\Visit\VisitProperties;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Exception\InvalidRequestParameterException;
+use Matomo\Log\LoggerInterface;
+use Matomo\Matomo;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CustomVariables\CustomVariables;
+use Matomo\Plugins\Events\Actions\ActionEvent;
+use Matomo\Tracker\Visit\VisitProperties;
 
 class GoalManager
 {
@@ -788,13 +788,13 @@ class GoalManager
          *                          to see what it contains.
          * @param array $visitInformation The visit entity that we are tracking a conversion for. See what
          *                                information it contains [here](/guides/persistence-and-the-mysql-backend#visits).
-         * @param \Piwik\Tracker\Request $request An object describing the tracking request being processed.
+         * @param \Matomo\Tracker\Request $request An object describing the tracking request being processed.
          * @param Action|null $action An action object like ActionPageView or ActionDownload, or null if no action is
          *                            supposed to be processed.
          * @deprecated
          * @ignore
          */
-        Piwik::postEvent('Tracker.newConversionInformation', array(&$conversion, $visitInformation, $request, $action));
+        Matomo::postEvent('Tracker.newConversionInformation', array(&$conversion, $visitInformation, $request, $action));
 
         if (
             !empty($convertedGoal)
@@ -969,7 +969,7 @@ class GoalManager
                 break;
             default:
                 try {
-                    StaticContainer::get(LoggerInterface::class)->warning(Piwik::translate('General_ExceptionInvalidGoalPattern', array($pattern_type)));
+                    StaticContainer::get(LoggerInterface::class)->warning(Matomo::translate('General_ExceptionInvalidGoalPattern', array($pattern_type)));
                 } catch (\Exception $e) {
                 }
                 $match = false;

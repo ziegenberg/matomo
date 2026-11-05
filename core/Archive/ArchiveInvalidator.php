@@ -7,29 +7,29 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
-use Piwik\Archive\ArchiveInvalidator\InvalidationResult;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive\ReArchiveList;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\DataAccess\Model;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Segment;
-use Piwik\SettingsServer;
-use Piwik\Site;
-use Piwik\Tracker\Cache;
-use Piwik\Log\LoggerInterface;
+use Matomo\Archive\ArchiveInvalidator\InvalidationResult;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive\ReArchiveList;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\DataAccess\Model;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Plugins\CoreAdminHome\Tasks\ArchivesToPurgeDistributedList;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Segment;
+use Matomo\SettingsServer;
+use Matomo\Site;
+use Matomo\Tracker\Cache;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Service that can be used to invalidate archives or add archive references to a list so they will
@@ -312,7 +312,7 @@ class ArchiveInvalidator
          * @param string $name A string containing the name of the archive to be invalidated.
          * @param bool $isPrivacyDeleteData A boolean value if event is triggered via Privacy delete visit action.
          */
-        Piwik::postEvent('Archiving.getIdSitesToMarkArchivesAsInvalidated', array(&$idSites, $dates, $period, $segment, $name, $isPrivacyDeleteData = false));
+        Matomo::postEvent('Archiving.getIdSitesToMarkArchivesAsInvalidated', array(&$idSites, $dates, $period, $segment, $name, $isPrivacyDeleteData = false));
         // we trigger above event on purpose here and it is good that the segment was created like
         // `new Segment($segmentString, $idSites)` because when a user adds a site via this event, the added idSite
         // might not have this segment meaning we avoid a possible error. For the workflow to work, any added or removed
@@ -471,7 +471,7 @@ class ArchiveInvalidator
     {
         $date2 = Date::today();
 
-        $earliestDateToRearchive = Piwik::getEarliestDateToRearchive();
+        $earliestDateToRearchive = Matomo::getEarliestDateToRearchive();
         if (empty($startDate)) {
             if (empty($earliestDateToRearchive)) {
                 return null; // INI setting set to 0 months so no rearchiving
@@ -722,7 +722,7 @@ class ArchiveInvalidator
      * @param Date[]|string[] $dates
      * @param string|false $period
      * @param bool $ignorePurgeLogDataDate
-     * @return \Piwik\Date[]
+     * @return \Matomo\Date[]
      */
     private function removeDatesThatHaveBeenPurged($dates, $period, InvalidationResult $invalidationInfo, $ignorePurgeLogDataDate)
     {
@@ -810,7 +810,7 @@ class ArchiveInvalidator
             return $this->allIdSitesCache;
         }
 
-        $model = new \Piwik\Plugins\SitesManager\Model();
+        $model = new \Matomo\Plugins\SitesManager\Model();
         $this->allIdSitesCache = $model->getSitesId();
         return $this->allIdSitesCache;
     }

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DeviceDetector;
+namespace Matomo\DeviceDetector;
 
-use Piwik\Cache as PiwikCache;
+use Matomo\Cache as PiwikCache;
 
 /**
  * Caching class used for DeviceDetector caching
  *
- * Combines Piwik\CacheFile with an additional caching in static property
+ * Combines Matomo\CacheFile with an additional caching in static property
  *
  * Static caching speeds up multiple detections in one request, which is the case when sending bulk requests
  */

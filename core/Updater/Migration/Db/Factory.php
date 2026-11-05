@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Db;
+namespace Matomo\Updater\Migration\Db;
 
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
 
 /**
  * Provides database migrations.
@@ -20,7 +20,7 @@ use Piwik\Container\StaticContainer;
 class Factory
 {
     /**
-     * @var \Piwik\Container\Container
+     * @var \Matomo\Container\Container
      */
     private $container;
 
@@ -39,9 +39,9 @@ class Factory
      * $factory->sql("DELETE * FROM table_name WHERE plugin_name = 'MyPluginName'");
      *
      * @param string $sql  The SQL query that should be executed. Make sure to prefix a table name via
-     *                     {@link Piwik\Commin::prefixTable()}.
+     *                     {@link Matomo\Commin::prefixTable()}.
      * @param int|int[]    $errorCodesToIgnore Any given MySQL server error code will be ignored. For a list of all
-     *                                         possible error codes have a look at {@link \Piwik\Updater\Migration\Db}.
+     *                                         possible error codes have a look at {@link \Matomo\Updater\Migration\Db}.
      *                                         If no error should be ignored use an empty array or `false`.
      * @return Sql
      */
@@ -51,7 +51,7 @@ class Factory
             $errorCodesToIgnore = array();
         }
 
-        return $this->container->make('Piwik\Updater\Migration\Db\Sql', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\Sql', array(
             'sql' => $sql, 'errorCodesToIgnore' => $errorCodesToIgnore,
         ));
     }
@@ -65,10 +65,10 @@ class Factory
      * $factory->boundSql('DELETE * FROM table_name WHERE idsite = ?, array($idSite = 1));
      *
      * @param string $sql  The SQL query that should be executed. Make sure to prefix a table name via
-     *                     {@link Piwik\Commin::prefixTable()}.
+     *                     {@link Matomo\Commin::prefixTable()}.
      * @param array $bind  An array of values that need to be replaced with the question marks in the SQL query.
      * @param int|int[] $errorCodesToIgnore Any given MySQL server error code will be ignored. For a list of all
-     *                                            possible error codes have a look at {@link \Piwik\Updater\Migration\Db}.
+     *                                            possible error codes have a look at {@link \Matomo\Updater\Migration\Db}.
      *                                            If no error should be ignored use `false`.
      * @return BoundSql
      */
@@ -78,7 +78,7 @@ class Factory
             $errorCodesToIgnore = array();
         }
 
-        return $this->container->make('Piwik\Updater\Migration\Db\BoundSql', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\BoundSql', array(
             'sql' => $sql, 'errorCodesToIgnore' => $errorCodesToIgnore, 'bind' => $bind,
         ));
     }
@@ -99,7 +99,7 @@ class Factory
             $primaryKey = array($primaryKey);
         }
 
-        return $this->container->make('Piwik\Updater\Migration\Db\CreateTable', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\CreateTable', array(
             'table' => $table, 'columnNames' => $columnNames, 'primaryKey' => $primaryKey,
         ));
     }
@@ -113,7 +113,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\DropTable', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\DropTable', array(
             'table' => $table,
         ));
     }
@@ -133,7 +133,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\AddColumn', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\AddColumn', array(
             'table' => $table, 'columnName' => $columnName, 'columnType' => $columnType, 'placeColumnAfter' => $placeColumnAfter,
         ));
     }
@@ -157,7 +157,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\AddColumns', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\AddColumns', array(
             'table' => $table, 'columns' => $columns, 'placeColumnAfter' => $placeColumnAfter,
         ));
     }
@@ -173,7 +173,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\DropColumn', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\DropColumn', array(
             'table' => $table, 'columnName' => $columnName,
         ));
     }
@@ -189,7 +189,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\DropColumns', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\DropColumns', array(
             'tableName' => $table, 'columnNames' => $columnNames,
         ));
     }
@@ -208,7 +208,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\ChangeColumn', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\ChangeColumn', array(
             'table' => $table, 'oldColumnName' => $oldColumnName,
             'newColumnName' => $newColumnName, 'columnType' => $columnType,
         ));
@@ -227,7 +227,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\ChangeColumnType', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\ChangeColumnType', array(
             'table' => $table, 'columnName' => $columnName, 'columnType' => $columnType,
         ));
     }
@@ -248,7 +248,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\ChangeColumnTypes', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\ChangeColumnTypes', array(
             'table' => $table, 'columns' => $columns,
         ));
     }
@@ -278,7 +278,7 @@ class Factory
             $columnNames = array($columnNames);
         }
 
-        return $this->container->make('Piwik\Updater\Migration\Db\AddIndex', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\AddIndex', array(
             'table' => $table, 'columnNames' => $columnNames, 'indexName' => $indexName,
         ));
     }
@@ -307,7 +307,7 @@ class Factory
             $columnNames = array($columnNames);
         }
 
-        return $this->container->make('Piwik\Updater\Migration\Db\AddUniqueKey', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\AddUniqueKey', array(
             'table' => $table, 'columnNames' => $columnNames, 'indexName' => $indexName,
         ));
     }
@@ -323,7 +323,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\DropIndex', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\DropIndex', array(
             'table' => $table, 'indexName' => $indexName,
         ));
     }
@@ -338,7 +338,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\DropPrimaryKey', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\DropPrimaryKey', array(
             'table' => $table,
         ));
     }
@@ -359,7 +359,7 @@ class Factory
             $columnNames = array($columnNames);
         }
 
-        return $this->container->make('Piwik\Updater\Migration\Db\AddPrimaryKey', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\AddPrimaryKey', array(
             'table' => $table, 'columnNames' => $columnNames,
         ));
     }
@@ -379,7 +379,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\Insert', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\Insert', array(
             'table' => $table, 'columnValuePairs' => $columnValuePairs,
         ));
     }
@@ -403,7 +403,7 @@ class Factory
     {
         $table = $this->prefixTable($table);
 
-        return $this->container->make('Piwik\Updater\Migration\Db\BatchInsert', array(
+        return $this->container->make('Matomo\Updater\Migration\Db\BatchInsert', array(
             'table' => $table, 'columnNames' => $columnNames, 'values' => $values,
             'throwException' => $throwException, 'charset' => $charset,
         ));

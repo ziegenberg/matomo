@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Request;
+namespace Matomo\Request;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Date;
-use Piwik\Exception\AuthenticationFailedException;
-use Piwik\Http\BadRequestException;
-use Piwik\Piwik;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\Request;
-use Piwik\SettingsServer;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Date;
+use Matomo\Exception\AuthenticationFailedException;
+use Matomo\Http\BadRequestException;
+use Matomo\Matomo;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Request;
+use Matomo\SettingsServer;
 
 /**
  * Main class to handle actions related to auth tokens.
@@ -165,7 +165,7 @@ class AuthenticationToken
         $firstValue = array_shift($valuesBySource);
         foreach ($valuesBySource as $value) {
             if ($value !== $firstValue) {
-                throw new BadRequestException(Piwik::translate('General_ConflictingAuthenticationParametersProvided'));
+                throw new BadRequestException(Matomo::translate('General_ConflictingAuthenticationParametersProvided'));
             }
         }
     }
@@ -395,7 +395,7 @@ class AuthenticationToken
         }
 
         throw new AuthenticationFailedException(
-            Piwik::translate('General_ScopedTokenCannotUseApiSession')
+            Matomo::translate('General_ScopedTokenCannotUseApiSession')
         );
     }
 

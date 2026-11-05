@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Tracker;
-use Piwik\DeviceDetector\DeviceDetectorFactory;
-use Piwik\SettingsPiwik;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Tracker;
+use Matomo\DeviceDetector\DeviceDetectorFactory;
+use Matomo\SettingsPiwik;
 
 class Settings // TODO: merge w/ visitor recognizer or make it it's own service. the class name is required for BC.
 {

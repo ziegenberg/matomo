@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Mail;
+namespace Matomo\Mail;
 
-use Piwik\Piwik;
-use Piwik\ReportRenderer;
+use Matomo\Matomo;
+use Matomo\ReportRenderer;
 
 class EmailStyles
 {
@@ -98,7 +98,7 @@ class EmailStyles
         $this->tableCellBorderColor = self::rgbToHex(ReportRenderer::TABLE_CELL_BORDER_COLOR);
         $this->tableBgColor = self::rgbToHex(ReportRenderer::TABLE_BG_COLOR);
 
-        $this->brandNameLong = 'Matomo, ' . Piwik::translate('General_OpenSourceWebAnalytics');
+        $this->brandNameLong = 'Matomo, ' . Matomo::translate('General_OpenSourceWebAnalytics');
     }
 
     public static function rgbToHex($rgbValues)
@@ -119,7 +119,7 @@ class EmailStyles
         /**
          * @ignore
          */
-        Piwik::postEvent('Email.configureEmailStyle', [$result]);
+        Matomo::postEvent('Email.configureEmailStyle', [$result]);
 
         return $result;
     }

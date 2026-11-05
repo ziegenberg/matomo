@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Changes;
+namespace Matomo\Changes;
 
-use Piwik\Log\LoggerInterface;
-use Piwik\Piwik;
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\Tracker\Db\DbException;
-use Piwik\Updater\Migration;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager as PluginManager;
+use Matomo\Log\LoggerInterface;
+use Matomo\Matomo;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\Tracker\Db\DbException;
+use Matomo\Updater\Migration;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager as PluginManager;
 
 /**
  * Change model class
@@ -219,7 +219,7 @@ class Model
          *
          * @param array &$changes
          */
-        Piwik::postEvent('Changes.filterChanges', array(&$changes));
+        Matomo::postEvent('Changes.filterChanges', array(&$changes));
 
         $this->changeItems = $changes;
 

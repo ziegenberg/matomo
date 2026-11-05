@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Updates as PiwikUpdates;
+use Matomo\Updates as PiwikUpdates;
 
 /**
  * Mark the upgrade as major as the field  visit_entry_idaction_url was updated in  https://github.com/piwik/piwik/pull/10510

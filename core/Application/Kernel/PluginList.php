@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Application\Kernel;
+namespace Matomo\Application\Kernel;
 
-use Piwik\Plugin\MetadataLoader;
+use Matomo\Plugin\MetadataLoader;
 
 /**
  * Lists the currently activated plugins. Used when setting up Piwik's environment before

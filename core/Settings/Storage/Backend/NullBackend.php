@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage\Backend;
+namespace Matomo\Settings\Storage\Backend;
 
 /**
  * Static / temporary storage where a value shall never be persisted. Meaning it will use the default value

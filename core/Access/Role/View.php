@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Access\Role;
+namespace Matomo\Access\Role;
 
-use Piwik\Access\Role;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Access\Role;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class View extends Role
 {
@@ -19,7 +19,7 @@ class View extends Role
 
     public function getName(): string
     {
-        return Piwik::translate('UsersManager_PrivView');
+        return Matomo::translate('UsersManager_PrivView');
     }
 
     public function getId(): string
@@ -29,7 +29,7 @@ class View extends Role
 
     public function getDescription(): string
     {
-        return Piwik::translate('UsersManager_PrivViewDescription');
+        return Matomo::translate('UsersManager_PrivViewDescription');
     }
 
     public function getHelpUrl(): string

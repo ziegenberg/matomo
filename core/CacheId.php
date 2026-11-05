@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager;
 
 class CacheId
 {
@@ -19,7 +19,7 @@ class CacheId
      */
     public static function languageAware($cacheId)
     {
-        return $cacheId . '-' . StaticContainer::get('Piwik\Translation\Translator')->getCurrentLanguage();
+        return $cacheId . '-' . StaticContainer::get('Matomo\Translation\Translator')->getCurrentLanguage();
     }
 
     /**

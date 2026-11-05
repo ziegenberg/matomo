@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\NumberFormatter;
-use Piwik\Piwik;
-use Piwik\Site;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\NumberFormatter;
+use Matomo\Matomo;
+use Matomo\Site;
 
 /**
  * A {@link DataTable} filter that calculates the evolution of a metric and adds
  * it to each row as a percentage.
  *
- * **This filter cannot be used as an argument to {@link \Piwik\DataTable::filter()}** since
+ * **This filter cannot be used as an argument to {@link \Matomo\DataTable::filter()}** since
  * it requires corresponding data from another DataTable. Instead,
  * you must manually perform a binary filter (see the **MultiSites** API for an
  * example).
@@ -172,7 +172,7 @@ class CalculateEvolutionFilter extends ColumnCallbackAddColumnPercentage
         }
 
         if ($prependPlusSignWhenPositive && $number >= 0) {
-            $formatted = Piwik::translate('Intl_NumberSymbolPlus') . $formatted;
+            $formatted = Matomo::translate('Intl_NumberSymbolPlus') . $formatted;
         }
 
         return $formatted;

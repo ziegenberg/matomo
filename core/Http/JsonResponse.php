@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Http;
+namespace Matomo\Http;
 
 use Attribute;
 
@@ -16,12 +16,12 @@ use Attribute;
  *
  * Sending the JSON `Content-Type` header from inside a controller action is fragile: the header is
  * not committed until the response body is finally echoed, so any code that runs afterwards while
- * the action is still building its response (most commonly a `Piwik\View::render()` call, which
+ * the action is still building its response (most commonly a `Matomo\View::render()` call, which
  * defaults to `text/html`) silently overwrites it again.
  *
- * Applying this attribute to an action tells the {@see \Piwik\FrontController} to (re-)send the JSON
+ * Applying this attribute to an action tells the {@see \Matomo\FrontController} to (re-)send the JSON
  * header once the action has fully returned, immediately before the output is written, so it wins
- * over anything the action did while building its response (such as a rendered `Piwik\View`).
+ * over anything the action did while building its response (such as a rendered `Matomo\View`).
  *
  * For this to hold, an action carrying the attribute must:
  *  - always return its JSON body as a string (typically `json_encode(...)`);

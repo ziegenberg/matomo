@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Access;
+namespace Matomo\Access;
 
 use Matomo\Cache\Transient;
 
 /**
- * Transient cache used while {@link \Piwik\Access::doAsSuperUser()} runs its callback.
+ * Transient cache used while {@link \Matomo\Access::doAsSuperUser()} runs its callback.
  *
  * Reads fall through to the cache of the caller, writes stay in the overlay. Once the callback
  * returns, {@link applyInvalidationsTo()} drops every entry the callback saved or deleted from the

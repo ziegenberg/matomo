@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Config;
-use Piwik\Piwik;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Config;
+use Matomo\Matomo;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_1_1 extends Updates
 {
@@ -33,7 +33,7 @@ class Updates_1_1 extends Updates
         $rootLogin = $superuser['login'];
         try {
             // throws an exception if invalid
-            Piwik::checkValidLoginString($rootLogin);
+            Matomo::checkValidLoginString($rootLogin);
         } catch (\Exception $e) {
             throw new \Exception('Superuser login name "' . $rootLogin . '" is no longer a valid format. '
                 . $e->getMessage()

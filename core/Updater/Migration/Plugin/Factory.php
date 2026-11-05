@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Plugin;
+namespace Matomo\Updater\Migration\Plugin;
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * Provides plugin migrations.
@@ -19,7 +19,7 @@ use Piwik\Container\StaticContainer;
 class Factory
 {
     /**
-     * @var \Piwik\Container\Container
+     * @var \Matomo\Container\Container
      */
     private $container;
 
@@ -41,7 +41,7 @@ class Factory
      */
     public function activate($pluginName)
     {
-        return $this->container->make('Piwik\Updater\Migration\Plugin\Activate', array(
+        return $this->container->make('Matomo\Updater\Migration\Plugin\Activate', array(
             'pluginName' => $pluginName,
         ));
     }
@@ -56,7 +56,7 @@ class Factory
      */
     public function deactivate($pluginName)
     {
-        return $this->container->make('Piwik\Updater\Migration\Plugin\Deactivate', array(
+        return $this->container->make('Matomo\Updater\Migration\Plugin\Deactivate', array(
             'pluginName' => $pluginName,
         ));
     }
@@ -71,7 +71,7 @@ class Factory
      */
     public function uninstall($pluginName)
     {
-        return $this->container->make('Piwik\Updater\Migration\Plugin\Uninstall', array(
+        return $this->container->make('Matomo\Updater\Migration\Plugin\Uninstall', array(
             'pluginName' => $pluginName,
         ));
     }

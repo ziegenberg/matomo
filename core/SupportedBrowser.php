@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\DeviceDetector\DeviceDetectorFactory;
-use Piwik\Exception\NotSupportedBrowserException;
+use Matomo\Container\StaticContainer;
+use Matomo\DeviceDetector\DeviceDetectorFactory;
+use Matomo\Exception\NotSupportedBrowserException;
 
 class SupportedBrowser
 {
@@ -60,8 +60,8 @@ class SupportedBrowser
 
     private static function throwException($client)
     {
-        $message  = "<p><b>" . Piwik::translate('General_ExceptionNotSupportedBrowserTitle') . "</b></p>";
-        $message .= "<p>" . Piwik::translate('General_ExceptionNotSupportedBrowserText') . "</p>";
+        $message  = "<p><b>" . Matomo::translate('General_ExceptionNotSupportedBrowserTitle') . "</b></p>";
+        $message .= "<p>" . Matomo::translate('General_ExceptionNotSupportedBrowserText') . "</p>";
 
         $exception = new NotSupportedBrowserException($message);
         $exception->setIsHtmlMessage();

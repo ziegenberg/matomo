@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage\Backend;
+namespace Matomo\Settings\Storage\Backend;
 
 /**
  * Interface for a storage backend. Any new storage backend must implement this interface.

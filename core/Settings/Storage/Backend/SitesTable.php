@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage\Backend;
+namespace Matomo\Settings\Storage\Backend;
 
-use Piwik\Plugins\SitesManager\Model;
-use Piwik\Site;
+use Matomo\Plugins\SitesManager\Model;
+use Matomo\Site;
 use Exception;
 
 /**

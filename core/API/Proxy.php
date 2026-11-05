@@ -7,23 +7,23 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\Exception\MissingRequestParameterException;
-use Piwik\Http\BadRequestException;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Context;
-use Piwik\Piwik;
-use Piwik\Plugin\API;
-use Piwik\Plugin\Manager;
+use Matomo\Exception\MissingRequestParameterException;
+use Matomo\Http\BadRequestException;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Context;
+use Matomo\Matomo;
+use Matomo\Plugin\API;
+use Matomo\Plugin\Manager;
 use ReflectionClass;
 use ReflectionMethod;
 
 // prevent upgrade error eg from Matomo 3.x to Matomo 4.x. Refs https://github.com/matomo-org/matomo/pull/16468
 // the `false` is important otherwise it would fail and try to load the proxy.php file again.
-if (!class_exists('Piwik\API\NoDefaultValue', false)) {
+if (!class_exists('Matomo\API\NoDefaultValue', false)) {
 
     // phpcs:ignoreFile PSR1.Classes.ClassDeclaration.MultipleClasses
     class NoDefaultValue
@@ -83,7 +83,7 @@ class Proxy
      *
      * The method will introspect the methods, their parameters, etc.
      *
-     * @param string $className Fully qualified API class name, eg. "\Piwik\Plugins\Referrers\API"
+     * @param string $className Fully qualified API class name, eg. "\Matomo\Plugins\Referrers\API"
      */
     public function registerClass($className)
     {
@@ -193,7 +193,7 @@ class Proxy
      * @param array $parametersRequest The parameters pairs (name=>value)
      *
      * @return mixed|null
-     * @throws Exception|\Piwik\NoAccessException
+     * @throws Exception|\Matomo\NoAccessException
      */
     public function call($className, $methodName, $parametersRequest)
     {
@@ -201,7 +201,7 @@ class Proxy
         return Context::executeWithQueryParameters($parametersRequest, function () use ($className, $methodName, $parametersRequest) {
             $this->registerClass($className);
 
-            $request = new \Piwik\Request($parametersRequest);
+            $request = new \Matomo\Request($parametersRequest);
 
             /**
              * instantiate the object
@@ -248,7 +248,7 @@ class Proxy
              * @param string $pluginName The name of the plugin the API method belongs to.
              * @param string $methodName The name of the API method that will be called.
              */
-            Piwik::postEvent('API.Request.dispatch', array(&$finalParameters, $pluginName, $methodName));
+            Matomo::postEvent('API.Request.dispatch', array(&$finalParameters, $pluginName, $methodName));
 
             /**
              * Triggered before an API request is dispatched.
@@ -268,7 +268,7 @@ class Proxy
              *
              * @param array &$finalParameters List of parameters that will be passed to the API method.
              */
-            Piwik::postEvent(sprintf('API.%s.%s', $pluginName, $methodName), array(&$finalParameters));
+            Matomo::postEvent(sprintf('API.%s.%s', $pluginName, $methodName), array(&$finalParameters));
 
             /**
              * Triggered before an API request is dispatched.
@@ -283,7 +283,7 @@ class Proxy
              * @param string $methodName The name of the API method that will be called.
              * @param array $parametersRequest The query parameters for this request.
              */
-            Piwik::postEvent('API.Request.intercept', [&$returnedValue, $finalParameters, $pluginName, $methodName, $parametersRequest]);
+            Matomo::postEvent('API.Request.intercept', [&$returnedValue, $finalParameters, $pluginName, $methodName, $parametersRequest]);
 
             $apiParametersInCorrectOrder = array();
 
@@ -330,8 +330,8 @@ class Proxy
              *     }
              *
              * @param mixed &$returnedValue The API method's return value. Can be an object, such as a
-             *                              {@link Piwik\DataTable DataTable} instance.
-             *                              could be a {@link Piwik\DataTable DataTable}.
+             *                              {@link Matomo\DataTable DataTable} instance.
+             *                              could be a {@link Matomo\DataTable DataTable}.
              * @param array $extraInfo An array holding information regarding the API request. Will
              *                         contain the following data:
              *
@@ -343,7 +343,7 @@ class Proxy
              *                         - **parameters**: The array of parameters passed to the API
              *                                           method.
              */
-            Piwik::postEvent(sprintf('API.%s.%s.end', $pluginName, $methodName), $endHookParams);
+            Matomo::postEvent(sprintf('API.%s.%s.end', $pluginName, $methodName), $endHookParams);
 
             /**
              * Triggered directly after an API request is dispatched.
@@ -371,7 +371,7 @@ class Proxy
              *     }
              *
              * @param mixed &$returnedValue The API method's return value. Can be an object, such as a
-             *                              {@link Piwik\DataTable DataTable} instance.
+             *                              {@link Matomo\DataTable DataTable} instance.
              * @param array $extraInfo An array holding information regarding the API request. Will
              *                         contain the following data:
              *
@@ -383,7 +383,7 @@ class Proxy
              *                         - **parameters**: The array of parameters passed to the API
              *                                           method.
              */
-            Piwik::postEvent('API.Request.dispatch.end', $endHookParams);
+            Matomo::postEvent('API.Request.dispatch.end', $endHookParams);
 
             return $returnedValue;
         });
@@ -444,14 +444,14 @@ class Proxy
     }
 
     /**
-     * Returns the 'moduleName' part of '\\Piwik\\Plugins\\moduleName\\API'
+     * Returns the 'moduleName' part of '\\Matomo\\Plugins\\moduleName\\API'
      *
      * @param string $className "API"
      * @return string "Referrers"
      */
     public function getModuleNameFromClassName($className)
     {
-        return str_replace(array('\\Piwik\\Plugins\\', '\\API'), '', $className);
+        return str_replace(array('\\Matomo\\Plugins\\', '\\API'), '', $className);
     }
 
     public function isExistingApiAction($pluginName, $apiAction)
@@ -496,7 +496,7 @@ class Proxy
             try {
                 $defaultValue = $parameter['default'];
                 $type = $parameter['type'];
-                $request = new \Piwik\Request($parametersRequest);
+                $request = new \Matomo\Request($parametersRequest);
 
                 if (in_array($name, ['segment', 'password', 'passwordConfirmation']) && !empty($parametersRequest[$name])) {
                     // special handling for some parameters:
@@ -529,7 +529,7 @@ class Proxy
                     }
                 }
             } catch (Exception $e) {
-                throw new BadRequestException(Piwik::translate('General_PleaseSpecifyValue', [$name]));
+                throw new BadRequestException(Matomo::translate('General_PleaseSpecifyValue', [$name]));
             }
             $finalParameters[$name] = $requestValue;
         }
@@ -540,11 +540,11 @@ class Proxy
      * Returns an array containing the values of the parameters to pass to the method to call
      *
      * @param array $requiredParameters array mapping parameter name to ['default' => value, 'type' => type]
-     * @param \Piwik\Request $request
+     * @param \Matomo\Request $request
      * @throws Exception
      * @return array values to pass to the function call
      */
-    private function getRequestParametersArray($requiredParameters, \Piwik\Request $request): array
+    private function getRequestParametersArray($requiredParameters, \Matomo\Request $request): array
     {
         $finalParameters = [];
         foreach ($requiredParameters as $name => $parameter) {
@@ -587,9 +587,9 @@ class Proxy
                     $requestValue = $request->$method($name, $defaultValue);
                 }
             } catch (MissingRequestParameterException $e) {
-                throw new BadRequestException(Piwik::translate('General_PleaseSpecifyValue', [$name]));
+                throw new BadRequestException(Matomo::translate('General_PleaseSpecifyValue', [$name]));
             } catch (Exception $e) {
-                throw new BadRequestException(Piwik::translate('General_InvalidValueForParameter', [$name]));
+                throw new BadRequestException(Matomo::translate('General_InvalidValueForParameter', [$name]));
             }
             $finalParameters[$name] = $requestValue;
         }
@@ -665,7 +665,7 @@ class Proxy
     private function checkMethodExists($className, $methodName)
     {
         if (!$this->isMethodAvailable($className, $methodName)) {
-            throw new BadRequestException(Piwik::translate('General_ExceptionMethodNotFound', [$methodName, $className]));
+            throw new BadRequestException(Matomo::translate('General_ExceptionMethodNotFound', [$methodName, $className]));
         }
     }
 
@@ -695,7 +695,7 @@ class Proxy
              *
              * @param bool &$hide whether to hide APIs tagged with $token should be displayed.
              */
-            Piwik::postEvent(sprintf('API.DocumentationGenerator.%s', $token), array(&$hide));
+            Matomo::postEvent(sprintf('API.DocumentationGenerator.%s', $token), array(&$hide));
         }
 
         return $hide;

@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * This class allows code to post events from anywhere in Piwik and for
@@ -22,7 +22,7 @@ class EventDispatcher
      */
     public static function getInstance()
     {
-        return StaticContainer::get('Piwik\EventDispatcher');
+        return StaticContainer::get('Matomo\EventDispatcher');
     }
 
     // implementation details for postEvent

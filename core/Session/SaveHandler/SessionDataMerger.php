@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Session\SaveHandler;
+namespace Matomo\Session\SaveHandler;
 
-use Piwik\Common;
-use Piwik\Session;
-use Piwik\Session\SessionFingerprint;
+use Matomo\Common;
+use Matomo\Session;
+use Matomo\Session\SessionFingerprint;
 use Zend_Session;
 
 /**

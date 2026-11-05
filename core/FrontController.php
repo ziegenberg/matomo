@@ -7,30 +7,30 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\API\Request;
-use Piwik\Exception\PluginNotFoundException;
-use Piwik\Http\BadRequestException;
-use Piwik\Http\HttpCodeException;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Config\GeneralConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable\Manager;
-use Piwik\DataTable\Renderer\Json;
-use Piwik\Exception\AuthenticationFailedException;
-use Piwik\Exception\DatabaseSchemaIsNewerThanCodebaseException;
-use Piwik\Exception\PluginDeactivatedException;
-use Piwik\Exception\PluginRequiresInternetException;
-use Piwik\Exception\StylesheetLessCompileException;
-use Piwik\Http\ControllerResolver;
-use Piwik\Http\JsonResponse;
-use Piwik\Http\Router;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Session\SessionAuth;
-use Piwik\Session\SessionInitializer;
-use Piwik\Log\LoggerInterface;
+use Matomo\API\Request;
+use Matomo\Exception\PluginNotFoundException;
+use Matomo\Http\BadRequestException;
+use Matomo\Http\HttpCodeException;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Config\GeneralConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable\Manager;
+use Matomo\DataTable\Renderer\Json;
+use Matomo\Exception\AuthenticationFailedException;
+use Matomo\Exception\DatabaseSchemaIsNewerThanCodebaseException;
+use Matomo\Exception\PluginDeactivatedException;
+use Matomo\Exception\PluginRequiresInternetException;
+use Matomo\Exception\StylesheetLessCompileException;
+use Matomo\Http\ControllerResolver;
+use Matomo\Http\JsonResponse;
+use Matomo\Http\Router;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\Session\SessionAuth;
+use Matomo\Session\SessionInitializer;
+use Matomo\Log\LoggerInterface;
 
 /**
  * This singleton dispatches requests to the appropriate plugin Controller.
@@ -66,7 +66,7 @@ use Piwik\Log\LoggerInterface;
  *
  * For a detailed explanation, see the documentation [here](https://developer.matomo.org/guides/how-piwik-works).
  *
- * @method static \Piwik\FrontController getInstance()
+ * @method static \Matomo\FrontController getInstance()
  */
 class FrontController extends Singleton
 {
@@ -160,7 +160,7 @@ class FrontController extends Singleton
     /**
      * Executes the requested plugin controller method.
      *
-     * @throws Exception|\Piwik\Exception\PluginDeactivatedException in case the plugin doesn't exist, the action doesn't exist,
+     * @throws Exception|\Matomo\Exception\PluginDeactivatedException in case the plugin doesn't exist, the action doesn't exist,
      *                                                     there is not enough permission, etc.
      *
      * @param string $module The name of the plugin whose controller to execute, eg, `'UserCountryMap'`.
@@ -194,9 +194,9 @@ class FrontController extends Singleton
              * This event can be used to customize the error that occurs when a user is denied access
              * (for example, displaying an error message, redirecting to a page other than login, etc.).
              *
-             * @param \Piwik\NoAccessException $exception The exception that was caught.
+             * @param \Matomo\NoAccessException $exception The exception that was caught.
              */
-            Piwik::postEvent('User.isNotAuthorized', array($exception), $pending = true);
+            Matomo::postEvent('User.isNotAuthorized', array($exception), $pending = true);
         } catch (\Twig\Error\RuntimeError $e) {
             if ($e->getPrevious() && !$e->getPrevious() instanceof \Twig\Error\RuntimeError) {
                 // a regular exception unrelated to twig was triggered while rendering an a view, for example as part of a triggered event
@@ -249,7 +249,7 @@ class FrontController extends Singleton
     {
         try {
             if (
-                class_exists('Piwik\\Profiler')
+                class_exists('Matomo\\Profiler')
                 && !SettingsServer::isTrackerApiRequest()
             ) {
                 // in tracker mode Piwik\Tracker\Db\Pdo\Mysql does currently not implement profiling
@@ -274,7 +274,7 @@ class FrontController extends Singleton
 
     public static function setUpSafeMode()
     {
-        register_shutdown_function(array('\\Piwik\\FrontController', 'triggerSafeModeWhenError'));
+        register_shutdown_function(array('\\Matomo\\FrontController', 'triggerSafeModeWhenError'));
     }
 
     public static function triggerSafeModeWhenError()
@@ -362,7 +362,7 @@ class FrontController extends Singleton
              * @param Exception $exception The exception thrown from creating and testing the database
              *                             connection.
              */
-            Piwik::postEvent('Db.cannotConnectToDb', array($exception), $pending = true);
+            Matomo::postEvent('Db.cannotConnectToDb', array($exception), $pending = true);
 
             throw $exception;
         }
@@ -385,7 +385,7 @@ class FrontController extends Singleton
              *
              * @param Exception $exception The exception thrown from trying to get an option value.
              */
-            Piwik::postEvent('Config.badConfigurationFile', array($exception), $pending = true);
+            Matomo::postEvent('Config.badConfigurationFile', array($exception), $pending = true);
 
             throw $exception;
         }
@@ -400,12 +400,12 @@ class FrontController extends Singleton
          *
          * _Note: At this point the user is not authenticated yet._
          */
-        Piwik::postEvent('Request.dispatchCoreAndPluginUpdatesScreen');
+        Matomo::postEvent('Request.dispatchCoreAndPluginUpdatesScreen');
 
         $this->throwIfPiwikVersionIsOlderThanDBSchema();
 
-        $module = Piwik::getModule();
-        $action = Piwik::getAction();
+        $module = Matomo::getModule();
+        $action = Matomo::getAction();
 
         if (
             empty($module)
@@ -413,11 +413,11 @@ class FrontController extends Singleton
             || $module !== 'Installation'
             || !in_array($action, array('getInstallationCss', 'getInstallationJs'))
         ) {
-            \Piwik\Plugin\Manager::getInstance()->installLoadedPlugins();
+            \Matomo\Plugin\Manager::getInstance()->installLoadedPlugins();
         }
 
         // ensure the current Piwik URL is known for later use
-        if (method_exists('Piwik\SettingsPiwik', 'getPiwikUrl')) {
+        if (method_exists('Matomo\SettingsPiwik', 'getPiwikUrl')) {
             SettingsPiwik::getPiwikUrl();
         }
 
@@ -445,9 +445,9 @@ class FrontController extends Singleton
 
             if (
                 $success
-                && Piwik::isUserIsAnonymous()
+                && Matomo::isUserIsAnonymous()
                 && $authAdapter->getLogin() === 'anonymous' //double checking the login
-                && Piwik::isUserHasSomeViewAccess()
+                && Matomo::isUserHasSomeViewAccess()
                 && Session::isSessionStarted()
                 && Session::isWritable() // only if session was started and writable, don't do it eg for API
             ) {
@@ -475,7 +475,7 @@ class FrontController extends Singleton
 
         SettingsServer::raiseMemoryLimitIfNecessary();
 
-        \Piwik\Plugin\Manager::getInstance()->postLoadPlugins();
+        \Matomo\Plugin\Manager::getInstance()->postLoadPlugins();
 
         /**
          * Triggered after the platform is initialized and after the user has been authenticated, but
@@ -483,7 +483,7 @@ class FrontController extends Singleton
          *
          * Piwik uses this event to check for updates to Piwik.
          */
-        Piwik::postEvent('Platform.initialized');
+        Matomo::postEvent('Platform.initialized');
     }
 
     protected function prepareDispatch($module, $action, $parameters)
@@ -517,15 +517,15 @@ class FrontController extends Singleton
 
         [$module, $action] = Request::getRenamedModuleAndAction($module, $action);
 
-        if (!SettingsPiwik::isInternetEnabled() && \Piwik\Plugin\Manager::getInstance()->doesPluginRequireInternetConnection($module)) {
+        if (!SettingsPiwik::isInternetEnabled() && \Matomo\Plugin\Manager::getInstance()->doesPluginRequireInternetConnection($module)) {
             throw new PluginRequiresInternetException($module);
         }
 
-        if (!\Piwik\Plugin\Manager::getInstance()->isPluginInFilesystem($module)) {
+        if (!\Matomo\Plugin\Manager::getInstance()->isPluginInFilesystem($module)) {
             throw new PluginNotFoundException($module);
         }
 
-        if (!\Piwik\Plugin\Manager::getInstance()->isPluginActivated($module)) {
+        if (!\Matomo\Plugin\Manager::getInstance()->isPluginActivated($module)) {
             throw new PluginDeactivatedException($module);
         }
 
@@ -568,7 +568,7 @@ class FrontController extends Singleton
         $page = file_get_contents(PIWIK_INCLUDE_PATH . '/plugins/Morpheus/templates/maintenance.tpl');
         $page = str_replace('%logoUrl%', $logoUrl, $page);
         $page = str_replace('%faviconUrl%', $faviconUrl, $page);
-        $page = str_replace('%piwikTitle%', Piwik::getRandomTitle(), $page);
+        $page = str_replace('%piwikTitle%', Matomo::getRandomTitle(), $page);
 
         $page = str_replace('%trackMessage%', $trackMessage, $page);
 
@@ -579,11 +579,11 @@ class FrontController extends Singleton
     protected function handleSSLRedirection()
     {
         // Specifically disable for the opt out iframe
-        if (Piwik::getModule() == 'CoreAdminHome' && (Piwik::getAction() == 'optOut' || Piwik::getAction() == 'optOutJS')) {
+        if (Matomo::getModule() == 'CoreAdminHome' && (Matomo::getAction() == 'optOut' || Matomo::getAction() == 'optOutJS')) {
             return;
         }
         // Disable Https for VisitorGenerator
-        if (Piwik::getModule() == 'VisitorGenerator') {
+        if (Matomo::getModule() == 'VisitorGenerator') {
             return;
         }
         if (Common::isPhpCliMode()) {
@@ -594,7 +594,7 @@ class FrontController extends Singleton
             return;
         }
         // TODO: remove in Matomo 6 - avoid update redirect loops before proxy_scheme_headers migration runs.
-        if (Piwik::getModule() === 'CoreUpdater' && ProxyHeaders::getProtocolInformation() !== null) {
+        if (Matomo::getModule() === 'CoreUpdater' && ProxyHeaders::getProtocolInformation() !== null) {
             return;
         }
         Url::redirectToHttps();
@@ -668,10 +668,10 @@ class FrontController extends Singleton
          * @param string &$action The name of the controller method being dispatched to.
          * @param array &$parameters The arguments passed to the controller action.
          */
-        Piwik::postEvent('Request.dispatch', array(&$module, &$action, &$parameters));
+        Matomo::postEvent('Request.dispatch', array(&$module, &$action, &$parameters));
 
         /** @var ControllerResolver $controllerResolver */
-        $controllerResolver = StaticContainer::get('Piwik\Http\ControllerResolver');
+        $controllerResolver = StaticContainer::get('Matomo\Http\ControllerResolver');
 
         $controller = $controllerResolver->getController($module, $action, $parameters);
 
@@ -690,7 +690,7 @@ class FrontController extends Singleton
              *
              * @param array &$parameters The arguments passed to the controller action.
              */
-            Piwik::postEvent(sprintf('Controller.%s.%s', $module, $action), array(&$parameters));
+            Matomo::postEvent(sprintf('Controller.%s.%s', $module, $action), array(&$parameters));
 
             $result = call_user_func_array($controller, $parameters);
 
@@ -707,7 +707,7 @@ class FrontController extends Singleton
              * @param mixed &$result The result of the controller action.
              * @param array $parameters The arguments passed to the controller action.
              */
-            Piwik::postEvent(sprintf('Controller.%s.%s.end', $module, $action), array(&$result, $parameters));
+            Matomo::postEvent(sprintf('Controller.%s.%s.end', $module, $action), array(&$result, $parameters));
 
             /**
              * Triggered after a controller action is successfully called.
@@ -717,7 +717,7 @@ class FrontController extends Singleton
              * @param mixed &$result The controller action result.
              * @param array $parameters The arguments passed to the controller action.
              */
-            Piwik::postEvent('Request.dispatch.end', array(&$result, $module, $action, $parameters));
+            Matomo::postEvent('Request.dispatch.end', array(&$result, $module, $action, $parameters));
         } finally {
             array_pop($this->dispatchStack);
         }
@@ -770,10 +770,10 @@ class FrontController extends Singleton
         $current = Version::VERSION;
         if (-1 === version_compare($current, $dbSchemaVersion)) {
             $messages = array(
-                Piwik::translate('General_ExceptionDatabaseVersionNewerThanCodebase', array($current, $dbSchemaVersion)),
-                Piwik::translate('General_ExceptionDatabaseVersionNewerThanCodebaseWait'),
+                Matomo::translate('General_ExceptionDatabaseVersionNewerThanCodebase', array($current, $dbSchemaVersion)),
+                Matomo::translate('General_ExceptionDatabaseVersionNewerThanCodebaseWait'),
                 // we cannot fill in the Super User emails as we are failing before Authentication was ready
-                Piwik::translate('General_ExceptionContactSupportGeneric', array('', '')),
+                Matomo::translate('General_ExceptionContactSupportGeneric', array('', '')),
             );
             throw new DatabaseSchemaIsNewerThanCodebaseException(implode(" ", $messages));
         }
@@ -807,7 +807,7 @@ class FrontController extends Singleton
             /**
              * @ignore
              */
-            Piwik::postEvent('Session.beforeSessionStart');
+            Matomo::postEvent('Session.beforeSessionStart');
 
             Session::start();
             return StaticContainer::get(SessionAuth::class);
@@ -823,17 +823,17 @@ class FrontController extends Singleton
          * should be created.
          *
          * Plugins that provide their own authentication implementation should use this event
-         * to set the global authentication object (which must derive from {@link Piwik\Auth}).
+         * to set the global authentication object (which must derive from {@link Matomo\Auth}).
          *
          * **Example**
          *
          *     Piwik::addAction('Request.initAuthenticationObject', function() {
-         *         StaticContainer::getContainer()->set('Piwik\Auth', new MyAuthImplementation());
+         *         StaticContainer::getContainer()->set('Matomo\Auth', new MyAuthImplementation());
          *     });
          */
-        Piwik::postEvent('Request.initAuthenticationObject');
+        Matomo::postEvent('Request.initAuthenticationObject');
         try {
-            $authAdapter = StaticContainer::get('Piwik\Auth');
+            $authAdapter = StaticContainer::get('Matomo\Auth');
         } catch (Exception $e) {
             $message = "Authentication object cannot be found in the container. Maybe the Login plugin is not activated?
                         <br />You can activate the plugin by adding:<br />
@@ -881,7 +881,7 @@ class FrontController extends Singleton
 
         $cookie->delete();
 
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             Access::getInstance()->setSessionExpired(true);
         }
     }
@@ -902,11 +902,11 @@ class FrontController extends Singleton
             return false;
         }
 
-        if (Piwik::getModule() === 'API' && (empty(Piwik::getAction()) || Piwik::getAction() === 'index' || Piwik::getAction() === 'glossary')) {
+        if (Matomo::getModule() === 'API' && (empty(Matomo::getAction()) || Matomo::getAction() === 'index' || Matomo::getAction() === 'glossary')) {
             return false;
         }
 
-        if (Piwik::getModule() === 'Widgetize') {
+        if (Matomo::getModule() === 'Widgetize') {
             return true;
         }
 
@@ -919,7 +919,7 @@ class FrontController extends Singleton
             return true;
         }
 
-        if (Piwik::isUserIsAnonymous()) {
+        if (Matomo::isUserIsAnonymous()) {
             return true;
         }
 

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Period;
+namespace Matomo\Period;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin;
 
 /**
  * Creates Period instances using the values used for the 'period' and 'date'
@@ -27,7 +27,7 @@ use Piwik\Plugin;
  *
  * To define a new period type:
  *
- * 1. create a new period class that derives from {@see \Piwik\Period}.
+ * 1. create a new period class that derives from {@see \Matomo\Period}.
  * 2. extend this class in a new PeriodFactory class and put it in /path/to/piwik/plugins/MyPlugin/PeriodFactory.php
  *
  * Period name collisions:
@@ -65,7 +65,7 @@ abstract class Factory
      * @param string $period `"day"`, `"week"`, `"month"`, `"year"`, `"range"`.
      * @param Date|string $date A date within the period or the range of dates.
      * @param string $timezone Optional timezone that will be used only when $period is 'range' or $date is 'last|previous'
-     * @return \Piwik\Period
+     * @return \Matomo\Period
      */
     public static function build($period, $date, $timezone = 'UTC')
     {
@@ -124,7 +124,7 @@ abstract class Factory
     {
         $periods = self::getPeriodsEnabledForAPI();
         $periods = implode(", ", $periods);
-        $message = Piwik::translate('General_ExceptionInvalidPeriod', array($strPeriod, $periods));
+        $message = Matomo::translate('General_ExceptionInvalidPeriod', array($strPeriod, $periods));
         throw new Exception($message);
     }
 
@@ -149,7 +149,7 @@ abstract class Factory
      * @param string $period The period string: `"day"`, `"week"`, `"month"`, `"year"`, `"range"`.
      * @param string|Date $date The date or date range string. Can be a special value including
      *                     `'now'`, `'today'`, `'yesterday'`, `'yesterdaySameTime'`.
-     * @return \Piwik\Period
+     * @return \Matomo\Period
      */
     public static function makePeriodFromQueryParams($timezone, $period, $date)
     {

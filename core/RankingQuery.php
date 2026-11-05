@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Db\Schema;
+use Matomo\Db\Schema;
 
 /**
  * The ranking query class wraps an arbitrary SQL query with more SQL that limits
@@ -188,8 +188,8 @@ class RankingQuery
      * limited resulting in several limited result sets.
      *
      * For example, you can run a query aggregating some data on the log_action table and
-     * partition by log_action.type with the possible values of {@link Piwik\Tracker\Action::TYPE_PAGE_URL},
-     * {@link Piwik\Tracker\Action::TYPE_OUTLINK}, {@link Piwik\Tracker\Action::TYPE_DOWNLOAD}.
+     * partition by log_action.type with the possible values of {@link Matomo\Tracker\Action::TYPE_PAGE_URL},
+     * {@link Matomo\Tracker\Action::TYPE_OUTLINK}, {@link Matomo\Tracker\Action::TYPE_DOWNLOAD}.
      * The result will be three separate result sets that are aggregated the same ways, but for rows
      * where `log_action.type = TYPE_OUTLINK`, for rows where `log_action.type = TYPE_ACTION_URL` and for
      * rows `log_action.type = TYPE_DOWNLOAD`.

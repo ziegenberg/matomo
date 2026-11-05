@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API;
+namespace Matomo\API;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Url;
 use ReflectionClass;
 
 /**
@@ -38,7 +38,7 @@ class DocumentationGenerator
      */
     public function __construct()
     {
-        $plugins = \Piwik\Plugin\Manager::getInstance()->getLoadedPluginsName();
+        $plugins = \Matomo\Plugin\Manager::getInstance()->getLoadedPluginsName();
         foreach ($plugins as $plugin) {
             try {
                 $className = Request::getClassNameAPI($plugin);
@@ -134,7 +134,7 @@ class DocumentationGenerator
 
     protected function addExamples($class, $methodName, $prefixUrls)
     {
-        $token = Piwik::getCurrentUserTokenAuth();
+        $token = Matomo::getCurrentUserTokenAuth();
         $token_auth_url = "&token_auth=" . $token;
         if ($token !== 'anonymous') {
             $token_auth_url .= "&force_api_session=1";
@@ -438,7 +438,7 @@ class DocumentationGenerator
             $moduleName = Proxy::getInstance()->getModuleNameFromClassName($class);
             $rClass = new ReflectionClass($class);
 
-            if (!Piwik::hasUserSuperUserAccess() && $this->checkIfClassCommentContainsHideAnnotation($rClass)) {
+            if (!Matomo::hasUserSuperUserAccess() && $this->checkIfClassCommentContainsHideAnnotation($rClass)) {
                 continue;
             }
 

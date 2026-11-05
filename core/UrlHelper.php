@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\RegionDataProvider;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\RegionDataProvider;
 
 /**
  * Contains less commonly needed URL helper methods.
@@ -114,7 +114,7 @@ class UrlHelper
         static $countries;
         if (!isset($countries)) {
             /** @var RegionDataProvider $regionDataProvider */
-            $regionDataProvider = StaticContainer::get('Piwik\Intl\Data\Provider\RegionDataProvider');
+            $regionDataProvider = StaticContainer::get('Matomo\Intl\Data\Provider\RegionDataProvider');
             $countries = implode('|', array_keys($regionDataProvider->getCountryList(true)));
         }
 

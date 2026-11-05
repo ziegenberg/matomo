@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\Piwik;
+use Matomo\DataTable;
+use Matomo\Matomo;
 
 /**
  * A {@link DataTable} filter that replaces range label columns with prettier,
@@ -108,7 +108,7 @@ class BeautifyRangeLabels extends ColumnCallbackReplace
             } else {
                 // if no lower bound can be found, this isn't a valid range. in this case
                 // we assume its a translation key and try to translate it.
-                return Piwik::translate(trim($value));
+                return Matomo::translate(trim($value));
             }
         }
     }

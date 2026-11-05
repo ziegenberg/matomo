@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Exception\FailedCopyException;
-use Piwik\Tracker\Cache as TrackerCache;
-use Piwik\Cache as PiwikCache;
-use Piwik\Exception\Exception;
+use Matomo\Container\StaticContainer;
+use Matomo\Exception\FailedCopyException;
+use Matomo\Tracker\Cache as TrackerCache;
+use Matomo\Cache as PiwikCache;
+use Matomo\Exception\Exception;
 
 /**
  * Contains helper functions that deal with the filesystem.
@@ -53,7 +53,7 @@ class Filesystem
          * Triggered after all non-memory caches are cleared (eg, via the cache:clear
          * command).
          */
-        Piwik::postEvent('Filesystem.allCachesCleared');
+        Matomo::postEvent('Filesystem.allCachesCleared');
     }
 
     /**

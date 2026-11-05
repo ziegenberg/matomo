@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DeviceDetector;
+namespace Matomo\DeviceDetector;
 
 use DeviceDetector\ClientHints;
 use DeviceDetector\DeviceDetector;
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 class DeviceDetectorFactory
 {

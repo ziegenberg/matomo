@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Exception;
+namespace Matomo\Exception;
 
-use Piwik\Http\HttpCodeException;
+use Matomo\Http\HttpCodeException;
 
-class ThingNotFoundException extends \Piwik\Exception\Exception implements HttpCodeException
+class ThingNotFoundException extends \Matomo\Exception\Exception implements HttpCodeException
 {
     public function __construct($message, $previous = null)
     {

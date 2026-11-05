@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * Internal helper for aggregating blob rows into a DataTable.

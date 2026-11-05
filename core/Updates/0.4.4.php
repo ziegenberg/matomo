@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Piwik;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Matomo;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_0_4_4 extends Updates
 {
@@ -21,7 +21,7 @@ class Updates_0_4_4 extends Updates
         if (file_exists($obsoleteFile)) {
             $rc = @unlink($obsoleteFile);
             if (!$rc) {
-                throw new \Exception(Piwik::translate('General_ExceptionUndeletableFile', array($obsoleteFile)));
+                throw new \Exception(Matomo::translate('General_ExceptionUndeletableFile', array($obsoleteFile)));
             }
         }
     }

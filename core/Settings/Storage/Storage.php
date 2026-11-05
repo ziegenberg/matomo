@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage;
+namespace Matomo\Settings\Storage;
 
-use Piwik\Settings\Storage\Backend;
+use Matomo\Settings\Storage\Backend;
 
 /**
  * A storage stores values for multiple settings. Storing multiple settings here saves having to do

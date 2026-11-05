@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Custom as CustomMigration;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updates;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Custom as CustomMigration;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updates;
 
 class Updates_5_2_0_b6 extends Updates
 {

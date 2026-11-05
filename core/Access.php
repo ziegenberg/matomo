@@ -7,26 +7,26 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
 use Matomo\Cache\Transient;
-use Piwik\Access\TransientCacheOverlay;
-use Piwik\Access\CapabilitiesProvider;
-use Piwik\Access\Capability;
-use Piwik\Access\Role\Admin;
-use Piwik\Access\Role\View;
-use Piwik\Access\Role\Write;
-use Piwik\API\Request;
-use Piwik\Access\RolesProvider;
-use Piwik\Http\BadRequestException;
-use Piwik\Request\AuthenticationToken;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
-use Piwik\Plugins\SitesManager\API as SitesManagerApi;
-use Piwik\Plugins\SitesManager\Model as SitesManagerModel;
-use Piwik\Plugins\UsersManager\Model as UsersModel;
-use Piwik\Session\SessionAuth;
+use Matomo\Access\TransientCacheOverlay;
+use Matomo\Access\CapabilitiesProvider;
+use Matomo\Access\Capability;
+use Matomo\Access\Role\Admin;
+use Matomo\Access\Role\View;
+use Matomo\Access\Role\Write;
+use Matomo\API\Request;
+use Matomo\Access\RolesProvider;
+use Matomo\Http\BadRequestException;
+use Matomo\Request\AuthenticationToken;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
+use Matomo\Plugins\SitesManager\API as SitesManagerApi;
+use Matomo\Plugins\SitesManager\Model as SitesManagerModel;
+use Matomo\Plugins\UsersManager\Model as UsersModel;
+use Matomo\Session\SessionAuth;
 
 /**
  * Singleton that manages user access to Piwik resources.
@@ -118,7 +118,7 @@ class Access
      */
     public static function getInstance()
     {
-        return StaticContainer::get('Piwik\Access');
+        return StaticContainer::get('Matomo\Access');
     }
 
     /**
@@ -134,10 +134,10 @@ class Access
     public function __construct(?RolesProvider $roleProvider = null, ?CapabilitiesProvider $capabilityProvider = null)
     {
         if (!isset($roleProvider)) {
-            $roleProvider = StaticContainer::get('Piwik\Access\RolesProvider');
+            $roleProvider = StaticContainer::get('Matomo\Access\RolesProvider');
         }
         if (!isset($capabilityProvider)) {
-            $capabilityProvider = StaticContainer::get('Piwik\Access\CapabilitiesProvider');
+            $capabilityProvider = StaticContainer::get('Matomo\Access\CapabilitiesProvider');
         }
         $this->roleProvider = $roleProvider;
         $this->capabilityProvider = $capabilityProvider;
@@ -421,7 +421,7 @@ class Access
                  *                                  ```
                  * @param string $login The current user's login.
                  */
-                Piwik::postEvent('Access.modifyUserAccess', [&$this->idsitesByAccess, $this->login]);
+                Matomo::postEvent('Access.modifyUserAccess', [&$this->idsitesByAccess, $this->login]);
 
                 $this->applyTokenAccessLevelRestrictionToLoadedSites();
                 $this->viewAccessLookup = null;
@@ -684,7 +684,7 @@ class Access
      * An Auth that declares `token_access_level` in {@see AuthResult::getAuthContext()} owns the result,
      * including a declared null. The key has to be declared rather than the context merely be present, or
      * any plugin passing a context for its own reasons would switch clamping off. Without the key the cap
-     * comes from the token row, so clamping holds whichever Piwik\Auth implementation is active.
+     * comes from the token row, so clamping holds whichever Matomo\Auth implementation is active.
      */
     private function resolveTokenAccessLevelForResult(AuthResult $result): ?string
     {
@@ -961,12 +961,12 @@ class Access
     /**
      * Throws an exception if the user is not the SuperUser
      *
-     * @throws \Piwik\NoAccessException
+     * @throws \Matomo\NoAccessException
      */
     public function checkUserHasSuperUserAccess()
     {
         if (!$this->hasSuperUserAccess()) {
-            $this->throwNoAccessException(Piwik::translate('General_ExceptionPrivilege', array("'superuser'")));
+            $this->throwNoAccessException(Matomo::translate('General_ExceptionPrivilege', array("'superuser'")));
         }
     }
 
@@ -1005,31 +1005,31 @@ class Access
     /**
      * If the user doesn't have an WRITE access for at least one website, throws an exception
      *
-     * @throws \Piwik\NoAccessException
+     * @throws \Matomo\NoAccessException
      */
     public function checkUserHasSomeWriteAccess()
     {
         if (!$this->isUserHasSomeWriteAccess()) {
-            $this->throwNoAccessException(Piwik::translate('General_ExceptionPrivilegeAtLeastOneWebsite', array('write')));
+            $this->throwNoAccessException(Matomo::translate('General_ExceptionPrivilegeAtLeastOneWebsite', array('write')));
         }
     }
 
     /**
      * If the user doesn't have an ADMIN access for at least one website, throws an exception
      *
-     * @throws \Piwik\NoAccessException
+     * @throws \Matomo\NoAccessException
      */
     public function checkUserHasSomeAdminAccess()
     {
         if (!$this->isUserHasSomeAdminAccess()) {
-            $this->throwNoAccessException(Piwik::translate('General_ExceptionPrivilegeAtLeastOneWebsite', array('admin')));
+            $this->throwNoAccessException(Matomo::translate('General_ExceptionPrivilegeAtLeastOneWebsite', array('admin')));
         }
     }
 
     /**
      * If the user doesn't have any view permission, throw exception
      *
-     * @throws \Piwik\NoAccessException
+     * @throws \Matomo\NoAccessException
      */
     public function checkUserHasSomeViewAccess()
     {
@@ -1040,7 +1040,7 @@ class Access
         $idSitesAccessible = $this->getSitesIdWithAtLeastViewAccess();
 
         if (count($idSitesAccessible) == 0) {
-            $this->throwNoAccessException(Piwik::translate('General_ExceptionPrivilegeAtLeastOneWebsite', array('view')));
+            $this->throwNoAccessException(Matomo::translate('General_ExceptionPrivilegeAtLeastOneWebsite', array('view')));
         }
     }
 
@@ -1049,7 +1049,7 @@ class Access
      * If the user doesn't have ADMIN access for at least one website of the list, we throw an exception.
      *
      * @param int|array $idSites List of ID sites to check
-     * @throws \Piwik\NoAccessException If for any of the websites the user doesn't have an ADMIN access
+     * @throws \Matomo\NoAccessException If for any of the websites the user doesn't have an ADMIN access
      */
     public function checkUserHasAdminAccess($idSites)
     {
@@ -1062,7 +1062,7 @@ class Access
 
         foreach ($idSites as $idsite) {
             if (!in_array($idsite, $idSitesAccessible)) {
-                $this->throwNoAccessException(Piwik::translate('General_ExceptionPrivilegeAccessWebsite', array("'admin'", $idsite)));
+                $this->throwNoAccessException(Matomo::translate('General_ExceptionPrivilegeAccessWebsite', array("'admin'", $idsite)));
             }
         }
     }
@@ -1072,7 +1072,7 @@ class Access
      * If the user doesn't have VIEW or ADMIN access for at least one website of the list, we throw an exception.
      *
      * @param int|array|string $idSites List of ID sites to check (integer, array of integers, string comma separated list of integers)
-     * @throws \Piwik\NoAccessException  If for any of the websites the user doesn't have an VIEW or ADMIN access
+     * @throws \Matomo\NoAccessException  If for any of the websites the user doesn't have an VIEW or ADMIN access
      */
     public function checkUserHasViewAccess($idSites)
     {
@@ -1085,7 +1085,7 @@ class Access
 
         foreach ($idSites as $idsite) {
             if (!isset($idSitesAccessible[$idsite])) {
-                $this->throwNoAccessException(Piwik::translate('General_ExceptionPrivilegeAccessWebsite', array("'view'", $idsite)));
+                $this->throwNoAccessException(Matomo::translate('General_ExceptionPrivilegeAccessWebsite', array("'view'", $idsite)));
             }
         }
     }
@@ -1095,7 +1095,7 @@ class Access
      * If the user doesn't have WRITE access for at least one website of the list, we throw an exception.
      *
      * @param int|array|string $idSites List of ID sites to check (integer, array of integers, string comma separated list of integers)
-     * @throws \Piwik\NoAccessException  If for any of the websites the user doesn't have a WRITE access
+     * @throws \Matomo\NoAccessException  If for any of the websites the user doesn't have a WRITE access
      */
     public function checkUserHasWriteAccess($idSites)
     {
@@ -1108,7 +1108,7 @@ class Access
 
         foreach ($idSites as $idsite) {
             if (!in_array($idsite, $idSitesAccessible)) {
-                $this->throwNoAccessException(Piwik::translate('General_ExceptionPrivilegeAccessWebsite', array("'write'", $idsite)));
+                $this->throwNoAccessException(Matomo::translate('General_ExceptionPrivilegeAccessWebsite', array("'write'", $idsite)));
             }
         }
     }
@@ -1118,8 +1118,8 @@ class Access
         if ($this->hasSuperUserAccess()) {
             return;
         }
-        if (Piwik::isUserIsAnonymous()) {
-            $this->throwNoAccessException(Piwik::translate('General_YouMustBeLoggedIn'));
+        if (Matomo::isUserIsAnonymous()) {
+            $this->throwNoAccessException(Matomo::translate('General_YouMustBeLoggedIn'));
         }
     }
 
@@ -1146,7 +1146,7 @@ class Access
 
         foreach ($idSites as $idsite) {
             if (!in_array($idsite, $idSitesAccessible)) {
-                $this->throwNoAccessException(Piwik::translate('General_ExceptionCapabilityAccessWebsite', array("'" . $capability . "'", $idsite)));
+                $this->throwNoAccessException(Matomo::translate('General_ExceptionCapabilityAccessWebsite', array("'" . $capability . "'", $idsite)));
             }
         }
 
@@ -1294,10 +1294,10 @@ class Access
      */
     private function throwNoAccessException($message)
     {
-        if (Piwik::isUserIsAnonymous() && !Request::isRootRequestApiRequest()) {
-            $message = Piwik::translate('General_YouMustBeLoggedIn');
+        if (Matomo::isUserIsAnonymous() && !Request::isRootRequestApiRequest()) {
+            $message = Matomo::translate('General_YouMustBeLoggedIn');
             if ($this->sessionExpired) {
-                $message = Piwik::translate('General_YourSessionHasExpired');
+                $message = Matomo::translate('General_YourSessionHasExpired');
             }
         }
 

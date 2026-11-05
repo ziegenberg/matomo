@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ReportRenderer;
+namespace Matomo\ReportRenderer;
 
-use Piwik\Common;
-use Piwik\Filesystem;
-use Piwik\Http\SecurityHeaders;
-use Piwik\NumberFormatter;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\ReportRenderer;
-use Piwik\TCPDF;
-use Piwik\UrlHelper;
+use Matomo\Common;
+use Matomo\Filesystem;
+use Matomo\Http\SecurityHeaders;
+use Matomo\NumberFormatter;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\ReportRenderer;
+use Matomo\TCPDF;
+use Matomo\UrlHelper;
 use TCPDF_FONTS;
 
 /**
@@ -193,7 +193,7 @@ class Pdf extends ReportRenderer
     public function renderFrontPage($reportTitle, $prettyDate, $description, $reportMetadata, $segment)
     {
         $reportTitle = $this->formatText($reportTitle);
-        $dateRange = $this->formatText(Piwik::translate('General_DateRange') . " " . $prettyDate);
+        $dateRange = $this->formatText(Matomo::translate('General_DateRange') . " " . $prettyDate);
 
         // footer
         $this->TCPDF->SetFooterFont(array($this->reportFont, $this->reportFontStyle, $this->reportSimpleFontSize));
@@ -204,7 +204,7 @@ class Pdf extends ReportRenderer
         $this->TCPDF->AddPage(self::PORTRAIT);
         $this->TCPDF->AddFont($this->reportFont, '', '', false);
         $this->TCPDF->SetFont($this->reportFont, $this->reportFontStyle, $this->reportSimpleFontSize);
-        $this->TCPDF->Bookmark(Piwik::translate('ScheduledReports_FrontPage'));
+        $this->TCPDF->Bookmark(Matomo::translate('ScheduledReports_FrontPage'));
 
         // logo
         $customLogo = new CustomLogo();
@@ -233,7 +233,7 @@ class Pdf extends ReportRenderer
             $this->TCPDF->Ln();
             $this->TCPDF->SetFont($this->reportFont, '', $this->reportHeaderFontSize - 2);
             $this->TCPDF->SetTextColor($this->headerTextColor[0], $this->headerTextColor[1], $this->headerTextColor[2]);
-            $this->TCPDF->Write(1, $this->formatText(Piwik::translate('ScheduledReports_CustomVisitorSegment') . ' ' . $segment['name']));
+            $this->TCPDF->Write(1, $this->formatText(Matomo::translate('ScheduledReports_CustomVisitorSegment') . ' ' . $segment['name']));
         }
 
         // The percentage columns the other formats carry are left out here, see
@@ -245,7 +245,7 @@ class Pdf extends ReportRenderer
         $this->TCPDF->Ln();
         $this->TCPDF->SetFont($this->reportFont, '', $this->reportHeaderFontSize - 2);
         $this->TCPDF->SetTextColor($this->reportTextColor[0], $this->reportTextColor[1], $this->reportTextColor[2]);
-        $this->TCPDF->Write(1, $this->formatText(Piwik::translate('ScheduledReports_PdfNoPercentageColumns')));
+        $this->TCPDF->Write(1, $this->formatText(Matomo::translate('ScheduledReports_PdfNoPercentageColumns')));
 
         $this->TCPDF->Ln(8);
         $this->TCPDF->SetFont($this->reportFont, '', $this->reportHeaderFontSize);
@@ -359,7 +359,7 @@ class Pdf extends ReportRenderer
         $this->paintReportHeader();
 
         if (!$this->reportHasData()) {
-            $this->paintMessage(Piwik::translate('CoreHome_ThereIsNoDataForThisReport'));
+            $this->paintMessage(Matomo::translate('CoreHome_ThereIsNoDataForThisReport'));
             return;
         }
 

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 /**
  * Interface implemented by classes that track visit information for the Tracker.

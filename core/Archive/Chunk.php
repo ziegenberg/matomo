@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
 /**
  * This class is used to split blobs of DataTables into chunks. Each blob used to be stored under one blob in the

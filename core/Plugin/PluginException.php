@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Common;
+use Matomo\Common;
 
 class PluginException extends \Exception
 {

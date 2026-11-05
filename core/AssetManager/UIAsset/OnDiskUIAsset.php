@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager\UIAsset;
+namespace Matomo\AssetManager\UIAsset;
 
 use Exception;
-use Piwik\AssetManager\UIAsset;
-use Piwik\Common;
-use Piwik\Filesystem;
+use Matomo\AssetManager\UIAsset;
+use Matomo\Common;
+use Matomo\Filesystem;
 
 class OnDiskUIAsset extends UIAsset
 {

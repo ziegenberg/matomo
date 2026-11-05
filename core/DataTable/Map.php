@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable;
+namespace Matomo\DataTable;
 
 use Closure;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\DataTable\Renderer\Html;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\DataTable\Renderer\Html;
 
 /**
  * Stores an array of {@link DataTable}s indexed by one type of {@link DataTable} metadata (such as site ID
@@ -78,7 +78,7 @@ class Map implements DataTableInterface
     /**
      * Queue a filter to {@link DataTable} child of contained by this instance.
      *
-     * See {@link Piwik\DataTable::queueFilter()} for more information..
+     * See {@link Matomo\DataTable::queueFilter()} for more information..
      *
      * @param string|Closure $className Filter name, eg. `'Limit'` or a Closure.
      * @param array $parameters Filter parameters, eg. `array(50, 10)`.
@@ -485,7 +485,7 @@ class Map implements DataTableInterface
      *
      * _Note: Will only add `$tableToSum` if the childTable has some rows._
      *
-     * See {@link Piwik\DataTable::addDataTable()}.
+     * See {@link Matomo\DataTable::addDataTable()}.
      */
     public function addDataTable(DataTable $tableToSum)
     {

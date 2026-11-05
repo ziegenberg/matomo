@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Plugin;
+namespace Matomo\Settings\Plugin;
 
-use Piwik\Piwik;
-use Piwik\Settings\Settings;
+use Matomo\Matomo;
+use Matomo\Settings\Settings;
 
 /**
  * Base class of all plugin settings providers. Plugins that define their own configuration settings
@@ -19,9 +19,9 @@ use Piwik\Settings\Settings;
  * Descendants of this class should implement the {@link init()} method and call the
  * {@link addSetting()} method for each of the plugin's settings.
  *
- * For an example, see {@link Piwik\Plugins\ExampleSettingsPlugin\UserSettings}.
+ * For an example, see {@link Matomo\Plugins\ExampleSettingsPlugin\UserSettings}.
  *
- * $userSettings = new Piwik\Plugins\ExampleSettingsPlugin\UserSettings(); // get instance via dependency injection
+ * $userSettings = new Matomo\Plugins\ExampleSettingsPlugin\UserSettings(); // get instance via dependency injection
  * $userSettings->yourSetting->getValue();
  *
  * @api
@@ -52,7 +52,7 @@ abstract class UserSettings extends Settings
      */
     protected function makeSetting($name, $defaultValue, $type, $configureCallback)
     {
-        $userLogin = Piwik::getCurrentUserLogin();
+        $userLogin = Matomo::getCurrentUserLogin();
 
         $setting = new UserSetting($name, $defaultValue, $type, $this->pluginName, $userLogin);
         $setting->setConfigureCallback($configureCallback);
@@ -84,6 +84,6 @@ abstract class UserSettings extends Settings
          *
          * @param Settings $settings The plugin settings object.
          */
-        Piwik::postEvent('UserSettings.updated', array($this));
+        Matomo::postEvent('UserSettings.updated', array($this));
     }
 }

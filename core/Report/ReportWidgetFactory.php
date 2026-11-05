@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Report;
+namespace Matomo\Report;
 
-use Piwik\Plugin\Report;
-use Piwik\Widget\WidgetContainerConfig;
+use Matomo\Plugin\Report;
+use Matomo\Widget\WidgetContainerConfig;
 
 /**
  * Report widget factory. This factory allows you to create widgets for a given report without having to re-specify
@@ -75,7 +75,7 @@ class ReportWidgetFactory
      * It will automatically use the report's categoryId, subcategoryId (if specified) and order in order to
      * create the container.
      *
-     * @param string $containerId eg 'Products' or 'Contents' see {Piwik\Widget\WidgetContainerConfig::setId()}.
+     * @param string $containerId eg 'Products' or 'Contents' see {Matomo\Widget\WidgetContainerConfig::setId()}.
      *                            Other reports or widgets will be able to add more widgets to this container.
      *                            This is useful when you want to show for example multiple related widgets
      *                            together.

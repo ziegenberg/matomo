@@ -7,21 +7,21 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\CronArchive;
+namespace Matomo\CronArchive;
 
 use Doctrine\Common\Cache\Cache;
 use Matomo\Cache\Transient;
-use Piwik\Access;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Cache as PiwikCache;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Period\Range;
-use Piwik\Plugins\SegmentEditor\Model;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Log\LoggerInterface;
+use Matomo\Access;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Cache as PiwikCache;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Period\Range;
+use Matomo\Plugins\SegmentEditor\Model;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Provides URLs that initiate archiving during cron archiving for segments.

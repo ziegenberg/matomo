@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-use Piwik\ProxyHttp;
+use Matomo\ProxyHttp;
 
 /**
  * Tracker proxy
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'
 /**
  * piwik.js proxy
  *
- * @see core/Piwik.php
+ * @see core/Matomo.php
  */
 define('PIWIK_DOCUMENT_ROOT', '..');
 
@@ -67,19 +67,19 @@ class Validator {
     public function validate() {}
 }
 $validator = new Validator();
-$environment = new \Piwik\Application\Environment(null, array(
-    'Piwik\Application\Kernel\EnvironmentValidator' => $validator
+$environment = new \Matomo\Application\Environment(null, array(
+    'Matomo\Application\Kernel\EnvironmentValidator' => $validator
 ));
 $environment->init();
 
-if (!\Piwik\Tracker\IgnoreCookie::isIgnoreCookieFound()) {
+if (!\Matomo\Tracker\IgnoreCookie::isIgnoreCookieFound()) {
     
-    $request = new \Piwik\Tracker\Request(array());
+    $request = new \Matomo\Tracker\Request(array());
     
     if ($request->shouldUseThirdPartyCookie()) {
         $visitorId = $request->getVisitorIdForThirdPartyCookie();
         if (!$visitorId) {
-            $visitorId = \Piwik\Common::hex2bin(\Piwik\Tracker\Visit::generateUniqueVisitorId());
+            $visitorId = \Matomo\Common::hex2bin(\Matomo\Tracker\Visit::generateUniqueVisitorId());
         }
         $request->setThirdPartyCookie($visitorId);
     }

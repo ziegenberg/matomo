@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Plugins\CoreConsole\FeatureFlags\SystemSignals;
-use Piwik\Plugins\FeatureFlags\FeatureFlagManager;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugins\CoreConsole\FeatureFlags\SystemSignals;
+use Matomo\Plugins\FeatureFlags\FeatureFlagManager;
 use Symfony\Component\Console\Command\Command as SymfonyCommand;
 use Symfony\Component\Console\Command\SignalableCommandInterface;
 use Symfony\Component\Console\Exception\LogicException;

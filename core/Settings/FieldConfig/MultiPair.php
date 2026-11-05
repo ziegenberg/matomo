@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\FieldConfig;
+namespace Matomo\Settings\FieldConfig;
 
 /**
  * Lets you configure a multi pair field.
@@ -33,7 +33,7 @@ class MultiPair
     /**
      * Describes what HTML element should be used to manipulate the setting through Piwik's UI.
      *
-     * See {@link Piwik\Plugin\Settings} for a list of supported control types.
+     * See {@link Matomo\Plugin\Settings} for a list of supported control types.
      *
      * @var string
      */

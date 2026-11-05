@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updates;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updates;
 
 /**
  * Moves scheduled reports off the retired `idGoal=0` report unique ids. The ecommerce order report is kept

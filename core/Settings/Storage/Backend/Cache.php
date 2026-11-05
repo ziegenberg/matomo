@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage\Backend;
+namespace Matomo\Settings\Storage\Backend;
 
-use Piwik\Tracker;
-use Piwik\Cache as PiwikCache;
+use Matomo\Tracker;
+use Matomo\Cache as PiwikCache;
 
 /**
  * Loads settings from tracker cache instead of database. If not yet present in tracker cache will cache it.

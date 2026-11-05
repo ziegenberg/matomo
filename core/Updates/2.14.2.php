@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\DbHelper;
-use Piwik\Option;
-use Piwik\Plugin\Dimension\ActionDimension;
-use Piwik\Plugin\Dimension\ConversionDimension;
-use Piwik\Plugin\Dimension\VisitDimension;
-use Piwik\Updater;
-use Piwik\Updates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Common;
+use Matomo\DbHelper;
+use Matomo\Option;
+use Matomo\Plugin\Dimension\ActionDimension;
+use Matomo\Plugin\Dimension\ConversionDimension;
+use Matomo\Plugin\Dimension\VisitDimension;
+use Matomo\Updater;
+use Matomo\Updates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Update for version 2.14.2.

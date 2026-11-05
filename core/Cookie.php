@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use DateTime;
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * Simple class to handle the cookies:
@@ -464,7 +464,7 @@ class Cookie
                 $sameSite = 'Lax'; // None can be only used when secure flag will be set
             } else {
                 $userAgent = Http::getUserAgent();
-                $ddFactory = StaticContainer::get(\Piwik\DeviceDetector\DeviceDetectorFactory::class);
+                $ddFactory = StaticContainer::get(\Matomo\DeviceDetector\DeviceDetectorFactory::class);
                 $deviceDetector = $ddFactory->makeInstance($userAgent, Http::getClientHintsFromServerVariables());
                 $deviceDetector->parse();
 

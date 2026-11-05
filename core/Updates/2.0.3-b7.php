@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Filesystem;
-use Piwik\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
-use Piwik\Plugins\PrivacyManager\IPAnonymizer;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Filesystem;
+use Matomo\Plugins\PrivacyManager\DoNotTrackHeaderChecker;
+use Matomo\Plugins\PrivacyManager\IPAnonymizer;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_2_0_3_b7 extends Updates
 {
@@ -25,12 +25,12 @@ class Updates_2_0_3_b7 extends Updates
             $checker = new DoNotTrackHeaderChecker();
 
             // enable DoNotTrack check in PrivacyManager if DoNotTrack plugin was enabled
-            if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('DoNotTrack')) {
+            if (\Matomo\Plugin\Manager::getInstance()->isPluginActivated('DoNotTrack')) {
                 $checker->activate();
             }
 
             // enable IP anonymization if AnonymizeIP plugin was enabled
-            if (\Piwik\Plugin\Manager::getInstance()->isPluginActivated('AnonymizeIP')) {
+            if (\Matomo\Plugin\Manager::getInstance()->isPluginActivated('AnonymizeIP')) {
                 IPAnonymizer::activate();
             }
         } catch (\Exception $ex) {
@@ -41,7 +41,7 @@ class Updates_2_0_3_b7 extends Updates
         $oldPlugins = array('DoNotTrack', 'AnonymizeIP');
         foreach ($oldPlugins as $plugin) {
             try {
-                \Piwik\Plugin\Manager::getInstance()->deactivatePlugin($plugin);
+                \Matomo\Plugin\Manager::getInstance()->deactivatePlugin($plugin);
             } catch (\Exception $e) {
             }
 

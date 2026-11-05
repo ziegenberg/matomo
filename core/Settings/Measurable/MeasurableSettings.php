@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Measurable;
+namespace Matomo\Settings\Measurable;
 
-use Piwik\Piwik;
-use Piwik\Settings\Settings;
-use Piwik\Site;
+use Matomo\Matomo;
+use Matomo\Settings\Settings;
+use Matomo\Site;
 use Exception;
 
 /**
@@ -21,9 +21,9 @@ use Exception;
  * Descendants of this class should implement the {@link init()} method and call the
  * {@link makeSetting()} method for each of the measurable's settings.
  *
- * For an example, see the {@link Piwik\Plugins\ExampleSettingsPlugin\MeasurableSettings} plugin.
+ * For an example, see the {@link Matomo\Plugins\ExampleSettingsPlugin\MeasurableSettings} plugin.
  *
- * $settingsProvider   = new Piwik\Plugin\SettingsProvider(); // get this instance via dependency injection
+ * $settingsProvider   = new Matomo\Plugin\SettingsProvider(); // get this instance via dependency injection
  * $measurableSettings = $settingProvider->getMeasurableSettings($yourPluginName, $idsite, $idType = null);
  * $measurableSettings->yourSetting->getValue();
  *
@@ -134,6 +134,6 @@ abstract class MeasurableSettings extends Settings
          *
          * @param Settings $settings The plugin settings object.
          */
-        Piwik::postEvent('MeasurableSettings.updated', array($this, $this->idSite));
+        Matomo::postEvent('MeasurableSettings.updated', array($this, $this->idSite));
     }
 }

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Twig\Extension;
+namespace Matomo\Twig\Extension;
 
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -17,8 +17,8 @@ class EscapeFilter extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('e', '\Piwik\piwik_escape_filter', ['needs_environment' => true, 'is_safe_callback' => 'twig_escape_filter_is_safe']),
-            new TwigFilter('escape', '\Piwik\piwik_escape_filter', ['needs_environment' => true, 'is_safe_callback' => 'twig_escape_filter_is_safe']),
+            new TwigFilter('e', '\Matomo\piwik_escape_filter', ['needs_environment' => true, 'is_safe_callback' => 'twig_escape_filter_is_safe']),
+            new TwigFilter('escape', '\Matomo\piwik_escape_filter', ['needs_environment' => true, 'is_safe_callback' => 'twig_escape_filter_is_safe']),
         ];
     }
 

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 /**
  * Base class for LogTables. You need to create a log table eg if you want to be able to create a segment for a custom

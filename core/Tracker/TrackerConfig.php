@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Config\SectionConfig;
-use Piwik\Tracker\Config\ThirdPartyCookies;
+use Matomo\Config\SectionConfig;
+use Matomo\Tracker\Config\ThirdPartyCookies;
 
 class TrackerConfig extends SectionConfig
 {

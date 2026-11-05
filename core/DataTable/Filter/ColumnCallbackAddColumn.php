@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\BaseFilter;
-use Piwik\Plugins\CoreHome\Columns\Metrics\CallableProcessedMetric;
+use Matomo\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\Plugins\CoreHome\Columns\Metrics\CallableProcessedMetric;
 
 /**
  * Adds a new column to every row of a {@link DataTable} based on the result of callback.

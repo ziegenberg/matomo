@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Widget;
+namespace Matomo\Widget;
 
-use Piwik\Access;
-use Piwik\Piwik;
+use Matomo\Access;
+use Matomo\Matomo;
 use Exception;
 
 /**
- * Configures a widget. Use this class to configure a {@link Piwik\Widget\Widget`} or to
+ * Configures a widget. Use this class to configure a {@link Matomo\Widget\Widget`} or to
  * add a widget to the WidgetsList via {@link WidgetsList::addWidget}.
  *
  * @api since Piwik 3.0.0
@@ -124,7 +124,7 @@ class WidgetConfig
 
     /**
      * Sets (overwrites) the parameters of the widget. These parameters will be added to the URL when rendering the
-     * widget. You can access these parameters via `Piwik\Common::getRequestVar(...)`.
+     * widget. You can access these parameters via `Matomo\Common::getRequestVar(...)`.
      *
      * This applies to widgets rendered through their controller/action request. Client-rendered widgets do not receive
      * these parameters automatically and should instead derive request state from the browser context or load data via
@@ -273,7 +273,7 @@ class WidgetConfig
             // prompt them to do this first rather than showing them the "widget not enabled" error
             Access::getInstance()->checkUserIsNotAnonymous();
 
-            throw new Exception(Piwik::translate('General_ExceptionWidgetNotEnabled'));
+            throw new Exception(Matomo::translate('General_ExceptionWidgetNotEnabled'));
         }
     }
 

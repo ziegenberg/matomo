@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Container;
+namespace Matomo\Container;
 
-use Piwik\Container\Container;
-use Piwik\Exception\DI\DependencyException;
-use Piwik\Exception\DI\NotFoundException;
+use Matomo\Container\Container;
+use Matomo\Exception\DI\DependencyException;
+use Matomo\Exception\DI\NotFoundException;
 
 /**
  * This class provides a static access to the container.

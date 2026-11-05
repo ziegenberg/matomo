@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable\Simple;
-use Piwik\DataTable;
-use Piwik\Metrics\Sorter;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable\Simple;
+use Matomo\DataTable;
+use Matomo\Metrics\Sorter;
 
 /**
  * Sorts a {@link DataTable} based on the value of a specific column.

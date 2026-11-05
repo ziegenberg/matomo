@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Auth;
+namespace Matomo\Auth;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 /**
  * Main class to handle actions related to password strength rules and verification of
@@ -42,23 +42,23 @@ class PasswordStrength
         return [
             [
                 'validationRegex' => '/^.{12,}$/',
-                'ruleText' => Piwik::translate('General_PasswordStrengthValidationLength'),
+                'ruleText' => Matomo::translate('General_PasswordStrengthValidationLength'),
             ],
             [
                 'validationRegex' => '/^.*[a-z].*$/',
-                'ruleText' => Piwik::translate('General_PasswordStrengthValidationLowercase'),
+                'ruleText' => Matomo::translate('General_PasswordStrengthValidationLowercase'),
             ],
             [
                 'validationRegex' => '/^.*[A-Z].*$/',
-                'ruleText' => Piwik::translate('General_PasswordStrengthValidationUppercase'),
+                'ruleText' => Matomo::translate('General_PasswordStrengthValidationUppercase'),
             ],
             [
                 'validationRegex' => '/^.*[0-9].*$/',
-                'ruleText' => Piwik::translate('General_PasswordStrengthValidationNumber'),
+                'ruleText' => Matomo::translate('General_PasswordStrengthValidationNumber'),
             ],
             [
                 'validationRegex' => '/^.*[!\"#$%&\\\'(\\\\)*+,\-.\/:;<=>?@[\\]^_\`{\|}\~].*$/',
-                'ruleText' => Piwik::translate('General_PasswordStrengthValidationSpecialChar'),
+                'ruleText' => Matomo::translate('General_PasswordStrengthValidationSpecialChar'),
             ],
         ];
     }
@@ -94,7 +94,7 @@ class PasswordStrength
 
         $concatenatedRules = implode(', ', array_map('lcfirst', $brokenRules));
 
-        return Piwik::translate('General_PasswordStrengthValidationFailed', $concatenatedRules);
+        return Matomo::translate('General_PasswordStrengthValidationFailed', $concatenatedRules);
     }
 
     public function getRulesAsHtmlList(): string

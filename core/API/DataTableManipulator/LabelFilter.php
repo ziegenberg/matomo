@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API\DataTableManipulator;
+namespace Matomo\API\DataTableManipulator;
 
-use Piwik\API\DataTableManipulator;
-use Piwik\Common;
-use Piwik\DataTable;
+use Matomo\API\DataTableManipulator;
+use Matomo\Common;
+use Matomo\DataTable;
 
 /**
  * This class is responsible for handling the label parameter that can be

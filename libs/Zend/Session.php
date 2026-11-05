@@ -317,7 +317,7 @@ class Zend_Session extends Zend_Session_Abstract
         $headers = headers_list();
         $cookieHeader = '';
         foreach ($headers as $header) {
-            if (strpos($header, 'Set-Cookie: ' . \Piwik\Session::SESSION_NAME) === 0) {
+            if (strpos($header, 'Set-Cookie: ' . \Matomo\Session::SESSION_NAME) === 0) {
                 $cookieHeader = $header;
                 break;
             }
@@ -328,7 +328,7 @@ class Zend_Session extends Zend_Session_Abstract
         }
 
         if (stripos($cookieHeader, 'SameSite') === false) {
-            $cookieHeader .= '; SameSite=' . \Piwik\Session::getSameSiteCookieValue();
+            $cookieHeader .= '; SameSite=' . \Matomo\Session::getSameSiteCookieValue();
             header($cookieHeader);
         }
     }
@@ -508,9 +508,9 @@ class Zend_Session extends Zend_Session_Abstract
         }
 
         if (isset($_SESSION['data']) && is_string($_SESSION['data'])) {
-            $_SESSION = \Piwik\Common::safe_unserialize(
+            $_SESSION = \Matomo\Common::safe_unserialize(
                 base64_decode($_SESSION['data']),
-                \Piwik\Session::SESSION_DATA_ALLOWED_CLASSES
+                \Matomo\Session::SESSION_DATA_ALLOWED_CLASSES
             );
         }
 
@@ -780,7 +780,7 @@ class Zend_Session extends Zend_Session_Abstract
         if (isset($_COOKIE[session_name()])) {
             $cookie_params = session_get_cookie_params();
 
-            \Piwik\Session::writeCookie(
+            \Matomo\Session::writeCookie(
                 session_name(),
                 false,
                 315554400, // strtotime('1980-01-01'),
@@ -788,7 +788,7 @@ class Zend_Session extends Zend_Session_Abstract
                 $cookie_params['domain'],
                 $cookie_params['secure'],
                 false,
-                \Piwik\Session::getSameSiteCookieValue()
+                \Matomo\Session::getSameSiteCookieValue()
             );
         }
     }

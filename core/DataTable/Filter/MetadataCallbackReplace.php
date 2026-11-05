@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
 
 /**
  * Execute a callback for each row of a {@link DataTable} passing certain column values and metadata

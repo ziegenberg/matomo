@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\CronArchive\Performance;
+namespace Matomo\CronArchive\Performance;
 
-use Piwik\ArchiveProcessor;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Timer;
-use Piwik\Url;
-use Piwik\Log\LoggerInterface;
+use Matomo\ArchiveProcessor;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Timer;
+use Matomo\Url;
+use Matomo\Log\LoggerInterface;
 
 class Logger
 {

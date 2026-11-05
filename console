@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-use Piwik\FrontController;
+use Matomo\FrontController;
 
 if (!defined('PIWIK_DOCUMENT_ROOT')) {
     define('PIWIK_DOCUMENT_ROOT', dirname(__FILE__) == '/' ? '' : dirname(__FILE__));
@@ -17,16 +17,16 @@ if (!defined('PIWIK_INCLUDE_PATH')) {
 
 require_once PIWIK_INCLUDE_PATH . '/core/bootstrap.php';
 
-if (!Piwik\Common::isPhpCliMode()) {
+if (!Matomo\Common::isPhpCliMode()) {
     exit;
 }
 
 if (!defined('PIWIK_ENABLE_ERROR_HANDLER') || PIWIK_ENABLE_ERROR_HANDLER) {
-    Piwik\ErrorHandler::registerErrorHandler();
-    Piwik\ExceptionHandler::setUp();
+    Matomo\ErrorHandler::registerErrorHandler();
+    Matomo\ExceptionHandler::setUp();
 }
 
 FrontController::setUpSafeMode();
 
-$console = new Piwik\Console();
+$console = new Matomo\Console();
 $console->run();

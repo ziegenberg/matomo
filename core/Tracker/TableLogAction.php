@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Common;
-use Piwik\Segment\SegmentExpression;
+use Matomo\Common;
+use Matomo\Segment\SegmentExpression;
 
 /**
  * This class is used to query Action IDs from the log_action table.

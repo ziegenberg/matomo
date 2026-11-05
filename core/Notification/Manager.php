@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Notification;
+namespace Matomo\Notification;
 
-use Piwik\Config\GeneralConfig;
-use Piwik\Notification;
-use Piwik\Session;
-use Piwik\Session\SessionNamespace;
+use Matomo\Config\GeneralConfig;
+use Matomo\Notification;
+use Matomo\Session;
+use Matomo\Session\SessionNamespace;
 
 /**
- * Posts and removes UI notifications (see {@link Piwik\Notification} to learn more).
+ * Posts and removes UI notifications (see {@link Matomo\Notification} to learn more).
  *
  */
 class Manager

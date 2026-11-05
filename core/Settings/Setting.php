@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings;
+namespace Matomo\Settings;
 
-use Piwik\Access;
-use Piwik\Piwik;
-use Piwik\Settings\Storage\Storage;
+use Matomo\Access;
+use Matomo\Matomo;
+use Matomo\Settings\Storage\Storage;
 use Exception;
-use Piwik\Validators\BaseValidator;
+use Matomo\Validators\BaseValidator;
 
 /**
  * Base setting type class.
@@ -299,7 +299,7 @@ class Setting
             }
 
             // TODO move error message creation to a subclass, eg in MeasurableSettings we do not want to mention plugin name
-            $errorMsg = Piwik::translate(
+            $errorMsg = Matomo::translate(
                 'CoreAdminHome_PluginSettingsValueNotAllowed',
                 array(strip_tags($config->title), $this->pluginName)
             );
@@ -317,7 +317,7 @@ class Setting
             }
         } elseif ($this->type === FieldConfig::TYPE_INT || $this->type === FieldConfig::TYPE_FLOAT) {
             if (!is_numeric($value)) {
-                $errorMsg = Piwik::translate(
+                $errorMsg = Matomo::translate(
                     'CoreAdminHome_PluginSettingsValueNotAllowed',
                     array(strip_tags($config->title), $this->pluginName)
                 );
@@ -325,7 +325,7 @@ class Setting
             }
         } elseif ($this->type === FieldConfig::TYPE_BOOL) {
             if (!in_array($value, array(true, false, '0', '1', 0, 1), true)) {
-                $errorMsg = Piwik::translate(
+                $errorMsg = Matomo::translate(
                     'CoreAdminHome_PluginSettingsValueNotAllowed',
                     array(strip_tags($config->title), $this->pluginName)
                 );
@@ -340,7 +340,7 @@ class Setting
     private function checkHasEnoughWritePermission()
     {
         if (!$this->isWritableByCurrentUser()) {
-            $errorMsg = Piwik::translate('CoreAdminHome_PluginSettingChangeNotAllowed', array($this->name, $this->pluginName));
+            $errorMsg = Matomo::translate('CoreAdminHome_PluginSettingChangeNotAllowed', array($this->name, $this->pluginName));
             throw new \Exception($errorMsg);
         }
     }

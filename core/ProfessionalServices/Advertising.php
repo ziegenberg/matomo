@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ProfessionalServices;
+namespace Matomo\ProfessionalServices;
 
-use Piwik\Plugin;
-use Piwik\Config;
-use Piwik\Url;
+use Matomo\Plugin;
+use Matomo\Config;
+use Matomo\Url;
 
 /**
  * Advertising for providers of Professional Support for Piwik.

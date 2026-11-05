@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Session\SaveHandler;
+namespace Matomo\Session\SaveHandler;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\DbHelper;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\DbHelper;
 use Exception;
-use Piwik\Log\LoggerInterface;
-use Piwik\SettingsPiwik;
-use Piwik\Updater\Migration;
+use Matomo\Log\LoggerInterface;
+use Matomo\SettingsPiwik;
+use Matomo\Updater\Migration;
 use Zend_Session;
 
 /**
@@ -48,7 +48,7 @@ class DbTable implements \SessionHandlerInterface
     private array $readData = [];
 
     /**
-     * Merging only works while the session is stored the way {@see \Piwik\Session::start()} asks PHP
+     * Merging only works while the session is stored the way {@see \Matomo\Session::start()} asks PHP
      * to store it. That ini_set is allowed to fail, and if it ever does every merge below returns
      * null and writing quietly goes back to storing whatever was written last.
      */

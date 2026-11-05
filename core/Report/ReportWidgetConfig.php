@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Report;
+namespace Matomo\Report;
 
-use Piwik\Widget\WidgetConfig;
+use Matomo\Widget\WidgetConfig;
 
 /**
  * Defines a widget config that is used to render a report.

@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\CronArchive;
+namespace Matomo\CronArchive;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CronArchive;
-use Piwik\DataAccess\ArchiveSelector;
-use Piwik\DataAccess\Model;
-use Piwik\Date;
-use Piwik\Period;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\Piwik;
-use Piwik\Plugin\Manager;
-use Piwik\Segment;
-use Piwik\Site;
-use Piwik\Timer;
-use Piwik\Log\LoggerInterface;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CronArchive;
+use Matomo\DataAccess\ArchiveSelector;
+use Matomo\DataAccess\Model;
+use Matomo\Date;
+use Matomo\Period;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\Matomo;
+use Matomo\Plugin\Manager;
+use Matomo\Segment;
+use Matomo\Site;
+use Matomo\Timer;
+use Matomo\Log\LoggerInterface;
 
 class QueueConsumer
 {
@@ -111,7 +111,7 @@ class QueueConsumer
         // archive. these IDs are stored here (using a list like this serves to keep our SQL simple).
         $this->invalidationsToExclude = [];
 
-        $this->periodIdsToLabels = array_flip(Piwik::$idPeriods);
+        $this->periodIdsToLabels = array_flip(Matomo::$idPeriods);
     }
 
     /**
@@ -147,7 +147,7 @@ class QueueConsumer
              * @param int $idSite The ID of the site we're archiving data for.
              * @param string $pid The PID of the process processing archives for this site.
              */
-            Piwik::postEvent('CronArchive.archiveSingleSite.start', array($this->idSite, $this->pid));
+            Matomo::postEvent('CronArchive.archiveSingleSite.start', array($this->idSite, $this->pid));
 
             $this->logger->info("Start processing archives for site {idSite}.", ['idSite' => $this->idSite]);
 
@@ -294,7 +294,7 @@ class QueueConsumer
              * @param int $idSite The ID of the site we're archiving data for.
              * @param string $pid The PID of the process processing archives for this site.
              */
-            Piwik::postEvent('CronArchive.archiveSingleSite.finish', array($this->idSite, $this->pid));
+            Matomo::postEvent('CronArchive.archiveSingleSite.finish', array($this->idSite, $this->pid));
 
             $this->logger->info("Finished archiving for site {idSite}, {requests} API requests, {timer} [{processed} / {totalNum} done]", [
                 'idSite' => $this->idSite,
@@ -385,7 +385,7 @@ class QueueConsumer
             [(int) $archiveToProcess['idsite']]
         );
 
-        $periods = array_flip(Piwik::$idPeriods);
+        $periods = array_flip(Matomo::$idPeriods);
 
         foreach ($inProgressArchives as $archiveBeingProcessed) {
             $this->findSegmentForArchive($archiveBeingProcessed);

@@ -7,36 +7,36 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\ArchiveProcessor\Loader;
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\CliMulti\Process;
-use Piwik\Container\StaticContainer;
-use Piwik\CronArchive\ArchiveFilter;
-use Piwik\CronArchive\FixedSiteIds;
-use Piwik\CronArchive\Performance\Logger;
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\CronArchive\QueueConsumer;
-use Piwik\CronArchive\SharedSiteIds;
-use Piwik\CronArchive\StopArchiverException;
-use Piwik\DataAccess\ArchiveSelector;
-use Piwik\DataAccess\ArchiveWriter;
-use Piwik\DataAccess\Model;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Metrics\Formatter;
-use Piwik\Period\Factory as PeriodFactory;
-use Piwik\CronArchive\SegmentArchiving;
-use Piwik\Period\Range;
-use Piwik\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
-use Piwik\Plugins\Monolog\Processor\ExceptionToTextProcessor;
-use Piwik\Plugins\SitesManager\API as APISitesManager;
-use Piwik\Plugins\UsersManager\API as APIUsersManager;
-use Piwik\Plugins\UsersManager\UserPreferences;
-use Piwik\Log\LoggerInterface;
-use Piwik\Scheduler\Scheduler;
+use Matomo\ArchiveProcessor\Loader;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\CliMulti\Process;
+use Matomo\Container\StaticContainer;
+use Matomo\CronArchive\ArchiveFilter;
+use Matomo\CronArchive\FixedSiteIds;
+use Matomo\CronArchive\Performance\Logger;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\CronArchive\QueueConsumer;
+use Matomo\CronArchive\SharedSiteIds;
+use Matomo\CronArchive\StopArchiverException;
+use Matomo\DataAccess\ArchiveSelector;
+use Matomo\DataAccess\ArchiveWriter;
+use Matomo\DataAccess\Model;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Metrics\Formatter;
+use Matomo\Period\Factory as PeriodFactory;
+use Matomo\CronArchive\SegmentArchiving;
+use Matomo\Period\Range;
+use Matomo\Plugins\CoreAdminHome\API as CoreAdminHomeAPI;
+use Matomo\Plugins\Monolog\Processor\ExceptionToTextProcessor;
+use Matomo\Plugins\SitesManager\API as APISitesManager;
+use Matomo\Plugins\UsersManager\API as APIUsersManager;
+use Matomo\Plugins\UsersManager\UserPreferences;
+use Matomo\Log\LoggerInterface;
+use Matomo\Scheduler\Scheduler;
 
 /**
  * ./console core:archive runs as a cron and is a useful tool for general maintenance,
@@ -254,13 +254,13 @@ class CronArchive
         $this->logger = $logger ?: StaticContainer::get(LoggerInterface::class);
         $this->formatter = new Formatter();
 
-        $this->invalidator = StaticContainer::get('Piwik\Archive\ArchiveInvalidator');
+        $this->invalidator = StaticContainer::get('Matomo\Archive\ArchiveInvalidator');
 
         $this->isArchiveProfilingEnabled = Config::getInstance()->Debug['archiving_profile'] == 1;
 
         $this->model = StaticContainer::get(Model::class);
 
-        $this->periodIdsToLabels = array_flip(Piwik::$idPeriods);
+        $this->periodIdsToLabels = array_flip(Matomo::$idPeriods);
 
         $this->supportsAsync = $this->makeCliMulti()->supportsAsync();
 
@@ -341,7 +341,7 @@ class CronArchive
          *
          * @param CronArchive $this
          */
-        Piwik::postEvent('CronArchive.init.start', [$this]);
+        Matomo::postEvent('CronArchive.init.start', [$this]);
 
         SettingsServer::setMaxExecutionTime(0);
 
@@ -385,7 +385,7 @@ class CronArchive
          *                          This will be the entire list of IDs regardless of whether some have
          *                          already been processed.
          */
-        Piwik::postEvent('CronArchive.init.finish', [$this->allWebsites]);
+        Matomo::postEvent('CronArchive.init.finish', [$this->allWebsites]);
     }
 
     /**
@@ -408,7 +408,7 @@ class CronArchive
         }
 
         $this->logger->debug("Applying queued rearchiving...");
-        \Piwik\Tracker\Cache::withDelegatedCacheClears(function () {
+        \Matomo\Tracker\Cache::withDelegatedCacheClears(function () {
             $this->invalidator->applyScheduledReArchiving();
         });
 
@@ -708,7 +708,7 @@ class CronArchive
          *
          * @param CronArchive $this
          */
-        Piwik::postEvent('CronArchive.end', [$this]);
+        Matomo::postEvent('CronArchive.end', [$this]);
 
         if (empty($this->errors)) {
             // No error -> Logs the successful script execution until completion
@@ -749,7 +749,7 @@ class CronArchive
 
         $this->disconnectDb();
 
-        Piwik::addAction('ScheduledTasks.execute.end', function () {
+        Matomo::addAction('ScheduledTasks.execute.end', function () {
             // check if we need to reconnect after each task executes
             $this->disconnectDb();
         });
@@ -894,7 +894,7 @@ class CronArchive
          *
          * @param array $websiteIds The list of website IDs to launch the archiving process for.
          */
-        Piwik::postEvent('CronArchive.filterWebsiteIds', [&$websiteIds]);
+        Matomo::postEvent('CronArchive.filterWebsiteIds', [&$websiteIds]);
     }
 
     /**
@@ -917,7 +917,7 @@ class CronArchive
 
     public function invalidateArchivedReportsForSitesThatNeedToBeArchivedAgain($idSiteToInvalidate)
     {
-        \Piwik\Tracker\Cache::withDelegatedCacheClears(function () use ($idSiteToInvalidate) {
+        \Matomo\Tracker\Cache::withDelegatedCacheClears(function () use ($idSiteToInvalidate) {
             $this->invalidateArchivedReportsForSitesThatNeedToBeArchivedAgainImpl($idSiteToInvalidate);
         });
     }
@@ -1219,7 +1219,7 @@ class CronArchive
         $higherPeriods = array_column($higherPeriods, 'period');
 
         $invalidationsToInsert = [];
-        foreach (Piwik::$idPeriods as $label => $id) {
+        foreach (Matomo::$idPeriods as $label => $id) {
             // lower period than the one we're processing or range, don't care
             if ($id <= $archiveToProcess['period'] || $label == 'range') {
                 continue;
@@ -1512,7 +1512,7 @@ class CronArchive
         /**
          * @ignore
          */
-        Piwik::postEvent('CronArchive.alterArchivingRequestUrl', [&$url]);
+        Matomo::postEvent('CronArchive.alterArchivingRequestUrl', [&$url]);
 
         return $url;
     }

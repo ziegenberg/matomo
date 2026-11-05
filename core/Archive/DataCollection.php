@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
 use Exception;
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 /**
  * This class is used to hold and transform archive data for the Archive class.
@@ -88,14 +88,14 @@ class DataCollection
      *     '2012-02-01,2012-02-28' => new Period(...),
      * )
      *
-     * @var \Piwik\Period[]
+     * @var \Matomo\Period[]
      */
     private $periods;
 
     /**
      * The segment that was queried
      *
-     * @var \Piwik\Segment
+     * @var \Matomo\Segment
      */
     private $segment;
 
@@ -105,8 +105,8 @@ class DataCollection
      * @param array $dataNames @see $this->dataNames
      * @param string $dataType @see $this->dataType
      * @param array $sitesId @see $this->sitesId
-     * @param \Piwik\Period[] $periods @see $this->periods
-     * @param \Piwik\Segment $segment @see $this->segment
+     * @param \Matomo\Period[] $periods @see $this->periods
+     * @param \Matomo\Segment $segment @see $this->segment
      * @param array|null $defaultRow @see $this->defaultRow
      */
     public function __construct($dataNames, $dataType, $sitesId, $periods, $segment, $defaultRow = null)

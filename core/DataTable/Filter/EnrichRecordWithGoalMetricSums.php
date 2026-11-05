@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\Metrics;
-use Piwik\Tracker\GoalManager;
+use Matomo\DataTable\BaseFilter;
+use Matomo\Metrics;
+use Matomo\Tracker\GoalManager;
 
 /**
  * This filter will check for goal metrics in every row in a DataTable (that is, the Metrics::INDEX_GOALS

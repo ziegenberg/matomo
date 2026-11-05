@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
 use Matomo\Network\IPUtils;
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class IpRanges extends BaseValidator
 {
@@ -25,7 +25,7 @@ class IpRanges extends BaseValidator
 
             foreach ($ips as $ip) {
                 if (IPUtils::getIPRangeBounds($ip) === null) {
-                    throw new Exception(Piwik::translate('SitesManager_ExceptionInvalidIPFormat', array($ip, "1.2.3.4, 1.2.3.*, or 1.2.3.4/5")));
+                    throw new Exception(Matomo::translate('SitesManager_ExceptionInvalidIPFormat', array($ip, "1.2.3.4, 1.2.3.*, or 1.2.3.4/5")));
                 }
             }
         }

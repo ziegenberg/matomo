@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Plugins\CoreAdminHome\Commands\MigrateUserScopedSettings;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Custom as CustomMigration;
-use Piwik\Updates;
+use Matomo\Plugins\CoreAdminHome\Commands\MigrateUserScopedSettings;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Custom as CustomMigration;
+use Matomo\Updates;
 
 class Updates_5_9_0_b1 extends Updates
 {

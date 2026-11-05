@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class NotEmpty extends BaseValidator
 {
     public function validate($value)
     {
         if (empty($value)) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorEmptyValue'));
+            throw new Exception(Matomo::translate('General_ValidatorErrorEmptyValue'));
         }
     }
 }

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Db;
-use Piwik\Updater;
-use Piwik\Updates;
-use Piwik\Plugins\Dashboard\Model as DashboardModel;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Db;
+use Matomo\Updater;
+use Matomo\Updates;
+use Matomo\Plugins\Dashboard\Model as DashboardModel;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * This Update script will update all browser and os archives of UserSettings and DevicesDetection plugin

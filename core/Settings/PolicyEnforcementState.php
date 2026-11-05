@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings;
+namespace Matomo\Settings;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Piwik;
-use Piwik\Settings\Measurable\MeasurableSetting;
-use Piwik\Settings\Plugin\SystemSetting;
-use Piwik\Settings\Storage\Factory;
-use Piwik\Settings\Storage\Storage;
+use Matomo\Container\StaticContainer;
+use Matomo\Matomo;
+use Matomo\Settings\Measurable\MeasurableSetting;
+use Matomo\Settings\Plugin\SystemSetting;
+use Matomo\Settings\Storage\Factory;
+use Matomo\Settings\Storage\Storage;
 
 /**
  * Stored enforcement state of a single policy-controlled setting.
@@ -43,7 +43,7 @@ use Piwik\Settings\Storage\Storage;
  *    state of the policies it subscribes to
  *
  * The state is consumed during setting-value resolution via
- * {@link \Piwik\Settings\Interfaces\Traits\PolicyComparisonTrait::getPolicyRequiredValues()},
+ * {@link \Matomo\Settings\Interfaces\Traits\PolicyComparisonTrait::getPolicyRequiredValues()},
  * which only applies the policy-required values while the setting is enforced.
  */
 class PolicyEnforcementState
@@ -132,7 +132,7 @@ class PolicyEnforcementState
             return;
         }
 
-        throw new Exception(Piwik::translate(
+        throw new Exception(Matomo::translate(
             'CoreAdminHome_PluginSettingChangeNotAllowed',
             [$this->settingName, $this->pluginName]
         ));

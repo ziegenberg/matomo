@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
 use Exception;
-use Piwik\Piwik;
-use Piwik\Url;
-use Piwik\Version;
+use Matomo\Matomo;
+use Matomo\Url;
+use Matomo\Version;
 
 /**
  * @see core/Version.php
@@ -53,7 +53,7 @@ class MetadataLoader
         $plugin   = $this->loadPluginInfoJson();
 
         // use translated plugin description if available
-        if ($defaults['description'] != Piwik::translate($defaults['description'])) {
+        if ($defaults['description'] != Matomo::translate($defaults['description'])) {
             unset($plugin['description']);
         }
 
@@ -133,7 +133,7 @@ class MetadataLoader
      */
     private function getPathToPluginFolder()
     {
-        return \Piwik\Plugin\Manager::getPluginDirectory($this->pluginName);
+        return \Matomo\Plugin\Manager::getPluginDirectory($this->pluginName);
     }
 
     /**

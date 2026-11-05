@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_1_9_3_b3 extends Updates
 {
@@ -19,9 +19,9 @@ class Updates_1_9_3_b3 extends Updates
         // Insight was a temporary code name for Overlay
         $pluginToDelete = 'Insight';
         self::deletePluginFromConfigFile($pluginToDelete);
-        \Piwik\Plugin\Manager::getInstance()->deletePluginFromFilesystem($pluginToDelete);
+        \Matomo\Plugin\Manager::getInstance()->deletePluginFromFilesystem($pluginToDelete);
 
         // We also clean up 1.9.1 and delete Feedburner plugin
-        \Piwik\Plugin\Manager::getInstance()->deletePluginFromFilesystem('Feedburner');
+        \Matomo\Plugin\Manager::getInstance()->deletePluginFromFilesystem('Feedburner');
     }
 }

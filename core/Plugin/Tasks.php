@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\Development;
-use Piwik\Scheduler\Schedule\Schedule;
-use Piwik\Scheduler\Task;
+use Matomo\Development;
+use Matomo\Scheduler\Schedule\Schedule;
+use Matomo\Scheduler\Task;
 
 /**
  * Base class for all Tasks declarations.
@@ -113,10 +113,10 @@ class Tasks
      * @param string|Schedule $time
      * @param int $priority
      *
-     * @return \Piwik\Scheduler\Schedule\Schedule
+     * @return \Matomo\Scheduler\Schedule\Schedule
      *
      * @throws \Exception If a wrong time format is given. Needs to be either a string such as 'daily', 'weekly', ...
-     *                    or an instance of {@link Piwik\Scheduler\Schedule\Schedule}
+     *                    or an instance of {@link Matomo\Scheduler\Schedule\Schedule}
      *
      * @api
      */

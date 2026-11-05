@@ -1,6 +1,6 @@
 <?php
 
-namespace Piwik\Db;
+namespace Matomo\Db;
 
 interface TransactionalDatabaseInterface
 {

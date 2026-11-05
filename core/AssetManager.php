@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\AssetManager\UIAsset;
-use Piwik\AssetManager\UIAsset\InMemoryUIAsset;
-use Piwik\AssetManager\UIAsset\OnDiskUIAsset;
-use Piwik\AssetManager\UIAssetCacheBuster;
-use Piwik\AssetManager\UIAssetFetcher\JScriptUIAssetFetcher;
-use Piwik\AssetManager\UIAssetFetcher\StaticUIAssetFetcher;
-use Piwik\AssetManager\UIAssetFetcher\StylesheetUIAssetFetcher;
-use Piwik\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
-use Piwik\AssetManager\UIAssetFetcher;
-use Piwik\AssetManager\UIAssetMerger\JScriptUIAssetMerger;
-use Piwik\AssetManager\UIAssetMerger\StylesheetUIAssetMerger;
-use Piwik\Container\StaticContainer;
-use Piwik\Plugin\Manager;
+use Matomo\AssetManager\UIAsset;
+use Matomo\AssetManager\UIAsset\InMemoryUIAsset;
+use Matomo\AssetManager\UIAsset\OnDiskUIAsset;
+use Matomo\AssetManager\UIAssetCacheBuster;
+use Matomo\AssetManager\UIAssetFetcher\JScriptUIAssetFetcher;
+use Matomo\AssetManager\UIAssetFetcher\StaticUIAssetFetcher;
+use Matomo\AssetManager\UIAssetFetcher\StylesheetUIAssetFetcher;
+use Matomo\AssetManager\UIAssetFetcher\PluginUmdAssetFetcher;
+use Matomo\AssetManager\UIAssetFetcher;
+use Matomo\AssetManager\UIAssetMerger\JScriptUIAssetMerger;
+use Matomo\AssetManager\UIAssetMerger\StylesheetUIAssetMerger;
+use Matomo\Container\StaticContainer;
+use Matomo\Plugin\Manager;
 
 /**
  * AssetManager is the class used to manage the inclusion of UI assets:
@@ -97,7 +97,7 @@ class AssetManager extends Singleton
          * This event is not a public event since we don't want to make the asset manager itself public
          * API
          */
-        Piwik::postEvent('AssetManager.makeNewAssetManagerObject', array(&$assetManager));
+        Matomo::postEvent('AssetManager.makeNewAssetManagerObject', array(&$assetManager));
 
         return $assetManager;
     }
@@ -141,7 +141,7 @@ class AssetManager extends Singleton
      */
     public function getJsInclusionDirective(bool $deferJS = false): string
     {
-        $result = "<script type=\"text/javascript\">\n" . StaticContainer::get('Piwik\Translation\Translator')->getJavascriptTranslations() . "\n</script>";
+        $result = "<script type=\"text/javascript\">\n" . StaticContainer::get('Matomo\Translation\Translator')->getJavascriptTranslations() . "\n</script>";
 
         if ($this->isMergedAssetsDisabled()) {
             $this->getMergedCoreJSAsset()->delete();

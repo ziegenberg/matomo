@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\DataTable\BaseFilter;
 
 /**
  * Deletes every row for which a specific column does not match a supplied regex pattern.

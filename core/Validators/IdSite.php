@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Site;
+use Matomo\Site;
 
 class IdSite extends BaseValidator
 {

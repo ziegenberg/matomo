@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Container;
+namespace Matomo\Container;
 
 use DI\ContainerBuilder;
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Application\Kernel\PluginList;
-use Piwik\Plugin\Manager;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Application\Kernel\PluginList;
+use Matomo\Plugin\Manager;
 
 /**
  * Creates a configured DI container.
@@ -90,8 +90,8 @@ class ContainerFactory
 
         /** @var Container $container */
         $container = $builder->build();
-        $container->set('Piwik\Application\Kernel\PluginList', $this->pluginList);
-        $container->set('Piwik\Application\Kernel\GlobalSettingsProvider', $this->settings);
+        $container->set('Matomo\Application\Kernel\PluginList', $this->pluginList);
+        $container->set('Matomo\Application\Kernel\GlobalSettingsProvider', $this->settings);
 
         return $container;
     }

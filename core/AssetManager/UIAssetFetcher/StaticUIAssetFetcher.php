@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager\UIAssetFetcher;
+namespace Matomo\AssetManager\UIAssetFetcher;
 
-use Piwik\AssetManager\UIAssetFetcher;
+use Matomo\AssetManager\UIAssetFetcher;
 
 class StaticUIAssetFetcher extends UIAssetFetcher
 {

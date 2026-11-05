@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
-use Piwik\Date;
-use Piwik\Log;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Segment;
-use Piwik\Site;
+use Matomo\Date;
+use Matomo\Log;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Segment;
+use Matomo\Site;
 
 /**
  * Contains the analytics parameters for the reports that are currently being archived. The analytics
@@ -125,7 +125,7 @@ class Parameters
     /**
      * Returns the array of Period which make up this archive.
      *
-     * @return \Piwik\Period[]
+     * @return \Matomo\Period[]
      * @ignore
      */
     public function getSubPeriods()
@@ -146,7 +146,7 @@ class Parameters
 
         $idSites = array($idSite);
 
-        Piwik::postEvent('ArchiveProcessor.Parameters.getIdSites', array(&$idSites, $this->getPeriod()));
+        Matomo::postEvent('ArchiveProcessor.Parameters.getIdSites', array(&$idSites, $this->getPeriod()));
 
         return $idSites;
     }

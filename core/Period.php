@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Period\Factory;
-use Piwik\Period\Range;
-use Piwik\Translation\Translator;
+use Matomo\Container\StaticContainer;
+use Matomo\Period\Factory;
+use Matomo\Period\Range;
+use Matomo\Translation\Translator;
 
 /**
  * Date range representation.
@@ -60,7 +60,7 @@ abstract class Period
     {
         $this->date = clone $date;
 
-        $this->translator = StaticContainer::get('Piwik\Translation\Translator');
+        $this->translator = StaticContainer::get('Matomo\Translation\Translator');
     }
 
     public function __sleep()
@@ -72,7 +72,7 @@ abstract class Period
 
     public function __wakeup()
     {
-        $this->translator = StaticContainer::get('Piwik\Translation\Translator');
+        $this->translator = StaticContainer::get('Matomo\Translation\Translator');
     }
 
     /**
@@ -103,7 +103,7 @@ abstract class Period
     /**
      * Checks the given date format whether it is a correct date format and if not, throw an exception.
      *
-     * For valid date formats have a look at the {@link \Piwik\Date::factory()} method and
+     * For valid date formats have a look at the {@link \Matomo\Date::factory()} method and
      * {@link isMultiplePeriod()} method.
      *
      * @param string $dateString
@@ -196,7 +196,7 @@ abstract class Period
      */
     public function getId()
     {
-        return Piwik::$idPeriods[$this->getLabel()];
+        return Matomo::$idPeriods[$this->getLabel()];
     }
 
     /**
@@ -286,7 +286,7 @@ abstract class Period
      *
      * Protected because adding periods after initialization is not supported.
      *
-     * @param \Piwik\Period $period Valid Period object
+     * @param \Matomo\Period $period Valid Period object
      * @ignore
      */
     protected function addSubperiod($period)
@@ -450,7 +450,7 @@ abstract class Period
             $maxDifference = 'M';
         }
 
-        $dateTimeFormatProvider = StaticContainer::get('Piwik\Intl\Data\Provider\DateTimeFormatProvider');
+        $dateTimeFormatProvider = StaticContainer::get('Matomo\Intl\Data\Provider\DateTimeFormatProvider');
 
         return $dateTimeFormatProvider->getRangeFormatPattern($short, $maxDifference);
     }

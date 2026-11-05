@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Scheduler;
+namespace Matomo\Scheduler;
 
-use Piwik\Concurrency\Lock;
-use Piwik\Piwik;
-use Piwik\Timer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Concurrency\Lock;
+use Matomo\Matomo;
+use Matomo\Timer;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Schedules task execution.
  *
  * A scheduled task is a callback that should be executed every so often (such as daily,
- * weekly, monthly, etc.). They are registered by extending {@link \Piwik\Plugin\Tasks}.
+ * weekly, monthly, etc.). They are registered by extending {@link \Matomo\Plugin\Tasks}.
  *
  * Tasks are executed when the `core:archive` command is executed.
  *
@@ -26,7 +26,7 @@ use Piwik\Log\LoggerInterface;
  *
  * **Scheduling a task**
  *
- *     class Tasks extends \Piwik\Plugin\Tasks
+ *     class Tasks extends \Matomo\Plugin\Tasks
  *     {
  *         public function schedule()
  *         {
@@ -167,7 +167,7 @@ class Scheduler
                  * @param bool &$shouldExecuteTask Decides whether the task will be executed.
                  * @param Task $task The task that is about to be executed.
                  */
-                Piwik::postEvent('ScheduledTasks.shouldExecuteTask', array(&$shouldExecuteTask, $task));
+                Matomo::postEvent('ScheduledTasks.shouldExecuteTask', array(&$shouldExecuteTask, $task));
 
                 if ($shouldExecuteTask) {
                     $readFromOption = true;
@@ -348,7 +348,7 @@ class Scheduler
          *
          * @param Task $task  The task that is about to be executed
          */
-        Piwik::postEvent('ScheduledTasks.execute', array(&$task));
+        Matomo::postEvent('ScheduledTasks.execute', array(&$task));
 
         try {
             $callable = array($task->getObjectInstance(), $task->getMethodName());
@@ -377,7 +377,7 @@ class Scheduler
          *
          * @param Task $task The task that was just executed
          */
-        Piwik::postEvent('ScheduledTasks.execute.end', array(&$task));
+        Matomo::postEvent('ScheduledTasks.execute.end', array(&$task));
 
         $this->logger->info("Scheduler: finished. {timeElapsed}", array(
             'timeElapsed' => $timer,

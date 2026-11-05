@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\DataTable\BaseFilter;
 
 /**
  * Sanitizes DataTable labels as an extra precaution. Called internally by Piwik.
@@ -49,7 +49,7 @@ class SafeDecodeLabel extends BaseFilter
     /**
      * Normalises the given value to exactly one level of HTML encoding, without reading it as a
      * URL. For a value that is already formatted for display - a metric carrying the `&nbsp;`
-     * entities `Piwik\Metrics\Formatter\Html` writes, say - `decodeLabelSafe()` would read a `%`
+     * entities `Matomo\Metrics\Formatter\Html` writes, say - `decodeLabelSafe()` would read a `%`
      * and the two characters behind it as a percent-escape and rewrite the value.
      *
      * @param string $value

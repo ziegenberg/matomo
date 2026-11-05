@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage\Backend;
+namespace Matomo\Settings\Storage\Backend;
 
 /**
  * Backend for an existing site. Stores all settings in the "site" database table.
@@ -35,7 +35,7 @@ class Config implements BackendInterface
 
     private function getConfig()
     {
-        return \Piwik\Config::getInstance();
+        return \Matomo\Config::getInstance();
     }
 
     /**

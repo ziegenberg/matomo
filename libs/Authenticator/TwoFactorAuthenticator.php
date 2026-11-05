@@ -31,7 +31,7 @@ class TwoFactorAuthenticator
         unset($validChars[32]);
 
         // modified by matomo.org
-        return \Piwik\Common::getRandomString($secretLength, implode('', $validChars));
+        return \Matomo\Common::getRandomString($secretLength, implode('', $validChars));
     }
 
     /**

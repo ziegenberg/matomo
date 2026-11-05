@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Storage;
+namespace Matomo\Settings\Storage;
 
-use Piwik\Settings\Storage\Backend\BackendInterface;
-use Piwik\SettingsServer;
+use Matomo\Settings\Storage\Backend\BackendInterface;
+use Matomo\SettingsServer;
 
 /**
  * Factory to create an instance of a storage. The storage can be created with different backends depending on the need.

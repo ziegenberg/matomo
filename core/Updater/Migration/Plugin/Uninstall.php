@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Plugin;
+namespace Matomo\Updater\Migration\Plugin;
 
-use Piwik\Config;
-use Piwik\Plugin;
-use Piwik\Updater\Migration;
+use Matomo\Config;
+use Matomo\Plugin;
+use Matomo\Updater\Migration;
 
 /**
  * Uninstalls the given plugin during the update

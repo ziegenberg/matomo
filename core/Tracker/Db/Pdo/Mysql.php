@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker\Db\Pdo;
+namespace Matomo\Tracker\Db\Pdo;
 
 use Exception;
 use PDO;
 use PDOException;
 use PDOStatement;
-use Piwik\Tracker\Db;
-use Piwik\Tracker\Db\DbException;
+use Matomo\Tracker\Db;
+use Matomo\Tracker\Db\DbException;
 
 /**
  * PDO MySQL wrapper
@@ -152,7 +152,7 @@ class Mysql extends Db
      */
     public function isMysqlServerHasGoneAwayError(Exception $e)
     {
-        return $this->isErrNo($e, \Piwik\Updater\Migration\Db::ERROR_CODE_MYSQL_SERVER_HAS_GONE_AWAY)
+        return $this->isErrNo($e, \Matomo\Updater\Migration\Db::ERROR_CODE_MYSQL_SERVER_HAS_GONE_AWAY)
                 || stripos($e->getMessage(), 'MySQL server has gone away') !== false;
     }
 
@@ -334,7 +334,7 @@ class Mysql extends Db
      */
     public function isErrNo($e, $errno)
     {
-        return \Piwik\Db\Adapter\Pdo\Mysql::isPdoErrorNumber($e, $errno);
+        return \Matomo\Db\Adapter\Pdo\Mysql::isPdoErrorNumber($e, $errno);
     }
 
     /**

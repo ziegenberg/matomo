@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces\Traits;
+namespace Matomo\Settings\Interfaces\Traits;
 
-use Piwik\Piwik;
-use Piwik\Plugins\SitesManager\Model as SitesManagerModel;
-use Piwik\Policy\CompliancePolicy;
-use Piwik\Policy\PolicyEnforcementBypass;
-use Piwik\Settings\Interfaces\PolicyComparisonInterface;
-use Piwik\Settings\PolicyEnforcementState;
+use Matomo\Matomo;
+use Matomo\Plugins\SitesManager\Model as SitesManagerModel;
+use Matomo\Policy\CompliancePolicy;
+use Matomo\Policy\PolicyEnforcementBypass;
+use Matomo\Settings\Interfaces\PolicyComparisonInterface;
+use Matomo\Settings\PolicyEnforcementState;
 
 /**
  * @template T of mixed
  *
- * @phpstan-require-implements \Piwik\Settings\Interfaces\PolicyComparisonInterface<T>
+ * @phpstan-require-implements \Matomo\Settings\Interfaces\PolicyComparisonInterface<T>
  */
 trait PolicyComparisonTrait
 {
@@ -151,9 +151,9 @@ trait PolicyComparisonTrait
          * @param bool|null $isEnforced Whether the setting is being enforced, or null when it
          *                              was reset to follow the policies it subscribes to
          * @param int|null $idSite The website the state was changed for, or null for the instance
-         * @param class-string<\Piwik\Settings\Interfaces\PolicyComparisonInterface<mixed>> The setting in question
+         * @param class-string<\Matomo\Settings\Interfaces\PolicyComparisonInterface<mixed>> The setting in question
          */
-        Piwik::postEvent('CompliancePolicy.setSettingEnforcedStatus', [$isEnforced, $idSite, static::class]);
+        Matomo::postEvent('CompliancePolicy.setSettingEnforcedStatus', [$isEnforced, $idSite, static::class]);
     }
 
     public static function getStoredEnforcementState(?int $idSite = null): ?bool
@@ -384,7 +384,7 @@ trait PolicyComparisonTrait
      */
     protected static function getPolicySettingPluginName(): string
     {
-        return Piwik::getPluginNameOfMatomoClass(static::class);
+        return Matomo::getPluginNameOfMatomoClass(static::class);
     }
 
     protected static function getPolicySettingShortName(): string

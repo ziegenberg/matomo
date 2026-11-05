@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings;
+namespace Matomo\Settings;
 
-use Piwik\Validators\BaseValidator;
+use Matomo\Validators\BaseValidator;
 
 /**
  * Lets you configure a form field.
@@ -113,7 +113,7 @@ class FieldConfig
     /**
      * Describes what HTML element should be used to manipulate the setting through Piwik's UI.
      *
-     * See {@link Piwik\Plugin\Settings} for a list of supported control types.
+     * See {@link Matomo\Plugin\Settings} for a list of supported control types.
      *
      * @var string
      */
@@ -268,16 +268,16 @@ class FieldConfig
     public $condition;
 
     /**
-     * Here you can add one or multiple instances of `Piwik\Validators\BaseValidator` to avoid having to
+     * Here you can add one or multiple instances of `Matomo\Validators\BaseValidator` to avoid having to
      * write the same validators over and over again in {@link $validate}.
      *
      * Examples
      * Want to require a value to be set?
-     * $fieldConfig->validators[] = new Piwik\Validators\NotEmpty();
+     * $fieldConfig->validators[] = new Matomo\Validators\NotEmpty();
      *
      * Want to require an email?
-     * $fieldConfig->validators[] = new Piwik\Validators\NotEmpty();
-     * $fieldConfig->validators[] = new Piwik\Validators\Email();
+     * $fieldConfig->validators[] = new Matomo\Validators\NotEmpty();
+     * $fieldConfig->validators[] = new Matomo\Validators\Email();
      *
      * The core comes with a set of various validators that can be used.
      *

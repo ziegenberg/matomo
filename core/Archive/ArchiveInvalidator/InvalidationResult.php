@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive\ArchiveInvalidator;
+namespace Matomo\Archive\ArchiveInvalidator;
 
-use Piwik\Date;
+use Matomo\Date;
 
 /**
  * Information about the result of an archive invalidation operation.

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ArchiveProcessor;
+namespace Matomo\ArchiveProcessor;
 
-use Piwik\Concurrency\Lock;
-use Piwik\Concurrency\LockBackend;
-use Piwik\Container\StaticContainer;
+use Matomo\Concurrency\Lock;
+use Matomo\Concurrency\LockBackend;
+use Matomo\Container\StaticContainer;
 
 class ArchivingStatus
 {

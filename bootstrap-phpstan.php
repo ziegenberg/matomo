@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Exception\NotYetInstalledException;
+use Matomo\Exception\NotYetInstalledException;
 
 class Manifest
 {
@@ -25,7 +25,7 @@ if (!defined('PIWIK_PRINT_ERROR_BACKTRACE')) {
     define('PIWIK_PRINT_ERROR_BACKTRACE', false);
 }
 
-$environment = new \Piwik\Application\Environment(null);
+$environment = new \Matomo\Application\Environment(null);
 try {
     $environment->init();
 } catch (NotYetInstalledException $e) {

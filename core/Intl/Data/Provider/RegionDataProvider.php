@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Intl\Data\Provider;
+namespace Matomo\Intl\Data\Provider;
 
 /**
  * Provides region related data (continents, countries, etc.).

@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Columns;
+namespace Matomo\Columns;
 
-use Piwik\Plugin\ArchivedMetric;
-use Piwik\Plugin\ComputedMetric;
+use Matomo\Plugin\ArchivedMetric;
+use Matomo\Plugin\ComputedMetric;
 
 /**
  * A factory to create computed metrics.
@@ -32,7 +32,7 @@ class ComputedMetricFactory
     }
 
     /**
-     * @return \Piwik\Plugin\ComputedMetric
+     * @return \Matomo\Plugin\ComputedMetric
      */
     public function createComputedMetric($metricName1, $metricName2, $aggregation)
     {

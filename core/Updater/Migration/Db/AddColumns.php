@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updater\Migration\Db;
+namespace Matomo\Updater\Migration\Db;
 
-use Piwik\DataAccess\TableMetadata;
-use Piwik\Db\Schema;
+use Matomo\DataAccess\TableMetadata;
+use Matomo\Db\Schema;
 
 /**
  * @see Factory::addColumns()

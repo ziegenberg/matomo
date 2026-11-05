@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Application;
+namespace Matomo\Application;
 
-use Piwik\Application\Kernel\GlobalSettingsProvider;
-use Piwik\Application\Kernel\PluginList;
+use Matomo\Application\Kernel\GlobalSettingsProvider;
+use Matomo\Application\Kernel\PluginList;
 
 /**
  * Used to manipulate Environment instances before the container is created.

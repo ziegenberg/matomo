@@ -7,17 +7,17 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\CliMulti;
+namespace Matomo\CliMulti;
 
-use Piwik\Application\Environment;
-use Piwik\Access;
-use Piwik\Container\StaticContainer;
-use Piwik\Db;
-use Piwik\Log;
-use Piwik\Option;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Url;
-use Piwik\UrlHelper;
+use Matomo\Application\Environment;
+use Matomo\Access;
+use Matomo\Container\StaticContainer;
+use Matomo\Db;
+use Matomo\Log;
+use Matomo\Option;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Url;
+use Matomo\UrlHelper;
 
 /**
  * RequestCommand
@@ -32,7 +32,7 @@ class RequestCommand extends ConsoleCommand
     protected function configure()
     {
         $this->setName('climulti:request');
-        $this->setDescription('Parses and executes the given query. See Piwik\CliMulti. Intended only for system usage.');
+        $this->setDescription('Parses and executes the given query. See Matomo\CliMulti. Intended only for system usage.');
         $this->addRequiredArgument('url-query', 'Matomo URL query string, for instance: "module=API&method=API.getPiwikVersion&token_auth=123456789"');
         $this->addNoValueOption('superuser', null, 'If supplied, runs the code as superuser.');
     }
@@ -65,8 +65,8 @@ class RequestCommand extends ConsoleCommand
 
         if ($this->getInput()->getOption('superuser')) {
             StaticContainer::addDefinitions(array(
-                'observers.global' => \Piwik\DI::add(array(
-                    array('Environment.bootstrapped', \Piwik\DI::value(function () {
+                'observers.global' => \Matomo\DI::add(array(
+                    array('Environment.bootstrapped', \Matomo\DI::value(function () {
                         Access::getInstance()->setSuperUserAccess(true);
                     })),
                 )),

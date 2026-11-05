@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Log\Logger;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Log\Logger;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Logging utility class.
@@ -55,8 +55,8 @@ use Piwik\Log\LoggerInterface;
  *                          the syslog.
  *
  *
- * @deprecated Inject and use Piwik\Log\LoggerInterface instead of this class.
- * @see \Piwik\Log\LoggerInterface
+ * @deprecated Inject and use Matomo\Log\LoggerInterface instead of this class.
+ * @see \Matomo\Log\LoggerInterface
  */
 class Log extends Singleton
 {
@@ -118,8 +118,8 @@ class Log extends Singleton
      * @param mixed ...$printFparams Optional sprintf params.
      * @api
      *
-     * @deprecated Inject and call Piwik\Log\LoggerInterface::error() instead.
-     * @see \Piwik\Log\LoggerInterface::error()
+     * @deprecated Inject and call Matomo\Log\LoggerInterface::error() instead.
+     * @see \Matomo\Log\LoggerInterface::error()
      */
     public static function error($message, ...$printFparams)
     {
@@ -133,8 +133,8 @@ class Log extends Singleton
      * @param mixed ...$printFparams Optional sprintf params.
      * @api
      *
-     * @deprecated Inject and call Piwik\Log\LoggerInterface::warning() instead.
-     * @see \Piwik\Log\LoggerInterface::warning()
+     * @deprecated Inject and call Matomo\Log\LoggerInterface::warning() instead.
+     * @see \Matomo\Log\LoggerInterface::warning()
      */
     public static function warning($message, ...$printFparams)
     {
@@ -148,8 +148,8 @@ class Log extends Singleton
      * @param mixed ...$printFparams Optional sprintf params.
      * @api
      *
-     * @deprecated Inject and call Piwik\Log\LoggerInterface::info() instead.
-     * @see \Piwik\Log\LoggerInterface::info()
+     * @deprecated Inject and call Matomo\Log\LoggerInterface::info() instead.
+     * @see \Matomo\Log\LoggerInterface::info()
      */
     public static function info($message, ...$printFparams)
     {
@@ -163,8 +163,8 @@ class Log extends Singleton
      * @param mixed ...$printFparams Optional sprintf params.
      * @api
      *
-     * @deprecated Inject and call Piwik\Log\LoggerInterface::debug() instead.
-     * @see \Piwik\Log\LoggerInterface::debug()
+     * @deprecated Inject and call Matomo\Log\LoggerInterface::debug() instead.
+     * @see \Matomo\Log\LoggerInterface::debug()
      */
     public static function debug($message, ...$printFparams)
     {
@@ -178,8 +178,8 @@ class Log extends Singleton
      * @param mixed ...$printFparams Optional sprintf params.
      * @api
      *
-     * @deprecated Inject and call Piwik\Log\LoggerInterface::debug() instead (the verbose level doesn't exist in the PSR standard).
-     * @see \Piwik\Log\LoggerInterface::debug()
+     * @deprecated Inject and call Matomo\Log\LoggerInterface::debug() instead (the verbose level doesn't exist in the PSR standard).
+     * @see \Matomo\Log\LoggerInterface::debug()
      */
     public static function verbose($message, ...$printFparams)
     {
@@ -232,8 +232,8 @@ class Log extends Singleton
     public static function getMonologLevelIfValid($level)
     {
         $level = strtoupper($level);
-        if (!empty($level) && defined('Piwik\Log::' . strtoupper($level))) {
-            return self::getMonologLevel(constant('Piwik\Log::' . strtoupper($level)));
+        if (!empty($level) && defined('Matomo\Log::' . strtoupper($level))) {
+            return self::getMonologLevel(constant('Matomo\Log::' . strtoupper($level)));
         }
         return null;
     }

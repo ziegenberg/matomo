@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
-use Piwik\DataTable\BaseFilter;
-use Piwik\Metrics;
+use Matomo\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\Metrics;
 
 /**
  * Deletes all rows for which a specific column has a value that is lower than

@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Option;
-use Piwik\Plugins\MobileMessaging\MobileMessaging;
-use Piwik\Plugins\UsersManager\API as UsersManagerApi;
-use Piwik\UpdaterErrorException;
-use Piwik\Updates;
-use Piwik\Updater;
+use Matomo\Option;
+use Matomo\Plugins\MobileMessaging\MobileMessaging;
+use Matomo\Plugins\UsersManager\API as UsersManagerApi;
+use Matomo\UpdaterErrorException;
+use Matomo\Updates;
+use Matomo\Updater;
 
 class Updates_2_0_4_b7 extends Updates
 {

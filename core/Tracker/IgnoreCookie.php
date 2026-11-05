@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Config;
-use Piwik\Cookie;
-use Piwik\ProxyHttp;
+use Matomo\Config;
+use Matomo\Cookie;
+use Matomo\ProxyHttp;
 
 /**
  * Tracking cookies.

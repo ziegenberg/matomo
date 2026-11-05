@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Translation\Loader;
+namespace Matomo\Translation\Loader;
 
-use Piwik\Common;
+use Matomo\Common;
 
 /**
  * Loads translations from JSON files.

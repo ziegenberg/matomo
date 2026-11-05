@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Plugins\BotTracking\BotDetector;
-use Piwik\Plugins\BotTracking\Dao\BotRequestsDao;
-use Piwik\Segment;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Custom as CustomMigration;
-use Piwik\Updates;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Plugins\BotTracking\BotDetector;
+use Matomo\Plugins\BotTracking\Dao\BotRequestsDao;
+use Matomo\Segment;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Custom as CustomMigration;
+use Matomo\Updates;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 class Updates_5_8_0_b1 extends Updates
 {

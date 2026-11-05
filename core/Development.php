@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Log\LoggerInterface;
+use Matomo\Container\StaticContainer;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Development related checks and tools. You can enable/disable development using `./console development:enable` and

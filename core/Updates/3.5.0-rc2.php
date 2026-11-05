@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Plugins\PrivacyManager\PrivacyManager;
-use Piwik\Tracker\Cache;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
+use Matomo\Plugins\PrivacyManager\PrivacyManager;
+use Matomo\Tracker\Cache;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
 
 class Updates_3_5_0_rc2 extends PiwikUpdates
 {

@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Exception;
+namespace Matomo\Exception;
 
-use Piwik\Http\HttpCodeException;
+use Matomo\Http\HttpCodeException;
 
-class NotSupportedBrowserException extends \Piwik\Exception\Exception implements HttpCodeException
+class NotSupportedBrowserException extends \Matomo\Exception\Exception implements HttpCodeException
 {
     public function __construct($message)
     {

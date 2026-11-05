@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable;
+use Matomo\DataTable;
 
 /**
  * A {@link DataTable} filter that replaces range labels whose values are in seconds with

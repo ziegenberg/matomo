@@ -6,14 +6,13 @@
  * @link    https://matomo.org
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  *
- * @method static \Piwik\AssetManager\UIAssetCacheBuster getInstance()
+ * @method static \Matomo\AssetManager\UIAssetCacheBuster getInstance()
  */
+namespace Matomo\AssetManager;
 
-namespace Piwik\AssetManager;
-
-use Piwik\Plugin\Manager;
-use Piwik\Singleton;
-use Piwik\Version;
+use Matomo\Plugin\Manager;
+use Matomo\Singleton;
+use Matomo\Version;
 
 class UIAssetCacheBuster extends Singleton
 {

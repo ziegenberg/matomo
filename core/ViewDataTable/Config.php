@@ -7,22 +7,22 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\ViewDataTable;
+namespace Matomo\ViewDataTable;
 
-use Piwik\API\Request as ApiRequest;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\PivotByDimension;
-use Piwik\Metrics;
-use Piwik\Period\PeriodValidator;
-use Piwik\Piwik;
-use Piwik\Plugins\API\API;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Request;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\PivotByDimension;
+use Matomo\Metrics;
+use Matomo\Period\PeriodValidator;
+use Matomo\Matomo;
+use Matomo\Plugins\API\API;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Request;
 
 /**
- * Contains base display properties for {@link Piwik\Plugin\ViewDataTable}s. Manipulating these
+ * Contains base display properties for {@link Matomo\Plugin\ViewDataTable}s. Manipulating these
  * properties in a ViewDataTable instance will change how its report will be displayed.
  *
  * <a name="client-side-properties-desc"></a>
@@ -40,13 +40,13 @@ use Piwik\Request;
  *
  * **Reusing base properties**
  *
- * Many of the properties in this class only have meaning for the {@link Piwik\Plugin\Visualization}
- * class, but can be set for other visualizations that extend {@link Piwik\Plugin\ViewDataTable}
+ * Many of the properties in this class only have meaning for the {@link Matomo\Plugin\Visualization}
+ * class, but can be set for other visualizations that extend {@link Matomo\Plugin\ViewDataTable}
  * directly.
  *
- * Visualizations that extend {@link Piwik\Plugin\ViewDataTable} directly and want to re-use these
+ * Visualizations that extend {@link Matomo\Plugin\ViewDataTable} directly and want to re-use these
  * properties must make sure the properties are used in the exact same way they are used in
- * {@link Piwik\Plugin\Visualization}.
+ * {@link Matomo\Plugin\Visualization}.
  *
  * **Defining new display properties**
  *
@@ -602,7 +602,7 @@ class Config
         $this->selectable_periods = $periodValidator->getPeriodsAllowedForUI();
         $this->selectable_periods = array_diff($this->selectable_periods, array('range'));
         foreach ($this->selectable_periods as $period) {
-            $this->translations[$period] = ucfirst(Piwik::translate('Intl_Period' . ucfirst($period)));
+            $this->translations[$period] = ucfirst(Matomo::translate('Intl_Period' . ucfirst($period)));
         }
         $this->show_title = (bool)Common::getRequestVar('showtitle', 0, 'int');
     }
@@ -793,9 +793,9 @@ class Config
 
         $secondaryDimensionTranslation = $dimensions[$secondaryDimension];
         $this->related_reports_title   =
-            Piwik::translate('General_SecondaryDimension', $secondaryDimensionTranslation)
+            Matomo::translate('General_SecondaryDimension', $secondaryDimensionTranslation)
             . "<br/>"
-            . Piwik::translate('General_SwitchToSecondaryDimension', '');
+            . Matomo::translate('General_SwitchToSecondaryDimension', '');
 
         foreach ($dimensions as $dimension => $dimensionLabel) {
             if ($dimension === $secondaryDimension) {

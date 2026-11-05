@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Db\AdapterInterface;
+use Matomo\Db\AdapterInterface;
 
 /**
  * Used for generating auto increment ids.

@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
-use Piwik\API\Request;
-use Piwik\API\Request as ApiRequest;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugins\API\Filter\DataComparisonFilter;
-use Piwik\View\ViewInterface;
-use Piwik\ViewDataTable\Config as VizConfig;
-use Piwik\ViewDataTable\Manager as ViewDataTableManager;
-use Piwik\ViewDataTable\Request as ViewDataTableRequest;
-use Piwik\ViewDataTable\RequestConfig as VizRequest;
+use Matomo\API\Request;
+use Matomo\API\Request as ApiRequest;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugins\API\Filter\DataComparisonFilter;
+use Matomo\View\ViewInterface;
+use Matomo\ViewDataTable\Config as VizConfig;
+use Matomo\ViewDataTable\Manager as ViewDataTableManager;
+use Matomo\ViewDataTable\Request as ViewDataTableRequest;
+use Matomo\ViewDataTable\RequestConfig as VizRequest;
 
 /**
  * The base class of all report visualizations.
@@ -34,7 +34,7 @@ use Piwik\ViewDataTable\RequestConfig as VizRequest;
  *
  * ### Creating ViewDataTables
  *
- * ViewDataTable instances are not created via the new operator, instead the {@link Piwik\ViewDataTable\Factory}
+ * ViewDataTable instances are not created via the new operator, instead the {@link Matomo\ViewDataTable\Factory}
  * class is used.
  *
  * The specific subclass to create is determined, first, by the **viewDataTable** query parameter.
@@ -46,8 +46,8 @@ use Piwik\ViewDataTable\RequestConfig as VizRequest;
  * **Display properties**
  *
  * ViewDataTable output can be customized by setting one of many available display
- * properties. Display properties are stored as fields in {@link Piwik\ViewDataTable\Config} objects.
- * ViewDataTables store a {@link Piwik\ViewDataTable\Config} object in the {@link $config} field.
+ * properties. Display properties are stored as fields in {@link Matomo\ViewDataTable\Config} objects.
+ * ViewDataTables store a {@link Matomo\ViewDataTable\Config} object in the {@link $config} field.
  *
  * Display properties can be set at any time before rendering.
  *
@@ -57,7 +57,7 @@ use Piwik\ViewDataTable\RequestConfig as VizRequest;
  * however, not used to customize ViewDataTable instances, but in the request to Piwik's
  * API when loading analytics data.
  *
- * Request properties are set by setting the fields of a {@link Piwik\ViewDataTable\RequestConfig} object stored in
+ * Request properties are set by setting the fields of a {@link Matomo\ViewDataTable\RequestConfig} object stored in
  * the {@link $requestConfig} field. They can be set at any time before rendering.
  * Setting them after data is loaded will have no effect.
  *
@@ -67,7 +67,7 @@ use Piwik\ViewDataTable\RequestConfig as VizRequest;
  * ways to render a report within its controller method. You can either:
  *
  * 1. manually create and configure a ViewDataTable instance
- * 2. invoke {@link Piwik\Plugin\Controller::renderReport} and configure the ViewDataTable instance
+ * 2. invoke {@link Matomo\Plugin\Controller::renderReport} and configure the ViewDataTable instance
  *    in the {@hook ViewDataTable.configure} event.
  *
  * ViewDataTable instances are configured by setting and modifying display properties and request
@@ -85,14 +85,14 @@ use Piwik\ViewDataTable\RequestConfig as VizRequest;
  *     // a controller method that displays a single report
  *     public function myReport()
  *     {
- *         $view = \Piwik\ViewDataTable\Factory::build('table', 'MyPlugin.myReport');
+ *         $view = \Matomo\ViewDataTable\Factory::build('table', 'MyPlugin.myReport');
  *         $view->config->show_limit_control = true;
  *         $view->config->translations['myFancyMetric'] = "My Fancy Metric";
  *         // ...
  *         return $view->render();
  *     }
  *
- * **Using {@link Piwik\Plugin\Controller::renderReport}**
+ * **Using {@link Matomo\Plugin\Controller::renderReport}**
  *
  * First, a controller method that displays a single report:
  *
@@ -116,17 +116,17 @@ use Piwik\ViewDataTable\RequestConfig as VizRequest;
  *
  * **Using custom configuration objects in a new visualization**
  *
- *     class MyVisualizationConfig extends Piwik\ViewDataTable\Config
+ *     class MyVisualizationConfig extends Matomo\ViewDataTable\Config
  *     {
  *         public $my_new_property = true;
  *     }
  *
- *     class MyVisualizationRequestConfig extends Piwik\ViewDataTable\RequestConfig
+ *     class MyVisualizationRequestConfig extends Matomo\ViewDataTable\RequestConfig
  *     {
  *         public $my_new_property = false;
  *     }
  *
- *     class MyVisualization extends Piwik\Plugin\ViewDataTable
+ *     class MyVisualization extends Matomo\Plugin\ViewDataTable
  *     {
  *         public static function getDefaultConfig()
  *         {
@@ -156,14 +156,14 @@ abstract class ViewDataTable implements ViewInterface
     /**
      * Contains display properties for this visualization.
      *
-     * @var \Piwik\ViewDataTable\Config
+     * @var \Matomo\ViewDataTable\Config
      */
     public $config;
 
     /**
      * Contains request properties for this visualization.
      *
-     * @var \Piwik\ViewDataTable\RequestConfig
+     * @var \Matomo\ViewDataTable\RequestConfig
      */
     public $requestConfig;
 
@@ -272,7 +272,7 @@ abstract class ViewDataTable implements ViewInterface
          *
          * @param ViewDataTable $view The instance to configure.
          */
-        Piwik::postEvent('ViewDataTable.configure', array($this));
+        Matomo::postEvent('ViewDataTable.configure', array($this));
 
         $this->assignRelatedReportsTitle();
 
@@ -315,7 +315,7 @@ abstract class ViewDataTable implements ViewInterface
          *
          * @param ViewDataTable $view The instance to configure.
          */
-        Piwik::postEvent('ViewDataTable.configure.end', array($this));
+        Matomo::postEvent('ViewDataTable.configure.end', array($this));
     }
 
     private function assignRelatedReportsTitle()
@@ -325,9 +325,9 @@ abstract class ViewDataTable implements ViewInterface
             return;
         }
         if (count($this->config->related_reports) == 1) {
-            $this->config->related_reports_title = Piwik::translate('General_RelatedReport') . ':';
+            $this->config->related_reports_title = Matomo::translate('General_RelatedReport') . ':';
         } else {
-            $this->config->related_reports_title = Piwik::translate('General_RelatedReports') . ':';
+            $this->config->related_reports_title = Matomo::translate('General_RelatedReports') . ':';
         }
     }
 
@@ -335,11 +335,11 @@ abstract class ViewDataTable implements ViewInterface
      * Returns the default config instance.
      *
      * Visualizations that define their own display properties should override this method and
-     * return an instance of their new {@link Piwik\ViewDataTable\Config} descendant.
+     * return an instance of their new {@link Matomo\ViewDataTable\Config} descendant.
      *
      * See the last example {@link ViewDataTable here} for more information.
      *
-     * @return \Piwik\ViewDataTable\Config
+     * @return \Matomo\ViewDataTable\Config
      */
     public static function getDefaultConfig()
     {
@@ -350,11 +350,11 @@ abstract class ViewDataTable implements ViewInterface
      * Returns the default request config instance.
      *
      * Visualizations that define their own request properties should override this method and
-     * return an instance of their new {@link Piwik\ViewDataTable\RequestConfig} descendant.
+     * return an instance of their new {@link Matomo\ViewDataTable\RequestConfig} descendant.
      *
      * See the last example {@link ViewDataTable here} for more information.
      *
-     * @return \Piwik\ViewDataTable\RequestConfig
+     * @return \Matomo\ViewDataTable\RequestConfig
      */
     public static function getDefaultRequestConfig()
     {
@@ -451,7 +451,7 @@ abstract class ViewDataTable implements ViewInterface
      */
     protected function checkStandardDataTable()
     {
-        Piwik::checkObjectTypeIs($this->dataTable, array('\Piwik\DataTable'));
+        Matomo::checkObjectTypeIs($this->dataTable, array('\Matomo\DataTable'));
     }
 
     /**
@@ -466,7 +466,7 @@ abstract class ViewDataTable implements ViewInterface
 
     protected function getDefaultDataTableCssClass()
     {
-        return 'dataTableViz' . Piwik::getUnnamespacedClassName(get_class($this));
+        return 'dataTableViz' . Matomo::getUnnamespacedClassName(get_class($this));
     }
 
     /**
@@ -495,7 +495,7 @@ abstract class ViewDataTable implements ViewInterface
         $columns = Common::getRequestVar('columns', false);
 
         if (false !== $columns) {
-            $this->config->columns_to_display = Piwik::getArrayFromApiParameter($columns);
+            $this->config->columns_to_display = Matomo::getArrayFromApiParameter($columns);
             array_unshift($this->config->columns_to_display, 'label');
         }
     }
@@ -506,7 +506,7 @@ abstract class ViewDataTable implements ViewInterface
         $value = Common::getRequestVar($name, $defaultValue, $type);
         // convert comma separated values to arrays if needed
         if (is_array($defaultValue)) {
-            $value = Piwik::getArrayFromApiParameter($value);
+            $value = Matomo::getArrayFromApiParameter($value);
         }
         return $value;
     }

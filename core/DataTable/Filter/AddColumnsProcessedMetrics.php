@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable;
-use Piwik\Plugin\Metric;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
-use Piwik\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
-use Piwik\Plugins\CoreHome\Columns\Metrics\BounceRate;
-use Piwik\Plugins\CoreHome\Columns\Metrics\ConversionRate;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable;
+use Matomo\Plugin\Metric;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ActionsPerVisit;
+use Matomo\Plugins\CoreHome\Columns\Metrics\AverageTimeOnSite;
+use Matomo\Plugins\CoreHome\Columns\Metrics\BounceRate;
+use Matomo\Plugins\CoreHome\Columns\Metrics\ConversionRate;
 
 /**
  * Adds processed metrics columns to a {@link DataTable} using metrics that already exist.

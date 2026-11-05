@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Session\SessionNamespace;
+use Matomo\Session\SessionNamespace;
 
 /**
  * Nonce class.
@@ -103,7 +103,7 @@ class Nonce
         //  The Session cookie is set to a secure cookie, when SSL is mis-configured, it can cause the PHP session cookie ID to change on each page view.
         //  Indicate to user how to solve this particular use case by forcing secure connections.
         if (Url::isSecureConnectionAssumedByPiwikButNotForcedYet()) {
-            $additionalErrors =  '<br/><br/>' . Piwik::translate(
+            $additionalErrors =  '<br/><br/>' . Matomo::translate(
                 'Login_InvalidNonceSSLMisconfigured',
                 [
                   Url::getExternalLinkTag('https://matomo.org/faq/how-to/faq_91/'),
@@ -117,7 +117,7 @@ class Nonce
 
         // validate token
         if (empty($cnonce) || $cnonce !== $nonce) {
-            return Piwik::translate('Login_InvalidNonceToken');
+            return Matomo::translate('Login_InvalidNonceToken');
         }
 
         // Validate referrer if present
@@ -125,7 +125,7 @@ class Nonce
         if (!empty($referrer)) {
             // Allow the instance host by default, if no allowedReferrerHost is specified.
             if (empty($allowedReferrerHost) && !Url::isLocalUrl($referrer)) {
-                return Piwik::translate('Login_InvalidNonceReferrer', [
+                return Matomo::translate('Login_InvalidNonceReferrer', [
                         Url::getExternalLinkTag('https://matomo.org/faq/how-to-install/faq_98'),
                         '</a>',
                     ]) . $additionalErrors;
@@ -133,7 +133,7 @@ class Nonce
 
             // Test that referrer matches what is allowed.
             if (!empty($allowedReferrerHost) && !self::isReferrerHostValid($referrer, $allowedReferrerHost)) {
-                return Piwik::translate('Login_InvalidNonceUnexpectedReferrer') . $additionalErrors;
+                return Matomo::translate('Login_InvalidNonceUnexpectedReferrer') . $additionalErrors;
             }
         }
 
@@ -144,7 +144,7 @@ class Nonce
             ($origin == 'null' ||
             !in_array($origin, self::getAcceptableOrigins()))
         ) {
-            return Piwik::translate('Login_InvalidNonceOrigin') . $additionalErrors;
+            return Matomo::translate('Login_InvalidNonceOrigin') . $additionalErrors;
         }
 
         return '';
@@ -245,7 +245,7 @@ class Nonce
             if (!empty($nonce)) {
                 self::discardNonce($nonceName); // Invalidate nonce on failed attempts
             }
-            throw new \Exception(Piwik::translate('General_ExceptionSecurityCheckFailed'));
+            throw new \Exception(Matomo::translate('General_ExceptionSecurityCheckFailed'));
         }
 
         self::discardNonce($nonceName);

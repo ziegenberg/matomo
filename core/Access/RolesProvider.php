@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Access;
+namespace Matomo\Access;
 
-use Piwik\Access\Role\Admin;
-use Piwik\Access\Role\View;
-use Piwik\Access\Role\Write;
-use Piwik\Piwik;
+use Matomo\Access\Role\Admin;
+use Matomo\Access\Role\View;
+use Matomo\Access\Role\Write;
+use Matomo\Matomo;
 use Exception;
 
 class RolesProvider
@@ -59,7 +59,7 @@ class RolesProvider
     {
         if (!$this->isValidRole($roleId)) {
             $roles = $this->getAllRoleIds();
-            throw new Exception(Piwik::translate("UsersManager_ExceptionAccessValues", [implode(", ", $roles), $roleId]));
+            throw new Exception(Matomo::translate("UsersManager_ExceptionAccessValues", [implode(", ", $roles), $roleId]));
         }
     }
 }

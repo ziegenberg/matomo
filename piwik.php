@@ -6,11 +6,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-use Piwik\SettingsServer;
-use Piwik\Tracker\RequestSet;
-use Piwik\Tracker;
-use Piwik\Tracker\Handler;
-use Piwik\API\CORSHandler;
+use Matomo\SettingsServer;
+use Matomo\Tracker\RequestSet;
+use Matomo\Tracker;
+use Matomo\Tracker\Handler;
+use Matomo\API\CORSHandler;
 
 @ignore_user_abort(true);
 
@@ -37,7 +37,7 @@ require_once PIWIK_INCLUDE_PATH . '/core/Singleton.php';
 require_once PIWIK_INCLUDE_PATH . '/core/Plugin/Manager.php';
 require_once PIWIK_INCLUDE_PATH . '/core/Plugin.php';
 require_once PIWIK_INCLUDE_PATH . '/core/Common.php';
-require_once PIWIK_INCLUDE_PATH . '/core/Piwik.php';
+require_once PIWIK_INCLUDE_PATH . '/core/Matomo.php';
 require_once PIWIK_INCLUDE_PATH . '/core/IP.php';
 require_once PIWIK_INCLUDE_PATH . '/core/UrlHelper.php';
 require_once PIWIK_INCLUDE_PATH . '/core/Url.php';
@@ -52,11 +52,11 @@ require_once PIWIK_INCLUDE_PATH . '/core/API/CORSHandler.php';
 
 SettingsServer::setIsTrackerApiRequest();
 
-$environment = new \Piwik\Application\Environment('tracker');
+$environment = new \Matomo\Application\Environment('tracker');
 try {
     $environment->init();
-} catch(\Piwik\Exception\NotYetInstalledException $e) {
-    \Piwik\Common::sendResponseCode(503);
+} catch(\Matomo\Exception\NotYetInstalledException $e) {
+    \Matomo\Common::sendResponseCode(503);
     die($e->getMessage());
 }
 

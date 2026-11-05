@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Exception\UnexpectedWebsiteFoundException;
-use Piwik\Plugins\UserCountry\Columns\Base;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Exception\UnexpectedWebsiteFoundException;
+use Matomo\Plugins\UserCountry\Columns\Base;
 
 trait RequestHandlerTrait
 {
@@ -72,7 +72,7 @@ trait RequestHandlerTrait
             return; // don't try to invalidate archives for today or later
         }
 
-        StaticContainer::get('Piwik\Archive\ArchiveInvalidator')->rememberToInvalidateArchivedReportsLater($idSite, $date);
+        StaticContainer::get('Matomo\Archive\ArchiveInvalidator')->rememberToInvalidateArchivedReportsLater($idSite, $date);
     }
 
     private function getTimezoneForSite(int $idSite): ?string

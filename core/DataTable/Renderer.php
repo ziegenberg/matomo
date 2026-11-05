@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable;
+namespace Matomo\DataTable;
 
 use Exception;
-use Piwik\Columns\Dimension;
-use Piwik\Common;
-use Piwik\DataTable;
-use Piwik\Metrics;
-use Piwik\Piwik;
-use Piwik\Plugins\CoreHome\Columns\Metrics\PercentOfReportTotal;
-use Piwik\BaseFactory;
+use Matomo\Columns\Dimension;
+use Matomo\Common;
+use Matomo\DataTable;
+use Matomo\Metrics;
+use Matomo\Matomo;
+use Matomo\Plugins\CoreHome\Columns\Metrics\PercentOfReportTotal;
+use Matomo\BaseFactory;
 
 /**
  * A DataTable Renderer can produce an output given a DataTable object.
@@ -163,7 +163,7 @@ abstract class Renderer extends BaseFactory
     protected static function getClassNameFromClassId($id)
     {
         $className = ucfirst(strtolower($id));
-        $className = 'Piwik\DataTable\Renderer\\' . $className;
+        $className = 'Matomo\DataTable\Renderer\\' . $className;
 
         return $className;
     }
@@ -173,7 +173,7 @@ abstract class Renderer extends BaseFactory
         $availableRenderers = implode(', ', self::getRenderers());
         $klassName = self::getClassNameFromClassId($id);
 
-        return Piwik::translate('General_ExceptionInvalidRendererFormat', array($klassName, $availableRenderers));
+        return Matomo::translate('General_ExceptionInvalidRendererFormat', array($klassName, $availableRenderers));
     }
 
     /**
@@ -268,7 +268,7 @@ abstract class Renderer extends BaseFactory
             foreach ($t as $name => $translation) {
                 $percentOfTotalName = $name . PercentOfReportTotal::COLUMN_NAME_SUFFIX;
                 if (!isset($t[$percentOfTotalName])) {
-                    $t[$percentOfTotalName] = Piwik::translate('General_ColumnPercentOfReportTotalShort', $translation);
+                    $t[$percentOfTotalName] = Matomo::translate('General_ColumnPercentOfReportTotalShort', $translation);
                 }
             }
 
@@ -305,7 +305,7 @@ abstract class Renderer extends BaseFactory
                 $this->apiMetaData = false;
             }
 
-            $api = \Piwik\Plugins\API\API::getInstance();
+            $api = \Matomo\Plugins\API\API::getInstance();
             $meta = $api->getMetadata($this->idSite, $apiModule, $apiAction);
             if (isset($meta[0]) && is_array($meta[0])) {
                 $meta = $meta[0];
@@ -394,7 +394,7 @@ abstract class Renderer extends BaseFactory
         }
 
         if ($isAssociativeArray === null) {
-            $isAssociativeArray = Piwik::isAssociativeArray($array);
+            $isAssociativeArray = Matomo::isAssociativeArray($array);
         }
 
         $wrap = true;

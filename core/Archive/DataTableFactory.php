@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Archive;
+namespace Matomo\Archive;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Row;
-use Piwik\Segment;
-use Piwik\Site;
+use Matomo\DataTable;
+use Matomo\DataTable\Row;
+use Matomo\Segment;
+use Matomo\Site;
 
 /**
  * Creates a DataTable or DataTable\Map instance based on an array

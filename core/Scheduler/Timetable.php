@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Scheduler;
+namespace Matomo\Scheduler;
 
-use Piwik\Common;
-use Piwik\Option;
-use Piwik\Date;
+use Matomo\Common;
+use Matomo\Option;
+use Matomo\Date;
 
 /**
  * This data structure holds the scheduled times for each active scheduled task.

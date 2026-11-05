@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugins\CoreConsole\Commands;
+namespace Matomo\Plugins\CoreConsole\Commands;
 
-use Piwik\Http;
-use Piwik\Plugin\ConsoleCommand;
-use Piwik\Plugin\Manager;
-use Piwik\Unzip;
+use Matomo\Http;
+use Matomo\Plugin\ConsoleCommand;
+use Matomo\Plugin\Manager;
+use Matomo\Unzip;
 
 class BuildTracker extends ConsoleCommand
 {
@@ -27,7 +27,7 @@ class BuildTracker extends ConsoleCommand
 
     public function isEnabled()
     {
-        return \Piwik\Development::isEnabled();
+        return \Matomo\Development::isEnabled();
     }
 
     protected function doExecute(): int

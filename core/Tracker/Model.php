@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Tracker;
+namespace Matomo\Tracker;
 
 use Exception;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Tracker;
-use Piwik\Log\LoggerInterface;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Tracker;
+use Matomo\Log\LoggerInterface;
 
 class Model
 {
@@ -658,7 +658,7 @@ class Model
     {
         $sql = sprintf('SELECT idsite FROM `%s` WHERE idsite = ? limit 1', Common::prefixTable('log_visit'));
 
-        $result = \Piwik\Db::fetchOne($sql, [$siteId]);
+        $result = \Matomo\Db::fetchOne($sql, [$siteId]);
 
         return $result == null;
     }
@@ -708,7 +708,7 @@ class Model
     /**
      * Get the tracker DB object
      *
-     * @return \Piwik\Db|Db\Mysqli|Db\Pdo\Mysql|null
+     * @return \Matomo\Db|Db\Mysqli|Db\Pdo\Mysql|null
      * @throws Db\DbException
      */
     private function getDb()

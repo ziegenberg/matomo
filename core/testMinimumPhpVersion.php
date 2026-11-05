@@ -77,11 +77,11 @@ if (!function_exists('Piwik_GetErrorMessagePage')) {
      */
     function Piwik_ShouldPrintBackTraceWithMessage()
     {
-        if (!class_exists(\Piwik\ExceptionHandler::class)) {
+        if (!class_exists(\Matomo\ExceptionHandler::class)) {
             return false;
         }
 
-        return \Piwik\ExceptionHandler::shouldPrintBackTraceWithMessage();
+        return \Matomo\ExceptionHandler::shouldPrintBackTraceWithMessage();
     }
 
     /**
@@ -154,8 +154,8 @@ if (!function_exists('Piwik_GetErrorMessagePage')) {
 
         if ($optionalLinks) {
             $adjustUrl = function ($url) {
-                if (class_exists(\Piwik\Url::class)) {
-                    return \Piwik\Url::addCampaignParametersToMatomoLink($url);
+                if (class_exists(\Matomo\Url::class)) {
+                    return \Matomo\Url::addCampaignParametersToMatomoLink($url);
                 }
 
                 return $url;

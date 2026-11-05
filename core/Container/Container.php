@@ -7,13 +7,13 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Container;
+namespace Matomo\Container;
 
 use DI\Container as DIContainer;
 use DI\Definition\Source\MutableDefinitionSource;
 use DI\Proxy\ProxyFactoryInterface;
-use Piwik\Exception\DI\DependencyException;
-use Piwik\Exception\DI\NotFoundException;
+use Matomo\Exception\DI\DependencyException;
+use Matomo\Exception\DI\NotFoundException;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -100,13 +100,13 @@ class Container extends DIContainer implements ContainerInterface
      *
      * During the 7.x release line the root namespace is `Matomo\` but un-migrated
      * plugins still request core services under their deprecated `Piwik\` names
-     * (e.g. `Piwik\Log\LoggerInterface`). {@see LegacyAutoloader} aliases the
+     * (e.g. `Matomo\Log\LoggerInterface`). {@see LegacyAutoloader} aliases the
      * classes via {@see class_alias()}, but PHP-DI container keys are strings: a
      * `Piwik\` key misses its `Matomo\` definition and autowiring an interface
      * fails with "not instantiable". This helper rewrites the key so
      * {@see get()} and {@see make()} can retry under the canonical `Matomo\`
      * name, honouring the same facade/exceptions-map rules as the alias layer
-     * (e.g. `Piwik\Piwik` -> `Matomo\Matomo`). The alias layer is removed in
+     * (e.g. `Matomo\Matomo` -> `Matomo\Matomo`). The alias layer is removed in
      * Matomo 8.0.
      */
     private static function legacyNameToMatomo(string $name): ?string

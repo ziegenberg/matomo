@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Session;
+namespace Matomo\Session;
 
-use Piwik\Config;
-use Piwik\Date;
+use Matomo\Config;
+use Matomo\Date;
 
 /**
  * Manages session information that is used to identify who the session

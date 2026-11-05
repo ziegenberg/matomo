@@ -7,19 +7,19 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Archive\ArchiveInvalidator;
-use Piwik\Common;
-use Piwik\Container\StaticContainer;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Plugins\Referrers\Archiver;
-use Piwik\Updater;
-use Piwik\Updater\Migration\Custom as CustomMigration;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration;
+use Matomo\Archive\ArchiveInvalidator;
+use Matomo\Common;
+use Matomo\Container\StaticContainer;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Plugins\Referrers\Archiver;
+use Matomo\Updater;
+use Matomo\Updater\Migration\Custom as CustomMigration;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration;
 
 /**
  * Update for version 5.6.0-b1

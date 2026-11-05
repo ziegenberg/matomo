@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Metrics\Formatter;
+use Matomo\Metrics\Formatter;
 
 class Timer
 {

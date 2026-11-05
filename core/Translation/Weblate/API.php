@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Translation\Weblate;
+namespace Matomo\Translation\Weblate;
 
 use Exception;
-use Piwik\Cache;
-use Piwik\Exception\AuthenticationFailedException;
-use Piwik\Http;
+use Matomo\Cache;
+use Matomo\Exception\AuthenticationFailedException;
+use Matomo\Http;
 
 class API
 {

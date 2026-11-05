@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Settings\Interfaces\Traits\Getters;
+namespace Matomo\Settings\Interfaces\Traits\Getters;
 
-use Piwik\Piwik;
-use Piwik\Settings\Measurable\MeasurableSetting;
-use Piwik\Settings\Measurable\MeasurableProperty;
+use Matomo\Matomo;
+use Matomo\Settings\Measurable\MeasurableSetting;
+use Matomo\Settings\Measurable\MeasurableProperty;
 
 /**
  * @template T of mixed
  *
- * @phpstan-require-implements \Piwik\Settings\Interfaces\MeasurableSettingInterface<T>
+ * @phpstan-require-implements \Matomo\Settings\Interfaces\MeasurableSettingInterface<T>
  */
 trait MeasurableGetterTrait
 {
@@ -27,7 +27,7 @@ trait MeasurableGetterTrait
                 self::getMeasurableName(),
                 self::getMeasurableDefaultValue(),
                 self::getMeasurableType(),
-                Piwik::getPluginNameOfMatomoClass(static::class),
+                Matomo::getPluginNameOfMatomoClass(static::class),
                 $idSite
             );
         }
@@ -35,7 +35,7 @@ trait MeasurableGetterTrait
             self::getMeasurableName(),
             self::getMeasurableDefaultValue(),
             self::getMeasurableType(),
-            Piwik::getPluginNameOfMatomoClass(static::class),
+            Matomo::getPluginNameOfMatomoClass(static::class),
             $idSite
         );
     }

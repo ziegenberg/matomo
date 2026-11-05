@@ -7,24 +7,24 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataTable\Filter;
+namespace Matomo\DataTable\Filter;
 
 use Exception;
-use Piwik\Columns\Dimension;
-use Piwik\Columns\DimensionsProvider;
-use Piwik\Common;
-use Piwik\Config\GeneralConfig;
-use Piwik\DataTable;
-use Piwik\DataTable\BaseFilter;
-use Piwik\DataTable\Row;
-use Piwik\Log;
-use Piwik\Metrics;
-use Piwik\Period;
-use Piwik\Piwik;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\Segment;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Site;
+use Matomo\Columns\Dimension;
+use Matomo\Columns\DimensionsProvider;
+use Matomo\Common;
+use Matomo\Config\GeneralConfig;
+use Matomo\DataTable;
+use Matomo\DataTable\BaseFilter;
+use Matomo\DataTable\Row;
+use Matomo\Log;
+use Matomo\Metrics;
+use Matomo\Period;
+use Matomo\Matomo;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\Segment;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Site;
 
 /**
  * DataTable filter that creates a pivot table from a report.
@@ -228,7 +228,7 @@ class PivotByDimension extends BaseFilter
 
         Log::debug("PivotByDimension::%s: pivoted columns set: %s", __FUNCTION__, $columnSet);
 
-        $others = Piwik::translate('General_Others');
+        $others = Matomo::translate('General_Others');
         $defaultRow = $this->getPivotTableDefaultRowFromColumnSummary($columnSet, $others);
 
         Log::debug("PivotByDimension::%s: un-prepended default row: %s", __FUNCTION__, $defaultRow);

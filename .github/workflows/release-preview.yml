@@ -111,7 +111,7 @@ jobs:
       - name: Check if there are any changes to create a preview release for
         id: changes
         run: |
-          MAJOR=$(php -r "include_once 'core/Version.php'; echo \Piwik\Version::MAJOR_VERSION;")
+          MAJOR=$(php -r "include_once 'core/Version.php'; echo \Matomo\Version::MAJOR_VERSION;")
 
           if [ "$MAJOR" != "${TARGET_BRANCH%%.*}" ]; then
             echo "core/Version.php on ${TARGET_BRANCH} reports major version ${MAJOR}."
@@ -151,8 +151,8 @@ jobs:
         id: version
         if: steps.changes.outputs.do_release == '1'
         run: |
-          OLD_VERSION=$(php -r "include_once 'core/Version.php'; echo \Piwik\Version::VERSION;")
-          NEW_VERSION=$(php -r "include_once 'core/Version.php'; \$v = new \Piwik\Version(); echo \$v->nextPreviewVersion(\Piwik\Version::VERSION);")
+          OLD_VERSION=$(php -r "include_once 'core/Version.php'; echo \Matomo\Version::VERSION;")
+          NEW_VERSION=$(php -r "include_once 'core/Version.php'; \$v = new \Matomo\Version(); echo \$v->nextPreviewVersion(\Matomo\Version::VERSION);")
           
           if [ "$NEW_VERSION" == "" ]; then
             HAS_NEW_VERSION=0

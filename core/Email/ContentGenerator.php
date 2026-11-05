@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Email;
+namespace Matomo\Email;
 
-use Piwik\View;
-use Piwik\View\HtmlReportEmailHeaderView;
+use Matomo\View;
+use Matomo\View\HtmlReportEmailHeaderView;
 
 class ContentGenerator
 {

@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Exception;
+namespace Matomo\Exception;
 
 /**
  * Exception thrown when the requested plugin requires internet connection, but internet features are disabled in the config file

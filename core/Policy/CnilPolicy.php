@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Policy;
+namespace Matomo\Policy;
 
-use Piwik\Piwik;
-use Piwik\Url;
+use Matomo\Matomo;
+use Matomo\Url;
 
 class CnilPolicy extends CompliancePolicy
 {
@@ -23,12 +23,12 @@ class CnilPolicy extends CompliancePolicy
 
     public static function generateDescription(): string
     {
-        return Piwik::translate('General_ComplianceCNILDescription', self::getFaqLinkParameters());
+        return Matomo::translate('General_ComplianceCNILDescription', self::getFaqLinkParameters());
     }
 
     protected static function generateGranularDescription(): string
     {
-        return Piwik::translate(
+        return Matomo::translate(
             'General_ComplianceCNILGranularDescription2',
             array_merge(self::getFaqLinkParameters(), [self::getGranularStatusLegend()])
         );
@@ -51,7 +51,7 @@ class CnilPolicy extends CompliancePolicy
 
         $legend = '';
         foreach ($items as $item) {
-            $legend .= '<li>' . Piwik::translate($item) . '</li>';
+            $legend .= '<li>' . Matomo::translate($item) . '</li>';
         }
 
         return "<ul class='browser-default'>" . $legend . '</ul>';
@@ -83,12 +83,12 @@ class CnilPolicy extends CompliancePolicy
 
     protected static function generateWarnings(): string
     {
-        return Piwik::translate('General_ComplianceCNILWarning');
+        return Matomo::translate('General_ComplianceCNILWarning');
     }
 
     public static function getTitle(): string
     {
-        return Piwik::translate('General_ComplianceCNILTitle');
+        return Matomo::translate('General_ComplianceCNILTitle');
     }
 
     public static function getUnknownSettings(): array
@@ -96,13 +96,13 @@ class CnilPolicy extends CompliancePolicy
         return [
             [
                 'id' => 'optOut',
-                'title' => Piwik::translate('General_ComplianceCNILUnknownSettingOptOutTitle'),
+                'title' => Matomo::translate('General_ComplianceCNILUnknownSettingOptOutTitle'),
                 'note' =>
-                    Piwik::translate('General_ComplianceCNILUnknownSettingOptOutNotes', [
+                    Matomo::translate('General_ComplianceCNILUnknownSettingOptOutNotes', [
                         self::getLinkOpeningTag('https://matomo.org/faq/general/faq_20000/'),
                         '</a>',
                     ]),
-                'impact' => Piwik::translate('General_ComplianceCNILUnknownSettingOptOutImpact'),
+                'impact' => Matomo::translate('General_ComplianceCNILUnknownSettingOptOutImpact'),
             ],
         ];
     }

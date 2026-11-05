@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Plugins\Installation\ServerFilesGenerator;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
+use Matomo\Plugins\Installation\ServerFilesGenerator;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
 
 class Updates_3_13_4_b1 extends PiwikUpdates
 {

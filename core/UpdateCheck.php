@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Container\StaticContainer;
+use Matomo\Container\StaticContainer;
 
 /**
  * Class to check if a newer version of Piwik is available
@@ -75,7 +75,7 @@ class UpdateCheck
      */
     private static function getLatestAvailableVersionNumber()
     {
-        $releaseChannels = StaticContainer::get('\Piwik\Plugin\ReleaseChannels');
+        $releaseChannels = StaticContainer::get('\Matomo\Plugin\ReleaseChannels');
         $channel = $releaseChannels->getActiveReleaseChannel();
         $url = $channel->getUrlToCheckForLatestAvailableVersion();
 

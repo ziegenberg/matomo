@@ -7,16 +7,16 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\AssetManager\UIAssetFetcher;
+namespace Matomo\AssetManager\UIAssetFetcher;
 
-use Piwik\AssetManager\UIAssetFetcher;
-use Piwik\Cache;
-use Piwik\Config;
-use Piwik\Container\StaticContainer;
-use Piwik\Development;
-use Piwik\Exception\ThingNotFoundException;
-use Piwik\Plugin\Manager;
-use Piwik\Theme;
+use Matomo\AssetManager\UIAssetFetcher;
+use Matomo\Cache;
+use Matomo\Config;
+use Matomo\Container\StaticContainer;
+use Matomo\Development;
+use Matomo\Exception\ThingNotFoundException;
+use Matomo\Plugin\Manager;
+use Matomo\Theme;
 
 class PluginUmdAssetFetcher extends UIAssetFetcher
 {

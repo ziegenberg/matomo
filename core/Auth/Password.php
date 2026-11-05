@@ -7,10 +7,10 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Auth;
+namespace Matomo\Auth;
 
 use Exception;
-use Piwik\Config;
+use Matomo\Config;
 
 /**
  * Main class to handle actions related to password hashing and verification.
@@ -93,7 +93,7 @@ class Password
      * Rehashes a user's password if necessary.
      *
      * This method expects the password to be pre-hashed by
-     * \Piwik\Plugins\UsersManager\UsersManager::getPasswordHash().
+     * \Matomo\Plugins\UsersManager\UsersManager::getPasswordHash().
      *
      * @param string $hash
      * @return boolean
@@ -107,7 +107,7 @@ class Password
      * Verifies a user's password against the provided hash.
      *
      * This method expects the password to be pre-hashed by
-     * \Piwik\Plugins\UsersManager\UsersManager::getPasswordHash().
+     * \Matomo\Plugins\UsersManager\UsersManager::getPasswordHash().
      *
      * @param string $password
      * @param string $hash

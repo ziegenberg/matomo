@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Session;
+namespace Matomo\Session;
 
 use Exception;
-use Piwik\Access;
-use Piwik\Auth as AuthInterface;
-use Piwik\AuthResult;
-use Piwik\Piwik;
-use Piwik\Session;
+use Matomo\Access;
+use Matomo\Auth as AuthInterface;
+use Matomo\AuthResult;
+use Matomo\Matomo;
+use Matomo\Session;
 
 /**
  * Initializes authenticated sessions using an Auth implementation.
@@ -24,7 +24,7 @@ class SessionInitializer
     /**
      * Authenticates the user and, if successful, initializes an authenticated session.
      *
-     * @param \Piwik\Auth $auth The Auth implementation to use.
+     * @param \Matomo\Auth $auth The Auth implementation to use.
      * @throws Exception If authentication fails or the user is not allowed to login for some reason.
      */
     public function initSession(AuthInterface $auth)
@@ -34,11 +34,11 @@ class SessionInitializer
         $authResult = $this->doAuthenticateSession($auth);
 
         if (!$authResult->wasAuthenticationSuccessful()) {
-            Piwik::postEvent('Login.authenticate.failed', array($auth->getLogin()));
+            Matomo::postEvent('Login.authenticate.failed', array($auth->getLogin()));
 
             $this->processFailedSession();
         } else {
-            Piwik::postEvent('Login.authenticate.successful', array($auth->getLogin()));
+            Matomo::postEvent('Login.authenticate.successful', array($auth->getLogin()));
 
             $this->processSuccessfulSession($authResult);
         }
@@ -55,7 +55,7 @@ class SessionInitializer
      */
     protected function doAuthenticateSession(AuthInterface $auth)
     {
-        Piwik::postEvent(
+        Matomo::postEvent(
             'Login.authenticate',
             array(
                 $auth->getLogin(),
@@ -72,7 +72,7 @@ class SessionInitializer
      */
     protected function processFailedSession()
     {
-        throw new Exception(Piwik::translate('Login_LoginPasswordNotCorrect'));
+        throw new Exception(Matomo::translate('Login_LoginPasswordNotCorrect'));
     }
 
     /**
@@ -91,7 +91,7 @@ class SessionInitializer
         /**
          * @ignore
          */
-        Piwik::postEvent('Login.authenticate.processSuccessfulSession.end', array($authResult->getIdentity()));
+        Matomo::postEvent('Login.authenticate.processSuccessfulSession.end', array($authResult->getIdentity()));
     }
 
     protected function regenerateSessionId()

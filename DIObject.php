@@ -12,7 +12,7 @@ if (!function_exists("\DI\object")) {
 
     function object(...$params)
     {
-        return \Piwik\DI::autowire(...$params);
+        return \Matomo\DI::autowire(...$params);
     }
 
 }
@@ -21,7 +21,7 @@ if (!function_exists("\DI\link")) {
 
     function link(...$params)
     {
-        return \Piwik\DI::get(...$params);
+        return \Matomo\DI::get(...$params);
     }
 
 }

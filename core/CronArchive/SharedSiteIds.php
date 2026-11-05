@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\CronArchive;
+namespace Matomo\CronArchive;
 
 use Exception;
-use Piwik\CliMulti\Process;
-use Piwik\Log;
-use Piwik\Option;
+use Matomo\CliMulti\Process;
+use Matomo\Log;
+use Matomo\Option;
 
 /**
  * This class saves all to be processed siteIds in an Option named 'SharedSiteIdsToArchive' and processes all sites

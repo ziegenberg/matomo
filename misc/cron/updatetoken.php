@@ -6,11 +6,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
-use Piwik\Application\Environment;
-use Piwik\Tests\Framework\TestingEnvironmentManipulator;
-use Piwik\Tests\Framework\TestingEnvironmentVariables;
+use Matomo\Application\Environment;
+use Matomo\Tests\Framework\TestingEnvironmentManipulator;
+use Matomo\Tests\Framework\TestingEnvironmentVariables;
 
 if (!defined('PIWIK_DOCUMENT_ROOT')) {
     define('PIWIK_DOCUMENT_ROOT', realpath(dirname(__FILE__) . "/../.."));
@@ -53,7 +53,7 @@ if($piwikDomain) {
 $environment = new Environment('cli');
 $environment->init();
 
-$token = Piwik::requestTemporarySystemAuthToken('LogImporter', 48);
+$token = Matomo::requestTemporarySystemAuthToken('LogImporter', 48);
 
 $filename = $environment->getContainer()->get('path.tmp') . '/cache/token.php';
 

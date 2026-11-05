@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\Access;
-use Piwik\Common;
-use Piwik\Db;
-use Piwik\Option;
-use Piwik\Plugins\Installation\ServerFilesGenerator;
-use Piwik\Updater;
-use Piwik\Updater\Migration;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
-use Piwik\Updates;
-use Piwik\Plugins\Dashboard;
+use Matomo\Access;
+use Matomo\Common;
+use Matomo\Db;
+use Matomo\Option;
+use Matomo\Plugins\Installation\ServerFilesGenerator;
+use Matomo\Updater;
+use Matomo\Updater\Migration;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
+use Matomo\Updates;
+use Matomo\Plugins\Dashboard;
 
 /**
  * Update for version 3.0.0-b1.
@@ -63,8 +63,8 @@ class Updates_3_0_0_b1 extends Updates
         ServerFilesGenerator::createHtAccessFiles();
 
         // Renamed plugin ExampleRssWidget -> RssWidget
-        \Piwik\Plugin\Manager::getInstance()->activatePlugin('RssWidget');
-        \Piwik\Plugin\Manager::getInstance()->deactivatePlugin('ExampleRssWidget');
+        \Matomo\Plugin\Manager::getInstance()->activatePlugin('RssWidget');
+        \Matomo\Plugin\Manager::getInstance()->deactivatePlugin('ExampleRssWidget');
     }
 
     private function migratePluginEmailUpdateSetting()

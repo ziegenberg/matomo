@@ -7,9 +7,9 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Validators;
+namespace Matomo\Validators;
 
-use Piwik\Piwik;
+use Matomo\Matomo;
 
 class NumberRange extends BaseValidator
 {
@@ -42,15 +42,15 @@ class NumberRange extends BaseValidator
             return;
         }
         if (!is_numeric($value)) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorNotANumber'));
+            throw new Exception(Matomo::translate('General_ValidatorErrorNotANumber'));
         }
 
         if (isset($this->min) && $this->min > $value) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorNumberTooLow', array($value, $this->min)));
+            throw new Exception(Matomo::translate('General_ValidatorErrorNumberTooLow', array($value, $this->min)));
         }
 
         if (isset($this->max) && $this->max < $value) {
-            throw new Exception(Piwik::translate('General_ValidatorErrorNumberTooHigh', array($value, $this->max)));
+            throw new Exception(Matomo::translate('General_ValidatorErrorNumberTooHigh', array($value, $this->max)));
         }
     }
 }

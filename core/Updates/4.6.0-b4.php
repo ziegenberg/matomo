@@ -7,20 +7,20 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Updates;
+namespace Matomo\Updates;
 
-use Piwik\ArchiveProcessor\Rules;
-use Piwik\Common;
-use Piwik\DataAccess\ArchiveTableCreator;
-use Piwik\Db;
-use Piwik\Plugins\SitesManager\Model;
-use Piwik\Plugins\VisitFrequency\API as VisitFrequencyAPI;
-use Piwik\Segment;
-use Piwik\Segment\SegmentExpression;
-use Piwik\Updater;
-use Piwik\Updates as PiwikUpdates;
-use Piwik\Updater\Migration;
-use Piwik\Updater\Migration\Factory as MigrationFactory;
+use Matomo\ArchiveProcessor\Rules;
+use Matomo\Common;
+use Matomo\DataAccess\ArchiveTableCreator;
+use Matomo\Db;
+use Matomo\Plugins\SitesManager\Model;
+use Matomo\Plugins\VisitFrequency\API as VisitFrequencyAPI;
+use Matomo\Segment;
+use Matomo\Segment\SegmentExpression;
+use Matomo\Updater;
+use Matomo\Updates as PiwikUpdates;
+use Matomo\Updater\Migration;
+use Matomo\Updater\Migration\Factory as MigrationFactory;
 
 /**
  * Update for version 4.6.0-b2.

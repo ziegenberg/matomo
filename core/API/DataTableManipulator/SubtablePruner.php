@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\API\DataTableManipulator;
+namespace Matomo\API\DataTableManipulator;
 
-use Piwik\DataTable;
-use Piwik\DataTable\Filter\SafeDecodeLabel;
-use Piwik\DataTable\Row;
-use Piwik\Metrics;
-use Piwik\Plugin\ProcessedMetric;
-use Piwik\Plugin\Report;
-use Piwik\Plugin\ReportsProvider;
-use Piwik\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
-use Piwik\Plugins\CoreHome\Columns\Metrics\PercentOfReportTotal;
-use Piwik\Plugins\PagePerformance\Columns\Metrics\AveragePerformanceMetric;
+use Matomo\DataTable;
+use Matomo\DataTable\Filter\SafeDecodeLabel;
+use Matomo\DataTable\Row;
+use Matomo\Metrics;
+use Matomo\Plugin\ProcessedMetric;
+use Matomo\Plugin\Report;
+use Matomo\Plugin\ReportsProvider;
+use Matomo\Plugins\Actions\Columns\Metrics\AveragePageGenerationTime;
+use Matomo\Plugins\CoreHome\Columns\Metrics\PercentOfReportTotal;
+use Matomo\Plugins\PagePerformance\Columns\Metrics\AveragePerformanceMetric;
 
 /**
  * Removes the rows a label search doesn't need from a subtable, before it is post-processed. If
@@ -213,8 +213,8 @@ final class SubtablePruner
     private function queuedFilterMayChangeLabels(string $className, array $parameters): bool
     {
         $name = ltrim($className, '\\');
-        if (str_starts_with($name, 'Piwik\\DataTable\\Filter\\')) {
-            $name = substr($name, strlen('Piwik\\DataTable\\Filter\\'));
+        if (str_starts_with($name, 'Matomo\\DataTable\\Filter\\')) {
+            $name = substr($name, strlen('Matomo\\DataTable\\Filter\\'));
         }
 
         return match ($name) {

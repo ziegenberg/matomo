@@ -7,11 +7,11 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik;
+namespace Matomo;
 
 use Exception;
-use Piwik\Container\StaticContainer;
-use Piwik\Intl\Data\Provider\DateTimeFormatProvider;
+use Matomo\Container\StaticContainer;
+use Matomo\Intl\Data\Provider\DateTimeFormatProvider;
 
 /**
  * Utility class that wraps date/time related PHP functions. Using this class can
@@ -159,7 +159,7 @@ class Date
 
         if ($timestamp < self::FIRST_WEBSITE_TIMESTAMP) {
             $dateOfFirstWebsite = new self(self::FIRST_WEBSITE_TIMESTAMP);
-            $message = Piwik::translate('General_ExceptionInvalidDateBeforeFirstWebsite', array(
+            $message = Matomo::translate('General_ExceptionInvalidDateBeforeFirstWebsite', array(
                 $date->toString(),
                 $dateOfFirstWebsite->getLocalized(self::DATE_FORMAT_SHORT),
                 $dateOfFirstWebsite->getTimestamp(),
@@ -518,7 +518,7 @@ class Date
     /**
      * Performs three-way comparison of the month of the current date against the given `$date`'s month.
      *
-     * @param \Piwik\Date $date Month to compare
+     * @param \Matomo\Date $date Month to compare
      * @return int Returns `0` if the current month is equal to `$date`'s, `-1` if the current month is
      *             earlier or `1` if the current month is later.
      */
@@ -538,7 +538,7 @@ class Date
     /**
      * Performs three-way comparison of the month of the current date against the given `$date`'s year.
      *
-     * @param \Piwik\Date $date Year to compare
+     * @param \Matomo\Date $date Year to compare
      * @return int Returns `0` if the current year is equal to `$date`'s, `-1` if the current year is
      *             earlier or `1` if the current year is later.
      */
@@ -568,7 +568,7 @@ class Date
     /**
      * Returns a date object set to now in UTC (same as {@link today()}, except that the time is also set).
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function now()
     {
@@ -578,7 +578,7 @@ class Date
     /**
      * Returns a date object set to today at midnight in UTC.
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function today()
     {
@@ -588,7 +588,7 @@ class Date
     /**
      * Returns a date object set to tomorrow at midnight in UTC.
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function tomorrow()
     {
@@ -598,7 +598,7 @@ class Date
     /**
      * Returns a date object set to yesterday at midnight in UTC.
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function yesterday()
     {
@@ -608,7 +608,7 @@ class Date
     /**
      * Returns a date object set to yesterday with the current time of day in UTC.
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function yesterdaySameTime()
     {
@@ -618,7 +618,7 @@ class Date
     /**
      * Returns a date object set to the day a week ago at midnight in UTC.
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function lastWeek()
     {
@@ -628,7 +628,7 @@ class Date
     /**
      * Returns a date object set to the day a month ago at midnight in UTC.
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function lastMonth()
     {
@@ -638,7 +638,7 @@ class Date
     /**
      * Returns a date object set to the day a year ago at midnight in UTC.
      *
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public static function lastYear()
     {
@@ -650,7 +650,7 @@ class Date
      * time of day.
      *
      * @param string $time String in the `'HH:MM:SS'` format.
-     * @return \Piwik\Date The new date with the time of day changed.
+     * @return \Matomo\Date The new date with the time of day changed.
      */
     public function setTime($time)
     {
@@ -662,7 +662,7 @@ class Date
      * by `$day`.
      *
      * @param int $day The day eg. `31`.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function setDay($day)
     {
@@ -683,7 +683,7 @@ class Date
      * a new year (specified by `$year`).
      *
      * @param int $year The year, eg. `2010`.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function setYear($year)
     {
@@ -703,7 +703,7 @@ class Date
      * Subtracts `$n` number of days from `$this` date and returns a new Date object.
      *
      * @param int $n An integer > 0.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function subDay($n)
     {
@@ -718,7 +718,7 @@ class Date
      * Subtracts `$n` weeks from `$this` date and returns a new Date object.
      *
      * @param int $n An integer > 0.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function subWeek($n)
     {
@@ -729,7 +729,7 @@ class Date
      * Subtracts `$n` months from `$this` date and returns the result as a new Date object.
      *
      * @param int $n An integer > 0.
-     * @return \Piwik\Date  new date
+     * @return \Matomo\Date  new date
      */
     public function subMonth($n)
     {
@@ -752,7 +752,7 @@ class Date
      * Subtracts `$n` years from `$this` date and returns the result as a new Date object.
      *
      * @param int $n An integer > 0.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function subYear($n)
     {
@@ -812,7 +812,7 @@ class Date
     {
         $dayOfWeek = $this->toString('N');
         $monthOfYear = $this->toString('n');
-        $translator = StaticContainer::get('Piwik\Translation\Translator');
+        $translator = StaticContainer::get('Matomo\Translation\Translator');
 
         switch ($token) {
             // year
@@ -983,7 +983,7 @@ class Date
      * instance.
      *
      * @param int $n Number of days to add, must be > 0.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function addDay($n)
     {
@@ -996,9 +996,8 @@ class Date
      * instance.
      *
      * @param int $n Number of days to add, must be > 0.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
-
     public function addMonth($n)
     {
         $ts = strtotime("+$n month", $this->timestamp);
@@ -1009,7 +1008,7 @@ class Date
      * Adds `$n` hours to `$this` date and returns the result in a new Date.
      *
      * @param int|float $n Number of hours to add. Can be less than 0, can be decimal (will get converted to minutes)
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function addHour($n)
     {
@@ -1055,7 +1054,7 @@ class Date
      * Subtracts `$n` hours from `$this` date and returns the result in a new Date.
      *
      * @param int $n Number of hours to subtract. Can be less than 0.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function subHour($n)
     {
@@ -1066,7 +1065,7 @@ class Date
      * Subtracts `$n` seconds from `$this` date and returns the result in a new Date.
      *
      * @param int $n Number of seconds to subtract. Can be less than 0.
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function subSeconds($n)
     {
@@ -1078,7 +1077,7 @@ class Date
      *
      * @param int $n The number of periods to add. Can be negative.
      * @param string $period The type of period to add (YEAR, MONTH, WEEK, DAY, ...)
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function addPeriod($n, $period)
     {
@@ -1123,7 +1122,7 @@ class Date
      *
      * @param int $n The number of periods to add. Can be negative.
      * @param string $period The type of period to add (YEAR, MONTH, WEEK, DAY, ...)
-     * @return \Piwik\Date
+     * @return \Matomo\Date
      */
     public function subPeriod($n, $period)
     {
@@ -1147,7 +1146,7 @@ class Date
      */
     private static function getInvalidDateFormatException($dateString)
     {
-        $message = Piwik::translate('General_ExceptionInvalidDateFormat', array("YYYY-MM-DD, or 'today' or 'yesterday'", "strtotime", "https://php.net/strtotime"));
+        $message = Matomo::translate('General_ExceptionInvalidDateFormat', array("YYYY-MM-DD, or 'today' or 'yesterday'", "strtotime", "https://php.net/strtotime"));
         return new Exception($message . ": " . var_export($dateString, true));
     }
 

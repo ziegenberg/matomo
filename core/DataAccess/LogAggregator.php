@@ -7,30 +7,30 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\DataAccess;
+namespace Matomo\DataAccess;
 
-use Piwik\ArchiveProcessor\Parameters;
-use Piwik\Common;
-use Piwik\Config;
-use Piwik\Config\DatabaseConfig;
-use Piwik\Container\StaticContainer;
-use Piwik\DataArray;
-use Piwik\Date;
-use Piwik\Db;
-use Piwik\DbHelper;
-use Piwik\Metrics;
-use Piwik\Plugin\LogTablesProvider;
-use Piwik\RankingQuery;
-use Piwik\Segment;
-use Piwik\Tracker\Action;
-use Piwik\Tracker\GoalManager;
-use Piwik\Log\LoggerInterface;
+use Matomo\ArchiveProcessor\Parameters;
+use Matomo\Common;
+use Matomo\Config;
+use Matomo\Config\DatabaseConfig;
+use Matomo\Container\StaticContainer;
+use Matomo\DataArray;
+use Matomo\Date;
+use Matomo\Db;
+use Matomo\DbHelper;
+use Matomo\Metrics;
+use Matomo\Plugin\LogTablesProvider;
+use Matomo\RankingQuery;
+use Matomo\Segment;
+use Matomo\Tracker\Action;
+use Matomo\Tracker\GoalManager;
+use Matomo\Log\LoggerInterface;
 
 /**
  * Contains methods that calculate metrics by aggregating log data (visits, actions, conversions,
  * ecommerce items).
  *
- * You can use the methods in this class within {@link Piwik\Plugin\Archiver Archiver} descendants
+ * You can use the methods in this class within {@link Matomo\Plugin\Archiver Archiver} descendants
  * to aggregate log data without having to write SQL queries.
  *
  * ### Aggregation Dimension
@@ -310,7 +310,7 @@ class LogAggregator
         try {
             $readerDb->query($createTableSql);
         } catch (\Exception $e) {
-            if ($readerDb->isErrNo($e, \Piwik\Updater\Migration\Db::ERROR_CODE_TABLE_EXISTS)) {
+            if ($readerDb->isErrNo($e, \Matomo\Updater\Migration\Db::ERROR_CODE_TABLE_EXISTS)) {
                 return;
             } else {
                 throw $e;
@@ -359,8 +359,8 @@ class LogAggregator
      * @param int $offset
      *
      * @return array{sql: string, bind: array<scalar>}
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     public function generateQuery($select, $from, $where, $groupBy, $orderBy, $limit = 0, $offset = 0, bool $withRollup = false)
     {
@@ -428,8 +428,8 @@ class LogAggregator
      *
      * @return string   Name of the created temporary table, including any table prefix
      *
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     private function createSegmentTable(): string
     {
@@ -445,15 +445,15 @@ class LogAggregator
      * Return the SQL query used to populate the segment temporary table
      *
      * @return array{sql: string, bind: array<scalar>}
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     public function getSegmentTableSql(): array
     {
         $segmentWhere = $this->getWhereStatement('log_visit', 'visit_last_action_time');
         $segmentBind = $this->getGeneralQueryBindParams();
 
-        $logQueryBuilder = StaticContainer::get('Piwik\DataAccess\LogQueryBuilder');
+        $logQueryBuilder = StaticContainer::get('Matomo\DataAccess\LogQueryBuilder');
         $forceGroupByBackup = $logQueryBuilder->getForcedInnerGroupBySubselect();
         $logQueryBuilder->forceInnerGroupBySubselect(LogQueryBuilder::FORCE_INNER_GROUP_BY_NO_SUBSELECT);
         $segmentSql = $this->segment->getSelectQuery('distinct log_visit.idvisit as idvisit', 'log_visit', $segmentWhere, $segmentBind, 'log_visit.idvisit ASC');
@@ -620,18 +620,18 @@ class LogAggregator
      *
      * The following columns are in each row of the result set:
      *
-     * - **{@link \Piwik\Metrics::INDEX_NB_UNIQ_VISITORS}**: The total number of unique visitors in this group
+     * - **{@link \Matomo\Metrics::INDEX_NB_UNIQ_VISITORS}**: The total number of unique visitors in this group
      *                                                      of aggregated visits.
-     * - **{@link \Piwik\Metrics::INDEX_NB_VISITS}**: The total number of visits aggregated.
-     * - **{@link \Piwik\Metrics::INDEX_NB_ACTIONS}**: The total number of actions performed in this group of
+     * - **{@link \Matomo\Metrics::INDEX_NB_VISITS}**: The total number of visits aggregated.
+     * - **{@link \Matomo\Metrics::INDEX_NB_ACTIONS}**: The total number of actions performed in this group of
      *                                                aggregated visits.
-     * - **{@link \Piwik\Metrics::INDEX_MAX_ACTIONS}**: The maximum actions performed in one visit for this group of
+     * - **{@link \Matomo\Metrics::INDEX_MAX_ACTIONS}**: The maximum actions performed in one visit for this group of
      *                                                 visits.
-     * - **{@link \Piwik\Metrics::INDEX_SUM_VISIT_LENGTH}**: The total amount of time spent on the site for this
+     * - **{@link \Matomo\Metrics::INDEX_SUM_VISIT_LENGTH}**: The total amount of time spent on the site for this
      *                                                      group of visits.
-     * - **{@link \Piwik\Metrics::INDEX_BOUNCE_COUNT}**: The total number of bounced visits in this group of
+     * - **{@link \Matomo\Metrics::INDEX_BOUNCE_COUNT}**: The total number of bounced visits in this group of
      *                                                  visits.
-     * - **{@link \Piwik\Metrics::INDEX_NB_VISITS_CONVERTED}**: The total number of visits for which at least one
+     * - **{@link \Matomo\Metrics::INDEX_NB_VISITS_CONVERTED}**: The total number of visits for which at least one
      *                                                         conversion occurred, for this group of visits.
      *
      * Additional data can be selected by setting the `$additionalSelects` parameter.
@@ -651,16 +651,16 @@ class LogAggregator
      * @param bool|array $metrics The set of metrics to calculate and return. If false, the query will select
      *                            all of them. The following values can be used:
      *
-     *                            - {@link \Piwik\Metrics::INDEX_NB_UNIQ_VISITORS}
-     *                            - {@link \Piwik\Metrics::INDEX_NB_VISITS}
-     *                            - {@link \Piwik\Metrics::INDEX_NB_ACTIONS}
-     *                            - {@link \Piwik\Metrics::INDEX_MAX_ACTIONS}
-     *                            - {@link \Piwik\Metrics::INDEX_SUM_VISIT_LENGTH}
-     *                            - {@link \Piwik\Metrics::INDEX_BOUNCE_COUNT}
-     *                            - {@link \Piwik\Metrics::INDEX_NB_VISITS_CONVERTED}
-     * @param bool|\Piwik\RankingQuery $rankingQuery
+     *                            - {@link \Matomo\Metrics::INDEX_NB_UNIQ_VISITORS}
+     *                            - {@link \Matomo\Metrics::INDEX_NB_VISITS}
+     *                            - {@link \Matomo\Metrics::INDEX_NB_ACTIONS}
+     *                            - {@link \Matomo\Metrics::INDEX_MAX_ACTIONS}
+     *                            - {@link \Matomo\Metrics::INDEX_SUM_VISIT_LENGTH}
+     *                            - {@link \Matomo\Metrics::INDEX_BOUNCE_COUNT}
+     *                            - {@link \Matomo\Metrics::INDEX_NB_VISITS_CONVERTED}
+     * @param bool|\Matomo\RankingQuery $rankingQuery
      *                                   A pre-configured ranking query instance that will be used to limit the result.
-     *                                   If set, the return value is the array returned by {@link \Piwik\RankingQuery::execute()}.
+     *                                   If set, the return value is the array returned by {@link \Matomo\RankingQuery::execute()}.
      * @param bool|string $orderBy       Order By clause to add (e.g. user_id ASC)
      * @param int $timeLimit             Adds a MAX_EXECUTION_TIME query hint to the query if $timeLimit > 0
      *                                   for more details see {@link DbHelper::addMaxExecutionTimeHintToQuery}
@@ -668,7 +668,7 @@ class LogAggregator
      * @param bool $rankingQueryGenerate if `true`, generates a SQL query / bind array pair and returns it. If false, the
      *                                   ranking query SQL will be immediately executed and the results returned.
      * @return mixed A Zend_Db_Statement if `$rankingQuery` isn't supplied, otherwise the result of
-     *               {@link \Piwik\RankingQuery::execute()}. Read {@link queryVisitsByDimension() this}
+     *               {@link \Matomo\RankingQuery::execute()}. Read {@link queryVisitsByDimension() this}
      *               to see what aggregate data is calculated by the query.
      * @api
      */
@@ -708,14 +708,14 @@ class LogAggregator
      * @param bool|string               $where
      * @param array                     $additionalSelects
      * @param bool|array                $metrics
-     * @param bool|\Piwik\RankingQuery  $rankingQuery
+     * @param bool|\Matomo\RankingQuery  $rankingQuery
      * @param bool|string               $orderBy
      * @param int                       $timeLimit
      * @param bool                      $rankingQueryGenerate
      *
      * @return array
-     * @throws \Piwik\Exception\DI\DependencyException
-     * @throws \Piwik\Exception\DI\NotFoundException
+     * @throws \Matomo\Exception\DI\DependencyException
+     * @throws \Matomo\Exception\DI\NotFoundException
      */
     public function getQueryByDimensionSql(
         array $dimensions,
@@ -978,15 +978,15 @@ class LogAggregator
      * Each row of the result set represents an aggregated group of ecommerce items. The following
      * columns are in each row of the result set:
      *
-     * - **{@link Piwik\Metrics::INDEX_ECOMMERCE_ITEM_REVENUE}**: The total revenue for the group of items.
-     * - **{@link Piwik\Metrics::INDEX_ECOMMERCE_ITEM_QUANTITY}**: The total number of items in this group.
-     * - **{@link Piwik\Metrics::INDEX_ECOMMERCE_ITEM_PRICE}**: The total price for the group of items.
-     * - **{@link Piwik\Metrics::INDEX_ECOMMERCE_ORDERS}**: The total number of orders this group of items
+     * - **{@link Matomo\Metrics::INDEX_ECOMMERCE_ITEM_REVENUE}**: The total revenue for the group of items.
+     * - **{@link Matomo\Metrics::INDEX_ECOMMERCE_ITEM_QUANTITY}**: The total number of items in this group.
+     * - **{@link Matomo\Metrics::INDEX_ECOMMERCE_ITEM_PRICE}**: The total price for the group of items.
+     * - **{@link Matomo\Metrics::INDEX_ECOMMERCE_ORDERS}**: The total number of orders this group of items
      *                                                      belongs to. This will be <= to the total number
      *                                                      of items in this group.
-     * - **{@link Piwik\Metrics::INDEX_NB_VISITS}**: The total number of visits that caused these items to be logged.
-     * - **ecommerceType**: Either {@link Piwik\Tracker\GoalManager::IDGOAL_CART} if the items in this group were
-     *                      abandoned by a visitor, or {@link Piwik\Tracker\GoalManager::IDGOAL_ORDER} if they
+     * - **{@link Matomo\Metrics::INDEX_NB_VISITS}**: The total number of visits that caused these items to be logged.
+     * - **ecommerceType**: Either {@link Matomo\Tracker\GoalManager::IDGOAL_CART} if the items in this group were
+     *                      abandoned by a visitor, or {@link Matomo\Tracker\GoalManager::IDGOAL_ORDER} if they
      *                      were ordered by a visitor.
      *
      * **Limitations**
@@ -1079,10 +1079,10 @@ class LogAggregator
      * Each row of the result set represents an aggregated group of actions. The following columns
      * are in each aggregate row:
      *
-     * - **{@link Piwik\Metrics::INDEX_NB_UNIQ_VISITORS}**: The total number of unique visitors that performed
+     * - **{@link Matomo\Metrics::INDEX_NB_UNIQ_VISITORS}**: The total number of unique visitors that performed
      *                                             the actions in this group.
-     * - **{@link Piwik\Metrics::INDEX_NB_VISITS}**: The total number of visits these actions belong to.
-     * - **{@link Piwik\Metrics::INDEX_NB_ACTIONS}**: The total number of actions in this aggregate group.
+     * - **{@link Matomo\Metrics::INDEX_NB_VISITS}**: The total number of visits these actions belong to.
+     * - **{@link Matomo\Metrics::INDEX_NB_ACTIONS}**: The total number of actions in this aggregate group.
      *
      * Additional data can be selected through the `$additionalSelects` parameter.
      *
@@ -1098,12 +1098,12 @@ class LogAggregator
      * @param bool|array $metrics The set of metrics to calculate and return. If `false`, the query will select
      *                            all of them. The following values can be used:
      *
-     *                              - {@link Piwik\Metrics::INDEX_NB_UNIQ_VISITORS}
-     *                              - {@link Piwik\Metrics::INDEX_NB_VISITS}
-     *                              - {@link Piwik\Metrics::INDEX_NB_ACTIONS}
-     * @param bool|\Piwik\RankingQuery $rankingQuery
+     *                              - {@link Matomo\Metrics::INDEX_NB_UNIQ_VISITORS}
+     *                              - {@link Matomo\Metrics::INDEX_NB_VISITS}
+     *                              - {@link Matomo\Metrics::INDEX_NB_ACTIONS}
+     * @param bool|\Matomo\RankingQuery $rankingQuery
      *                                   A pre-configured ranking query instance that will be used to limit the result.
-     *                                   If set, the return value is the array returned by {@link Piwik\RankingQuery::execute()}.
+     *                                   If set, the return value is the array returned by {@link Matomo\RankingQuery::execute()}.
      * @param false|string|array<string> $joinLogActionOnColumn One or more columns from the **log_link_visit_action** table that
      *                                           log_action should be joined on. The table alias used for each join
      *                                           is `"log_action$i"` where `$i` is the index of the column in this
@@ -1115,7 +1115,7 @@ class LogAggregator
      * @param int $timeLimit                Adds a MAX_EXECUTION_TIME hint to the query if $timeLimit > 0
      *                                      for more details see {@link DbHelper::addMaxExecutionTimeHintToQuery}
      * @return mixed A Zend_Db_Statement if `$rankingQuery` isn't supplied, otherwise the result of
-     *               {@link Piwik\RankingQuery::execute()}. Read [this](#queryEcommerceItems-result-set)
+     *               {@link Matomo\RankingQuery::execute()}. Read [this](#queryEcommerceItems-result-set)
      *               to see what aggregate data is calculated by the query.
      * @api
      */
@@ -1209,34 +1209,34 @@ class LogAggregator
      * Each row of the result set represents an aggregated group of conversions. The
      * following columns are in each aggregate row:
      *
-     * - **{@link Piwik\Metrics::INDEX_GOAL_NB_CONVERSIONS}**: The total number of conversions in this aggregate
+     * - **{@link Matomo\Metrics::INDEX_GOAL_NB_CONVERSIONS}**: The total number of conversions in this aggregate
      *                                                         group.
-     * - **{@link Piwik\Metrics::INDEX_GOAL_NB_VISITS_CONVERTED}**: The total number of visits during which these
+     * - **{@link Matomo\Metrics::INDEX_GOAL_NB_VISITS_CONVERTED}**: The total number of visits during which these
      *                                                              conversions were converted.
-     * - **{@link Piwik\Metrics::INDEX_GOAL_REVENUE}**: The total revenue generated by these conversions. This value
+     * - **{@link Matomo\Metrics::INDEX_GOAL_REVENUE}**: The total revenue generated by these conversions. This value
      *                                                  includes the revenue from individual ecommerce items.
-     * - **{@link Piwik\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_SUBTOTAL}**: The total cost of all ecommerce items sold
+     * - **{@link Matomo\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_SUBTOTAL}**: The total cost of all ecommerce items sold
      *                                                                     within these conversions. This value does not
      *                                                                     include tax, shipping or any applied discount.
      *
      *                                                                     _This metric is only applicable to the special
      *                                                                     **ecommerce** goal (where `idGoal == 'ecommerceOrder'`)._
-     * - **{@link Piwik\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_TAX}**: The total tax applied to every transaction in these
+     * - **{@link Matomo\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_TAX}**: The total tax applied to every transaction in these
      *                                                                conversions.
      *
      *                                                                _This metric is only applicable to the special
      *                                                                **ecommerce** goal (where `idGoal == 'ecommerceOrder'`)._
-     * - **{@link Piwik\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_SHIPPING}**: The total shipping cost for every transaction
+     * - **{@link Matomo\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_SHIPPING}**: The total shipping cost for every transaction
      *                                                                     in these conversions.
      *
      *                                                                     _This metric is only applicable to the special
      *                                                                     **ecommerce** goal (where `idGoal == 'ecommerceOrder'`)._
-     * - **{@link Piwik\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_DISCOUNT}**: The total discount applied to every transaction
+     * - **{@link Matomo\Metrics::INDEX_GOAL_ECOMMERCE_REVENUE_DISCOUNT}**: The total discount applied to every transaction
      *                                                                     in these conversions.
      *
      *                                                                     _This metric is only applicable to the special
      *                                                                     **ecommerce** goal (where `idGoal == 'ecommerceOrder'`)._
-     * - **{@link Piwik\Metrics::INDEX_GOAL_ECOMMERCE_ITEMS}**: The total number of ecommerce items sold in each transaction
+     * - **{@link Matomo\Metrics::INDEX_GOAL_ECOMMERCE_ITEMS}**: The total number of ecommerce items sold in each transaction
      *                                                          in these conversions.
      *
      *                                                          _This metric is only applicable to the special

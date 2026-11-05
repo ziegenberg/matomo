@@ -7,31 +7,31 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
 use Exception;
-use Piwik\Columns\Dimension;
-use Piwik\Development;
+use Matomo\Columns\Dimension;
+use Matomo\Development;
 
 /**
- * Creates a new segment that can be used for instance within the {@link \Piwik\Columns\Dimension::configureSegment()}
- * method. Make sure to set at least the following values: {@link setName()}, {@link setSegment()},
- * {@link setSqlSegment()}, {@link setType()} and {@link setCategory()}. If you are using a segment in the context of a
- * dimension the type and the SQL segment is usually set for you automatically.
- *
- * Example:
- * ```
- $segment = new \Piwik\Plugin\Segment();
- $segment->setType(\Piwik\Plugin\Segment::TYPE_DIMENSION);
- $segment->setName('General_EntryKeyword');
- $segment->setCategory('General_Visit');
- $segment->setSegment('entryKeyword');
- $segment->setSqlSegment('log_visit.entry_keyword');
- $segment->setAcceptedValues('Any keywords people search for on your website such as "help" or "imprint"');
- ```
- * @api
- * @since 2.5.0
- */
+* Creates a new segment that can be used for instance within the {@link \Matomo\Columns\Dimension::configureSegment()}
+* method. Make sure to set at least the following values: {@link setName()}, {@link setSegment()},
+* {@link setSqlSegment()}, {@link setType()} and {@link setCategory()}. If you are using a segment in the context of a
+* dimension the type and the SQL segment is usually set for you automatically.
+*
+* Example:
+* ```
+$segment = new \Matomo\Plugin\Segment();
+$segment->setType(\Matomo\Plugin\Segment::TYPE_DIMENSION);
+$segment->setName('General_EntryKeyword');
+$segment->setCategory('General_Visit');
+$segment->setSegment('entryKeyword');
+$segment->setSqlSegment('log_visit.entry_keyword');
+$segment->setAcceptedValues('Any keywords people search for on your website such as "help" or "imprint"');
+```
+* @api
+* @since 2.5.0
+*/
 class Segment
 {
     /**

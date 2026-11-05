@@ -7,7 +7,7 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Widget;
+namespace Matomo\Widget;
 
 /**
  * Defines a new widget container. Widget containers are useful when you want to combine several widgets
@@ -65,7 +65,7 @@ class WidgetContainerConfig extends WidgetConfig
      * behaviour you can specify a layout that will be recognized by the UI. It is not yet possible to define
      * custom layouts.
      *
-     * @param string $layout eg 'ByDimension' see {@link Piwik\Plugins\CoreHome\CoreHome::WIDGET_CONTAINER_LAYOUT_BY_DIMENSION}
+     * @param string $layout eg 'ByDimension' see {@link Matomo\Plugins\CoreHome\CoreHome::WIDGET_CONTAINER_LAYOUT_BY_DIMENSION}
      * @return static
      */
     public function setLayout($layout)

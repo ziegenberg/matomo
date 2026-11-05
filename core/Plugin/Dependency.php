@@ -7,12 +7,12 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Plugin;
+namespace Matomo\Plugin;
 
 use Composer\Semver\VersionParser;
-use Piwik\Plugin\Manager as PluginManager;
-use Piwik\Plugins\Marketplace\Environment;
-use Piwik\Version;
+use Matomo\Plugin\Manager as PluginManager;
+use Matomo\Plugins\Marketplace\Environment;
+use Matomo\Version;
 
 class Dependency
 {

@@ -9,12 +9,12 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Http;
+namespace Matomo\Http;
 
 use Exception;
 
 /**
- * Thrown when the SSRF-safe fetch path in {@see \Piwik\Http} refuses a request: a non-public target,
+ * Thrown when the SSRF-safe fetch path in {@see \Matomo\Http} refuses a request: a non-public target,
  * or an unmet precondition (curl, an http(s) scheme, no forward proxy). Distinct from a transient
  * network failure, so callers can surface it to the admin, who can act on it.
  */

@@ -7,15 +7,15 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Application\Kernel;
+namespace Matomo\Application\Kernel;
 
-use Piwik\Common;
-use Piwik\Exception\NotYetInstalledException;
-use Piwik\Filechecks;
-use Piwik\Piwik;
-use Piwik\SettingsPiwik;
-use Piwik\SettingsServer;
-use Piwik\Translation\Translator;
+use Matomo\Common;
+use Matomo\Exception\NotYetInstalledException;
+use Matomo\Filechecks;
+use Matomo\Matomo;
+use Matomo\SettingsPiwik;
+use Matomo\SettingsServer;
+use Matomo\Translation\Translator;
 
 /**
  * Validates the Piwik environment. This includes making sure the required config files
@@ -113,7 +113,7 @@ class EnvironmentValidator
          *
          * @param \Exception $exception The exception that was thrown by `Config::getInstance()`.
          */
-        Piwik::postEvent('Config.NoConfigurationFile', array($exception), $pending = true);
+        Matomo::postEvent('Config.NoConfigurationFile', array($exception), $pending = true);
     }
 
     /**

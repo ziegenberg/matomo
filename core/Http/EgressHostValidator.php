@@ -9,14 +9,14 @@
 
 declare(strict_types=1);
 
-namespace Piwik\Http;
+namespace Matomo\Http;
 
 use Matomo\Network\IP;
-use Piwik\Config\GeneralConfig;
+use Matomo\Config\GeneralConfig;
 
 /**
  * Validates that an outgoing request target is a public host, for the SSRF-safe fetch
- * path in {@see \Piwik\Http}. Canonicalises the host to what the transport will connect
+ * path in {@see \Matomo\Http}. Canonicalises the host to what the transport will connect
  * to, rejects encoded/numeric hosts, and confirms that every resolved address is public
  * or covered by the `[General] allowed_private_egress_ranges` config allowlist.
  */

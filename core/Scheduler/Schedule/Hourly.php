@@ -7,14 +7,14 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\Scheduler\Schedule;
+namespace Matomo\Scheduler\Schedule;
 
 use Exception;
 
 /**
  * Hourly class is used to schedule tasks every hour.
  *
- * @see \Piwik\Scheduler\Task
+ * @see \Matomo\Scheduler\Task
  */
 class Hourly extends Schedule
 {

@@ -7,18 +7,18 @@
  * @license https://www.gnu.org/licenses/gpl-3.0.html GPL v3 or later
  */
 
-namespace Piwik\View;
+namespace Matomo\View;
 
-use Piwik\Common;
-use Piwik\Date;
-use Piwik\Mail\EmailStyles;
-use Piwik\Plugin\ThemeStyles;
-use Piwik\Plugins\CoreAdminHome\CustomLogo;
-use Piwik\Scheduler\Schedule\Schedule;
-use Piwik\SettingsPiwik;
-use Piwik\Site;
-use Piwik\View;
-use Piwik\Plugin\Manager;
+use Matomo\Common;
+use Matomo\Date;
+use Matomo\Mail\EmailStyles;
+use Matomo\Plugin\ThemeStyles;
+use Matomo\Plugins\CoreAdminHome\CustomLogo;
+use Matomo\Scheduler\Schedule\Schedule;
+use Matomo\SettingsPiwik;
+use Matomo\Site;
+use Matomo\View;
+use Matomo\Plugin\Manager;
 
 class HtmlReportEmailHeaderView extends View
 {
@@ -89,6 +89,6 @@ class HtmlReportEmailHeaderView extends View
 
     private static function getPeriodToFrequencyAsAdjective()
     {
-        return array_map(['\Piwik\Piwik', 'translate'], self::$reportFrequencyTranslationByPeriod);
+        return array_map(['\Matomo\Matomo', 'translate'], self::$reportFrequencyTranslationByPeriod);
     }
 }
