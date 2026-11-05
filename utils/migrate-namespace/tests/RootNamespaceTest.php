@@ -48,6 +48,29 @@ final class RootNamespaceTest extends TestCase
         yield 'empty text' => ['', ''];
         yield 'multiple occurrences' => ['Piwik\Foo and Piwik\Bar', 'Matomo\Foo and Matomo\Bar'];
         yield 'triple facade segment untouched twice' => ['Piwik\Piwik\Piwik', 'Matomo\Piwik\Piwik'];
+        yield 'bare namespace declaration' => ['namespace Piwik;', 'namespace Matomo;'];
+        yield 'namespace declaration with whitespace before semicolon' => ['namespace Piwik ;', 'namespace Matomo ;'];
+        yield 'namespace declaration in generated source' => ["<?php\nnamespace Piwik;\nclass A {}\n", "<?php\nnamespace Matomo;\nclass A {}\n"];
+        yield 'namespace declaration with sub namespace' => ['namespace Piwik\Foo;', 'namespace Matomo\Foo;'];
+        yield 'namespace declaration in shell sed replacement' => [
+            'sed \'s/^/namespace Piwik;\\nclass Manifest {/\'',
+            'sed \'s/^/namespace Matomo;\\nclass Manifest {/\'',
+        ];
+        yield 'namespace declaration with identifier suffix blocked' => ['namespace PiwikPro;', 'namespace PiwikPro;'];
+        yield 'namespace declaration lowercase untouched' => ['namespace piwik;', 'namespace piwik;'];
+        yield 'use statement is not a namespace declaration' => ['use Piwik;', 'use Piwik;'];
+        yield 'namespace declaration without semicolon untouched' => ['namespace Piwik', 'namespace Piwik'];
+        yield 'namespace declaration with identifier prefix blocked' => ['mynamespace Piwik;', 'mynamespace Piwik;'];
+        yield 'facade file path' => ['core/Piwik.php', 'core/Matomo.php'];
+        yield 'facade file path in quoted string' => ["'/core/Piwik.php'", "'/core/Matomo.php'"];
+        yield 'facade file path in docblock' => ['@see core/Piwik.php', '@see core/Matomo.php'];
+        yield 'facade file path with qualified name' => ['Piwik\Piwik.php', 'Matomo\Matomo.php'];
+        yield 'facade file path lowercase shim untouched' => ['piwik.php', 'piwik.php'];
+        yield 'facade file path uppercase untouched' => ['PIWIK.php', 'PIWIK.php'];
+        yield 'facade file path in url rewritten (accepted)' => ['https://example.com/Piwik.php', 'https://example.com/Matomo.php'];
+        yield 'facade file path with extension suffix rewritten (accepted)' => ['core/Piwik.php.bak', 'core/Matomo.php.bak'];
+        yield 'facade file path with identifier suffix untouched' => ['core/Piwik.phpFoo', 'core/Piwik.phpFoo'];
+        yield 'facade file path without slash untouched' => ["'Piwik.php'", "'Piwik.php'"];
     }
 
     /**
@@ -72,5 +95,7 @@ final class RootNamespaceTest extends TestCase
             '"Matomo\Foo\nPiwik\t"',
         ];
         yield 'unpair-able raw falls back to null' => ['"\x50iwik\Foo"', 'Piwik\Foo', null];
+        yield 'facade file path in raw literal' => ["'core/Piwik.php'", 'core/Piwik.php', "'core/Matomo.php'"];
+        yield 'namespace declaration in raw literal' => ["'namespace Piwik;'", 'namespace Piwik;', "'namespace Matomo;'"];
     }
 }

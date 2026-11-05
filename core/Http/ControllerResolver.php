@@ -60,7 +60,7 @@ class ControllerResolver
 
     private function createPluginController($module, $action)
     {
-        $controllerClass = "Piwik\\Plugins\\$module\\Controller";
+        $controllerClass = "Matomo\\Plugins\\$module\\Controller";
         if (!class_exists($controllerClass)) {
             return null;
         }

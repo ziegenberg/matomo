@@ -131,9 +131,11 @@ class Manager
         $result = array();
 
         foreach (static::getAvailableViewDataTables() as $vizId => $vizClass) {
+            $canonicalClass = \LegacyAutoloader::canonicalize($vizClass);
+
             if (
-                !str_contains($vizClass, 'Matomo\\Plugins\\CoreVisualizations')
-                && !str_contains($vizClass, 'Matomo\\Plugins\\Goals\\Visualizations\\Goals')
+                !str_contains($canonicalClass, 'Matomo\\Plugins\\CoreVisualizations')
+                && !str_contains($canonicalClass, 'Matomo\\Plugins\\Goals\\Visualizations\\Goals')
             ) {
                 $result[$vizId] = $vizClass;
             }

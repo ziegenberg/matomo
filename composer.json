@@ -84,7 +84,7 @@
         "psr-4": {
             "Piwik\\Plugins\\": "plugins/",
             "Matomo\\Plugins\\": "plugins/",
-            "Piwik\\": "core/"
+            "Matomo\\": "core/"
         },
         "psr-0": {
             "Zend_": "libs/",
@@ -99,6 +99,7 @@
     "autoload-dev": {
         "psr-4": {
             "Piwik\\Tests\\": "tests/PHPUnit/",
+            "Matomo\\Tests\\": "tests/PHPUnit/",
             "Utils\\MigrateNamespace\\": "utils/migrate-namespace/src",
             "Utils\\MigrateNamespace\\Tests\\": "utils/migrate-namespace/tests"
         }

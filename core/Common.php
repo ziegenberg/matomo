@@ -23,7 +23,7 @@ use Matomo\Tracker\TrackerConfig;
 /**
  * Contains helper methods used by both Piwik Core and the Piwik Tracking engine.
  *
- * This is the only non-Tracker class loaded by the **\/piwik.php** file.
+ * This is the only non-Tracker class loaded by the **\/matomo.php** file.
  */
 class Common
 {

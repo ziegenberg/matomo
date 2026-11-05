@@ -4,16 +4,19 @@ Standalone, deterministic migration tool that rewrites the `Piwik\` root namespa
 
 String literals keep their original quoting and escaping byte-for-byte (`'Piwik\\Plugins\\%s'` becomes `'Matomo\\Plugins\\%s'`, not `'Matomo\Plugins\%s'`), and docblocks are swapped only when their text actually differs, so unchanged files stay byte-identical. Plain comments (`//`, `/* */`) and interpolated strings (`"Piwik\Foo $x"`) are deliberately left untouched.
 
+The same value-aware rule also applies to text files (no per-format parsers): backslash-qualified `Piwik\` roots, bare `namespace Piwik;` declarations (e.g. in scripts that generate PHP source), and facade file path segments (`core/Piwik.php` after the facade file was renamed to `core/Matomo.php`).
+
 ## Usage
 
 ```
-php utils/migrate-namespace/bin/migrate.php [--dry-run] <path>...
-php utils/migrate-namespace/bin/migrate.php --check [--allowlist <path>] <path>...
+php utils/migrate-namespace/bin/migrate.php [--dry-run] [--text-extensions neon,sh] <path>...
+php utils/migrate-namespace/bin/migrate.php --check [--allowlist <path>] [--text-extensions neon,sh] <path>...
 php utils/migrate-namespace/bin/migrate.php --help
 ```
 
 - `--dry-run` reports files that would change without writing them.
 - `--check` verifies: writes nothing and exits 1 when any file would change or could not be read/parsed. It uses the default allowlist unless `--allowlist` (repeatable, replaces the default) is given.
+- `--text-extensions <csv>` migrates files with the given extensions (lowercase, no dot; repeatable, merged) as text via the shared swap rule. Explicit file arguments with an extension outside the effective set (`.php` plus the configured text extensions) are skipped, not failed; extensionless files (e.g. the `console` entrypoint) are treated as PHP.
 - Only changed files are written. Unchanged files are left byte-identical.
 - Git submodule checkouts (directories whose `.git` is a file, e.g. `plugins/LogViewer`) are never touched — they are separate repositories. `vendor/`, `.git/`, and `node_modules/` are skipped too.
 - Exit code 0 when every file was processed; 1 when any file could not be parsed or written (or, with `--check`, when any file would change); 2 on CLI misuse.
@@ -22,7 +25,7 @@ php utils/migrate-namespace/bin/migrate.php --help
 
 `migrate.php --check` verifies that scanned PHP files contain no `Piwik\` root-namespace references that the migration would rewrite. The check is idempotency-based: a file is a violation exactly when running the migrator over it changes it, so it flags precisely what the swapper would rewrite (code names, string literals, docblock types) while plain comments, display strings, `PIWIK_*` names, and alias-guarded references (`use Matomo\Cache as Piwik;` plus `Piwik::` calls) stay clean by construction.
 
-The default allowlist exempts the files that legitimately contain `Piwik\` text: `LegacyAutoloader.php`, `tests/PHPUnit/Unit/LegacyAutoLoaderTest.php`, `tests/PHPUnit/Unit/PluginNamespaceAutoloadTest.php`, `plugins/Diagnostics/`, and the tool itself (`utils/migrate-namespace/`). `--allowlist` accepts an explicit allowlist for other uses (e.g. subtree scans).
+The default allowlist exempts the files that legitimately contain `Piwik\` text: `LegacyAutoloader.php`, `tests/PHPUnit/Unit/LegacyAutoLoaderTest.php`, `tests/PHPUnit/Unit/PluginNamespaceAutoloadTest.php`, `plugins/Diagnostics/`, and the tool itself (`utils/migrate-namespace/`). The core dual-prefix call sites are no longer listed: they route both-prefix handling through the canonicalization helper next to `LegacyAutoloader` (`isRootNamespaceName()` / `canonicalize()`), so they are idempotency-clean against the swap rule. `--allowlist` accepts an explicit allowlist for other uses (e.g. subtree scans).
 
 ## Tests
 

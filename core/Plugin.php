@@ -569,7 +569,13 @@ if (!class_exists('Matomo\Plugin')) {
          */
         public static function getPluginNameFromNamespace($namespaceOrClassName)
         {
-            if ($namespaceOrClassName && preg_match("/Matomo\\\\Plugins\\\\([a-zA-Z_0-9]+)\\\\/", $namespaceOrClassName, $matches)) {
+            if (
+                $namespaceOrClassName && preg_match(
+                    "/Matomo\\\\Plugins\\\\([a-zA-Z_0-9]+)\\\\/",
+                    \LegacyAutoloader::canonicalize($namespaceOrClassName),
+                    $matches
+                )
+            ) {
                 return $matches[1];
             } else {
                 return false;

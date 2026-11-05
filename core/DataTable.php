@@ -1525,13 +1525,41 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
         return $aSerializedDataTable;
     }
 
-    /** @var string[] */
-    private static array $previousRowClasses = [
-        'O:39:"Matomo\DataTable\Row\DataTableSummaryRow"',
-        'O:19:"Matomo\DataTable\Row"',
-        'O:36:"Piwik_DataTable_Row_DataTableSummary"',
-        'O:19:"Piwik_DataTable_Row"',
-    ];
+    /** @var string[]|null */
+    private static ?array $previousRowClasses = null;
+
+    /**
+     * Serialized Row class-name prefixes to rewrite to the fast unserialize row.
+     *
+     * The length prefix must match the class-name byte count exactly, so the
+     * legacy root-namespace Row names are derived at runtime from the
+     * canonical class references (a literal swap would be length-wrong and
+     * corrupt legacy archive payloads). The underscore names are literal: they
+     * have no namespace and are not part of the Piwik root namespace.
+     */
+    private static function previousRowClasses(): array
+    {
+        if (self::$previousRowClasses === null) {
+            $legacyRowNames = [];
+
+            foreach (
+                [
+                \Matomo\DataTable\Row\DataTableSummaryRow::class,
+                \Matomo\DataTable\Row::class,
+                ] as $rowClass
+            ) {
+                $legacyRowName = \LegacyAutoloader::getOppositeName($rowClass);
+                $legacyRowNames[] = 'O:' . strlen($legacyRowName) . ':"' . $legacyRowName . '"';
+            }
+
+            self::$previousRowClasses = array_merge($legacyRowNames, [
+                'O:36:"Piwik_DataTable_Row_DataTableSummary"',
+                'O:19:"Piwik_DataTable_Row"',
+            ]);
+        }
+
+        return self::$previousRowClasses;
+    }
 
     private static string $rowClassToUseForUnserialize = 'O:29:"Piwik_DataTable_SerializedRow"';
 
@@ -1564,7 +1592,7 @@ class DataTable implements DataTableInterface, \IteratorAggregate, \ArrayAccess
         $legacySerialized = str_replace(
             array_map(function ($class) {
                 return $class . ':';
-            }, self::$previousRowClasses),
+            }, self::previousRowClasses()),
             self::$rowClassToUseForUnserialize . ':',
             $serialized
         );

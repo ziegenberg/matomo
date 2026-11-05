@@ -15,7 +15,7 @@ use Matomo\ProxyHttp;
 if ($_SERVER['REQUEST_METHOD'] == 'POST'
     || !empty($_SERVER['QUERY_STRING'])
 ) {
-    include '../piwik.php';
+    include '../matomo.php';
     exit;
 }
 

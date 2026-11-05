@@ -745,8 +745,11 @@ class FrontController extends Singleton
 
         $method = new \ReflectionMethod($controller[0], $controller[1]);
 
-        if (count($method->getAttributes(JsonResponse::class)) > 0) {
-            Json::sendHeaderJSON();
+        foreach ($method->getAttributes() as $attribute) {
+            if ($attribute->getName() === JsonResponse::class || \LegacyAutoloader::canonicalize($attribute->getName()) === JsonResponse::class) {
+                Json::sendHeaderJSON();
+                return;
+            }
         }
     }
 

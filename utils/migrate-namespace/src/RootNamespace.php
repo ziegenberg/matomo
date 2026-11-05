@@ -20,6 +20,19 @@ namespace Utils\MigrateNamespace;
  * identifier start (so Piwik\Foo, Piwik\\Foo regex-escaped, and
  * Piwik\DataTable\Filter\ all match, while bare 'Piwik', 'PiwikPro',
  * 'Piwik_Key', PiwikFoo\Bar, URLs, and PIWIK_* do not).
+ *
+ * Two further free-text forms are recognized by the same rule, both root-only
+ * swaps:
+ *  - a bare namespace declaration (`namespace Piwik;`, e.g. inside a script
+ *    that generates PHP source);
+ *  - a facade file path segment (`/core/Piwik.php`, e.g. `require_once`
+ *    strings and `@see` docblocks after the facade file was renamed to
+ *    `core/Matomo.php`).
+ *
+ * The facade-path form treats any non-identifier character after `.php` as a
+ * boundary, so `Piwik.php.bak` is rewritten too; that is accepted because a
+ * reference to the renamed facade file should follow the rename in any
+ * extension, and no such reference exists in the repository.
  */
 final class RootNamespace
 {
@@ -38,6 +51,19 @@ final class RootNamespace
      * run is exactly "Piwik" and it is the last segment; both segments swap.
      */
     private const OCCURRENCE_FACADE = 2;
+
+    /**
+     * Occurrence is the bare namespace declaration `namespace Piwik;`
+     * (possibly followed by horizontal whitespace before the semicolon).
+     * Root-only swap; the semicolon and surrounding text are preserved.
+     */
+    private const OCCURRENCE_NAMESPACE_DECL = 3;
+
+    /**
+     * Occurrence is a facade file path segment `.../Piwik.php`. Root-only
+     * swap; the `.php` suffix and surrounding text are preserved.
+     */
+    private const OCCURRENCE_FACADE_PATH = 4;
 
     /**
      * True when $name is exactly the facade FQCN (Piwik\Piwik), the one class
@@ -145,29 +171,43 @@ final class RootNamespace
     /**
      * Every qualified-root occurrence of "Piwik" in $text, in order.
      *
-     * @return list<array{pos: int, kind: self::OCCURRENCE_ROOT|self::OCCURRENCE_FACADE}>
+     * The backslash-qualified rule is checked first, then the bare namespace
+     * declaration, then the facade file path segment; each occurrence gets at
+     * most one kind.
+     *
+     * @return list<array{pos: int, kind: self::OCCURRENCE_ROOT|self::OCCURRENCE_FACADE|self::OCCURRENCE_NAMESPACE_DECL|self::OCCURRENCE_FACADE_PATH}>
      */
     private static function qualifiedOccurrences(string $text): array
     {
         $occurrences = [];
 
         foreach (self::piwikPositions($text) as $pos) {
-            if (!self::isQualifiedRootOccurrence($text, $pos)) {
+            if (self::isQualifiedRootOccurrence($text, $pos)) {
+                $runEnd = self::runEnd($text, $pos + strlen(self::OLD_ROOT));
+                $segmentEnd = self::segmentEnd($text, $runEnd);
+
+                if (
+                    $segmentEnd - $runEnd === strlen(self::OLD_ROOT)
+                    && substr($text, $runEnd, strlen(self::OLD_ROOT)) === self::OLD_ROOT
+                    && (!isset($text[$segmentEnd])
+                        || ($text[$segmentEnd] !== '\\' && !self::isIdentifierChar($text[$segmentEnd])))
+                ) {
+                    $occurrences[] = ['pos' => $pos, 'kind' => self::OCCURRENCE_FACADE];
+                } else {
+                    $occurrences[] = ['pos' => $pos, 'kind' => self::OCCURRENCE_ROOT];
+                }
+
                 continue;
             }
 
-            $runEnd = self::runEnd($text, $pos + strlen(self::OLD_ROOT));
-            $segmentEnd = self::segmentEnd($text, $runEnd);
+            if (self::isNamespaceDeclOccurrence($text, $pos)) {
+                $occurrences[] = ['pos' => $pos, 'kind' => self::OCCURRENCE_NAMESPACE_DECL];
 
-            if (
-                $segmentEnd - $runEnd === strlen(self::OLD_ROOT)
-                && substr($text, $runEnd, strlen(self::OLD_ROOT)) === self::OLD_ROOT
-                && (!isset($text[$segmentEnd])
-                    || ($text[$segmentEnd] !== '\\' && !self::isIdentifierChar($text[$segmentEnd])))
-            ) {
-                $occurrences[] = ['pos' => $pos, 'kind' => self::OCCURRENCE_FACADE];
-            } else {
-                $occurrences[] = ['pos' => $pos, 'kind' => self::OCCURRENCE_ROOT];
+                continue;
+            }
+
+            if (self::isFacadePathOccurrence($text, $pos)) {
+                $occurrences[] = ['pos' => $pos, 'kind' => self::OCCURRENCE_FACADE_PATH];
             }
         }
 
@@ -230,6 +270,74 @@ final class RootNamespace
         }
 
         return $before < 0 || !self::isIdentifierChar($text[$before]);
+    }
+
+    /**
+     * True when the occurrence at $pos is the bare namespace declaration
+     * `namespace Piwik;`: the text before it ends with the word `namespace`
+     * plus horizontal whitespace (the char before `namespace` is the start of
+     * the text or a non-identifier character), and after it comes optional
+     * horizontal whitespace, then `;`, then a non-identifier character or the
+     * end of the text.
+     */
+    private static function isNamespaceDeclOccurrence(string $text, int $pos): bool
+    {
+        $before = $pos;
+
+        while ($before > 0 && ($text[$before - 1] === ' ' || $text[$before - 1] === "\t")) {
+            $before--;
+        }
+
+        if ($before < 9) {
+            return false;
+        }
+
+        if (substr($text, $before - 9, 9) !== 'namespace') {
+            return false;
+        }
+
+        $beforeNamespace = $before - 9;
+
+        if ($beforeNamespace > 0 && self::isIdentifierChar($text[$beforeNamespace - 1])) {
+            return false;
+        }
+
+        $after = $pos + strlen(self::OLD_ROOT);
+
+        while (isset($text[$after]) && ($text[$after] === ' ' || $text[$after] === "\t")) {
+            $after++;
+        }
+
+        if (!isset($text[$after]) || $text[$after] !== ';') {
+            return false;
+        }
+
+        $after++;
+
+        return !isset($text[$after]) || !self::isIdentifierChar($text[$after]);
+    }
+
+    /**
+     * True when the occurrence at $pos is a facade file path segment
+     * `.../Piwik.php`: preceded by `/` (or at the start of the text), followed
+     * by exactly `.php` and then a non-identifier character or the end of the
+     * text. Case-sensitive, so `piwik.php` and `PIWIK.php` are untouched.
+     */
+    private static function isFacadePathOccurrence(string $text, int $pos): bool
+    {
+        if ($pos > 0 && $text[$pos - 1] !== '/') {
+            return false;
+        }
+
+        $after = $pos + strlen(self::OLD_ROOT);
+
+        if (substr($text, $after, 4) !== '.php') {
+            return false;
+        }
+
+        $after += 4;
+
+        return !isset($text[$after]) || !self::isIdentifierChar($text[$after]);
     }
 
     /**

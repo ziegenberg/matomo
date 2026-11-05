@@ -32,16 +32,19 @@ final class SourceCleanGuard
      * @param list<string> $paths Files or directories to scan.
      * @param list<string> $allowedPaths File/directory prefixes exempt from the check
      *                                   (absolute or repo-relative).
+     * @param list<string> $textExtensions File extensions (lowercase, no dot) scanned
+     *                                     via the shared value-aware swap rule.
      * @return array{violations: list<string>, failed: list<string>} Violations
      *               are paths that would change; failed are paths that could not
      *               be read or parsed.
      */
-    public function scan(array $paths, array $allowedPaths = []): array
+    public function scan(array $paths, array $allowedPaths = [], array $textExtensions = []): array
     {
         $violations = [];
         $failed = [];
+        $extensions = array_merge(['php'], $textExtensions);
 
-        foreach (MigrationRunner::collectPhpFiles($paths, $failed) as $path) {
+        foreach (MigrationRunner::collectFiles($paths, $failed, $extensions) as $path) {
             if ($this->isAllowed($path, $allowedPaths)) {
                 continue;
             }
@@ -54,16 +57,21 @@ final class SourceCleanGuard
                 continue;
             }
 
-            try {
-                $migrated = $this->migrator->migrate($original);
-            } catch (Error $error) {
-                $failed[] = $path . ': ' . $error->getMessage();
+            if (MigrationRunner::isPhpPath($path)) {
+                try {
+                    $migrated = $this->migrator->migrate($original);
+                } catch (Error $error) {
+                    $failed[] = $path . ': ' . $error->getMessage();
 
-                continue;
-            } catch (\Throwable $throwable) {
-                $failed[] = $path . ': ' . $throwable->getMessage();
+                    continue;
+                } catch (\Throwable $throwable) {
+                    $failed[] = $path . ': ' . $throwable->getMessage();
 
-                continue;
+                    continue;
+                }
+            } else {
+                // Text file: idempotency via the pure byte rule; no parse failures.
+                $migrated = RootNamespace::swapQualified($original);
             }
 
             if ($migrated !== $original) {
@@ -85,6 +93,10 @@ final class SourceCleanGuard
      *  - utils/migrate-namespace/ is the tool itself (Piwik\ constants and
      *    fixture strings).
      *
+     * The core dual-prefix call sites (issue 05/11) no longer need an entry:
+     * they route both-prefix handling through the canonicalization helper next
+     * to LegacyAutoloader, so they are idempotency-clean against the swap rule.
+     *
      * @return list<string>
      */
     public static function defaultAllowlist(): array
@@ -101,7 +113,7 @@ final class SourceCleanGuard
     /**
      * @param list<string> $allowedPaths
      */
-    private function isAllowed(string $path, array $allowedPaths): bool
+    public static function isAllowed(string $path, array $allowedPaths): bool
     {
         if ($allowedPaths === []) {
             return false;

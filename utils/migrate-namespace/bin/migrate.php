@@ -10,25 +10,39 @@ require dirname(__DIR__, 3) . '/vendor/autoload.php';
 $usage = <<<'USAGE'
 Usage: php utils/migrate-namespace/bin/migrate.php [options] <path>...
 
-Rewrites the Piwik\ root namespace to Matomo\ in PHP source files.
+Rewrites the Piwik\ root namespace to Matomo\ in PHP source files and, when
+configured, in text files with the given extensions (same value-aware rule,
+no per-format parsers).
 
 Options:
   --dry-run            Report files that would change without writing them.
   --check              Verify mode: write nothing; exit 1 when any file would
                        change or could not be read/parsed. Uses the default
                        allowlist unless --allowlist is given.
-  --allowlist <path>   Exempt a file or directory from --check (repeatable;
-                       replaces the default allowlist).
+  --allowlist <path>   Exempt a file or directory (repeatable; replaces the
+                       default allowlist). Used by --check and by run/dry-run
+                       when --skip-allowlisted is given.
+  --skip-allowlisted   Skip allowlisted files when migrating (run/dry-run).
+                       Makes re-runs no-ops on migrated trees where the
+                       allowlisted Piwik\ text is intentional (e.g. dual-prefix
+                       back-compat). Omit on the first migration pass.
+  --text-extensions <csv>
+                       Comma-separated file extensions (no dot) to migrate as
+                       text via the shared swap rule (repeatable; merged and
+                       lowercased). E.g. neon,yml,yaml,sh,json.
   --help, -h           Show this help message.
 
 Arguments:
-  path        A file or directory (recursively searched for *.php files).
+  path        A file or directory (recursively searched for *.php files and
+              files with a --text-extensions extension).
 USAGE;
 
 $paths = [];
 $dryRun = false;
 $check = false;
+$skipAllowlisted = false;
 $allowlist = [];
+$textExtensions = [];
 
 $args = array_slice($argv, 1);
 $argCount = count($args);
@@ -55,6 +69,31 @@ for ($i = 0; $i < $argCount; $i++) {
         }
 
         $allowlist[] = $args[++$i];
+
+        continue;
+    }
+
+    if ($argument === '--text-extensions') {
+        if ($i + 1 >= $argCount) {
+            fwrite(STDERR, 'Option --text-extensions requires a comma-separated list.' . PHP_EOL);
+            exit(2);
+        }
+
+        $parts = explode(',', strtolower($args[++$i]));
+
+        foreach ($parts as $part) {
+            $part = trim($part);
+
+            if ($part !== '' && !in_array($part, $textExtensions, true)) {
+                $textExtensions[] = $part;
+            }
+        }
+
+        continue;
+    }
+
+    if ($argument === '--skip-allowlisted') {
+        $skipAllowlisted = true;
 
         continue;
     }
@@ -87,7 +126,8 @@ if ($paths === []) {
 if ($check) {
     $result = (new SourceCleanGuard())->scan(
         $paths,
-        $allowlist === [] ? SourceCleanGuard::defaultAllowlist() : $allowlist
+        $allowlist === [] ? SourceCleanGuard::defaultAllowlist() : $allowlist,
+        $textExtensions
     );
 
     foreach ($result['violations'] as $violation) {
@@ -106,4 +146,9 @@ if ($check) {
     exit(($result['violations'] === [] && $result['failed'] === []) ? 0 : 1);
 }
 
-exit((new MigrationRunner())->run($paths, $dryRun));
+exit((new MigrationRunner())->run(
+    $paths,
+    $dryRun,
+    $skipAllowlisted ? ($allowlist === [] ? SourceCleanGuard::defaultAllowlist() : $allowlist) : [],
+    $textExtensions
+));

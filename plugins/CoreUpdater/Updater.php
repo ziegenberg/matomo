@@ -316,7 +316,7 @@ class Updater
         $someExpectedFiles = array(
             '/config/global.ini.php',
             '/index.php',
-            '/core/Piwik.php',
+            '/core/Matomo.php',
             '/piwik.php',
             '/matomo.php',
             '/plugins/API/API.php',

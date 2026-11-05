@@ -9,7 +9,7 @@
 
 namespace Piwik\Tests\Unit\PHPStan\Rules\data;
 
-use Piwik\Http\JsonResponse;
+use Matomo\Http\JsonResponse;
 
 /**
  * Fixture demonstrating #[JsonResponse] used outside a controller. Never executed; only analysed.

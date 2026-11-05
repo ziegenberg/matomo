@@ -451,12 +451,14 @@ class Proxy
      */
     public function getModuleNameFromClassName($className)
     {
+        $className = \LegacyAutoloader::canonicalize($className);
+
         return str_replace(array('\\Matomo\\Plugins\\', '\\API'), '', $className);
     }
 
     public function isExistingApiAction($pluginName, $apiAction)
     {
-        $namespacedApiClassName = "\\Piwik\\Plugins\\$pluginName\\API";
+        $namespacedApiClassName = "\\Matomo\\Plugins\\$pluginName\\API";
         $api = $namespacedApiClassName::getInstance();
 
         return method_exists($api, $apiAction);

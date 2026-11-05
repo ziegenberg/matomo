@@ -113,6 +113,26 @@ PHP
         $this->assertSame([$file], $result['violations']);
     }
 
+    public function testScanFlagsTextViolation(): void
+    {
+        $file = $this->write('Config.neon', "# Piwik\\Log\\Logger is a proxy\n");
+
+        $result = (new SourceCleanGuard())->scan([$this->dir], [], ['neon']);
+
+        $this->assertSame([$file], $result['violations']);
+        $this->assertSame([], $result['failed']);
+    }
+
+    public function testScanIgnoresCleanTextFile(): void
+    {
+        $this->write('Config.neon', "# Matomo\\Log\\Logger is a proxy\n");
+
+        $result = (new SourceCleanGuard())->scan([$this->dir], [], ['neon']);
+
+        $this->assertSame([], $result['violations']);
+        $this->assertSame([], $result['failed']);
+    }
+
     public function testParseErrorLandsInFailed(): void
     {
         $this->write('Broken.php', "<?php\n\nclass {\n");

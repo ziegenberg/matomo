@@ -433,13 +433,13 @@ class Manager
     public static function registerPluginDirAutoload($pluginDirs)
     {
         spl_autoload_register(function ($className) use ($pluginDirs) {
-            if (str_starts_with($className, 'Matomo\Plugins\\')) {
-                $withoutPrefix = str_replace('Matomo\Plugins\\', '', $className);
-            } elseif (str_starts_with($className, 'Matomo\Plugins\\')) {
-                $withoutPrefix = str_replace('Matomo\Plugins\\', '', $className);
-            } else {
+            $className = \LegacyAutoloader::canonicalize($className);
+
+            if (!str_starts_with($className, 'Matomo\Plugins\\')) {
                 return;
             }
+
+            $withoutPrefix = substr($className, strlen('Matomo\Plugins\\'));
             $path = str_replace('\\', DIRECTORY_SEPARATOR, $withoutPrefix) . '.php';
             foreach ($pluginDirs as $pluginsDirectory) {
                 if (file_exists($pluginsDirectory . $path)) {
@@ -1364,7 +1364,10 @@ class Manager
         require_once $path;
 
         $namespacedClass = $this->getClassNamePlugin($pluginName);
-        if (!class_exists($namespacedClass, false)) {
+        // Autoload-enabled so the alias layer can bridge un-migrated plugin
+        // classes (declared as Piwik\Plugins\... through 7.0) to the canonical
+        // Matomo\ name; the file was already required above.
+        if (!class_exists($namespacedClass)) {
             throw new \Exception("The class $pluginClassName couldn't be found in the file '$path'");
         }
         $newPlugin = new $namespacedClass();
@@ -1381,7 +1384,7 @@ class Manager
         if ($pluginName === 'API') {
             $className = 'Plugin';
         }
-        return "\\Piwik\\Plugins\\$pluginName\\$className";
+        return "\\Matomo\\Plugins\\$pluginName\\$className";
     }
 
     private function resetTransientCache(): void

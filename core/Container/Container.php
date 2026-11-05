@@ -42,12 +42,12 @@ class Container extends DIContainer implements ContainerInterface
         try {
             return parent::get($name);
         } catch (\Throwable $e) {
-            $matomoName = self::legacyNameToMatomo($name);
-            if ($matomoName !== null) {
+            $oppositeName = self::oppositeName($name);
+            if ($oppositeName !== null) {
                 try {
-                    return parent::get($matomoName);
+                    return parent::get($oppositeName);
                 } catch (\Throwable $e2) {
-                    // Matomo\ key also failed; throw the original below.
+                    // Opposite key also failed; throw the original below.
                 }
             }
             if ($e instanceof \DI\NotFoundException) {
@@ -67,12 +67,12 @@ class Container extends DIContainer implements ContainerInterface
         try {
             return parent::make($name, $parameters);
         } catch (\Throwable $e) {
-            $matomoName = self::legacyNameToMatomo($name);
-            if ($matomoName !== null) {
+            $oppositeName = self::oppositeName($name);
+            if ($oppositeName !== null) {
                 try {
-                    return parent::make($matomoName, $parameters);
+                    return parent::make($oppositeName, $parameters);
                 } catch (\Throwable $e2) {
-                    // Matomo\ key also failed; throw the original below.
+                    // Opposite key also failed; throw the original below.
                 }
             }
             if ($e instanceof \DI\NotFoundException) {
@@ -95,32 +95,32 @@ class Container extends DIContainer implements ContainerInterface
     }
 
     /**
-     * Returns the `Matomo\` counterpart of a deprecated `Piwik\` container
-     * entry name, or null when the name is not a `Piwik\` root-namespace key.
+     * Returns the opposite-namespace container key for a `Matomo\`
+     * root-namespace entry name, or null when the name is not a root-namespace key.
      *
      * During the 7.x release line the root namespace is `Matomo\` but un-migrated
      * plugins still request core services under their deprecated `Piwik\` names
-     * (e.g. `Matomo\Log\LoggerInterface`). {@see LegacyAutoloader} aliases the
-     * classes via {@see class_alias()}, but PHP-DI container keys are strings: a
-     * `Piwik\` key misses its `Matomo\` definition and autowiring an interface
-     * fails with "not instantiable". This helper rewrites the key so
-     * {@see get()} and {@see make()} can retry under the canonical `Matomo\`
-     * name, honouring the same facade/exceptions-map rules as the alias layer
-     * (e.g. `Matomo\Matomo` -> `Matomo\Matomo`). The alias layer is removed in
-     * Matomo 8.0.
+     * (e.g. the logger interface and auth implementations) and still register
+     * their own services under them. {@see LegacyAutoloader} aliases the classes
+     * via {@see class_alias()}, but PHP-DI container keys are strings: a key
+     * misses its opposite-namespace definition and autowiring an interface fails
+     * with "not instantiable". This helper rewrites the key so {@see get()} and
+     * {@see make()} can retry under the opposite-namespace name, honouring the
+     * same facade/exceptions-map rules as the alias layer. The alias layer is
+     * removed in Matomo 8.0.
      */
-    private static function legacyNameToMatomo(string $name): ?string
+    private static function oppositeName(string $name): ?string
     {
-        if (strncmp($name, 'Piwik\\', 6) !== 0) {
+        if (!\LegacyAutoloader::isRootNamespaceName($name)) {
             return null;
         }
 
-        $matomoName = \LegacyAutoloader::getOppositeName($name);
+        $oppositeName = \LegacyAutoloader::getOppositeName($name);
 
-        if (strncmp($matomoName, 'Matomo\\', 7) !== 0) {
+        if ($oppositeName === $name) {
             return null;
         }
 
-        return $matomoName;
+        return $oppositeName;
     }
 }

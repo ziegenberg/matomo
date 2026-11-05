@@ -32,6 +32,9 @@ final class SubtablePruner
 {
     /**
      * Metrics whose beforeCompute() gives the same result on a pruned table.
+     * Only canonical `Matomo\` names are listed: the runtime class name is
+     * canonicalized before the check, so un-migrated plugin metrics resolving
+     * to their legacy alias are matched too.
      */
     private const BEFORE_COMPUTE_SAFE_ON_PRUNED_TABLE = [
         ProcessedMetric::class,
@@ -212,7 +215,10 @@ final class SubtablePruner
 
     private function queuedFilterMayChangeLabels(string $className, array $parameters): bool
     {
-        $name = ltrim($className, '\\');
+        $name = \LegacyAutoloader::canonicalize(ltrim($className, '\\'));
+        // Un-migrated plugin code still queues core filters under their legacy
+        // alias; the alias layer makes both resolve to the same class, so
+        // canonicalize and strip the canonical prefix.
         if (str_starts_with($name, 'Matomo\\DataTable\\Filter\\')) {
             $name = substr($name, strlen('Matomo\\DataTable\\Filter\\'));
         }
@@ -275,7 +281,9 @@ final class SubtablePruner
             $class = get_class($metric);
 
             if (!isset(self::$metricNeedsWholeTable[$class])) {
-                $declaringClass = (new \ReflectionMethod($metric, 'beforeCompute'))->getDeclaringClass()->getName();
+                $declaringClass = \LegacyAutoloader::canonicalize(
+                    (new \ReflectionMethod($metric, 'beforeCompute'))->getDeclaringClass()->getName()
+                );
                 self::$metricNeedsWholeTable[$class] = !in_array($declaringClass, self::BEFORE_COMPUTE_SAFE_ON_PRUNED_TABLE, true);
             }
 

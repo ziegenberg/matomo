@@ -107,6 +107,28 @@ class ContainerTest extends \PHPUnit\Framework\TestCase
         $this->assertSame($stub, $container->get('Piwik\Test\Key'));
     }
 
+    public function testGetRetriesUnderPiwikKey()
+    {
+        // Un-migrated plugins still register services under deprecated Piwik\ keys;
+        // core asks for the canonical Matomo\ key.
+        $container = $this->createContainer();
+        $stub = new class {
+        };
+        $container->set('Piwik\Test\RetryInterface', $stub);
+
+        $this->assertSame($stub, $container->get('Matomo\Test\RetryInterface'));
+    }
+
+    public function testMakeRetriesUnderPiwikKey()
+    {
+        $container = $this->createContainer();
+        $stub = new class {
+        };
+        $container->set('Piwik\Test\RetryInterface', $stub);
+
+        $this->assertSame($stub, $container->make('Matomo\Test\RetryInterface'));
+    }
+
     public function testMissingPiwikKeyStillThrows()
     {
         $container = $this->createContainer();

@@ -51,7 +51,7 @@ class EnvironmentValidator
         $startInstaller = true;
 
         if (SettingsServer::isTrackerApiRequest()) {
-            // nothing can be tracked before installation, piwik.php answers with 503 so clients can retry later
+            // nothing can be tracked before installation, matomo.php answers with 503 so clients can retry later
             throw new NotYetInstalledException("As Matomo is not installed yet, the Tracking API cannot proceed.");
         }
 

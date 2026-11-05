@@ -133,6 +133,96 @@ PHP;
         $this->assertStringContainsString('0 changed, 1 unchanged, 0 failed', $this->streamContents($stdout));
     }
 
+    public function testRunSkipsAllowlistedFiles(): void
+    {
+        $allowed = $this->dir . '/Allowed.php';
+        $other = $this->dir . '/Other.php';
+
+        file_put_contents($allowed, "<?php\n\nnamespace Piwik;\n\nclass A {}\n");
+        file_put_contents($other, "<?php\n\nnamespace Piwik;\n\nclass B {}\n");
+
+        [$stdout, $stderr] = $this->streams();
+        $exit = (new MigrationRunner(null, $stdout, $stderr))->run([$this->dir], false, [$allowed]);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame("<?php\n\nnamespace Piwik;\n\nclass A {}\n", file_get_contents($allowed));
+        $this->assertStringContainsString('namespace Matomo;', (string) file_get_contents($other));
+        $this->assertStringContainsString('1 changed, 1 unchanged, 0 failed', $this->streamContents($stdout));
+        $this->assertStringNotContainsString('changed: ' . $allowed, $this->streamContents($stdout));
+    }
+
+    public function testTextFileModeSwapsTextExtensions(): void
+    {
+        $neon = $this->dir . '/Config.neon';
+        $sh = $this->dir . '/build.sh';
+        $json = $this->dir . '/composer.json';
+        $txt = $this->dir . '/notes.txt';
+
+        file_put_contents($neon, "# Piwik\\Log\\Logger is a proxy\n");
+        file_put_contents($sh, "namespace Piwik;\n");
+        file_put_contents($json, "{\"psr-4\": {\"Piwik\\\\Plugins\\\\\": \"plugins/\"}}\n");
+        file_put_contents($txt, "Piwik\\Foo stays\n");
+
+        [$stdout, $stderr] = $this->streams();
+        $exit = (new MigrationRunner(null, $stdout, $stderr))->run([$this->dir], false, [], ['neon', 'sh', 'json']);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame("# Matomo\\Log\\Logger is a proxy\n", file_get_contents($neon));
+        $this->assertSame("namespace Matomo;\n", file_get_contents($sh));
+        $this->assertSame("{\"psr-4\": {\"Matomo\\\\Plugins\\\\\": \"plugins/\"}}\n", file_get_contents($json));
+        $this->assertSame("Piwik\\Foo stays\n", file_get_contents($txt));
+        $this->assertStringContainsString('3 changed, 0 unchanged, 0 failed', $this->streamContents($stdout));
+    }
+
+    public function testTextFileModeRespectsAllowlist(): void
+    {
+        $allowed = $this->dir . '/Allowed.neon';
+        $other = $this->dir . '/Other.neon';
+
+        file_put_contents($allowed, "# Piwik\\Log\\Logger\n");
+        file_put_contents($other, "# Piwik\\Log\\Logger\n");
+
+        [$stdout, $stderr] = $this->streams();
+        $exit = (new MigrationRunner(null, $stdout, $stderr))->run([$this->dir], false, [$allowed], ['neon']);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame("# Piwik\\Log\\Logger\n", file_get_contents($allowed));
+        $this->assertSame("# Matomo\\Log\\Logger\n", file_get_contents($other));
+        $this->assertStringContainsString('1 changed, 1 unchanged, 0 failed', $this->streamContents($stdout));
+    }
+
+    public function testTextFileModeSecondRunNoOp(): void
+    {
+        $neon = $this->dir . '/Config.neon';
+        file_put_contents($neon, "# Piwik\\Log\\Logger\n");
+
+        [$stdout, $stderr] = $this->streams();
+        $runner = new MigrationRunner(null, $stdout, $stderr);
+
+        $this->assertSame(0, $runner->run([$this->dir], false, [], ['neon']));
+        $this->assertStringContainsString('1 changed, 0 unchanged, 0 failed', $this->streamContents($stdout));
+
+        [$stdout2, $stderr2] = $this->streams();
+        $runner2 = new MigrationRunner(null, $stdout2, $stderr2);
+
+        $this->assertSame(0, $runner2->run([$this->dir], false, [], ['neon']));
+        $this->assertStringContainsString('0 changed, 1 unchanged, 0 failed', $this->streamContents($stdout2));
+        $this->assertSame("# Matomo\\Log\\Logger\n", file_get_contents($neon));
+    }
+
+    public function testTextFileModeSkipsExplicitFileWithExtensionOutsideSet(): void
+    {
+        $txt = $this->dir . '/notes.txt';
+        file_put_contents($txt, "Piwik\\Foo\n");
+
+        [$stdout, $stderr] = $this->streams();
+        $exit = (new MigrationRunner(null, $stdout, $stderr))->run([$txt], false, [], ['neon']);
+
+        $this->assertSame(0, $exit);
+        $this->assertSame("Piwik\\Foo\n", file_get_contents($txt));
+        $this->assertStringContainsString('0 changed, 0 unchanged, 0 failed', $this->streamContents($stdout));
+    }
+
     public function testSubmoduleDirectoriesAreSkipped(): void
     {
         $submodule = $this->dir . '/plugins/TagManager';

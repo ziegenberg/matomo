@@ -33,12 +33,31 @@ use PHPStan\Analyser\Scope;
  */
 final class JsonResponseRuleHelper
 {
-    public const ATTRIBUTE_CLASS = 'Piwik\\Http\\JsonResponse';
-    public const CONTROLLER_CLASS = 'Piwik\\Plugin\\Controller';
+    /**
+     * Both the canonical `Matomo\` names and the deprecated `Piwik\` aliases
+     * must match: core code migrated in 7.0 declares the new names, while
+     * un-migrated plugin code (and the rule fixtures) still uses the old ones.
+     * The alias layer makes both resolve to the same classes; the rules must
+     * accept either.
+     */
+    public const ATTRIBUTE_CLASSES = [
+        'Piwik\\Http\\JsonResponse',
+        'Matomo\\Http\\JsonResponse',
+    ];
+    public const CONTROLLER_CLASSES = [
+        'Piwik\\Plugin\\Controller',
+        'Matomo\\Plugin\\Controller',
+    ];
 
-    private const JSON_RENDERER_CLASS = 'Piwik\\DataTable\\Renderer\\Json';
+    private const JSON_RENDERER_CLASSES = [
+        'Piwik\\DataTable\\Renderer\\Json',
+        'Matomo\\DataTable\\Renderer\\Json',
+    ];
     private const JSON_HEADER_METHOD = 'sendheaderjson';
-    private const COMMON_CLASS = 'Piwik\\Common';
+    private const COMMON_CLASSES = [
+        'Piwik\\Common',
+        'Matomo\\Common',
+    ];
     private const SEND_HEADER_METHOD = 'sendheader';
     private const OUTPUT_FUNCTIONS = [
         'flush', 'ob_flush', 'ob_end_flush', 'printf', 'vprintf', 'readfile', 'fpassthru', 'passthru',
@@ -53,11 +72,10 @@ final class JsonResponseRuleHelper
             return false;
         }
 
-        return in_array(
-            self::CONTROLLER_CLASS,
-            $scope->getClassReflection()->getParentClassesNames(),
-            true
-        );
+        return array_intersect(
+            self::CONTROLLER_CLASSES,
+            $scope->getClassReflection()->getParentClassesNames()
+        ) !== [];
     }
 
     /**
@@ -74,7 +92,7 @@ final class JsonResponseRuleHelper
     {
         foreach ($method->attrGroups as $attrGroup) {
             foreach ($attrGroup->attrs as $attr) {
-                if ($scope->resolveName($attr->name) === self::ATTRIBUTE_CLASS) {
+                if (in_array($scope->resolveName($attr->name), self::ATTRIBUTE_CLASSES, true)) {
                     return true;
                 }
             }
@@ -116,7 +134,7 @@ final class JsonResponseRuleHelper
         }
 
         foreach ($parentMethod->getAttributes() as $attribute) {
-            if ($attribute->getName() === self::ATTRIBUTE_CLASS) {
+            if (in_array($attribute->getName(), self::ATTRIBUTE_CLASSES, true)) {
                 return true;
             }
         }
@@ -391,7 +409,7 @@ final class JsonResponseRuleHelper
             return false;
         }
 
-        return $scope->resolveName($call->class) === self::JSON_RENDERER_CLASS;
+        return in_array($scope->resolveName($call->class), self::JSON_RENDERER_CLASSES, true);
     }
 
     private static function isRawJsonContentTypeCall(StaticCall $call, Scope $scope): bool
@@ -404,7 +422,7 @@ final class JsonResponseRuleHelper
             return false;
         }
 
-        if ($scope->resolveName($call->class) !== self::COMMON_CLASS) {
+        if (!in_array($scope->resolveName($call->class), self::COMMON_CLASSES, true)) {
             return false;
         }
 

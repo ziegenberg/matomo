@@ -537,7 +537,7 @@ abstract class Dimension
         $method = new \ReflectionMethod($this, $method);
         $declaringClass = $method->getDeclaringClass();
 
-        return str_starts_with($declaringClass->name, 'Matomo\Plugins');
+        return str_starts_with(\LegacyAutoloader::canonicalize($declaringClass->name), 'Matomo\Plugins');
     }
 
     /**
@@ -686,7 +686,7 @@ abstract class Dimension
     protected function generateIdFromClass($className)
     {
         // parse plugin name & dimension name
-        $regex = "/Matomo\\\\Plugins\\\\([^\\\\]+)\\\\" . self::COMPONENT_SUBNAMESPACE . "\\\\([^\\\\]+)/";
+        $regex = "/(?:Piwik|Matomo)\\\\Plugins\\\\([^\\\\]+)\\\\" . self::COMPONENT_SUBNAMESPACE . "\\\\([^\\\\]+)/";
         if (!preg_match($regex, $className, $matches)) {
             throw new Exception("'$className' is located in the wrong directory.");
         }

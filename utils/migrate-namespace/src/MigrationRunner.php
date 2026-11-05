@@ -7,9 +7,11 @@ namespace Utils\MigrateNamespace;
 use PhpParser\Error;
 
 /**
- * Walks files/directories, migrates every PHP file, and writes only files
- * whose content actually changed. Parse failures are recorded per file and
- * never abort the run.
+ * Walks files/directories, migrates every PHP file (and, when text extensions
+ * are configured, every file with one of those extensions via the shared
+ * value-aware swap rule), and writes only files whose content actually
+ * changed. Parse failures are recorded per file and never abort the run;
+ * text files cannot fail (no parsing).
  */
 final class MigrationRunner
 {
@@ -37,18 +39,29 @@ final class MigrationRunner
     }
 
     /**
-     * Migrates all PHP files under the given paths.
+     * Migrates all PHP files (and configured text files) under the given paths.
      *
      * @param list<string> $paths
+     * @param list<string> $allowedPaths File/directory prefixes never rewritten
+     *                                   (same semantics as the source-clean guard).
+     * @param list<string> $textExtensions File extensions (lowercase, no dot) whose
+     *                                     content is swapped via the shared rule.
      * @return int 0 when every file was processed, 1 when any file failed.
      */
-    public function run(array $paths, bool $dryRun = false): int
+    public function run(array $paths, bool $dryRun = false, array $allowedPaths = [], array $textExtensions = []): int
     {
         $changed = 0;
         $unchanged = 0;
         $failed = [];
+        $extensions = array_merge(['php'], $textExtensions);
 
-        foreach (self::collectPhpFiles($paths, $failed) as $path) {
+        foreach (self::collectFiles($paths, $failed, $extensions) as $path) {
+            if ($allowedPaths !== [] && SourceCleanGuard::isAllowed($path, $allowedPaths)) {
+                $unchanged++;
+
+                continue;
+            }
+
             $original = @file_get_contents($path);
 
             if ($original === false) {
@@ -57,16 +70,21 @@ final class MigrationRunner
                 continue;
             }
 
-            try {
-                $migrated = $this->migrator->migrate($original);
-            } catch (Error $error) {
-                $failed[] = $path . ': ' . $error->getMessage();
+            if (self::isPhpPath($path)) {
+                try {
+                    $migrated = $this->migrator->migrate($original);
+                } catch (Error $error) {
+                    $failed[] = $path . ': ' . $error->getMessage();
 
-                continue;
-            } catch (\Throwable $throwable) {
-                $failed[] = $path . ': ' . $throwable->getMessage();
+                    continue;
+                } catch (\Throwable $throwable) {
+                    $failed[] = $path . ': ' . $throwable->getMessage();
 
-                continue;
+                    continue;
+                }
+            } else {
+                // Text file: pure byte rule, no parsing, no format-preserving print.
+                $migrated = RootNamespace::swapQualified($original);
             }
 
             if ($migrated === $original) {
@@ -113,17 +131,41 @@ final class MigrationRunner
      */
     public static function collectPhpFiles(array $paths, array &$failed): array
     {
+        return self::collectFiles($paths, $failed);
+    }
+
+    /**
+     * Collects every file under the given paths whose extension is in
+     * $extensions, recursively, applying the same skip rules as run()
+     * (vendor/.git/node_modules and git-submodule checkouts are never
+     * touched). Explicit file arguments with an extension outside the set are
+     * skipped (not reported as failed); extensionless explicit files (e.g. the
+     * `console` entrypoint) are kept as PHP.
+     *
+     * @param list<string> $paths
+     * @param list<string> $failed Filled with 'path: reason' entries for unreadable paths.
+     * @param list<string> $extensions File extensions (lowercase, no dot) to collect.
+     * @return list<string>
+     */
+    public static function collectFiles(array $paths, array &$failed, array $extensions = ['php']): array
+    {
         $files = [];
 
         foreach ($paths as $path) {
             if (is_file($path)) {
+                $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+                if ($extension !== '' && !in_array($extension, $extensions, true)) {
+                    continue;
+                }
+
                 $files[] = $path;
 
                 continue;
             }
 
             if (is_dir($path)) {
-                foreach (self::collectDir($path, $failed) as $file) {
+                foreach (self::collectDir($path, $failed, $extensions) as $file) {
                     $files[] = $file;
                 }
 
@@ -140,9 +182,10 @@ final class MigrationRunner
 
     /**
      * @param list<string> $failed Filled with 'path: reason' entries for unreadable directories.
+     * @param list<string> $extensions File extensions (lowercase, no dot) to collect.
      * @return list<string>
      */
-    private static function collectDir(string $dir, array &$failed): array
+    private static function collectDir(string $dir, array &$failed, array $extensions): array
     {
         $files = [];
 
@@ -177,7 +220,7 @@ final class MigrationRunner
             $iterator = new \RecursiveIteratorIterator($filteredIterator, \RecursiveIteratorIterator::LEAVES_ONLY);
 
             foreach ($iterator as $fileInfo) {
-                if (!$fileInfo->isFile() || $fileInfo->getExtension() !== 'php') {
+                if (!$fileInfo->isFile() || !in_array($fileInfo->getExtension(), $extensions, true)) {
                     continue;
                 }
 
@@ -194,6 +237,18 @@ final class MigrationRunner
         }
 
         return $files;
+    }
+
+    /**
+     * True for PHP files: .php files and extensionless files (the `console`
+     * entrypoint is an extensionless PHP script and is part of the canonical
+     * path set).
+     */
+    public static function isPhpPath(string $path): bool
+    {
+        $extension = pathinfo($path, PATHINFO_EXTENSION);
+
+        return $extension === 'php' || $extension === '';
     }
 
     /**

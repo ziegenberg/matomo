@@ -26,7 +26,7 @@ use Matomo\Plugin\Manager as PluginManager;
 use Matomo\Log\LoggerInterface;
 
 /**
- * Class used by the logging script piwik.php called by the javascript tag.
+ * Class used by the logging script matomo.php called by the javascript tag.
  * Handles the visitor and their actions on the website, saves the data in the DB,
  * saves information in the cookie, etc.
  *
@@ -215,7 +215,7 @@ class Tracker
     }
 
     /**
-     * Used to initialize core Piwik components on a piwik.php request
+     * Used to initialize core Piwik components on a matomo.php request
      * Eg. when cache is missed and we will be calling some APIs to generate cache
      */
     public static function initCorePiwikInTrackerMode()

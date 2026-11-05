@@ -172,4 +172,56 @@ class LegacyAutoLoaderTest extends \PHPUnit\Framework\TestCase
         // Reverse direction.
         $this->assertInstanceOf(\Piwik\ShortName::class, new \Matomo\ShortNameTarget());
     }
+
+    public function testIsRootNamespaceName()
+    {
+        $this->assertTrue(\LegacyAutoloader::isRootNamespaceName('Piwik\Foo'));
+        $this->assertTrue(\LegacyAutoloader::isRootNamespaceName('Matomo\Foo'));
+        $this->assertTrue(\LegacyAutoloader::isRootNamespaceName('\Piwik\Foo'));
+        $this->assertTrue(\LegacyAutoloader::isRootNamespaceName('\\Matomo\Foo'));
+        $this->assertFalse(\LegacyAutoloader::isRootNamespaceName('Piwik'));
+        $this->assertFalse(\LegacyAutoloader::isRootNamespaceName('Matomo'));
+        $this->assertFalse(\LegacyAutoloader::isRootNamespaceName('PiwikFoo\Bar'));
+        $this->assertFalse(\LegacyAutoloader::isRootNamespaceName('My\Piwik\Foo'));
+        $this->assertFalse(\LegacyAutoloader::isRootNamespaceName(''));
+    }
+
+    public function testCanonicalizeFacadeBothDirections()
+    {
+        $this->assertSame('Matomo\Matomo', \LegacyAutoloader::canonicalize('Piwik\Piwik'));
+        $this->assertSame('Matomo\Matomo', \LegacyAutoloader::canonicalize('Matomo\Matomo'));
+        $this->assertSame('\Matomo\Matomo', \LegacyAutoloader::canonicalize('\Piwik\Piwik'));
+    }
+
+    public function testCanonicalizePreservesLeadingBackslashes()
+    {
+        $this->assertSame('\Matomo\Plugins\X', \LegacyAutoloader::canonicalize('\Piwik\Plugins\X'));
+        $this->assertSame('\\Matomo\Plugins\X', \LegacyAutoloader::canonicalize('\\Piwik\Plugins\X'));
+        $this->assertSame('\Matomo\Plugins\X', \LegacyAutoloader::canonicalize('\Matomo\Plugins\X'));
+    }
+
+    public function testCanonicalizeHonoursExceptionMap()
+    {
+        \LegacyAutoloader::setExceptionMap(['Piwik\ShortName' => 'Matomo\ShortNameTarget']);
+
+        $this->assertSame('Matomo\ShortNameTarget', \LegacyAutoloader::canonicalize('Piwik\ShortName'));
+        // The reverse map is not consulted: Matomo names are already canonical.
+        $this->assertSame('Matomo\ShortNameTarget', \LegacyAutoloader::canonicalize('Matomo\ShortNameTarget'));
+        $this->assertSame('Matomo\Other', \LegacyAutoloader::canonicalize('Piwik\Other'));
+    }
+
+    public function testCanonicalizeLeavesNonRootAndCanonicalNamesUnchanged()
+    {
+        $this->assertSame('Matomo\Foo', \LegacyAutoloader::canonicalize('Matomo\Foo'));
+        $this->assertSame('Piwik', \LegacyAutoloader::canonicalize('Piwik'));
+        $this->assertSame('My\Piwik\Foo', \LegacyAutoloader::canonicalize('My\Piwik\Foo'));
+        $this->assertSame('', \LegacyAutoloader::canonicalize(''));
+    }
+
+    public function testCanonicalizeSwapsRootPrefix()
+    {
+        $this->assertSame('Matomo\Plugins\Foo\Bar', \LegacyAutoloader::canonicalize('Piwik\Plugins\Foo\Bar'));
+        // Only the facade's both segments swap; interior facade segments stay.
+        $this->assertSame('Matomo\Piwik\Foo', \LegacyAutoloader::canonicalize('Piwik\Piwik\Foo'));
+    }
 }

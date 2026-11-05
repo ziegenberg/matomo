@@ -238,7 +238,7 @@ class Factory
         }
 
         if (!is_subclass_of($klass, 'Matomo\View\ViewInterface')) {
-            throw new \Exception("viewDataTable $klass must implement Piwik\View\ViewInterface interface.");
+            throw new \Exception("viewDataTable $klass must implement Matomo\View\ViewInterface interface.");
         }
 
         return new $klass($controllerAction, $apiAction, $params);

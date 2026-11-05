@@ -9,9 +9,9 @@
 
 namespace Piwik\Tests\Unit\PHPStan\Rules\data;
 
-use Piwik\Http\JsonResponse;
+use Matomo\Http\JsonResponse;
 
-class JsonResponseInheritanceBaseController extends \Piwik\Plugin\Controller
+class JsonResponseInheritanceBaseController extends \Matomo\Plugin\Controller
 {
     #[JsonResponse]
     public function jsonAction(): string

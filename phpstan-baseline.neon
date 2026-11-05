@@ -1,13 +1,13 @@
 parameters:
 	ignoreErrors:
 		-
-			message: '#^Instanceof between Piwik\\DataTable and Piwik\\DataTable\\Map will always evaluate to false\.$#'
+			message: '#^Instanceof between Matomo\\DataTable and Matomo\\DataTable\\Map will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: core/API/DataTableGenericFilter.php
 
 		-
-			message: '#^Instanceof between Piwik\\Plugin\\ProcessedMetric and Piwik\\Plugin\\ProcessedMetric will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\Plugin\\ProcessedMetric and Matomo\\Plugin\\ProcessedMetric will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: core/API/DataTableGenericFilter.php
@@ -25,7 +25,7 @@ parameters:
 			path: core/API/DataTableManipulator.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable and Piwik\\DataTable will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\DataTable and Matomo\\DataTable will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: core/API/DataTableManipulator.php
@@ -37,7 +37,7 @@ parameters:
 			path: core/API/DataTableManipulator/Flattener.php
 
 		-
-			message: '#^Strict comparison using \=\=\= between Piwik\\DataTable and null will always evaluate to false\.$#'
+			message: '#^Strict comparison using \=\=\= between Matomo\\DataTable and null will always evaluate to false\.$#'
 			identifier: identical.alwaysFalse
 			count: 1
 			path: core/API/DataTableManipulator/Flattener.php
@@ -49,7 +49,7 @@ parameters:
 			path: core/API/DataTableManipulator/LabelFilter.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\DataTable\\DataTableInterface\:\:getRows\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\DataTable\\DataTableInterface\:\:getRows\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: core/API/DataTableManipulator/ReportTotalsCalculator.php
@@ -61,32 +61,38 @@ parameters:
 			path: core/API/DataTableManipulator/ReportTotalsCalculator.php
 
 		-
-			message: '#^Property Piwik\\API\\DataTableManipulator\\ReportTotalsCalculator\:\:\$report \(Piwik\\Plugin\\Report\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\API\\DataTableManipulator\\ReportTotalsCalculator\:\:\$report \(Matomo\\Plugin\\Report\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 1
 			path: core/API/DataTableManipulator/ReportTotalsCalculator.php
 
 		-
-			message: '#^Parameter \#1 \$dataTable of method Piwik\\API\\DataTableManipulator\\Flattener\:\:flatten\(\) expects Piwik\\DataTable, Piwik\\DataTable\\DataTableInterface given\.$#'
+			message: '#^Parameter \#1 \$dataTable of method Matomo\\API\\DataTableManipulator\\Flattener\:\:flatten\(\) expects Matomo\\DataTable, Matomo\\DataTable\\DataTableInterface given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/API/DataTablePostProcessor.php
 
 		-
-			message: '#^Parameter \#1 \$table of method Piwik\\API\\DataTableGenericFilter\:\:filter\(\) expects Piwik\\DataTable, Piwik\\DataTable\\DataTableInterface given\.$#'
+			message: '#^Parameter \#1 \$table of method Matomo\\API\\DataTableGenericFilter\:\:filter\(\) expects Matomo\\DataTable, Matomo\\DataTable\\DataTableInterface given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/API/DataTablePostProcessor.php
 
 		-
-			message: '#^Parameter \#1 \$table of method Piwik\\API\\DataTableManipulator\\ReportTotalsCalculator\:\:calculate\(\) expects Piwik\\DataTable, Piwik\\DataTable\\DataTableInterface given\.$#'
+			message: '#^Parameter \#1 \$table of method Matomo\\API\\DataTableManipulator\\ReportTotalsCalculator\:\:calculate\(\) expects Matomo\\DataTable, Matomo\\DataTable\\DataTableInterface given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/API/DataTablePostProcessor.php
 
 		-
-			message: '#^Parameter \#2 \$dataTable of method Piwik\\API\\DataTableManipulator\\LabelFilter\:\:filter\(\) expects Piwik\\DataTable, Piwik\\DataTable\\DataTableInterface given\.$#'
+			message: '#^Parameter \#2 \$dataTable of method Matomo\\API\\DataTableManipulator\\LabelFilter\:\:filter\(\) expects Matomo\\DataTable, Matomo\\DataTable\\DataTableInterface given\.$#'
 			identifier: argument.type
+			count: 1
+			path: core/API/DataTablePostProcessor.php
+
+		-
+			message: '#^Strict comparison using \!\=\= between non\-falsy\-string and ''0'' will always evaluate to true\.$#'
+			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: core/API/DataTablePostProcessor.php
 
@@ -115,31 +121,31 @@ parameters:
 			path: core/API/Request.php
 
 		-
-			message: '#^Parameter \#2 \$columnToFilter of class Piwik\\DataTable\\Filter\\Pattern constructor expects string, array given\.$#'
+			message: '#^Parameter \#2 \$columnToFilter of class Matomo\\DataTable\\Filter\\Pattern constructor expects string, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/API/ResponseBuilder.php
 
 		-
-			message: '#^Property Piwik\\API\\ResponseBuilder\:\:\$outputFormat is never read, only written\.$#'
+			message: '#^Property Matomo\\API\\ResponseBuilder\:\:\$outputFormat is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/API/ResponseBuilder.php
 
 		-
-			message: '#^Method Piwik\\Archive\\ArchiveInvalidator\:\:getSegmentArchiving\(\) is unused\.$#'
+			message: '#^Method Matomo\\Archive\\ArchiveInvalidator\:\:getSegmentArchiving\(\) is unused\.$#'
 			identifier: method.unused
 			count: 1
 			path: core/Archive/ArchiveInvalidator.php
 
 		-
-			message: '#^Property Piwik\\Archive\\ArchiveInvalidator\:\:\$allIdSitesCache \(array\<int\>\) in isset\(\) is not nullable\.$#'
+			message: '#^Property Matomo\\Archive\\ArchiveInvalidator\:\:\$allIdSitesCache \(array\<int\>\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
 			path: core/Archive/ArchiveInvalidator.php
 
 		-
-			message: '#^Property Piwik\\Archive\\ArchiveInvalidator\:\:\$allIdSitesCache is never written, only read\.$#'
+			message: '#^Property Matomo\\Archive\\ArchiveInvalidator\:\:\$allIdSitesCache is never written, only read\.$#'
 			identifier: property.onlyRead
 			count: 1
 			path: core/Archive/ArchiveInvalidator.php
@@ -151,13 +157,13 @@ parameters:
 			path: core/Archive/ArchiveInvalidator.php
 
 		-
-			message: '#^Property Piwik\\Archive\\ArchivePurger\:\:\$today is never read, only written\.$#'
+			message: '#^Property Matomo\\Archive\\ArchivePurger\:\:\$today is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/Archive/ArchivePurger.php
 
 		-
-			message: '#^Parameter \#3 \$archiveIdsFlipped of method Piwik\\Archive\\ArchiveState\:\:checkArchiveStates\(\) expects array\<string, array\<int, bool\>\>, array\<string, array\<int, \(int\|string\)\>\> given\.$#'
+			message: '#^Parameter \#3 \$archiveIdsFlipped of method Matomo\\Archive\\ArchiveState\:\:checkArchiveStates\(\) expects array\<string, array\<int, bool\>\>, array\<string, array\<int, \(int\|string\)\>\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Archive/ArchiveState.php
@@ -181,7 +187,7 @@ parameters:
 			path: core/ArchiveProcessor/Loader.php
 
 		-
-			message: '#^Parameter \#1 \$archiveOnlyReport of method Piwik\\ArchiveProcessor\\Parameters\:\:setArchiveOnlyReport\(\) expects array\<string\>\|string, null given\.$#'
+			message: '#^Parameter \#1 \$archiveOnlyReport of method Matomo\\ArchiveProcessor\\Parameters\:\:setArchiveOnlyReport\(\) expects array\<string\>\|string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/ArchiveProcessor/Loader.php
@@ -211,31 +217,31 @@ parameters:
 			path: core/ArchiveProcessor/RecordBuilder.php
 
 		-
-			message: '#^Instanceof between Piwik\\ArchiveProcessor\\Record and Piwik\\ArchiveProcessor\\Record will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\ArchiveProcessor\\Record and Matomo\\ArchiveProcessor\\Record will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: core/ArchiveProcessor/RecordBuilder.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/ArchiveProcessor/Rules.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/ArchiveProcessor/Rules.php
 
 		-
-			message: '#^Parameter \#2 \$assetFetcher of class Piwik\\AssetManager\\UIAssetMerger\\JScriptUIAssetMerger constructor expects Piwik\\AssetManager\\UIAssetFetcher\\JScriptUIAssetFetcher, Piwik\\AssetManager\\UIAssetFetcher given\.$#'
+			message: '#^Parameter \#2 \$assetFetcher of class Matomo\\AssetManager\\UIAssetMerger\\JScriptUIAssetMerger constructor expects Matomo\\AssetManager\\UIAssetFetcher\\JScriptUIAssetFetcher, Matomo\\AssetManager\\UIAssetFetcher given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/AssetManager.php
 
 		-
-			message: '#^Parameter \#2 \$assetFetcher of class Piwik\\AssetManager\\UIAssetMerger\\JScriptUIAssetMerger constructor expects Piwik\\AssetManager\\UIAssetFetcher\\JScriptUIAssetFetcher, Piwik\\AssetManager\\UIAssetFetcher\\StaticUIAssetFetcher given\.$#'
+			message: '#^Parameter \#2 \$assetFetcher of class Matomo\\AssetManager\\UIAssetMerger\\JScriptUIAssetMerger constructor expects Matomo\\AssetManager\\UIAssetFetcher\\JScriptUIAssetFetcher, Matomo\\AssetManager\\UIAssetFetcher\\StaticUIAssetFetcher given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/AssetManager.php
@@ -247,7 +253,7 @@ parameters:
 			path: core/AssetManager/UIAsset/OnDiskUIAsset.php
 
 		-
-			message: '#^Property Piwik\\AssetManager\\UIAsset\\OnDiskUIAsset\:\:\$relativeRootDir \(string\) in isset\(\) is not nullable\.$#'
+			message: '#^Property Matomo\\AssetManager\\UIAsset\\OnDiskUIAsset\:\:\$relativeRootDir \(string\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
 			path: core/AssetManager/UIAsset/OnDiskUIAsset.php
@@ -265,7 +271,7 @@ parameters:
 			path: core/AssetManager/UIAssetFetcher.php
 
 		-
-			message: '#^Parameter \#3 \$pending of static method Piwik\\Piwik\:\:postEvent\(\) expects bool, null given\.$#'
+			message: '#^Parameter \#3 \$pending of static method Matomo\\Matomo\:\:postEvent\(\) expects bool, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/AssetManager/UIAssetFetcher/JScriptUIAssetFetcher.php
@@ -277,25 +283,25 @@ parameters:
 			path: core/AssetManager/UIAssetFetcher/PluginUmdAssetFetcher.php
 
 		-
-			message: '#^Call to function method_exists\(\) with Piwik\\Plugin and ''shouldLoadUmdOnDema…'' will always evaluate to true\.$#'
+			message: '#^Call to function method_exists\(\) with Matomo\\Plugin and ''shouldLoadUmdOnDema…'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: core/AssetManager/UIAssetFetcher/PluginUmdAssetFetcher.php
 
 		-
-			message: '#^Parameter \#3 \$pending of static method Piwik\\Piwik\:\:postEvent\(\) expects bool, null given\.$#'
+			message: '#^Parameter \#3 \$pending of static method Matomo\\Matomo\:\:postEvent\(\) expects bool, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/AssetManager/UIAssetMerger/JScriptUIAssetMerger.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:fetchAll\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:fetchAll\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Changes/Model.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:query\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:query\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: core/Changes/Model.php
@@ -313,13 +319,19 @@ parameters:
 			path: core/Changes/Model.php
 
 		-
+			message: '#^Variable \$response in empty\(\) always exists and is always falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: core/CliMulti.php
+
+		-
 			message: '#^Call to function is_string\(\) with non\-falsy\-string will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: core/CliMulti/Output.php
 
 		-
-			message: '#^Parameter \#1 \$environment of class Piwik\\Application\\Environment constructor expects string, null given\.$#'
+			message: '#^Parameter \#1 \$environment of class Matomo\\Application\\Environment constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/CliMulti/RequestCommand.php
@@ -391,7 +403,7 @@ parameters:
 			path: core/Console.php
 
 		-
-			message: '#^Argument of an invalid type Piwik\\Application\\Kernel\\GlobalSettingsProvider supplied for foreach, only iterables are supported\.$#'
+			message: '#^Argument of an invalid type Matomo\\Application\\Kernel\\GlobalSettingsProvider supplied for foreach, only iterables are supported\.$#'
 			identifier: foreach.nonIterable
 			count: 1
 			path: core/Container/IniConfigDefinitionSource.php
@@ -421,19 +433,19 @@ parameters:
 			path: core/CronArchive.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
 			identifier: argument.type
 			count: 3
 			path: core/CronArchive.php
 
 		-
-			message: '#^Property Piwik\\CronArchive\:\:\$archivingStartingTime is never read, only written\.$#'
+			message: '#^Property Matomo\\CronArchive\:\:\$archivingStartingTime is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/CronArchive.php
 
 		-
-			message: '#^Property Piwik\\CronArchive\:\:\$segmentArchiving \(Piwik\\CronArchive\\SegmentArchiving\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\CronArchive\:\:\$segmentArchiving \(Matomo\\CronArchive\\SegmentArchiving\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 2
 			path: core/CronArchive.php
@@ -457,25 +469,25 @@ parameters:
 			path: core/CronArchive/QueueConsumer.php
 
 		-
-			message: '#^Parameter \#1 \$subXPeriods of static method Piwik\\Period\\Range\:\:getDateXPeriodsAgo\(\) expects int, string given\.$#'
+			message: '#^Parameter \#1 \$subXPeriods of static method Matomo\\Period\\Range\:\:getDateXPeriodsAgo\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 2
 			path: core/CronArchive/SegmentArchiving.php
 
 		-
-			message: '#^Property Piwik\\CronArchive\\SegmentArchiving\:\:\$now is never read, only written\.$#'
+			message: '#^Property Matomo\\CronArchive\\SegmentArchiving\:\:\$now is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/CronArchive/SegmentArchiving.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, float given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, float given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/CronArchive/SharedSiteIds.php
 
 		-
-			message: '#^Call to method fetch\(\) on an unknown class Piwik\\Tracker\\PDOStatement\.$#'
+			message: '#^Call to method fetch\(\) on an unknown class Matomo\\Tracker\\PDOStatement\.$#'
 			identifier: class.notFound
 			count: 1
 			path: core/DataAccess/ArchiveSelector.php
@@ -505,7 +517,7 @@ parameters:
 			path: core/DataAccess/ArchivingDbAdapter.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:fetchCol\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:fetchCol\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: core/DataAccess/Model.php
@@ -517,55 +529,55 @@ parameters:
 			path: core/DataTable.php
 
 		-
-			message: '#^Call to method Piwik\\DataTable\\Row\:\:setColumn\(\) on a separate line has no effect\.$#'
+			message: '#^Call to method Matomo\\DataTable\\Row\:\:setColumn\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 1
 			path: core/DataTable.php
 
 		-
-			message: '#^Constructor of class Piwik\\DataTable\\BaseFilter has an unused parameter \$table\.$#'
+			message: '#^Constructor of class Matomo\\DataTable\\BaseFilter has an unused parameter \$table\.$#'
 			identifier: constructor.unusedParameter
 			count: 1
 			path: core/DataTable/BaseFilter.php
 
 		-
-			message: '#^Constructor of class Piwik\\DataTable\\Filter\\AddColumnsProcessedMetricsGoal has an unused parameter \$enable\.$#'
+			message: '#^Constructor of class Matomo\\DataTable\\Filter\\AddColumnsProcessedMetricsGoal has an unused parameter \$enable\.$#'
 			identifier: constructor.unusedParameter
 			count: 1
 			path: core/DataTable/Filter/AddColumnsProcessedMetricsGoal.php
 
 		-
-			message: '#^Property Piwik\\DataTable\\Filter\\AddSegmentByRangeLabel\:\:\$delimiter is unused\.$#'
+			message: '#^Property Matomo\\DataTable\\Filter\\AddSegmentByRangeLabel\:\:\$delimiter is unused\.$#'
 			identifier: property.unused
 			count: 1
 			path: core/DataTable/Filter/AddSegmentByRangeLabel.php
 
 		-
-			message: '#^Property Piwik\\DataTable\\Filter\\AddSegmentByRangeLabel\:\:\$segments is unused\.$#'
+			message: '#^Property Matomo\\DataTable\\Filter\\AddSegmentByRangeLabel\:\:\$segments is unused\.$#'
 			identifier: property.unused
 			count: 1
 			path: core/DataTable/Filter/AddSegmentByRangeLabel.php
 
 		-
-			message: '#^Property Piwik\\DataTable\\Filter\\AddSegmentBySegmentValue\:\:\$report \(Piwik\\Plugin\\Report\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\DataTable\\Filter\\AddSegmentBySegmentValue\:\:\$report \(Matomo\\Plugin\\Report\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 1
 			path: core/DataTable/Filter/AddSegmentBySegmentValue.php
 
 		-
-			message: '#^Call to method Piwik\\DataTable\\Row\:\:setColumn\(\) on a separate line has no effect\.$#'
+			message: '#^Call to method Matomo\\DataTable\\Row\:\:setColumn\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 1
 			path: core/DataTable/Filter/AddSummaryRow.php
 
 		-
-			message: '#^Method Piwik\\DataTable\\Filter\\CalculateEvolutionFilter\:\:getDividend\(\) should return float\|int but returns false\.$#'
+			message: '#^Method Matomo\\DataTable\\Filter\\CalculateEvolutionFilter\:\:getDividend\(\) should return float\|int but returns false\.$#'
 			identifier: return.type
 			count: 1
 			path: core/DataTable/Filter/CalculateEvolutionFilter.php
 
 		-
-			message: '#^Return type \(string\) of method Piwik\\DataTable\\Filter\\ColumnCallbackAddColumnPercentage\:\:formatValue\(\) should be compatible with return type \(float\|int\) of method Piwik\\DataTable\\Filter\\ColumnCallbackAddColumnQuotient\:\:formatValue\(\)$#'
+			message: '#^Return type \(string\) of method Matomo\\DataTable\\Filter\\ColumnCallbackAddColumnPercentage\:\:formatValue\(\) should be compatible with return type \(float\|int\) of method Matomo\\DataTable\\Filter\\ColumnCallbackAddColumnQuotient\:\:formatValue\(\)$#'
 			identifier: method.childReturnType
 			count: 1
 			path: core/DataTable/Filter/ColumnCallbackAddColumnPercentage.php
@@ -589,19 +601,19 @@ parameters:
 			path: core/DataTable/Filter/ColumnCallbackDeleteRow.php
 
 		-
-			message: '#^Property Piwik\\DataTable\\Filter\\Pattern\:\:\$columnToFilter \(array\|string\) is never assigned array so it can be removed from the property type\.$#'
+			message: '#^Property Matomo\\DataTable\\Filter\\Pattern\:\:\$columnToFilter \(array\|string\) is never assigned array so it can be removed from the property type\.$#'
 			identifier: property.unusedType
 			count: 1
 			path: core/DataTable/Filter/Pattern.php
 
 		-
-			message: '#^Property Piwik\\DataTable\\Filter\\Pattern\:\:\$patternToSearch is never read, only written\.$#'
+			message: '#^Property Matomo\\DataTable\\Filter\\Pattern\:\:\$patternToSearch is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/DataTable/Filter/Pattern.php
 
 		-
-			message: '#^Property Piwik\\DataTable\\Filter\\PatternRecursive\:\:\$patternToSearch is never read, only written\.$#'
+			message: '#^Property Matomo\\DataTable\\Filter\\PatternRecursive\:\:\$patternToSearch is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/DataTable/Filter/PatternRecursive.php
@@ -619,13 +631,13 @@ parameters:
 			path: core/DataTable/Filter/RangeCheck.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable\|false and Piwik\\DataTable\\Map will always evaluate to false\.$#'
+			message: '#^Instanceof between Matomo\\DataTable\|false and Matomo\\DataTable\\Map will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: core/DataTable/Map.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable\\DataTableInterface and Piwik\\DataTable\\DataTableInterface will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\DataTable\\DataTableInterface and Matomo\\DataTable\\DataTableInterface will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: core/DataTable/Renderer.php
@@ -649,13 +661,13 @@ parameters:
 			path: core/DataTable/Renderer/Csv.php
 
 		-
-			message: '#^Parameter \#1 \$table of method Piwik\\DataTable\\Renderer\\Html\:\:buildTableStructure\(\) expects Piwik\\DataTable\|Piwik\\DataTable\\Map, Piwik\\DataTable\\DataTableInterface given\.$#'
+			message: '#^Parameter \#1 \$table of method Matomo\\DataTable\\Renderer\\Html\:\:buildTableStructure\(\) expects Matomo\\DataTable\|Matomo\\DataTable\\Map, Matomo\\DataTable\\DataTableInterface given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/DataTable/Renderer/Html.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable\\Map and Piwik\\DataTable\\Map will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\DataTable\\Map and Matomo\\DataTable\\Map will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: core/DataTable/Renderer/Rss.php
@@ -703,7 +715,7 @@ parameters:
 			path: core/Date.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:exec\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:exec\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Db.php
@@ -745,19 +757,19 @@ parameters:
 			path: core/Db/BatchInsert.php
 
 		-
-			message: '#^Method Piwik\\Db\\Schema\:\:hasReachedEOL\(\) should return string but returns bool\.$#'
+			message: '#^Method Matomo\\Db\\Schema\:\:hasReachedEOL\(\) should return string but returns bool\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Db/Schema.php
 
 		-
-			message: '#^Method Piwik\\Db\\SchemaInterface\:\:dropDatabase\(\) invoked with 1 parameter, 0 required\.$#'
+			message: '#^Method Matomo\\Db\\SchemaInterface\:\:dropDatabase\(\) invoked with 1 parameter, 0 required\.$#'
 			identifier: arguments.count
 			count: 1
 			path: core/Db/Schema.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:fetchCol\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:fetchCol\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Db/Schema/Mysql.php
@@ -769,7 +781,7 @@ parameters:
 			path: core/Db/Schema/Mysql.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:closeConnection\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:closeConnection\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/DbHelper.php
@@ -781,7 +793,7 @@ parameters:
 			path: core/DbHelper.php
 
 		-
-			message: '#^Call to method rowCount\(\) on an unknown class Piwik\\Tracker\\PDOStatement\.$#'
+			message: '#^Call to method rowCount\(\) on an unknown class Matomo\\Tracker\\PDOStatement\.$#'
 			identifier: class.notFound
 			count: 1
 			path: core/DbHelper.php
@@ -817,7 +829,7 @@ parameters:
 			path: core/Filesystem.php
 
 		-
-			message: '#^Call to function method_exists\(\) with ''Piwik\\\\SettingsPiwik'' and ''getPiwikUrl'' will always evaluate to true\.$#'
+			message: '#^Call to function method_exists\(\) with ''Matomo\\\\SettingsPiwik'' and ''getPiwikUrl'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: core/FrontController.php
@@ -829,7 +841,7 @@ parameters:
 			path: core/FrontController.php
 
 		-
-			message: '#^Parameter \#1 \$e of method Piwik\\FrontController\:\:generateSafeModeOutputFromException\(\) expects Exception, Error given\.$#'
+			message: '#^Parameter \#1 \$e of method Matomo\\FrontController\:\:generateSafeModeOutputFromException\(\) expects Exception, Error given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/FrontController.php
@@ -847,13 +859,13 @@ parameters:
 			path: core/Http.php
 
 		-
-			message: '#^Method Piwik\\Log\:\:getInstance\(\) should return static\(Piwik\\Log\) but returns Piwik\\Log\.$#'
+			message: '#^Method Matomo\\Log\:\:getInstance\(\) should return static\(Matomo\\Log\) but returns Matomo\\Log\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Log.php
 
 		-
-			message: '#^Property Piwik\\LogDeleter\:\:\$logTablesProvider is never read, only written\.$#'
+			message: '#^Property Matomo\\LogDeleter\:\:\$logTablesProvider is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/LogDeleter.php
@@ -863,6 +875,42 @@ parameters:
 			identifier: argument.type
 			count: 3
 			path: core/Mail/EmailStyles.php
+
+		-
+			message: '#^Call to function is_numeric\(\) with float\|int will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 3
+			path: core/Matomo.php
+
+		-
+			message: '#^Call to function is_numeric\(\) with float\|int\<min, \-1\>\|int\<1, max\> will always evaluate to true\.$#'
+			identifier: function.alreadyNarrowedType
+			count: 1
+			path: core/Matomo.php
+
+		-
+			message: '#^Result of \|\| is always false\.$#'
+			identifier: booleanOr.alwaysFalse
+			count: 1
+			path: core/Matomo.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between 0\|numeric\-string and null will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: core/Matomo.php
+
+		-
+			message: '#^Strict comparison using \=\=\= between float\|int\<min, \-1\>\|int\<1, max\> and ''\-'' will always evaluate to false\.$#'
+			identifier: identical.alwaysFalse
+			count: 1
+			path: core/Matomo.php
+
+		-
+			message: '#^Unreachable statement \- code above always terminates\.$#'
+			identifier: deadCode.unreachable
+			count: 1
+			path: core/Matomo.php
 
 		-
 			message: '#^Call to function is_array\(\) with array will always evaluate to true\.$#'
@@ -883,13 +931,13 @@ parameters:
 			path: core/Metrics/Formatter.php
 
 		-
-			message: '#^Parameter \#1 \$array \(list\<Piwik\\DataTable\\Row\>\) of array_values is already a list, call has no effect\.$#'
+			message: '#^Parameter \#1 \$array \(list\<Matomo\\DataTable\\Row\>\) of array_values is already a list, call has no effect\.$#'
 			identifier: arrayValues.list
 			count: 1
 			path: core/Metrics/Sorter.php
 
 		-
-			message: '#^Parameter \#1 \$default of static method Piwik\\Url\:\:getCurrentHost\(\) expects string, null given\.$#'
+			message: '#^Parameter \#1 \$default of static method Matomo\\Url\:\:getCurrentHost\(\) expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Nonce.php
@@ -901,7 +949,7 @@ parameters:
 			path: core/NumberFormatter.php
 
 		-
-			message: '#^Parameter \#1 \$valueLength of method Piwik\\NumberFormatter\:\:getMaxFractionDigitsForCompactFormat\(\) expects int, float given\.$#'
+			message: '#^Parameter \#1 \$valueLength of method Matomo\\NumberFormatter\:\:getMaxFractionDigitsForCompactFormat\(\) expects int, float given\.$#'
 			identifier: argument.type
 			count: 2
 			path: core/NumberFormatter.php
@@ -919,7 +967,7 @@ parameters:
 			path: core/Period/Range.php
 
 		-
-			message: '#^Parameter \#2 \$strDate of class Piwik\\Period\\Range constructor expects string, int given\.$#'
+			message: '#^Parameter \#2 \$strDate of class Matomo\\Period\\Range constructor expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Period/Range.php
@@ -929,42 +977,6 @@ parameters:
 			identifier: binaryOp.invalid
 			count: 1
 			path: core/Period/Week.php
-
-		-
-			message: '#^Call to function is_numeric\(\) with float\|int will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 3
-			path: core/Piwik.php
-
-		-
-			message: '#^Call to function is_numeric\(\) with float\|int\<min, \-1\>\|int\<1, max\> will always evaluate to true\.$#'
-			identifier: function.alreadyNarrowedType
-			count: 1
-			path: core/Piwik.php
-
-		-
-			message: '#^Result of \|\| is always false\.$#'
-			identifier: booleanOr.alwaysFalse
-			count: 1
-			path: core/Piwik.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between 0\|numeric\-string and null will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: core/Piwik.php
-
-		-
-			message: '#^Strict comparison using \=\=\= between float\|int\<min, \-1\>\|int\<1, max\> and ''\-'' will always evaluate to false\.$#'
-			identifier: identical.alwaysFalse
-			count: 1
-			path: core/Piwik.php
-
-		-
-			message: '#^Unreachable statement \- code above always terminates\.$#'
-			identifier: deadCode.unreachable
-			count: 1
-			path: core/Piwik.php
 
 		-
 			message: '#^Call to function is_null\(\) with Matomo\\Cache\\Eager will always evaluate to false\.$#'
@@ -979,37 +991,43 @@ parameters:
 			path: core/Plugin.php
 
 		-
-			message: '#^Call to function is_null\(\) with Piwik\\Site will always evaluate to false\.$#'
+			message: '#^Trait Matomo\\Plugin\\ArtifactsHttpAuthTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: core/Plugin/ArtifactsHttpAuthTrait.php
+
+		-
+			message: '#^Call to function is_null\(\) with Matomo\\Site will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
 			path: core/Plugin/Controller.php
 
 		-
-			message: '#^Call to function property_exists\(\) with Piwik\\ViewDataTable\\Config and ''selectable_columns'' will always evaluate to true\.$#'
+			message: '#^Call to function property_exists\(\) with Matomo\\ViewDataTable\\Config and ''selectable_columns'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: core/Plugin/Controller.php
 
 		-
-			message: '#^Default value of the parameter \#3 \$columnsToDisplay \(false\) of method Piwik\\Plugin\\Controller\:\:getLastUnitGraphAcrossPlugins\(\) is incompatible with type array\.$#'
+			message: '#^Default value of the parameter \#3 \$columnsToDisplay \(false\) of method Matomo\\Plugin\\Controller\:\:getLastUnitGraphAcrossPlugins\(\) is incompatible with type array\.$#'
 			identifier: parameter.defaultValue
 			count: 1
 			path: core/Plugin/Controller.php
 
 		-
-			message: '#^Instanceof between Piwik\\Site and Piwik\\Site will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\Site and Matomo\\Site will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: core/Plugin/Controller.php
 
 		-
-			message: '#^Parameter \#2 \$action of method Piwik\\FrontController\:\:dispatch\(\) expects string\|null, false given\.$#'
+			message: '#^Parameter \#2 \$action of method Matomo\\FrontController\:\:dispatch\(\) expects string\|null, false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Plugin/Controller.php
 
 		-
-			message: '#^Property Piwik\\Plugin\\Controller\:\:\$site \(Piwik\\Site\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\Plugin\\Controller\:\:\$site \(Matomo\\Site\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 2
 			path: core/Plugin/Controller.php
@@ -1045,7 +1063,7 @@ parameters:
 			path: core/Plugin/LogTablesProvider.php
 
 		-
-			message: '#^Call to function method_exists\(\) with Piwik\\Plugin and ''shouldLoadUmdOnDema…'' will always evaluate to true\.$#'
+			message: '#^Call to function method_exists\(\) with Matomo\\Plugin and ''shouldLoadUmdOnDema…'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: core/Plugin/Manager.php
@@ -1053,6 +1071,12 @@ parameters:
 		-
 			message: '#^Right side of \|\| is always false\.$#'
 			identifier: booleanOr.rightAlwaysFalse
+			count: 1
+			path: core/Plugin/Manager.php
+
+		-
+			message: '#^Variable \$plugin in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
 			count: 1
 			path: core/Plugin/Manager.php
 
@@ -1069,13 +1093,13 @@ parameters:
 			path: core/Plugin/Report.php
 
 		-
-			message: '#^Parameter \#4 \$forceDefault of static method Piwik\\ViewDataTable\\Factory\:\:build\(\) expects bool, int given\.$#'
+			message: '#^Parameter \#4 \$forceDefault of static method Matomo\\ViewDataTable\\Factory\:\:build\(\) expects bool, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Plugin/Report.php
 
 		-
-			message: '#^Property Piwik\\Plugin\\Report\:\:\$dimension \(Piwik\\Columns\\Dimension\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\Plugin\\Report\:\:\$dimension \(Matomo\\Columns\\Dimension\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 1
 			path: core/Plugin/Report.php
@@ -1087,37 +1111,37 @@ parameters:
 			path: core/Plugin/Segment.php
 
 		-
-			message: '#^Instanceof between Piwik\\Scheduler\\Schedule\\Schedule and Piwik\\Scheduler\\Schedule\\Schedule will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\Scheduler\\Schedule\\Schedule and Matomo\\Scheduler\\Schedule\\Schedule will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: core/Plugin/Tasks.php
 
 		-
-			message: '#^Property Piwik\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) in isset\(\) is not nullable\.$#'
+			message: '#^Property Matomo\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
 			path: core/Plugin/ViewDataTable.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable and Piwik\\DataTable\\Map will always evaluate to false\.$#'
+			message: '#^Instanceof between Matomo\\DataTable and Matomo\\DataTable\\Map will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: core/Plugin/Visualization.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable\|null and Piwik\\DataTable\\Map will always evaluate to false\.$#'
+			message: '#^Instanceof between Matomo\\DataTable\|null and Matomo\\DataTable\\Map will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 2
 			path: core/Plugin/Visualization.php
 
 		-
-			message: '#^Instanceof between null and Piwik\\DataTable\\Map will always evaluate to false\.$#'
+			message: '#^Instanceof between null and Matomo\\DataTable\\Map will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: core/Plugin/Visualization.php
 
 		-
-			message: '#^Parameter \#1 \$dataTable of method Piwik\\Plugin\\ViewDataTable\:\:setDataTable\(\) expects Piwik\\DataTable\|Piwik\\DataTable\\Map, Piwik\\DataTable\\DataTableInterface given\.$#'
+			message: '#^Parameter \#1 \$dataTable of method Matomo\\Plugin\\ViewDataTable\:\:setDataTable\(\) expects Matomo\\DataTable\|Matomo\\DataTable\\Map, Matomo\\DataTable\\DataTableInterface given\.$#'
 			identifier: argument.type
 			count: 2
 			path: core/Plugin/Visualization.php
@@ -1141,19 +1165,19 @@ parameters:
 			path: core/Policy/CompliancePolicy.php
 
 		-
-			message: '#^Call to function is_a\(\) with arguments class\-string\<Piwik\\Policy\\CompliancePolicy\>, ''Piwik\\\\Policy\\\\CompliancePolicy'' and true will always evaluate to true\.$#'
+			message: '#^Call to function is_a\(\) with arguments class\-string\<Matomo\\Policy\\CompliancePolicy\>, ''Matomo\\\\Policy\\\\CompliancePolicy'' and true will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: core/Policy/PolicyManager.php
 
 		-
-			message: '#^Property Piwik\\ProfessionalServices\\Advertising\:\:\$pluginManager is never read, only written\.$#'
+			message: '#^Property Matomo\\ProfessionalServices\\Advertising\:\:\$pluginManager is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/ProfessionalServices/Advertising.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:getProfiler\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:getProfiler\(\)\.$#'
 			identifier: method.notFound
 			count: 3
 			path: core/Profiler.php
@@ -1183,13 +1207,13 @@ parameters:
 			path: core/Profiler.php
 
 		-
-			message: '#^Static method Piwik\\Profiler\:\:maxSumMsFirst\(\) is unused\.$#'
+			message: '#^Static method Matomo\\Profiler\:\:maxSumMsFirst\(\) is unused\.$#'
 			identifier: method.unused
 			count: 1
 			path: core/Profiler.php
 
 		-
-			message: '#^Static method Piwik\\Profiler\:\:sortTimeDesc\(\) is unused\.$#'
+			message: '#^Static method Matomo\\Profiler\:\:sortTimeDesc\(\) is unused\.$#'
 			identifier: method.unused
 			count: 1
 			path: core/Profiler.php
@@ -1207,37 +1231,37 @@ parameters:
 			path: core/QuickForm2.php
 
 		-
-			message: '#^Parameter \#1 \$viewDataTableId of method Piwik\\Report\\ReportWidgetConfig\:\:setDefaultViewDataTable\(\) expects string, null given\.$#'
+			message: '#^Parameter \#1 \$viewDataTableId of method Matomo\\Report\\ReportWidgetConfig\:\:setDefaultViewDataTable\(\) expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Report/ReportWidgetFactory.php
 
 		-
-			message: '#^Method Piwik\\DataTable\\Renderer\\Csv\:\:render\(\) invoked with 1 parameter, 0 required\.$#'
+			message: '#^Method Matomo\\DataTable\\Renderer\\Csv\:\:render\(\) invoked with 1 parameter, 0 required\.$#'
 			identifier: arguments.count
 			count: 1
 			path: core/ReportRenderer/Csv.php
 
 		-
-			message: '#^Method Piwik\\Request\:\:fromGet\(\) should return static\(Piwik\\Request\) but returns Piwik\\Request\.$#'
+			message: '#^Method Matomo\\Request\:\:fromGet\(\) should return static\(Matomo\\Request\) but returns Matomo\\Request\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Request.php
 
 		-
-			message: '#^Method Piwik\\Request\:\:fromPost\(\) should return static\(Piwik\\Request\) but returns Piwik\\Request\.$#'
+			message: '#^Method Matomo\\Request\:\:fromPost\(\) should return static\(Matomo\\Request\) but returns Matomo\\Request\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Request.php
 
 		-
-			message: '#^Method Piwik\\Request\:\:fromQueryString\(\) should return static\(Piwik\\Request\) but returns Piwik\\Request\.$#'
+			message: '#^Method Matomo\\Request\:\:fromQueryString\(\) should return static\(Matomo\\Request\) but returns Matomo\\Request\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Request.php
 
 		-
-			message: '#^Method Piwik\\Request\:\:fromRequest\(\) should return static\(Piwik\\Request\) but returns Piwik\\Request\.$#'
+			message: '#^Method Matomo\\Request\:\:fromRequest\(\) should return static\(Matomo\\Request\) but returns Matomo\\Request\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Request.php
@@ -1255,19 +1279,19 @@ parameters:
 			path: core/Segment.php
 
 		-
-			message: '#^Instanceof between Piwik\\Date and Piwik\\Date will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\Date and Matomo\\Date will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 2
 			path: core/Segment.php
 
 		-
-			message: '#^Property Piwik\\Segment\:\:\$endDate \(Piwik\\Date\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\Segment\:\:\$endDate \(Matomo\\Date\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 1
 			path: core/Segment.php
 
 		-
-			message: '#^Property Piwik\\Segment\:\:\$startDate \(Piwik\\Date\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\Segment\:\:\$startDate \(Matomo\\Date\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 1
 			path: core/Segment.php
@@ -1297,25 +1321,25 @@ parameters:
 			path: core/Segment/SegmentExpression.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:fetchOne\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:fetchOne\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Sequence.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:insert\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:insert\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Sequence.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:lastInsertId\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:lastInsertId\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Sequence.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:query\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:query\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: core/Sequence.php
@@ -1327,25 +1351,37 @@ parameters:
 			path: core/Session.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:getConnection\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:getConnection\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Session/SaveHandler/DbTable.php
 
 		-
-			message: '#^Parameter \#2 \$login of class Piwik\\AuthResult constructor expects string, null given\.$#'
+			message: '#^Parameter \#2 \$login of class Matomo\\AuthResult constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Session/SessionAuth.php
 
 		-
-			message: '#^Parameter \#3 \$tokenAuth of class Piwik\\AuthResult constructor expects string, null given\.$#'
+			message: '#^Parameter \#3 \$tokenAuth of class Matomo\\AuthResult constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Session/SessionAuth.php
 
 		-
-			message: '#^Method Piwik\\Settings\\Plugin\\SystemSettings\:\:makeSettingManagedInConfigOnly\(\) should return Piwik\\Settings\\Plugin\\SystemSetting but returns Piwik\\Settings\\Plugin\\SystemConfigSetting\.$#'
+			message: '#^Trait Matomo\\Settings\\Interfaces\\Traits\\Getters\\CustomGetterTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: core/Settings/Interfaces/Traits/Getters/CustomGetterTrait.php
+
+		-
+			message: '#^Trait Matomo\\Settings\\Interfaces\\Traits\\Getters\\OptionGetterTrait is used zero times and is not analysed\.$#'
+			identifier: trait.unused
+			count: 1
+			path: core/Settings/Interfaces/Traits/Getters/OptionGetterTrait.php
+
+		-
+			message: '#^Method Matomo\\Settings\\Plugin\\SystemSettings\:\:makeSettingManagedInConfigOnly\(\) should return Matomo\\Settings\\Plugin\\SystemSetting but returns Matomo\\Settings\\Plugin\\SystemConfigSetting\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Settings/Plugin/SystemSettings.php
@@ -1357,43 +1393,43 @@ parameters:
 			path: core/Settings/Setting.php
 
 		-
-			message: '#^Property Piwik\\Settings\\FieldConfig\:\:\$uiControl \(string\) in isset\(\) is not nullable\.$#'
+			message: '#^Property Matomo\\Settings\\FieldConfig\:\:\$uiControl \(string\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
 			path: core/Settings/Setting.php
 
 		-
-			message: '#^Property Piwik\\Settings\\Setting\:\:\$type \(string\) in isset\(\) is not nullable\.$#'
+			message: '#^Property Matomo\\Settings\\Setting\:\:\$type \(string\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
 			path: core/Settings/Setting.php
 
 		-
-			message: '#^Property Piwik\\Settings\\Storage\\Backend\\BaseSettingsTable\:\:\$db \(Piwik\\Db\\AdapterInterface\) in isset\(\) is not nullable\.$#'
+			message: '#^Property Matomo\\Settings\\Storage\\Backend\\BaseSettingsTable\:\:\$db \(Matomo\\Db\\AdapterInterface\) in isset\(\) is not nullable\.$#'
 			identifier: isset.property
 			count: 1
 			path: core/Settings/Storage/Backend/BaseSettingsTable.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:fetchAll\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:fetchAll\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: core/Settings/Storage/Backend/MeasurableSettingsTable.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:query\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:query\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Settings/Storage/Backend/MeasurableSettingsTable.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:fetchAll\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:fetchAll\(\)\.$#'
 			identifier: method.notFound
 			count: 6
 			path: core/Settings/Storage/Backend/PluginSettingsTable.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\\AdapterInterface\:\:query\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\\AdapterInterface\:\:query\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: core/Settings/Storage/Backend/PluginSettingsTable.php
@@ -1453,13 +1489,13 @@ parameters:
 			path: core/SiteContentDetector.php
 
 		-
-			message: '#^Property Piwik\\SiteContentDetector\:\:\$detectedContent \(array\<string, array\<string, Piwik\\Plugins\\SitesManager\\SiteContentDetection\\SiteContentDetectionAbstract\>\>\) does not accept array\<int, array\>\.$#'
+			message: '#^Property Matomo\\SiteContentDetector\:\:\$detectedContent \(array\<string, array\<string, Piwik\\Plugins\\SitesManager\\SiteContentDetection\\SiteContentDetectionAbstract\>\>\) does not accept array\<int, array\>\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: core/SiteContentDetector.php
 
 		-
-			message: '#^Property Piwik\\SiteContentDetector\:\:\$detectedContent \(array\<string, array\<string, Piwik\\Plugins\\SitesManager\\SiteContentDetection\\SiteContentDetectionAbstract\>\>\) does not accept default value of type array\<int, array\>\.$#'
+			message: '#^Property Matomo\\SiteContentDetector\:\:\$detectedContent \(array\<string, array\<string, Piwik\\Plugins\\SitesManager\\SiteContentDetection\\SiteContentDetectionAbstract\>\>\) does not accept default value of type array\<int, array\>\.$#'
 			identifier: property.defaultValue
 			count: 1
 			path: core/SiteContentDetector.php
@@ -1483,7 +1519,7 @@ parameters:
 			path: core/TCPDF.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\:\:disconnect\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\:\:disconnect\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: core/Tracker.php
@@ -1525,7 +1561,7 @@ parameters:
 			path: core/Tracker/Cache.php
 
 		-
-			message: '#^Method Piwik\\Tracker\\Db\:\:query\(\) has invalid return type Piwik\\Tracker\\PDOStatement\.$#'
+			message: '#^Method Matomo\\Tracker\\Db\:\:query\(\) has invalid return type Matomo\\Tracker\\PDOStatement\.$#'
 			identifier: class.notFound
 			count: 1
 			path: core/Tracker/Db.php
@@ -1537,7 +1573,7 @@ parameters:
 			path: core/Tracker/Db/Mysqli.php
 
 		-
-			message: '#^Method Piwik\\Tracker\\Db\\Mysqli\:\:prepare\(\) is unused\.$#'
+			message: '#^Method Matomo\\Tracker\\Db\\Mysqli\:\:prepare\(\) is unused\.$#'
 			identifier: method.unused
 			count: 1
 			path: core/Tracker/Db/Mysqli.php
@@ -1555,13 +1591,13 @@ parameters:
 			path: core/Tracker/Db/Mysqli.php
 
 		-
-			message: '#^Method Piwik\\Tracker\\Db\\Pdo\\Mysql\:\:lastInsertId\(\) should return int but returns string\|false\.$#'
+			message: '#^Method Matomo\\Tracker\\Db\\Pdo\\Mysql\:\:lastInsertId\(\) should return int but returns string\|false\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Tracker/Db/Pdo/Mysql.php
 
 		-
-			message: '#^Parameter \#2 \$errno of method Piwik\\Tracker\\Db\\Pdo\\Mysql\:\:isErrNo\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$errno of method Matomo\\Tracker\\Db\\Pdo\\Mysql\:\:isErrNo\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Tracker/Db/Pdo/Mysql.php
@@ -1573,31 +1609,31 @@ parameters:
 			path: core/Tracker/Db/Pdo/Mysql.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Tracker\\Action\:\:getEventAction\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Tracker\\Action\:\:getEventAction\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Tracker/GoalManager.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Tracker\\Action\:\:getEventCategory\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Tracker\\Action\:\:getEventCategory\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Tracker/GoalManager.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Tracker\\Action\:\:getEventName\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Tracker\\Action\:\:getEventName\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Tracker/GoalManager.php
 
 		-
-			message: '#^Method Piwik\\Tracker\\GoalManager\:\:getRevenue\(\) should return float\|int but returns string\.$#'
+			message: '#^Method Matomo\\Tracker\\GoalManager\:\:getRevenue\(\) should return float\|int but returns string\.$#'
 			identifier: return.type
 			count: 1
 			path: core/Tracker/GoalManager.php
 
 		-
-			message: '#^Call to function is_null\(\) with Piwik\\Tracker\\ScheduledTasksRunner will always evaluate to false\.$#'
+			message: '#^Call to function is_null\(\) with Matomo\\Tracker\\ScheduledTasksRunner will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
 			path: core/Tracker/Handler.php
@@ -1609,13 +1645,13 @@ parameters:
 			path: core/Tracker/Handler/Factory.php
 
 		-
-			message: '#^Instanceof between \*NEVER\* and Piwik\\Tracker\\Handler will always evaluate to false\.$#'
+			message: '#^Instanceof between \*NEVER\* and Matomo\\Tracker\\Handler will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: core/Tracker/Handler/Factory.php
 
 		-
-			message: '#^Method Piwik\\Tracker\\LogTable\:\:getLinkTableToBeAbleToJoinOnVisit\(\) should return string but empty return statement found\.$#'
+			message: '#^Method Matomo\\Tracker\\LogTable\:\:getLinkTableToBeAbleToJoinOnVisit\(\) should return string but empty return statement found\.$#'
 			identifier: return.empty
 			count: 1
 			path: core/Tracker/LogTable.php
@@ -1627,7 +1663,7 @@ parameters:
 			path: core/Tracker/Model.php
 
 		-
-			message: '#^Parameter \#3 \$urlPrefix of method Piwik\\Tracker\\Model\:\:insertNewAction\(\) expects string, int given\.$#'
+			message: '#^Parameter \#3 \$urlPrefix of method Matomo\\Tracker\\Model\:\:insertNewAction\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Tracker/Model.php
@@ -1651,7 +1687,7 @@ parameters:
 			path: core/Tracker/Request.php
 
 		-
-			message: '#^Parameter \#1 \$login of method Piwik\\Auth\:\:setLogin\(\) expects string, null given\.$#'
+			message: '#^Parameter \#1 \$login of method Matomo\\Auth\:\:setLogin\(\) expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Tracker/Request.php
@@ -1681,7 +1717,7 @@ parameters:
 			path: core/Tracker/Response.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Tracker/ScheduledTasksRunner.php
@@ -1693,7 +1729,7 @@ parameters:
 			path: core/Tracker/TableLogAction.php
 
 		-
-			message: '#^Instanceof between \*NEVER\* and Piwik\\Tracker\\VisitInterface will always evaluate to false\.$#'
+			message: '#^Instanceof between \*NEVER\* and Matomo\\Tracker\\VisitInterface will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: core/Tracker/Visit/Factory.php
@@ -1705,7 +1741,7 @@ parameters:
 			path: core/Tracker/Visit/Factory.php
 
 		-
-			message: '#^Property Piwik\\Tracker\\Visitor\:\:\$previousVisitProperties \(Piwik\\Tracker\\Visit\\VisitProperties\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\Tracker\\Visitor\:\:\$previousVisitProperties \(Matomo\\Tracker\\Visit\\VisitProperties\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 1
 			path: core/Tracker/Visitor.php
@@ -1723,13 +1759,13 @@ parameters:
 			path: core/Translation/Translator.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, bool given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, bool given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/UpdateCheck.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/UpdateCheck.php
@@ -1747,19 +1783,19 @@ parameters:
 			path: core/Updates/1.1.php
 
 		-
-			message: '#^Parameter \#2 \$errorCodesToIgnore of method Piwik\\Updater\\Migration\\Db\\Factory\:\:sql\(\) expects array\<int\>\|int, string given\.$#'
+			message: '#^Parameter \#2 \$errorCodesToIgnore of method Matomo\\Updater\\Migration\\Db\\Factory\:\:sql\(\) expects array\<int\>\|int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/Updates/1.4-rc1.php
 
 		-
-			message: '#^Parameter \#2 \$errorCodesToIgnore of method Piwik\\Updater\\Migration\\Db\\Factory\:\:sql\(\) expects array\<int\>\|int, string given\.$#'
+			message: '#^Parameter \#2 \$errorCodesToIgnore of method Matomo\\Updater\\Migration\\Db\\Factory\:\:sql\(\) expects array\<int\>\|int, string given\.$#'
 			identifier: argument.type
 			count: 3
 			path: core/Updates/2.0-a13.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:insert\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:insert\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Updates/2.0.4-b5.php
@@ -1771,37 +1807,37 @@ parameters:
 			path: core/Updates/2.0.4-b5.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:fetchCol\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:fetchCol\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Updates/2.1.1-b11.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:fetchCol\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:fetchCol\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Updates/2.9.0-b1.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:closeConnection\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:closeConnection\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: core/Updates/3.6.0-b4.php
 
 		-
-			message: '#^Property Piwik\\Updates\\Updates_4_1_2_b1\:\:\$migration is never read, only written\.$#'
+			message: '#^Property Matomo\\Updates\\Updates_4_1_2_b1\:\:\$migration is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/Updates/4.1.2-b1.php
 
 		-
-			message: '#^Property Piwik\\Updates\\Updates_5_2_0_b6\:\:\$migration is never read, only written\.$#'
+			message: '#^Property Matomo\\Updates\\Updates_5_2_0_b6\:\:\$migration is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/Updates/5.2.0-b6.php
 
 		-
-			message: '#^Property Piwik\\Updates\\Updates_5_3_0_rc1\:\:\$migration is never read, only written\.$#'
+			message: '#^Property Matomo\\Updates\\Updates_5_3_0_rc1\:\:\$migration is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/Updates/5.3.0-rc1.php
@@ -1843,13 +1879,13 @@ parameters:
 			path: core/View/MethodCallExpression.php
 
 		-
-			message: '#^Method Piwik\\ViewDataTable\\Factory\:\:createViewDataTableInstance\(\) should return Piwik\\Plugin\\ViewDataTable but returns Piwik\\View\\ViewInterface\.$#'
+			message: '#^Method Matomo\\ViewDataTable\\Factory\:\:createViewDataTableInstance\(\) should return Matomo\\Plugin\\ViewDataTable but returns Matomo\\View\\ViewInterface\.$#'
 			identifier: return.type
 			count: 1
 			path: core/ViewDataTable/Factory.php
 
 		-
-			message: '#^Static property Piwik\\ViewDataTable\\Factory\:\:\$defaultViewTypes is never read, only written\.$#'
+			message: '#^Static property Matomo\\ViewDataTable\\Factory\:\:\$defaultViewTypes is never read, only written\.$#'
 			identifier: property.onlyWritten
 			count: 1
 			path: core/ViewDataTable/Factory.php
@@ -1861,7 +1897,7 @@ parameters:
 			path: core/ViewDataTable/Factory.php
 
 		-
-			message: '#^Method Piwik\\ViewDataTable\\Manager\:\:getFooterIconFor\(\) should return array but empty return statement found\.$#'
+			message: '#^Method Matomo\\ViewDataTable\\Manager\:\:getFooterIconFor\(\) should return array but empty return statement found\.$#'
 			identifier: return.empty
 			count: 1
 			path: core/ViewDataTable/Manager.php
@@ -1879,7 +1915,7 @@ parameters:
 			path: core/ViewDataTable/Request.php
 
 		-
-			message: '#^Property Piwik\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) does not accept default value of type false\.$#'
+			message: '#^Property Matomo\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) does not accept default value of type false\.$#'
 			identifier: property.defaultValue
 			count: 1
 			path: core/ViewDataTable/RequestConfig.php
@@ -1903,13 +1939,13 @@ parameters:
 			path: core/dispatch.php
 
 		-
-			message: '#^Parameter \#1 \$environment of class Piwik\\Application\\Environment constructor expects string, null given\.$#'
+			message: '#^Parameter \#1 \$environment of class Matomo\\Application\\Environment constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: core/dispatch.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/AIAgents/Reports/Get.php
@@ -1987,19 +2023,19 @@ parameters:
 			path: plugins/API/Filter/DataComparisonFilter.php
 
 		-
-			message: '#^Offset int\<0, max\> on non\-empty\-list\<Piwik\\DataTable\|Piwik\\DataTable\\Map\> in empty\(\) always exists and is not falsy\.$#'
+			message: '#^Offset int\<0, max\> on non\-empty\-list\<Matomo\\DataTable\|Matomo\\DataTable\\Map\> in empty\(\) always exists and is not falsy\.$#'
 			identifier: empty.offset
 			count: 1
 			path: plugins/API/Filter/DataComparisonFilter/ComparisonRowGenerator.php
 
 		-
-			message: '#^Parameter \#3 \$rootCompareTable of method Piwik\\Plugins\\API\\Filter\\DataComparisonFilter\\ComparisonRowGenerator\:\:compareTable\(\) expects Piwik\\DataTable\|null, Piwik\\DataTable\\DataTableInterface\|null given\.$#'
+			message: '#^Parameter \#3 \$rootCompareTable of method Piwik\\Plugins\\API\\Filter\\DataComparisonFilter\\ComparisonRowGenerator\:\:compareTable\(\) expects Matomo\\DataTable\|null, Matomo\\DataTable\\DataTableInterface\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/API/Filter/DataComparisonFilter/ComparisonRowGenerator.php
 
 		-
-			message: '#^Parameter \#4 \$compareTable of method Piwik\\Plugins\\API\\Filter\\DataComparisonFilter\\ComparisonRowGenerator\:\:compareTable\(\) expects Piwik\\DataTable\|null, Piwik\\DataTable\\DataTableInterface\|null given\.$#'
+			message: '#^Parameter \#4 \$compareTable of method Piwik\\Plugins\\API\\Filter\\DataComparisonFilter\\ComparisonRowGenerator\:\:compareTable\(\) expects Matomo\\DataTable\|null, Matomo\\DataTable\\DataTableInterface\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/API/Filter/DataComparisonFilter/ComparisonRowGenerator.php
@@ -2017,7 +2053,7 @@ parameters:
 			path: plugins/API/ProcessedReport.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/API/Reports/Get.php
@@ -2035,7 +2071,7 @@ parameters:
 			path: plugins/API/RowEvolution.php
 
 		-
-			message: '#^Call to method Piwik\\Plugins\\API\\RowEvolution\:\:checkDataTableInstance\(\) with Piwik\\DataTable will always evaluate to true\.$#'
+			message: '#^Call to method Piwik\\Plugins\\API\\RowEvolution\:\:checkDataTableInstance\(\) with Matomo\\DataTable will always evaluate to true\.$#'
 			identifier: method.alreadyNarrowedType
 			count: 2
 			path: plugins/API/RowEvolution.php
@@ -2047,7 +2083,7 @@ parameters:
 			path: plugins/API/RowEvolution.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable and Piwik\\DataTable will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\DataTable and Matomo\\DataTable will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: plugins/Actions/API.php
@@ -2065,7 +2101,13 @@ parameters:
 			path: plugins/Actions/Actions/ActionSiteSearch.php
 
 		-
-			message: '#^Call to function is_null\(\) with Piwik\\DataTable\\Row will always evaluate to false\.$#'
+			message: '#^Variable \$keywordParameterRaw might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: plugins/Actions/Actions/ActionSiteSearch.php
+
+		-
+			message: '#^Call to function is_null\(\) with Matomo\\DataTable\\Row will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 2
 			path: plugins/Actions/ArchivingHelper.php
@@ -2083,7 +2125,7 @@ parameters:
 			path: plugins/Actions/ArchivingHelper.php
 
 		-
-			message: '#^Parameter \#1 \$name of method Piwik\\DataTable\\Row\:\:setColumn\(\) expects string, int given\.$#'
+			message: '#^Parameter \#1 \$name of method Matomo\\DataTable\\Row\:\:setColumn\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Actions/ArchivingHelper.php
@@ -2113,7 +2155,7 @@ parameters:
 			path: plugins/Actions/Columns/ActionType.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable and Piwik\\DataTable will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\DataTable and Matomo\\DataTable will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: plugins/Actions/Columns/Metrics/AveragePageGenerationTime.php
@@ -2125,7 +2167,7 @@ parameters:
 			path: plugins/Actions/RecordBuilders/ActionReports.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between Piwik\\Tracker\\Action and null will always evaluate to true\.$#'
+			message: '#^Strict comparison using \!\=\= between Matomo\\Tracker\\Action and null will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: plugins/Actions/Tracker/ActionsRequestProcessor.php
@@ -2197,79 +2239,79 @@ parameters:
 			path: plugins/BotTracking/BotTracking.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/AbstractAIChatbotContentUrlReport.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/AbstractAIChatbotContentUrlReport.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/AbstractAIChatbotFavouredPagesReport.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/AbstractAIChatbotFavouredPagesReport.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/AbstractAIChatbotsRealTimeReport.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/AbstractAIChatbotsRealTimeReport.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/Get.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/GetAIChatbotBrokenContent.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/GetAIChatbotBrokenContent.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:configureView\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/GetAIChatbotRequests.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/GetAIChatbotRequests.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/GetDocumentUrlsForAIChatbot.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/BotTracking/Reports/GetPageUrlsForAIChatbot.php
@@ -2287,7 +2329,7 @@ parameters:
 			path: plugins/BulkTracking/BulkTracking.php
 
 		-
-			message: '#^Parameter \#1 \$login of method Piwik\\Auth\:\:setLogin\(\) expects string, null given\.$#'
+			message: '#^Parameter \#1 \$login of method Matomo\\Auth\:\:setLogin\(\) expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/BulkTracking/Tracker/Handler.php
@@ -2305,7 +2347,7 @@ parameters:
 			path: plugins/Contents/RecordBuilders/ContentRecords.php
 
 		-
-			message: '#^Call to function property_exists\(\) with Piwik\\ViewDataTable\\Config and ''selectable_columns'' will always evaluate to true\.$#'
+			message: '#^Call to function property_exists\(\) with Matomo\\ViewDataTable\\Config and ''selectable_columns'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: plugins/Contents/Reports/Base.php
@@ -2353,7 +2395,7 @@ parameters:
 			path: plugins/CoreAdminHome/Commands/DeleteLogsData.php
 
 		-
-			message: '#^Parameter \#3 \$default of method Piwik\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, string given\.$#'
+			message: '#^Parameter \#3 \$default of method Matomo\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, string given\.$#'
 			identifier: argument.type
 			count: 2
 			path: plugins/CoreAdminHome/Commands/PurgeBrokenArchiveData.php
@@ -2365,7 +2407,7 @@ parameters:
 			path: plugins/CoreAdminHome/Commands/PurgeBrokenArchiveData.php
 
 		-
-			message: '#^Parameter \#3 \$default of method Piwik\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array\<int, mixed\> given\.$#'
+			message: '#^Parameter \#3 \$default of method Matomo\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array\<int, mixed\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/CoreAdminHome/Commands/PurgeOldArchiveData.php
@@ -2413,7 +2455,7 @@ parameters:
 			path: plugins/CoreAdminHome/CustomLogo.php
 
 		-
-			message: '#^Parameter \#1 \$idSegments of method Piwik\\CronArchive\\ArchiveFilter\:\:setSegmentsToForceFromSegmentIds\(\) expects array\<int\>, list\<string\> given\.$#'
+			message: '#^Parameter \#1 \$idSegments of method Matomo\\CronArchive\\ArchiveFilter\:\:setSegmentsToForceFromSegmentIds\(\) expects array\<int\>, list\<string\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/CoreConsole/Commands/CoreArchiver.php
@@ -2437,13 +2479,13 @@ parameters:
 			path: plugins/CoreHome/Columns/Metrics/EvolutionMetric.php
 
 		-
-			message: '#^Parameter \#1 \$sqlFilterValue of method Piwik\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
+			message: '#^Parameter \#1 \$sqlFilterValue of method Matomo\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/CoreHome/Columns/VisitorDaysSinceFirst.php
 
 		-
-			message: '#^Property Piwik\\Columns\\Dimension\:\:\$sqlFilterValue \(array\|string\) does not accept Closure\.$#'
+			message: '#^Property Matomo\\Columns\\Dimension\:\:\$sqlFilterValue \(array\|string\) does not accept Closure\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: plugins/CoreHome/Columns/VisitorReturning.php
@@ -2467,13 +2509,13 @@ parameters:
 			path: plugins/CoreHome/DataTableRowAction/RowEvolution.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable\\Map and Piwik\\DataTable\\DataTableInterface will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\DataTable\\Map and Matomo\\DataTable\\DataTableInterface will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: plugins/CoreHome/DataTableRowAction/RowEvolution.php
 
 		-
-			message: '#^Instanceof between Piwik\\Date and Piwik\\Date will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\Date and Matomo\\Date will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: plugins/CoreHome/DataTableRowAction/RowEvolution.php
@@ -2491,19 +2533,19 @@ parameters:
 			path: plugins/CoreHome/DataTableRowAction/RowEvolution.php
 
 		-
-			message: '#^Strict comparison using \!\=\= between array\|int\|Piwik\\Date\|string and false will always evaluate to true\.$#'
+			message: '#^Strict comparison using \!\=\= between array\|int\|Matomo\\Date\|string and false will always evaluate to true\.$#'
 			identifier: notIdentical.alwaysTrue
 			count: 1
 			path: plugins/CoreHome/DataTableRowAction/RowEvolution.php
 
 		-
-			message: '#^Parameter \#3 \$url of method Piwik\\Menu\\MenuAbstract\:\:addItem\(\) expects array\<string, bool\|float\|int\|string\>\|string, array\<string, mixed\> given\.$#'
+			message: '#^Parameter \#3 \$url of method Matomo\\Menu\\MenuAbstract\:\:addItem\(\) expects array\<string, bool\|float\|int\|string\>\|string, array\<string, mixed\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/CoreHome/Menu.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/CoreHome/Widgets/GetSystemSummary.php
@@ -2539,7 +2581,7 @@ parameters:
 			path: plugins/CorePluginsAdmin/Controller.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/CorePluginsAdmin/Model/TagManagerTeaser.php
@@ -2551,13 +2593,19 @@ parameters:
 			path: plugins/CorePluginsAdmin/PluginInstaller.php
 
 		-
+			message: '#^Variable \$setting in empty\(\) always exists and is not falsy\.$#'
+			identifier: empty.variable
+			count: 1
+			path: plugins/CorePluginsAdmin/SettingsMetadata.php
+
+		-
 			message: '#^Right side of && is always true\.$#'
 			identifier: booleanAnd.rightAlwaysTrue
 			count: 1
 			path: plugins/CoreUpdater/Controller.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/CoreUpdater/ReleaseChannel.php
@@ -2617,49 +2665,49 @@ parameters:
 			path: plugins/CoreVisualizations/Visualizations/Graph.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable and Piwik\\DataTable\\Map will always evaluate to false\.$#'
+			message: '#^Instanceof between Matomo\\DataTable and Matomo\\DataTable\\Map will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/Graph.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Visualization\:\:afterGenericFiltersAreAppliedToLoadedDataTable\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Visualization\:\:afterGenericFiltersAreAppliedToLoadedDataTable\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/HtmlTable.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Visualization\:\:beforeGenericFiltersAreAppliedToLoadedDataTable\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Visualization\:\:beforeGenericFiltersAreAppliedToLoadedDataTable\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/HtmlTable.php
 
 		-
-			message: '#^Property Piwik\\Plugin\\Visualization\:\:\$report \(Piwik\\Plugin\\Report\) in empty\(\) is not falsy\.$#'
+			message: '#^Property Matomo\\Plugin\\Visualization\:\:\$report \(Matomo\\Plugin\\Report\) in empty\(\) is not falsy\.$#'
 			identifier: empty.property
 			count: 2
 			path: plugins/CoreVisualizations/Visualizations/HtmlTable.php
 
 		-
-			message: '#^Property Piwik\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) does not accept false\.$#'
+			message: '#^Property Matomo\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) does not accept false\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/HtmlTable/RequestConfig.php
 
 		-
-			message: '#^Parameter \#2 \$lastN of static method Piwik\\Period\\Range\:\:getRelativeToEndDate\(\) expects int, string given\.$#'
+			message: '#^Parameter \#2 \$lastN of static method Matomo\\Period\\Range\:\:getRelativeToEndDate\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/JqplotGraph/Evolution.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\DataTable\\DataTableInterface\:\:getMetadata\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\DataTable\\DataTableInterface\:\:getMetadata\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/Sparkline.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable\|null and Piwik\\DataTable\\Map will always evaluate to false\.$#'
+			message: '#^Instanceof between Matomo\\DataTable\|null and Matomo\\DataTable\\Map will always evaluate to false\.$#'
 			identifier: instanceof.alwaysFalse
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/Sparkline.php
@@ -2701,7 +2749,7 @@ parameters:
 			path: plugins/CoreVisualizations/Visualizations/Sparklines/Config.php
 
 		-
-			message: '#^Call to function is_null\(\) with Piwik\\Site will always evaluate to false\.$#'
+			message: '#^Call to function is_null\(\) with Matomo\\Site will always evaluate to false\.$#'
 			identifier: function.impossibleType
 			count: 1
 			path: plugins/CoreVisualizations/Visualizations/Sparklines/Config.php
@@ -2731,7 +2779,7 @@ parameters:
 			path: plugins/CoreVue/Commands/Build.php
 
 		-
-			message: '#^Parameter \#3 \$default of method Piwik\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array given\.$#'
+			message: '#^Parameter \#3 \$default of method Matomo\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/CoreVue/Commands/Build.php
@@ -2755,7 +2803,7 @@ parameters:
 			path: plugins/CustomDimensions/Dimension/Extraction.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/CustomDimensions/GetCustomDimension.php
@@ -2773,13 +2821,13 @@ parameters:
 			path: plugins/CustomDimensions/Tracker/CustomDimensionsRequestProcessor.php
 
 		-
-			message: '#^Parameter \#1 \$sqlFilterValue of method Piwik\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
+			message: '#^Parameter \#1 \$sqlFilterValue of method Matomo\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/DevicesDetection/Columns/BrowserName.php
 
 		-
-			message: '#^Parameter \#1 \$sqlFilterValue of method Piwik\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
+			message: '#^Parameter \#1 \$sqlFilterValue of method Matomo\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/DevicesDetection/Columns/Os.php
@@ -2791,7 +2839,7 @@ parameters:
 			path: plugins/DevicesDetection/functions.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/Diagnostics/Commands/ArchivingInstanceStatistics.php
@@ -2827,7 +2875,7 @@ parameters:
 			path: plugins/Diagnostics/Diagnostic/CronArchivingCheck.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Db\|Piwik\\Db\\AdapterInterface\|Piwik\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Db\|Matomo\\Db\\AdapterInterface\|Matomo\\Tracker\\Db\:\:getServerVersion\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/Diagnostics/Diagnostic/DatabaseInformational.php
@@ -2863,7 +2911,7 @@ parameters:
 			path: plugins/Diagnostics/Diagnostic/PhpInformational.php
 
 		-
-			message: '#^Parameter \#2 \$parameters of static method Piwik\\Db\:\:fetchOne\(\) expects array, string given\.$#'
+			message: '#^Parameter \#2 \$parameters of static method Matomo\\Db\:\:fetchOne\(\) expects array, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Diagnostics/Diagnostic/ReportInformational.php
@@ -2911,7 +2959,7 @@ parameters:
 			path: plugins/Ecommerce/VisitorDetails.php
 
 		-
-			message: '#^Call to function property_exists\(\) with Piwik\\ViewDataTable\\Config and ''selectable_columns'' will always evaluate to true\.$#'
+			message: '#^Call to function property_exists\(\) with Matomo\\ViewDataTable\\Config and ''selectable_columns'' will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: plugins/Events/Reports/Base.php
@@ -2929,7 +2977,7 @@ parameters:
 			path: plugins/Feedback/Feedback.php
 
 		-
-			message: '#^Parameter \#2 \$parameters of static method Piwik\\Db\:\:query\(\) expects array, string given\.$#'
+			message: '#^Parameter \#2 \$parameters of static method Matomo\\Db\:\:query\(\) expects array, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/GeoIp2/Commands/ConvertRegionCodesToIso.php
@@ -2941,13 +2989,13 @@ parameters:
 			path: plugins/GeoIp2/Commands/ConvertRegionCodesToIso.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, true given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/GeoIp2/Commands/ConvertRegionCodesToIso.php
 
 		-
-			message: '#^Parameter \#3 \$isContinuation of static method Piwik\\Http\:\:downloadChunk\(\) expects bool, int given\.$#'
+			message: '#^Parameter \#3 \$isContinuation of static method Matomo\\Http\:\:downloadChunk\(\) expects bool, int given\.$#'
 			identifier: argument.type
 			count: 2
 			path: plugins/GeoIp2/Controller.php
@@ -2971,13 +3019,13 @@ parameters:
 			path: plugins/GeoIp2/GeoIP2AutoUpdater.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/GeoIp2/GeoIP2AutoUpdater.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, true given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, true given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/GeoIp2/GeoIp2.php
@@ -2989,19 +3037,19 @@ parameters:
 			path: plugins/GeoIp2/LocationProvider/GeoIp2.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int\<1, max\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/GeoIp2/LocationProvider/GeoIp2.php
 
 		-
-			message: '#^Parameter \#1 \$name of method Piwik\\DataTable\\Row\:\:deleteColumn\(\) expects string, int given\.$#'
+			message: '#^Parameter \#1 \$name of method Matomo\\DataTable\\Row\:\:deleteColumn\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Goals/API.php
 
 		-
-			message: '#^Parameter \#1 \$oldName of method Piwik\\DataTable\\Row\:\:renameColumn\(\) expects string, int given\.$#'
+			message: '#^Parameter \#1 \$oldName of method Matomo\\DataTable\\Row\:\:renameColumn\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Goals/API.php
@@ -3019,7 +3067,7 @@ parameters:
 			path: plugins/Goals/Commands/CalculateConversionPages.php
 
 		-
-			message: '#^Parameter \#1 \$idsite of class Piwik\\Site constructor expects int, string given\.$#'
+			message: '#^Parameter \#1 \$idsite of class Matomo\\Site constructor expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Goals/Commands/CalculateConversionPages.php
@@ -3049,7 +3097,7 @@ parameters:
 			path: plugins/Goals/RecordBuilders/GeneralGoalsRecords.php
 
 		-
-			message: '#^Parameter \#3 \$columnToSortByBeforeTruncation of method Piwik\\ArchiveProcessor\\RecordBuilder\:\:__construct\(\) expects string\|null, int given\.$#'
+			message: '#^Parameter \#3 \$columnToSortByBeforeTruncation of method Matomo\\ArchiveProcessor\\RecordBuilder\:\:__construct\(\) expects string\|null, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Goals/RecordBuilders/ProductRecord.php
@@ -3079,7 +3127,7 @@ parameters:
 			path: plugins/Goals/VisitorDetails.php
 
 		-
-			message: '#^Parameter \#2 \$lastN of static method Piwik\\Period\\Range\:\:getRelativeToEndDate\(\) expects int, string given\.$#'
+			message: '#^Parameter \#2 \$lastN of static method Matomo\\Period\\Range\:\:getRelativeToEndDate\(\) expects int, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/ImageGraph/ImageGraph.php
@@ -3169,22 +3217,10 @@ parameters:
 			path: plugins/Installation/FormDatabaseSetup.php
 
 		-
-			message: '#^Constructor of class Piwik\\Plugins\\Installation\\FormDatabaseSetup has an unused parameter \$attributes\.$#'
-			identifier: constructor.unusedParameter
-			count: 1
-			path: plugins/Installation/FormDatabaseSetup.php
-
-		-
 			message: '#^Call to an undefined method HTML_QuickForm2_Node\:\:loadOptions\(\)\.$#'
 			identifier: method.notFound
 			count: 2
 			path: plugins/Installation/FormFirstWebsiteSetup.php
-
-		-
-			message: '#^Constructor of class Piwik\\Plugins\\Installation\\FormSuperUser has an unused parameter \$attributes\.$#'
-			identifier: constructor.unusedParameter
-			count: 1
-			path: plugins/Installation/FormSuperUser.php
 
 		-
 			message: '#^Instanceof between Exception and Exception will always evaluate to true\.$#'
@@ -3211,7 +3247,7 @@ parameters:
 			path: plugins/Installation/Installation.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Installation/Onboarding.php
@@ -3224,6 +3260,12 @@ parameters:
 
 		-
 			message: '#^Parameter &\$languages by\-ref type of method Piwik\\Plugins\\LanguagesManager\\API\:\:enableDevelopmentLanguageInDevEnvironment\(\) expects list\<string\>, array\<int\<0, max\>, string\> given\.$#'
+			identifier: parameterByRef.type
+			count: 1
+			path: plugins/LanguagesManager/API.php
+
+		-
+			message: '#^Parameter &\$languages by\-ref type of method Piwik\\Plugins\\LanguagesManager\\API\:\:enableDevelopmentLanguageInDevEnvironment\(\) expects list\<string\>, non\-empty\-array\<int\<0, max\>, string\> given\.$#'
 			identifier: parameterByRef.type
 			count: 1
 			path: plugins/LanguagesManager/API.php
@@ -3247,7 +3289,7 @@ parameters:
 			path: plugins/LanguagesManager/LanguagesManager.php
 
 		-
-			message: '#^Parameter \#5 \$tooltip of method Piwik\\Menu\\MenuTop\:\:addHtml\(\) expects string, false given\.$#'
+			message: '#^Parameter \#5 \$tooltip of method Matomo\\Menu\\MenuTop\:\:addHtml\(\) expects string, false given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/LanguagesManager/Menu.php
@@ -3301,13 +3343,13 @@ parameters:
 			path: plugins/Live/VisitorFactory.php
 
 		-
-			message: '#^Parameter \#2 \$login of class Piwik\\AuthResult constructor expects string, null given\.$#'
+			message: '#^Parameter \#2 \$login of class Matomo\\AuthResult constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Login/Auth.php
 
 		-
-			message: '#^Parameter \#3 \$tokenAuth of class Piwik\\AuthResult constructor expects string, null given\.$#'
+			message: '#^Parameter \#3 \$tokenAuth of class Matomo\\AuthResult constructor expects string, null given\.$#'
 			identifier: argument.type
 			count: 2
 			path: plugins/Login/Auth.php
@@ -3331,13 +3373,13 @@ parameters:
 			path: plugins/Login/Controller.php
 
 		-
-			message: '#^Parameter \#1 \$login of method Piwik\\Auth\:\:setLogin\(\) expects string, null given\.$#'
+			message: '#^Parameter \#1 \$login of method Matomo\\Auth\:\:setLogin\(\) expects string, null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Login/Login.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int\|null given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int\|null given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/Login/Model.php
@@ -3367,7 +3409,7 @@ parameters:
 			path: plugins/Login/SystemSettings.php
 
 		-
-			message: '#^Property Piwik\\Plugins\\Marketplace\\Environment\:\:\$releaseChannel \(Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\) does not accept Piwik\\UpdateCheck\\ReleaseChannel\.$#'
+			message: '#^Property Piwik\\Plugins\\Marketplace\\Environment\:\:\$releaseChannel \(Piwik\\Plugins\\CoreUpdater\\ReleaseChannel\) does not accept Matomo\\UpdateCheck\\ReleaseChannel\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: plugins/Marketplace/Environment.php
@@ -3403,7 +3445,7 @@ parameters:
 			path: plugins/MobileMessaging/Model.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, bool given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, bool given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/MobileMessaging/Model.php
@@ -3451,37 +3493,37 @@ parameters:
 			path: plugins/MultiSites/Dashboard.php
 
 		-
-			message: '#^Call to method Piwik\\DataTable\\Row\:\:setColumn\(\) on a separate line has no effect\.$#'
+			message: '#^Call to method Matomo\\DataTable\\Row\:\:setColumn\(\) on a separate line has no effect\.$#'
 			identifier: method.resultUnused
 			count: 1
 			path: plugins/MultiSites/Dashboard.php
 
 		-
-			message: '#^Instanceof between Piwik\\DataTable and Piwik\\DataTable will always evaluate to true\.$#'
+			message: '#^Instanceof between Matomo\\DataTable and Matomo\\DataTable will always evaluate to true\.$#'
 			identifier: instanceof.alwaysTrue
 			count: 1
 			path: plugins/PagePerformance/Columns/Metrics/AveragePerformanceMetric.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/PagePerformance/Reports/Get.php
 
 		-
-			message: '#^Property Piwik\\Plugin\\Report\:\:\$dimension \(Piwik\\Columns\\Dimension\) does not accept null\.$#'
+			message: '#^Property Matomo\\Plugin\\Report\:\:\$dimension \(Matomo\\Columns\\Dimension\) does not accept null\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: plugins/PagePerformance/Reports/Get.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Plugin\\Dimension\\ActionDimension\:\:getRequestParam\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Plugin\\Dimension\\ActionDimension\:\:getRequestParam\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/PagePerformance/Tracker/PerformanceDataProcessor.php
 
 		-
-			message: '#^Call to function is_a\(\) with arguments class\-string\<Piwik\\Policy\\CompliancePolicy\>, ''Piwik\\\\Policy\\\\CompliancePolicy'' and true will always evaluate to true\.$#'
+			message: '#^Call to function is_a\(\) with arguments class\-string\<Matomo\\Policy\\CompliancePolicy\>, ''Piwik\\\\Policy\\\\CompliancePolicy'' and true will always evaluate to true\.$#'
 			identifier: function.alreadyNarrowedType
 			count: 1
 			path: plugins/PrivacyManager/API.php
@@ -3523,7 +3565,7 @@ parameters:
 			path: plugins/PrivacyManager/PrivacyManager.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 5
 			path: plugins/PrivacyManager/PrivacyManager.php
@@ -3631,7 +3673,7 @@ parameters:
 			path: plugins/ScheduledReports/ReportEmailGenerator/AttachedFileReportEmailGenerator.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\DataTable\\Renderer\:\:setRenderImageInline\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\DataTable\\Renderer\:\:setRenderImageInline\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/ScheduledReports/ScheduledReports.php
@@ -3673,19 +3715,19 @@ parameters:
 			path: plugins/SitesManager/SitesManager.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/SitesManager/SitesManager.php
 
 		-
-			message: '#^Parameter \#3 \$default of method Piwik\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, string given\.$#'
+			message: '#^Parameter \#3 \$default of method Matomo\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, string given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/TestRunner/Commands/CodeCoverage.php
 
 		-
-			message: '#^Parameter \#3 \$default of method Piwik\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array\<int, string\> given\.$#'
+			message: '#^Parameter \#3 \$default of method Matomo\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array\<int, string\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/TestRunner/Commands/SyncScreenshots.php
@@ -3697,13 +3739,13 @@ parameters:
 			path: plugins/TestRunner/Commands/TestsRun.php
 
 		-
-			message: '#^Parameter \#3 \$default of method Piwik\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array given\.$#'
+			message: '#^Parameter \#3 \$default of method Matomo\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/TestRunner/Commands/TestsRun.php
 
 		-
-			message: '#^Parameter \#3 \$default of method Piwik\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array given\.$#'
+			message: '#^Parameter \#3 \$default of method Matomo\\Plugin\\ConsoleCommand\:\:addOptionalArgument\(\) expects null, array given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/TestRunner/Commands/TestsRunUI.php
@@ -3757,7 +3799,7 @@ parameters:
 			path: plugins/UserCountry/API.php
 
 		-
-			message: '#^Parameter \#1 \$sqlFilterValue of method Piwik\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
+			message: '#^Parameter \#1 \$sqlFilterValue of method Matomo\\Plugin\\Segment\:\:setSqlFilterValue\(\) expects array\|string, Closure given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/UserCountry/Columns/Country.php
@@ -3787,7 +3829,7 @@ parameters:
 			path: plugins/UserId/RecordBuilders/Users.php
 
 		-
-			message: '#^Property Piwik\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) does not accept 2\.$#'
+			message: '#^Property Matomo\\ViewDataTable\\RequestConfig\:\:\$filter_excludelowpop_value \(Closure\|string\) does not accept 2\.$#'
 			identifier: assign.propertyType
 			count: 1
 			path: plugins/UserId/Reports/GetUsers.php
@@ -3811,7 +3853,7 @@ parameters:
 			path: plugins/UsersManager/Controller.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/UsersManager/NewsletterSignup.php
@@ -3835,7 +3877,7 @@ parameters:
 			path: plugins/UsersManager/SystemSettings.php
 
 		-
-			message: '#^Parameter \#2 \$value of static method Piwik\\Option\:\:set\(\) expects string, int given\.$#'
+			message: '#^Parameter \#2 \$value of static method Matomo\\Option\:\:set\(\) expects string, int given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/UsersManager/TokenNotifications/TokenNotifierTask.php
@@ -3853,19 +3895,19 @@ parameters:
 			path: plugins/UsersManager/UserLoginHelper.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/VisitFrequency/Reports/Get.php
 
 		-
-			message: '#^Parameter \#1 \$view of method Piwik\\Plugins\\VisitFrequency\\Reports\\Get\:\:addSparklineColumns\(\) expects Piwik\\Plugins\\CoreVisualizations\\Visualizations\\Sparklines, Piwik\\Plugin\\ViewDataTable given\.$#'
+			message: '#^Parameter \#1 \$view of method Piwik\\Plugins\\VisitFrequency\\Reports\\Get\:\:addSparklineColumns\(\) expects Piwik\\Plugins\\CoreVisualizations\\Visualizations\\Sparklines, Matomo\\Plugin\\ViewDataTable given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/VisitFrequency/Reports/Get.php
 
 		-
-			message: '#^Call to an undefined method Piwik\\Archive\\ArchiveQuery\:\:getParams\(\)\.$#'
+			message: '#^Call to an undefined method Matomo\\Archive\\ArchiveQuery\:\:getParams\(\)\.$#'
 			identifier: method.notFound
 			count: 1
 			path: plugins/VisitTime/API.php
@@ -3877,7 +3919,7 @@ parameters:
 			path: plugins/VisitTime/DataTable/Filter/AddSegmentByLabelInUTC.php
 
 		-
-			message: '#^Parameter \#1 \$label of method Piwik\\DataTable\:\:getRowFromLabel\(\) expects string, int\<0, 23\> given\.$#'
+			message: '#^Parameter \#1 \$label of method Matomo\\DataTable\:\:getRowFromLabel\(\) expects string, int\<0, 23\> given\.$#'
 			identifier: argument.type
 			count: 1
 			path: plugins/VisitTime/RecordBuilders/Base.php
@@ -3889,7 +3931,7 @@ parameters:
 			path: plugins/VisitsSummary/API.php
 
 		-
-			message: '#^Call to Piwik\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
+			message: '#^Call to Matomo\\Plugin\\Report\:\:init\(\) on a separate line has no effect\.$#'
 			identifier: staticMethod.resultUnused
 			count: 1
 			path: plugins/VisitsSummary/Reports/Get.php

@@ -174,6 +174,52 @@ class LegacyAutoloader
     }
 
     /**
+     * True when the name is a `Piwik\` or `Matomo\` root-namespace class name.
+     * A leading backslash run is ignored (`\Piwik\Foo` is a root name, `Piwik`
+     * alone is not). Pure string operation, never triggers autoloading.
+     */
+    public static function isRootNamespaceName(string $name): bool
+    {
+        $name = ltrim($name, '\\');
+
+        return strncmp($name, 'Piwik\\', 6) === 0 || strncmp($name, 'Matomo\\', 7) === 0;
+    }
+
+    /**
+     * Returns the canonical `Matomo\` form of a `Piwik\` or `Matomo\` class
+     * name: a leading backslash run is preserved verbatim, the facade
+     * (`Piwik\Piwik` -> `Matomo\Matomo`) and the test-configurable exceptions
+     * map are honoured, and otherwise the `Piwik\` prefix is swapped for
+     * `Matomo\`. `Matomo\` names and names outside both namespaces are
+     * returned unchanged. Pure string operation, never triggers autoloading
+     * (same constraint as {@see getOppositeName()}).
+     */
+    public static function canonicalize(string $name): string
+    {
+        $leadingBackslashes = '';
+        $rest = $name;
+
+        while (isset($rest[0]) && $rest[0] === '\\') {
+            $leadingBackslashes .= '\\';
+            $rest = substr($rest, 1);
+        }
+
+        if ($rest === self::FACADE_PIWIK) {
+            return $leadingBackslashes . self::FACADE_MATOMO;
+        }
+
+        if (isset(self::$exceptionMap[$rest])) {
+            return $leadingBackslashes . self::$exceptionMap[$rest];
+        }
+
+        if (strncmp($rest, 'Piwik\\', 6) === 0) {
+            return $leadingBackslashes . 'Matomo\\' . substr($rest, 6);
+        }
+
+        return $name;
+    }
+
+    /**
      * Alias every `Piwik\` / `Matomo\` class already declared to its
      * opposite-namespace name. Run after {@see register()}, this makes the alias
      * set independent of load order: classes required before the autoloader

@@ -193,6 +193,20 @@ class TrackerResponseTest extends SystemTestCase
         $this->assertEquals($expected, $response['data']);
     }
 
+    /**
+     * piwik.php is the legacy tracker entrypoint; since the 7.0 namespace migration it is a shim
+     * that includes the canonical matomo.php. It must keep answering like the canonical entrypoint.
+     */
+    public function testResponseShouldReturnPiwikMessageWithHttp200InCaseOfEmptyGETRequestToLegacyEndpoint()
+    {
+        $url = str_replace('matomo.php', 'piwik.php', Fixture::getTrackerUrl());
+        $response = Http::sendHttpRequest($url, 10, null, null, 0, false, false, true);
+        $this->assertEquals(200, $response['status']);
+
+        $expected = "This resource is part of Matomo. Keep full control of your data with the leading free and open source <a href='https://matomo.org' target='_blank' rel='noopener noreferrer nofollow'>web analytics & conversion optimisation platform</a>.<br>\nThis file is the endpoint for the Matomo tracking API. If you want to access the Matomo UI or use the Reporting API, please use <a href='index.php'>index.php</a> instead.\n";
+        $this->assertEquals($expected, $response['data']);
+    }
+
     public function testResponseShouldReturnPiwikMessageWithHttp400InCaseOfInvalidRequestOrIfNothingIsTracked()
     {
         $url = Fixture::getTrackerUrl();
